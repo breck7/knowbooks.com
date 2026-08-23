@@ -1,1 +1,416 @@
-let's work together to give all humans superpowers.
+title Knowbooks - premium experiment kits for humans of all ages.
+description Knowbooks are premium experiment kits for humans of all ages.
+baseUrl https://knowbooks.com/
+permalink index.html
+openGraphImage knowbooksLogo.svg
+favicon knowbooksLogo.svg
+buildHtml
+buildConcepts catalog.js
+metaTags
+
+buildToFileParser
+ description Write the raw body to one or more files during the first build pass.
+ extends abstractBuildOneCommandParser
+ cueFromId
+ baseParser blobParser
+ example
+  buildToFile robots.txt robots-copy.txt
+   User-agent: *
+   Disallow:
+ javascript
+  buildOutput() {
+   return this.subparticlesToString()
+  }
+  async buildOne() {
+   const { root } = this
+   const { fileSystem, folderPath, filename, path } = root
+   const content = this.buildOutput()
+   for (const name of this.outputFileNames) {
+    await fileSystem.writeProduct(path.join(folderPath, name), content)
+    root.log(`💾 Built ${name} from ${filename}`)
+   }
+  }
+
+buildToFile .gitignore
+ *.*
+ index.html
+ *.svg
+ *.js
+
+buildToFile knowbooksLogo.svg
+ <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Knowbooks</title>
+  <desc id="desc">A circular ring supported by two hands.</desc>
+  <g fill="#d9bc78">
+   <path fill-rule="evenodd" d="M128 14C68.45 14 20 62.45 20 122c0 18.12 4.5 35.2 12.42 50.2l12.37-7.15A93.28 93.28 0 0 1 34.3 122c0-51.67 42.03-93.7 93.7-93.7s93.7 42.03 93.7 93.7a93.28 93.28 0 0 1-10.49 43.05l12.37 7.15A107.42 107.42 0 0 0 236 122c0-59.55-48.45-108-108-108Z"/>
+   <path d="M29.31 156.42c-4.34-7.23-3.66-13.77.07-15.84 3.38-1.87 7.33.31 10.53 4.4l22.82 25.16c1.12 1.24 2.85-.31 1.88-1.66l-19.1-26.67c-3.67-5.13-3.33-10.19.2-12.41 3.77-2.38 8.54.65 12.52 5.26l18.1 20.97c3.7 4.29 8.36 7.65 12.05 12.6 5.96 7.99 6.08 19.48 6.08 31.36v25.99c-24.1-2.86-43.02-12.51-53.85-26.48-7.38-9.52-8.76-23.53-11.3-42.68Z"/>
+   <path d="M226.69 156.42c4.34-7.23 3.66-13.77-.07-15.84-3.38-1.87-7.33.31-10.53 4.4l-22.82 25.16c-1.12 1.24-2.85-.31-1.88-1.66l19.1-26.67c3.67-5.13 3.33-10.19-.2-12.41-3.77-2.38-8.54.65-12.52 5.26l-18.1 20.97c-3.7 4.29-8.36 7.65-12.05 12.6-5.96 7.99-6.08 19.48-6.08 31.36v25.99c24.1-2.86 43.02-12.51 53.85-26.48 7.38-9.52 8.76-23.53 11.3-42.68Z"/>
+  </g>
+ </svg>
+
+html
+ <header class="site-header">
+  <a class="brand" href="#top" aria-label="Knowbooks home"><img src="knowbooksLogo.svg" alt=""><span>KNOWBOOKS</span></a>
+  <button class="cart-toggle" type="button" aria-expanded="false" aria-controls="cart">Cart <span class="cart-count">0</span></button>
+ </header>
+ <main id="top">
+  <section class="hero">
+   <h1>Know Your World</h1>
+   <p class="intro">A Knowbook is an experiment kit in a book. Open one, do the experiments, and learn how things work.</p>
+   <a class="down" href="#catalog">Build your shelf <span aria-hidden="true">↓</span></a>
+  </section>
+  <section class="catalog-section" id="catalog" aria-labelledby="catalog-title">
+   <div class="product-grid" id="product-grid"></div>
+  </section>
+ </main>
+ <footer class="site-footer"><a href="https://x.com/breckyunits">X</a><a href="https://github.com/breck7/knowbooks.com">GitHub</a></footer>
+ <div class="scrim" hidden></div>
+ <aside class="cart" id="cart" aria-labelledby="cart-title" aria-hidden="true">
+  <div class="cart-head"><div><p class="eyebrow">Your shelf</p><h2 id="cart-title">Cart</h2></div><button class="cart-close" type="button" aria-label="Close cart">×</button></div>
+  <div class="cart-lines"></div>
+  <div class="cart-empty"><p>Your cart is empty.</p><a href="#catalog">Find a Knowbook</a></div>
+  <div class="cart-footer" hidden><p class="cart-total"><span>Total</span><strong>$0</strong></p><a class="paypal-button" href="https://www.paypal.com/cgi-bin/webscr" rel="noopener">Pay with PayPal</a><small>Shipping and applicable taxes are handled by PayPal.</small></div>
+ </aside>
+ <noscript>This shop needs JavaScript to manage its cart.</noscript>
+
+css
+ :root {
+  --paper: #f4efe5;
+  --ink: #20211e;
+  --muted: #706b61;
+  --line: rgba(32, 33, 30, .18);
+  --gold: #d9bc78;
+  color-scheme: light;
+  font-family: Georgia, "Times New Roman", serif;
+ }
+ * { box-sizing: border-box; }
+ html { scroll-behavior: smooth; }
+ body { margin: 0; color: var(--ink); background: var(--paper); }
+ body.cart-open { overflow: hidden; }
+ button, a { color: inherit; }
+ button { font: inherit; }
+ .site-header {
+  position: absolute;
+  z-index: 10;
+  inset: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px clamp(20px, 5vw, 72px);
+ }
+ .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font: 700 11px/1 Arial, sans-serif; letter-spacing: .2em; }
+ .brand img { width: 30px; height: 30px; padding: 5px; border-radius: 50%; background: var(--ink); }
+ .cart-toggle { border: 1px solid var(--ink); border-radius: 999px; padding: 9px 10px 9px 16px; background: transparent; cursor: pointer; text-transform: uppercase; font: 700 10px/1 Arial, sans-serif; letter-spacing: .13em; }
+ .cart-count { display: inline-grid; place-items: center; min-width: 24px; height: 24px; margin-left: 7px; border-radius: 50%; color: var(--paper); background: var(--ink); }
+ .hero {
+  min-height: 92svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 120px clamp(20px, 8vw, 124px) 70px;
+  overflow: hidden;
+  position: relative;
+  background: radial-gradient(circle at 78% 44%, rgba(217,188,120,.35), transparent 20%), linear-gradient(145deg, #f7f3eb, #e9e0d0);
+ }
+ .hero::after { content: ""; position: absolute; right: -8vw; top: 15%; width: min(48vw, 610px); aspect-ratio: 1; background: url("knowbooksLogo.svg") center / contain no-repeat; opacity: .14; }
+ .eyebrow { margin: 0 0 20px; text-transform: uppercase; font: 700 10px/1 Arial, sans-serif; letter-spacing: .2em; }
+ h1 { position: relative; z-index: 1; max-width: 820px; margin: 0; font-size: clamp(58px, 9vw, 132px); font-weight: 400; line-height: .85; letter-spacing: -.055em; }
+ .intro { position: relative; z-index: 1; max-width: 610px; margin: 36px 0; color: #49473f; font-size: clamp(18px, 2vw, 25px); line-height: 1.45; }
+ .down { position: relative; z-index: 1; display: inline-flex; gap: 18px; padding-bottom: 7px; border-bottom: 1px solid; text-decoration: none; text-transform: uppercase; font: 700 10px/1 Arial, sans-serif; letter-spacing: .15em; }
+ .catalog-section { padding: 100px clamp(20px, 5vw, 72px) 120px; }
+ .section-heading { display: grid; grid-template-columns: 1fr 2fr; align-items: end; gap: 30px; margin-bottom: 60px; }
+ .section-heading .eyebrow { align-self: start; padding-top: 11px; }
+ .section-heading h2 { margin: 0; max-width: 720px; font-size: clamp(40px, 6vw, 78px); font-weight: 400; line-height: .95; letter-spacing: -.04em; }
+ .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+ .product { min-width: 0; padding: clamp(20px, 3vw, 42px); background: var(--paper); }
+ .book-cover { position: relative; isolation: isolate; aspect-ratio: .72; display: flex; flex-direction: column; align-items: center; padding: 11% 9%; overflow: hidden; color: #f4dfb3; background: linear-gradient(135deg, var(--cover), color-mix(in srgb, var(--cover) 58%, #000)); border-radius: 2px 12px 12px 2px; box-shadow: 11px 16px 25px rgba(34,28,20,.2), inset 5px 0 8px rgba(0,0,0,.17), inset 0 0 0 1px rgba(255,255,255,.08); transition: transform 180ms ease; }
+ .product:hover .book-cover { transform: translateY(-5px) rotate(-.5deg); }
+ .book-cover::before { content: ""; position: absolute; z-index: -1; inset: 0; opacity: .22; background: repeating-linear-gradient(89deg, rgba(255,255,255,.18) 0 1px, transparent 1px 4px); }
+ .book-cover h3 { margin: 5% 0 0; text-align: center; text-transform: uppercase; font-size: clamp(19px, 2vw, 29px); font-weight: 400; letter-spacing: .11em; }
+ .book-brand { margin-top: auto; text-transform: uppercase; font: 700 7px/1 Arial, sans-serif; letter-spacing: .18em; }
+ .product-info { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-top: 23px; }
+ .product-meta p { margin: 4px 0 0; color: var(--muted); font: 12px/1.4 Arial, sans-serif; }
+ .price { font-size: 19px; }
+ .add-button { flex: 0 0 auto; width: 44px; height: 44px; border: 1px solid var(--ink); border-radius: 50%; background: transparent; cursor: pointer; font: 22px/1 Arial, sans-serif; transition: background 150ms, color 150ms; }
+ .add-button:hover, .add-button.is-added { color: var(--paper); background: var(--ink); }
+ .scrim { position: fixed; z-index: 19; inset: 0; background: rgba(23,23,20,.36); backdrop-filter: blur(2px); }
+ .cart { position: fixed; z-index: 20; inset: 0 0 0 auto; width: min(480px, 100%); padding: 30px; display: flex; flex-direction: column; background: #faf7f0; box-shadow: -18px 0 60px rgba(20,20,17,.18); transform: translateX(105%); visibility: hidden; transition: transform 240ms ease, visibility 240ms; }
+ .cart.is-open { transform: none; visibility: visible; }
+ .cart-head { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+ .cart-head .eyebrow { margin-bottom: 7px; }
+ .cart-head h2 { margin: 0; font-size: 42px; font-weight: 400; }
+ .cart-close { width: 42px; height: 42px; border: 0; background: transparent; cursor: pointer; font-size: 32px; font-weight: 300; }
+ .cart-lines { overflow-y: auto; }
+ .cart-line { display: grid; grid-template-columns: 54px 1fr auto; gap: 15px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
+ .line-swatch { width: 54px; aspect-ratio: .72; border-radius: 1px 5px 5px 1px; background: var(--cover); box-shadow: inset 4px 0 rgba(0,0,0,.16); }
+ .line-copy h3 { margin: 0 0 6px; font-size: 18px; font-weight: 400; }
+ .line-copy p { margin: 0; color: var(--muted); font: 12px/1 Arial, sans-serif; }
+ .quantity { display: flex; align-items: center; gap: 8px; }
+ .quantity button { width: 27px; height: 27px; border: 1px solid var(--line); border-radius: 50%; background: transparent; cursor: pointer; }
+ .quantity span { min-width: 12px; text-align: center; font: 12px/1 Arial, sans-serif; }
+ .cart-empty { margin: auto; text-align: center; color: var(--muted); }
+ .cart-empty a { color: var(--ink); text-underline-offset: 4px; }
+ .cart-footer { margin-top: auto; padding-top: 24px; border-top: 1px solid var(--line); }
+ .cart-total { display: flex; justify-content: space-between; margin: 0 0 20px; font: 16px/1 Arial, sans-serif; }
+ .cart-total strong { font-size: 20px; }
+ .paypal-button { display: block; padding: 16px; border-radius: 999px; color: white; background: #142c8e; text-align: center; text-decoration: none; font: 700 14px/1 Arial, sans-serif; }
+ .paypal-button:hover { background: #0c236d; }
+ .cart-footer small { display: block; margin-top: 12px; color: var(--muted); text-align: center; font: 10px/1.4 Arial, sans-serif; }
+ .site-footer { display: flex; justify-content: center; gap: 22px; padding: 0 20px 32px; color: var(--muted); text-transform: uppercase; font: 10px/1 Arial, sans-serif; letter-spacing: .12em; }
+ .site-footer a { color: inherit; text-decoration: none; text-underline-offset: 3px; }
+ .site-footer a:hover, .site-footer a:focus-visible { text-decoration: underline; }
+ noscript { display: block; padding: 12px; color: white; background: #8a2d21; text-align: center; }
+ @media (max-width: 850px) { .product-grid { grid-template-columns: repeat(2, 1fr); } .section-heading { grid-template-columns: 1fr; } }
+ @media (max-width: 520px) { .hero { min-height: 82svh; } .hero::after { width: 88vw; right: -32vw; } .product-grid { grid-template-columns: 1fr; } .cart { padding: 22px; } }
+ @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+
+catalog.js
+
+script
+ (() => {
+  "use strict";
+  const coverColors = [
+   { coverColor: "#243f59" },
+   { coverColor: "#a8442e" },
+   { coverColor: "#375748" },
+   { coverColor: "#5b4154" },
+   { coverColor: "#26727a" }
+  ];
+  const productCatalog = (Array.isArray(catalog) ? catalog : []).map((product, index) => ({ ...product, ...coverColors[index % coverColors.length] }));
+  const products = new Map(productCatalog.map(product => [product.id, product]));
+  const paypalEmail = "breck7@gmail.com";
+  const currency = "USD";
+  const money = new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 });
+  const cart = new Map();
+  const grid = document.querySelector("#product-grid");
+  const drawer = document.querySelector("#cart");
+  const scrim = document.querySelector(".scrim");
+  const toggle = document.querySelector(".cart-toggle");
+  const count = document.querySelector(".cart-count");
+  const lines = document.querySelector(".cart-lines");
+  const empty = document.querySelector(".cart-empty");
+  const footer = document.querySelector(".cart-footer");
+  const total = document.querySelector(".cart-total strong");
+  const checkout = document.querySelector(".paypal-button");
+  const escapeHtml = value => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+  const productCard = product => `<article class="product">
+   <div class="book-cover" style="--cover:${escapeHtml(product.coverColor)}">
+    <h3>${escapeHtml(product.title)}</h3><span class="book-brand">Knowbooks</span>
+   </div>
+   <div class="product-info"><div class="product-meta"><span class="price">${money.format(product.priceUsd)}</span><p>Premium experiment kit</p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
+  </article>`;
+  const paypalUrl = () => {
+   const url = new URL("https://www.paypal.com/cgi-bin/webscr");
+   url.searchParams.set("cmd", "_cart");
+   url.searchParams.set("upload", "1");
+   url.searchParams.set("business", paypalEmail);
+   url.searchParams.set("currency_code", currency);
+   [...cart].forEach(([id, quantity], index) => {
+    const product = products.get(id);
+    const number = index + 1;
+    url.searchParams.set(`item_name_${number}`, `${product.title} Knowbook`);
+    url.searchParams.set(`item_number_${number}`, product.id);
+    url.searchParams.set(`amount_${number}`, Number(product.priceUsd).toFixed(2));
+    url.searchParams.set(`quantity_${number}`, String(quantity));
+   });
+   return url.href;
+  };
+  const save = () => {
+   try { localStorage.setItem("knowbooks-cart", JSON.stringify([...cart])); } catch {}
+  };
+  const refresh = () => {
+   const quantity = [...cart.values()].reduce((sum, value) => sum + value, 0);
+   const amount = [...cart].reduce((sum, [id, value]) => sum + products.get(id).priceUsd * value, 0);
+   count.textContent = quantity;
+   document.querySelectorAll("[data-add]").forEach(button => {
+    const added = cart.has(button.dataset.add);
+    button.classList.toggle("is-added", added);
+    button.textContent = added ? "✓" : "+";
+   });
+   lines.innerHTML = [...cart].map(([id, value]) => {
+    const product = products.get(id);
+    return `<div class="cart-line"><span class="line-swatch" style="--cover:${escapeHtml(product.coverColor)}" aria-hidden="true"></span><div class="line-copy"><h3>${escapeHtml(product.title)}</h3><p>${money.format(product.priceUsd)} each</p></div><div class="quantity"><button type="button" data-less="${escapeHtml(id)}" aria-label="Remove one ${escapeHtml(product.title)}">−</button><span>${value}</span><button type="button" data-more="${escapeHtml(id)}" aria-label="Add one ${escapeHtml(product.title)}">+</button></div></div>`;
+   }).join("");
+   empty.hidden = quantity > 0;
+   footer.hidden = quantity === 0;
+   total.textContent = money.format(amount);
+   checkout.href = quantity ? paypalUrl() : "https://www.paypal.com/cgi-bin/webscr";
+   save();
+  };
+  const openCart = () => {
+   drawer.classList.add("is-open");
+   drawer.setAttribute("aria-hidden", "false");
+   toggle.setAttribute("aria-expanded", "true");
+   scrim.hidden = false;
+   document.body.classList.add("cart-open");
+   drawer.querySelector(".cart-close").focus();
+  };
+  const closeCart = () => {
+   drawer.classList.remove("is-open");
+   drawer.setAttribute("aria-hidden", "true");
+   toggle.setAttribute("aria-expanded", "false");
+   scrim.hidden = true;
+   document.body.classList.remove("cart-open");
+  };
+  const change = (id, delta) => {
+   const next = (cart.get(id) || 0) + delta;
+   next > 0 ? cart.set(id, next) : cart.delete(id);
+   refresh();
+  };
+  grid.innerHTML = productCatalog.map(productCard).join("");
+  try {
+   const saved = JSON.parse(localStorage.getItem("knowbooks-cart") || "[]");
+   saved.forEach(([id, quantity]) => { if (products.has(id) && Number.isInteger(quantity) && quantity > 0) cart.set(id, quantity); });
+  } catch {}
+  grid.addEventListener("click", event => { const button = event.target.closest("[data-add]"); if (button) { change(button.dataset.add, 1); openCart(); } });
+  lines.addEventListener("click", event => { const more = event.target.closest("[data-more]"); const less = event.target.closest("[data-less]"); if (more) change(more.dataset.more, 1); if (less) change(less.dataset.less, -1); });
+  toggle.addEventListener("click", openCart);
+  drawer.querySelector(".cart-close").addEventListener("click", closeCart);
+  empty.querySelector("a").addEventListener("click", closeCart);
+  scrim.addEventListener("click", closeCart);
+  document.addEventListener("keydown", event => { if (event.key === "Escape") closeCart(); });
+  refresh();
+ })();
+
+idParser
+ extends abstractIdParser
+ description Stable product identifier.
+
+titleParser
+ extends abstractStringMeasureParser
+ description Product title.
+
+statusParser
+ extends abstractStringMeasureParser
+ description Product status.
+
+priceUsdParser
+ extends abstractIntegerMeasureParser
+ description Website checkout price in whole US dollars.
+
+descriptionParser
+ extends abstractStringMeasureParser
+ description Optional product description.
+
+// data
+
+id magnets
+title Magnets
+status beta
+priceUsd 49
+
+id beams
+title Beams
+status beta
+priceUsd 49
+
+id focus
+title Focus
+status beta
+priceUsd 99
+
+id light
+title Light
+status beta
+priceUsd 59
+
+id capital
+title Capital
+status beta
+priceUsd 399
+
+id levers
+title Levers
+status beta
+priceUsd 49
+
+id gravity
+title Gravity
+status beta
+priceUsd 59
+
+id sound
+title Sound
+status beta
+priceUsd 69
+
+id electricity
+title Electricity
+status beta
+priceUsd 79
+
+id air
+title Air
+status beta
+priceUsd 69
+
+id heat
+title Heat
+status beta
+priceUsd 79
+
+id glass
+title Glass
+status beta
+priceUsd 199
+
+id cells
+title Cells
+status beta
+priceUsd 299
+
+id iron
+title Iron
+status beta
+priceUsd 129
+
+id elements
+title Elements
+status beta
+priceUsd 199
+
+id copper
+title Copper
+status beta
+priceUsd 129
+
+id fire
+title Fire
+status beta
+priceUsd 129
+
+id sleep
+title Sleep
+status beta
+priceUsd 499
+
+id fields
+title Fields
+status beta
+priceUsd 199
+
+id hydration
+title Hydration
+status beta
+priceUsd 199
+
+id food
+title Food
+status beta
+priceUsd 149
+
+id software
+title Software
+status beta
+priceUsd 599
+
+id sales
+title Sales
+status beta
+priceUsd 399
+
+id twitter
+title Twitter
+status beta
+priceUsd 799
