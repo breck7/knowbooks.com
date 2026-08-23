@@ -32,8 +32,8 @@ buildToFileParser
   }
 
 buildToFile .gitignore
- *.*
- index.html
+ *.html
+ .*
  *.svg
  *.js
 
