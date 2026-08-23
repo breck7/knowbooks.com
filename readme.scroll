@@ -122,7 +122,7 @@ css
  .section-heading { display: grid; grid-template-columns: 1fr 2fr; align-items: end; gap: 30px; margin-bottom: 60px; }
  .section-heading .eyebrow { align-self: start; padding-top: 11px; }
  .section-heading h2 { margin: 0; max-width: 720px; font-size: clamp(40px, 6vw, 78px); font-weight: 400; line-height: .95; letter-spacing: -.04em; }
- .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+ .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
  .product { min-width: 0; padding: clamp(20px, 3vw, 42px); background: var(--paper); }
  .book-cover { position: relative; isolation: isolate; aspect-ratio: .72; display: flex; flex-direction: column; align-items: center; padding: 11% 9%; overflow: hidden; color: #f4dfb3; background: linear-gradient(135deg, var(--cover), color-mix(in srgb, var(--cover) 58%, #000)); border-radius: 2px 12px 12px 2px; box-shadow: 11px 16px 25px rgba(34,28,20,.2), inset 5px 0 8px rgba(0,0,0,.17), inset 0 0 0 1px rgba(255,255,255,.08); transition: transform 180ms ease; }
  .product:hover .book-cover { transform: translateY(-5px) rotate(-.5deg); }
