@@ -48,12 +48,12 @@ buildToFile knowbooksLogo.svg
   </g>
  </svg>
 
-html
- <header class="site-header">
+<header class="site-header">
   <a class="brand" href="#top" aria-label="Knowbooks home"><img src="knowbooksLogo.svg" alt=""><span>KNOWBOOKS</span></a>
+  <a class="faq-link" href="#faq">FAQ</a>
   <button class="cart-toggle" type="button" aria-expanded="false" aria-controls="cart">Cart <span class="cart-count">0</span></button>
  </header>
- <main id="top">
+<main id="top">
   <section class="hero">
    <h1>Knowbooks are books you <em>do</em>.</h1>
    <p class="intro">A Knowbook is an experiment kit in a book. Open one, do the experiments, and learn how things work.</p>
@@ -62,16 +62,37 @@ html
   <section class="catalog-section" id="catalog" aria-labelledby="catalog-title">
    <div class="product-grid" id="product-grid"></div>
   </section>
- </main>
- <footer class="site-footer"><a href="https://x.com/breckyunits">X</a><a href="https://github.com/breck7/knowbooks.com">GitHub</a></footer>
- <div class="scrim" hidden></div>
- <aside class="cart" id="cart" aria-labelledby="cart-title" aria-hidden="true">
+
+## Frequently asked questions
+ id faq
+
+? Who are Knowbooks for?
+Knowbooks are for curious people of all ages. Younger children can explore them with an adult, while teenagers and adults can work through experiments independently.
+
+? What comes inside each Knowbook?
+Each Knowbook contains a curated collection of real objects plus experiment cards that show you what to do to learn a superpower.
+
+? How is the current build quality?
+Our first Knowbooks should be considered "betas". Each one is hand-crafted on Oahu. They are complete and usable, but their objects, experiments, packaging, and instructions are improving as we learn from our first customers.
+
+? Can I use a Knowbook more than once?
+Yes. Knowbooks are designed to last a lifetime and can be explored repeatedly, shared, and returned to the shelf. Most objects are reusable; some contain consumable/replaceable materials.
+
+? When will my Knowbook(s) ship?
+Orders begin assembly immediately and typically ship within 15 business days from Hawai'i. You'll receive tracking when your order is on its way. Delivery times will improve as we scale up.
+
+</main>
+
+<footer class="site-footer"><a href="https://x.com/breckyunits">X</a><a href="https://github.com/breck7/knowbooks.com">GitHub</a></footer>
+
+<div class="scrim" hidden></div>
+<aside class="cart" id="cart" aria-labelledby="cart-title" aria-hidden="true">
   <div class="cart-head"><div><p class="eyebrow">Your shelf</p><h2 id="cart-title">Cart</h2></div><button class="cart-close" type="button" aria-label="Close cart">×</button></div>
   <div class="cart-lines"></div>
   <div class="cart-empty"><p>Your cart is empty.</p><a href="#catalog">Find a Knowbook</a></div>
   <div class="cart-footer" hidden><p class="cart-total"><span>Total</span><strong>$0</strong></p><a class="paypal-button" href="https://www.paypal.com/cgi-bin/webscr" rel="noopener">Pay with PayPal</a><small>Shipping and applicable taxes are handled by PayPal.</small></div>
  </aside>
- <noscript>This shop needs JavaScript to manage its cart.</noscript>
+<noscript>This shop needs JavaScript to manage its cart.</noscript>
 
 css
  :root {
@@ -100,9 +121,15 @@ css
  }
  .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font: 700 11px/1 Arial, sans-serif; letter-spacing: .2em; }
  .brand img { width: 30px; height: 30px; padding: 5px; border-radius: 50%; background: var(--ink); }
+ .faq-link { margin-left: auto; margin-right: 20px; text-decoration: none; text-transform: uppercase; font: 700 10px/1 Arial, sans-serif; letter-spacing: .13em; }
+ .faq-link:hover, .faq-link:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
  .cart-toggle { border: 1px solid var(--ink); border-radius: 999px; padding: 9px 10px 9px 16px; background: transparent; cursor: pointer; text-transform: uppercase; font: 700 10px/1 Arial, sans-serif; letter-spacing: .13em; }
  .cart-count { display: inline-grid; place-items: center; min-width: 24px; height: 24px; margin-left: 7px; border-radius: 50%; color: var(--paper); background: var(--ink); }
  .hero {
+  --ring-radius: min(24vw, 305px);
+  --ring-size: min(48vw, 610px);
+  --ring-overhang: 8vw;
+  --ring-top: 15%;
   min-height: 92svh;
   display: flex;
   flex-direction: column;
@@ -111,9 +138,9 @@ css
   padding: 120px clamp(20px, 8vw, 124px) 70px;
   overflow: hidden;
   position: relative;
-  background: radial-gradient(circle at 78% 44%, rgba(217,188,120,.35), transparent 20%), linear-gradient(145deg, #f7f3eb, #e9e0d0);
+  background: radial-gradient(circle at calc(100% + var(--ring-overhang) - var(--ring-radius)) calc(var(--ring-top) + var(--ring-radius)), rgba(217,188,120,.35), transparent 20%), linear-gradient(145deg, #f7f3eb, #e9e0d0);
  }
- .hero::after { content: ""; position: absolute; right: -8vw; top: 15%; width: min(48vw, 610px); aspect-ratio: 1; background: url("knowbooksLogo.svg") center / contain no-repeat; opacity: .14; }
+ .hero::after { content: ""; position: absolute; right: calc(0px - var(--ring-overhang)); top: var(--ring-top); width: var(--ring-size); aspect-ratio: 1; background: url("knowbooksLogo.svg") center / contain no-repeat; opacity: .14; }
  .eyebrow { margin: 0 0 20px; text-transform: uppercase; font: 700 10px/1 Arial, sans-serif; letter-spacing: .2em; }
  h1 { position: relative; z-index: 1; max-width: 820px; margin: 0; font-size: clamp(58px, 9vw, 132px); font-weight: 400; line-height: .85; letter-spacing: -.055em; }
  .intro { position: relative; z-index: 1; max-width: 610px; margin: 36px 0; color: #49473f; font-size: clamp(18px, 2vw, 25px); line-height: 1.45; }
@@ -134,6 +161,13 @@ css
  .price { font-size: 19px; }
  .add-button { flex: 0 0 auto; width: 44px; height: 44px; border: 1px solid var(--ink); border-radius: 50%; background: transparent; cursor: pointer; font: 22px/1 Arial, sans-serif; transition: background 150ms, color 150ms; }
  .add-button:hover, .add-button.is-added { color: var(--paper); background: var(--ink); }
+ main > .scrollSection { padding: 0 clamp(20px, 8vw, 124px); }
+ main > .scrollSection h2.scrollParagraph { max-width: 720px; margin: 0 0 45px; font-size: clamp(40px, 6vw, 78px); font-weight: 400; line-height: .95; letter-spacing: -.04em; }
+ main > .scrollSection:last-child { padding-bottom: 120px; }
+ main > .scrollSection:last-child .scrollParagraph { border-bottom: 1px solid var(--line); }
+ .scrollQuestion, .scrollQuestion + .scrollParagraph { max-width: 900px; margin-right: 0; margin-left: auto; }
+ .scrollQuestion { margin-top: 0; margin-bottom: 0; padding: 24px 0 10px; border-top: 1px solid var(--line); font-size: clamp(19px, 2vw, 25px); font-weight: 400; }
+ .scrollQuestion + .scrollParagraph { margin-top: 0; margin-bottom: 0; padding: 0 0 24px; color: var(--muted); font: 15px/1.6 Arial, sans-serif; }
  .scrim { position: fixed; z-index: 19; inset: 0; background: rgba(23,23,20,.36); backdrop-filter: blur(2px); }
  .cart { position: fixed; z-index: 20; inset: 0 0 0 auto; width: min(480px, 100%); padding: 30px; display: flex; flex-direction: column; background: #faf7f0; box-shadow: -18px 0 60px rgba(20,20,17,.18); transform: translateX(105%); visibility: hidden; transition: transform 240ms ease, visibility 240ms; }
  .cart.is-open { transform: none; visibility: visible; }
@@ -162,7 +196,7 @@ css
  .site-footer a:hover, .site-footer a:focus-visible { text-decoration: underline; }
  noscript { display: block; padding: 12px; color: white; background: #8a2d21; text-align: center; }
  @media (max-width: 850px) { .product-grid { grid-template-columns: repeat(2, 1fr); } .section-heading { grid-template-columns: 1fr; } }
- @media (max-width: 520px) { .hero { min-height: 82svh; } .hero::after { width: 88vw; right: -32vw; } .product-grid { grid-template-columns: 1fr; } .cart { padding: 22px; } }
+ @media (max-width: 520px) { .hero { --ring-radius: 44vw; --ring-size: 88vw; --ring-overhang: 32vw; min-height: 82svh; } .product-grid { grid-template-columns: 1fr; } .cart { padding: 22px; } }
  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
 
 catalog.js
