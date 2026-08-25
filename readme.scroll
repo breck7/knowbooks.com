@@ -55,7 +55,7 @@ html
  </header>
  <main id="top">
   <section class="hero">
-   <h1>Know Your World</h1>
+   <h1>Knowbooks are books you <em>do</em>.</h1>
    <p class="intro">A Knowbook is an experiment kit in a book. Open one, do the experiments, and learn how things work.</p>
    <a class="down" href="#catalog">Build your shelf <span aria-hidden="true">↓</span></a>
   </section>
@@ -390,6 +390,181 @@ title Fields
 status beta
 priceUsd 199
 
+id energy
+title Energy
+status beta
+priceUsd 139
+
+id voltage
+title Voltage
+status beta
+priceUsd 99
+
+id motors
+title Motors
+status beta
+priceUsd 199
+
+id gears
+title Gears
+status beta
+priceUsd 149
+
+id colors
+title Colors
+status beta
+priceUsd 89
+
+id gluons
+title Gluons
+status beta
+priceUsd 899
+
+id bosons
+title Bosons
+status beta
+priceUsd 899
+
+id matter
+title Matter
+status beta
+priceUsd 199
+
+id atoms
+title Atoms
+status beta
+priceUsd 199
+
+id motion
+title Motion
+status beta
+priceUsd 99
+
+id friction
+title Friction
+status beta
+priceUsd 59
+
+id ropes
+title Ropes
+status beta
+priceUsd 79
+
+id wind
+title Wind
+status beta
+priceUsd 59
+
+id water
+title Water
+status beta
+priceUsd 89
+
+id rust
+title Rust
+status beta
+priceUsd 99
+
+id liberty
+title Liberty
+status beta
+priceUsd 199
+
+id courage
+title Courage
+status beta
+priceUsd 199
+
+id property
+title Property
+status beta
+priceUsd 399
+
+id membranes
+title Membranes
+status beta
+priceUsd 199
+
+id decay
+title Decay
+status beta
+priceUsd 299
+
+id bonds
+title Bonds
+status beta
+priceUsd 159
+
+id teamwork
+title Teamwork
+status beta
+priceUsd 199
+
+id patience
+title Patience
+status beta
+priceUsd 149
+
+id paper
+title Paper
+status beta
+priceUsd 99
+
+id ink
+title Ink
+status beta
+priceUsd 99
+
+id metals
+title Metals
+status beta
+priceUsd 129
+
+id steel
+title Steel
+status beta
+priceUsd 119
+
+id aluminum
+title Aluminum
+status beta
+priceUsd 109
+
+id brass
+title Brass
+status beta
+priceUsd 99
+
+id wood
+title Wood
+status beta
+priceUsd 89
+
+id wheels
+title Wheels
+status beta
+priceUsd 79
+
+id stars
+title Stars
+status beta
+priceUsd 99
+
+id exploration
+title Exploration
+status beta
+priceUsd 199
+
+id fabric
+title Fabric
+status beta
+priceUsd 179
+
+id mitochondria
+title Mitochondria
+status beta
+priceUsd 499
+
 id hydration
 title Hydration
 status beta
@@ -404,6 +579,11 @@ id software
 title Software
 status beta
 priceUsd 599
+
+id scroll
+title Scroll
+status beta
+priceUsd 499
 
 id sales
 title Sales
