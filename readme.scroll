@@ -2,7 +2,7 @@ title Knowbooks - experiment kits in a book, for humans of all ages.
 description Knowbooks are experiment kits in a book, for humans of all ages.
 baseUrl https://knowbooks.com/
 permalink index.html
-openGraphImage knowbooksLogo.svg
+openGraphImage og.jpeg
 favicon knowbooksLogo.svg
 buildHtml
 metaTags
