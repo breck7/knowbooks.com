@@ -1,5 +1,5 @@
-title Knowbooks - premium experiment kits for humans of all ages.
-description Knowbooks are premium experiment kits for humans of all ages.
+title Knowbooks - experiment kits in a book, for humans of all ages.
+description Knowbooks are experiment kits in a book, for humans of all ages.
 baseUrl https://knowbooks.com/
 permalink index.html
 openGraphImage knowbooksLogo.svg
@@ -77,7 +77,10 @@ Our first Knowbooks should be considered "betas". Each one is hand-crafted on Oa
 ? Can I use a Knowbook more than once?
 Yes. Knowbooks are designed to last a lifetime and can be explored repeatedly, shared, and returned to the shelf. Most objects are reusable; some contain consumable/replaceable materials.
 
-? When will my Knowbook(s) ship?
+? When will my KnowBook be ready (Hawai'i customers)?
+Oahu customers will generally receive their KnowBooks within 10 days, by hand delivery or pickup.
+
+? When will my Knowbook(s) ship (Mainland customers)?
 Orders begin assembly immediately and typically ship within 15 business days from Hawai'i. You'll receive tracking when your order is on its way. Delivery times will improve as we scale up.
 
 </main>
@@ -153,7 +156,7 @@ css
  .book-cover { position: relative; isolation: isolate; aspect-ratio: .72; display: flex; flex-direction: column; align-items: center; padding: 11% 9%; overflow: hidden; color: #f4dfb3; background: linear-gradient(135deg, var(--cover), color-mix(in srgb, var(--cover) 58%, #000)); border-radius: 2px 12px 12px 2px; box-shadow: 11px 16px 25px rgba(34,28,20,.2), inset 5px 0 8px rgba(0,0,0,.17), inset 0 0 0 1px rgba(255,255,255,.08); transition: transform 180ms ease; }
  .product:hover .book-cover { transform: translateY(-5px) rotate(-.5deg); }
  .book-cover::before { content: ""; position: absolute; z-index: -1; inset: 0; opacity: .22; background: repeating-linear-gradient(89deg, rgba(255,255,255,.18) 0 1px, transparent 1px 4px); }
- .book-cover h3 { margin: 5% 0 0; text-align: center; text-transform: uppercase; font-size: clamp(19px, 2vw, 29px); font-weight: 400; letter-spacing: .11em; }
+ .book-cover h3 { width: 100%; margin: 5% 0 0; white-space: nowrap; text-align: center; text-transform: uppercase; font-size: clamp(19px, 2vw, 29px); font-weight: 400; letter-spacing: .11em; }
  .book-brand { margin-top: auto; text-transform: uppercase; font: 700 7px/1 Arial, sans-serif; letter-spacing: .18em; }
  .product-info { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-top: 23px; }
  .product-meta p { margin: 4px 0 0; color: var(--muted); font: 12px/1.4 Arial, sans-serif; }
@@ -231,8 +234,21 @@ script
    <div class="book-cover" style="--cover:${escapeHtml(product.coverColor)}">
     <h3>${escapeHtml(product.title)}</h3><span class="book-brand">Knowbooks</span>
    </div>
-   <div class="product-info"><div class="product-meta"><span class="price">${money.format(product.priceUsd)}</span><p>Premium experiment kit</p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
+   <div class="product-info"><div class="product-meta"><span class="price">${money.format(product.priceUsd)}</span><p>Experiment kit in a book.<br><i>Beta edition</i></p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
   </article>`;
+  let titleFitFrame;
+  const fitBookTitles = () => {
+   cancelAnimationFrame(titleFitFrame);
+   titleFitFrame = requestAnimationFrame(() => {
+    grid.querySelectorAll(".book-cover h3").forEach(title => {
+     title.style.removeProperty("font-size");
+     if (title.scrollWidth > title.clientWidth) {
+      const baseSize = Number.parseFloat(getComputedStyle(title).fontSize);
+      title.style.fontSize = `${baseSize * title.clientWidth / title.scrollWidth}px`;
+     }
+    });
+   });
+  };
   const paypalUrl = () => {
    const url = new URL("https://www.paypal.com/cgi-bin/webscr");
    url.searchParams.set("cmd", "_cart");
@@ -292,6 +308,7 @@ script
    refresh();
   };
   grid.innerHTML = productCatalog.map(productCard).join("");
+  fitBookTitles();
   try {
    const saved = JSON.parse(localStorage.getItem("knowbooks-cart") || "[]");
    saved.forEach(([id, quantity]) => { if (products.has(id) && Number.isInteger(quantity) && quantity > 0) cart.set(id, quantity); });
@@ -303,6 +320,7 @@ script
   empty.querySelector("a").addEventListener("click", closeCart);
   scrim.addEventListener("click", closeCart);
   document.addEventListener("keydown", event => { if (event.key === "Escape") closeCart(); });
+  window.addEventListener("resize", fitBookTitles);
   refresh();
  })();
 

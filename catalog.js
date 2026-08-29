@@ -36,6 +36,12 @@ const catalog = [
     "priceUsd": 49
   },
   {
+    "id": "carpentry",
+    "title": "Carpentry",
+    "status": "beta",
+    "priceUsd": 149
+  },
+  {
     "id": "gravity",
     "title": "Gravity",
     "status": "beta",
