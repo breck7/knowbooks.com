@@ -64,7 +64,7 @@
 <aside class="cart" id="cart" aria-labelledby="cart-title" aria-hidden="true"> <div class="cart-head"><div><p class="eyebrow">Your shelf</p><h2 id="cart-title">Cart</h2></div><button class="cart-close" type="button" aria-label="Close cart">×</button></div>
  <div class="cart-lines"></div>
  <div class="cart-empty"><p>Your cart is empty.</p><a href="#catalog">Find a Knowbook</a></div>
- <div class="cart-footer" hidden><p class="cart-total"><span>Total</span><strong>$0</strong></p><a class="paypal-button" href="https://www.paypal.com/cgi-bin/webscr" rel="noopener">Pay with PayPal</a><small>Shipping and applicable taxes are handled by PayPal.</small></div>
+ <div class="cart-footer" hidden><p class="cart-total"><span>Total</span><strong>$0</strong></p><a class="paypal-button" href="https://www.paypal.com/cgi-bin/webscr" rel="noopener">Pay with PayPal</a><small>Shipping and applicable taxes are handled by PayPal.</small><details class="crypto"><summary>Pay with crypto</summary><p><b>BTC</b><span><output data-crypto="BTC"></output><code>3G9q4tRjkTSP8PP4eFVZuNLtXxKuERJcJr</code></span><b>ETH</b><span><output data-crypto="ETH"></output><code>0xaEe37CE75AcC6341abfa1c73c6Bb1B73963a6ccD</code></span><b>NEAR</b><span><output data-crypto="NEAR"></output><code>4345b29b9fb2ba13d2fb47e7946b1b135118381fb13e54c8a9042cd79542e89f</code></span><b>USDC <i>(Base)</i></b><span><output data-crypto="USDC"></output><code>0x3d3e69E8f208A782E09f018643fE9796e918e45e</code></span></p><small>Send the amount shown, then email your transaction ID, cart, and shipping address to <a href="mailto:breck@knowbooks.com">breck@knowbooks.com</a>.</small></details></div>
 </aside>
 <noscript>This shop needs JavaScript to manage its cart.</noscript>
 <style>:root {
@@ -163,6 +163,9 @@ main > .scrollSection:last-child .scrollParagraph { border-bottom: 1px solid var
 .paypal-button { display: block; padding: 16px; border-radius: 999px; color: white; background: #142c8e; text-align: center; text-decoration: none; font: 700 14px/1 Arial, sans-serif; }
 .paypal-button:hover { background: #0c236d; }
 .cart-footer small { display: block; margin-top: 12px; color: var(--muted); text-align: center; font: 10px/1.4 Arial, sans-serif; }
+.crypto { margin-top: 16px; font: 12px/1.5 Arial, sans-serif; }
+.crypto summary { cursor: pointer; text-align: center; text-decoration: underline; text-underline-offset: 3px; }
+.crypto p { display: grid; grid-template-columns: auto 1fr; gap: 8px 10px; } .crypto output, .crypto code { display: block; } .crypto code { overflow-wrap: anywhere; user-select: all; }
 .site-footer { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 8px 20px 32px; color: var(--muted); text-align: center; }
 .email-invite { max-width: 670px; margin: 0; font-size: clamp(17px, 2vw, 22px); line-height: 1.5; }
 .email-invite a, .email-modal a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: 4px; }
@@ -196,6 +199,7 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
  const paypalEmail = "breck7@gmail.com";
  const currency = "USD";
  const money = new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 });
+ const crypto = { BTC: [78759.81, 8], ETH: [2474.64, 6], NEAR: [1.97, 2], USDC: [1, 2] }; // USD price, display decimals; updated August 31, 2026
  const cart = new Map();
  const grid = document.querySelector("#product-grid");
  const drawer = document.querySelector("#cart");
@@ -266,6 +270,7 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
   empty.hidden = quantity > 0;
   footer.hidden = quantity === 0;
   total.textContent = money.format(amount);
+  document.querySelectorAll("[data-crypto]").forEach(output => { const [usd, decimals] = crypto[output.dataset.crypto]; output.textContent = `${(amount / usd).toFixed(decimals)} ${output.dataset.crypto}`; });
   checkout.href = quantity ? paypalUrl() : "https://www.paypal.com/cgi-bin/webscr";
   save();
  };
