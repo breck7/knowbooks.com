@@ -72,7 +72,7 @@ Knowbooks are for curious people of all ages. Younger children can explore them 
 Each Knowbook contains a curated collection of real objects plus experiment cards that show you what to do to learn a superpower.
 
 ? How is the current build quality?
-Our first Knowbooks should be considered "betas". Each one is hand-crafted on Oahu. They are complete and usable, but their objects, experiments, packaging, and instructions are improving as we learn from our first customers.
+Our first Knowbooks are Trailblazer editions. Each one is hand-crafted on Oahu. They are complete and usable, but their objects, experiments, packaging, and instructions are improving as we learn from our first customers.
 
 ? Can I use a Knowbook more than once?
 Yes. Knowbooks are designed to last a lifetime and can be explored repeatedly, shared, and returned to the shelf. Most objects are reusable; some contain consumable/replaceable materials.
@@ -89,13 +89,6 @@ Orders begin assembly immediately and typically ship within 15 business days fro
   <p class="email-invite">We don't have an email list, but we'd love to hear from you! Emails welcome: <a href="mailto:breck@knowbooks.com">breck@knowbooks.com</a></p>
   <nav class="footer-links" aria-label="Social links"><a href="https://x.com/breckyunits">X</a><a href="https://github.com/breck7/knowbooks.com">GitHub</a></nav>
  </footer>
-
-<div class="email-scrim" hidden></div>
-<section class="email-modal" role="dialog" aria-modal="true" aria-labelledby="email-modal-title" hidden>
-  <button class="email-modal-close" type="button" aria-label="Close email invitation">×</button>
-  <p class="eyebrow">KnowBooks is starting</p>
-  <p id="email-modal-title">We don't have an email list, but we'd love to hear from you! Emails welcome: <a href="mailto:breck@knowbooks.com">breck@knowbooks.com</a></p>
- </section>
 
 <div class="scrim" hidden></div>
 <aside class="cart" id="cart" aria-labelledby="cart-title" aria-hidden="true">
@@ -119,7 +112,7 @@ css
  * { box-sizing: border-box; }
  html { scroll-behavior: smooth; }
  body { margin: 0; color: var(--ink); background: var(--paper); }
- body.cart-open, body.modal-open { overflow: hidden; }
+ body.cart-open { overflow: hidden; }
  button, a { color: inherit; }
  button { font: inherit; }
  .site-header {
@@ -162,6 +155,10 @@ css
  .section-heading .eyebrow { align-self: start; padding-top: 11px; }
  .section-heading h2 { margin: 0; max-width: 720px; font-size: clamp(40px, 6vw, 78px); font-weight: 400; line-height: .95; letter-spacing: -.04em; }
  .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+ .edition-divider { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 14px; margin: 72px clamp(20px, 3vw, 42px) 8px; }
+ .edition-divider:first-child { margin-top: 0; }
+ .edition-divider h2 { margin: 0; font-size: clamp(28px, 3vw, 42px); font-weight: 400; line-height: 1; letter-spacing: -.025em; }
+ .edition-divider p { margin: 0; color: var(--muted); white-space: nowrap; text-transform: uppercase; font: 700 14px/1.2 Arial, sans-serif; letter-spacing: .06em; }
  .product { min-width: 0; padding: clamp(20px, 3vw, 42px); background: var(--paper); }
  .book-cover { position: relative; isolation: isolate; aspect-ratio: .72; display: flex; flex-direction: column; align-items: center; padding: 11% 9%; overflow: hidden; color: #f4dfb3; background: linear-gradient(135deg, var(--cover), color-mix(in srgb, var(--cover) 58%, #000)); border-radius: 2px 12px 12px 2px; box-shadow: 11px 16px 25px rgba(34,28,20,.2), inset 5px 0 8px rgba(0,0,0,.17), inset 0 0 0 1px rgba(255,255,255,.08); transition: transform 180ms ease; }
  .product:hover .book-cover { transform: translateY(-5px) rotate(-.5deg); }
@@ -208,18 +205,10 @@ css
  .crypto p { display: grid; grid-template-columns: auto 1fr; gap: 8px 10px; } .crypto output, .crypto code { display: block; } .crypto code { overflow-wrap: anywhere; user-select: all; }
  .site-footer { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 8px 20px 32px; color: var(--muted); text-align: center; }
  .email-invite { max-width: 670px; margin: 0; font-size: clamp(17px, 2vw, 22px); line-height: 1.5; }
- .email-invite a, .email-modal a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+ .email-invite a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: 4px; }
  .footer-links { display: flex; gap: 22px; text-transform: uppercase; font: 10px/1 Arial, sans-serif; letter-spacing: .12em; }
  .footer-links a { color: inherit; text-decoration: none; text-underline-offset: 3px; }
  .footer-links a:hover, .footer-links a:focus-visible { text-decoration: underline; }
- .email-scrim { position: fixed; z-index: 29; inset: 0; background: rgba(23,23,20,.48); backdrop-filter: blur(3px); }
- .email-modal { position: fixed; z-index: 30; inset: 50% auto auto 50%; width: min(620px, calc(100% - 36px)); padding: clamp(34px, 6vw, 64px); transform: translate(-50%, -50%); background: #faf7f0; border: 1px solid rgba(32,33,30,.18); box-shadow: 0 24px 80px rgba(20,20,17,.28); }
- .email-modal[hidden], .email-scrim[hidden] { display: none; }
- .email-modal::before { content: ""; position: absolute; inset: 12px; pointer-events: none; border: 1px solid rgba(217,188,120,.55); }
- .email-modal .eyebrow { position: relative; margin-bottom: 24px; color: var(--muted); }
- .email-modal > p:last-child { position: relative; margin: 0; font-size: clamp(26px, 4vw, 42px); line-height: 1.12; letter-spacing: -.025em; }
- .email-modal-close { position: absolute; z-index: 1; top: 18px; right: 18px; width: 42px; height: 42px; border: 0; background: transparent; cursor: pointer; font-size: 32px; font-weight: 300; line-height: 1; }
- .email-modal-close:hover, .email-modal-close:focus-visible { color: #8a2d21; }
  noscript { display: block; padding: 12px; color: white; background: #8a2d21; text-align: center; }
  @media (max-width: 850px) { .product-grid { grid-template-columns: repeat(2, 1fr); } .section-heading { grid-template-columns: 1fr; } }
  @media (max-width: 520px) { .hero { --ring-radius: 44vw; --ring-size: 88vw; --ring-overhang: 32vw; min-height: 82svh; } .product-grid { grid-template-columns: 1fr; } .cart { padding: 22px; } }
@@ -242,6 +231,17 @@ script
   const paypalEmail = "breck7@gmail.com";
   const currency = "USD";
   const money = new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 });
+  const shippingByStatus = {
+   believer: "Ship within 90 days",
+   trailblazer: "Ship within 30 days",
+   frontier: "Ship within 6 months"
+  };
+  const editionNameByStatus = {
+   believer: "Believer",
+   trailblazer: "Trailblazer",
+   frontier: "Frontier"
+  };
+  const statusOrder = ["trailblazer", "believer", "frontier"];
   const crypto = { BTC: [78759.81, 8], ETH: [2474.64, 6], NEAR: [1.97, 2], USDC: [1, 2] }; // USD price, display decimals; updated August 31, 2026
   const cart = new Map();
   const grid = document.querySelector("#product-grid");
@@ -254,17 +254,26 @@ script
   const footer = document.querySelector(".cart-footer");
   const total = document.querySelector(".cart-total strong");
   const checkout = document.querySelector(".paypal-button");
-  const emailModal = document.querySelector(".email-modal");
-  const emailScrim = document.querySelector(".email-scrim");
-  const emailClose = document.querySelector(".email-modal-close");
-  const emailDismissedKey = "knowbooks-email-invite-dismissed";
   const escapeHtml = value => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
-  const productCard = product => `<article class="product">
-   <div class="book-cover" style="--cover:${escapeHtml(product.coverColor)}">
-    <h3>${escapeHtml(product.title)}</h3><span class="book-brand">Knowbooks</span>
-   </div>
-   <div class="product-info"><div class="product-meta"><span class="price">${money.format(product.priceUsd)}</span><p>Experiment kit in a book.<br><i>Beta edition</i></p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
-  </article>`;
+  const editionDetails = status => {
+   const name = editionNameByStatus[status];
+   const shipping = shippingByStatus[status];
+   if (!name || !shipping) throw new Error(`Unknown product status: ${status}`);
+   return { name, shipping };
+  };
+  const productCard = product => {
+   const { name, shipping } = editionDetails(product.status);
+   return `<article class="product">
+    <div class="book-cover" style="--cover:${escapeHtml(product.coverColor)}">
+     <h3>${escapeHtml(product.title)}</h3><span class="book-brand">Knowbooks</span>
+    </div>
+    <div class="product-info"><div class="product-meta"><span class="price">${money.format(product.priceUsd)}</span><p>Experiment kit in a book.<br><i>${escapeHtml(name)} edition<br>${escapeHtml(shipping)}</i></p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
+   </article>`;
+  };
+  const editionDivider = status => {
+   const { name, shipping } = editionDetails(status);
+   return `<div class="edition-divider" data-status="${escapeHtml(status)}"><h2>${escapeHtml(name)} editions</h2><p>${escapeHtml(shipping)}</p></div>`;
+  };
   let titleFitFrame;
   const fitBookTitles = () => {
    cancelAnimationFrame(titleFitFrame);
@@ -332,28 +341,16 @@ script
    scrim.hidden = true;
    document.body.classList.remove("cart-open");
   };
-  const dismissEmailModal = () => {
-   if (emailModal.hidden) return;
-   emailModal.hidden = true;
-   emailScrim.hidden = true;
-   document.body.classList.remove("modal-open");
-   try { localStorage.setItem(emailDismissedKey, "1"); } catch {}
-  };
-  const showEmailModal = () => {
-   let dismissed = false;
-   try { dismissed = localStorage.getItem(emailDismissedKey) === "1"; } catch {}
-   if (dismissed) return;
-   emailModal.hidden = false;
-   emailScrim.hidden = false;
-   document.body.classList.add("modal-open");
-   emailClose.focus();
-  };
   const change = (id, delta) => {
    const next = (cart.get(id) || 0) + delta;
    next > 0 ? cart.set(id, next) : cart.delete(id);
    refresh();
   };
-  grid.innerHTML = productCatalog.map(productCard).join("");
+  productCatalog.forEach(product => editionDetails(product.status));
+  grid.innerHTML = statusOrder.flatMap(status => {
+   const stageProducts = productCatalog.filter(product => product.status === status);
+   return stageProducts.length ? [editionDivider(status), ...stageProducts.map(productCard)] : [];
+  }).join("");
   fitBookTitles();
   try {
    const saved = JSON.parse(localStorage.getItem("knowbooks-cart") || "[]");
@@ -365,12 +362,9 @@ script
   drawer.querySelector(".cart-close").addEventListener("click", closeCart);
   empty.querySelector("a").addEventListener("click", closeCart);
   scrim.addEventListener("click", closeCart);
-  emailClose.addEventListener("click", dismissEmailModal);
-  emailScrim.addEventListener("click", dismissEmailModal);
-  document.addEventListener("keydown", event => { if (event.key === "Escape") emailModal.hidden ? closeCart() : dismissEmailModal(); });
+  document.addEventListener("keydown", event => { if (event.key === "Escape") closeCart(); });
   window.addEventListener("resize", fitBookTitles);
   refresh();
-  showEmailModal();
  })();
 
 catalog.scroll
