@@ -91,6 +91,7 @@ Orders begin assembly immediately and typically ship within 15 business days fro
  </footer>
 
 <div class="scrim" hidden></div>
+<div class="book-preview" role="dialog" aria-modal="true" aria-label="Inside this Knowbook" hidden></div>
 <aside class="cart" id="cart" aria-labelledby="cart-title" aria-hidden="true">
   <div class="cart-head"><div><p class="eyebrow">Your shelf</p><h2 id="cart-title">Cart</h2></div><button class="cart-close" type="button" aria-label="Close cart">×</button></div>
   <div class="cart-lines"></div>
@@ -160,11 +161,23 @@ css
  .edition-divider h2 { margin: 0; font-size: clamp(28px, 3vw, 42px); font-weight: 400; line-height: 1; letter-spacing: -.025em; }
  .edition-divider p { margin: 0; color: var(--muted); white-space: nowrap; text-transform: uppercase; font: 700 14px/1.2 Arial, sans-serif; letter-spacing: .06em; }
  .product { min-width: 0; padding: clamp(20px, 3vw, 42px); background: var(--paper); }
- .book-cover { position: relative; isolation: isolate; aspect-ratio: .72; display: flex; flex-direction: column; align-items: center; padding: 11% 9%; overflow: hidden; color: #f4dfb3; background: linear-gradient(135deg, var(--cover), color-mix(in srgb, var(--cover) 58%, #000)); border-radius: 2px 12px 12px 2px; box-shadow: 11px 16px 25px rgba(34,28,20,.2), inset 5px 0 8px rgba(0,0,0,.17), inset 0 0 0 1px rgba(255,255,255,.08); transition: transform 180ms ease; }
+ .book-cover { position: relative; isolation: isolate; aspect-ratio: .72; display: flex; flex-direction: column; align-items: center; padding: 11% 9%; overflow: hidden; color: #f4dfb3; background: linear-gradient(135deg, var(--cover), color-mix(in srgb, var(--cover) 58%, #000)); border-radius: 2px 12px 12px 2px; box-shadow: 11px 16px 25px rgba(34,28,20,.2), inset 5px 0 8px rgba(0,0,0,.17), inset 0 0 0 1px rgba(255,255,255,.08); cursor: pointer; transition: transform 180ms ease; }
  .product:hover .book-cover { transform: translateY(-5px) rotate(-.5deg); }
  .book-cover::before { content: ""; position: absolute; z-index: -1; inset: 0; opacity: .22; background: repeating-linear-gradient(89deg, rgba(255,255,255,.18) 0 1px, transparent 1px 4px); }
  .book-cover h3 { width: 100%; margin: 5% 0 0; white-space: nowrap; text-align: center; text-transform: uppercase; font-size: clamp(19px, 2vw, 29px); font-weight: 400; letter-spacing: .11em; }
+ .book-cover a { text-decoration: none; }
  .book-brand { margin-top: auto; text-transform: uppercase; font: 700 7px/1 Arial, sans-serif; letter-spacing: .18em; }
+ .book-preview { position: fixed; z-index: 30; inset: 0; background: rgba(23,23,20,.55); opacity: 0; visibility: hidden; transition: opacity 250ms, visibility 250ms; }
+ .book-preview.is-open { opacity: 1; visibility: visible; }
+ .preview-book { position: absolute; left: 50%; top: 50%; width: min(320px, 43vw); aspect-ratio: .72; translate: -50% -50%; transform: translate(var(--x), var(--y)) scale(var(--scale)); transition: transform 450ms cubic-bezier(.2,.8,.2,1); perspective: 1400px; }
+ .book-preview.is-open .preview-book { transform: none; }
+ .preview-pages { position: absolute; inset: 0; display: grid; place-items: center; padding: 16%; border-radius: 2px 12px 12px 2px; background: #fffaf0; box-shadow: 11px 16px 35px rgba(0,0,0,.28), inset 7px 0 12px rgba(90,70,35,.12); }
+ .preview-pages p { margin: 0; font-size: clamp(13px, 2vw, 19px); line-height: 1.45; }
+ .preview-close { position: absolute; z-index: 1; top: 8px; right: 8px; border: 0; background: transparent; cursor: pointer; font-size: 25px; }
+ .preview-cover { position: absolute; inset: 0; transform-origin: left; transition: transform 650ms cubic-bezier(.2,.7,.2,1) 450ms; }
+ .preview-cover h3, .preview-cover .book-brand { transition: opacity 0s 775ms; }
+ .book-preview.is-open .preview-cover { transform: rotateY(-155deg); }
+ .book-preview.is-open .preview-cover h3, .book-preview.is-open .preview-cover .book-brand { opacity: 0; }
  .product-info { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-top: 23px; }
  .product-meta p { margin: 4px 0 0; color: var(--muted); font: 12px/1.4 Arial, sans-serif; }
  .price { font-size: 19px; }
@@ -245,6 +258,7 @@ script
   const crypto = { BTC: [78759.81, 8], ETH: [2474.64, 6], NEAR: [1.97, 2], USDC: [1, 2] }; // USD price, display decimals; updated August 31, 2026
   const cart = new Map();
   const grid = document.querySelector("#product-grid");
+  const preview = document.querySelector(".book-preview");
   const drawer = document.querySelector("#cart");
   const scrim = document.querySelector(".scrim");
   const toggle = document.querySelector(".cart-toggle");
@@ -263,9 +277,9 @@ script
   };
   const productCard = product => {
    const { name, shipping } = editionDetails(product.status);
-   return `<article class="product">
+   return `<article class="product" id="${escapeHtml(product.id)}">
     <div class="book-cover" style="--cover:${escapeHtml(product.coverColor)}">
-     <h3>${escapeHtml(product.title)}</h3><span class="book-brand">Knowbooks</span>
+     <h3><a href="?knowbookId=${escapeHtml(product.id)}" onclick="return false">${escapeHtml(product.title)}</a></h3><span class="book-brand">Knowbooks</span>
     </div>
     <div class="product-info"><div class="product-meta"><span class="price">${money.format(product.priceUsd)}</span><p>Experiment kit in a book.<br><i>${escapeHtml(name)} edition<br>${escapeHtml(shipping)}</i></p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
    </article>`;
@@ -341,6 +355,18 @@ script
    scrim.hidden = true;
    document.body.classList.remove("cart-open");
   };
+  const openBook = cover => {
+   const rect = cover.getBoundingClientRect();
+   preview.innerHTML = `<div class="preview-book"><div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>Each Knowbook is currently built by hand on Oahu, and each version is currently still unique. Order yours to see what's inside.</p></div>${cover.outerHTML}</div>`;
+   preview.querySelector(".book-cover").classList.add("preview-cover");
+   preview.hidden = false;
+   const book = preview.firstElementChild;
+   book.style.setProperty("--x", `${rect.left + rect.width / 2 - innerWidth / 2}px`);
+   book.style.setProperty("--y", `${rect.top + rect.height / 2 - innerHeight / 2}px`);
+   book.style.setProperty("--scale", rect.width / book.offsetWidth);
+   requestAnimationFrame(() => preview.classList.add("is-open"));
+  };
+  const closeBook = () => { preview.classList.remove("is-open"); setTimeout(() => { preview.hidden = true; }, 250); };
   const change = (id, delta) => {
    const next = (cart.get(id) || 0) + delta;
    next > 0 ? cart.set(id, next) : cart.delete(id);
@@ -351,18 +377,20 @@ script
    const stageProducts = productCatalog.filter(product => product.status === status);
    return stageProducts.length ? [editionDivider(status), ...stageProducts.map(productCard)] : [];
   }).join("");
+  document.getElementById(new URLSearchParams(location.search).get("knowbookId"))?.scrollIntoView();
   fitBookTitles();
   try {
    const saved = JSON.parse(localStorage.getItem("knowbooks-cart") || "[]");
    saved.forEach(([id, quantity]) => { if (products.has(id) && Number.isInteger(quantity) && quantity > 0) cart.set(id, quantity); });
   } catch {}
-  grid.addEventListener("click", event => { const button = event.target.closest("[data-add]"); if (button) { change(button.dataset.add, 1); openCart(); } });
+  grid.addEventListener("click", event => { const cover = event.target.closest(".book-cover"); const button = event.target.closest("[data-add]"); if (cover) openBook(cover); if (button) { change(button.dataset.add, 1); openCart(); } });
+  preview.addEventListener("click", event => { if (event.target === preview || event.target.closest(".preview-close")) closeBook(); });
   lines.addEventListener("click", event => { const more = event.target.closest("[data-more]"); const less = event.target.closest("[data-less]"); if (more) change(more.dataset.more, 1); if (less) change(less.dataset.less, -1); });
   toggle.addEventListener("click", openCart);
   drawer.querySelector(".cart-close").addEventListener("click", closeCart);
   empty.querySelector("a").addEventListener("click", closeCart);
   scrim.addEventListener("click", closeCart);
-  document.addEventListener("keydown", event => { if (event.key === "Escape") closeCart(); });
+  document.addEventListener("keydown", event => { if (event.key === "Escape") { closeCart(); closeBook(); } });
   window.addEventListener("resize", fitBookTitles);
   refresh();
  })();
