@@ -175,7 +175,7 @@ css
  .preview-pages p { margin: 0; font-size: clamp(13px, 2vw, 19px); line-height: 1.45; }
  .preview-close { position: absolute; z-index: 1; top: 8px; right: 8px; border: 0; background: transparent; cursor: pointer; font-size: 25px; }
  .preview-cover { position: absolute; inset: 0; transform-origin: left; transition: transform 650ms cubic-bezier(.2,.7,.2,1) 450ms; }
- .preview-cover h3, .preview-cover .book-brand { transition: opacity 0s 775ms; }
+ .preview-cover h3, .preview-cover .book-brand { transition: opacity 100ms 450ms; }
  .book-preview.is-open .preview-cover { transform: rotateY(-155deg); }
  .book-preview.is-open .preview-cover h3, .book-preview.is-open .preview-cover .book-brand { opacity: 0; }
  .product-info { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-top: 23px; }
@@ -369,7 +369,7 @@ script
    book.style.removeProperty("transition");
    requestAnimationFrame(() => preview.classList.add("is-open"));
   };
-  const closeBook = () => { preview.classList.remove("is-open"); setTimeout(() => { preview.hidden = true; }, 250); };
+  const closeBook = () => { if (preview.hidden) return; history.replaceState(null, "", location.pathname + location.hash); preview.classList.remove("is-open"); setTimeout(() => { preview.hidden = true; }, 250); };
   const change = (id, delta) => {
    const next = (cart.get(id) || 0) + delta;
    next > 0 ? cart.set(id, next) : cart.delete(id);
@@ -380,13 +380,14 @@ script
    const stageProducts = productCatalog.filter(product => product.status === status);
    return stageProducts.length ? [editionDivider(status), ...stageProducts.map(productCard)] : [];
   }).join("");
-  document.getElementById(new URLSearchParams(location.search).get("knowbookId"))?.scrollIntoView();
+  const linkedBook = document.getElementById(new URLSearchParams(location.search).get("knowbookId"));
+  if (linkedBook) { document.addEventListener("scrollend", () => openBook(linkedBook.querySelector(".book-cover")), { once: true }); linkedBook.scrollIntoView(); }
   fitBookTitles();
   try {
    const saved = JSON.parse(localStorage.getItem("knowbooks-cart") || "[]");
    saved.forEach(([id, quantity]) => { if (products.has(id) && Number.isInteger(quantity) && quantity > 0) cart.set(id, quantity); });
   } catch {}
-  grid.addEventListener("click", event => { const cover = event.target.closest(".book-cover"); const button = event.target.closest("[data-add]"); if (cover) openBook(cover); if (button) { change(button.dataset.add, 1); openCart(); } });
+  grid.addEventListener("click", event => { const cover = event.target.closest(".book-cover"); const button = event.target.closest("[data-add]"); if (cover) { history.replaceState(null, "", cover.querySelector("a").href); openBook(cover); } if (button) { change(button.dataset.add, 1); openCart(); } });
   preview.addEventListener("click", event => { if (event.target === preview || event.target.closest(".preview-close")) closeBook(); });
   lines.addEventListener("click", event => { const more = event.target.closest("[data-more]"); const less = event.target.closest("[data-less]"); if (more) change(more.dataset.more, 1); if (less) change(less.dataset.less, -1); });
   toggle.addEventListener("click", openCart);
