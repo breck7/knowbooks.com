@@ -361,9 +361,12 @@ script
    preview.querySelector(".book-cover").classList.add("preview-cover");
    preview.hidden = false;
    const book = preview.firstElementChild;
+   book.style.transition = "none";
    book.style.setProperty("--x", `${rect.left + rect.width / 2 - innerWidth / 2}px`);
    book.style.setProperty("--y", `${rect.top + rect.height / 2 - innerHeight / 2}px`);
    book.style.setProperty("--scale", rect.width / book.offsetWidth);
+   book.offsetWidth;
+   book.style.removeProperty("transition");
    requestAnimationFrame(() => preview.classList.add("is-open"));
   };
   const closeBook = () => { preview.classList.remove("is-open"); setTimeout(() => { preview.hidden = true; }, 250); };
