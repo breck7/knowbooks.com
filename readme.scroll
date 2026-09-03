@@ -164,6 +164,7 @@ css
  .product:hover .book-cover { transform: translateY(-5px) rotate(-.5deg); }
  .book-cover::before { content: ""; position: absolute; z-index: -1; inset: 0; opacity: .22; background: repeating-linear-gradient(89deg, rgba(255,255,255,.18) 0 1px, transparent 1px 4px); }
  .book-cover h3 { width: 100%; margin: 5% 0 0; white-space: nowrap; text-align: center; text-transform: uppercase; font-size: clamp(19px, 2vw, 29px); font-weight: 400; letter-spacing: .11em; }
+ .book-cover a { text-decoration: none; }
  .book-brand { margin-top: auto; text-transform: uppercase; font: 700 7px/1 Arial, sans-serif; letter-spacing: .18em; }
  .product-info { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-top: 23px; }
  .product-meta p { margin: 4px 0 0; color: var(--muted); font: 12px/1.4 Arial, sans-serif; }
@@ -263,9 +264,9 @@ script
   };
   const productCard = product => {
    const { name, shipping } = editionDetails(product.status);
-   return `<article class="product">
+   return `<article class="product" id="${escapeHtml(product.id)}">
     <div class="book-cover" style="--cover:${escapeHtml(product.coverColor)}">
-     <h3>${escapeHtml(product.title)}</h3><span class="book-brand">Knowbooks</span>
+     <h3><a href="?knowbookId=${escapeHtml(product.id)}" onclick="return false">${escapeHtml(product.title)}</a></h3><span class="book-brand">Knowbooks</span>
     </div>
     <div class="product-info"><div class="product-meta"><span class="price">${money.format(product.priceUsd)}</span><p>Experiment kit in a book.<br><i>${escapeHtml(name)} edition<br>${escapeHtml(shipping)}</i></p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
    </article>`;
@@ -351,6 +352,7 @@ script
    const stageProducts = productCatalog.filter(product => product.status === status);
    return stageProducts.length ? [editionDivider(status), ...stageProducts.map(productCard)] : [];
   }).join("");
+  document.getElementById(new URLSearchParams(location.search).get("knowbookId"))?.scrollIntoView();
   fitBookTitles();
   try {
    const saved = JSON.parse(localStorage.getItem("knowbooks-cart") || "[]");
