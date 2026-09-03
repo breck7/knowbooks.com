@@ -372,6 +372,12 @@ const catalog = [
     "priceUsd": 999
   },
   {
+    "id": "cancer",
+    "title": "Cancer",
+    "status": "frontier",
+    "priceUsd": 999
+  },
+  {
     "id": "gluons",
     "title": "Gluons",
     "status": "frontier",
