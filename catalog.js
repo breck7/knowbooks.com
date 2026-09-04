@@ -3,31 +3,31 @@ const catalog = [
     "id": "magnets",
     "title": "Magnets",
     "status": "trailblazer",
-    "priceUsd": 49
+    "priceUsd": 59
   },
   {
     "id": "beams",
     "title": "Beams",
     "status": "trailblazer",
-    "priceUsd": 49
+    "priceUsd": 59
   },
   {
     "id": "focus",
     "title": "Focus",
     "status": "trailblazer",
-    "priceUsd": 49
+    "priceUsd": 99
   },
   {
     "id": "capital",
     "title": "Capital",
     "status": "trailblazer",
-    "priceUsd": 999
+    "priceUsd": 699
   },
   {
     "id": "light",
     "title": "Light",
     "status": "believer",
-    "priceUsd": 99
+    "priceUsd": 149
   },
   {
     "id": "levers",
@@ -36,10 +36,16 @@ const catalog = [
     "priceUsd": 99
   },
   {
+    "id": "tools",
+    "title": "Tools",
+    "status": "believer",
+    "priceUsd": 129
+  },
+  {
     "id": "carpentry",
     "title": "Carpentry",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "gravity",
@@ -51,19 +57,19 @@ const catalog = [
     "id": "sound",
     "title": "Sound",
     "status": "believer",
-    "priceUsd": 99
+    "priceUsd": 149
   },
   {
     "id": "electricity",
     "title": "Electricity",
     "status": "believer",
-    "priceUsd": 99
+    "priceUsd": 149
   },
   {
     "id": "air",
     "title": "Air",
     "status": "believer",
-    "priceUsd": 99
+    "priceUsd": 149
   },
   {
     "id": "heat",
@@ -105,7 +111,7 @@ const catalog = [
     "id": "fire",
     "title": "Fire",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "sleep",
@@ -147,7 +153,7 @@ const catalog = [
     "id": "colors",
     "title": "Colors",
     "status": "believer",
-    "priceUsd": 99
+    "priceUsd": 149
   },
   {
     "id": "matter",
@@ -165,7 +171,7 @@ const catalog = [
     "id": "motion",
     "title": "Motion",
     "status": "believer",
-    "priceUsd": 99
+    "priceUsd": 149
   },
   {
     "id": "friction",
@@ -183,25 +189,31 @@ const catalog = [
     "id": "wind",
     "title": "Wind",
     "status": "believer",
-    "priceUsd": 99
+    "priceUsd": 199
+  },
+  {
+    "id": "aerodynamics",
+    "title": "Aerodynamics",
+    "status": "believer",
+    "priceUsd": 199
   },
   {
     "id": "water",
     "title": "Water",
     "status": "believer",
-    "priceUsd": 99
+    "priceUsd": 149
   },
   {
     "id": "rust",
     "title": "Rust",
     "status": "believer",
-    "priceUsd": 99
+    "priceUsd": 199
   },
   {
     "id": "time",
     "title": "Time",
     "status": "believer",
-    "priceUsd": 99
+    "priceUsd": 149
   },
   {
     "id": "liberty",
@@ -255,11 +267,17 @@ const catalog = [
     "id": "paper",
     "title": "Paper",
     "status": "believer",
-    "priceUsd": 99
+    "priceUsd": 129
   },
   {
     "id": "ink",
     "title": "Ink",
+    "status": "believer",
+    "priceUsd": 129
+  },
+  {
+    "id": "folding",
+    "title": "Folding",
     "status": "believer",
     "priceUsd": 99
   },
@@ -285,13 +303,19 @@ const catalog = [
     "id": "brass",
     "title": "Brass",
     "status": "believer",
-    "priceUsd": 99
+    "priceUsd": 129
   },
   {
     "id": "wood",
     "title": "Wood",
     "status": "believer",
-    "priceUsd": 99
+    "priceUsd": 129
+  },
+  {
+    "id": "seeds",
+    "title": "Seeds",
+    "status": "believer",
+    "priceUsd": 199
   },
   {
     "id": "wheels",
@@ -303,7 +327,7 @@ const catalog = [
     "id": "stars",
     "title": "Stars",
     "status": "believer",
-    "priceUsd": 99
+    "priceUsd": 199
   },
   {
     "id": "exploration",

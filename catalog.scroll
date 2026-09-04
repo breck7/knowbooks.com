@@ -25,37 +25,42 @@ descriptionParser
 id magnets
 title Magnets
 status trailblazer
-priceUsd 49
+priceUsd 59
 
 id beams
 title Beams
 status trailblazer
-priceUsd 49
+priceUsd 59
 
 id focus
 title Focus
 status trailblazer
-priceUsd 49
+priceUsd 99
 
 id capital
 title Capital
 status trailblazer
-priceUsd 999
+priceUsd 699
 
 id light
 title Light
 status believer
-priceUsd 99
+priceUsd 149
 
 id levers
 title Levers
 status believer
 priceUsd 99
 
+id tools
+title Tools
+status believer
+priceUsd 129
+
 id carpentry
 title Carpentry
 status believer
-priceUsd 149
+priceUsd 249
 
 id gravity
 title Gravity
@@ -65,17 +70,17 @@ priceUsd 99
 id sound
 title Sound
 status believer
-priceUsd 99
+priceUsd 149
 
 id electricity
 title Electricity
 status believer
-priceUsd 99
+priceUsd 149
 
 id air
 title Air
 status believer
-priceUsd 99
+priceUsd 149
 
 id heat
 title Heat
@@ -110,7 +115,7 @@ priceUsd 129
 id fire
 title Fire
 status believer
-priceUsd 129
+priceUsd 149
 
 id sleep
 title Sleep
@@ -145,7 +150,7 @@ priceUsd 149
 id colors
 title Colors
 status believer
-priceUsd 99
+priceUsd 149
 
 id matter
 title Matter
@@ -160,7 +165,7 @@ priceUsd 199
 id motion
 title Motion
 status believer
-priceUsd 99
+priceUsd 149
 
 id friction
 title Friction
@@ -175,22 +180,27 @@ priceUsd 99
 id wind
 title Wind
 status believer
-priceUsd 99
+priceUsd 199
+
+id aerodynamics
+title Aerodynamics
+status believer
+priceUsd 199
 
 id water
 title Water
 status believer
-priceUsd 99
+priceUsd 149
 
 id rust
 title Rust
 status believer
-priceUsd 99
+priceUsd 199
 
 id time
 title Time
 status believer
-priceUsd 99
+priceUsd 149
 
 id liberty
 title Liberty
@@ -235,10 +245,15 @@ priceUsd 149
 id paper
 title Paper
 status believer
-priceUsd 99
+priceUsd 129
 
 id ink
 title Ink
+status believer
+priceUsd 129
+
+id folding
+title Folding
 status believer
 priceUsd 99
 
@@ -260,12 +275,17 @@ priceUsd 109
 id brass
 title Brass
 status believer
-priceUsd 99
+priceUsd 129
 
 id wood
 title Wood
 status believer
-priceUsd 99
+priceUsd 129
+
+id seeds
+title Seeds
+status believer
+priceUsd 199
 
 id wheels
 title Wheels
@@ -275,7 +295,7 @@ priceUsd 99
 id stars
 title Stars
 status believer
-priceUsd 99
+priceUsd 199
 
 id exploration
 title Exploration
