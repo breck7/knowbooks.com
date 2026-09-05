@@ -3,13 +3,13 @@ const catalog = [
     "id": "magnets",
     "title": "Magnets",
     "status": "trailblazer",
-    "priceUsd": 59
+    "priceUsd": 89
   },
   {
     "id": "beams",
     "title": "Beams",
     "status": "trailblazer",
-    "priceUsd": 59
+    "priceUsd": 89
   },
   {
     "id": "focus",
@@ -376,6 +376,12 @@ const catalog = [
     "title": "Hydration",
     "status": "believer",
     "priceUsd": 199
+  },
+  {
+    "id": "hurricanes",
+    "title": "Hurricanes",
+    "status": "believer",
+    "priceUsd": 399
   },
   {
     "id": "actuators",
