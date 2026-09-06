@@ -1,0 +1,49 @@
+importOnly
+
+// Cover microlanguage: a 100 by 100 canvas, one ink, no fonts or raster images.
+// circle cx cy radius [strokeWidth]
+// ellipse cx cy rx ry [strokeWidth]
+// rect x y width height [strokeWidth]
+// line x1 y1 x2 y2 [strokeWidth]
+// polygon x1 y1 x2 y2 x3 y3 ...
+// path SVG path data (M, L, C, Q, A, Z and their lowercase forms)
+// All shapes are outlines; strokeWidth defaults to 3 canvas units.
+// Keep artwork inside 10..90 to leave room for the stroke.
+// The compiled SVG uses currentColor, matching the cover title.
+// For fabrication, set the desired physical size and expand strokes in the cutter software.
+
+coverParser
+ extends abstractTextareaMeasureParser
+ description Single-color cover symbol compiled to an SVG on a 100 by 100 canvas.
+ javascript
+  get measureValue() {
+   const specs = { circle: ["cx", "cy", "r"], ellipse: ["cx", "cy", "rx", "ry"], rect: ["x", "y", "width", "height"], line: ["x1", "y1", "x2", "y2"] }
+   const fail = message => { throw new Error(`Invalid cover: ${message}`) }
+   const shapes = this.subparticlesToString().split("\n").filter(line => line.trim()).map(line => {
+    if (line !== line.trim()) fail("drawing commands must be direct children of cover")
+    const [command, ...args] = line.split(/\s+/)
+    if (command === "path") {
+     const d = args.join(" ")
+     if (!/^[Mm]/.test(d) || !/^[MmLlHhVvCcSsQqTtAaZz0-9., +eE-]+$/.test(d)) fail(`invalid path: ${d}`)
+     return `<path d="${d}"/>`
+    }
+    const values = args.map(Number)
+    if (!values.length || values.some(value => !Number.isFinite(value))) fail(`invalid numbers: ${line}`)
+    if (command === "polygon") {
+     if (values.length < 6 || values.length % 2) fail("polygon needs at least three coordinate pairs")
+     return `<polygon points="${values.join(" ")}"/>`
+    }
+    const attributes = specs[command]
+    if (!attributes) fail(`unknown command: ${command}`)
+    if (values.length !== attributes.length && values.length !== attributes.length + 1) fail(`wrong argument count: ${line}`)
+    const width = values[attributes.length] ?? 3
+    if (width <= 0) fail("stroke width must be positive")
+    const attrs = attributes.map((name, index) => {
+     if (["r", "rx", "ry", "width", "height"].includes(name) && values[index] <= 0) fail(`${name} must be positive`)
+     return `${name}="${values[index]}"`
+    }).join(" ")
+    return `<${command} ${attrs} stroke-width="${width}"/>`
+   })
+   if (!shapes.length) fail("empty symbol")
+   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${shapes.join("")}</svg>`
+  }

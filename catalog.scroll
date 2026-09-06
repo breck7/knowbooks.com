@@ -1,5 +1,7 @@
 importOnly
 
+covers.scroll
+
 idParser
  extends abstractIdParser
  description Stable product identifier.
@@ -16,6 +18,10 @@ priceUsdParser
  extends abstractIntegerMeasureParser
  description Website checkout price in whole US dollars.
 
+symbolParser
+ extends abstractStringMeasureParser
+ description Symbol for cover.
+
 descriptionParser
  extends abstractStringMeasureParser
  description Optional product description.
@@ -25,32 +31,69 @@ descriptionParser
 id magnets
 title Magnets
 status trailblazer
-priceUsd 89
+priceUsd 99
+symbol vertical bar magnet
+cover
+ rect 37 17 26 66
+ line 37 50 63 50
 
 id beams
 title Beams
 status trailblazer
-priceUsd 89
+priceUsd 99
+symbol vertical bar
+cover
+ rect 40 17 20 66
 
 id focus
 title Focus
 status trailblazer
 priceUsd 99
+symbol two triangles touching horizontally, like a bowtie
+cover
+ polygon 20 28 50 50 20 72
+ polygon 80 28 50 50 80 72
 
 id capital
 title Capital
 status trailblazer
 priceUsd 699
+symbol four pairs of two circles. each pair has 1 small circle, 2 are bigger, 1 is bigger than that, 1 bigger than that. arranged in a scattered way.
+cover
+ circle 18 19 4
+ circle 34 28 7
+ circle 65 16 4
+ circle 79 30 7
+ circle 16 58 4
+ circle 30 75 10
+ circle 55 56 4
+ circle 72 74 13
+
+id levers
+title Levers
+status trailblazer
+priceUsd 99
+symbol tilted lever with an aligned square load and a small touching fulcrum near the load.
+cover
+ line 15 53 85 41 4
+ polygon 40 48.714 32 65 48 65
+ polygon 17.429 37.143 32.429 34.571 35 49.571 20 52.143
+
+id sales
+title Sales
+status trailblazer
+priceUsd 399
+symbol two circles with two parallel dashed lines between them, leaving a small gap at each circle.
+cover
+ circle 26 50 13
+ circle 74 50 13
+ path M43 45 H47 M53 45 H57
+ path M43 55 H47 M53 55 H57
 
 id light
 title Light
 status believer
 priceUsd 149
-
-id levers
-title Levers
-status believer
-priceUsd 99
 
 id tools
 title Tools
@@ -321,11 +364,6 @@ id scroll
 title Scroll
 status believer
 priceUsd 499
-
-id sales
-title Sales
-status believer
-priceUsd 399
 
 id marketing
 title Marketing

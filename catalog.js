@@ -2,38 +2,56 @@ const catalog = [
   {
     "id": "magnets",
     "title": "Magnets",
+    "symbol": "vertical bar magnet",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"37\" y=\"17\" width=\"26\" height=\"66\" stroke-width=\"3\"/><line x1=\"37\" y1=\"50\" x2=\"63\" y2=\"50\" stroke-width=\"3\"/></svg>",
     "status": "trailblazer",
-    "priceUsd": 89
+    "priceUsd": 99
   },
   {
     "id": "beams",
     "title": "Beams",
+    "symbol": "vertical bar",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"40\" y=\"17\" width=\"20\" height=\"66\" stroke-width=\"3\"/></svg>",
     "status": "trailblazer",
-    "priceUsd": 89
+    "priceUsd": 99
   },
   {
     "id": "focus",
     "title": "Focus",
+    "symbol": "two triangles touching horizontally, like a bowtie",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"20 28 50 50 20 72\"/><polygon points=\"80 28 50 50 80 72\"/></svg>",
     "status": "trailblazer",
     "priceUsd": 99
   },
   {
     "id": "capital",
     "title": "Capital",
+    "symbol": "four pairs of two circles. each pair has 1 small circle, 2 are bigger, 1 is bigger than that, 1 bigger than that. arranged in a scattered way.",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"18\" cy=\"19\" r=\"4\" stroke-width=\"3\"/><circle cx=\"34\" cy=\"28\" r=\"7\" stroke-width=\"3\"/><circle cx=\"65\" cy=\"16\" r=\"4\" stroke-width=\"3\"/><circle cx=\"79\" cy=\"30\" r=\"7\" stroke-width=\"3\"/><circle cx=\"16\" cy=\"58\" r=\"4\" stroke-width=\"3\"/><circle cx=\"30\" cy=\"75\" r=\"10\" stroke-width=\"3\"/><circle cx=\"55\" cy=\"56\" r=\"4\" stroke-width=\"3\"/><circle cx=\"72\" cy=\"74\" r=\"13\" stroke-width=\"3\"/></svg>",
     "status": "trailblazer",
     "priceUsd": 699
+  },
+  {
+    "id": "levers",
+    "title": "Levers",
+    "symbol": "tilted lever with an aligned square load and a small touching fulcrum near the load.",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"15\" y1=\"53\" x2=\"85\" y2=\"41\" stroke-width=\"4\"/><polygon points=\"40 48.714 32 65 48 65\"/><polygon points=\"17.429 37.143 32.429 34.571 35 49.571 20 52.143\"/></svg>",
+    "status": "trailblazer",
+    "priceUsd": 99
+  },
+  {
+    "id": "sales",
+    "title": "Sales",
+    "symbol": "two circles with two parallel dashed lines between them, leaving a small gap at each circle.",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"26\" cy=\"50\" r=\"13\" stroke-width=\"3\"/><circle cx=\"74\" cy=\"50\" r=\"13\" stroke-width=\"3\"/><path d=\"M43 45 H47 M53 45 H57\"/><path d=\"M43 55 H47 M53 55 H57\"/></svg>",
+    "status": "trailblazer",
+    "priceUsd": 399
   },
   {
     "id": "light",
     "title": "Light",
     "status": "believer",
     "priceUsd": 149
-  },
-  {
-    "id": "levers",
-    "title": "Levers",
-    "status": "believer",
-    "priceUsd": 99
   },
   {
     "id": "tools",
@@ -358,12 +376,6 @@ const catalog = [
     "title": "Scroll",
     "status": "believer",
     "priceUsd": 499
-  },
-  {
-    "id": "sales",
-    "title": "Sales",
-    "status": "believer",
-    "priceUsd": 399
   },
   {
     "id": "marketing",
