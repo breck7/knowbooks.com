@@ -366,6 +366,12 @@ const catalog = [
     "priceUsd": 399
   },
   {
+    "id": "marketing",
+    "title": "Marketing",
+    "status": "believer",
+    "priceUsd": 999
+  },
+  {
     "id": "twitter",
     "title": "Twitter",
     "status": "believer",
