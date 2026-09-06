@@ -458,4 +458,4 @@ script
 
 catalog.scroll
 buildConcepts catalog.js
-buildZip knowbooks.zip index.html catalog.js knowbooksLogo.svg og.jpeg
+buildZip knowbooks.zip index.html catalog.js knowbooksLogo.svg og.jpeg readme.scroll catalog.scroll covers.scroll
