@@ -366,6 +366,12 @@ const catalog = [
     "priceUsd": 149
   },
   {
+    "id": "batteries",
+    "title": "Batteries",
+    "status": "believer",
+    "priceUsd": 299
+  },
+  {
     "id": "software",
     "title": "Software",
     "status": "believer",
