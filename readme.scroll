@@ -35,6 +35,19 @@ buildToFile .gitignore
  .*
  *.svg
  *.js
+ *.zip
+
+buildZipParser
+ description Zip the listed files or folders after preceding build commands. Requires the zip command.
+ extends abstractBuildCommandParser
+ cueFromId
+ javascript
+  async buildTwo() {
+   const { folderPath, fileSystem, path } = this.root
+   const [name, ...files] = this.getAtomsFrom(1)
+   const zip = require("child_process").execFileSync("zip", ["-rq", "-", ...files], { cwd: folderPath, maxBuffer: 100 * 1024 * 1024 })
+   await fileSystem.writeProduct(path.join(folderPath, name), zip)
+  }
 
 buildToFile knowbooksLogo.svg
  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
@@ -94,6 +107,7 @@ Your satisfaction is our top priority. If we don't reach your expectations, get 
 <footer class="site-footer">
   <p class="email-invite">We don't have an email list, but we'd love to hear from you! Emails welcome: <a href="mailto:breck@knowbooks.com">breck@knowbooks.com</a></p>
   <nav class="footer-links" aria-label="Social links"><a href="https://x.com/breckyunits">X</a><a href="https://github.com/breck7/knowbooks.com">GitHub</a></nav>
+  <div class="footer-links"><a href="knowbooks.zip" download>Download this website</a></div>
  </footer>
 
 <div class="scrim" hidden></div>
@@ -444,3 +458,4 @@ script
 
 catalog.scroll
 buildConcepts catalog.js
+buildZip knowbooks.zip index.html catalog.js knowbooksLogo.svg og.jpeg
