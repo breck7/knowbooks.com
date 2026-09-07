@@ -131,7 +131,7 @@ h1 { position: relative; z-index: 1; max-width: 820px; margin: 0; font-size: cla
 .catalog-empty { margin: 0 clamp(20px, 3vw, 42px); color: var(--muted); font: 14px/1.5 Arial, sans-serif; }
 .catalog-empty:empty, .product[hidden], .edition-divider[hidden] { display: none; }
 .edition-divider.is-first { margin-top: 0; }
-.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
 .edition-divider { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 14px; margin: 72px clamp(20px, 3vw, 42px) 8px; }
 .edition-divider:first-child { margin-top: 0; }
 .edition-divider h2 { margin: 0; font-size: clamp(28px, 3vw, 42px); font-weight: 400; line-height: 1; letter-spacing: -.025em; }
