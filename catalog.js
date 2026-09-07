@@ -420,6 +420,30 @@ const catalog = [
     "priceUsd": 399
   },
   {
+    "id": "guitar",
+    "title": "Guitar",
+    "status": "frontier",
+    "priceUsd": 599
+  },
+  {
+    "id": "piano",
+    "title": "Piano",
+    "status": "frontier",
+    "priceUsd": 599
+  },
+  {
+    "id": "drums",
+    "title": "Drums",
+    "status": "frontier",
+    "priceUsd": 599
+  },
+  {
+    "id": "singing",
+    "title": "Singing",
+    "status": "frontier",
+    "priceUsd": 599
+  },
+  {
     "id": "actuators",
     "title": "Actuators",
     "status": "frontier",
