@@ -366,16 +366,22 @@ const catalog = [
     "priceUsd": 149
   },
   {
+    "id": "budgeting",
+    "title": "Budgeting",
+    "status": "believer",
+    "priceUsd": 129
+  },
+  {
     "id": "bookkeeping",
     "title": "Bookkeeping",
     "status": "believer",
-    "priceUsd": 899
+    "priceUsd": 299
   },
   {
     "id": "payroll",
     "title": "Payroll",
     "status": "believer",
-    "priceUsd": 899
+    "priceUsd": 299
   },
   {
     "id": "batteries",
