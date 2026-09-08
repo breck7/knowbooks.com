@@ -1,0 +1,75 @@
+// To track a new storm:
+// - copy this file to [stormName].scroll
+// - update the settings below
+// - run: scroll build
+
+replace STORM_NAME Post-Tropical Cyclone Marie
+replace REGION_LABEL Los Angeles Live Monitor
+replace EMERGENCY_LABEL NHC Marie updates ↗
+replace EMERGENCY_URL https://www.nhc.noaa.gov/refresh/graphics_ep3+shtml/081437.shtml?cone#contents
+replace MAP_LABEL LOS ANGELES CAMERA MAP
+replace MAP_NOTE Pins approximate
+replace TV_HEADING Live TV coverage
+replace PAGE_NOTE Los Angeles is the viewing area. See NHC graphics for Marie’s forecast track. Camera feeds may stop or require Play; forecast issue times are printed on graphics.
+replace WEATHER_PROVIDER NOAA
+replace MAP_LATITUDE 34.0522
+replace MAP_LONGITUDE -118.2437
+replace MAP_ZOOM 10
+
+title REGION_LABEL · STORM_NAME
+description Los Angeles-area coastal cameras and NOAA satellite imagery and forecast graphics for Marie.
+baseUrl https://knowbooks.com/s/stormTracker/
+openGraphImage marie.jpg
+htmlLang en
+
+readme.scroll
+
+// ScrollSet of Cameras:
+
+id santa-monica-park
+name Santa Monica Beach
+place Pacific Park · Park camera
+lat 34.0086
+lng -118.4972
+src https://relay.ozolio.com/pub.api?cmd=embed&oid=EMB_BJOF0000022D
+sourceUrl https://pacpark.com/santa-monica-pier-live-cams/park/
+
+id santa-monica-pier
+name Santa Monica Pier
+place Pacific Park · Pier camera
+lat 34.0086
+lng -118.4972
+src https://relay.ozolio.com/pub.api?cmd=embed&oid=EMB_DDLQ00000228
+sourceUrl https://pacpark.com/santa-monica-pier-live-cams/pier/
+
+id pacific-wheel
+name Pacific Wheel
+place Pacific Park · Ferris wheel camera
+lat 34.0086
+lng -118.4972
+src https://relay.ozolio.com/pub.api?cmd=embed&oid=EMB_SPED0000020A
+sourceUrl https://pacpark.com/santa-monica-pier-live-cams/wheel/
+
+id marie-satellite
+group weather
+name Marie satellite
+place NOAA · GeoColor
+kind image
+src https://cdn.star.nesdis.noaa.gov/FLOATER/EP132026/GEOCOLOR/1000x1000.jpg
+sourceUrl https://www.goes.noaa.gov/floater_band.php?band=GEOCOLOR&length=24&stormid=EP132026
+
+id marie-wind
+group weather
+name Wind probabilities
+place 34 kt · 5 days
+kind image
+src https://www.nhc.noaa.gov/storm_graphics/EP13/refresh/EP132026_wind_probs_34_F120+png/081437.png
+sourceUrl https://www.nhc.noaa.gov/refresh/graphics_ep3+shtml/081437.shtml?tswind120#contents
+
+id marie-cone
+group weather
+name Forecast cone
+place NHC · Marie
+kind image
+src https://www.nhc.noaa.gov/storm_graphics/EP13/refresh/EP132026_5day_cone+png/081437.png
+sourceUrl https://www.nhc.noaa.gov/refresh/graphics_ep3+shtml/081437.shtml?cone#contents

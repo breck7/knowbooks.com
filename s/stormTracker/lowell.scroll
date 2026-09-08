@@ -1,0 +1,109 @@
+// To track a new storm:
+// - copy this file to [stormName].scroll
+// - update the settings below
+// - run: scroll build
+
+replace STORM_NAME Hurricane Lowell
+replace REGION_LABEL Kauaʻi Live Monitor
+replace EMERGENCY_LABEL Hawaiʻi emergency updates ↗
+replace EMERGENCY_URL https://dod.hawaii.gov/hiema/hurricane-lowell-updates/
+replace MAP_LABEL KAUAʻI CAMERA MAP
+replace MAP_NOTE Pins approximate
+replace TV_HEADING Live TV coverage
+replace PAGE_NOTE TV may show the latest newscast between live broadcasts. Camera feeds may stop or require Play. Forecast issue times are printed on graphics.
+replace WEATHER_PROVIDER NOAA
+replace MAP_LATITUDE 22.055
+replace MAP_LONGITUDE -159.5
+replace MAP_ZOOM 10
+
+title REGION_LABEL · STORM_NAME
+description Live Kauai coastal and field cameras, animated NOAA satellite imagery, storm forecasts, and Hawaii News Now coverage.
+baseUrl https://knowbooks.com/s/stormTracker/
+openGraphImage lowell.jpg
+htmlLang en
+
+readme.scroll
+
+// ScrollSet of Cameras:
+
+id poipu
+name Poʻipū Beach
+place Nukumoi · South shore
+lat 21.8733
+lng -159.4538
+src https://iframe.dacast.com/b/125968/c/496219
+sourceUrl https://nukumoi.com/live-cam/
+dacast 41f4cb2177aceea6b7d20c1f8179c161-live-27d3f3cef1d5f598a98344b9a8111c49
+
+id sheraton
+name Sheraton Kauai
+place Kiahuna Beach · South shore
+lat 21.8758
+lng -159.4616
+youtubeId tuj4OvU6UZI
+
+id lawai
+name Lāwaʻi Beach
+place Lawai Beach Resort · South shore
+lat 21.8802
+lng -159.4747
+youtubeId 3ATYHKN2hIg
+offline true
+
+id kalapaki
+name Kalapaki Bay
+place Royal Sonesta · Līhuʻe
+lat 21.9625
+lng -159.3507
+youtubeId M6kN1wlNSk4
+
+id golf
+name Poipu Bay Golf Course
+place Poipu Bay · South shore
+lat 21.8756
+lng -159.4338
+youtubeId kP3JW-K59-c
+
+id field
+name Kauaʻi live field camera
+place DL Scales · Mobile storm coverage
+youtubeId Hxn3IcYvy9M
+
+id hnn
+group broadcast
+name Hawaii News Now
+place TV · Hurricane Lowell coverage
+youtubeId khBbm5h76I4
+
+id noaa
+group weather
+name NOAA satellite loop
+place GOES-West · GeoColor
+kind video
+src https://cdn.star.nesdis.noaa.gov/GOES18/ABI/SECTOR/tpw/GEOCOLOR/GOES18-TPW-GEOCOLOR-900x540.mp4
+sourceUrl https://www.star.nesdis.noaa.gov/GOES/sector_band.php?sat=G18&sector=tpw&band=GEOCOLOR&length=24
+
+id wind
+group weather
+name Wind probabilities
+place 34 kt · 5 days
+kind image
+src https://www.nhc.noaa.gov/storm_graphics/EP12/refresh/EP122026_wind_probs_34_F120+png/080300.png
+sourceUrl https://www.nhc.noaa.gov/refresh/graphics_cp4+shtml/080300.shtml?tswind120#contents
+
+id rain
+group weather
+name Rainfall forecast
+place NOAA / WPC
+kind image
+src https://www.nhc.noaa.gov/storm_graphics/EP12/refresh/EP1226WPCQPF+gif/080300WPCQPF.gif
+sourceUrl https://www.nhc.noaa.gov/refresh/graphics_cp4+shtml/080300.shtml?rainqpf#contents
+
+id cone
+group weather
+name Forecast cone
+place 5-day track
+kind image
+src https://www.nhc.noaa.gov/storm_graphics/EP12/refresh/EP122026_5day_cone+png/080300_5day_cone.png
+sourceUrl https://www.nhc.noaa.gov/refresh/graphics_cp4+shtml/080300.shtml?cone#contents
+
