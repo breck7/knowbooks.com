@@ -445,6 +445,12 @@ title Cancer
 status frontier
 priceUsd 999
 
+// Fluids / Navier–Stokes
+id flow
+title Flow
+status frontier
+priceUsd 999
+
 id gluons
 title Gluons
 status frontier

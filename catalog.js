@@ -474,6 +474,12 @@ const catalog = [
     "priceUsd": 999
   },
   {
+    "id": "flow",
+    "title": "Flow",
+    "status": "frontier",
+    "priceUsd": 999
+  },
+  {
     "id": "gluons",
     "title": "Gluons",
     "status": "frontier",
