@@ -2,8 +2,8 @@
 // Five well-known camera locations across Hawaii; not a measured popularity ranking.
 // Camera coordinates are approximate. Provider links checked 2026-09-10.
 
-replace STORM_NAME Norbert
-replace REGION_LABEL Hawaiʻi Live Monitor
+replace STORM_NAME Hurricane Norbert
+replace REGION_LABEL Hawaiʻi
 replace EMERGENCY_LABEL NHC Norbert updates ↗
 replace EMERGENCY_URL https://www.nhc.noaa.gov/graphics_ep4.shtml?cone#contents
 replace MAP_LABEL HAWAIʻI CAMERA MAP
@@ -15,7 +15,7 @@ replace MAP_LATITUDE 20.6
 replace MAP_LONGITUDE -157.55
 replace MAP_ZOOM 6
 
-title REGION_LABEL · STORM_NAME
+title STORM_NAME - REGION_LABEL · Storm Tracker
 description Five Hawaii cameras, West Coast Storm Chasers, and NOAA satellite and forecast graphics for Norbert.
 baseUrl https://knowbooks.com/s/stormTracker/
 openGraphImage norbert.jpg
@@ -115,3 +115,11 @@ place 5-day track
 kind image
 src https://www.nhc.noaa.gov/storm_graphics/EP14/EP142026_5day_cone.png
 sourceUrl https://www.nhc.noaa.gov/graphics_ep4.shtml?cone#contents
+
+id outlook
+group weather
+name 7-day Pacific outlook
+place NHC · All disturbances
+kind image
+src https://www.nhc.noaa.gov/ftp/graphics/xgtwo/xgtwo_pac_7d0.png
+sourceUrl https://www.nhc.noaa.gov/?epac

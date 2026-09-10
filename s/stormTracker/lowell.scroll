@@ -4,7 +4,7 @@
 // - run: scroll build
 
 replace STORM_NAME Hurricane Lowell
-replace REGION_LABEL Kauaʻi Live Monitor
+replace REGION_LABEL Kauaʻi
 replace EMERGENCY_LABEL Hawaiʻi emergency updates ↗
 replace EMERGENCY_URL https://dod.hawaii.gov/hiema/hurricane-lowell-updates/
 replace MAP_LABEL KAUAʻI CAMERA MAP
@@ -16,7 +16,7 @@ replace MAP_LATITUDE 22.055
 replace MAP_LONGITUDE -159.5
 replace MAP_ZOOM 10
 
-title REGION_LABEL · STORM_NAME
+title STORM_NAME - REGION_LABEL · Storm Tracker
 description Live Kauai coastal and field cameras, animated NOAA satellite imagery, storm forecasts, and Hawaii News Now coverage.
 baseUrl https://knowbooks.com/s/stormTracker/
 openGraphImage lowell.jpg

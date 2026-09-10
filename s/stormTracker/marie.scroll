@@ -4,7 +4,7 @@
 // - run: scroll build
 
 replace STORM_NAME Post-Tropical Cyclone Marie
-replace REGION_LABEL Los Angeles Live Monitor
+replace REGION_LABEL Los Angeles
 replace EMERGENCY_LABEL NHC Marie updates ↗
 replace EMERGENCY_URL https://www.nhc.noaa.gov/refresh/graphics_ep3+shtml/081437.shtml?cone#contents
 replace MAP_LABEL LOS ANGELES CAMERA MAP
@@ -16,7 +16,7 @@ replace MAP_LATITUDE 34.0522
 replace MAP_LONGITUDE -118.2437
 replace MAP_ZOOM 10
 
-title REGION_LABEL · STORM_NAME
+title STORM_NAME - REGION_LABEL · Storm Tracker
 description Los Angeles-area coastal cameras and NOAA satellite imagery and forecast graphics for Marie.
 baseUrl https://knowbooks.com/s/stormTracker/
 openGraphImage marie.jpg
