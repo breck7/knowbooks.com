@@ -1,5 +1,5 @@
 title StormTracker — make your own interactieve storm dashboard with live feeds
-description A simple, open-source storm dashboard. Explore live examples for Lowell and Marie, then get the source to track a storm of your own.
+description A simple, open-source storm dashboard. Explore live examples for Norbert, Marie, and Lowell, then get the source to track a storm of your own.
 baseUrl https://knowbooks.com/s/stormTracker/
 permalink index.html
 openGraphImage lowell.jpg
@@ -30,14 +30,19 @@ Copy a storm file. Update the settings and feeds. Share with your community.
 ## Try a working example
  id examples-title
 
+// Newest storms first; prepend new storm cards here.
 <div class="example-grid">
-<a class="example" href="lowell.html" aria-label="Open the Lowell tracker for Kauaʻi">
- <img src="lowell.jpg" alt="Lowell dashboard with a Kauaʻi map, coastal cameras, and weather imagery" width="1600" height="900">
- <div class="example-caption"><div><h3>Lowell</h3><p>Kauaʻi, Hawaiʻi</p></div><span class="open-example">Open tracker <span aria-hidden="true">↗</span></span></div>
+<a class="example" href="norbert.html" aria-label="Open the Norbert tracker for Hawaiʻi">
+ <img src="norbert.jpg" alt="Norbert dashboard with a Hawaii-wide map, island cameras, and NOAA forecasts" width="1280" height="720">
+ <div class="example-caption"><div><h3>Norbert</h3><p>Hawaiʻi · All main islands</p></div><span class="open-example">Open tracker <span aria-hidden="true">↗</span></span></div>
 </a>
 <a class="example" href="marie.html" aria-label="Open the Marie tracker for Los Angeles">
  <img src="marie.jpg" alt="Marie dashboard with a Los Angeles map, Santa Monica cameras, and satellite imagery" width="1600" height="900">
  <div class="example-caption"><div><h3>Marie</h3><p>Los Angeles, California</p></div><span class="open-example">Open tracker <span aria-hidden="true">↗</span></span></div>
+</a>
+<a class="example" href="lowell.html" aria-label="Open the Lowell tracker for Kauaʻi">
+ <img src="lowell.jpg" alt="Lowell dashboard with a Kauaʻi map, coastal cameras, and weather imagery" width="1600" height="900">
+ <div class="example-caption"><div><h3>Lowell</h3><p>Kauaʻi, Hawaiʻi</p></div><span class="open-example">Open tracker <span aria-hidden="true">↗</span></span></div>
 </a>
 </div>
 </section>
