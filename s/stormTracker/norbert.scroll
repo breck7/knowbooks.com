@@ -1,0 +1,116 @@
+// Norbert dashboard. Build with: scroll build norbert.scroll
+// Five well-known camera locations across Hawaii; not a measured popularity ranking.
+// Camera coordinates are approximate. Provider links checked 2026-09-10.
+
+replace STORM_NAME Norbert
+replace REGION_LABEL Hawaiʻi Live Monitor
+replace EMERGENCY_LABEL NHC Norbert updates ↗
+replace EMERGENCY_URL https://www.nhc.noaa.gov/graphics_ep4.shtml?cone#contents
+replace MAP_LABEL HAWAIʻI CAMERA MAP
+replace MAP_NOTE All main islands · Pins approximate
+replace TV_HEADING Live TV coverage
+replace PAGE_NOTE Camera feeds may stop or require Play. Storm coverage may show replays between broadcasts. Forecast issue times are printed on NOAA graphics.
+replace WEATHER_PROVIDER NOAA
+replace MAP_LATITUDE 20.6
+replace MAP_LONGITUDE -157.55
+replace MAP_ZOOM 6
+
+title REGION_LABEL · STORM_NAME
+description Five Hawaii cameras, West Coast Storm Chasers, and NOAA satellite and forecast graphics for Norbert.
+baseUrl https://knowbooks.com/s/stormTracker/
+htmlLang en
+
+readme.scroll
+
+// Fit Niʻihau through Hawaiʻi Island on desktop and mobile.
+script
+ document.addEventListener('DOMContentLoaded', () => {
+  if (!map) return;
+  const fitHawaii = () => map.fitBounds([[18.85, -160.35], [22.35, -154.75]], {paddingTopLeft: [24, 65], paddingBottomRight: [24, 24]});
+  fitHawaii();
+  map.on('resize', fitHawaii);
+ });
+
+// data
+
+id poipu
+name Poʻipū Beach
+place Kauaʻi · Nukumoi
+lat 21.8733
+lng -159.4538
+src https://iframe.dacast.com/b/125968/c/496219
+sourceUrl https://nukumoi.com/live-cam/
+dacast 41f4cb2177aceea6b7d20c1f8179c161-live-27d3f3cef1d5f598a98344b9a8111c49
+
+id pipeline
+name Banzai Pipeline
+place Oʻahu · North shore · Explore.org
+lat 21.665
+lng -158.052
+youtubeId Fp7l8XASb9Y
+
+id waikiki
+name Waikīkī Beach
+place Oʻahu · Sheraton Waikiki
+lat 21.277
+lng -157.829
+src https://relay.ozolio.com/pub.api?cmd=explore&oid=CID_HCOU00000057
+sourceUrl https://marriott.ozolio.com/sheraton-waikiki/
+
+id kaanapali
+name Kāʻanapali Beach
+place Maui · Sheraton Maui
+lat 20.926
+lng -156.695
+src https://relay.ozolio.com/pub.api?channel=0&cmd=explore&oid=CID_PUYX0000005C
+sourceUrl https://www.ozolio.com/explore/PUYX0000005C
+
+id kilauea
+name Kīlauea Volcano
+place Hawaiʻi Island · USGS summit cam
+lat 19.406
+lng -155.283
+youtubeId gXKuUyKt8mc
+
+id field
+name West Coast Storm Chasers
+place DL Scales · Storm coverage
+youtubeId Hxn3IcYvy9M
+
+id hnn
+group broadcast
+name Hawaii News Now
+place TV · Hawaii coverage
+youtubeId khBbm5h76I4
+
+id noaa
+group weather
+name NOAA satellite loop
+place GOES-West · GeoColor
+kind video
+src https://cdn.star.nesdis.noaa.gov/GOES18/ABI/SECTOR/tpw/GEOCOLOR/GOES18-TPW-GEOCOLOR-900x540.mp4
+sourceUrl https://www.star.nesdis.noaa.gov/GOES/sector_band.php?sat=G18&sector=tpw&band=GEOCOLOR&length=24
+
+id wind
+group weather
+name Wind probabilities
+place 34 kt · 5 days
+kind image
+src https://www.nhc.noaa.gov/storm_graphics/EP14/EP142026_wind_probs_34_F120.png
+sourceUrl https://www.nhc.noaa.gov/graphics_ep4.shtml?tswind120#contents
+
+id history
+group weather
+name Wind history
+place Norbert · Observed wind extent
+kind image
+src https://www.nhc.noaa.gov/storm_graphics/EP14/EP142026_wind_history.png
+sourceUrl https://www.nhc.noaa.gov/graphics_ep4.shtml?swath#contents
+
+id cone
+group weather
+name Forecast cone
+place 5-day track
+kind image
+src https://www.nhc.noaa.gov/storm_graphics/EP14/EP142026_5day_cone.png
+sourceUrl https://www.nhc.noaa.gov/graphics_ep4.shtml?cone#contents
