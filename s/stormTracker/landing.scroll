@@ -1,4 +1,4 @@
-title StormTracker — make your own interactieve storm dashboard with live feeds
+title Storm Tracker — make your own interactieve storm dashboard with live feeds
 description A simple, open-source storm dashboard. Explore live examples for Norbert, Marie, and Lowell, then get the source to track a storm of your own.
 baseUrl https://knowbooks.com/s/stormTracker/
 permalink index.html
@@ -7,7 +7,7 @@ htmlLang en
 buildHtml
 metaTags
 
-<header><a class="brand" href="index.html"><span aria-hidden="true">◉</span> StormTracker</a><a class="header-link" href="https://github.com/breck7/knowbooks.com/tree/main/s/stormTracker">GitHub ↗</a></header>
+<header><a class="brand" href="index.html"><span aria-hidden="true">◉</span> Storm Tracker</a><a class="header-link" href="https://github.com/breck7/knowbooks.com/tree/main/s/stormTracker">GitHub ↗</a></header>
 <main>
 <section class="hero" aria-labelledby="intro">
 
