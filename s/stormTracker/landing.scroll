@@ -2,7 +2,7 @@ title StormTracker — make your own interactieve storm dashboard with live feed
 description A simple, open-source storm dashboard. Explore live examples for Norbert, Marie, and Lowell, then get the source to track a storm of your own.
 baseUrl https://knowbooks.com/s/stormTracker/
 permalink index.html
-openGraphImage lowell.jpg
+openGraphImage norbert.jpg
 htmlLang en
 buildHtml
 metaTags
