@@ -126,6 +126,12 @@ const catalog = [
     "priceUsd": 129
   },
   {
+    "id": "gold",
+    "title": "Gold",
+    "status": "believer",
+    "priceUsd": 999
+  },
+  {
     "id": "fire",
     "title": "Fire",
     "status": "believer",
