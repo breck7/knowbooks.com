@@ -246,6 +246,18 @@ const catalog = [
     "priceUsd": 149
   },
   {
+    "id": "patience",
+    "title": "Patience",
+    "status": "believer",
+    "priceUsd": 149
+  },
+  {
+    "id": "centuries",
+    "title": "Centuries",
+    "status": "believer",
+    "priceUsd": 199
+  },
+  {
     "id": "liberty",
     "title": "Liberty",
     "status": "believer",
@@ -286,12 +298,6 @@ const catalog = [
     "title": "Teamwork",
     "status": "believer",
     "priceUsd": 199
-  },
-  {
-    "id": "patience",
-    "title": "Patience",
-    "status": "believer",
-    "priceUsd": 149
   },
   {
     "id": "paper",
