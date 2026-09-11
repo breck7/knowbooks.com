@@ -160,6 +160,12 @@ title Gold
 status believer
 priceUsd 999
 
+// fed
+id banking
+title Banking
+status believer
+priceUsd 1999
+
 id fire
 title Fire
 status believer
@@ -414,6 +420,16 @@ id hurricanes
 title Hurricanes
 status believer
 priceUsd 399
+
+id currency
+title Currency
+status believer
+priceUsd 799
+
+id bitcoin
+title Bitcoin
+status believer
+priceUsd 899
 
 id guitar
 title Guitar
