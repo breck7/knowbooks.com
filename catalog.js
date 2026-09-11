@@ -132,6 +132,12 @@ const catalog = [
     "priceUsd": 999
   },
   {
+    "id": "banking",
+    "title": "Banking",
+    "status": "believer",
+    "priceUsd": 1999
+  },
+  {
     "id": "fire",
     "title": "Fire",
     "status": "believer",
@@ -436,6 +442,18 @@ const catalog = [
     "title": "Hurricanes",
     "status": "believer",
     "priceUsd": 399
+  },
+  {
+    "id": "currency",
+    "title": "Currency",
+    "status": "believer",
+    "priceUsd": 799
+  },
+  {
+    "id": "bitcoin",
+    "title": "Bitcoin",
+    "status": "believer",
+    "priceUsd": 899
   },
   {
     "id": "guitar",
