@@ -360,6 +360,12 @@ const catalog = [
     "priceUsd": 129
   },
   {
+    "id": "wedges",
+    "title": "Wedges",
+    "status": "believer",
+    "priceUsd": 129
+  },
+  {
     "id": "stars",
     "title": "Stars",
     "status": "believer",
