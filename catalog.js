@@ -312,6 +312,12 @@ const catalog = [
     "priceUsd": 199
   },
   {
+    "id": "collusion",
+    "title": "Collusion",
+    "status": "believer",
+    "priceUsd": 199
+  },
+  {
     "id": "anger",
     "title": "Anger",
     "status": "believer",
