@@ -1,0 +1,222 @@
+const tags = [
+  {
+    "id": "physicsTag",
+    "question": "Is understanding physical forces, energy, waves, or matter a central goal?",
+    "knowbooks": "magnets beams focus levers light gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter atoms motion friction ropes wind aerodynamics water rust membranes bonds metals steel aluminum brass wheels wedges stars screws batteries hurricanes guitar piano drums singing actuators transistors fusion flow gluons bosons"
+  },
+  {
+    "id": "chemistryTag",
+    "question": "Is chemical composition or chemical change central to this topic?",
+    "knowbooks": "heat glass cells iron elements copper gold fire matter atoms water rust membranes decay bonds ink metals steel aluminum brass food batteries mitochondria cancer"
+  },
+  {
+    "id": "biologyTag",
+    "question": "Is understanding living organisms or the human body's functions a central goal?",
+    "knowbooks": "cells sleep membranes decay seeds food hydration mitochondria cancer"
+  },
+  {
+    "id": "plantTag",
+    "question": "Does this knowbook centrally involve plants or materials obtained from plants?",
+    "knowbooks": "carpentry paper wood seeds fabric food"
+  },
+  {
+    "id": "economicsTag",
+    "question": "Is money, ownership, trade, or the allocation of scarce resources central to this topic?",
+    "knowbooks": "capital sales gold banking liberty property competition collusion budgeting bookkeeping payroll marketing currency bitcoin"
+  },
+  {
+    "id": "psychologyTag",
+    "question": "Is understanding or changing attention, emotion, motivation, or social behavior a central goal?",
+    "knowbooks": "focus sales sleep patience liberty courage teamwork motivation competition collusion anger marketing twitter"
+  },
+  {
+    "id": "computingTag",
+    "question": "Is software, digital information, or electronic computation central to this topic?",
+    "knowbooks": "software scroll twitter bitcoin transistors"
+  },
+  {
+    "id": "materialsTag",
+    "question": "Is exploring the properties or uses of a tangible material a central goal?",
+    "knowbooks": "beams carpentry air glass iron elements copper gold matter water rust membranes bonds paper ink folding metals steel aluminum brass wood fabric food"
+  },
+  {
+    "id": "mechanicsTag",
+    "question": "Are forces, motion, or mechanical advantage central to this topic?",
+    "knowbooks": "magnets beams tools carpentry gravity levers motors gears motion friction ropes wind aerodynamics wheels wedges screws actuators flow hurricanes"
+  },
+  {
+    "id": "electricityTag",
+    "question": "Are electric charge, circuits, or electromagnetism central to this topic?",
+    "knowbooks": "magnets electricity copper fields energy voltage motors batteries actuators transistors"
+  },
+  {
+    "id": "wavesTag",
+    "question": "Are light, sound, or other wave phenomena central to this topic?",
+    "knowbooks": "light sound glass fields colors stars guitar piano drums singing"
+  },
+  {
+    "id": "fluidsTag",
+    "question": "Is the behavior or movement of liquids or gases central to this topic?",
+    "knowbooks": "air heat wind aerodynamics water membranes hydration hurricanes flow"
+  },
+  {
+    "id": "natureTag",
+    "question": "Is observing natural environments, weather, or the sky a central learning activity?",
+    "knowbooks": "air wind water centuries decay seeds stars exploration hurricanes"
+  },
+  {
+    "id": "buildingTag",
+    "question": "Is assembling, shaping, or programming something a central hands-on way to learn this topic?",
+    "knowbooks": "beams tools carpentry levers electricity motors gears ropes paper ink folding wood wheels wedges fabric screws batteries software scroll guitar piano drums actuators transistors"
+  },
+  {
+    "id": "measurementTag",
+    "question": "Is taking numerical measurements or keeping quantitative records a central way to explore this topic?",
+    "knowbooks": "beams capital gravity sound electricity heat banking sleep energy voltage motion friction wind aerodynamics water time centuries stars budgeting bookkeeping payroll batteries hydration hurricanes currency bitcoin flow"
+  },
+  {
+    "id": "creativeTag",
+    "question": "Is creating an expressive work, design, or performance a central activity?",
+    "knowbooks": "carpentry sound colors paper ink folding fabric software scroll marketing twitter guitar piano drums singing"
+  },
+  {
+    "id": "instantTag",
+    "question": "Can a typical introductory activity give directly observable feedback within a minute of setup?",
+    "knowbooks": "magnets beams focus levers light tools gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter motion friction ropes wind aerodynamics water membranes paper ink folding metals steel aluminum brass wood wheels wedges fabric screws batteries software scroll guitar piano drums singing actuators transistors flow"
+  },
+  {
+    "id": "longTermTag",
+    "question": "Is tracking change over weeks or months a central way to deepen learning about this topic?",
+    "knowbooks": "capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing twitter cancer"
+  },
+  {
+    "id": "multiplePeopleTag",
+    "question": "Does practicing this topic in real life centrally involve interaction between multiple people?",
+    "knowbooks": "sales liberty property teamwork competition collusion payroll marketing twitter"
+  },
+  {
+    "id": "hazardTag",
+    "question": "Does direct experimentation with the real phenomenon involve hazards such as heat, cutting, electricity, contamination, or severe weather?",
+    "knowbooks": "tools carpentry electricity heat glass fire voltage motors wedges food screws batteries hurricanes actuators cancer fusion"
+  },
+  {
+    "id": "gasTag",
+    "keywords": "gas gases gaseous air atmosphere vapor vapour steam",
+    "question": "Are gases or their behavior a central part of this topic?",
+    "knowbooks": "air fire wind aerodynamics hurricanes flow"
+  },
+  {
+    "id": "liquidTag",
+    "keywords": "liquid liquids fluid fluids water viscosity",
+    "question": "Are liquids or their behavior a central part of this topic?",
+    "knowbooks": "water membranes ink hydration flow"
+  },
+  {
+    "id": "solidTag",
+    "keywords": "solid solids rigid rigidity stiffness hardness",
+    "question": "Are the structure or mechanical properties of solids central to this topic?",
+    "knowbooks": "beams tools carpentry glass iron copper gold matter friction paper folding metals steel aluminum brass wood wedges screws"
+  },
+  {
+    "id": "combustionTag",
+    "keywords": "combustion burning burn flame flames fuel ignition",
+    "question": "Is burning fuel or understanding combustion a central way to explore this topic?",
+    "knowbooks": "fire heat energy"
+  },
+  {
+    "id": "energyTag",
+    "keywords": "energy power work conversion storage",
+    "question": "Is storing, transferring, or converting energy a central goal?",
+    "knowbooks": "levers gravity sound electricity heat fire energy voltage motors motion friction wind food batteries mitochondria fusion"
+  },
+  {
+    "id": "temperatureTag",
+    "keywords": "temperature thermal heating cooling hot cold thermodynamics",
+    "question": "Is temperature or heat transfer central to this topic?",
+    "knowbooks": "heat fire energy stars fusion"
+  },
+  {
+    "id": "pressureTag",
+    "keywords": "pressure compression compressed pneumatic hydraulic hydraulics buoyancy",
+    "question": "Is pressure in liquids or gases central to this topic?",
+    "knowbooks": "air wind aerodynamics water hurricanes flow"
+  },
+  {
+    "id": "opticsTag",
+    "keywords": "optics optical lenses lens reflection refraction color colour vision",
+    "question": "Is the behavior or perception of light central to this topic?",
+    "knowbooks": "light glass colors stars"
+  },
+  {
+    "id": "musicTag",
+    "keywords": "music musical instrument instruments rhythm melody pitch acoustic acoustics",
+    "question": "Is making or understanding musical sounds a central activity?",
+    "knowbooks": "sound guitar piano drums singing"
+  },
+  {
+    "id": "growthTag",
+    "keywords": "growth growing grow germination reproduction division",
+    "question": "Is the growth or reproduction of living things central to this topic?",
+    "knowbooks": "cells seeds cancer"
+  },
+  {
+    "id": "nutritionTag",
+    "keywords": "nutrition nutrients diet eating drinking digestion metabolism",
+    "question": "Is understanding how the body obtains or uses food and water a central goal?",
+    "knowbooks": "food hydration mitochondria"
+  },
+  {
+    "id": "healthTag",
+    "keywords": "health healthy wellbeing wellness body physiology",
+    "question": "Is understanding or supporting human health a central goal?",
+    "knowbooks": "sleep food hydration mitochondria cancer"
+  },
+  {
+    "id": "financeTag",
+    "keywords": "finance financial money investing investment savings accounting payment payments",
+    "question": "Is managing, recording, or exchanging money and financial assets central to this topic?",
+    "knowbooks": "capital gold banking property budgeting bookkeeping payroll currency bitcoin"
+  },
+  {
+    "id": "businessTag",
+    "keywords": "business enterprise commerce commercial market markets entrepreneurship",
+    "question": "Is operating a business or participating in a market a central goal?",
+    "knowbooks": "capital sales banking property competition collusion budgeting bookkeeping payroll marketing"
+  },
+  {
+    "id": "communicationTag",
+    "keywords": "communication communicating message messages media writing publishing persuasion",
+    "question": "Is conveying information to other people a central activity?",
+    "knowbooks": "sales teamwork ink software scroll marketing twitter"
+  },
+  {
+    "id": "cooperationTag",
+    "keywords": "cooperation collaboration coordination collaborating teams group social",
+    "question": "Is coordinating people's actions toward a shared goal central to this topic?",
+    "knowbooks": "teamwork collusion payroll"
+  },
+  {
+    "id": "machinesTag",
+    "keywords": "machine machines mechanism mechanisms mechanical engineering robotics robot",
+    "question": "Is understanding or using mechanisms that transmit force or motion a central goal?",
+    "knowbooks": "beams levers tools carpentry motors gears ropes wheels wedges screws actuators"
+  },
+  {
+    "id": "metalTag",
+    "keywords": "metal metallic metallurgy alloy alloys conductive conductor conductors",
+    "question": "Are metals or their distinctive properties central to this topic?",
+    "knowbooks": "magnets iron copper gold rust metals steel aluminum brass"
+  },
+  {
+    "id": "timeTag",
+    "keywords": "time timing duration cycles periodic history historical aging ageing",
+    "question": "Is measuring time or understanding change over time a central goal?",
+    "knowbooks": "sleep rust time patience centuries decay seeds"
+  },
+  {
+    "id": "nuclearTag",
+    "keywords": "nuclear nucleus nuclei particle particles quantum subatomic radiation",
+    "question": "Are atomic nuclei or subatomic particles and their interactions central to this topic?",
+    "knowbooks": "atoms stars fusion gluons bosons"
+  }
+]

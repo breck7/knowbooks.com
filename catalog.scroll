@@ -45,6 +45,7 @@ symbol vertical bar
 cover
  rect 40 17 20 66
 
+// physical experiments that teach both non-linear physical jumps and metaphorically the personal/social power of focus
 id focus
 title Focus
 status trailblazer
@@ -54,6 +55,7 @@ cover
  polygon 20 28 50 50 20 72
  polygon 80 28 50 50 80 72
 
+// economic system
 id capital
 title Capital
 status trailblazer
@@ -176,6 +178,7 @@ title Sleep
 status believer
 priceUsd 499
 
+// electromagnetic and other fields
 id fields
 title Fields
 status believer
@@ -291,6 +294,7 @@ title Decay
 status believer
 priceUsd 299
 
+// chemical and other bonds
 id bonds
 title Bonds
 status believer
@@ -426,6 +430,7 @@ title Software
 status believer
 priceUsd 599
 
+// the language/software
 id scroll
 title Scroll
 status believer
