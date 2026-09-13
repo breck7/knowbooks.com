@@ -311,6 +311,11 @@ title Competition
 status believer
 priceUsd 199
 
+id anger
+title Anger
+status believer
+priceUsd 199
+
 id paper
 title Paper
 status believer
