@@ -261,6 +261,7 @@ css
  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
 
 catalog.js
+tags.js
 
 script
  (() => {
@@ -274,6 +275,13 @@ script
   ];
   const productCatalog = (Array.isArray(catalog) ? catalog : []).map((product, index) => ({ ...product, ...coverColors[index % coverColors.length] }));
   const products = new Map(productCatalog.map(product => [product.id, product]));
+  const tagMembers = tags.map(tag => new Set(tag.knowbooks.split(/\s+/)));
+  const tagVectors = new Map(productCatalog.map(product => [product.id, tagMembers.map(members => Number(members.has(product.id)))]));
+  const searchableTitles = new Map(productCatalog.map(product => [product.id, [product.id, product.title, ...tags.filter((tag, index) => tagMembers[index].has(product.id)).map(tag => `${tag.id} ${tag.keywords || ""}`)].join(" ").toLowerCase()]));
+  const vectorDistance = (a, b) => {
+   const left = tagVectors.get(a), right = tagVectors.get(b);
+   return 1 - left.reduce((sum, bit, i) => sum + (bit & right[i]), 0) / (left.reduce((sum, bit, i) => sum + (bit | right[i]), 0) || 1);
+  };
   const paypalEmail = "breck7@gmail.com";
   const currency = "USD";
   const money = new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 });
@@ -324,14 +332,28 @@ script
   const filterCatalog = () => {
    const query = document.querySelector("#catalog-search").value.trim();
    const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+   const likeSearch = /^like(?:\s|$)/i.test(query);
+   const referenceId = query.replace(/^like\s*/i, "").toLowerCase();
+   const reference = likeSearch && tagVectors.get(referenceId);
+   const rank = product => [product.id, product.title.toLowerCase()].includes(query.toLowerCase()) ? 0 : terms.some(term => product.title.toLowerCase().includes(term)) ? 1 : 2;
+   const direct = likeSearch || !query ? [] : productCatalog.filter(product => terms.some(term => searchableTitles.get(product.id).includes(term))).sort((a, b) => rank(a) - rank(b));
+   const directIds = new Set(direct.map(product => product.id));
+   const seeds = likeSearch ? (reference ? [referenceId] : []) : (direct.some(product => rank(product) === 0) ? direct.filter(product => rank(product) === 0) : direct).map(product => product.id);
+   // At most six neighbors with >=75% overlap in Yes answers; ties keep catalog order.
+   const neighbors = seeds.length ? productCatalog.filter(product => !directIds.has(product.id) && (!likeSearch || product.id !== referenceId)).map(product => ({
+    id: product.id,
+    distance: Math.min(...seeds.map(id => vectorDistance(product.id, id)))
+   })).filter(product => product.distance <= 0.25).sort((a, b) => a.distance - b.distance).slice(0, 6) : [];
+   const hits = [...direct, ...neighbors], hitIds = new Set(hits.map(product => product.id));
+   if (query) hits.forEach(product => grid.appendChild(document.getElementById(product.id)));
+   else catalogNodes.forEach(node => grid.appendChild(node));
    const url = new URL(location.href);
    query ? url.searchParams.set("q", query) : url.searchParams.delete("q");
    if (url.href !== location.href) history.replaceState(null, "", url);
    document.querySelector("#search-heading").hidden = !query;
    const visibleStatuses = new Set();
    grid.querySelectorAll(".product").forEach(card => {
-    const title = products.get(card.id).title.toLowerCase();
-    card.hidden = terms.length > 0 && !terms.some(term => title.includes(term));
+    card.hidden = Boolean(query) && !hitIds.has(card.id);
     if (!card.hidden) visibleStatuses.add(products.get(card.id).status);
    });
    const firstStatus = statusOrder.find(status => visibleStatuses.has(status));
@@ -339,7 +361,7 @@ script
     divider.hidden = Boolean(query) || !visibleStatuses.has(divider.dataset.status);
     divider.classList.toggle("is-first", divider.dataset.status === firstStatus);
    });
-   document.querySelector(".catalog-empty").textContent = visibleStatuses.size ? "" : "No knowbooks match this search.";
+   document.querySelector(".catalog-empty").textContent = likeSearch && !reference ? "Unknown knowbook. Use like followed by a knowbook ID, for example: like seeds." : visibleStatuses.size ? "" : "No knowbooks match this search.";
    fitBookTitles();
   };
   let titleFitFrame;
@@ -434,6 +456,7 @@ script
    const stageProducts = productCatalog.filter(product => product.status === status);
    return stageProducts.length ? [editionDivider(status), ...stageProducts.map(productCard)] : [];
   }).join("");
+  const catalogNodes = Array.from(grid.children);
   const restoreSearch = () => {
    document.querySelector("#catalog-search").value = new URLSearchParams(location.search).get("q") || "";
    filterCatalog();
@@ -462,4 +485,4 @@ script
 
 catalog.scroll
 buildConcepts catalog.js
-buildZip knowbooks.zip index.html catalog.js knowbooksLogo.svg kbc.jpg readme.scroll catalog.scroll covers.scroll
+buildZip knowbooks.zip index.html catalog.js tags.js knowbooksLogo.svg kbc.jpg readme.scroll catalog.scroll covers.scroll tags.scroll
