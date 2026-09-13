@@ -300,6 +300,18 @@ const catalog = [
     "priceUsd": 199
   },
   {
+    "id": "motivation",
+    "title": "Motivation",
+    "status": "believer",
+    "priceUsd": 199
+  },
+  {
+    "id": "competition",
+    "title": "Competition",
+    "status": "believer",
+    "priceUsd": 199
+  },
+  {
     "id": "paper",
     "title": "Paper",
     "status": "believer",
