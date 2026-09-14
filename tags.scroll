@@ -14,9 +14,9 @@ buildConcepts tags.js
 // Plant involvement includes plant-derived materials. Multiple people means real
 // interpersonal practice is central, even when a solo simulation is possible.
 // Rebuild with: scroll list | scroll build
-// Search examples: plantTag; chemistryTag; like seeds. Tags stay off product cards.
+// Search examples: plantTag; chemistryTag; seeds; startups. Tags stay off product cards.
 // Keywords are search aliases, not additional vector dimensions.
-// Similarity uses Jaccard distance across the 40 answers: shared Yes / either Yes.
+// Similarity uses Jaccard distance across all tag answers: shared Yes / either Yes.
 // Require at least 75% overlap and show at most six additional neighbors.
 // Exact titles/IDs precede partial titles, tag matches, then similar knowbooks.
 
@@ -187,6 +187,11 @@ id businessTag
 question Is operating a business or participating in a market a central goal?
 keywords business enterprise commerce commercial market markets entrepreneurship
 knowbooks capital sales banking property competition collusion budgeting bookkeeping payroll marketing
+
+id startupsTag
+question Does this topic directly support founding, funding, or building an early-stage business?
+keywords startup startups founder founders founding entrepreneur entrepreneurs entrepreneurship venture ventures
+knowbooks focus capital sales banking teamwork competition budgeting bookkeeping payroll software marketing twitter motivation
 
 id communicationTag
 question Is conveying information to other people a central activity?

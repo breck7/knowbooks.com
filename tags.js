@@ -184,6 +184,12 @@ const tags = [
     "knowbooks": "capital sales banking property competition collusion budgeting bookkeeping payroll marketing"
   },
   {
+    "id": "startupsTag",
+    "keywords": "startup startups founder founders founding entrepreneur entrepreneurs entrepreneurship venture ventures",
+    "question": "Does this topic directly support founding, funding, or building an early-stage business?",
+    "knowbooks": "focus capital sales banking teamwork competition budgeting bookkeeping payroll software marketing twitter motivation"
+  },
+  {
     "id": "communicationTag",
     "keywords": "communication communicating message messages media writing publishing persuasion",
     "question": "Is conveying information to other people a central activity?",

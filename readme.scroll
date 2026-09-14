@@ -363,15 +363,12 @@ script
   const filterCatalog = () => {
    const query = document.querySelector("#catalog-search").value.trim();
    const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
-   const likeSearch = /^like(?:\s|$)/i.test(query);
-   const referenceId = query.replace(/^like\s*/i, "").toLowerCase();
-   const reference = likeSearch && tagVectors.get(referenceId);
    const rank = product => [product.id, product.title.toLowerCase()].includes(query.toLowerCase()) ? 0 : terms.some(term => product.title.toLowerCase().includes(term)) ? 1 : 2;
-   const direct = likeSearch || !query ? [] : productCatalog.filter(product => terms.some(term => searchableTitles.get(product.id).includes(term))).sort((a, b) => rank(a) - rank(b));
+   const direct = !query ? [] : productCatalog.filter(product => terms.some(term => searchableTitles.get(product.id).includes(term))).sort((a, b) => rank(a) - rank(b));
    const directIds = new Set(direct.map(product => product.id));
-   const seeds = likeSearch ? (reference ? [referenceId] : []) : (direct.some(product => rank(product) === 0) ? direct.filter(product => rank(product) === 0) : direct).map(product => product.id);
+   const seeds = (direct.some(product => rank(product) === 0) ? direct.filter(product => rank(product) === 0) : direct).map(product => product.id);
    // At most six neighbors with >=75% overlap in Yes answers; ties keep catalog order.
-   const neighbors = seeds.length ? productCatalog.filter(product => !directIds.has(product.id) && (!likeSearch || product.id !== referenceId)).map(product => ({
+   const neighbors = seeds.length ? productCatalog.filter(product => !directIds.has(product.id)).map(product => ({
     id: product.id,
     distance: Math.min(...seeds.map(id => vectorDistance(product.id, id)))
    })).filter(product => product.distance <= 0.25).sort((a, b) => a.distance - b.distance).slice(0, 6) : [];
@@ -392,7 +389,7 @@ script
     divider.hidden = Boolean(query) || !visibleStatuses.has(divider.dataset.status);
     divider.classList.toggle("is-first", divider.dataset.status === firstStatus);
    });
-   document.querySelector(".catalog-empty").textContent = likeSearch && !reference ? "Unknown knowbook. Use like followed by a knowbook ID, for example: like seeds." : visibleStatuses.size ? "" : "No knowbooks match this search.";
+   document.querySelector(".catalog-empty").textContent = visibleStatuses.size ? "" : "No knowbooks match this search.";
    fitBookTitles();
   };
   let titleFitFrame;
