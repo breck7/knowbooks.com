@@ -168,7 +168,8 @@ css
  .cart-close { width: 42px; height: 42px; border: 0; background: transparent; cursor: pointer; font-size: 32px; font-weight: 300; }
  .cart-lines { overflow-y: auto; }
  .cart-line { display: grid; grid-template-columns: 54px 1fr auto; gap: 15px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
- .line-swatch { width: 54px; aspect-ratio: .72; border-radius: 1px 5px 5px 1px; background: var(--cover); box-shadow: inset 4px 0 rgba(0,0,0,.16); }
+ .line-swatch { position: relative; width: 54px; aspect-ratio: .72; }
+ .line-swatch .book-cover { position: absolute; width: 270px; padding: 29.7px 24.3px; transform: scale(.2); transform-origin: top left; pointer-events: none; }
  .line-copy h3 { margin: 0 0 6px; font-size: 18px; font-weight: 400; }
  .line-copy p { margin: 0; color: var(--muted); font: 12px/1 Arial, sans-serif; }
  .quantity { display: flex; align-items: center; gap: 8px; }
@@ -345,12 +346,13 @@ script
    if (!name || !shipping) throw new Error(`Unknown product status: ${status}`);
    return { name, shipping };
   };
+  const bookCover = product => `<div class="book-cover" style="--cover:${escapeHtml(product.coverColor)}">
+     <h3><a href="?knowbookId=${escapeHtml(product.id)}" onclick="return false">${escapeHtml(product.title)}</a></h3><span class="book-symbol" aria-hidden="true">${product.cover || ""}</span><span class="book-brand">Knowbooks</span>
+    </div>`;
   const productCard = product => {
    const { name, shipping } = editionDetails(product.status);
    return `<article class="product" id="${escapeHtml(product.id)}">
-    <div class="book-cover" style="--cover:${escapeHtml(product.coverColor)}">
-     <h3><a href="?knowbookId=${escapeHtml(product.id)}" onclick="return false">${escapeHtml(product.title)}</a></h3><span class="book-symbol" aria-hidden="true">${product.cover || ""}</span><span class="book-brand">Knowbooks</span>
-    </div>
+    ${bookCover(product)}
     <div class="product-info"><div class="product-meta"><span class="price">${money.format(product.priceUsd)}</span><p>Experiment kit in a book.<br><i>${escapeHtml(name)} edition<br>${escapeHtml(shipping)}</i></p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
    </article>`;
   };
@@ -397,7 +399,7 @@ script
   const fitBookTitles = () => {
    cancelAnimationFrame(titleFitFrame);
    titleFitFrame = requestAnimationFrame(() => {
-    grid.querySelectorAll(".product:not([hidden]) .book-cover h3").forEach(title => {
+    document.querySelectorAll(".product:not([hidden]) .book-cover h3, .line-swatch .book-cover h3").forEach(title => {
      title.style.removeProperty("font-size");
      if (title.scrollWidth > title.clientWidth) {
       const baseSize = Number.parseFloat(getComputedStyle(title).fontSize);
@@ -436,8 +438,9 @@ script
    });
    lines.innerHTML = [...cart].map(([id, value]) => {
     const product = products.get(id);
-    return `<div class="cart-line"><span class="line-swatch" style="--cover:${escapeHtml(product.coverColor)}" aria-hidden="true"></span><div class="line-copy"><h3>${escapeHtml(product.title)}</h3><p>${money.format(product.priceUsd)} each</p></div><div class="quantity"><button type="button" data-less="${escapeHtml(id)}" aria-label="Remove one ${escapeHtml(product.title)}">−</button><span>${value}</span><button type="button" data-more="${escapeHtml(id)}" aria-label="Add one ${escapeHtml(product.title)}">+</button></div></div>`;
+    return `<div class="cart-line"><div class="line-swatch" aria-hidden="true" inert>${bookCover(product)}</div><div class="line-copy"><h3>${escapeHtml(product.title)}</h3><p>${money.format(product.priceUsd)} each</p></div><div class="quantity"><button type="button" data-less="${escapeHtml(id)}" aria-label="Remove one ${escapeHtml(product.title)}">−</button><span>${value}</span><button type="button" data-more="${escapeHtml(id)}" aria-label="Add one ${escapeHtml(product.title)}">+</button></div></div>`;
    }).join("");
+   fitBookTitles();
    empty.hidden = quantity > 0;
    footer.hidden = quantity === 0;
    total.textContent = money.format(amount);
