@@ -60,70 +60,6 @@ buildToFile knowbooksLogo.svg
   </g>
  </svg>
 
-<header class="site-header">
-  <a class="brand" href="#top" aria-label="Knowbooks home"><img src="knowbooksLogo.svg" alt=""><span>KNOWBOOKS</span></a>
-  <a class="faq-link" href="#faq">FAQ</a>
-  <button class="cart-toggle" type="button" aria-expanded="false" aria-controls="cart">Cart <span class="cart-count">0</span></button>
- </header>
-<main id="top">
-  <section class="hero">
-   <h1>Knowbooks are books you <em>do</em>.</h1>
-   <p class="intro">No pages. No screens. A Knowbook is an experiment kit in a book. Open one, do the experiments, and change your life.</p>
-   <a class="down" href="#catalog">Build your shelf <span aria-hidden="true">↓</span></a>
-  </section>
-  <section class="catalog-section" id="catalog" aria-labelledby="catalog-title">
-   <div class="catalog-tools"><input id="catalog-search" type="search" placeholder="Search books…" aria-label="Search knowbooks" aria-controls="product-grid" title="Search book titles; separate words with spaces to match any." autocomplete="off"></div>
-   <div class="edition-divider is-first" id="search-heading" hidden><h2>Search results</h2></div>
-   <p class="catalog-empty" role="status" aria-live="polite"></p>
-   <div class="product-grid" id="product-grid"></div>
-  </section>
-
-## Frequently asked questions
- id faq
-
-? Who are Knowbooks for?
-Knowbooks are for curious people of all ages. Younger children can explore them with an adult, while teenagers and adults can work through experiments independently.
-
-? What comes inside each Knowbook?
-Each Knowbook contains a curated collection of real objects plus experiment cards that show you what to do to learn a superpower.
-
-? How is the current build quality?
-Our first Knowbooks are Trailblazer editions. Each one is hand-crafted on Oahu. They are complete and usable, but their objects, experiments, packaging, and instructions are improving as we learn from our first customers.
-
-? Can I use a Knowbook more than once?
-Yes. Knowbooks are designed to last a lifetime and can be explored repeatedly, shared, and returned to the shelf. Most objects are reusable; some contain consumable/replaceable materials.
-
-? How will I receive my KnowBook(s) (Hawai'i customers)?
-Oahu customers can have their KnowBooks delivered free of charge, or come pick them up.
-
-? When will my Knowbook(s) ship (Mainland customers)?
-Orders begin assembly immediately. You'll receive tracking when your order is on its way. Delivery times will improve as we scale up.
-
-? What's the return policy?
-Your satisfaction is our top priority. If we don't reach your expectations, get in touch and we'll coordinate a replacement and/or refund.
-
-</main>
-
-<footer class="site-footer">
-  <p class="email-invite">We don't have an email list, but we'd love to hear from you! Emails welcome: <a href="mailto:breck@knowbooks.com">breck@knowbooks.com</a></p>
-  <nav class="footer-links" aria-label="Social links">
-  <a href="https://x.com/breckyunits">X</a>
-  <a href="https://github.com/breck7/knowbooks.com">GitHub</a>
-  <a href="https://x.com/i/lists/2099164377492369481">ScienceFeed</a>
-  </nav>
-  <div class="footer-links"><a href="knowbooks.zip" download>Download this website</a></div>
- </footer>
-
-<div class="scrim" hidden></div>
-<div class="book-preview" role="dialog" aria-modal="true" aria-label="Inside this Knowbook" hidden></div>
-<aside class="cart" id="cart" aria-labelledby="cart-title" aria-hidden="true">
-  <div class="cart-head"><div><p class="eyebrow">Your shelf</p><h2 id="cart-title">Cart</h2></div><button class="cart-close" type="button" aria-label="Close cart">×</button></div>
-  <div class="cart-lines"></div>
-  <div class="cart-empty"><p>Your cart is empty.</p><a href="#catalog">Find a Knowbook</a></div>
-  <div class="cart-footer" hidden><p class="cart-total"><span>Total</span><strong>$0</strong></p><a class="paypal-button" href="https://www.paypal.com/cgi-bin/webscr" rel="noopener">Pay with PayPal</a><small>Shipping and applicable taxes are handled by PayPal.<br>Oahu customers can pay by cash.</small><details class="crypto"><summary>Pay with crypto</summary><p><b>BTC</b><span><output data-crypto="BTC"></output><code>3G9q4tRjkTSP8PP4eFVZuNLtXxKuERJcJr</code></span><b>ETH</b><span><output data-crypto="ETH"></output><code>0xaEe37CE75AcC6341abfa1c73c6Bb1B73963a6ccD</code></span><b>NEAR</b><span><output data-crypto="NEAR"></output><code>4345b29b9fb2ba13d2fb47e7946b1b135118381fb13e54c8a9042cd79542e89f</code></span><b>USDC <i>(Base)</i></b><span><output data-crypto="USDC"></output><code>0x3d3e69E8f208A782E09f018643fE9796e918e45e</code></span></p><small>Send the amount shown, then email your transaction ID, cart, and shipping address to <a href="mailto:breck@knowbooks.com">breck@knowbooks.com</a>.</small></details></div>
- </aside>
-<noscript>This shop needs JavaScript to manage its cart.</noscript>
-
 css
  :root {
   --paper: #f4efe5;
@@ -259,6 +195,70 @@ css
  @media (max-width: 850px) { .product-grid { grid-template-columns: repeat(2, 1fr); } .section-heading { grid-template-columns: 1fr; } }
  @media (max-width: 520px) { .hero { --ring-radius: 44vw; --ring-size: 88vw; --ring-overhang: 32vw; min-height: 82svh; } .product-grid { grid-template-columns: 1fr; } .cart { padding: 22px; } }
  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+
+<header class="site-header">
+  <a class="brand" href="#top" aria-label="Knowbooks home"><img src="knowbooksLogo.svg" alt=""><span>KNOWBOOKS</span></a>
+  <a class="faq-link" href="#faq">FAQ</a>
+  <button class="cart-toggle" type="button" aria-expanded="false" aria-controls="cart">Cart <span class="cart-count">0</span></button>
+ </header>
+<main id="top">
+  <section class="hero">
+   <h1>Knowbooks are books you <em>do</em>.</h1>
+   <p class="intro">No pages. No screens. A Knowbook is an experiment kit in a book. Open one, do the experiments, and change your life.</p>
+   <a class="down" href="#catalog">Build your shelf <span aria-hidden="true">↓</span></a>
+  </section>
+  <section class="catalog-section" id="catalog" aria-labelledby="catalog-title">
+   <div class="catalog-tools"><input id="catalog-search" type="search" placeholder="Search books…" aria-label="Search knowbooks" aria-controls="product-grid" title="Search book titles; separate words with spaces to match any." autocomplete="off"></div>
+   <div class="edition-divider is-first" id="search-heading" hidden><h2>Search results</h2></div>
+   <p class="catalog-empty" role="status" aria-live="polite"></p>
+   <div class="product-grid" id="product-grid"></div>
+  </section>
+
+## Frequently asked questions
+ id faq
+
+? Who are Knowbooks for?
+Knowbooks are for curious people of all ages. Younger children can explore them with an adult, while teenagers and adults can work through experiments independently.
+
+? What comes inside each Knowbook?
+Each Knowbook contains a curated collection of real objects plus experiment cards that show you what to do to learn a superpower.
+
+? How is the current build quality?
+Our first Knowbooks are Trailblazer editions. Each one is hand-crafted on Oahu. They are complete and usable, but their objects, experiments, packaging, and instructions are improving as we learn from our first customers.
+
+? Can I use a Knowbook more than once?
+Yes. Knowbooks are designed to last a lifetime and can be explored repeatedly, shared, and returned to the shelf. Most objects are reusable; some contain consumable/replaceable materials.
+
+? How will I receive my KnowBook(s) (Hawai'i customers)?
+Oahu customers can have their KnowBooks delivered free of charge, or come pick them up.
+
+? When will my Knowbook(s) ship (Mainland customers)?
+Orders begin assembly immediately. You'll receive tracking when your order is on its way. Delivery times will improve as we scale up.
+
+? What's the return policy?
+Your satisfaction is our top priority. If we don't reach your expectations, get in touch and we'll coordinate a replacement and/or refund.
+
+</main>
+
+<footer class="site-footer">
+  <p class="email-invite">We don't have an email list, but we'd love to hear from you! Emails welcome: <a href="mailto:breck@knowbooks.com">breck@knowbooks.com</a></p>
+  <nav class="footer-links" aria-label="Social links">
+  <a href="https://x.com/breckyunits">X</a>
+  <a href="https://github.com/breck7/knowbooks.com">GitHub</a>
+  <a href="https://x.com/i/lists/2099164377492369481">ScienceFeed</a>
+  </nav>
+  <div class="footer-links"><a href="knowbooks.zip" download>Download this website</a></div>
+ </footer>
+
+<div class="scrim" hidden></div>
+<div class="book-preview" role="dialog" aria-modal="true" aria-label="Inside this Knowbook" hidden></div>
+<aside class="cart" id="cart" aria-labelledby="cart-title" aria-hidden="true">
+  <div class="cart-head"><div><p class="eyebrow">Your shelf</p><h2 id="cart-title">Cart</h2></div><button class="cart-close" type="button" aria-label="Close cart">×</button></div>
+  <div class="cart-lines"></div>
+  <div class="cart-empty"><p>Your cart is empty.</p><a href="#catalog">Find a Knowbook</a></div>
+  <div class="cart-footer" hidden><p class="cart-total"><span>Total</span><strong>$0</strong></p><a class="paypal-button" href="https://www.paypal.com/cgi-bin/webscr" rel="noopener">Pay with PayPal</a><small>Shipping and applicable taxes are handled by PayPal.<br>Oahu customers can pay by cash.</small><details class="crypto"><summary>Pay with crypto</summary><p><b>BTC</b><span><output data-crypto="BTC"></output><code>3G9q4tRjkTSP8PP4eFVZuNLtXxKuERJcJr</code></span><b>ETH</b><span><output data-crypto="ETH"></output><code>0xaEe37CE75AcC6341abfa1c73c6Bb1B73963a6ccD</code></span><b>NEAR</b><span><output data-crypto="NEAR"></output><code>4345b29b9fb2ba13d2fb47e7946b1b135118381fb13e54c8a9042cd79542e89f</code></span><b>USDC <i>(Base)</i></b><span><output data-crypto="USDC"></output><code>0x3d3e69E8f208A782E09f018643fE9796e918e45e</code></span></p><small>Send the amount shown, then email your transaction ID, cart, and shipping address to <a href="mailto:breck@knowbooks.com">breck@knowbooks.com</a>.</small></details></div>
+ </aside>
+<noscript>This shop needs JavaScript to manage its cart.</noscript>
 
 catalog.js
 tags.js
