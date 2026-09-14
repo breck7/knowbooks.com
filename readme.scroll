@@ -266,14 +266,26 @@ tags.js
 script
  (() => {
   "use strict";
-  const coverColors = [
-   { coverColor: "#243f59" },
-   { coverColor: "#a8442e" },
-   { coverColor: "#375748" },
-   { coverColor: "#5b4154" },
-   { coverColor: "#26727a" }
-  ];
-  const productCatalog = (Array.isArray(catalog) ? catalog : []).map((product, index) => ({ ...product, ...coverColors[index % coverColors.length] }));
+  const coverPalette = {
+   navy: "#294575",
+   ocean: "#05638E",
+   teal: "#0E91A5",
+   forest: "#3D6640",
+   purple: "#7D589E",
+   yellow: "#F2C75D",
+   orange: "#E88F47",
+   coral: "#EC704B",
+   brick: "#B84A40",
+   burgundy: "#8D3340",
+   brown: "#65453B"
+  };
+  const coverColors = ["yellow", "navy", "coral", "forest", "orange", "purple", "brick", "teal", "burgundy", "ocean", "brown"].map(color => coverPalette[color]);
+  let nextCoverColor = 0;
+  const productCatalog = (Array.isArray(catalog) ? catalog : []).map(product => {
+   const color = product.color?.trim().toLowerCase();
+   if (color && !Object.hasOwn(coverPalette, color)) throw new Error(`Unknown cover color "${product.color}" for ${product.id}`);
+   return { ...product, coverColor: color ? coverPalette[color] : coverColors[nextCoverColor++ % coverColors.length] };
+  });
   const products = new Map(productCatalog.map(product => [product.id, product]));
   const tagMembers = tags.map(tag => new Set(tag.knowbooks.split(/\s+/)));
   const tagVectors = new Map(productCatalog.map(product => [product.id, tagMembers.map(members => Number(members.has(product.id)))]));
