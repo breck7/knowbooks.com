@@ -7,6 +7,23 @@ favicon knowbooksLogo.svg
 buildHtml
 metaTags
 
+dlElementParser
+ extends abstractHtmlElementParser
+ cue dl
+
+dtElementParser
+ extends abstractHtmlElementParser
+ cue dt
+
+ddElementParser
+ extends abstractHtmlElementParser
+ cue dd
+
+offeringLabelledByParser
+ extends abstractAftertextAttributeParser
+ cue aria-labelledby
+ catchAllAtomType htmlAnyAtom
+
 buildToFileParser
  description Write the raw body to one or more files during the first build pass.
  extends abstractBuildOneCommandParser
@@ -112,6 +129,20 @@ css
  .intro { position: relative; z-index: 1; max-width: 610px; margin: 36px 0; color: #49473f; font-size: clamp(18px, 2vw, 25px); line-height: 1.45; }
  .down { position: relative; z-index: 1; display: inline-flex; gap: 18px; padding-bottom: 7px; border-bottom: 1px solid; text-decoration: none; text-transform: uppercase; font: 700 10px/1 Arial, sans-serif; letter-spacing: .15em; }
  .catalog-section { padding: 100px clamp(20px, 5vw, 72px) 120px; }
+ .offering { padding: 72px clamp(20px, 8vw, 124px); border-top: 1px solid var(--line); }
+ .offering:last-of-type { margin-bottom: 80px; }
+ .offering .section-heading { margin-bottom: 32px; }
+ .offering-body { max-width: 720px; margin-left: calc((100% + 30px) / 3); }
+ .offering-body > p { margin: 0 0 24px; color: var(--muted); font: 17px/1.7 Arial, sans-serif; }
+ .offering-body .offering-lead { color: var(--ink); font: clamp(22px, 3vw, 30px)/1.4 Georgia, "Times New Roman", serif; }
+ #startups { background: #ebe3d3; }
+ .offering-terms { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 32px 0; }
+ .offering-terms div { padding-top: 18px; border-top: 1px solid var(--line); }
+ .offering-terms dt { margin-bottom: 10px; font-size: 23px; }
+ .offering-terms dd { margin: 0; color: var(--muted); font: 15px/1.6 Arial, sans-serif; }
+ .offering .down { line-height: 1.5; }
+ @media (max-width: 850px) { .offering-body { margin-left: 0; } }
+ @media (max-width: 520px) { .offering-terms { grid-template-columns: 1fr; } }
  .section-heading { display: grid; grid-template-columns: 1fr 2fr; align-items: end; gap: 30px; margin-bottom: 60px; }
  .section-heading .eyebrow { align-self: start; padding-top: 11px; }
  .section-heading h2 { margin: 0; max-width: 720px; font-size: clamp(40px, 6vw, 78px); font-weight: 400; line-height: .95; letter-spacing: -.04em; }
@@ -243,6 +274,99 @@ Orders begin assembly immediately. You'll receive tracking when your order is on
 
 ? What's the return policy?
 Your satisfaction is our top priority. If we don't reach your expectations, get in touch and we'll coordinate a replacement and/or refund.
+
+section
+ addClass offering
+ id startups
+ aria-labelledby startups-title
+ div
+  id startups-element-1
+  addClass section-heading
+  p Knowbooks for startups
+   id startups-element-2
+   addClass eyebrow
+  h2 Put your pitch<br>in their hands.
+   id startups-title
+ div
+  id startups-element-3
+  addClass offering-body
+  p A one-of-a-kind Knowbook, built around your startup.
+   id startups-element-4
+   addClass offering-lead
+  p We develop custom Knowbooks for startups raising funds. Turn your big idea into hands-on experiments that help investors explore what you're building and understand why it matters.
+   id startups-element-5
+   addClass offering-copy
+  dl
+   id startups-element-6
+   addClass offering-terms
+   div
+    id startups-element-7
+    dt Design once.
+     id startups-element-8
+    dd Pay a one-time design fee to develop your custom Knowbook.
+     id startups-element-9
+   div
+    id startups-element-10
+    dt Build on demand.
+     id startups-element-11
+    dd Then pay only production costs for on-demand manufacturing and assembly. Order as many as you need, whenever you need more.
+     id startups-element-12
+  a Let's build your Knowbook <span aria-hidden="true">↗</span>
+   id startups-element-13
+   addClass down
+   href mailto:startups@knowbooks.com?subject=Knowbooks%20for%20my%20startup
+
+section
+ addClass offering
+ id corporate-training
+ aria-labelledby training-title
+ div
+  id corporate-training-element-1
+  addClass section-heading
+  p Knowbooks for corporate training
+   id corporate-training-element-2
+   addClass eyebrow
+  h2 Train your team.<br>Faster. Better. Deeper.
+   id training-title
+ div
+  id corporate-training-element-3
+  addClass offering-body
+  p Turn hands-on practice into deeper understanding and skills your team can put to work.
+   id corporate-training-element-4
+   addClass offering-lead
+  p We create custom Knowbooks around the skills your team needs to master. An alternative to training videos and manuals, each book gives your team experiments they can do with their hands: practice the task, see how it works, and understand why. Build your training around doing, so your team can get up to speed and go deeper.
+   id corporate-training-element-5
+   addClass offering-copy
+  a Build your team's training Knowbook <span aria-hidden="true">↗</span>
+   id corporate-training-element-6
+   addClass down
+   href mailto:training@knowbooks.com?subject=Knowbooks%20for%20corporate%20training
+
+section
+ addClass offering
+ id partnerships
+ aria-labelledby partnerships-title
+ div
+  id partnerships-element-1
+  addClass section-heading
+  p Knowbooks partnerships
+   id partnerships-element-2
+   addClass eyebrow
+  h2 Made locally.<br>Copied worldwide.
+   id partnerships-title
+ div
+  id partnerships-element-3
+  addClass offering-body
+  p Our focus is Oahu. Our partners build around the world.
+   id partnerships-element-4
+   addClass offering-lead
+  p We partner with entrepreneurial craftsmen all over the world to bring more Knowbooks to more people faster. Interested in building Knowbooks for your community? Let's talk about becoming a Knowbooks partner.
+   id partnerships-element-5
+   addClass offering-copy
+  a Explore a partnership <span aria-hidden="true">↗</span>
+   id partnerships-element-6
+   addClass down
+   href mailto:partnerships@knowbooks.com?subject=Knowbooks%20partnership
 
 </main>
 
