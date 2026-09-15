@@ -174,6 +174,24 @@ const catalog = [
     "priceUsd": 299
   },
   {
+    "id": "waves",
+    "title": "Waves",
+    "status": "believer",
+    "priceUsd": 299
+  },
+  {
+    "id": "helices",
+    "title": "Helices",
+    "status": "believer",
+    "priceUsd": 299
+  },
+  {
+    "id": "springs",
+    "title": "Springs",
+    "status": "believer",
+    "priceUsd": 149
+  },
+  {
     "id": "voltage",
     "title": "Voltage",
     "status": "believer",

@@ -224,5 +224,11 @@ const tags = [
     "keywords": "nuclear nucleus nuclei particle particles quantum subatomic radiation",
     "question": "Are atomic nuclei or subatomic particles and their interactions central to this topic?",
     "knowbooks": "atoms stars fusion gluons bosons"
+  },
+  {
+    "id": "cyclesTag",
+    "keywords": "cycle cycles cyclic cyclical periodic periodicity repetition repeating oscillation oscillations rhythm rhythms rotation rotating spiral spirals helix helices helixes coil coils coiled frequency",
+    "question": "Are repeated turns, oscillations, or patterns in space or time central to this topic?",
+    "knowbooks": "light sound sleep frequency helices springs motors gears ropes time wheels screws hurricanes guitar piano drums singing waves"
   }
 ]
