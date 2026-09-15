@@ -70,6 +70,20 @@ h1 { position: relative; z-index: 1; max-width: 820px; margin: 0; font-size: cla
 .intro { position: relative; z-index: 1; max-width: 610px; margin: 36px 0; color: #49473f; font-size: clamp(18px, 2vw, 25px); line-height: 1.45; }
 .down { position: relative; z-index: 1; display: inline-flex; gap: 18px; padding-bottom: 7px; border-bottom: 1px solid; text-decoration: none; text-transform: uppercase; font: 700 10px/1 Arial, sans-serif; letter-spacing: .15em; }
 .catalog-section { padding: 100px clamp(20px, 5vw, 72px) 120px; }
+.offering { padding: 72px clamp(20px, 8vw, 124px); border-top: 1px solid var(--line); }
+.offering:last-of-type { margin-bottom: 80px; }
+.offering .section-heading { margin-bottom: 32px; }
+.offering-body { max-width: 720px; margin-left: calc((100% + 30px) / 3); }
+.offering-body > p { margin: 0 0 24px; color: var(--muted); font: 17px/1.7 Arial, sans-serif; }
+.offering-body .offering-lead { color: var(--ink); font: clamp(22px, 3vw, 30px)/1.4 Georgia, "Times New Roman", serif; }
+#startups { background: #ebe3d3; }
+.offering-terms { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 32px 0; }
+.offering-terms div { padding-top: 18px; border-top: 1px solid var(--line); }
+.offering-terms dt { margin-bottom: 10px; font-size: 23px; }
+.offering-terms dd { margin: 0; color: var(--muted); font: 15px/1.6 Arial, sans-serif; }
+.offering .down { line-height: 1.5; }
+@media (max-width: 850px) { .offering-body { margin-left: 0; } }
+@media (max-width: 520px) { .offering-terms { grid-template-columns: 1fr; } }
 .section-heading { display: grid; grid-template-columns: 1fr 2fr; align-items: end; gap: 30px; margin-bottom: 60px; }
 .section-heading .eyebrow { align-self: start; padding-top: 11px; }
 .section-heading h2 { margin: 0; max-width: 720px; font-size: clamp(40px, 6vw, 78px); font-weight: 400; line-height: .95; letter-spacing: -.04em; }
@@ -176,27 +190,46 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
  </section>
 <div class="scrollSection"><h2 id="faq" class="scrollParagraph">Frequently asked questions</h2>
 </div>
-<div class="scrollSection"><h4 id="particle24" class="scrollQuestion">Who are Knowbooks for?</h4>
-<p id="particle25" class="scrollParagraph">Knowbooks are for curious people of all ages. Younger children can explore them with an adult, while teenagers and adults can work through experiments independently.</p>
+<div class="scrollSection"><h4 id="particle32" class="scrollQuestion">Who are Knowbooks for?</h4>
+<p id="particle33" class="scrollParagraph">Knowbooks are for curious people of all ages. Younger children can explore them with an adult, while teenagers and adults can work through experiments independently.</p>
 </div>
-<div class="scrollSection"><h4 id="particle27" class="scrollQuestion">What comes inside each Knowbook?</h4>
-<p id="particle28" class="scrollParagraph">Each Knowbook contains a curated collection of real objects plus experiment cards that show you what to do to learn a superpower.</p>
+<div class="scrollSection"><h4 id="particle35" class="scrollQuestion">What comes inside each Knowbook?</h4>
+<p id="particle36" class="scrollParagraph">Each Knowbook contains a curated collection of real objects plus experiment cards that show you what to do to learn a superpower.</p>
 </div>
-<div class="scrollSection"><h4 id="particle30" class="scrollQuestion">How is the current build quality?</h4>
-<p id="particle31" class="scrollParagraph">Our first Knowbooks are Trailblazer editions. Each one is hand-crafted on Oahu. They are complete and usable, but their objects, experiments, packaging, and instructions are improving as we learn from our first customers.</p>
+<div class="scrollSection"><h4 id="particle38" class="scrollQuestion">How is the current build quality?</h4>
+<p id="particle39" class="scrollParagraph">Our first Knowbooks are Trailblazer editions. Each one is hand-crafted on Oahu. They are complete and usable, but their objects, experiments, packaging, and instructions are improving as we learn from our first customers.</p>
 </div>
-<div class="scrollSection"><h4 id="particle33" class="scrollQuestion">Can I use a Knowbook more than once?</h4>
-<p id="particle34" class="scrollParagraph">Yes. Knowbooks are designed to last a lifetime and can be explored repeatedly, shared, and returned to the shelf. Most objects are reusable; some contain consumable/replaceable materials.</p>
+<div class="scrollSection"><h4 id="particle41" class="scrollQuestion">Can I use a Knowbook more than once?</h4>
+<p id="particle42" class="scrollParagraph">Yes. Knowbooks are designed to last a lifetime and can be explored repeatedly, shared, and returned to the shelf. Most objects are reusable; some contain consumable/replaceable materials.</p>
 </div>
-<div class="scrollSection"><h4 id="particle36" class="scrollQuestion">How will I receive my KnowBook(s) (Hawai'i customers)?</h4>
-<p id="particle37" class="scrollParagraph">Oahu customers can have their KnowBooks delivered free of charge, or come pick them up.</p>
+<div class="scrollSection"><h4 id="particle44" class="scrollQuestion">How will I receive my KnowBook(s) (Hawai'i customers)?</h4>
+<p id="particle45" class="scrollParagraph">Oahu customers can have their KnowBooks delivered free of charge, or come pick them up.</p>
 </div>
-<div class="scrollSection"><h4 id="particle39" class="scrollQuestion">When will my Knowbook(s) ship (Mainland customers)?</h4>
-<p id="particle40" class="scrollParagraph">Orders begin assembly immediately. You'll receive tracking when your order is on its way. Delivery times will improve as we scale up.</p>
+<div class="scrollSection"><h4 id="particle47" class="scrollQuestion">When will my Knowbook(s) ship (Mainland customers)?</h4>
+<p id="particle48" class="scrollParagraph">Orders begin assembly immediately. You'll receive tracking when your order is on its way. Delivery times will improve as we scale up.</p>
 </div>
-<div class="scrollSection"><h4 id="particle42" class="scrollQuestion">What's the return policy?</h4>
-<p id="particle43" class="scrollParagraph">Your satisfaction is our top priority. If we don't reach your expectations, get in touch and we'll coordinate a replacement and/or refund.</p>
+<div class="scrollSection"><h4 id="particle50" class="scrollQuestion">What's the return policy?</h4>
+<p id="particle51" class="scrollParagraph">Your satisfaction is our top priority. If we don't reach your expectations, get in touch and we'll coordinate a replacement and/or refund.</p>
 </div>
+<section id="startups" aria-labelledby="startups-title" class="offering"><div id="startups-element-1" class="section-heading"><p id="startups-element-2" class="eyebrow">Knowbooks for startups</p>
+<h2 id="startups-title" >Put your pitch<br>in their hands.</h2></div>
+<div id="startups-element-3" class="offering-body"><p id="startups-element-4" class="offering-lead">A one-of-a-kind Knowbook, built around your startup.</p>
+<p id="startups-element-5" class="offering-copy">We develop custom Knowbooks for startups raising funds. Turn your big idea into hands-on experiments that help investors explore what you're building and understand why it matters.</p>
+<dl id="startups-element-6" class="offering-terms"><div id="startups-element-7" ><dt id="startups-element-8" >Design once.</dt>
+<dd id="startups-element-9" >Pay a one-time design fee to develop your custom Knowbook.</dd></div>
+<div id="startups-element-10" ><dt id="startups-element-11" >Build on demand.</dt>
+<dd id="startups-element-12" >Then pay only production costs for on-demand manufacturing and assembly. Order as many as you need, whenever you need more.</dd></div></dl>
+<a id="startups-element-13" href="mailto:startups@knowbooks.com?subject=Knowbooks%20for%20my%20startup" class="down">Let's build your Knowbook <span aria-hidden="true">↗</span></a></div></section>
+<section id="corporate-training" aria-labelledby="training-title" class="offering"><div id="corporate-training-element-1" class="section-heading"><p id="corporate-training-element-2" class="eyebrow">Knowbooks for corporate training</p>
+<h2 id="training-title" >Train your team.<br>Faster. Better. Deeper.</h2></div>
+<div id="corporate-training-element-3" class="offering-body"><p id="corporate-training-element-4" class="offering-lead">Turn hands-on practice into deeper understanding and skills your team can put to work.</p>
+<p id="corporate-training-element-5" class="offering-copy">We create custom Knowbooks around the skills your team needs to master. An alternative to training videos and manuals, each book gives your team experiments they can do with their hands: practice the task, see how it works, and understand why. Build your training around doing, so your team can get up to speed and go deeper.</p>
+<a id="corporate-training-element-6" href="mailto:training@knowbooks.com?subject=Knowbooks%20for%20corporate%20training" class="down">Build your team's training Knowbook <span aria-hidden="true">↗</span></a></div></section>
+<section id="partnerships" aria-labelledby="partnerships-title" class="offering"><div id="partnerships-element-1" class="section-heading"><p id="partnerships-element-2" class="eyebrow">Knowbooks partnerships</p>
+<h2 id="partnerships-title" >Made locally.<br>Copied worldwide.</h2></div>
+<div id="partnerships-element-3" class="offering-body"><p id="partnerships-element-4" class="offering-lead">Our focus is Oahu. Our partners build around the world.</p>
+<p id="partnerships-element-5" class="offering-copy">We partner with entrepreneurial craftsmen all over the world to bring more Knowbooks to more people faster. Interested in building Knowbooks for your community? Let's talk about becoming a Knowbooks partner.</p>
+<a id="partnerships-element-6" href="mailto:partnerships@knowbooks.com?subject=Knowbooks%20partnership" class="down">Explore a partnership <span aria-hidden="true">↗</span></a></div></section>
 </main>
 <footer class="site-footer"> <div>
  <h2 class="contact-heading">Contact us</h2>
