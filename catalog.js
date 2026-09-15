@@ -168,6 +168,12 @@ const catalog = [
     "priceUsd": 139
   },
   {
+    "id": "frequency",
+    "title": "Frequency",
+    "status": "believer",
+    "priceUsd": 299
+  },
+  {
     "id": "voltage",
     "title": "Voltage",
     "status": "believer",
