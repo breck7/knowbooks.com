@@ -210,6 +210,12 @@ const catalog = [
     "priceUsd": 149
   },
   {
+    "id": "momentum",
+    "title": "Momentum",
+    "status": "believer",
+    "priceUsd": 199
+  },
+  {
     "id": "friction",
     "title": "Friction",
     "status": "believer",
