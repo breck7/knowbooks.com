@@ -2,12 +2,16 @@ importOnly
 
 // Cover microlanguage: a 100 by 100 canvas, one ink, no fonts or raster images.
 // circle cx cy radius [strokeWidth]
+// filledCircle cx cy radius
 // ellipse cx cy rx ry [strokeWidth]
 // rect x y width height [strokeWidth]
+// filledRect x y width height
 // line x1 y1 x2 y2 [strokeWidth]
 // polygon x1 y1 x2 y2 x3 y3 ...
+// filledPolygon x1 y1 x2 y2 x3 y3 ...
 // path SVG path data (M, L, C, Q, A, Z and their lowercase forms)
-// All shapes are outlines; strokeWidth defaults to 3 canvas units.
+// filledPath SVG path data (same commands as path)
+// Shapes are outlines except filled commands; strokeWidth defaults to 3 canvas units.
 // Keep artwork inside 10..90 to leave room for the stroke.
 // The compiled SVG uses currentColor, matching the cover title.
 // For fabrication, set the desired physical size and expand strokes in the cutter software.
@@ -22,19 +26,23 @@ coverParser
    const shapes = this.subparticlesToString().split("\n").filter(line => line.trim()).map(line => {
     if (line !== line.trim()) fail("drawing commands must be direct children of cover")
     const [command, ...args] = line.split(/\s+/)
-    if (command === "path") {
+    if (command === "path" || command === "filledPath") {
      const d = args.join(" ")
      if (!/^[Mm]/.test(d) || !/^[MmLlHhVvCcSsQqTtAaZz0-9., +eE-]+$/.test(d)) fail(`invalid path: ${d}`)
+     if (command === "filledPath") return `<path d="${d}" fill="currentColor" stroke="none"/>`
      return `<path d="${d}"/>`
     }
     const values = args.map(Number)
     if (!values.length || values.some(value => !Number.isFinite(value))) fail(`invalid numbers: ${line}`)
-    if (command === "polygon") {
+    if (command === "polygon" || command === "filledPolygon") {
      if (values.length < 6 || values.length % 2) fail("polygon needs at least three coordinate pairs")
+     if (command === "filledPolygon") return `<polygon points="${values.join(" ")}" fill="currentColor" stroke="none"/>`
      return `<polygon points="${values.join(" ")}"/>`
     }
-    const attributes = specs[command]
+    const filledShape = { filledRect: "rect", filledCircle: "circle" }[command]
+    const attributes = specs[filledShape || command]
     if (!attributes) fail(`unknown command: ${command}`)
+    if (filledShape && values.length !== attributes.length) fail(`wrong argument count: ${line}`)
     if (values.length !== attributes.length && values.length !== attributes.length + 1) fail(`wrong argument count: ${line}`)
     const width = values[attributes.length] ?? 3
     if (width <= 0) fail("stroke width must be positive")
@@ -42,6 +50,7 @@ coverParser
      if (["r", "rx", "ry", "width", "height"].includes(name) && values[index] <= 0) fail(`${name} must be positive`)
      return `${name}="${values[index]}"`
     }).join(" ")
+    if (filledShape) return `<${filledShape} ${attrs} fill="currentColor" stroke="none"/>`
     return `<${command} ${attrs} stroke-width="${width}"/>`
    })
    if (!shapes.length) fail("empty symbol")
