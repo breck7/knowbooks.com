@@ -1,7 +1,7 @@
 title Knowbook tags
 buildConcepts tags.js
 
-// Editorial classification v2, 2026-09-13. Source: catalog.scroll titles and comments.
+// Editorial classification v3, 2026-09-15. Source: catalog.scroll titles and comments.
 // Strategy: combine broad subject splits with independent activity and time axes.
 // Prefer questions that separate meaningful groups; retain narrower questions for
 // useful branches (plants, electricity, collaboration). These are candidate tree
@@ -40,7 +40,7 @@ keywordsParser
 
 id physicsTag
 question Is understanding physical forces, energy, waves, or matter a central goal?
-knowbooks magnets beams focus levers light gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter atoms motion friction ropes wind aerodynamics water rust membranes bonds metals steel aluminum brass wheels wedges stars screws batteries hurricanes guitar piano drums singing actuators transistors fusion flow gluons bosons
+knowbooks magnets beams focus levers light gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter atoms motion friction ropes wind aerodynamics water rust membranes bonds metals steel aluminum brass wheels wedges stars screws batteries hurricanes guitar piano drums singing actuators transistors fusion flow gluons bosons frequency waves helices springs momentum rockets
 
 id chemistryTag
 question Is chemical composition or chemical change central to this topic?
@@ -60,7 +60,7 @@ knowbooks capital sales gold banking liberty property competition collusion budg
 
 id psychologyTag
 question Is understanding or changing attention, emotion, motivation, or social behavior a central goal?
-knowbooks focus sales sleep patience liberty courage teamwork motivation competition collusion anger marketing twitter
+knowbooks focus sales sleep patience liberty courage teamwork motivation competition collusion anger marketing twitter alignment
 
 id computingTag
 question Is software, digital information, or electronic computation central to this topic?
@@ -68,11 +68,11 @@ knowbooks software scroll twitter bitcoin transistors
 
 id materialsTag
 question Is exploring the properties or uses of a tangible material a central goal?
-knowbooks beams carpentry air glass iron elements copper gold matter water rust membranes bonds paper ink folding metals steel aluminum brass wood fabric food
+knowbooks beams carpentry air glass iron elements copper gold matter water rust membranes bonds paper ink folding metals steel aluminum brass wood fabric food springs
 
 id mechanicsTag
 question Are forces, motion, or mechanical advantage central to this topic?
-knowbooks magnets beams tools carpentry gravity levers motors gears motion friction ropes wind aerodynamics wheels wedges screws actuators flow hurricanes
+knowbooks magnets beams tools carpentry gravity levers motors gears motion friction ropes wind aerodynamics wheels wedges screws actuators flow hurricanes springs momentum rockets
 
 id electricityTag
 question Are electric charge, circuits, or electromagnetism central to this topic?
@@ -80,11 +80,11 @@ knowbooks magnets electricity copper fields energy voltage motors batteries actu
 
 id wavesTag
 question Are light, sound, or other wave phenomena central to this topic?
-knowbooks light sound glass fields colors stars guitar piano drums singing
+knowbooks light sound glass fields colors stars guitar piano drums singing frequency waves
 
 id fluidsTag
 question Is the behavior or movement of liquids or gases central to this topic?
-knowbooks air heat wind aerodynamics water membranes hydration hurricanes flow
+knowbooks air heat wind aerodynamics water membranes hydration hurricanes flow rockets
 
 id natureTag
 question Is observing natural environments, weather, or the sky a central learning activity?
@@ -92,11 +92,11 @@ knowbooks air wind water centuries decay seeds stars exploration hurricanes
 
 id buildingTag
 question Is assembling, shaping, or programming something a central hands-on way to learn this topic?
-knowbooks beams tools carpentry levers electricity motors gears ropes paper ink folding wood wheels wedges fabric screws batteries software scroll guitar piano drums actuators transistors
+knowbooks beams tools carpentry levers electricity motors gears ropes paper ink folding wood wheels wedges fabric screws batteries software scroll guitar piano drums actuators transistors helices springs rockets
 
 id measurementTag
 question Is taking numerical measurements or keeping quantitative records a central way to explore this topic?
-knowbooks beams capital gravity sound electricity heat banking sleep energy voltage motion friction wind aerodynamics water time centuries stars budgeting bookkeeping payroll batteries hydration hurricanes currency bitcoin flow
+knowbooks beams capital gravity sound electricity heat banking sleep energy voltage motion friction wind aerodynamics water time centuries stars budgeting bookkeeping payroll batteries hydration hurricanes currency bitcoin flow frequency waves springs momentum rockets
 
 id creativeTag
 question Is creating an expressive work, design, or performance a central activity?
@@ -104,7 +104,7 @@ knowbooks carpentry sound colors paper ink folding fabric software scroll market
 
 id instantTag
 question Can a typical introductory activity give directly observable feedback within a minute of setup?
-knowbooks magnets beams focus levers light tools gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter motion friction ropes wind aerodynamics water membranes paper ink folding metals steel aluminum brass wood wheels wedges fabric screws batteries software scroll guitar piano drums singing actuators transistors flow
+knowbooks magnets beams focus levers light tools gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter motion friction ropes wind aerodynamics water membranes paper ink folding metals steel aluminum brass wood wheels wedges fabric screws batteries software scroll guitar piano drums singing actuators transistors flow frequency waves springs momentum
 
 id longTermTag
 question Is tracking change over weeks or months a central way to deepen learning about this topic?
@@ -112,7 +112,7 @@ knowbooks capital sales banking sleep rust patience centuries decay motivation s
 
 id multiplePeopleTag
 question Does practicing this topic in real life centrally involve interaction between multiple people?
-knowbooks sales liberty property teamwork competition collusion payroll marketing twitter
+knowbooks sales liberty property teamwork competition collusion payroll marketing twitter alignment
 
 id hazardTag
 question Does direct experimentation with the real phenomenon involve hazards such as heat, cutting, electricity, contamination, or severe weather?
@@ -121,7 +121,7 @@ knowbooks tools carpentry electricity heat glass fire voltage motors wedges food
 id gasTag
 question Are gases or their behavior a central part of this topic?
 keywords gas gases gaseous air atmosphere vapor vapour steam
-knowbooks air fire wind aerodynamics hurricanes flow
+knowbooks air fire wind aerodynamics hurricanes flow rockets
 
 id liquidTag
 question Are liquids or their behavior a central part of this topic?
@@ -131,7 +131,7 @@ knowbooks water membranes ink hydration flow
 id solidTag
 question Are the structure or mechanical properties of solids central to this topic?
 keywords solid solids rigid rigidity stiffness hardness
-knowbooks beams tools carpentry glass iron copper gold matter friction paper folding metals steel aluminum brass wood wedges screws
+knowbooks beams tools carpentry glass iron copper gold matter friction paper folding metals steel aluminum brass wood wedges screws springs
 
 id combustionTag
 question Is burning fuel or understanding combustion a central way to explore this topic?
@@ -141,7 +141,7 @@ knowbooks fire heat energy
 id energyTag
 question Is storing, transferring, or converting energy a central goal?
 keywords energy power work conversion storage
-knowbooks levers gravity sound electricity heat fire energy voltage motors motion friction wind food batteries mitochondria fusion
+knowbooks levers gravity sound electricity heat fire energy voltage motors motion friction wind food batteries mitochondria fusion springs momentum rockets waves
 
 id temperatureTag
 question Is temperature or heat transfer central to this topic?
@@ -151,7 +151,7 @@ knowbooks heat fire energy stars fusion
 id pressureTag
 question Is pressure in liquids or gases central to this topic?
 keywords pressure compression compressed pneumatic hydraulic hydraulics buoyancy
-knowbooks air wind aerodynamics water hurricanes flow
+knowbooks air wind aerodynamics water hurricanes flow rockets
 
 id opticsTag
 question Is the behavior or perception of light central to this topic?
@@ -201,12 +201,12 @@ knowbooks sales teamwork ink software scroll marketing twitter
 id cooperationTag
 question Is coordinating people's actions toward a shared goal central to this topic?
 keywords cooperation collaboration coordination collaborating teams group social
-knowbooks teamwork collusion payroll
+knowbooks teamwork collusion payroll alignment
 
 id machinesTag
 question Is understanding or using mechanisms that transmit force or motion a central goal?
 keywords machine machines mechanism mechanisms mechanical engineering robotics robot
-knowbooks beams levers tools carpentry motors gears ropes wheels wedges screws actuators
+knowbooks beams levers tools carpentry motors gears ropes wheels wedges screws actuators springs
 
 id metalTag
 question Are metals or their distinctive properties central to this topic?
@@ -227,3 +227,33 @@ id cyclesTag
 question Are repeated turns, oscillations, or patterns in space or time central to this topic?
 keywords cycle cycles cyclic cyclical periodic periodicity repetition repeating oscillation oscillations rhythm rhythms rotation rotating spiral spirals helix helices helixes coil coils coiled frequency
 knowbooks light sound sleep frequency helices springs motors gears ropes time wheels screws hurricanes guitar piano drums singing waves
+
+id flightTag
+question Is flight, propulsion, or the forces governing travel through air or space central to this topic?
+keywords flight flying fly aviation aerospace aircraft airplane airplanes rocket rockets rocketry propulsion thrust launch lift drag
+knowbooks rockets aerodynamics
+
+id spaceTag
+question Is understanding objects in space or the physical principles of spaceflight a central way to explore this topic?
+keywords space spaceflight astronomy astronomical cosmos cosmic orbit orbital satellite satellites astronaut astronauts
+knowbooks stars gravity rockets momentum
+
+id motionTag
+question Is understanding motion, momentum, or the forces that change motion central to this topic?
+keywords motion movement moving momentum inertia acceleration velocity speed impulse newton newtonian
+knowbooks motion momentum gravity friction springs rockets levers motors gears wheels actuators aerodynamics
+
+id geometryTag
+question Is exploring shapes, spatial relationships, or three-dimensional structures central to this topic?
+keywords geometry geometric shape shapes spatial structure structures symmetry curves curve topology
+knowbooks helices folding beams carpentry gears screws
+
+id emotionalSkillsTag
+question Is developing emotional awareness, self-regulation, or the ability to act through difficulty central to this topic?
+keywords emotion emotions emotional feelings resilience resilient regulation mindfulness confidence grit perseverance
+knowbooks focus patience courage motivation anger
+
+id explorationTag
+question Is investigating unfamiliar places or planning how to explore them a central activity?
+keywords exploration exploring explore discovery discover expedition expeditions navigation navigating adventure adventures
+knowbooks exploration

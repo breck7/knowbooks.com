@@ -3,26 +3,35 @@ const catalog = [
     "id": "magnets",
     "title": "Magnets",
     "color": "navy",
-    "symbol": "vertical bar magnet",
-    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"37\" y=\"17\" width=\"26\" height=\"66\" stroke-width=\"3\"/><line x1=\"37\" y1=\"50\" x2=\"63\" y2=\"50\" stroke-width=\"3\"/></svg>",
+    "symbol": "vertical bar magnet. south half is solid color",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"37\" y=\"50\" width=\"26\" height=\"33\" fill=\"currentColor\" stroke=\"none\"/><rect x=\"37\" y=\"17\" width=\"26\" height=\"66\" stroke-width=\"3\"/><line x1=\"37\" y1=\"50\" x2=\"63\" y2=\"50\" stroke-width=\"3\"/></svg>",
     "status": "trailblazer",
     "priceUsd": 129
   },
   {
     "id": "focus",
     "title": "Focus",
-    "color": "forest",
-    "symbol": "two triangles touching horizontally, like a bowtie",
-    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"20 28 50 50 20 72\"/><polygon points=\"80 28 50 50 80 72\"/></svg>",
+    "color": "coral",
+    "symbol": "two triangles touching horizontally, like a bowtie. solid fill",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"20 28 50 50 20 72\" fill=\"currentColor\" stroke=\"none\"/><polygon points=\"80 28 50 50 80 72\" fill=\"currentColor\" stroke=\"none\"/></svg>",
+    "status": "trailblazer",
+    "priceUsd": 129
+  },
+  {
+    "id": "levers",
+    "title": "Levers",
+    "color": "navy",
+    "symbol": "tilted lever with an aligned square load and a small touching fulcrum near the load. solid shapes",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"15\" y1=\"53\" x2=\"85\" y2=\"41\" stroke-width=\"4\"/><polygon points=\"40 48.714 32 65 48 65\" fill=\"currentColor\" stroke=\"none\"/><polygon points=\"17.429 37.143 32.429 34.571 35 49.571 20 52.143\" fill=\"currentColor\" stroke=\"none\"/></svg>",
     "status": "trailblazer",
     "priceUsd": 129
   },
   {
     "id": "beams",
     "title": "Beams",
-    "color": "brick",
-    "symbol": "vertical bar",
-    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"40\" y=\"17\" width=\"20\" height=\"66\" stroke-width=\"3\"/></svg>",
+    "color": "brown",
+    "symbol": "vertical bar. solid fill.",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"40\" y=\"17\" width=\"20\" height=\"66\" fill=\"currentColor\" stroke=\"none\"/></svg>",
     "status": "trailblazer",
     "priceUsd": 129
   },
@@ -30,26 +39,35 @@ const catalog = [
     "id": "sales",
     "title": "Sales",
     "color": "forest",
-    "symbol": "two circles with two parallel dashed lines between them, leaving a small gap at each circle.",
-    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"26\" cy=\"50\" r=\"13\" stroke-width=\"3\"/><circle cx=\"74\" cy=\"50\" r=\"13\" stroke-width=\"3\"/><path d=\"M43 45 H47 M53 45 H57\"/><path d=\"M43 55 H47 M53 55 H57\"/></svg>",
+    "symbol": "two triangles in alignment, pointed north east",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"46 54 38 82 18 62\" fill=\"currentColor\" stroke=\"none\"/><polygon points=\"82 18 74 46 54 26\" fill=\"currentColor\" stroke=\"none\"/></svg>",
     "status": "trailblazer",
     "priceUsd": 399
   },
   {
-    "id": "levers",
-    "title": "Levers",
-    "color": "brick",
-    "symbol": "tilted lever with an aligned square load and a small touching fulcrum near the load.",
-    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"15\" y1=\"53\" x2=\"85\" y2=\"41\" stroke-width=\"4\"/><polygon points=\"40 48.714 32 65 48 65\"/><polygon points=\"17.429 37.143 32.429 34.571 35 49.571 20 52.143\"/></svg>",
+    "id": "carpentry",
+    "title": "Carpentry",
+    "color": "brown",
+    "symbol": "long horizontal hand saw blade tapering from left to right. solid fill. three teeth. small handle on the left",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"26 34 88 46 88 60 78 66 68 60 58 66 48 60 38 66 26 60\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M10 35 Q10 31 14 31 H28 V63 H14 Q10 63 10 59 Z M16 39 V55 H22 V39 Z\" fill=\"currentColor\" stroke=\"none\"/></svg>",
     "status": "trailblazer",
-    "priceUsd": 129
+    "priceUsd": 349
+  },
+  {
+    "id": "plumbing",
+    "title": "Plumbing",
+    "color": "ocean",
+    "symbol": "two elbow pipes one coming from left a drip of water flowing out and into the other elbow pipe leaving to right. all solids",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 18 H40 Q56 18 56 34 V39 H44 V34 Q44 30 40 30 H14 Z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M44 66 H56 V72 Q56 76 60 76 H86 V88 H60 Q44 88 44 72 Z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M50 46 C48 50 45 53 45 56 A5 5 0 0 0 55 56 C55 53 52 50 50 46 Z\" fill=\"currentColor\" stroke=\"none\"/></svg>",
+    "status": "trailblazer",
+    "priceUsd": 349
   },
   {
     "id": "capital",
     "title": "Capital",
     "color": "forest",
-    "symbol": "four pairs of two circles. each pair has 1 small circle, 2 are bigger, 1 is bigger than that, 1 bigger than that. arranged in a scattered way.",
-    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"18\" cy=\"19\" r=\"4\" stroke-width=\"3\"/><circle cx=\"34\" cy=\"28\" r=\"7\" stroke-width=\"3\"/><circle cx=\"65\" cy=\"16\" r=\"4\" stroke-width=\"3\"/><circle cx=\"79\" cy=\"30\" r=\"7\" stroke-width=\"3\"/><circle cx=\"16\" cy=\"58\" r=\"4\" stroke-width=\"3\"/><circle cx=\"30\" cy=\"75\" r=\"10\" stroke-width=\"3\"/><circle cx=\"55\" cy=\"56\" r=\"4\" stroke-width=\"3\"/><circle cx=\"72\" cy=\"74\" r=\"13\" stroke-width=\"3\"/></svg>",
+    "symbol": "four pairs of two solid circles. each pair has 1 small circle, 2 are bigger, 1 is bigger than that, 1 bigger than that. arranged in a scattered way.",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"18\" cy=\"19\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"34\" cy=\"28\" r=\"7\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"65\" cy=\"16\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"79\" cy=\"30\" r=\"7\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"16\" cy=\"58\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"30\" cy=\"75\" r=\"10\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"55\" cy=\"56\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"72\" cy=\"74\" r=\"13\" fill=\"currentColor\" stroke=\"none\"/></svg>",
     "status": "trailblazer",
     "priceUsd": 699
   },
@@ -64,12 +82,6 @@ const catalog = [
     "title": "Tools",
     "status": "believer",
     "priceUsd": 129
-  },
-  {
-    "id": "carpentry",
-    "title": "Carpentry",
-    "status": "believer",
-    "priceUsd": 249
   },
   {
     "id": "gravity",
@@ -562,6 +574,12 @@ const catalog = [
     "title": "Actuators",
     "status": "frontier",
     "priceUsd": 1299
+  },
+  {
+    "id": "rockets",
+    "title": "Rockets",
+    "status": "frontier",
+    "priceUsd": 1969
   },
   {
     "id": "transistors",

@@ -2,7 +2,7 @@ const tags = [
   {
     "id": "physicsTag",
     "question": "Is understanding physical forces, energy, waves, or matter a central goal?",
-    "knowbooks": "magnets beams focus levers light gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter atoms motion friction ropes wind aerodynamics water rust membranes bonds metals steel aluminum brass wheels wedges stars screws batteries hurricanes guitar piano drums singing actuators transistors fusion flow gluons bosons"
+    "knowbooks": "magnets beams focus levers light gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter atoms motion friction ropes wind aerodynamics water rust membranes bonds metals steel aluminum brass wheels wedges stars screws batteries hurricanes guitar piano drums singing actuators transistors fusion flow gluons bosons frequency waves helices springs momentum rockets"
   },
   {
     "id": "chemistryTag",
@@ -27,7 +27,7 @@ const tags = [
   {
     "id": "psychologyTag",
     "question": "Is understanding or changing attention, emotion, motivation, or social behavior a central goal?",
-    "knowbooks": "focus sales sleep patience liberty courage teamwork motivation competition collusion anger marketing twitter"
+    "knowbooks": "focus sales sleep patience liberty courage teamwork motivation competition collusion anger marketing twitter alignment"
   },
   {
     "id": "computingTag",
@@ -37,12 +37,12 @@ const tags = [
   {
     "id": "materialsTag",
     "question": "Is exploring the properties or uses of a tangible material a central goal?",
-    "knowbooks": "beams carpentry air glass iron elements copper gold matter water rust membranes bonds paper ink folding metals steel aluminum brass wood fabric food"
+    "knowbooks": "beams carpentry air glass iron elements copper gold matter water rust membranes bonds paper ink folding metals steel aluminum brass wood fabric food springs"
   },
   {
     "id": "mechanicsTag",
     "question": "Are forces, motion, or mechanical advantage central to this topic?",
-    "knowbooks": "magnets beams tools carpentry gravity levers motors gears motion friction ropes wind aerodynamics wheels wedges screws actuators flow hurricanes"
+    "knowbooks": "magnets beams tools carpentry gravity levers motors gears motion friction ropes wind aerodynamics wheels wedges screws actuators flow hurricanes springs momentum rockets"
   },
   {
     "id": "electricityTag",
@@ -52,12 +52,12 @@ const tags = [
   {
     "id": "wavesTag",
     "question": "Are light, sound, or other wave phenomena central to this topic?",
-    "knowbooks": "light sound glass fields colors stars guitar piano drums singing"
+    "knowbooks": "light sound glass fields colors stars guitar piano drums singing frequency waves"
   },
   {
     "id": "fluidsTag",
     "question": "Is the behavior or movement of liquids or gases central to this topic?",
-    "knowbooks": "air heat wind aerodynamics water membranes hydration hurricanes flow"
+    "knowbooks": "air heat wind aerodynamics water membranes hydration hurricanes flow rockets"
   },
   {
     "id": "natureTag",
@@ -67,12 +67,12 @@ const tags = [
   {
     "id": "buildingTag",
     "question": "Is assembling, shaping, or programming something a central hands-on way to learn this topic?",
-    "knowbooks": "beams tools carpentry levers electricity motors gears ropes paper ink folding wood wheels wedges fabric screws batteries software scroll guitar piano drums actuators transistors"
+    "knowbooks": "beams tools carpentry levers electricity motors gears ropes paper ink folding wood wheels wedges fabric screws batteries software scroll guitar piano drums actuators transistors helices springs rockets"
   },
   {
     "id": "measurementTag",
     "question": "Is taking numerical measurements or keeping quantitative records a central way to explore this topic?",
-    "knowbooks": "beams capital gravity sound electricity heat banking sleep energy voltage motion friction wind aerodynamics water time centuries stars budgeting bookkeeping payroll batteries hydration hurricanes currency bitcoin flow"
+    "knowbooks": "beams capital gravity sound electricity heat banking sleep energy voltage motion friction wind aerodynamics water time centuries stars budgeting bookkeeping payroll batteries hydration hurricanes currency bitcoin flow frequency waves springs momentum rockets"
   },
   {
     "id": "creativeTag",
@@ -82,7 +82,7 @@ const tags = [
   {
     "id": "instantTag",
     "question": "Can a typical introductory activity give directly observable feedback within a minute of setup?",
-    "knowbooks": "magnets beams focus levers light tools gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter motion friction ropes wind aerodynamics water membranes paper ink folding metals steel aluminum brass wood wheels wedges fabric screws batteries software scroll guitar piano drums singing actuators transistors flow"
+    "knowbooks": "magnets beams focus levers light tools gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter motion friction ropes wind aerodynamics water membranes paper ink folding metals steel aluminum brass wood wheels wedges fabric screws batteries software scroll guitar piano drums singing actuators transistors flow frequency waves springs momentum"
   },
   {
     "id": "longTermTag",
@@ -92,7 +92,7 @@ const tags = [
   {
     "id": "multiplePeopleTag",
     "question": "Does practicing this topic in real life centrally involve interaction between multiple people?",
-    "knowbooks": "sales liberty property teamwork competition collusion payroll marketing twitter"
+    "knowbooks": "sales liberty property teamwork competition collusion payroll marketing twitter alignment"
   },
   {
     "id": "hazardTag",
@@ -103,7 +103,7 @@ const tags = [
     "id": "gasTag",
     "keywords": "gas gases gaseous air atmosphere vapor vapour steam",
     "question": "Are gases or their behavior a central part of this topic?",
-    "knowbooks": "air fire wind aerodynamics hurricanes flow"
+    "knowbooks": "air fire wind aerodynamics hurricanes flow rockets"
   },
   {
     "id": "liquidTag",
@@ -115,7 +115,7 @@ const tags = [
     "id": "solidTag",
     "keywords": "solid solids rigid rigidity stiffness hardness",
     "question": "Are the structure or mechanical properties of solids central to this topic?",
-    "knowbooks": "beams tools carpentry glass iron copper gold matter friction paper folding metals steel aluminum brass wood wedges screws"
+    "knowbooks": "beams tools carpentry glass iron copper gold matter friction paper folding metals steel aluminum brass wood wedges screws springs"
   },
   {
     "id": "combustionTag",
@@ -127,7 +127,7 @@ const tags = [
     "id": "energyTag",
     "keywords": "energy power work conversion storage",
     "question": "Is storing, transferring, or converting energy a central goal?",
-    "knowbooks": "levers gravity sound electricity heat fire energy voltage motors motion friction wind food batteries mitochondria fusion"
+    "knowbooks": "levers gravity sound electricity heat fire energy voltage motors motion friction wind food batteries mitochondria fusion springs momentum rockets waves"
   },
   {
     "id": "temperatureTag",
@@ -139,7 +139,7 @@ const tags = [
     "id": "pressureTag",
     "keywords": "pressure compression compressed pneumatic hydraulic hydraulics buoyancy",
     "question": "Is pressure in liquids or gases central to this topic?",
-    "knowbooks": "air wind aerodynamics water hurricanes flow"
+    "knowbooks": "air wind aerodynamics water hurricanes flow rockets"
   },
   {
     "id": "opticsTag",
@@ -199,13 +199,13 @@ const tags = [
     "id": "cooperationTag",
     "keywords": "cooperation collaboration coordination collaborating teams group social",
     "question": "Is coordinating people's actions toward a shared goal central to this topic?",
-    "knowbooks": "teamwork collusion payroll"
+    "knowbooks": "teamwork collusion payroll alignment"
   },
   {
     "id": "machinesTag",
     "keywords": "machine machines mechanism mechanisms mechanical engineering robotics robot",
     "question": "Is understanding or using mechanisms that transmit force or motion a central goal?",
-    "knowbooks": "beams levers tools carpentry motors gears ropes wheels wedges screws actuators"
+    "knowbooks": "beams levers tools carpentry motors gears ropes wheels wedges screws actuators springs"
   },
   {
     "id": "metalTag",
@@ -230,5 +230,41 @@ const tags = [
     "keywords": "cycle cycles cyclic cyclical periodic periodicity repetition repeating oscillation oscillations rhythm rhythms rotation rotating spiral spirals helix helices helixes coil coils coiled frequency",
     "question": "Are repeated turns, oscillations, or patterns in space or time central to this topic?",
     "knowbooks": "light sound sleep frequency helices springs motors gears ropes time wheels screws hurricanes guitar piano drums singing waves"
+  },
+  {
+    "id": "flightTag",
+    "keywords": "flight flying fly aviation aerospace aircraft airplane airplanes rocket rockets rocketry propulsion thrust launch lift drag",
+    "question": "Is flight, propulsion, or the forces governing travel through air or space central to this topic?",
+    "knowbooks": "rockets aerodynamics"
+  },
+  {
+    "id": "spaceTag",
+    "keywords": "space spaceflight astronomy astronomical cosmos cosmic orbit orbital satellite satellites astronaut astronauts",
+    "question": "Is understanding objects in space or the physical principles of spaceflight a central way to explore this topic?",
+    "knowbooks": "stars gravity rockets momentum"
+  },
+  {
+    "id": "motionTag",
+    "keywords": "motion movement moving momentum inertia acceleration velocity speed impulse newton newtonian",
+    "question": "Is understanding motion, momentum, or the forces that change motion central to this topic?",
+    "knowbooks": "motion momentum gravity friction springs rockets levers motors gears wheels actuators aerodynamics"
+  },
+  {
+    "id": "geometryTag",
+    "keywords": "geometry geometric shape shapes spatial structure structures symmetry curves curve topology",
+    "question": "Is exploring shapes, spatial relationships, or three-dimensional structures central to this topic?",
+    "knowbooks": "helices folding beams carpentry gears screws"
+  },
+  {
+    "id": "emotionalSkillsTag",
+    "keywords": "emotion emotions emotional feelings resilience resilient regulation mindfulness confidence grit perseverance",
+    "question": "Is developing emotional awareness, self-regulation, or the ability to act through difficulty central to this topic?",
+    "knowbooks": "focus patience courage motivation anger"
+  },
+  {
+    "id": "explorationTag",
+    "keywords": "exploration exploring explore discovery discover expedition expeditions navigation navigating adventure adventures",
+    "question": "Is investigating unfamiliar places or planning how to explore them a central activity?",
+    "knowbooks": "exploration"
   }
 ]

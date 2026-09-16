@@ -18,8 +18,13 @@ priceUsdParser
  extends abstractIntegerMeasureParser
  description Website checkout price in whole US dollars.
 
+coverColorAtom
+ extends colorAtom
+ enum navy ocean teal forest purple yellow orange coral brick burgundy brown
+
 colorParser
- extends abstractStringMeasureParser
+ extends abstractEnumMeasureParser
+ atoms measureNameAtom coverColorAtom
  description Optional default cover color: navy, ocean, teal, forest, purple, yellow, orange, coral, brick, burgundy, or brown. Unassigned books cycle yellow, navy, coral, forest, orange, purple, brick, teal, burgundy, ocean, brown in catalog order; assigned colors do not advance the cycle.
 
 symbolParser
@@ -37,53 +42,73 @@ color navy
 title Magnets
 status trailblazer
 priceUsd 129
-symbol vertical bar magnet
+symbol vertical bar magnet. south half is solid color
 cover
+ filledRect 37 50 26 33
  rect 37 17 26 66
  line 37 50 63 50
 
 // physical experiments that teach both non-linear physical jumps and metaphorically the personal/social power of focus
 id focus
-color forest
+color coral
 title Focus
 status trailblazer
 priceUsd 129
-symbol two triangles touching horizontally, like a bowtie
+symbol two triangles touching horizontally, like a bowtie. solid fill
 cover
- polygon 20 28 50 50 20 72
- polygon 80 28 50 50 80 72
+ filledPolygon 20 28 50 50 20 72
+ filledPolygon 80 28 50 50 80 72
+
+id levers
+color navy
+title Levers
+status trailblazer
+priceUsd 129
+symbol tilted lever with an aligned square load and a small touching fulcrum near the load. solid shapes
+cover
+ line 15 53 85 41 4
+ filledPolygon 40 48.714 32 65 48 65
+ filledPolygon 17.429 37.143 32.429 34.571 35 49.571 20 52.143
 
 id beams
-color brick
+color brown
 title Beams
 status trailblazer
 priceUsd 129
-symbol vertical bar
+symbol vertical bar. solid fill.
 cover
- rect 40 17 20 66
+ filledRect 40 17 20 66
 
 id sales
 color forest
 title Sales
 status trailblazer
 priceUsd 399
-symbol two circles with two parallel dashed lines between them, leaving a small gap at each circle.
+symbol two triangles in alignment, pointed north east
 cover
- circle 26 50 13
- circle 74 50 13
- path M43 45 H47 M53 45 H57
- path M43 55 H47 M53 55 H57
+ filledPolygon 46 54 38 82 18 62
+ filledPolygon 82 18 74 46 54 26
 
-id levers
-color brick
-title Levers
+id carpentry
+title Carpentry
 status trailblazer
-priceUsd 129
-symbol tilted lever with an aligned square load and a small touching fulcrum near the load.
+color brown
+priceUsd 349
+symbol long horizontal hand saw blade tapering from left to right. solid fill. three teeth. small handle on the left
 cover
- line 15 53 85 41 4
- polygon 40 48.714 32 65 48 65
- polygon 17.429 37.143 32.429 34.571 35 49.571 20 52.143
+ filledPolygon 26 34 88 46 88 60 78 66 68 60 58 66 48 60 38 66 26 60
+ filledPath M10 35 Q10 31 14 31 H28 V63 H14 Q10 63 10 59 Z M16 39 V55 H22 V39 Z
+
+id plumbing
+title Plumbing
+color ocean
+status trailblazer
+priceUsd 349
+symbol two elbow pipes one coming from left a drip of water flowing out and into the other elbow pipe leaving to right. all solids
+cover
+ filledPath M14 18 H40 Q56 18 56 34 V39 H44 V34 Q44 30 40 30 H14 Z
+ filledPath M44 66 H56 V72 Q56 76 60 76 H86 V88 H60 Q44 88 44 72 Z
+ filledPath M50 46 C48 50 45 53 45 56 A5 5 0 0 0 55 56 C55 53 52 50 50 46 Z
 
 // economic system
 id capital
@@ -91,16 +116,16 @@ color forest
 title Capital
 status trailblazer
 priceUsd 699
-symbol four pairs of two circles. each pair has 1 small circle, 2 are bigger, 1 is bigger than that, 1 bigger than that. arranged in a scattered way.
+symbol four pairs of two solid circles. each pair has 1 small circle, 2 are bigger, 1 is bigger than that, 1 bigger than that. arranged in a scattered way.
 cover
- circle 18 19 4
- circle 34 28 7
- circle 65 16 4
- circle 79 30 7
- circle 16 58 4
- circle 30 75 10
- circle 55 56 4
- circle 72 74 13
+ filledCircle 18 19 4
+ filledCircle 34 28 7
+ filledCircle 65 16 4
+ filledCircle 79 30 7
+ filledCircle 16 58 4
+ filledCircle 30 75 10
+ filledCircle 55 56 4
+ filledCircle 72 74 13
 
 id light
 title Light
@@ -111,11 +136,6 @@ id tools
 title Tools
 status believer
 priceUsd 129
-
-id carpentry
-title Carpentry
-status believer
-priceUsd 249
 
 id gravity
 title Gravity
@@ -532,6 +552,11 @@ id actuators
 title Actuators
 status frontier
 priceUsd 1299
+
+id rockets
+title Rockets
+status frontier
+priceUsd 1969
 
 id transistors
 title Transistors
