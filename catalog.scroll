@@ -192,6 +192,12 @@ title Gold
 status believer
 priceUsd 999
 
+// venture capital
+id venture
+title Venture
+status believer
+priceUsd 10000
+
 // fed
 id banking
 title Banking
