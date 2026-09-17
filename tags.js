@@ -42,7 +42,7 @@ const tags = [
   {
     "id": "mechanicsTag",
     "question": "Are forces, motion, or mechanical advantage central to this topic?",
-    "knowbooks": "magnets beams tools carpentry gravity levers motors gears motion friction ropes wind aerodynamics wheels wedges screws actuators flow hurricanes springs momentum rockets"
+    "knowbooks": "magnets beams tools carpentry gravity levers motors gears motion friction ropes wind aerodynamics wheels wedges screws actuators flow hurricanes springs momentum rockets basketball football soccer boxing golf baseball"
   },
   {
     "id": "electricityTag",
@@ -82,17 +82,17 @@ const tags = [
   {
     "id": "instantTag",
     "question": "Can a typical introductory activity give directly observable feedback within a minute of setup?",
-    "knowbooks": "magnets beams focus levers light tools gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter motion friction ropes wind aerodynamics water membranes paper ink folding metals steel aluminum brass wood wheels wedges fabric screws batteries software scroll guitar piano drums singing actuators transistors flow frequency waves springs momentum"
+    "knowbooks": "magnets beams focus levers light tools gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter motion friction ropes wind aerodynamics water membranes paper ink folding metals steel aluminum brass wood wheels wedges fabric screws batteries software scroll guitar piano drums singing actuators transistors flow frequency waves springs momentum basketball football soccer boxing golf baseball"
   },
   {
     "id": "longTermTag",
     "question": "Is tracking change over weeks or months a central way to deepen learning about this topic?",
-    "knowbooks": "capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing twitter cancer raising attraction"
+    "knowbooks": "capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing twitter cancer raising attraction basketball football soccer boxing golf baseball"
   },
   {
     "id": "multiplePeopleTag",
     "question": "Does practicing this topic in real life centrally involve interaction between multiple people?",
-    "knowbooks": "sales liberty property teamwork competition collusion payroll marketing twitter alignment raising attraction"
+    "knowbooks": "sales liberty property teamwork competition collusion payroll marketing twitter alignment raising attraction basketball football soccer boxing baseball"
   },
   {
     "id": "hazardTag",
@@ -193,13 +193,13 @@ const tags = [
     "id": "communicationTag",
     "keywords": "communication communicating message messages media writing publishing persuasion",
     "question": "Is conveying information to other people a central activity?",
-    "knowbooks": "sales teamwork ink software scroll marketing twitter raising attraction"
+    "knowbooks": "sales teamwork ink software scroll marketing twitter raising attraction basketball football soccer baseball"
   },
   {
     "id": "cooperationTag",
     "keywords": "cooperation collaboration coordination collaborating teams group social",
     "question": "Is coordinating people's actions toward a shared goal central to this topic?",
-    "knowbooks": "teamwork collusion payroll alignment raising"
+    "knowbooks": "teamwork collusion payroll alignment raising basketball football soccer baseball"
   },
   {
     "id": "machinesTag",
@@ -247,7 +247,7 @@ const tags = [
     "id": "motionTag",
     "keywords": "motion movement moving momentum inertia acceleration velocity speed impulse newton newtonian",
     "question": "Is understanding motion, momentum, or the forces that change motion central to this topic?",
-    "knowbooks": "motion momentum gravity friction springs rockets levers motors gears wheels actuators aerodynamics"
+    "knowbooks": "motion momentum gravity friction springs rockets levers motors gears wheels actuators aerodynamics basketball football soccer boxing golf baseball"
   },
   {
     "id": "geometryTag",
@@ -296,5 +296,35 @@ const tags = [
     "keywords": "social interpersonal interaction interactions relationships relating socializing",
     "question": "Is understanding social relationships or practicing interpersonal skills a central goal?",
     "knowbooks": "sales liberty teamwork competition collusion marketing twitter alignment raising attraction"
+  },
+  {
+    "id": "sportsTag",
+    "keywords": "sport sports sporting athletic athletics athlete athletes",
+    "question": "Is learning or practicing an athletic sport a central goal?",
+    "knowbooks": "basketball football soccer boxing golf baseball"
+  },
+  {
+    "id": "teamSportsTag",
+    "keywords": "team sports teams teammates teamwork",
+    "question": "Is playing a sport with teammates working toward a shared result central to this topic?",
+    "knowbooks": "basketball football soccer baseball"
+  },
+  {
+    "id": "ballSportsTag",
+    "keywords": "ball sports balls ballgame ballgames basketball football soccer golf baseball",
+    "question": "Is controlling, striking, throwing, or kicking a ball central to this sport?",
+    "knowbooks": "basketball football soccer golf baseball"
+  },
+  {
+    "id": "combatSportsTag",
+    "keywords": "combat sports fighting fight sparring boxing",
+    "question": "Is practicing a sport involving direct physical combat with an opponent central to this topic?",
+    "knowbooks": "boxing"
+  },
+  {
+    "id": "individualSportsTag",
+    "keywords": "individual sports solo singles",
+    "question": "Can the sport centrally be practiced in competition with results attributed to an individual rather than a team?",
+    "knowbooks": "boxing golf"
   }
 ]

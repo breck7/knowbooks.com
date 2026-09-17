@@ -618,6 +618,42 @@ const catalog = [
     "priceUsd": 699
   },
   {
+    "id": "basketball",
+    "title": "Basketball",
+    "status": "frontier",
+    "priceUsd": 3323
+  },
+  {
+    "id": "football",
+    "title": "Football",
+    "status": "frontier",
+    "priceUsd": 2837
+  },
+  {
+    "id": "soccer",
+    "title": "Soccer",
+    "status": "frontier",
+    "priceUsd": 1023
+  },
+  {
+    "id": "boxing",
+    "title": "Boxing",
+    "status": "frontier",
+    "priceUsd": 4956
+  },
+  {
+    "id": "golf",
+    "title": "Golf",
+    "status": "frontier",
+    "priceUsd": 1518
+  },
+  {
+    "id": "baseball",
+    "title": "Baseball",
+    "status": "frontier",
+    "priceUsd": 406
+  },
+  {
     "id": "flow",
     "title": "Flow",
     "status": "frontier",
