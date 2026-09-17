@@ -148,7 +148,7 @@ css
  .section-heading .eyebrow { align-self: start; padding-top: 11px; text-decoration: none; }
  .section-heading h2 { margin: 0; max-width: 720px; font-size: clamp(40px, 6vw, 78px); font-weight: 400; line-height: .95; letter-spacing: -.04em; }
  .catalog-tools { display: flex; justify-content: flex-end; margin: 0 clamp(20px, 3vw, 42px) 18px; }
- #catalog-search { width: 155px; max-width: 100%; padding: 6px 2px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; color: var(--ink); font: 12px/1.4 Arial, sans-serif; }
+ #catalog-search { width: 260px; max-width: 100%; min-height: 44px; padding: 10px 2px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; color: var(--ink); font: 16px/22px Arial, sans-serif; }
  #catalog-search::placeholder { color: var(--muted); }
  #catalog-search:focus-visible { outline: 1px solid var(--muted); outline-offset: 4px; }
  .catalog-empty { margin: 0 clamp(20px, 3vw, 42px); color: var(--muted); font: 14px/1.5 Arial, sans-serif; }
@@ -622,6 +622,9 @@ script
   window.addEventListener("popstate", restoreSearch);
   const linkedBook = document.getElementById(new URLSearchParams(location.search).get("knowbookId"));
   if (linkedBook && !linkedBook.hidden) { document.addEventListener("scrollend", () => openBook(linkedBook.querySelector(".book-cover")), { once: true }); linkedBook.scrollIntoView(); }
+  else if (document.querySelector("#catalog-search").value.trim()) {
+   requestAnimationFrame(() => document.querySelector("#catalog").scrollIntoView({ behavior: "instant", block: "start" }));
+  }
   fitBookTitles();
   try {
    const saved = JSON.parse(localStorage.getItem("knowbooks-cart") || "[]");
