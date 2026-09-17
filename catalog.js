@@ -150,6 +150,12 @@ const catalog = [
     "priceUsd": 999
   },
   {
+    "id": "venture",
+    "title": "Venture",
+    "status": "believer",
+    "priceUsd": 10000
+  },
+  {
     "id": "banking",
     "title": "Banking",
     "status": "believer",
