@@ -612,6 +612,12 @@ const catalog = [
     "priceUsd": 1921
   },
   {
+    "id": "attraction",
+    "title": "Attraction",
+    "status": "frontier",
+    "priceUsd": 699
+  },
+  {
     "id": "flow",
     "title": "Flow",
     "status": "frontier",

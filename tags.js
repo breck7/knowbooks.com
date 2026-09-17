@@ -12,7 +12,7 @@ const tags = [
   {
     "id": "biologyTag",
     "question": "Is understanding living organisms or the human body's functions a central goal?",
-    "knowbooks": "cells sleep membranes decay seeds food hydration mitochondria cancer"
+    "knowbooks": "cells sleep membranes decay seeds food hydration mitochondria cancer raising"
   },
   {
     "id": "plantTag",
@@ -27,7 +27,7 @@ const tags = [
   {
     "id": "psychologyTag",
     "question": "Is understanding or changing attention, emotion, motivation, or social behavior a central goal?",
-    "knowbooks": "focus sales sleep patience liberty courage teamwork motivation competition collusion anger marketing twitter alignment"
+    "knowbooks": "focus sales sleep patience liberty courage teamwork motivation competition collusion anger marketing twitter alignment raising attraction"
   },
   {
     "id": "computingTag",
@@ -87,12 +87,12 @@ const tags = [
   {
     "id": "longTermTag",
     "question": "Is tracking change over weeks or months a central way to deepen learning about this topic?",
-    "knowbooks": "capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing twitter cancer"
+    "knowbooks": "capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing twitter cancer raising attraction"
   },
   {
     "id": "multiplePeopleTag",
     "question": "Does practicing this topic in real life centrally involve interaction between multiple people?",
-    "knowbooks": "sales liberty property teamwork competition collusion payroll marketing twitter alignment"
+    "knowbooks": "sales liberty property teamwork competition collusion payroll marketing twitter alignment raising attraction"
   },
   {
     "id": "hazardTag",
@@ -157,7 +157,7 @@ const tags = [
     "id": "growthTag",
     "keywords": "growth growing grow germination reproduction division",
     "question": "Is the growth or reproduction of living things central to this topic?",
-    "knowbooks": "cells seeds cancer"
+    "knowbooks": "cells seeds cancer raising"
   },
   {
     "id": "nutritionTag",
@@ -169,7 +169,7 @@ const tags = [
     "id": "healthTag",
     "keywords": "health healthy wellbeing wellness body physiology",
     "question": "Is understanding or supporting human health a central goal?",
-    "knowbooks": "sleep food hydration mitochondria cancer"
+    "knowbooks": "sleep food hydration mitochondria cancer raising"
   },
   {
     "id": "financeTag",
@@ -193,13 +193,13 @@ const tags = [
     "id": "communicationTag",
     "keywords": "communication communicating message messages media writing publishing persuasion",
     "question": "Is conveying information to other people a central activity?",
-    "knowbooks": "sales teamwork ink software scroll marketing twitter"
+    "knowbooks": "sales teamwork ink software scroll marketing twitter raising attraction"
   },
   {
     "id": "cooperationTag",
     "keywords": "cooperation collaboration coordination collaborating teams group social",
     "question": "Is coordinating people's actions toward a shared goal central to this topic?",
-    "knowbooks": "teamwork collusion payroll alignment"
+    "knowbooks": "teamwork collusion payroll alignment raising"
   },
   {
     "id": "machinesTag",
@@ -217,7 +217,7 @@ const tags = [
     "id": "timeTag",
     "keywords": "time timing duration cycles periodic history historical aging ageing",
     "question": "Is measuring time or understanding change over time a central goal?",
-    "knowbooks": "sleep rust time patience centuries decay seeds"
+    "knowbooks": "sleep rust time patience centuries decay seeds raising"
   },
   {
     "id": "nuclearTag",
@@ -259,12 +259,42 @@ const tags = [
     "id": "emotionalSkillsTag",
     "keywords": "emotion emotions emotional feelings resilience resilient regulation mindfulness confidence grit perseverance",
     "question": "Is developing emotional awareness, self-regulation, or the ability to act through difficulty central to this topic?",
-    "knowbooks": "focus patience courage motivation anger"
+    "knowbooks": "focus patience courage motivation anger raising attraction"
   },
   {
     "id": "explorationTag",
     "keywords": "exploration exploring explore discovery discover expedition expeditions navigation navigating adventure adventures",
     "question": "Is investigating unfamiliar places or planning how to explore them a central activity?",
     "knowbooks": "exploration"
+  },
+  {
+    "id": "parentingTag",
+    "keywords": "parenting parent parents parenthood child children childhood childcare caregiving nurturing",
+    "question": "Is raising children or practicing parenting skills a central goal?",
+    "knowbooks": "raising"
+  },
+  {
+    "id": "datingTag",
+    "keywords": "dating romance romantic attraction courtship flirting relationships",
+    "question": "Is understanding romantic attraction or practicing dating skills a central goal?",
+    "knowbooks": "attraction"
+  },
+  {
+    "id": "familyTag",
+    "keywords": "family families familial kinship relatives home",
+    "question": "Is building family relationships or caring for family members a central goal?",
+    "knowbooks": "raising attraction"
+  },
+  {
+    "id": "matingTag",
+    "keywords": "mating mate mates courtship pairing partner partners selection",
+    "question": "Is understanding mate attraction or mate selection a central goal?",
+    "knowbooks": "attraction"
+  },
+  {
+    "id": "socialTag",
+    "keywords": "social interpersonal interaction interactions relationships relating socializing",
+    "question": "Is understanding social relationships or practicing interpersonal skills a central goal?",
+    "knowbooks": "sales liberty teamwork competition collusion marketing twitter alignment raising attraction"
   }
 ]
