@@ -670,5 +670,11 @@ const catalog = [
     "title": "Bosons",
     "status": "frontier",
     "priceUsd": 1299
+  },
+  {
+    "id": "solar",
+    "title": "Solar",
+    "status": "frontier",
+    "priceUsd": 10000
   }
 ]
