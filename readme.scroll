@@ -53,6 +53,7 @@ buildToFile .gitignore
  *.svg
  *.js
  *.zip
+ *.csv
 
 buildZipParser
  description Zip the listed files or folders after preceding build commands. Requires the zip command.
@@ -641,4 +642,4 @@ script
 
 catalog.scroll
 buildConcepts catalog.js
-buildZip knowbooks.zip index.html catalog.js tags.js knowbooksLogo.svg kbc.jpg readme.scroll catalog.scroll covers.scroll tags.scroll
+buildZip knowbooks.zip index.html catalog.js catalog.csv tags.js knowbooksLogo.svg kbc.jpg readme.scroll catalog.scroll catalogCsv.scroll covers.scroll tags.scroll

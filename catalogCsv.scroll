@@ -1,0 +1,5 @@
+catalog.scroll
+buildCsv catalog.csv
+concepts
+ select id title status priceUsd
+  printTable
