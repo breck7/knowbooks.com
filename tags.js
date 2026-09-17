@@ -50,6 +50,12 @@ const tags = [
     "knowbooks": "magnets electricity copper fields energy voltage motors batteries actuators transistors solar"
   },
   {
+    "id": "electromagnetismTag",
+    "keywords": "electromagnetism electromagnetic electromagnet electromagnets magnetism magnetic induction",
+    "question": "Are electric or magnetic fields, electric circuits, or electromagnetic waves central to this topic?",
+    "knowbooks": "magnets electricity copper fields voltage motors batteries actuators transistors light glass colors waves solar"
+  },
+  {
     "id": "wavesTag",
     "question": "Are light, sound, or other wave phenomena central to this topic?",
     "knowbooks": "light sound glass fields colors stars guitar piano drums singing frequency waves solar"
