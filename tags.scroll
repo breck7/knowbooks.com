@@ -1,7 +1,7 @@
 title Knowbook tags
 buildConcepts tags.js
 
-// Editorial classification v4, 2026-09-16. Source: catalog.scroll titles and comments.
+// Editorial classification v5, 2026-09-16. Source: catalog.scroll titles and comments.
 // Strategy: combine broad subject splits with independent activity and time axes.
 // Prefer questions that separate meaningful groups; retain narrower questions for
 // useful branches (plants, electricity, collaboration). These are candidate tree
@@ -72,7 +72,7 @@ knowbooks beams carpentry air glass iron elements copper gold matter water rust 
 
 id mechanicsTag
 question Are forces, motion, or mechanical advantage central to this topic?
-knowbooks magnets beams tools carpentry gravity levers motors gears motion friction ropes wind aerodynamics wheels wedges screws actuators flow hurricanes springs momentum rockets
+knowbooks magnets beams tools carpentry gravity levers motors gears motion friction ropes wind aerodynamics wheels wedges screws actuators flow hurricanes springs momentum rockets basketball football soccer boxing golf baseball
 
 id electricityTag
 question Are electric charge, circuits, or electromagnetism central to this topic?
@@ -104,15 +104,15 @@ knowbooks carpentry sound colors paper ink folding fabric software scroll market
 
 id instantTag
 question Can a typical introductory activity give directly observable feedback within a minute of setup?
-knowbooks magnets beams focus levers light tools gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter motion friction ropes wind aerodynamics water membranes paper ink folding metals steel aluminum brass wood wheels wedges fabric screws batteries software scroll guitar piano drums singing actuators transistors flow frequency waves springs momentum
+knowbooks magnets beams focus levers light tools gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter motion friction ropes wind aerodynamics water membranes paper ink folding metals steel aluminum brass wood wheels wedges fabric screws batteries software scroll guitar piano drums singing actuators transistors flow frequency waves springs momentum basketball football soccer boxing golf baseball
 
 id longTermTag
 question Is tracking change over weeks or months a central way to deepen learning about this topic?
-knowbooks capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing twitter cancer raising attraction
+knowbooks capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing twitter cancer raising attraction basketball football soccer boxing golf baseball
 
 id multiplePeopleTag
 question Does practicing this topic in real life centrally involve interaction between multiple people?
-knowbooks sales liberty property teamwork competition collusion payroll marketing twitter alignment raising attraction
+knowbooks sales liberty property teamwork competition collusion payroll marketing twitter alignment raising attraction basketball football soccer boxing baseball
 
 id hazardTag
 question Does direct experimentation with the real phenomenon involve hazards such as heat, cutting, electricity, contamination, or severe weather?
@@ -196,12 +196,12 @@ knowbooks focus capital sales banking teamwork competition budgeting bookkeeping
 id communicationTag
 question Is conveying information to other people a central activity?
 keywords communication communicating message messages media writing publishing persuasion
-knowbooks sales teamwork ink software scroll marketing twitter raising attraction
+knowbooks sales teamwork ink software scroll marketing twitter raising attraction basketball football soccer baseball
 
 id cooperationTag
 question Is coordinating people's actions toward a shared goal central to this topic?
 keywords cooperation collaboration coordination collaborating teams group social
-knowbooks teamwork collusion payroll alignment raising
+knowbooks teamwork collusion payroll alignment raising basketball football soccer baseball
 
 id machinesTag
 question Is understanding or using mechanisms that transmit force or motion a central goal?
@@ -241,7 +241,7 @@ knowbooks stars gravity rockets momentum
 id motionTag
 question Is understanding motion, momentum, or the forces that change motion central to this topic?
 keywords motion movement moving momentum inertia acceleration velocity speed impulse newton newtonian
-knowbooks motion momentum gravity friction springs rockets levers motors gears wheels actuators aerodynamics
+knowbooks motion momentum gravity friction springs rockets levers motors gears wheels actuators aerodynamics basketball football soccer boxing golf baseball
 
 id geometryTag
 question Is exploring shapes, spatial relationships, or three-dimensional structures central to this topic?
@@ -282,3 +282,28 @@ id socialTag
 question Is understanding social relationships or practicing interpersonal skills a central goal?
 keywords social interpersonal interaction interactions relationships relating socializing
 knowbooks sales liberty teamwork competition collusion marketing twitter alignment raising attraction
+
+id sportsTag
+question Is learning or practicing an athletic sport a central goal?
+keywords sport sports sporting athletic athletics athlete athletes
+knowbooks basketball football soccer boxing golf baseball
+
+id teamSportsTag
+question Is playing a sport with teammates working toward a shared result central to this topic?
+keywords team sports teams teammates teamwork
+knowbooks basketball football soccer baseball
+
+id ballSportsTag
+question Is controlling, striking, throwing, or kicking a ball central to this sport?
+keywords ball sports balls ballgame ballgames basketball football soccer golf baseball
+knowbooks basketball football soccer golf baseball
+
+id combatSportsTag
+question Is practicing a sport involving direct physical combat with an opponent central to this topic?
+keywords combat sports fighting fight sparring boxing
+knowbooks boxing
+
+id individualSportsTag
+question Can the sport centrally be practiced in competition with results attributed to an individual rather than a team?
+keywords individual sports solo singles
+knowbooks boxing golf
