@@ -6,7 +6,7 @@ const catalog = [
     "symbol": "vertical bar magnet. south half is solid color",
     "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"37\" y=\"50\" width=\"26\" height=\"33\" fill=\"currentColor\" stroke=\"none\"/><rect x=\"37\" y=\"17\" width=\"26\" height=\"66\" stroke-width=\"3\"/><line x1=\"37\" y1=\"50\" x2=\"63\" y2=\"50\" stroke-width=\"3\"/></svg>",
     "status": "trailblazer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "focus",
@@ -15,7 +15,7 @@ const catalog = [
     "symbol": "two triangles touching horizontally, like a bowtie. solid fill",
     "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"20 28 50 50 20 72\" fill=\"currentColor\" stroke=\"none\"/><polygon points=\"80 28 50 50 80 72\" fill=\"currentColor\" stroke=\"none\"/></svg>",
     "status": "trailblazer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "levers",
@@ -24,7 +24,7 @@ const catalog = [
     "symbol": "tilted lever with an aligned square load and a small touching fulcrum near the load. solid shapes",
     "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"15\" y1=\"53\" x2=\"85\" y2=\"41\" stroke-width=\"4\"/><polygon points=\"40 48.714 32 65 48 65\" fill=\"currentColor\" stroke=\"none\"/><polygon points=\"17.429 37.143 32.429 34.571 35 49.571 20 52.143\" fill=\"currentColor\" stroke=\"none\"/></svg>",
     "status": "trailblazer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "beams",
@@ -33,7 +33,7 @@ const catalog = [
     "symbol": "vertical bar. solid fill.",
     "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"40\" y=\"17\" width=\"20\" height=\"66\" fill=\"currentColor\" stroke=\"none\"/></svg>",
     "status": "trailblazer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "sales",
@@ -81,13 +81,13 @@ const catalog = [
     "id": "tools",
     "title": "Tools",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "gravity",
     "title": "Gravity",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "sound",
@@ -111,7 +111,7 @@ const catalog = [
     "id": "heat",
     "title": "Heat",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "glass",
@@ -129,7 +129,7 @@ const catalog = [
     "id": "iron",
     "title": "Iron",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "elements",
@@ -141,7 +141,7 @@ const catalog = [
     "id": "copper",
     "title": "Copper",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "gold",
@@ -183,7 +183,7 @@ const catalog = [
     "id": "energy",
     "title": "Energy",
     "status": "believer",
-    "priceUsd": 139
+    "priceUsd": 149
   },
   {
     "id": "frequency",
@@ -213,7 +213,7 @@ const catalog = [
     "id": "voltage",
     "title": "Voltage",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "motors",
@@ -261,13 +261,13 @@ const catalog = [
     "id": "friction",
     "title": "Friction",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "ropes",
     "title": "Ropes",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "wind",
@@ -387,25 +387,25 @@ const catalog = [
     "id": "paper",
     "title": "Paper",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "ink",
     "title": "Ink",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "folding",
     "title": "Folding",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "metals",
     "title": "Metals",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "steel",
@@ -423,13 +423,13 @@ const catalog = [
     "id": "brass",
     "title": "Brass",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "wood",
     "title": "Wood",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "seeds",
@@ -441,13 +441,13 @@ const catalog = [
     "id": "wheels",
     "title": "Wheels",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "wedges",
     "title": "Wedges",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "stars",
@@ -477,7 +477,7 @@ const catalog = [
     "id": "budgeting",
     "title": "Budgeting",
     "status": "believer",
-    "priceUsd": 129
+    "priceUsd": 149
   },
   {
     "id": "bookkeeping",
@@ -519,13 +519,13 @@ const catalog = [
     "id": "marketing",
     "title": "Marketing",
     "status": "believer",
-    "priceUsd": 1299
+    "priceUsd": 1499
   },
   {
     "id": "twitter",
     "title": "Twitter",
     "status": "believer",
-    "priceUsd": 1299
+    "priceUsd": 1499
   },
   {
     "id": "hydration",
@@ -579,7 +579,7 @@ const catalog = [
     "id": "actuators",
     "title": "Actuators",
     "status": "frontier",
-    "priceUsd": 1299
+    "priceUsd": 1499
   },
   {
     "id": "rockets",
@@ -591,25 +591,25 @@ const catalog = [
     "id": "transistors",
     "title": "Transistors",
     "status": "frontier",
-    "priceUsd": 1299
+    "priceUsd": 1499
   },
   {
     "id": "mitochondria",
     "title": "Mitochondria",
     "status": "frontier",
-    "priceUsd": 1299
+    "priceUsd": 1499
   },
   {
     "id": "cancer",
     "title": "Cancer",
     "status": "frontier",
-    "priceUsd": 1299
+    "priceUsd": 1499
   },
   {
     "id": "fusion",
     "title": "Fusion",
     "status": "frontier",
-    "priceUsd": 1299
+    "priceUsd": 1499
   },
   {
     "id": "raising",
@@ -663,19 +663,19 @@ const catalog = [
     "id": "flow",
     "title": "Flow",
     "status": "frontier",
-    "priceUsd": 1299
+    "priceUsd": 1499
   },
   {
     "id": "gluons",
     "title": "Gluons",
     "status": "frontier",
-    "priceUsd": 1299
+    "priceUsd": 1499
   },
   {
     "id": "bosons",
     "title": "Bosons",
     "status": "frontier",
-    "priceUsd": 1299
+    "priceUsd": 1499
   },
   {
     "id": "solar",
