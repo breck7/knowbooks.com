@@ -108,6 +108,9 @@ css
  .faq-link { margin-left: auto; margin-right: 100px; text-decoration: none; text-transform: uppercase; font: 700 10px/1 Arial, sans-serif; letter-spacing: .13em; }
  .faq-link:hover, .faq-link:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
  .cart-toggle { position: fixed; z-index: 25; top: 16px; right: clamp(16px, 4vw, 60px); width: 86px; height: 78px; padding: 0; border: 0; background: transparent; cursor: pointer; filter: drop-shadow(0 5px 5px #0002); transition: opacity 200ms, transform 200ms; }
+ .corner-books { position: absolute; inset: 0 auto auto 0; width: 200px; height: 148px; transform: scale(.43, .527027); transform-origin: top left; pointer-events: none; }
+ .cart-toggle > svg { position: relative; z-index: 2; }
+ .cart-toggle .cart-count { z-index: 3; }
  .cart-toggle:hover { transform: rotate(-5deg); }
  .cart-toggle svg, .cart-art svg { width: 100%; height: 100%; overflow: visible; }
  .cart-count { position: absolute; top: 0; right: 0; display: grid; place-items: center; min-width: 25px; height: 25px; padding: 0 5px; border-radius: 50%; color: var(--paper); background: var(--ink); font: 700 11px Arial, sans-serif; }
@@ -117,7 +120,8 @@ css
  #cart .cart-art:has(.basket-books:empty) { display: none; }
  .cart-art > svg { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
  .basket-books { position: absolute; inset: 8px 24px 43px 50px; display: flex; align-items: end; justify-content: center; }
- .basket-book { width: 48px; height: 74px; flex-shrink: 0; margin: 0 -9px; transform: rotate(var(--tilt)); border-radius: 2px 5px 5px 2px; background: var(--cover); box-shadow: inset 3px 0 #0002, 2px 2px 4px #0003; padding: 8px 5px; text-align: center; }
+ .basket-book { width: 48px; height: 74px; flex-shrink: 0; margin: 0; transform: rotate(var(--tilt)); border-radius: 2px 5px 5px 2px; background: var(--cover); box-shadow: inset 3px 0 #0002, 2px 2px 4px #0003; padding: 8px 5px; text-align: center; }
+ .basket-book + .basket-book { margin-left: var(--pile-overlap, -18px); }
  .basket-book span { display: block; overflow: hidden; color: #fff; font: 5px Georgia, serif; text-transform: uppercase; }
  .basket-book svg { width: 24px; height: 24px; margin-top: 8px; }
  .cart-flight, .flying-book { position: fixed; z-index: 50; pointer-events: none; margin: 0; transform-origin: center; }
@@ -259,7 +263,7 @@ css
 <header class="site-header">
   <a class="brand" href="#top" aria-label="Knowbooks home"><img src="knowbooksLogo.svg" alt=""><span>KNOWBOOKS</span></a>
   <a class="faq-link" href="#faq">FAQ</a>
-  <button class="cart-toggle" type="button" aria-label="Open shopping cart" aria-expanded="false" aria-controls="cart"><svg viewBox="0 0 160 120" fill="none" aria-hidden="true"><path d="M13 15h19l16 69h88" stroke="#343e35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 34h108l-13 40H47z" fill="#c7ad7029" stroke="#343e35" stroke-width="3" stroke-linejoin="round"/><path d="M62 35l5 38m20-38v38m23-38-5 38M43 54h96" stroke="#8b805f" stroke-width="2"/><circle cx="59" cy="100" r="9" fill="#343e35"/><circle cx="126" cy="100" r="9" fill="#343e35"/><circle cx="59" cy="100" r="3" fill="#efe9da"/><circle cx="126" cy="100" r="3" fill="#efe9da"/></svg><span class="cart-count">0</span></button>
+  <button class="cart-toggle" type="button" aria-label="Open shopping cart" aria-expanded="false" aria-controls="cart"><span class="corner-books" aria-hidden="true"><span class="basket-books"></span></span><svg viewBox="0 0 160 120" fill="none" aria-hidden="true"><path d="M13 15h19l16 69h88" stroke="#343e35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 34h108l-13 40H47z" fill="#c7ad7029" stroke="#343e35" stroke-width="3" stroke-linejoin="round"/><path d="M62 35l5 38m20-38v38m23-38-5 38M43 54h96" stroke="#8b805f" stroke-width="2"/><circle cx="59" cy="100" r="9" fill="#343e35"/><circle cx="126" cy="100" r="9" fill="#343e35"/><circle cx="59" cy="100" r="3" fill="#efe9da"/><circle cx="126" cy="100" r="3" fill="#efe9da"/></svg><span class="cart-count">0</span></button>
  </header>
 <main id="top">
   <section class="hero">
@@ -309,7 +313,7 @@ section
    href #signature
    id signature-element-2
    addClass eyebrow
-  h2 Your expertise.<br>Your signature Knowbook.
+  h2 Your expertise.<br>Your signature.<br>Your Knowbook.
    id signature-title
  div
   id signature-element-3
@@ -622,7 +626,8 @@ script
    const amount = [...cart].reduce((sum, [id, value]) => sum + products.get(id).priceUsd * value, 0);
    count.textContent = quantity;
    toggle.setAttribute("aria-label", `Open shopping cart, ${quantity} ${quantity === 1 ? "book" : "books"}`);
-   document.querySelector(".basket-books").innerHTML = [...cart].flatMap(([id, quantity]) => Array.from({ length: Math.min(quantity, 5) }, () => products.get(id))).slice(0, 7).map((product, i) => `<div class="basket-book" style="--cover:${escapeHtml(product.coverColor)};--tilt:${(i % 3 - 1) * 12}deg"><span>${escapeHtml(product.title)}</span>${product.cover || ""}</div>`).join("");
+   const bookPile = [...cart].flatMap(([id, quantity]) => Array.from({ length: Math.min(quantity, 5) }, () => products.get(id))).slice(0, 7).map((product, i) => `<span class="basket-book" style="--cover:${escapeHtml(product.coverColor)};--tilt:${(i % 3 - 1) * 12}deg"><span>${escapeHtml(product.title)}</span>${product.cover || ""}</span>`).join("");
+   document.querySelectorAll(".cart-toggle .basket-books, #cart .basket-books").forEach(pile => { pile.innerHTML = bookPile; pile.style.setProperty("--pile-overlap", `${Math.min(30, 62 / Math.max(1, pile.children.length - 1)) - 48}px`); });
    grid.querySelectorAll("[data-add]").forEach(button => {
     const added = cart.has(button.dataset.add);
     button.classList.toggle("is-added", added);
