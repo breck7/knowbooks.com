@@ -17,7 +17,7 @@ jobs:
           node-version: 24
       - name: Install and Build
         run: |
-          npm install -g breck7/scroll
+          npm install -g https://github.com/breck7/scroll/archive/refs/heads/main.tar.gz
           scroll list | scroll build
           # Include generated files in the deployment.
           rm .gitignore
