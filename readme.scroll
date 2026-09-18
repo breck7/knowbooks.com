@@ -278,6 +278,48 @@ Your satisfaction is our top priority. If we don't reach your expectations, get 
 
 section
  addClass offering
+ id signature
+ aria-labelledby signature-title
+ div
+  id signature-element-1
+  addClass section-heading
+  a Signature Knowbooks
+   href #signature
+   id signature-element-2
+   addClass eyebrow
+  h2 Your expertise.<br>Your signature Knowbook.
+   id signature-title
+ div
+  id signature-element-3
+  addClass offering-body
+  p Create a Knowbook with us. Put your life's work in people's hands.
+   id signature-element-4
+   addClass offering-lead
+  p We partner with renowned experts to jointly create Signature Knowbooks. Our world-class team designs the experiments with your feedback, turning your expertise into hands-on discoveries people can explore for themselves.
+   id signature-element-5
+   addClass offering-copy
+  dl
+   id signature-element-6
+   addClass offering-terms
+   div
+    id signature-element-7
+    dt Create together.
+     id signature-element-8
+    dd Bring your knowledge and community. We handle the grunt work from manufacturing to fulfillment.
+     id signature-element-9
+   div
+    id signature-element-10
+    dt Share the success.
+     id signature-element-11
+    dd We market your Signature Knowbook together and share the revenue.
+     id signature-element-12
+  a Create your Signature Knowbook <span aria-hidden="true">↗</span>
+   id signature-element-13
+   addClass down
+   href mailto:signature@knowbooks.com?subject=Creating%20a%20Signature%20Knowbook
+
+section
+ addClass offering
  id startups
  aria-labelledby startups-title
  div
