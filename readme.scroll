@@ -105,10 +105,31 @@ css
  }
  .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font: 700 11px/1 Arial, sans-serif; letter-spacing: .2em; }
  .brand img { width: 30px; height: 30px; padding: 5px; border-radius: 50%; background: var(--ink); }
- .faq-link { margin-left: auto; margin-right: 20px; text-decoration: none; text-transform: uppercase; font: 700 10px/1 Arial, sans-serif; letter-spacing: .13em; }
+ .faq-link { margin-left: auto; margin-right: 100px; text-decoration: none; text-transform: uppercase; font: 700 10px/1 Arial, sans-serif; letter-spacing: .13em; }
  .faq-link:hover, .faq-link:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
- .cart-toggle { border: 1px solid var(--ink); border-radius: 999px; padding: 9px 10px 9px 16px; background: transparent; cursor: pointer; text-transform: uppercase; font: 700 10px/1 Arial, sans-serif; letter-spacing: .13em; }
- .cart-count { display: inline-grid; place-items: center; min-width: 24px; height: 24px; margin-left: 7px; border-radius: 50%; color: var(--paper); background: var(--ink); }
+ .cart-toggle { position: fixed; z-index: 25; top: 16px; right: clamp(16px, 4vw, 60px); width: 86px; height: 78px; padding: 0; border: 0; background: transparent; cursor: pointer; filter: drop-shadow(0 5px 5px #0002); transition: opacity 200ms, transform 200ms; }
+ .cart-toggle:hover { transform: rotate(-5deg); }
+ .cart-toggle svg, .cart-art svg { width: 100%; height: 100%; overflow: visible; }
+ .cart-count { position: absolute; top: 0; right: 0; display: grid; place-items: center; min-width: 25px; height: 25px; padding: 0 5px; border-radius: 50%; color: var(--paper); background: var(--ink); font: 700 11px Arial, sans-serif; }
+ body.cart-open .cart-toggle, body.cart-travelling .cart-toggle { opacity: 0; pointer-events: none; }
+ .cart-art { display: block; position: relative; width: 200px; height: 148px; margin: 0 auto 12px; flex-shrink: 0; }
+ #cart .cart-art > svg { display: none; }
+ #cart .cart-art:has(.basket-books:empty) { display: none; }
+ .cart-art > svg { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+ .basket-books { position: absolute; inset: 8px 24px 43px 50px; display: flex; align-items: end; justify-content: center; }
+ .basket-book { width: 48px; height: 74px; flex-shrink: 0; margin: 0 -9px; transform: rotate(var(--tilt)); border-radius: 2px 5px 5px 2px; background: var(--cover); box-shadow: inset 3px 0 #0002, 2px 2px 4px #0003; padding: 8px 5px; text-align: center; }
+ .basket-book span { display: block; overflow: hidden; color: #fff; font: 5px Georgia, serif; text-transform: uppercase; }
+ .basket-book svg { width: 24px; height: 24px; margin-top: 8px; }
+ .cart-flight, .flying-book { position: fixed; z-index: 50; pointer-events: none; margin: 0; transform-origin: center; }
+ .cart-flight { display: block; z-index: 19; }
+ .cart-flight.is-returning { z-index: 1000; }
+ .gathering-book { position: fixed; z-index: 1001; pointer-events: none; }
+ .cart-flight > svg { width: 100%; height: 100%; }
+ .preview-add { flex-shrink: 0; width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 12px 8px; border: 1px solid #cbb57866; border-radius: 999px; background: #f4e5bf; color: #262b22; box-shadow: 0 4px 12px #65512714; cursor: pointer; font: 700 clamp(10px, 1.2vw, 14px) Arial, sans-serif; }
+ .preview-add:hover { background: #fff2d4; }
+ .preview-add:disabled { opacity: .6; cursor: wait; }
+ .preview-add span { opacity: .65; font-weight: 400; }
+ button:focus-visible, a:focus-visible { outline: 3px solid #b58132; outline-offset: 5px; }
  .hero {
   --ring-radius: min(24vw, 305px);
   --ring-size: min(48vw, 610px);
@@ -170,12 +191,12 @@ css
  .book-brand { margin-top: auto; text-transform: uppercase; font: 700 7px/1 Arial, sans-serif; letter-spacing: .18em; }
  .book-preview { position: fixed; z-index: 30; inset: 0; background: rgba(23,23,20,.55); opacity: 0; visibility: hidden; transition: opacity 250ms, visibility 250ms; }
  .book-preview.is-open { opacity: 1; visibility: visible; }
- .preview-book { position: absolute; left: 50%; top: 50%; width: min(320px, 43vw); aspect-ratio: .72; translate: -50% -50%; transform: translate(var(--x), var(--y)) scale(var(--scale)); transition: transform 450ms cubic-bezier(.2,.8,.2,1); perspective: 1400px; }
+ .preview-book { position: absolute; left: 50%; top: 50%; width: min(300px, 40vw, 48svh); aspect-ratio: .72; translate: 0 -50%; transform: translate(var(--x), var(--y)) scale(var(--scale)); transition: transform 450ms cubic-bezier(.2,.8,.2,1); perspective: 1400px; }
  .book-preview.is-open .preview-book { transform: none; }
- .preview-pages { position: absolute; inset: 0; display: grid; place-items: center; padding: 16%; border-radius: 2px 12px 12px 2px; background: #fffaf0; box-shadow: 11px 16px 35px rgba(0,0,0,.28), inset 7px 0 12px rgba(90,70,35,.12); }
+ .preview-pages { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: 12%; overflow-y: auto; border-radius: 2px 12px 12px 2px; background: #fffaf0; box-shadow: 11px 16px 35px rgba(0,0,0,.28), inset 7px 0 12px rgba(90,70,35,.12); }
  .preview-pages p { margin: 0; font-size: clamp(13px, 2vw, 19px); line-height: 1.45; }
  .preview-close { position: absolute; z-index: 1; top: 8px; right: 8px; border: 0; background: transparent; cursor: pointer; font-size: 25px; }
- .preview-cover { position: absolute; inset: 0; transform-origin: left; transition: transform 650ms cubic-bezier(.2,.7,.2,1) 450ms; }
+ .preview-cover { position: absolute; inset: 0; height: 100%; transform-origin: left; transition: transform 650ms cubic-bezier(.2,.7,.2,1) 450ms; }
  .preview-cover h3, .preview-cover .book-symbol, .preview-cover .book-brand { transition: opacity 100ms 450ms; }
  .book-preview.is-open .preview-cover { transform: rotateY(-155deg); }
  .book-preview.is-open .preview-cover h3, .book-preview.is-open .preview-cover .book-symbol, .book-preview.is-open .preview-cover .book-brand { opacity: 0; }
@@ -192,14 +213,14 @@ css
  .scrollQuestion { margin-top: 0; margin-bottom: 0; padding: 24px 0 10px; border-top: 1px solid var(--line); font-size: clamp(19px, 2vw, 25px); font-weight: 400; }
  .scrollQuestion + .scrollParagraph { margin-top: 0; margin-bottom: 0; padding: 0 0 24px; color: var(--muted); font: 15px/1.6 Arial, sans-serif; }
  .scrim { position: fixed; z-index: 19; inset: 0; background: rgba(23,23,20,.36); backdrop-filter: blur(2px); }
- .cart { position: fixed; z-index: 20; inset: 0 0 0 auto; width: min(480px, 100%); padding: 30px; display: flex; flex-direction: column; background: #faf7f0; box-shadow: -18px 0 60px rgba(20,20,17,.18); transform: translateX(105%); visibility: hidden; transition: transform 240ms ease, visibility 240ms; }
- .cart.is-open { transform: none; visibility: visible; }
+ .cart { position: fixed; z-index: 20; left: 50%; top: 50%; width: min(520px, calc(100% - 24px)); max-height: calc(100svh - 32px); padding: 26px 32px; display: flex; flex-direction: column; background: #fffdf8; border: 1px solid #fff9; border-radius: 28px; box-shadow: 0 30px 100px #17171440; transform: translate(-50%, -50%); opacity: 0; visibility: hidden; overflow-y: auto; transition: transform 420ms cubic-bezier(.2,.8,.2,1), opacity 240ms, visibility 240ms; }
+ .cart.is-open { transform: translate(-50%, -50%) scale(1); opacity: 1; visibility: visible; transition: opacity 280ms 180ms, visibility 0ms; }
  .cart-head { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
  .cart-head .eyebrow { margin-bottom: 7px; }
  .cart-head h2 { margin: 0; font-size: 42px; font-weight: 400; }
  .cart-close { width: 42px; height: 42px; border: 0; background: transparent; cursor: pointer; font-size: 32px; font-weight: 300; }
- .cart-lines { overflow-y: auto; }
- .cart-line { display: grid; grid-template-columns: 54px 1fr auto; gap: 15px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
+ .cart-lines { overflow-y: auto; min-height: 90px; flex: 1 0 auto; }
+ .cart-line { display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 15px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
  .line-swatch { position: relative; width: 54px; aspect-ratio: .72; }
  .line-swatch .book-cover { position: absolute; width: 270px; padding: 29.7px 24.3px; transform: scale(.2); transform-origin: top left; pointer-events: none; }
  .line-copy h3 { margin: 0 0 6px; font-size: 18px; font-weight: 400; }
@@ -207,13 +228,13 @@ css
  .quantity { display: flex; align-items: center; gap: 8px; }
  .quantity button { width: 27px; height: 27px; border: 1px solid var(--line); border-radius: 50%; background: transparent; cursor: pointer; }
  .quantity span { min-width: 12px; text-align: center; font: 12px/1 Arial, sans-serif; }
- .cart-empty { margin: auto; text-align: center; color: var(--muted); }
+ .cart-empty { margin: 24px auto; text-align: center; color: var(--muted); }
  .cart-empty a { color: var(--ink); text-underline-offset: 4px; }
  .cart-footer { margin-top: auto; padding-top: 24px; border-top: 1px solid var(--line); }
  .cart-total { display: flex; justify-content: space-between; margin: 0 0 20px; font: 16px/1 Arial, sans-serif; }
  .cart-total strong { font-size: 20px; }
- .paypal-button { display: block; padding: 16px; border-radius: 999px; color: white; background: #142c8e; text-align: center; text-decoration: none; font: 700 14px/1 Arial, sans-serif; }
- .paypal-button:hover { background: #0c236d; }
+ .paypal-button { display: block; padding: 20px; border-radius: 999px; color: white; background: #243d32; box-shadow: 0 6px 16px #243d3226; text-align: center; text-decoration: none; font: 700 14px/1 Arial, sans-serif; }
+ .paypal-button:hover { background: #172e24; transform: translateY(-1px); }
  .cart-footer small { display: block; margin-top: 12px; color: var(--muted); text-align: center; font: 10px/1.4 Arial, sans-serif; }
  .crypto { margin-top: 16px; font: 12px/1.5 Arial, sans-serif; }
  .crypto summary { cursor: pointer; text-align: center; text-decoration: underline; text-underline-offset: 3px; }
@@ -232,12 +253,13 @@ css
  noscript { display: block; padding: 12px; color: white; background: #8a2d21; text-align: center; }
  @media (max-width: 850px) { .product-grid { grid-template-columns: repeat(2, 1fr); } .section-heading { grid-template-columns: 1fr; } }
  @media (max-width: 520px) { .hero { --ring-radius: 44vw; --ring-size: 88vw; --ring-overhang: 32vw; min-height: 82svh; } .product-grid { grid-template-columns: 1fr; } .cart { padding: 22px; } }
+ @media (max-width: 520px) { .preview-book { aspect-ratio: .6; } .preview-pages { padding: 30px 12px 14px; gap: 10px; justify-content: safe center; } .preview-pages p { font-size: clamp(11px, 2.6vw, 13px); line-height: 1.4; } .preview-add { gap: 6px; } }
  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
 
 <header class="site-header">
   <a class="brand" href="#top" aria-label="Knowbooks home"><img src="knowbooksLogo.svg" alt=""><span>KNOWBOOKS</span></a>
   <a class="faq-link" href="#faq">FAQ</a>
-  <button class="cart-toggle" type="button" aria-expanded="false" aria-controls="cart">Cart <span class="cart-count">0</span></button>
+  <button class="cart-toggle" type="button" aria-label="Open shopping cart" aria-expanded="false" aria-controls="cart"><svg viewBox="0 0 160 120" fill="none" aria-hidden="true"><path d="M13 15h19l16 69h88" stroke="#343e35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 34h108l-13 40H47z" fill="#c7ad7029" stroke="#343e35" stroke-width="3" stroke-linejoin="round"/><path d="M62 35l5 38m20-38v38m23-38-5 38M43 54h96" stroke="#8b805f" stroke-width="2"/><circle cx="59" cy="100" r="9" fill="#343e35"/><circle cx="126" cy="100" r="9" fill="#343e35"/><circle cx="59" cy="100" r="3" fill="#efe9da"/><circle cx="126" cy="100" r="3" fill="#efe9da"/></svg><span class="cart-count">0</span></button>
  </header>
 <main id="top">
   <section class="hero">
@@ -268,7 +290,7 @@ Our first Knowbooks are Trailblazer editions. Each one is hand-crafted in Hawaii
 Yes. Knowbooks are designed to last a lifetime and can be explored repeatedly, shared, and returned to the shelf. Most objects are reusable; some contain consumable/replaceable materials.
 
 ? How will I receive my KnowBook(s) (Hawaii customers)?
-Oahu customers can have their KnowBooks delivered free of charge, or come pick them up.
+Hawaii customers can have their KnowBooks delivered free of charge, or come pick them up.
 
 ? When will my Knowbook(s) ship (Mainland customers)?
 Orders begin assembly immediately. You'll receive tracking when your order is on its way. Delivery times will improve as we scale up.
@@ -440,11 +462,12 @@ section
 
 <div class="scrim" hidden></div>
 <div class="book-preview" role="dialog" aria-modal="true" aria-label="Inside this Knowbook" hidden></div>
-<aside class="cart" id="cart" aria-labelledby="cart-title" aria-hidden="true">
-  <div class="cart-head"><div><p class="eyebrow">Your shelf</p><h2 id="cart-title">Cart</h2></div><button class="cart-close" type="button" aria-label="Close cart">×</button></div>
+<aside class="cart" role="dialog" aria-modal="true" inert id="cart" aria-labelledby="cart-title" aria-hidden="true">
+  <div class="cart-head"><div><p class="eyebrow"></p><h2 id="cart-title">Your cart</h2></div><button class="cart-close" type="button" aria-label="Close cart">×</button></div>
+  <div class="cart-art" aria-hidden="true"><div class="basket-books"></div><svg viewBox="0 0 160 120" fill="none" aria-hidden="true"><path d="M13 15h19l16 69h88" stroke="#343e35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 34h108l-13 40H47z" fill="#c7ad7029" stroke="#343e35" stroke-width="3" stroke-linejoin="round"/><path d="M62 35l5 38m20-38v38m23-38-5 38M43 54h96" stroke="#8b805f" stroke-width="2"/><circle cx="59" cy="100" r="9" fill="#343e35"/><circle cx="126" cy="100" r="9" fill="#343e35"/><circle cx="59" cy="100" r="3" fill="#efe9da"/><circle cx="126" cy="100" r="3" fill="#efe9da"/></svg></div>
   <div class="cart-lines"></div>
   <div class="cart-empty"><p>Your cart is empty.</p><a href="#catalog">Find a Knowbook</a></div>
-  <div class="cart-footer" hidden><p class="cart-total"><span>Total</span><strong>$0</strong></p><a class="paypal-button" href="https://www.paypal.com/cgi-bin/webscr" rel="noopener">Pay with PayPal</a><small>Shipping and applicable taxes are handled by PayPal.<br>Oahu customers can pay by cash.</small><details class="crypto"><summary>Pay with crypto</summary><p><b>BTC</b><span><output data-crypto="BTC"></output><code>3G9q4tRjkTSP8PP4eFVZuNLtXxKuERJcJr</code></span><b>ETH</b><span><output data-crypto="ETH"></output><code>0xaEe37CE75AcC6341abfa1c73c6Bb1B73963a6ccD</code></span><b>NEAR</b><span><output data-crypto="NEAR"></output><code>4345b29b9fb2ba13d2fb47e7946b1b135118381fb13e54c8a9042cd79542e89f</code></span><b>USDC <i>(Base)</i></b><span><output data-crypto="USDC"></output><code>0x3d3e69E8f208A782E09f018643fE9796e918e45e</code></span></p><small>Send the amount shown, then email your transaction ID, cart, and shipping address to <a href="mailto:founders@knowbooks.com">founders@knowbooks.com</a>.</small></details></div>
+  <div class="cart-footer" hidden><p class="cart-total"><span>Total</span><strong>$0</strong></p><a class="paypal-button" href="https://www.paypal.com/cgi-bin/webscr" rel="noopener">Checkout with PayPal &nbsp; ↗</a><small>Shipping and taxes included.<br>Hawaii customers can pay by cash.</small><details class="crypto"><summary>Pay with crypto</summary><p><b>BTC</b><span><output data-crypto="BTC"></output><code>3G9q4tRjkTSP8PP4eFVZuNLtXxKuERJcJr</code></span><b>ETH</b><span><output data-crypto="ETH"></output><code>0xaEe37CE75AcC6341abfa1c73c6Bb1B73963a6ccD</code></span><b>NEAR</b><span><output data-crypto="NEAR"></output><code>4345b29b9fb2ba13d2fb47e7946b1b135118381fb13e54c8a9042cd79542e89f</code></span><b>USDC <i>(Base)</i></b><span><output data-crypto="USDC"></output><code>0x3d3e69E8f208A782E09f018643fE9796e918e45e</code></span></p><small>Send the amount shown, then email your transaction ID, cart, and shipping address to <a href="mailto:paybycrypto@knowbooks.com">paybycrypto@knowbooks.com</a>.</small></details></div>
  </aside>
 <noscript>This shop needs JavaScript to manage its cart.</noscript>
 
@@ -598,7 +621,9 @@ script
    const quantity = [...cart.values()].reduce((sum, value) => sum + value, 0);
    const amount = [...cart].reduce((sum, [id, value]) => sum + products.get(id).priceUsd * value, 0);
    count.textContent = quantity;
-   document.querySelectorAll("[data-add]").forEach(button => {
+   toggle.setAttribute("aria-label", `Open shopping cart, ${quantity} ${quantity === 1 ? "book" : "books"}`);
+   document.querySelector(".basket-books").innerHTML = [...cart].flatMap(([id, quantity]) => Array.from({ length: Math.min(quantity, 5) }, () => products.get(id))).slice(0, 7).map((product, i) => `<div class="basket-book" style="--cover:${escapeHtml(product.coverColor)};--tilt:${(i % 3 - 1) * 12}deg"><span>${escapeHtml(product.title)}</span>${product.cover || ""}</div>`).join("");
+   grid.querySelectorAll("[data-add]").forEach(button => {
     const added = cart.has(button.dataset.add);
     button.classList.toggle("is-added", added);
     button.textContent = added ? "✓" : "+";
@@ -615,40 +640,150 @@ script
    checkout.href = quantity ? paypalUrl() : "https://www.paypal.com/cgi-bin/webscr";
    save();
   };
+  const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let returnFocus, previewFocus, adding = false;
+  const backgroundInert = value => { document.querySelectorAll(".site-header, main, .site-footer").forEach(element => { element.inert = value; }); };
+  const cartArt = document.querySelector(".cart-art");
+  let cartFlight;
+  const stopCartFlight = () => {
+   if (!cartFlight) return null;
+   const rect = cartFlight.getBoundingClientRect();
+   cartFlight.getAnimations().forEach(animation => animation.cancel());
+   cartFlight.remove();
+   cartFlight = null;
+   return rect;
+  };
+  const tableCartRect = () => {
+   const rect = drawer.getBoundingClientRect();
+   return { left: rect.left + rect.width / 2 - 100, top: rect.top + rect.height / 2 - 74, width: 200, height: 148 };
+  };
+  const gatherBooks = target => {
+   if (reducedMotion()) return;
+   const bounds = drawer.getBoundingClientRect();
+   lines.querySelectorAll(".line-swatch").forEach(swatch => {
+    const rect = swatch.getBoundingClientRect();
+    if (rect.bottom < bounds.top || rect.top > bounds.bottom) return;
+    const book = swatch.cloneNode(true);
+    book.classList.add("gathering-book");
+    Object.assign(book.style, { left: `${rect.left}px`, top: `${rect.top}px` });
+    document.body.append(book);
+    book.animate([{ transform: "none", opacity: 1 }, { transform: `translate(${target.left + target.width / 2 - rect.left - rect.width / 2}px, ${target.top + 55 - rect.top - rect.height / 2}px) scale(.65) rotate(-10deg)`, opacity: 0 }], { duration: 300, easing: "cubic-bezier(.4,0,.4,1)" }).finished.finally(() => book.remove());
+   });
+  };
+  const flyCart = (start, end, done, returning = false) => {
+   if (reducedMotion()) { done(); return; }
+   const flight = cartArt.cloneNode(true);
+   flight.classList.add("cart-flight");
+   flight.classList.toggle("is-returning", returning);
+   flight.style.opacity = "1";
+   flight.inert = true;
+   const width = 200, height = 148;
+   Object.assign(flight.style, { left: `${end.left + end.width / 2 - width / 2}px`, top: `${end.top + end.height / 2 - height / 2}px`, width: `${width}px`, height: `${height}px` });
+   document.body.append(flight);
+   cartFlight = flight;
+   if (returning) flight.querySelector(".basket-books").animate([{ opacity: 0 }, { opacity: 1 }], { duration: 160, delay: 180, fill: "both" });
+   document.body.classList.add("cart-travelling");
+   const from = `translate(${start.left + start.width / 2 - end.left - end.width / 2}px, ${start.top + start.height / 2 - end.top - end.height / 2}px) scale(${start.width / width}, ${start.height / height})`;
+   flight.animate([{ transform: from }, { transform: `scale(${end.width / width}, ${end.height / height})` }], { duration: 560, delay: returning ? 300 : 0, easing: "cubic-bezier(.22,.75,.18,1)", fill: "both" }).finished.then(() => {
+    if (cartFlight !== flight) return;
+    flight.remove();
+    cartFlight = null;
+    cartArt.style.opacity = "";
+    document.body.classList.remove("cart-travelling");
+    done();
+   }).catch(() => {});
+  };
   const openCart = () => {
+   if (drawer.classList.contains("is-open")) return;
+   returnFocus = previewFocus || document.activeElement;
+   closeBook(false);
+   const start = stopCartFlight() || toggle.getBoundingClientRect();
+   drawer.inert = false;
    drawer.classList.add("is-open");
    drawer.setAttribute("aria-hidden", "false");
    toggle.setAttribute("aria-expanded", "true");
    scrim.hidden = false;
    document.body.classList.add("cart-open");
+   backgroundInert(true);
    drawer.querySelector(".cart-close").focus();
+   flyCart(start, tableCartRect(), () => {});
   };
   const closeCart = () => {
+   if (!drawer.classList.contains("is-open")) return;
+   const start = stopCartFlight() || tableCartRect();
+   gatherBooks(start);
+   drawer.inert = true;
    drawer.classList.remove("is-open");
    drawer.setAttribute("aria-hidden", "true");
    toggle.setAttribute("aria-expanded", "false");
    scrim.hidden = true;
    document.body.classList.remove("cart-open");
+   backgroundInert(false);
+   flyCart(start, toggle.getBoundingClientRect(), () => {
+    (returnFocus?.isConnected ? returnFocus : toggle).focus();
+    previewFocus = null;
+   }, true);
   };
   const openBook = cover => {
+   previewFocus = document.activeElement;
+   const product = products.get(cover.closest(".product").id);
+   backgroundInert(true);
+   document.body.classList.add("cart-open");
    const rect = cover.getBoundingClientRect();
-   preview.innerHTML = `<div class="preview-book"><div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>Each Knowbook is currently built by hand in Hawaii, and each version is currently still unique. Order yours to see what's inside.</p></div>${cover.outerHTML}</div>`;
+   preview.innerHTML = `<div class="preview-book"><div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>Each Knowbook is currently built by hand in Hawaii, and each version is currently still unique. Order yours to see what's inside.</p><button class="preview-add" data-add="${escapeHtml(product.id)}">Add to cart <span>${money.format(product.priceUsd)}</span></button></div>${cover.outerHTML}</div>`;
    preview.querySelector(".book-cover").classList.add("preview-cover");
    preview.hidden = false;
    const book = preview.firstElementChild;
    book.style.transition = "none";
-   book.style.setProperty("--x", `${rect.left + rect.width / 2 - innerWidth / 2}px`);
+   book.style.setProperty("--x", `${rect.left + rect.width / 2 - innerWidth / 2 - book.offsetWidth / 2}px`);
    book.style.setProperty("--y", `${rect.top + rect.height / 2 - innerHeight / 2}px`);
    book.style.setProperty("--scale", rect.width / book.offsetWidth);
    book.offsetWidth;
    book.style.removeProperty("transition");
-   requestAnimationFrame(() => preview.classList.add("is-open"));
+   requestAnimationFrame(() => { preview.classList.add("is-open"); preview.querySelector(".preview-add").focus(); });
   };
-  const closeBook = () => { if (preview.hidden) return; const url = new URL(location.href); url.searchParams.delete("knowbookId"); history.replaceState(null, "", url); preview.classList.remove("is-open"); setTimeout(() => { preview.hidden = true; }, 250); };
+  const closeBook = (restoreFocus = true) => {
+   if (preview.hidden) return;
+   const url = new URL(location.href); url.searchParams.delete("knowbookId"); history.replaceState(null, "", url);
+   preview.classList.remove("is-open"); preview.hidden = true;
+   if (!drawer.classList.contains("is-open")) { backgroundInert(false); document.body.classList.remove("cart-open"); }
+   if (restoreFocus) { previewFocus?.focus(); previewFocus = null; }
+  };
+  const addToCart = async (id, source, button) => {
+   if (adding) return;
+   adding = true;
+   button.disabled = true;
+   const rect = source.getBoundingClientRect();
+   const product = products.get(id);
+   closeBook(false);
+   if (!reducedMotion()) {
+    const flight = document.createElement("div");
+    flight.className = "flying-book";
+    flight.inert = true;
+    flight.setAttribute("aria-hidden", "true");
+    flight.innerHTML = bookCover(product);
+    Object.assign(flight.style, { left: `${rect.left}px`, top: `${rect.top}px`, width: `${rect.width}px`, height: `${rect.height}px` });
+    document.body.append(flight);
+    const target = toggle.getBoundingClientRect();
+    await flight.animate([{ transform: "none", opacity: 1 }, { transform: `translate(${target.left + target.width / 2 - rect.left - rect.width / 2}px, ${target.top + target.height / 2 - rect.top - rect.height / 2}px) scale(.08) rotate(12deg)`, opacity: .3 }], { duration: 680, easing: "cubic-bezier(.45,0,.25,1)" }).finished;
+    flight.remove();
+   }
+   change(id, 1);
+   button.disabled = false;
+   adding = false;
+   (previewFocus?.isConnected ? previewFocus : button).focus();
+   previewFocus = null;
+  };
   const change = (id, delta) => {
+   const focused = document.activeElement;
+   const control = focused?.hasAttribute("data-more") ? "data-more" : focused?.hasAttribute("data-less") ? "data-less" : null;
    const next = (cart.get(id) || 0) + delta;
    next > 0 ? cart.set(id, next) : cart.delete(id);
    refresh();
+   if (control) {
+    const replacement = [...lines.querySelectorAll(`[${control}]`)].find(button => button.getAttribute(control) === id);
+    (replacement || drawer.querySelector(".cart-close")).focus();
+   }
   };
   productCatalog.forEach(product => editionDetails(product.status));
   grid.innerHTML = statusOrder.flatMap(status => {
@@ -672,14 +807,22 @@ script
    const saved = JSON.parse(localStorage.getItem("knowbooks-cart") || "[]");
    saved.forEach(([id, quantity]) => { if (products.has(id) && Number.isInteger(quantity) && quantity > 0) cart.set(id, quantity); });
   } catch {}
-  grid.addEventListener("click", event => { const cover = event.target.closest(".book-cover"); const button = event.target.closest("[data-add]"); if (cover) { const url = new URL(location.href); url.searchParams.set("knowbookId", cover.closest(".product").id); history.replaceState(null, "", url); openBook(cover); } if (button) { change(button.dataset.add, 1); openCart(); } });
-  preview.addEventListener("click", event => { if (event.target === preview || event.target.closest(".preview-close")) closeBook(); });
+  grid.addEventListener("click", event => { const cover = event.target.closest(".book-cover"); const button = event.target.closest("[data-add]"); if (cover) { const url = new URL(location.href); url.searchParams.set("knowbookId", cover.closest(".product").id); history.replaceState(null, "", url); openBook(cover); } if (button) { addToCart(button.dataset.add, button.closest(".product").querySelector(".book-cover"), button); } });
+  preview.addEventListener("click", event => { const button = event.target.closest(".preview-add"); if (button) addToCart(button.dataset.add, preview.querySelector(".preview-book"), button); if (event.target === preview || event.target.closest(".preview-close")) closeBook(); });
   lines.addEventListener("click", event => { const more = event.target.closest("[data-more]"); const less = event.target.closest("[data-less]"); if (more) change(more.dataset.more, 1); if (less) change(less.dataset.less, -1); });
   toggle.addEventListener("click", openCart);
   drawer.querySelector(".cart-close").addEventListener("click", closeCart);
   empty.querySelector("a").addEventListener("click", closeCart);
   scrim.addEventListener("click", closeCart);
-  document.addEventListener("keydown", event => { if (event.key === "Escape") { closeCart(); closeBook(); } });
+  document.addEventListener("keydown", event => {
+   if (event.key === "Escape") { closeCart(); closeBook(); }
+   const modal = drawer.classList.contains("is-open") ? drawer : !preview.hidden ? preview : null;
+   if (event.key !== "Tab" || !modal) return;
+   const focusable = [...modal.querySelectorAll("button:not(:disabled), a[href], summary")].filter(element => element.getClientRects().length);
+   const first = focusable[0], last = focusable.at(-1);
+   if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+   else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  });
   document.querySelector("#catalog-search").addEventListener("input", filterCatalog);
   window.addEventListener("resize", fitBookTitles);
   refresh();
