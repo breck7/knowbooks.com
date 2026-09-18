@@ -1,6 +1,6 @@
 importOnly
 
-// To use, make sure you have Scroll installed (npm install -g scroll-cli)
+// To use, install Node.js 24+ and Scroll from GitHub (npm install -g breck7/scroll)
 //
 // Then copy one of the demo examples in this folder and follow the instructions.
 
