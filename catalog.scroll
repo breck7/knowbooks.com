@@ -41,7 +41,7 @@ id magnets
 color navy
 title Magnets
 status trailblazer
-priceUsd 149
+priceUsd 249
 symbol vertical bar magnet. south half is solid color
 cover
  filledRect 37 50 26 33
@@ -53,7 +53,7 @@ id focus
 color coral
 title Focus
 status trailblazer
-priceUsd 149
+priceUsd 249
 symbol two triangles touching horizontally, like a bowtie. solid fill
 cover
  filledPolygon 20 28 50 50 20 72
@@ -63,7 +63,7 @@ id levers
 color navy
 title Levers
 status trailblazer
-priceUsd 149
+priceUsd 249
 symbol tilted lever with an aligned square load and a small touching fulcrum near the load. solid shapes
 cover
  line 15 53 85 41 4
@@ -74,7 +74,7 @@ id beams
 color brown
 title Beams
 status trailblazer
-priceUsd 149
+priceUsd 249
 symbol vertical bar. solid fill.
 cover
  filledRect 40 17 20 66
@@ -130,42 +130,42 @@ cover
 id light
 title Light
 status believer
-priceUsd 149
+priceUsd 249
 
 id tools
 title Tools
 status believer
-priceUsd 149
+priceUsd 249
 
 id gravity
 title Gravity
 status believer
-priceUsd 149
+priceUsd 249
 
 id sound
 title Sound
 status believer
-priceUsd 149
+priceUsd 249
 
 id electricity
 title Electricity
 status believer
-priceUsd 149
+priceUsd 249
 
 id air
 title Air
 status believer
-priceUsd 149
+priceUsd 249
 
 id heat
 title Heat
 status believer
-priceUsd 149
+priceUsd 249
 
 id glass
 title Glass
 status believer
-priceUsd 199
+priceUsd 249
 
 id cells
 title Cells
@@ -175,17 +175,17 @@ priceUsd 299
 id iron
 title Iron
 status believer
-priceUsd 149
+priceUsd 249
 
 id elements
 title Elements
 status believer
-priceUsd 199
+priceUsd 249
 
 id copper
 title Copper
 status believer
-priceUsd 149
+priceUsd 249
 
 id gold
 title Gold
@@ -207,7 +207,7 @@ priceUsd 1999
 id fire
 title Fire
 status believer
-priceUsd 149
+priceUsd 249
 
 id sleep
 title Sleep
@@ -218,12 +218,12 @@ priceUsd 499
 id fields
 title Fields
 status believer
-priceUsd 199
+priceUsd 249
 
 id energy
 title Energy
 status believer
-priceUsd 149
+priceUsd 249
 
 id frequency
 title Frequency
@@ -244,102 +244,102 @@ priceUsd 299
 id springs
 title Springs
 status believer
-priceUsd 149
+priceUsd 249
 
 id voltage
 title Voltage
 status believer
-priceUsd 149
+priceUsd 249
 
 id motors
 title Motors
 status believer
-priceUsd 199
+priceUsd 249
 
 id gears
 title Gears
 status believer
-priceUsd 149
+priceUsd 249
 
 id colors
 title Colors
 status believer
-priceUsd 149
+priceUsd 249
 
 id matter
 title Matter
 status believer
-priceUsd 199
+priceUsd 249
 
 id atoms
 title Atoms
 status believer
-priceUsd 199
+priceUsd 249
 
 id motion
 title Motion
 status believer
-priceUsd 149
+priceUsd 249
 
 id momentum
 title Momentum
 status believer
-priceUsd 199
+priceUsd 249
 
 id friction
 title Friction
 status believer
-priceUsd 149
+priceUsd 249
 
 id ropes
 title Ropes
 status believer
-priceUsd 149
+priceUsd 249
 
 id wind
 title Wind
 status believer
-priceUsd 199
+priceUsd 249
 
 id aerodynamics
 title Aerodynamics
 status believer
-priceUsd 199
+priceUsd 249
 
 id water
 title Water
 status believer
-priceUsd 149
+priceUsd 249
 
 id rust
 title Rust
 status believer
-priceUsd 199
+priceUsd 249
 
 id time
 title Time
 status believer
-priceUsd 149
+priceUsd 249
 
 id patience
 title Patience
 status believer
-priceUsd 149
+priceUsd 249
 
 id centuries
 title Centuries
 status believer
-priceUsd 199
+priceUsd 249
 
 id liberty
 title Liberty
 status believer
-priceUsd 199
+priceUsd 249
 
 id courage
 title Courage
 status believer
-priceUsd 199
+priceUsd 249
 
 id property
 title Property
@@ -349,7 +349,7 @@ priceUsd 399
 id membranes
 title Membranes
 status believer
-priceUsd 199
+priceUsd 249
 
 id decay
 title Decay
@@ -360,118 +360,118 @@ priceUsd 299
 id bonds
 title Bonds
 status believer
-priceUsd 159
+priceUsd 249
 
 id teamwork
 title Teamwork
 status believer
-priceUsd 199
+priceUsd 249
 
 id motivation
 title Motivation
 status believer
-priceUsd 199
+priceUsd 249
 
 id competition
 title Competition
 status believer
-priceUsd 199
+priceUsd 249
 
 // benefits of rowing in sync.
 id alignment
 title Alignment
 status believer
-priceUsd 199
+priceUsd 249
 
 id collusion
 title Collusion
 status believer
-priceUsd 199
+priceUsd 249
 
 id anger
 title Anger
 status believer
-priceUsd 199
+priceUsd 249
 
 id paper
 title Paper
 status believer
-priceUsd 149
+priceUsd 249
 
 id ink
 title Ink
 status believer
-priceUsd 149
+priceUsd 249
 
 id folding
 title Folding
 status believer
-priceUsd 149
+priceUsd 249
 
 id metals
 title Metals
 status believer
-priceUsd 149
+priceUsd 249
 
 id steel
 title Steel
 status believer
-priceUsd 119
+priceUsd 249
 
 id aluminum
 title Aluminum
 status believer
-priceUsd 109
+priceUsd 249
 
 id brass
 title Brass
 status believer
-priceUsd 149
+priceUsd 249
 
 id wood
 title Wood
 status believer
-priceUsd 149
+priceUsd 249
 
 id seeds
 title Seeds
 status believer
-priceUsd 199
+priceUsd 249
 
 id wheels
 title Wheels
 status believer
-priceUsd 149
+priceUsd 249
 
 id wedges
 title Wedges
 status believer
-priceUsd 149
+priceUsd 249
 
 id stars
 title Stars
 status believer
-priceUsd 199
+priceUsd 249
 
 id exploration
 title Exploration
 status believer
-priceUsd 199
+priceUsd 249
 
 id fabric
 title Fabric
 status believer
-priceUsd 179
+priceUsd 249
 
 id food
 title Food
 status believer
-priceUsd 149
+priceUsd 249
 
 id budgeting
 title Budgeting
 status believer
-priceUsd 149
+priceUsd 249
 
 id bookkeeping
 title Bookkeeping
@@ -481,7 +481,7 @@ priceUsd 299
 id screws
 title Screws
 status believer
-priceUsd 199
+priceUsd 249
 
 id payroll
 title Payroll
@@ -517,7 +517,7 @@ priceUsd 1499
 id hydration
 title Hydration
 status believer
-priceUsd 199
+priceUsd 249
 
 id hurricanes
 title Hurricanes

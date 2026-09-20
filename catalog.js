@@ -6,7 +6,7 @@ const catalog = [
     "symbol": "vertical bar magnet. south half is solid color",
     "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"37\" y=\"50\" width=\"26\" height=\"33\" fill=\"currentColor\" stroke=\"none\"/><rect x=\"37\" y=\"17\" width=\"26\" height=\"66\" stroke-width=\"3\"/><line x1=\"37\" y1=\"50\" x2=\"63\" y2=\"50\" stroke-width=\"3\"/></svg>",
     "status": "trailblazer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "focus",
@@ -15,7 +15,7 @@ const catalog = [
     "symbol": "two triangles touching horizontally, like a bowtie. solid fill",
     "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"20 28 50 50 20 72\" fill=\"currentColor\" stroke=\"none\"/><polygon points=\"80 28 50 50 80 72\" fill=\"currentColor\" stroke=\"none\"/></svg>",
     "status": "trailblazer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "levers",
@@ -24,7 +24,7 @@ const catalog = [
     "symbol": "tilted lever with an aligned square load and a small touching fulcrum near the load. solid shapes",
     "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"15\" y1=\"53\" x2=\"85\" y2=\"41\" stroke-width=\"4\"/><polygon points=\"40 48.714 32 65 48 65\" fill=\"currentColor\" stroke=\"none\"/><polygon points=\"17.429 37.143 32.429 34.571 35 49.571 20 52.143\" fill=\"currentColor\" stroke=\"none\"/></svg>",
     "status": "trailblazer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "beams",
@@ -33,7 +33,7 @@ const catalog = [
     "symbol": "vertical bar. solid fill.",
     "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"40\" y=\"17\" width=\"20\" height=\"66\" fill=\"currentColor\" stroke=\"none\"/></svg>",
     "status": "trailblazer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "sales",
@@ -75,49 +75,49 @@ const catalog = [
     "id": "light",
     "title": "Light",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "tools",
     "title": "Tools",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "gravity",
     "title": "Gravity",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "sound",
     "title": "Sound",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "electricity",
     "title": "Electricity",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "air",
     "title": "Air",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "heat",
     "title": "Heat",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "glass",
     "title": "Glass",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "cells",
@@ -129,19 +129,19 @@ const catalog = [
     "id": "iron",
     "title": "Iron",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "elements",
     "title": "Elements",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "copper",
     "title": "Copper",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "gold",
@@ -165,7 +165,7 @@ const catalog = [
     "id": "fire",
     "title": "Fire",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "sleep",
@@ -177,13 +177,13 @@ const catalog = [
     "id": "fields",
     "title": "Fields",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "energy",
     "title": "Energy",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "frequency",
@@ -207,121 +207,121 @@ const catalog = [
     "id": "springs",
     "title": "Springs",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "voltage",
     "title": "Voltage",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "motors",
     "title": "Motors",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "gears",
     "title": "Gears",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "colors",
     "title": "Colors",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "matter",
     "title": "Matter",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "atoms",
     "title": "Atoms",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "motion",
     "title": "Motion",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "momentum",
     "title": "Momentum",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "friction",
     "title": "Friction",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "ropes",
     "title": "Ropes",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "wind",
     "title": "Wind",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "aerodynamics",
     "title": "Aerodynamics",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "water",
     "title": "Water",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "rust",
     "title": "Rust",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "time",
     "title": "Time",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "patience",
     "title": "Patience",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "centuries",
     "title": "Centuries",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "liberty",
     "title": "Liberty",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "courage",
     "title": "Courage",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "property",
@@ -333,7 +333,7 @@ const catalog = [
     "id": "membranes",
     "title": "Membranes",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "decay",
@@ -345,139 +345,139 @@ const catalog = [
     "id": "bonds",
     "title": "Bonds",
     "status": "believer",
-    "priceUsd": 159
+    "priceUsd": 249
   },
   {
     "id": "teamwork",
     "title": "Teamwork",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "motivation",
     "title": "Motivation",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "competition",
     "title": "Competition",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "alignment",
     "title": "Alignment",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "collusion",
     "title": "Collusion",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "anger",
     "title": "Anger",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "paper",
     "title": "Paper",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "ink",
     "title": "Ink",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "folding",
     "title": "Folding",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "metals",
     "title": "Metals",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "steel",
     "title": "Steel",
     "status": "believer",
-    "priceUsd": 119
+    "priceUsd": 249
   },
   {
     "id": "aluminum",
     "title": "Aluminum",
     "status": "believer",
-    "priceUsd": 109
+    "priceUsd": 249
   },
   {
     "id": "brass",
     "title": "Brass",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "wood",
     "title": "Wood",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "seeds",
     "title": "Seeds",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "wheels",
     "title": "Wheels",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "wedges",
     "title": "Wedges",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "stars",
     "title": "Stars",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "exploration",
     "title": "Exploration",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "fabric",
     "title": "Fabric",
     "status": "believer",
-    "priceUsd": 179
+    "priceUsd": 249
   },
   {
     "id": "food",
     "title": "Food",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "budgeting",
     "title": "Budgeting",
     "status": "believer",
-    "priceUsd": 149
+    "priceUsd": 249
   },
   {
     "id": "bookkeeping",
@@ -489,7 +489,7 @@ const catalog = [
     "id": "screws",
     "title": "Screws",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "payroll",
@@ -531,7 +531,7 @@ const catalog = [
     "id": "hydration",
     "title": "Hydration",
     "status": "believer",
-    "priceUsd": 199
+    "priceUsd": 249
   },
   {
     "id": "hurricanes",
