@@ -163,12 +163,17 @@ h1 { position: relative; z-index: 1; max-width: 820px; margin: 0; font-size: cla
 .catalog-empty { margin: 0 clamp(20px, 3vw, 42px); color: var(--muted); font: 14px/1.5 Arial, sans-serif; }
 .catalog-empty:empty, .product[hidden], .edition-divider[hidden] { display: none; }
 .edition-divider.is-first { margin-top: 0; }
-.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
-.edition-divider { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 14px; margin: 72px clamp(20px, 3vw, 42px) 8px; }
+.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+.edition-divider { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px; margin: 72px clamp(20px, 3vw, 42px) 8px; }
 .edition-divider:first-child { margin-top: 0; }
 .edition-divider h2 { margin: 0; font-size: clamp(28px, 3vw, 42px); font-weight: 400; line-height: 1; letter-spacing: -.025em; }
+.edition-toggle { display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px; width: 100%; min-height: 44px; text-decoration: none; }
+.edition-toggle h2 { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; }
+.edition-toggle:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
+.edition-toggle h2::before { content: "▸"; font-size: .65em; }
+.edition-toggle[aria-expanded="true"] h2::before { content: "▾"; }
 .edition-divider p { margin: 0; color: var(--muted); white-space: nowrap; text-transform: uppercase; font: 700 14px/1.2 Arial, sans-serif; letter-spacing: .06em; }
-.product { min-width: 0; padding: clamp(20px, 3vw, 42px); background: var(--paper); }
+.product { min-width: 0; padding: clamp(20px, 2vw, 28px); background: var(--paper); }
 .book-cover { position: relative; isolation: isolate; aspect-ratio: .72; display: flex; flex-direction: column; align-items: center; padding: 11% 9%; overflow: hidden; color: #f4dfb3; background: linear-gradient(135deg, var(--cover), color-mix(in srgb, var(--cover) 58%, #000)); border-radius: 2px 12px 12px 2px; box-shadow: 11px 16px 25px rgba(34,28,20,.2), inset 5px 0 8px rgba(0,0,0,.17), inset 0 0 0 1px rgba(255,255,255,.08); cursor: pointer; transition: transform 180ms ease; }
 .product:hover .book-cover { transform: translateY(-5px) rotate(-.5deg); }
 .book-cover::before { content: ""; position: absolute; z-index: -1; inset: 0; opacity: .22; background: repeating-linear-gradient(89deg, rgba(255,255,255,.18) 0 1px, transparent 1px 4px); }
@@ -416,6 +421,7 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
   frontier: "Frontier"
  };
  const statusOrder = ["trailblazer", "believer", "frontier"];
+ const collapsedEditions = new Set(["believer", "frontier"]);
  const crypto = { BTC: [81080.75, 8], ETH: [2622.79, 6], NEAR: [3.7381, 2], USDC: [1, 2] }; // USD price, display decimals; Coinbase snapshot September 19, 2026 04:32 UTC (https://api.coinbase.com/v2/exchange-rates?currency=USD)
  const cart = new Map();
  const grid = document.querySelector("#product-grid");
@@ -457,7 +463,8 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
  };
  const editionDivider = status => {
   const { name, shipping } = editionDetails(status);
-  return `<div class="edition-divider" data-status="${escapeHtml(status)}"><h2>${escapeHtml(name)} editions</h2><p>${escapeHtml(shipping)}</p></div>`;
+  const controls = productCatalog.filter(product => product.status === status).map(product => escapeHtml(product.id)).join(" ");
+  return `<div class="edition-divider" id="${escapeHtml(status)}-editions" data-status="${escapeHtml(status)}"><a class="edition-toggle" href="#${escapeHtml(status)}-editions" role="button" aria-expanded="${!collapsedEditions.has(status)}" aria-controls="${controls}"><h2>${escapeHtml(name)} editions</h2><p>${escapeHtml(shipping)}</p></a></div>`;
  };
  const filterCatalog = () => {
   const query = document.querySelector("#catalog-search").value.trim();
@@ -480,11 +487,14 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
   document.querySelector("#search-heading").hidden = !query;
   const visibleStatuses = new Set();
   grid.querySelectorAll(".product").forEach(card => {
-   card.hidden = Boolean(query) && !hitIds.has(card.id);
-   if (!card.hidden) visibleStatuses.add(products.get(card.id).status);
+   const status = products.get(card.id).status;
+   const matches = !query || hitIds.has(card.id);
+   card.hidden = !matches || (!query && collapsedEditions.has(status));
+   if (matches) visibleStatuses.add(status);
   });
   const firstStatus = statusOrder.find(status => visibleStatuses.has(status));
   grid.querySelectorAll(".edition-divider").forEach(divider => {
+   divider.querySelector(".edition-toggle").setAttribute("aria-expanded", String(!collapsedEditions.has(divider.dataset.status)));
    divider.hidden = Boolean(query) || !visibleStatuses.has(divider.dataset.status);
    divider.classList.toggle("is-first", divider.dataset.status === firstStatus);
   });
@@ -936,6 +946,10 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
  restoreSearch();
  window.addEventListener("popstate", restoreSearch);
  const linkedBook = document.getElementById(new URLSearchParams(location.search).get("knowbookId"));
+ if (linkedBook?.classList.contains("product") && !document.querySelector("#catalog-search").value.trim()) {
+  collapsedEditions.delete(products.get(linkedBook.id).status);
+  filterCatalog();
+ }
  if (linkedBook && !linkedBook.hidden) { document.addEventListener("scrollend", () => openBook(linkedBook.querySelector(".book-cover")), { once: true }); linkedBook.scrollIntoView(); }
  else if (document.querySelector("#catalog-search").value.trim()) {
   requestAnimationFrame(() => document.querySelector("#catalog").scrollIntoView({ behavior: "instant", block: "start" }));
@@ -946,6 +960,18 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
   const saved = JSON.parse(localStorage.getItem("knowbooks-cart") || "[]");
   saved.forEach(([id, quantity]) => { if (products.has(id) && Number.isInteger(quantity) && quantity > 0) cart.set(id, products.get(id).design ? 1 : quantity); });
  } catch {}
+ grid.addEventListener("click", event => {
+  const link = event.target.closest(".edition-toggle");
+  if (!link) return;
+  event.preventDefault();
+  const status = link.closest(".edition-divider").dataset.status;
+  collapsedEditions.has(status) ? collapsedEditions.delete(status) : collapsedEditions.add(status);
+  filterCatalog();
+  link.focus({ preventScroll: true });
+ });
+ grid.addEventListener("keydown", event => {
+  if (event.key === " " && event.target.matches(".edition-toggle")) { event.preventDefault(); event.target.click(); }
+ });
  grid.addEventListener("click", event => { const cover = event.target.closest(".book-cover"); const button = event.target.closest("[data-add]"); if (cover) { const url = new URL(location.href); url.searchParams.set("knowbookId", cover.closest(".product").id); history.replaceState(null, "", url); openBook(cover); } if (button) { addToCart(button.dataset.add, button.closest(".product").querySelector(".book-cover"), button); } });
  preview.addEventListener("click", event => { const button = event.target.closest(".preview-add"); if (button) addToCart(button.dataset.add, preview.querySelector(".preview-book"), button); if (event.target === preview || event.target.closest(".preview-close")) closeBook(); });
  lines.addEventListener("click", event => { const more = event.target.closest("[data-more]"); const less = event.target.closest("[data-less]"); if (more) change(more.dataset.more, 1); if (less) change(less.dataset.less, -1); });
