@@ -80,6 +80,9 @@ buildToFile knowbooksLogo.svg
 
 css
  #designer { width: min(850px, calc(100% - 24px)); max-height: 92dvh; padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); }
+ #design-source { margin-top: 20px; font: 13px/1.5 Arial, sans-serif; }
+ #design-source summary { cursor: pointer; }
+ #design-code { display: block; width: 100%; min-height: 240px; margin-top: 10px; padding: 12px; resize: vertical; font: 12px/1.5 monospace; border: 1px solid var(--line); border-radius: 4px; background: #fff8; color: var(--ink); }
  #designer::backdrop { background: #151d19aa; }
  body:has(#designer[open]) { overflow: hidden; }
  .designer-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
@@ -534,7 +537,7 @@ section
  <label id="portrait-label">Upload an image → gold hedcut<input id="portrait-file" type="file" accept="image/png,image/jpeg,image/webp"></label><button type="button" id="remove-image" hidden>Remove image</button><small id="signature-hint" hidden>Upload your portrait; draw your signature beneath it.</small>
  </div>
  <div class="design-inside"><h3>What’s inside?</h3><p>Five experiments. One verb each.</p><div id="design-experiments"></div><small>Up to five verbs. Bend. Build. Test.</small><p class="design-price">$10,000 <small>design fee</small></p><p>50% now. One prototype shipped within 30 days of deposit. Balance before shipment.</p><p>More copies: our cost + 30% per knowbook. You sell or give away or let us handle sales and distribution.</p><button id="design-add" type="submit">Add $5,000 deposit to cart</button><p class="design-handoff">Your brief downloads when added. Email it to <a href="mailto:startups@knowbooks.com" id="design-email">startups@knowbooks.com</a> with your order.</p><p id="design-status" role="status"></p></div>
- </div></form>
+ </div><details id="design-source"><summary>See/Edit code</summary><textarea id="design-code" aria-label="Knowbook Scroll code" aria-describedby="design-code-status" spellcheck="false"></textarea><small id="design-code-status" role="status"></small></details></form>
 </dialog>
 <noscript>This shop needs JavaScript to manage its cart.</noscript>
 
@@ -891,6 +894,7 @@ script
    const remember = () => {
     design.title = title.textContent.replace(/\s+/g,' ').trim().slice(0, 60);
     design.byline = mode === 'signature' ? byline.value.trim() : '';
+    syncCode();
     if (editing) return;
     drafts[mode] = design;
     try { localStorage.setItem(key, JSON.stringify(drafts)); } catch { status.textContent = 'Draft could not be saved on this device. Download your brief before leaving.'; }
@@ -908,10 +912,10 @@ script
      drafts[kind] = d; products.set(d.id, product(d));
     }
    } catch {}
-   const download = async d => {
+   const proposal = d => {
     const leaf = value => String(value || '').replace(/\s+/g,' ').trim();
     const strokes = paths => paths.flatMap(path => ['  path', ...(path.match(/[MLQ][^MLQ]*/g) || []).map(command => `   ${{M:'moveTo', L:'lineTo', Q:'quadraticTo'}[command[0]]} ${command.slice(1).trim().replace(/[ ,]+/g,' ')}`)]);
-    const brief = [
+    return [
      `title ${leaf(d.title)}`, `id ${d.id}`, `edition ${d.mode}`, ...(d.byline ? [`byline ${leaf(d.byline)}`] : []), `color ${d.color}`,
      'designFeeUsd 10000', 'depositUsd 5000', 'prototype One shipped within 30 days of deposit', 'balance Due before shipment',
      'copies Our production cost + 30%',
@@ -920,11 +924,75 @@ script
      ' portrait', ...d.portrait.map(dot => `  filledCircle ${dot.join(' ')}`),
      ' art', ...strokes(d.art), ' signature', '  translate 0 200', ...strokes(d.signature)
     ].join('\n') + '\n';
-    const parts = leaf(d.title).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/([a-z])([A-Z])/g,'$1 $2').toLowerCase().match(/[a-z0-9]+/g) || ['untitled'];
+   };
+   const signText = async brief => {
+    const hash=Array.from(new Uint8Array(await globalThis.crypto.subtle.digest('SHA-256',new TextEncoder().encode(brief))), byte=>byte.toString(16).padStart(2,'0')).join('');
+    return brief + `checksum sha256 ${hash}\n`;
+   };
+   const signedProposal = d => signText(proposal(d));
+   const code = $('#design-code'), codeStatus = $('#design-code-status');
+   let codeVersion=0, codeInvalid=false;
+   async function syncCode(fromEditor=false) {
+    const version=++codeVersion, text=await signText(fromEditor ? code.value.replace(/^checksum .*\n?/gm,'').replace(/\n?$/, '\n') : proposal(design));
+    if(version!==codeVersion || (!fromEditor && document.activeElement===code)) return;
+    const [start,end]=[code.selectionStart,code.selectionEnd]; code.value=text; if(fromEditor) code.setSelectionRange(start,end); codeInvalid=false; code.setCustomValidity(''); codeStatus.textContent='';
+   }
+   function readProposal(text) {
+    const root={children:[]}, stack=[root];
+    const fail = message => {throw Error(message);};
+    for(const line of text.replace(/\r\n/g,'\n').split('\n').filter(line=>line.trim())) {
+     const match=line.match(/^( *)(\S+)(?: (.*))?$/); if(!match || line.includes('\t')) fail('Use spaces for indentation.');
+     const [,spaces,key,value='']=match, depth=spaces.length;
+     if(depth>=stack.length) fail('Indent one space per level.');
+     const node={key,value,children:[]};stack[depth].children.push(node);stack[depth+1]=node;stack.length=depth+2;
+    }
+    const fields = (node, allowed) => {
+     const result={};for(const child of node.children) {if(!allowed.includes(child.key) || result[child.key]) fail(`Unexpected or repeated field: ${child.key}`);result[child.key]=child;}return result;
+    };
+    const scalar = (node, fallback='') => {if(node?.children.length) fail(`Unexpected indentation below ${node.key}.`);return node?.value ?? fallback;};
+    const top=fields(root,['title','id','edition','byline','color','designFeeUsd','depositUsd','prototype','balance','copies','experiments','cover','checksum']);
+    const d={...fresh(),title:scalar(top.title),id:scalar(top.id),mode:scalar(top.edition),byline:scalar(top.byline),color:scalar(top.color),verbs:scalar(top.experiments).split(/\s+/).filter(Boolean)};
+    if(!d.title.trim() || d.title.length>60 || d.byline.length>60) fail('Use a title and byline of at most 60 characters.');
+    if(!/^custom-[a-f0-9-]{8}$/.test(d.id)) fail('ID must be custom- followed by eight hexadecimal characters.');
+    if(editing && d.mode!==design.mode) fail('Keep the cart item’s edition when editing.');
+    if(editing && d.id!==design.id) fail('Keep the cart item’s ID when editing.');
+    if(!Object.hasOwn(designModes,d.mode) || !Object.hasOwn(coverPalette,d.color)) fail('Use a listed edition and cover color.');
+    if(d.mode!=='signature' && d.byline) fail('Bylines belong to signature editions.');
+    if(d.verbs.length>5 || d.verbs.some(v=>v.length>24)) fail('Use up to five verbs, at most 24 characters each.');
+    for(const line of proposal(d).split('\n').filter(line=>/^(designFeeUsd|depositUsd|prototype|balance|copies) /.test(line))) {
+     const space=line.indexOf(' '), key=line.slice(0,space);if(scalar(top[key])!==line.slice(space+1)) fail(`${key} is a fixed offer term.`);
+    }
+    if(!top.cover || top.cover.value) fail('Include the cover tree.');
+    const coverFields=fields(top.cover,['viewBox','ink','strokeWidth','lineCap','lineJoin','portrait','art','signature']);
+    for(const [key,value] of Object.entries({viewBox:'0 0 200 255',ink:'#d9bc78',strokeWidth:'2.5',lineCap:'round',lineJoin:'round'})) if(scalar(coverFields[key])!==value) fail(`Keep cover ${key} ${value}.`);
+    const numbers = (node,count) => {const nums=scalar(node).trim().split(/\s+/).map(Number);if(nums.length!==count || nums.some(n=>!Number.isFinite(n) || Math.abs(n)>10000)) fail(`Invalid ${node.key} coordinates.`);return nums;};
+    for(const key of ['portrait','art','signature']) {
+     const group=coverFields[key];if(!group || group.value) fail(`Include the ${key} group.`);
+     if(group.children.length>(key==='portrait'?4500:201)) fail('Too many drawing elements.');
+     for(const node of group.children) {
+      if(key==='portrait' && node.key==='filledCircle') {const dot=numbers(node,3);if(dot[0]<0 || dot[0]>200 || dot[1]<0 || dot[1]>200 || dot[2]<=0 || dot[2]>=3) fail('Portrait dots must fit the cover.');d.portrait.push(dot);}
+      else if(key==='signature' && node.key==='translate') {if(scalar(node)!=='0 200') fail('Keep signature translate 0 200.');}
+      else if(key!=='portrait' && node.key==='path' && !node.value) {
+       if(!node.children.length || node.children[0].key!=='moveTo') fail('Start each path with moveTo.');
+       d[key].push(node.children.map(command=>{const spec={moveTo:['M',2],lineTo:['L',2],quadraticTo:['Q',4]}[command.key];if(!spec) fail(`Unknown drawing command: ${command.key}`);return spec[0]+numbers(command,spec[1]).join(',');}).join(' '));
+       if(d[key].at(-1).length>20000) fail('Path is too long.');
+      } else fail(`Unexpected ${node.key} in ${key}.`);
+     }
+     if(key==='signature' && group.children.filter(n=>n.key==='translate').length!==1) fail('Include signature translate 0 200 once.');
+    }
+    d.verbs=Array.from({length:5},(_,i)=>d.verbs[i] || '');
+    return d;
+   }
+   code.addEventListener('input', () => {
+    codeVersion++;
+    try {const next=readProposal(code.value);photoVersion++;undo.length=0;design=next;mode=design.mode;showDesign();remember();codeInvalid=false;code.setCustomValidity('');codeStatus.textContent='';syncCode(true);}
+    catch(error) {codeInvalid=true;code.setCustomValidity(error.message);codeStatus.textContent=error.message;}
+   });
+   code.addEventListener('blur', () => {if(!codeInvalid) syncCode();});
+   const download = async d => {
+    const parts = d.title.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/([a-z])([A-Z])/g,'$1 $2').toLowerCase().match(/[a-z0-9]+/g) || ['untitled'];
     const filename = parts.map((part,i) => i ? part[0].toUpperCase()+part.slice(1) : part).join('') + 'KnowBooksProposal.scroll';
-    // Hash the exact UTF-8 bytes before the final checksum line, including the last LF.
-    const hash = Array.from(new Uint8Array(await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode(brief))), byte => byte.toString(16).padStart(2,'0')).join('');
-    const url = URL.createObjectURL(new Blob([brief, `checksum sha256 ${hash}\n`], {type:'text/plain;charset=utf-8'}));
+    const url = URL.createObjectURL(new Blob([await signedProposal(d)], {type:'text/plain;charset=utf-8'}));
     const a = Object.assign(document.createElement('a'), {href:url, download:filename});
     a.click(); setTimeout(() => URL.revokeObjectURL(url),1000);
    };
@@ -1004,13 +1072,18 @@ script
      design.art=[]; undo.length=0; render(); remember(); status.textContent='Gold hedcut preview. We refine the final artwork during design.';
     } catch {status.textContent='Could not read that photo. Try another PNG or JPEG.';}
    };
-   function open(kind,event,existing) {
-    event.preventDefault(); opener=event.target.closest('button, a'); mode=kind; editing=Boolean(existing); photoVersion++; undo.length=0;
-    design=existing ? structuredClone(existing) : drafts[mode] || fresh(); design.mode=mode; title.textContent=design.title; byline.value=design.byline || ''; byline.hidden=mode!=='signature';
+   function showDesign() {
+    title.textContent=design.title; byline.value=design.byline || ''; byline.hidden=mode!=='signature';
     verbs.forEach((input,i)=>input.value=design.verbs[i]); signature.toggleAttribute('hidden',mode!=='signature'); $('#signature-hint').hidden=mode!=='signature';
     $('#designer-heading').textContent=designModes[mode].heading;
     $('#design-add').textContent=editing ? 'Update cart' : 'Add $5,000 deposit to cart';
     const email=designModes[mode].inbox+'@knowbooks.com'; $('#design-email').textContent=email; $('#design-email').href=`mailto:${email}?subject=${encodeURIComponent('Knowbook design '+design.id)}`;
+    render();
+   }
+   function open(kind,event,existing) {
+    event.preventDefault(); opener=event.target.closest('button, a'); mode=kind; editing=Boolean(existing); photoVersion++; undo.length=0;
+    design=existing ? structuredClone(existing) : drafts[mode] || fresh(); design.mode=mode;
+    showDesign(); syncCode();
     status.textContent=''; $('#portrait-file').value=''; render(); dialog.showModal(); title.focus();
    }
    Object.entries(designModes).forEach(([kind, config]) => { $(config.trigger).onclick = event => open(kind,event); });
