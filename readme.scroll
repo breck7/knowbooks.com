@@ -83,6 +83,8 @@ css
  #designer { width: min(850px, calc(100% - 24px)); max-height: 92dvh; padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); }
  #design-source { margin-top: 20px; font: 13px/1.5 Arial, sans-serif; }
  #design-source summary { cursor: pointer; }
+ #design-link { width: 100%; margin-top: 6px; padding: 8px; border: 1px solid var(--line); border-radius: 4px; background: #fff8; font: 12px monospace; }
+ #design-source label { display: block; margin-top: 12px; }
  #design-code { display: block; width: 100%; min-height: 240px; margin-top: 10px; padding: 12px; resize: vertical; font: 12px/1.5 monospace; border: 1px solid var(--line); border-radius: 4px; background: #fff8; color: var(--ink); }
  #designer::backdrop { background: #151d19aa; }
  body:has(#designer[open]) { overflow: hidden; }
@@ -538,7 +540,7 @@ section
  <label id="portrait-label">Upload an image → gold hedcut<input id="portrait-file" type="file" accept="image/png,image/jpeg,image/webp"></label><button type="button" id="remove-image" hidden>Remove image</button><small id="signature-hint" hidden>Upload your portrait; draw your signature beneath it.</small>
  </div>
  <div class="design-inside"><h3>What’s inside?</h3><p>Five experiments. One verb each.</p><div id="design-experiments"></div><small>Up to five verbs. Bend. Build. Test.</small><p class="design-price">$10,000 <small>design fee</small></p><p>50% now. One prototype shipped within 30 days of deposit. Balance before shipment.</p><p>More copies: our cost + 30% per knowbook. You sell or give away or let us handle sales and distribution.</p><button id="design-add" type="submit">Add $5,000 deposit to cart</button><p class="design-handoff">Your brief downloads when added. Email it to <a href="mailto:startups@knowbooks.com" id="design-email">startups@knowbooks.com</a> with your order.</p><p id="design-status" role="status"></p></div>
- </div><details id="design-source"><summary>See/Edit code</summary><textarea id="design-code" aria-label="Knowbook Scroll code" aria-describedby="design-code-status" spellcheck="false"></textarea><small id="design-code-status" role="status"></small></details></form>
+ </div><details id="design-source"><summary>See/Edit code</summary><textarea id="design-code" aria-label="Knowbook Scroll code" aria-describedby="design-code-status" spellcheck="false"></textarea><small id="design-code-status" role="status"></small><label for="design-link">Design link</label><input id="design-link" type="text" readonly spellcheck="false"></details></form>
 </dialog>
 <noscript>This shop needs JavaScript to manage its cart.</noscript>
 
@@ -929,12 +931,14 @@ script
    };
    const signText = async brief => brief + `checkem v1 ${await checkem(brief)}\n`;
    const signedProposal = d => signText(proposal(d));
-   const code = $('#design-code'), codeStatus = $('#design-code-status');
+   const code = $('#design-code'), codeStatus = $('#design-code-status'), designLink = $('#design-link');
+   designLink.addEventListener('focus', () => designLink.select());
    let codeVersion=0, codeInvalid=false;
    async function syncCode(fromEditor=false) {
     const version=++codeVersion, text=await signText(fromEditor ? code.value.replace(/^(?:checksum|checkem)(?:[ \t][^\n]*)?(?:\n|$)/gm,'').replace(/\n?$/, '\n') : proposal(design));
-    if(version!==codeVersion || (!fromEditor && document.activeElement===code)) return;
+    if(version!==codeVersion || codeInvalid || (!fromEditor && document.activeElement===code)) return;
     const [start,end]=[code.selectionStart,code.selectionEnd]; code.value=text; if(fromEditor) code.setSelectionRange(start,end); codeInvalid=false; code.setCustomValidity(''); codeStatus.textContent='';
+    const url=new URL(location.href);url.search='';url.hash='knowbook='+encodeURIComponent(text);designLink.value=url.href;
    }
    function readProposal(text) {
     const root={children:[]}, stack=[root];
@@ -985,7 +989,7 @@ script
    code.addEventListener('input', () => {
     codeVersion++;
     try {const next=readProposal(code.value);photoVersion++;undo.length=0;design=next;mode=design.mode;showDesign();remember();codeInvalid=false;code.setCustomValidity('');codeStatus.textContent='';syncCode(true);}
-    catch(error) {codeInvalid=true;code.setCustomValidity(error.message);codeStatus.textContent=error.message;}
+    catch(error) {codeInvalid=true;designLink.value='';code.setCustomValidity(error.message);codeStatus.textContent=error.message;}
    });
    code.addEventListener('blur', () => {if(!codeInvalid) syncCode();});
    const download = async d => {
@@ -1080,7 +1084,7 @@ script
     render();
    }
    function open(kind,event,existing) {
-    event.preventDefault(); opener=event.target.closest('button, a'); mode=kind; editing=Boolean(existing); photoVersion++; undo.length=0;
+    codeInvalid=false;event?.preventDefault(); opener=event?.target.closest('button, a') || $(designModes[kind].trigger); mode=kind; editing=Boolean(existing); photoVersion++; undo.length=0;
     design=existing ? structuredClone(existing) : drafts[mode] || fresh(); design.mode=mode;
     showDesign(); syncCode();
     status.textContent=''; $('#portrait-file').value=''; render(); dialog.showModal(); title.focus();
@@ -1095,6 +1099,13 @@ script
     if(mode==='signature' && (!design.portrait.length || !design.signature.length)) {status.textContent='Add a creator photo and draw your signature.';return;}
     editing=false; remember(); products.set(design.id,product(structuredClone(design))); cart.set(design.id,1); refresh(); download(design); dialog.close(); openCart();
    };
+   const loadDesignLink = () => {
+    if(!location.hash.startsWith('#knowbook=')) return;
+    open('startup');$('#design-source').open=true;codeVersion++;
+    try {code.value=decodeURIComponent(location.hash.slice('#knowbook='.length));code.dispatchEvent(new Event('input'));}
+    catch {code.value='';codeInvalid=true;designLink.value='';codeStatus.textContent='This design link has invalid URL encoding.';code.setCustomValidity(codeStatus.textContent);}
+   };
+   window.addEventListener('hashchange',loadDesignLink);loadDesignLink();
   }
   productCatalog.forEach(product => editionDetails(product.status));
   grid.innerHTML = statusOrder.flatMap(status => {
