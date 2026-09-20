@@ -79,6 +79,45 @@ buildToFile knowbooksLogo.svg
  </svg>
 
 css
+ #designer { width: min(850px, calc(100% - 24px)); max-height: 92dvh; padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); }
+ #designer::backdrop { background: #151d19aa; }
+ body:has(#designer[open]) { overflow: hidden; }
+ .designer-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+ .designer-head h2 { margin: 0; font-size: 26px; font-weight: normal; }
+ #design-close { border: 0; background: none; font-size: 28px; }
+ .design-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+ .design-cover { background: var(--cover, #294575); color: var(--gold); border-radius: 5px 12px 12px 5px; box-shadow: inset 8px 0 8px #0003, 5px 5px 0 #dcd1b9; padding: 24px 22px 18px; text-align: center; }
+ #design-title { font: 24px/1.2 Georgia, serif; min-height: 58px; overflow-wrap: anywhere; margin: 0 0 10px; }
+ #design-byline { display: block; width: 100%; margin: -2px 0 12px; padding: 4px; border: 0; background: transparent; color: inherit; text-align: center; font: italic 16px Georgia, serif; }
+ #design-byline::placeholder { color: inherit; opacity: .7; }
+ #designer [hidden] { display: none; }
+ [data-brief], [data-edit-design] { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; text-align: left; }
+ [data-brief]:hover, [data-edit-design]:hover { text-decoration: underline; }
+ .design-actions { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 6px 0; }
+ [data-brief] svg { width: 14px; height: 14px; flex-shrink: 0; }
+ .book-byline { margin-top: 8px; font: italic 14px Georgia, serif; text-align: center; }
+ #design-title:focus { outline: 1px dashed var(--gold); }
+ .design-cover svg { display: block; width: 100%; touch-action: none; cursor: crosshair; }
+ .design-cover .strokes { fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; pointer-events: stroke; }
+ .design-cover > span { display: block; margin-top: 18px; font: 10px Arial, sans-serif; letter-spacing: .25em; }
+ #design-colors { display: flex; flex-wrap: wrap; gap: 7px; margin: 18px 0 10px; }
+ #design-colors button { width: 24px; height: 24px; border: 2px solid transparent; border-radius: 50%; background: var(--swatch); cursor: pointer; }
+ #design-colors button[aria-pressed=true] { outline: 2px solid var(--ink); outline-offset: 2px; }
+ .design-tools { display: flex; align-items: center; gap: 15px; }
+ .design-tools button { cursor: pointer; border: 0; background: none; padding: 8px 0; }
+ #design-marker { display: flex; align-items: center; gap: 8px; }
+ #design-marker[aria-pressed=true] svg { transform: rotate(180deg); }
+ #designer small, #portrait-label { display: block; font: 12px/1.5 Arial, sans-serif; color: var(--muted); }
+ #portrait-label { margin-top: 12px; }
+ #portrait-file { display: block; width: 100%; margin: 8px 0; }
+ .design-inside { font: 14px/1.5 Arial, sans-serif; }
+ .design-inside h3 { font: 26px Georgia, serif; margin: 0; }
+ #design-experiments input { display: block; margin: 8px 0; width: 100%; min-width: 0; padding: 10px; border: 1px solid var(--line); border-radius: 4px; background: #fff8; font: inherit; }
+ .design-price { font: 30px Georgia, serif; margin: 24px 0 12px; }
+ .design-price small { display: inline !important; }
+ #design-add { width: 100%; padding: 15px; border: 0; border-radius: 5px; color: white; background: #243d32; font-weight: bold; cursor: pointer; }
+ .design-handoff, #design-status { font-size: 12px; }
+ @media(max-width: 600px) { #designer { padding: 18px; } .design-spread { grid-template-columns: 1fr; } .design-cover { max-width: 320px; margin: auto; } .designer-head h2 { font-size: 23px; } }
  :root {
   --paper: #f4efe5;
   --ink: #20211e;
@@ -343,12 +382,12 @@ section
     id signature-element-10
     dt Share the success.
      id signature-element-11
-    dd We market your Signature Knowbook together and share the revenue.
+    dd Order copies at our cost + 30%; sell, give them away, or have us fulfill.
      id signature-element-12
   a Create your Signature Knowbook <span aria-hidden="true">↗</span>
    id signature-element-13
    addClass down
-   href mailto:signature@knowbooks.com?subject=Creating%20a%20Signature%20Knowbook
+   href #designer
 
 section
  addClass offering
@@ -385,12 +424,12 @@ section
     id startups-element-10
     dt Build on demand.
      id startups-element-11
-    dd Then pay only production costs for on-demand manufacturing and assembly. Order as many as you need, whenever you need more.
+    dd Order more at our cost + 30%. Any quantity, whenever you need it.
      id startups-element-12
   a Let's build your Knowbook <span aria-hidden="true">↗</span>
    id startups-element-13
    addClass down
-   href mailto:startups@knowbooks.com?subject=Knowbooks%20for%20my%20startup
+   href #designer
 
 section
  addClass offering
@@ -417,7 +456,7 @@ section
   a Build your team's training Knowbook <span aria-hidden="true">↗</span>
    id training-element-6
    addClass down
-   href mailto:training@knowbooks.com?subject=Knowbooks%20for%20corporate%20training
+   href #designer
 
 section
  addClass offering
@@ -477,8 +516,26 @@ section
   <div class="cart-art" aria-hidden="true"><div class="basket-books"></div><svg viewBox="0 0 160 120" fill="none" aria-hidden="true"><path d="M13 15h19l16 69h88" stroke="#343e35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 34h108l-13 40H47z" fill="#c7ad7029" stroke="#343e35" stroke-width="3" stroke-linejoin="round"/><path d="M62 35l5 38m20-38v38m23-38-5 38M43 54h96" stroke="#8b805f" stroke-width="2"/><circle cx="59" cy="100" r="9" fill="#343e35"/><circle cx="126" cy="100" r="9" fill="#343e35"/><circle cx="59" cy="100" r="3" fill="#efe9da"/><circle cx="126" cy="100" r="3" fill="#efe9da"/></svg></div>
   <div class="cart-lines"></div>
   <div class="cart-empty"><p>Your cart is empty.</p><a href="#catalog">Find a Knowbook</a></div>
-  <div class="cart-footer" hidden><div class="referral"><input id="referral-code" type="text" placeholder="Referral code (optional)" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="referral-status"><p class="referral-status" id="referral-status" role="status"></p></div><p class="cart-total"><span>Total</span><strong>$0</strong></p><a class="paypal-button" href="https://www.paypal.com/cgi-bin/webscr" rel="noopener">Checkout with PayPal &nbsp; ↗</a><small>Shipping and taxes included.<br>Hawaii customers can pay by cash.</small><details class="crypto"><summary>Pay with crypto</summary><p><b>BTC</b><span><output data-crypto="BTC"></output><code>3G9q4tRjkTSP8PP4eFVZuNLtXxKuERJcJr</code></span><b>ETH</b><span><output data-crypto="ETH"></output><code>0xaEe37CE75AcC6341abfa1c73c6Bb1B73963a6ccD</code></span><b>NEAR</b><span><output data-crypto="NEAR"></output><code>knowbooks.near</code></span><b>USDC <i>(Base)</i></b><span><output data-crypto="USDC"></output><code>0x3d3e69E8f208A782E09f018643fE9796e918e45e</code></span></p><small>Send the amount shown, then email your transaction ID, cart, and shipping address to <a href="mailto:paybycrypto@knowbooks.com">paybycrypto@knowbooks.com</a>.</small></details></div>
+  <div class="cart-footer" hidden><div class="referral"><input id="referral-code" type="text" placeholder="Referral code (optional)" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="referral-status"><p class="referral-status" id="referral-status" role="status"></p></div><p class="cart-total"><span>Total</span><strong>$0</strong></p><a class="paypal-button" href="https://www.paypal.com/cgi-bin/webscr" rel="noopener">Checkout with PayPal &nbsp; ↗</a><small>Shipping and taxes included.<br>Hawaii customers can pay by cash or check.</small><details class="crypto"><summary>Pay with crypto</summary><p><b>NEAR</b><span><output data-crypto="NEAR"></output><code>knowbooks.near</code></span><b>BTC</b><span><output data-crypto="BTC"></output><code>3G9q4tRjkTSP8PP4eFVZuNLtXxKuERJcJr</code></span><b>ETH</b><span><output data-crypto="ETH"></output><code>0xaEe37CE75AcC6341abfa1c73c6Bb1B73963a6ccD</code></span><b>USDC <i>(Base)</i></b><span><output data-crypto="USDC"></output><code>0x3d3e69E8f208A782E09f018643fE9796e918e45e</code></span></p><small>Send the amount shown, then email your transaction ID, cart, and shipping address to <a href="mailto:paybycrypto@knowbooks.com">paybycrypto@knowbooks.com</a>.</small></details></div>
  </aside>
+<dialog id="designer" aria-labelledby="designer-heading">
+ <form id="design-form">
+ <div class="designer-head"><h2 id="designer-heading">Build your Knowbook</h2><button type="button" id="design-close" aria-label="Close designer">×</button></div>
+ <div class="design-spread">
+ <div><div class="design-cover">
+ <h3 id="design-title" contenteditable="plaintext-only" role="textbox" aria-label="Knowbook title" aria-multiline="false" spellcheck="false">Your Knowbook</h3>
+ <input id="design-byline" aria-label="Expert name" placeholder="by Your name" maxlength="60" hidden>
+ <svg id="design-art" viewBox="0 0 200 200" aria-label="Draw your cover with the marker"><g id="design-portrait"></g><g class="strokes"></g></svg>
+ <svg id="design-signature" viewBox="0 0 200 55" aria-label="Draw your signature" hidden><g class="strokes"></g></svg>
+ <span>KNOWBOOKS</span></div>
+ <div id="design-colors" role="group" aria-label="Cover color"></div>
+ <div class="design-tools"><button type="button" id="design-marker" aria-pressed="false" aria-label="Flip marker to eraser"><svg viewBox="0 0 100 24" width="100" height="24" aria-hidden="true"><path d="M5 12 19 5v14z" fill="currentColor"/><rect x="19" y="4" width="60" height="16" rx="3" fill="currentColor"/><rect x="80" y="4" width="15" height="16" rx="3" fill="#d9bc78"/></svg><span>Flip to erase</span></button><button type="button" id="design-undo">Undo</button></div>
+ <small id="design-hint">Draw freely. Lines straighten; curves smooth. Eraser removes a stroke.</small>
+ <label id="portrait-label">Upload an image → gold hedcut<input id="portrait-file" type="file" accept="image/png,image/jpeg,image/webp"></label><button type="button" id="remove-image" hidden>Remove image</button><small id="signature-hint" hidden>Upload your portrait; draw your signature beneath it.</small>
+ </div>
+ <div class="design-inside"><h3>What’s inside?</h3><p>Five experiments. One verb each.</p><div id="design-experiments"></div><small>Up to five verbs. Bend. Build. Test.</small><p class="design-price">$10,000 <small>design fee</small></p><p>50% now. One prototype shipped within 30 days of deposit. Balance before shipment.</p><p>More copies: our cost + 30% per knowbook. You sell or give away or let us handle sales and distribution.</p><button id="design-add" type="submit">Add $5,000 deposit to cart</button><p class="design-handoff">Your brief downloads when added. Email it to <a href="mailto:startups@knowbooks.com" id="design-email">startups@knowbooks.com</a> with your order.</p><p id="design-status" role="status"></p></div>
+ </div></form>
+</dialog>
 <noscript>This shop needs JavaScript to manage its cart.</noscript>
 
 catalog.js
@@ -514,6 +571,11 @@ script
   const vectorDistance = (a, b) => {
    const left = tagVectors.get(a), right = tagVectors.get(b);
    return 1 - left.reduce((sum, bit, i) => sum + (bit & right[i]), 0) / (left.reduce((sum, bit, i) => sum + (bit | right[i]), 0) || 1);
+  };
+  const designModes = {
+   startup: { label: "Custom", heading: "Build your Knowbook", inbox: "startups", trigger: "#startups-element-13" },
+   signature: { label: "Signature", heading: "Your Signature Knowbook", inbox: "signature", trigger: "#signature-element-13" },
+   training: { label: "Corporate training", heading: "Build your team’s training Knowbook", inbox: "training", trigger: "#training-element-6" }
   };
   const paypalEmail = "breck7@gmail.com";
   const currency = "USD";
@@ -561,7 +623,7 @@ script
    return { name, shipping };
   };
   const bookCover = product => `<div class="book-cover" style="--cover:${escapeHtml(product.coverColor)}">
-     <h3><a href="?knowbookId=${escapeHtml(product.id)}" onclick="return false">${escapeHtml(product.title)}</a></h3><span class="book-symbol" aria-hidden="true">${product.cover || ""}</span><span class="book-brand">Knowbooks</span>
+     <h3><a href="?knowbookId=${escapeHtml(product.id)}" onclick="return false">${escapeHtml(product.design?.title || product.title)}</a></h3>${product.design?.byline ? `<span class="book-byline">by ${escapeHtml(product.design.byline)}</span>` : ""}<span class="book-symbol" aria-hidden="true">${product.cover || ""}</span><span class="book-brand">Knowbooks</span>
     </div>`;
   const productCard = product => {
    const { name, shipping } = editionDetails(product.status);
@@ -657,14 +719,14 @@ script
    });
    lines.innerHTML = [...cart].map(([id, value]) => {
     const product = products.get(id);
-    return `<div class="cart-line"><div class="line-swatch" aria-hidden="true" inert>${bookCover(product)}</div><div class="line-copy"><h3>${escapeHtml(product.title)}</h3><p>${money.format(product.priceUsd)} each</p></div><div class="quantity"><button type="button" data-less="${escapeHtml(id)}" aria-label="Remove one ${escapeHtml(product.title)}">−</button><span>${value}</span><button type="button" data-more="${escapeHtml(id)}" aria-label="Add one ${escapeHtml(product.title)}">+</button></div></div>`;
+    return `<div class="cart-line"><div class="line-swatch" aria-hidden="true" inert>${bookCover(product)}</div><div class="line-copy"><h3>${escapeHtml(product.title)}</h3><p>${money.format(product.priceUsd)} ${product.design ? "deposit · 50% of $10,000" : "each"}</p>${product.design ? `<div class="design-actions"><button type="button" data-edit-design="${escapeHtml(id)}">Edit</button><button type="button" data-brief="${escapeHtml(id)}">Download design brief <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg></button></div><p>Email brief to ${designModes[product.design.mode].inbox}@knowbooks.com</p>` : ""}</div><div class="quantity"><button type="button" data-less="${escapeHtml(id)}" aria-label="Remove one ${escapeHtml(product.title)}">−</button><span>${value}</span><button type="button" data-more="${escapeHtml(id)}" aria-label="Add one ${escapeHtml(product.title)}">+</button></div></div>`;
    }).join("");
    fitBookTitles();
    empty.hidden = quantity > 0;
    footer.hidden = quantity === 0;
    total.textContent = checkoutMoney.format(amount);
    referralInput.setAttribute("aria-invalid", String(Boolean(enteredCode && !referralCode)));
-   referralStatus.textContent = referralCode ? `10% off applied — you save ${checkoutMoney.format(discountCents / 100)}.` : enteredCode ? "That referral code isn’t valid." : "";
+   referralStatus.textContent = referralCode ? `10% off your cart — you save ${checkoutMoney.format(discountCents / 100)}.` : enteredCode ? "That referral code isn’t valid." : "";
    document.querySelectorAll("[data-crypto]").forEach(output => { const [usd, decimals] = crypto[output.dataset.crypto]; output.textContent = `${(amount / usd).toFixed(decimals)} ${output.dataset.crypto}`; });
    checkout.href = quantity ? paypalUrl(pricing) : "https://www.paypal.com/cgi-bin/webscr";
    save();
@@ -806,7 +868,7 @@ script
   const change = (id, delta) => {
    const focused = document.activeElement;
    const control = focused?.hasAttribute("data-more") ? "data-more" : focused?.hasAttribute("data-less") ? "data-less" : null;
-   const next = (cart.get(id) || 0) + delta;
+   const next = Math.min(products.get(id).design ? 1 : Infinity, (cart.get(id) || 0) + delta);
    next > 0 ? cart.set(id, next) : cart.delete(id);
    refresh();
    if (control) {
@@ -814,6 +876,154 @@ script
     (replacement || drawer.querySelector(".cart-close")).focus();
    }
   };
+  function initDesigner() {
+   const $ = selector => document.querySelector(selector), dialog = $('#designer'), title = $('#design-title'), byline = $('#design-byline');
+   const art = $('#design-art'), signature = $('#design-signature'), marker = $('#design-marker'), status = $('#design-status');
+   const key = 'knowbooks-designs', drafts = {}, undo = [];
+   let mode = 'startup', design, editing = false, erase = false, drawing, opener, photoVersion = 0;
+   const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', byline: '', color: 'navy', verbs: Array(5).fill(''), art: [], signature: [], portrait: [] });
+   function cryptoId() { return globalThis.crypto.randomUUID().slice(0, 8); }
+   const svg = body => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 255" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
+   const paths = values => values.map(d => `<path d="${d}"/>`).join('');
+   const dots = values => values.map(([x,y,r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="currentColor" stroke="none"/>`).join('');
+   const cover = d => svg(dots(d.portrait) + paths(d.art) + `<g transform="translate(0 200)">${paths(d.signature)}</g>`);
+   const product = d => ({ id: d.id, title: `${d.title} — ${designModes[d.mode].label} design deposit (${d.id})`, priceUsd: 5000, coverColor: coverPalette[d.color], cover: cover(d), design: d });
+   const remember = () => {
+    design.title = title.textContent.replace(/\s+/g,' ').trim().slice(0, 60);
+    design.byline = mode === 'signature' ? byline.value.trim() : '';
+    if (editing) return;
+    drafts[mode] = design;
+    try { localStorage.setItem(key, JSON.stringify(drafts)); } catch { status.textContent = 'Draft could not be saved on this device. Download your brief before leaving.'; }
+   };
+   // Saved drawings allow only numeric SVG path commands; no uploaded HTML/SVG is inserted.
+   try {
+    const saved = JSON.parse(localStorage.getItem(key) || '{}');
+    for (const kind of Object.keys(designModes)) {
+     const d = saved[kind];
+     if (!d || !/^custom-[a-f0-9-]{8}$/.test(d.id) || !Object.hasOwn(coverPalette,d.color)) continue;
+     d.mode = kind; d.title = String(d.title).slice(0,60); d.byline = String(d.byline || '').replace(/\s+/g,' ').slice(0,60);
+     d.verbs = Array.from({length:5},(_,i) => String(d.verbs?.[i] ?? d.words?.[i*2] ?? '').replace(/\s/g,'').slice(0,24)); delete d.words;
+     for (const field of ['art','signature']) d[field] = (Array.isArray(d[field]) ? d[field] : []).filter(p => typeof p === 'string' && p.length < 20000 && /^[MLQ0-9., -]+$/.test(p)).slice(0,200);
+     d.portrait = (Array.isArray(d.portrait) ? d.portrait : []).filter(p => Array.isArray(p) && p.length === 3 && p.every(Number.isFinite) && p[0]>=0 && p[0]<=200 && p[1]>=0 && p[1]<=200 && p[2]>0 && p[2]<3).slice(0,4500);
+     drafts[kind] = d; products.set(d.id, product(d));
+    }
+   } catch {}
+   const download = async d => {
+    const leaf = value => String(value || '').replace(/\s+/g,' ').trim();
+    const strokes = paths => paths.flatMap(path => ['  path', ...(path.match(/[MLQ][^MLQ]*/g) || []).map(command => `   ${{M:'moveTo', L:'lineTo', Q:'quadraticTo'}[command[0]]} ${command.slice(1).trim().replace(/[ ,]+/g,' ')}`)]);
+    const brief = [
+     `title ${leaf(d.title)}`, `id ${d.id}`, `edition ${d.mode}`, ...(d.byline ? [`byline ${leaf(d.byline)}`] : []), `color ${d.color}`,
+     'designFeeUsd 10000', 'depositUsd 5000', 'prototype One shipped within 30 days of deposit', 'balance Due before shipment',
+     'copies Our production cost + 30%',
+     ['experiments', ...d.verbs.filter(Boolean).map(leaf)].join(' '),
+     'cover', ' viewBox 0 0 200 255', ' ink #d9bc78', ' strokeWidth 2.5', ' lineCap round', ' lineJoin round',
+     ' portrait', ...d.portrait.map(dot => `  filledCircle ${dot.join(' ')}`),
+     ' art', ...strokes(d.art), ' signature', '  translate 0 200', ...strokes(d.signature)
+    ].join('\n') + '\n';
+    const parts = leaf(d.title).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/([a-z])([A-Z])/g,'$1 $2').toLowerCase().match(/[a-z0-9]+/g) || ['untitled'];
+    const filename = parts.map((part,i) => i ? part[0].toUpperCase()+part.slice(1) : part).join('') + 'KnowBooksProposal.scroll';
+    // Hash the exact UTF-8 bytes before the final checksum line, including the last LF.
+    const hash = Array.from(new Uint8Array(await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode(brief))), byte => byte.toString(16).padStart(2,'0')).join('');
+    const url = URL.createObjectURL(new Blob([brief, `checksum sha256 ${hash}\n`], {type:'text/plain;charset=utf-8'}));
+    const a = Object.assign(document.createElement('a'), {href:url, download:filename});
+    a.click(); setTimeout(() => URL.revokeObjectURL(url),1000);
+   };
+   lines.addEventListener('click', event => {
+    const button = event.target.closest('[data-brief], [data-edit-design]'); if (!button) return;
+    const saved = products.get(button.dataset.brief || button.dataset.editDesign).design;
+    button.hasAttribute('data-brief') ? download(saved) : open(saved.mode, event, saved);
+   });
+   $('#design-experiments').innerHTML = Array.from({length:5},(_,i) => `<input aria-label="Experiment ${i+1} verb" placeholder="Verb ${i+1}" maxlength="24" pattern="[^\\s]+">`).join('');
+   const verbs = [...$('#design-experiments').querySelectorAll('input')];
+   verbs.forEach((input,i) => input.addEventListener('input', () => { input.value = input.value.replace(/\s/g,''); design.verbs[i] = input.value; remember(); }));
+   $('#design-colors').innerHTML = Object.entries(coverPalette).map(([name,color]) => `<button type="button" style="--swatch:${color}" data-color="${name}" aria-label="${name}" title="${name}" aria-pressed="false"></button>`).join('');
+   function render() {
+    $('.design-cover').style.setProperty('--cover', coverPalette[design.color]);
+    $('#design-colors').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed',b.dataset.color === design.color));
+    $('#design-portrait').innerHTML = dots(design.portrait); $('#remove-image').hidden = !design.portrait.length;
+    art.querySelector('.strokes').innerHTML = paths(design.art);
+    signature.querySelector('.strokes').innerHTML = paths(design.signature);
+   }
+   $('#design-colors').onclick = event => { const b = event.target.closest('[data-color]'); if(b) { design.color = b.dataset.color; render(); remember(); } };
+   title.addEventListener('keydown', event => { if(event.key === 'Enter') event.preventDefault(); });
+   title.addEventListener('input', () => { if(title.textContent.length > 60) title.textContent = title.textContent.slice(0,60); remember(); });
+   byline.addEventListener('input', remember);
+   marker.onclick = () => { erase = !erase; marker.setAttribute('aria-pressed',erase); marker.setAttribute('aria-label',erase ? 'Flip eraser to marker' : 'Flip marker to eraser'); marker.querySelector('span').textContent = erase ? 'Flip to draw' : 'Flip to erase'; };
+   const snapshot = () => { undo.push(JSON.stringify([design.art, design.signature])); if(undo.length>30) undo.shift(); };
+   $('#design-undo').onclick = () => { if(undo.length) { [design.art,design.signature] = JSON.parse(undo.pop()); render(); remember(); } };
+   // Reduce a stroke to its bends, then round them. Nearly straight strokes become a single line.
+   const distance = (p,a,b) => { const dx=b[0]-a[0],dy=b[1]-a[1], t=Math.max(0,Math.min(1,((p[0]-a[0])*dx+(p[1]-a[1])*dy)/(dx*dx+dy*dy || 1))); return Math.hypot(p[0]-a[0]-t*dx,p[1]-a[1]-t*dy); };
+   const simplify = points => {
+    let max=2.5,index=0; for(let i=1;i<points.length-1;i++) { const d=distance(points[i],points[0],points.at(-1)); if(d>max) {max=d;index=i;} }
+    return index ? [...simplify(points.slice(0,index+1)).slice(0,-1),...simplify(points.slice(index))] : [points[0],points.at(-1)];
+   };
+   const smooth = points => {
+    const p=simplify(points), last=p.at(-1); let d=`M${p[0]}`;
+    for(let i=1;i<p.length-1;i++) d+=` Q${p[i]} ${(p[i][0]+p[i+1][0])/2},${(p[i][1]+p[i+1][1])/2}`;
+    return `${d} L${last}`;
+   };
+   [art,signature].forEach(surface => {
+    const field=surface === art ? 'art' : 'signature';
+    const point = e => { const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(surface.getScreenCTM().inverse()); return [Math.round(Math.max(0,Math.min(200,p.x))),Math.round(Math.max(0,Math.min(surface.viewBox.baseVal.height,p.y)))]; };
+    const remove = e => {
+     const hit=document.elementFromPoint(e.clientX,e.clientY), group=surface.querySelector('.strokes');
+     if(hit?.parentNode === group) { design[field].splice([...group.children].indexOf(hit),1); render(); }
+    };
+    surface.onpointerdown = e => {
+     if(drawing || (e.button !== 0 && e.button !== 5)) return;
+     e.preventDefault(); snapshot(); surface.setPointerCapture(e.pointerId);
+     drawing={id:e.pointerId, points:[point(e)], erase:erase || e.button===5};
+     if(drawing.erase) remove(e);
+     else { const path=document.createElementNS('http://www.w3.org/2000/svg','path'); surface.querySelector('.strokes').append(path); drawing.path=path; }
+    };
+    surface.onpointermove = e => {
+     if(!drawing || drawing.id!==e.pointerId) return;
+     if(drawing.erase) {remove(e);return;}
+     const p=point(e); if(Math.hypot(p[0]-drawing.points.at(-1)[0],p[1]-drawing.points.at(-1)[1])<1.5 || drawing.points.length>=1500) return;
+     drawing.points.push(p); drawing.path.setAttribute('d','M'+drawing.points.join(' L'));
+    };
+    surface.onpointerup = e => {
+     if(!drawing || drawing.id!==e.pointerId) return;
+     if(!drawing.erase) { drawing.points.push(point(e)); design[field].push(smooth(drawing.points)); }
+     drawing=null; surface.releasePointerCapture(e.pointerId); render(); remember();
+    };
+    surface.onpointercancel = () => { if(drawing) { [design.art,design.signature]=JSON.parse(undo.pop()); drawing=null; render(); } };
+   });
+   $('#remove-image').onclick = () => { photoVersion++; design.portrait=[]; $('#portrait-file').value=''; render(); remember(); };
+   $('#portrait-file').onchange = async event => {
+    const file=event.target.files[0], version=++photoVersion;
+    if(!file) return;
+    if(!['image/png','image/jpeg','image/webp'].includes(file.type) || file.size>10000000) {status.textContent='Choose a PNG, JPEG or WebP photo under 10 MB.';return;}
+    try {
+     const image=await createImageBitmap(file); if(version!==photoVersion) {image.close();return;}
+     const canvas=document.createElement('canvas'); canvas.width=canvas.height=200;
+     const ctx=canvas.getContext('2d'); ctx.fillStyle='white'; ctx.fillRect(0,0,200,200);
+     const size=Math.min(image.width,image.height); ctx.drawImage(image,(image.width-size)/2,(image.height-size)/2,size,size,0,0,200,200); image.close();
+     const pixels=ctx.getImageData(0,0,200,200).data; design.portrait=[];
+     for(let y=3;y<198;y+=3) for(let x=3;x<198;x+=3) { const i=(y*200+x)*4, ink=1-(pixels[i]*.299+pixels[i+1]*.587+pixels[i+2]*.114)/255; if(ink>.15) design.portrait.push([x,y,+(ink*1.45).toFixed(2)]); }
+     design.art=[]; undo.length=0; render(); remember(); status.textContent='Gold hedcut preview. We refine the final artwork during design.';
+    } catch {status.textContent='Could not read that photo. Try another PNG or JPEG.';}
+   };
+   function open(kind,event,existing) {
+    event.preventDefault(); opener=event.target.closest('button, a'); mode=kind; editing=Boolean(existing); photoVersion++; undo.length=0;
+    design=existing ? structuredClone(existing) : drafts[mode] || fresh(); design.mode=mode; title.textContent=design.title; byline.value=design.byline || ''; byline.hidden=mode!=='signature';
+    verbs.forEach((input,i)=>input.value=design.verbs[i]); signature.toggleAttribute('hidden',mode!=='signature'); $('#signature-hint').hidden=mode!=='signature';
+    $('#designer-heading').textContent=designModes[mode].heading;
+    $('#design-add').textContent=editing ? 'Update cart' : 'Add $5,000 deposit to cart';
+    const email=designModes[mode].inbox+'@knowbooks.com'; $('#design-email').textContent=email; $('#design-email').href=`mailto:${email}?subject=${encodeURIComponent('Knowbook design '+design.id)}`;
+    status.textContent=''; $('#portrait-file').value=''; render(); dialog.showModal(); title.focus();
+   }
+   Object.entries(designModes).forEach(([kind, config]) => { $(config.trigger).onclick = event => open(kind,event); });
+   $('#design-close').onclick = () => dialog.close();
+   dialog.addEventListener('click', event => { if(event.target===dialog) { const r=dialog.getBoundingClientRect(); if(event.clientX<r.left || event.clientX>r.right || event.clientY<r.top || event.clientY>r.bottom) dialog.close(); } });
+   dialog.addEventListener('close', () => {photoVersion++; remember(); editing=false; (opener?.isConnected ? opener : drawer.querySelector('.cart-close')).focus();});
+   $('#design-form').onsubmit = event => {
+    event.preventDefault(); remember();
+    if(!design.title) {status.textContent='Give your Knowbook a title.';title.focus();return;}
+    if(mode==='signature' && (!design.portrait.length || !design.signature.length)) {status.textContent='Add a creator photo and draw your signature.';return;}
+    editing=false; remember(); products.set(design.id,product(structuredClone(design))); cart.set(design.id,1); refresh(); download(design); dialog.close(); openCart();
+   };
+  }
   productCatalog.forEach(product => editionDetails(product.status));
   grid.innerHTML = statusOrder.flatMap(status => {
    const stageProducts = productCatalog.filter(product => product.status === status);
@@ -832,9 +1042,10 @@ script
    requestAnimationFrame(() => document.querySelector("#catalog").scrollIntoView({ behavior: "instant", block: "start" }));
   }
   fitBookTitles();
+  initDesigner();
   try {
    const saved = JSON.parse(localStorage.getItem("knowbooks-cart") || "[]");
-   saved.forEach(([id, quantity]) => { if (products.has(id) && Number.isInteger(quantity) && quantity > 0) cart.set(id, quantity); });
+   saved.forEach(([id, quantity]) => { if (products.has(id) && Number.isInteger(quantity) && quantity > 0) cart.set(id, products.get(id).design ? 1 : quantity); });
   } catch {}
   grid.addEventListener("click", event => { const cover = event.target.closest(".book-cover"); const button = event.target.closest("[data-add]"); if (cover) { const url = new URL(location.href); url.searchParams.set("knowbookId", cover.closest(".product").id); history.replaceState(null, "", url); openBook(cover); } if (button) { addToCart(button.dataset.add, button.closest(".product").querySelector(".book-cover"), button); } });
   preview.addEventListener("click", event => { const button = event.target.closest(".preview-add"); if (button) addToCart(button.dataset.add, preview.querySelector(".preview-book"), button); if (event.target === preview || event.target.closest(".preview-close")) closeBook(); });
@@ -845,6 +1056,7 @@ script
   empty.querySelector("a").addEventListener("click", closeCart);
   scrim.addEventListener("click", closeCart);
   document.addEventListener("keydown", event => {
+   if (document.querySelector("#designer").open) return;
    if (event.key === "Escape") { closeCart(); closeBook(); }
    const modal = drawer.classList.contains("is-open") ? drawer : !preview.hidden ? preview : null;
    if (event.key !== "Tab" || !modal) return;
