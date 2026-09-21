@@ -26,6 +26,8 @@
 #design-source label { display: block; margin-top: 12px; }
 #design-code { display: block; width: 100%; min-height: 240px; margin-top: 10px; padding: 12px; resize: vertical; font: 12px/1.5 monospace; border: 1px solid var(--line); border-radius: 4px; background: #fff8; color: var(--ink); }
 #designer::backdrop { background: #151d19aa; }
+.cover-drop-target { position: fixed; inset: 12px; z-index: 10000; display: grid; place-items: center; padding: 24px; border: 3px dashed #d9bc78; border-radius: 12px; background: #151d19e6; color: #f4e5bf; text-align: center; font: 600 clamp(20px, 4vw, 32px)/1.4 Arial, sans-serif; pointer-events: none; }
+.cover-drop-target[hidden] { display: none; }
 body:has(#designer[open]) { overflow: hidden; }
 .designer-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
 .designer-head h2 { margin: 0; font-size: 26px; font-weight: normal; }
@@ -276,26 +278,26 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
  </section>
 <div class="scrollSection"><h2 id="faq" class="scrollParagraph">Frequently asked questions</h2>
 </div>
-<div class="scrollSection"><h4 id="particle32" class="scrollQuestion">Who are Knowbooks for?</h4>
-<p id="particle33" class="scrollParagraph">Knowbooks are for curious people of all ages. Younger children can explore them with an adult, while teenagers and adults can work through experiments independently.</p>
+<div class="scrollSection"><h4 id="particle38" class="scrollQuestion">Who are Knowbooks for?</h4>
+<p id="particle39" class="scrollParagraph">Knowbooks are for curious people of all ages. Younger children can explore them with an adult, while teenagers and adults can work through experiments independently.</p>
 </div>
-<div class="scrollSection"><h4 id="particle35" class="scrollQuestion">What comes inside each Knowbook?</h4>
-<p id="particle36" class="scrollParagraph">Each Knowbook contains a curated collection of real objects plus experiment cards that show you what to do to learn a superpower.</p>
+<div class="scrollSection"><h4 id="particle41" class="scrollQuestion">What comes inside each Knowbook?</h4>
+<p id="particle42" class="scrollParagraph">Each Knowbook contains a curated collection of real objects plus experiment cards that show you what to do to learn a superpower.</p>
 </div>
-<div class="scrollSection"><h4 id="particle38" class="scrollQuestion">How is the current build quality?</h4>
-<p id="particle39" class="scrollParagraph">Our first Knowbooks are Trailblazer editions. Each one is hand-crafted in Hawaii. They are complete and usable, but their objects, experiments, packaging, and instructions are improving as we learn from our first customers.</p>
+<div class="scrollSection"><h4 id="particle44" class="scrollQuestion">How is the current build quality?</h4>
+<p id="particle45" class="scrollParagraph">Our first Knowbooks are Trailblazer editions. Each one is hand-crafted in Hawaii. They are complete and usable, but their objects, experiments, packaging, and instructions are improving as we learn from our first customers.</p>
 </div>
-<div class="scrollSection"><h4 id="particle41" class="scrollQuestion">Can I use a Knowbook more than once?</h4>
-<p id="particle42" class="scrollParagraph">Yes. Knowbooks are designed to last a lifetime and can be explored repeatedly, shared, and returned to the shelf. Most objects are reusable; some contain consumable/replaceable materials.</p>
+<div class="scrollSection"><h4 id="particle47" class="scrollQuestion">Can I use a Knowbook more than once?</h4>
+<p id="particle48" class="scrollParagraph">Yes. Knowbooks are designed to last a lifetime and can be explored repeatedly, shared, and returned to the shelf. Most objects are reusable; some contain consumable/replaceable materials.</p>
 </div>
-<div class="scrollSection"><h4 id="particle44" class="scrollQuestion">How will I receive my KnowBook(s) (Hawaii customers)?</h4>
-<p id="particle45" class="scrollParagraph">Hawaii customers can have their KnowBooks delivered free of charge, or come pick them up.</p>
+<div class="scrollSection"><h4 id="particle50" class="scrollQuestion">How will I receive my KnowBook(s) (Hawaii customers)?</h4>
+<p id="particle51" class="scrollParagraph">Hawaii customers can have their KnowBooks delivered free of charge, or come pick them up.</p>
 </div>
-<div class="scrollSection"><h4 id="particle47" class="scrollQuestion">When will my Knowbook(s) ship (Mainland customers)?</h4>
-<p id="particle48" class="scrollParagraph">Orders begin assembly immediately. You'll receive tracking when your order is on its way. Delivery times will improve as we scale up.</p>
+<div class="scrollSection"><h4 id="particle53" class="scrollQuestion">When will my Knowbook(s) ship (Mainland customers)?</h4>
+<p id="particle54" class="scrollParagraph">Orders begin assembly immediately. You'll receive tracking when your order is on its way. Delivery times will improve as we scale up.</p>
 </div>
-<div class="scrollSection"><h4 id="particle50" class="scrollQuestion">What's the return policy?</h4>
-<p id="particle51" class="scrollParagraph">Your satisfaction is our top priority. If we don't reach your expectations, get in touch and we'll coordinate a replacement and/or refund.</p>
+<div class="scrollSection"><h4 id="particle56" class="scrollQuestion">What's the return policy?</h4>
+<p id="particle57" class="scrollParagraph">Your satisfaction is our top priority. If we don't reach your expectations, get in touch and we'll coordinate a replacement and/or refund.</p>
 </div>
 <section id="signature" aria-labelledby="signature-title" class="offering"><div id="signature-element-1" class="section-heading"><a href="#signature" id="signature-element-2" class="eyebrow">Signature Knowbooks</a>
 <h2 id="signature-title" >Your expertise.<br>Your signature.<br>Your Knowbook.</h2></div>
@@ -348,12 +350,38 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
 </footer>
 <div class="scrim" hidden></div>
 <div class="book-preview" role="dialog" aria-modal="true" aria-label="Inside this Knowbook" hidden></div>
-<aside class="cart" role="dialog" aria-modal="true" inert id="cart" aria-labelledby="cart-title" aria-hidden="true"> <div class="cart-head"><div><p class="eyebrow"></p><h2 id="cart-title">Your cart</h2></div><button class="cart-close" type="button" aria-label="Close cart">×</button></div>
- <div class="cart-art" aria-hidden="true"><div class="basket-books"></div><svg viewBox="0 0 160 120" fill="none" aria-hidden="true"><path d="M13 15h19l16 69h88" stroke="#343e35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 34h108l-13 40H47z" fill="#c7ad7029" stroke="#343e35" stroke-width="3" stroke-linejoin="round"/><path d="M62 35l5 38m20-38v38m23-38-5 38M43 54h96" stroke="#8b805f" stroke-width="2"/><circle cx="59" cy="100" r="9" fill="#343e35"/><circle cx="126" cy="100" r="9" fill="#343e35"/><circle cx="59" cy="100" r="3" fill="#efe9da"/><circle cx="126" cy="100" r="3" fill="#efe9da"/></svg></div>
- <div class="cart-lines"></div>
- <div class="cart-empty"><p>Your cart is empty.</p><a href="#catalog">Find a Knowbook</a></div>
- <div class="cart-footer" hidden><div class="referral"><input id="referral-code" type="text" placeholder="Referral code (optional)" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="referral-status"><p class="referral-status" id="referral-status" role="status"></p></div><p class="cart-total"><span>Total</span><strong>$0</strong></p><small class="shipping-note">Includes shipping and tax.</small><a class="paypal-button" href="https://www.paypal.com/cgi-bin/webscr" rel="noopener">Checkout with PayPal &nbsp; ↗</a><div class="wallet-buttons"><a href="https://cash.app/$knowbooksdotcom" target="_blank" rel="noopener">Cash App &nbsp; ↗<span>$knowbooksdotcom</span></a><a href="https://venmo.com/u/knowbooks" target="_blank" rel="noopener">Venmo &nbsp; ↗<span>@knowbooks</span></a></div><small>For Cash App or Venmo, send the cart total shown above then email your order to <a href="mailto:founders@knowbooks.com?subject=Cash%20App%20or%20Venmo%20order">founders@knowbooks.com</a>.</small><small>Cash/check accepted at all our Hawaii locations.</small><details class="crypto"><summary>Pay with crypto</summary><p><b>NEAR</b><span><output data-crypto="NEAR"></output><code>knowbooks.near</code></span><b>BTC</b><span><output data-crypto="BTC"></output><code>3G9q4tRjkTSP8PP4eFVZuNLtXxKuERJcJr</code></span><b>ETH</b><span><output data-crypto="ETH"></output><code>0xaEe37CE75AcC6341abfa1c73c6Bb1B73963a6ccD</code></span><b>USDC <i>(Base)</i></b><span><output data-crypto="USDC"></output><code>0x3d3e69E8f208A782E09f018643fE9796e918e45e</code></span></p><small>Send the amount shown, then email your transaction ID, cart, and shipping address to <a href="mailto:paybycrypto@knowbooks.com">paybycrypto@knowbooks.com</a>.</small></details></div>
-</aside>
+<aside role="dialog" aria-modal="true" inert="undefined" id="cart" aria-labelledby="cart-title" aria-hidden="true" class="cart"><div id="cart-element-1" class="cart-head"><div id="cart-element-2" ><p id="cart-element-3" class="eyebrow"></p>
+<h2 id="cart-title" >Your cart</h2></div>
+<button id="cart-element-4" type="button" aria-label="Close cart" class="cart-close">×</button></div>
+<div id="cart-element-5" aria-hidden="true" class="cart-art"><div id="cart-element-6" class="basket-books"></div>
+<svg viewBox="0 0 160 120" fill="none" aria-hidden="true"><path d="M13 15h19l16 69h88" stroke="#343e35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 34h108l-13 40H47z" fill="#c7ad7029" stroke="#343e35" stroke-width="3" stroke-linejoin="round"/><path d="M62 35l5 38m20-38v38m23-38-5 38M43 54h96" stroke="#8b805f" stroke-width="2"/><circle cx="59" cy="100" r="9" fill="#343e35"/><circle cx="126" cy="100" r="9" fill="#343e35"/><circle cx="59" cy="100" r="3" fill="#efe9da"/><circle cx="126" cy="100" r="3" fill="#efe9da"/></svg></div>
+<div id="cart-element-7" class="cart-lines"></div>
+<div id="cart-element-8" class="cart-empty"><p id="cart-element-9" class="scrollParagraph">Your cart is empty.</p>
+<a id="cart-element-10" href="#catalog" >Find a Knowbook</a></div>
+<div id="cart-element-11" hidden class="cart-footer"><div id="cart-element-12" class="referral"><input id="referral-code" type="text" placeholder="Referral code (optional)" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="referral-status"  />
+<p id="referral-status" role="status" class="referral-status"></p></div>
+<p id="cart-element-13" class="cart-total"><span id="cart-element-14" >Total</span>
+<strong id="cart-element-15" >$0</strong></p>
+<small id="cart-element-16" class="shipping-note">Includes shipping and tax.</small>
+<a id="cart-element-17" href="https://www.paypal.com/cgi-bin/webscr" rel="noopener" class="paypal-button">Checkout with PayPal &nbsp; ↗</a>
+<div id="cart-element-18" class="wallet-buttons"><a id="cart-element-19" href="https://cash.app/$knowbooksdotcom" target="_blank" rel="noopener" >Cash App &nbsp; ↗<span id="cart-element-20" >$knowbooksdotcom</span></a>
+<a id="cart-element-21" href="https://venmo.com/u/knowbooks" target="_blank" rel="noopener" >Venmo &nbsp; ↗<span id="cart-element-22" >@knowbooks</span></a></div>
+<small id="cart-element-23" >For Cash App or Venmo, send the cart total shown above then email your order to <a href="mailto:founders@knowbooks.com?subject=Cash%20App%20or%20Venmo%20order">founders@knowbooks.com</a>.</small>
+<small id="cart-element-24" >Cash/check accepted at all our Hawaii locations.</small>
+<details id="cart-element-25" class="crypto"><summary id="cart-element-26" >Pay with crypto</summary>
+<p id="cart-element-27" class="scrollParagraph"><b id="cart-element-28" >NEAR</b>
+<span id="cart-element-29" ><output id="cart-element-30" data-crypto="NEAR" ></output>
+<code id="cart-element-31" >knowbooks.near</code></span>
+<b id="cart-element-32" >BTC</b>
+<span id="cart-element-33" ><output id="cart-element-34" data-crypto="BTC" ></output>
+<code id="cart-element-35" >3G9q4tRjkTSP8PP4eFVZuNLtXxKuERJcJr</code></span>
+<b id="cart-element-36" >ETH</b>
+<span id="cart-element-37" ><output id="cart-element-38" data-crypto="ETH" ></output>
+<code id="cart-element-39" >0xaEe37CE75AcC6341abfa1c73c6Bb1B73963a6ccD</code></span>
+<b id="cart-element-40" >USDC <i>(Base)</i></b>
+<span id="cart-element-41" ><output id="cart-element-42" data-crypto="USDC" ></output>
+<code id="cart-element-43" >0x3d3e69E8f208A782E09f018643fE9796e918e45e</code></span></p>
+<small id="cart-element-44" >Send the amount shown, then email your transaction ID, cart, and shipping address to <a href="mailto:paybycrypto@knowbooks.com">paybycrypto@knowbooks.com</a>.</small></details></div></aside>
 <dialog id="designer" aria-labelledby="designer-heading"><form id="design-form">
 <div class="designer-head"><h2 id="designer-heading">Build your Knowbook</h2><button type="button" id="design-close" aria-label="Close designer">×</button></div>
 <div class="design-spread">
@@ -892,8 +920,8 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
    surface.onpointercancel = () => { if(drawing) { [design.art,design.signature]=JSON.parse(undo.pop()); drawing=null; render(); } };
   });
   $('#remove-image').onclick = () => { photoVersion++; design.portrait=[]; $('#portrait-file').value=''; render(); remember(); };
-  $('#portrait-file').onchange = async event => {
-   const file=event.target.files[0], version=++photoVersion;
+  const useCoverImage = async file => {
+   const version=++photoVersion;
    if(!file) return;
    if(!['image/png','image/jpeg','image/webp'].includes(file.type) || file.size>10000000) {status.textContent='Choose a PNG, JPEG or WebP photo under 10 MB.';return;}
    try {
@@ -904,8 +932,49 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
     const pixels=ctx.getImageData(0,0,200,200).data; design.portrait=[];
     for(let y=3;y<198;y+=3) for(let x=3;x<198;x+=3) { const i=(y*200+x)*4, ink=1-(pixels[i]*.299+pixels[i+1]*.587+pixels[i+2]*.114)/255; if(ink>.15) design.portrait.push([x,y,+(ink*1.45).toFixed(2)]); }
     design.art=[]; undo.length=0; render(); remember(); status.textContent='Gold hedcut preview. We refine the final artwork during design.';
-   } catch {status.textContent='Could not read that photo. Try another PNG or JPEG.';}
+   } catch {if(version===photoVersion) status.textContent='Could not read that photo. Try another PNG or JPEG.';}
   };
+  $('#portrait-file').onchange = event => useCoverImage(event.target.files[0]);
+  const dropTarget = document.createElement('div');
+  dropTarget.className='cover-drop-target'; dropTarget.hidden=true; dropTarget.setAttribute('role','status');
+  dropTarget.textContent='Drop file to use as custom knowbook cover art';
+  document.body.append(dropTarget);
+  let dragDepth=0;
+  const isFileDrag = event => [...(event.dataTransfer?.types || [])].includes('Files');
+  const clearDropTarget = () => {dragDepth=0;dropTarget.hidden=true;};
+  const showDropTarget = () => {
+   // A modal dialog is in the browser's top layer, so host the overlay there when open.
+   const host=dialog.open ? dialog : document.body;
+   if(dropTarget.parentNode!==host) host.append(dropTarget);
+   dropTarget.hidden=false;
+  };
+  document.addEventListener('dragenter', event => {
+   if(!isFileDrag(event)) return;
+   event.preventDefault(); dragDepth++; showDropTarget();
+  });
+  document.addEventListener('dragover', event => {
+   if(!isFileDrag(event)) return;
+   event.preventDefault(); event.dataTransfer.dropEffect='copy'; showDropTarget();
+  });
+  document.addEventListener('dragleave', event => {
+   if(!isFileDrag(event) && !dragDepth) return;
+   if(--dragDepth<=0 || !event.relatedTarget) clearDropTarget();
+  });
+  document.addEventListener('drop', event => {
+   clearDropTarget();
+   if(!isFileDrag(event)) return;
+   event.preventDefault();
+   const file=[...event.dataTransfer.files].find(file => ['image/png','image/jpeg','image/webp'].includes(file.type));
+   if(!file) {if(dialog.open) status.textContent='Choose a PNG, JPEG or WebP photo under 10 MB.';return;}
+   if(!dialog.open) {
+    const next=fresh();
+    next.title=file.name.replace(/\.[^.]+$/, '').replace(/[_-]+/g,' ').replace(/\s+/g,' ').trim().slice(0,60) || next.title;
+    open('signature',undefined,undefined,next);
+   }
+   useCoverImage(file);
+  });
+  window.addEventListener('blur',clearDropTarget);
+  document.addEventListener('dragend',clearDropTarget);
   function showDesign() {
    title.textContent=design.title; byline.value=design.byline || ''; byline.hidden=mode!=='signature';
    verbs.forEach((input,i)=>input.value=design.verbs[i]); signature.toggleAttribute('hidden',mode!=='signature'); $('#signature-hint').hidden=mode!=='signature';
@@ -914,9 +983,9 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
    const email=designModes[mode].inbox+'@knowbooks.com'; $('#design-email').textContent=email; $('#design-email').href=`mailto:${email}?subject=${encodeURIComponent('Knowbook design '+design.id)}`;
    render();
   }
-  function open(kind,event,existing) {
+  function open(kind,event,existing,newDesign) {
    codeInvalid=false;event?.preventDefault(); opener=event?.target.closest('button, a') || $(designModes[kind].trigger); mode=kind; editing=Boolean(existing); photoVersion++; undo.length=0;
-   design=existing ? structuredClone(existing) : drafts[mode] || fresh(); design.mode=mode;
+   design=existing ? structuredClone(existing) : newDesign || drafts[mode] || fresh(); design.mode=mode;
    showDesign(); syncCode();
    status.textContent=''; $('#portrait-file').value=''; render(); dialog.showModal(); title.focus();
   }
