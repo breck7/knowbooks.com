@@ -19,7 +19,7 @@ main
  id software-main
  section
   addClass hero
-  h1 Free software by Knowbooks.com
+  h1 Free software from Knowbooks.com
  section
   addClass tool-grid
   aria-label Free utilities
