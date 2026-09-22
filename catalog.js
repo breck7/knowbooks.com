@@ -480,8 +480,8 @@ const catalog = [
     "priceUsd": 249
   },
   {
-    "id": "breathing",
-    "title": "Breathing",
+    "id": "breath",
+    "title": "Breath",
     "status": "believer",
     "priceUsd": 249
   },
