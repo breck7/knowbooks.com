@@ -7,9 +7,22 @@ const source = readFileSync(__dirname + '/checko.js', 'utf8');
 const checko = runInNewContext(source + '\nchecko', {crypto:webcrypto, TextEncoder});
 const sample = 'title A little discovery\nexperiments Bend Build Explore\n';
 (async () => {
+ const generator = runInNewContext(source + '\ncheckoGeneratorV1', {crypto:webcrypto, TextEncoder});
+ const vocabulary = source.match(/const words = "([^"]+)"\.split/)[1].split(' ');
+ const details = 'orderDetails\n currency USD\n items\n  item magnets\n   quantity 1\n   unitPriceUsd 249.00\n';
+ const phrase = await generator(details);
+ assert.equal(phrase.split(' ').length,5);
+ assert.ok(phrase.split(' ').every(word => vocabulary.includes(word)));
+ let value=BigInt('0x'+createHash('sha256').update('checkoGeneratorV1\n'+details).digest('hex'));
+ const expected=Array(5);
+ for(let i=4;i>=0;i--){expected[i]=vocabulary[Number(value%BigInt(vocabulary.length))];value/=BigInt(vocabulary.length);}
+ assert.equal(phrase,expected.join(' '));
+ assert.equal(await generator(details.replaceAll('\n','\r\n')+'\r\n'),phrase);
+ for(const edit of [details.replace('249.00','250.00'),details.replace('quantity 1','quantity 2'),details+'   customization forest\n']) assert.notEqual(await generator(edit),phrase);
+ console.log('checkoGeneratorV1 passed: 5 frozen-vocabulary words, independent SHA-256 encoding, normalization, price/quantity/customization changes.');
  const base=await checko(sample);
  // Frozen vector independently produced with Python hashlib and integer base conversion.
- assert.equal(base,'littleBendBendExperimentsLittleBuildBendADiscoveryAExperimentsExperimentsExploreLittleExploreATitleExperimentsLittleExperimentsTitleTitleExploreLittle');
+ assert.equal(base,'littleBendAExperimentsBuildExperimentsLittleAExploreExploreExperimentsBuildBuildExperimentsTitleExperimentsBendDiscoveryBuildBuildExperimentsABendBend');
  for(const text of [sample.trimEnd(),sample.replaceAll('\n','\r\n'),sample.replaceAll('\n','\r'),sample+'\n',sample+`checko v1 ${base}\n`,'checko v1 wrong\n'+sample,sample+'checko']) assert.equal(await checko(text),base);
  for(const text of [sample.replace('title','Title'),sample.replace('title',' title'),sample.replace('little','little '),sample+' checko v1 nested\n',sample+'checkoOther word\n',sample+'checksum sha256 old\n',sample+'42']) assert.notEqual(await checko(text),base);
  for(const text of ['', '12345','hello','hello HELLO','你好 世界','Café']) await assert.rejects(checko(text),/two distinct/);

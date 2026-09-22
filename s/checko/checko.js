@@ -11,3 +11,15 @@ async function checko(scroll) {
   for (let i = length - 1; i >= 0; i--) { phrase[i] = words[Number(value % base)]; value /= base; }
   return phrase.map((word, i) => i ? word[0].toUpperCase() + word.slice(1) : word).join('');
 }
+
+// Frozen order-ID vocabulary and algorithm. Catalog changes must not change V1.
+// Input is order details only, without timestamp, customer, or payment metadata.
+async function checkoGeneratorV1(scroll) {
+  const words = "magnets focus levers beams sales carpentry plumbing capital light tools gravity sound electricity air heat glass cells iron elements copper gold venture banking fire sleep fields energy frequency waves helices springs voltage motors gears colors matter atoms motion momentum friction ropes wind aerodynamics water rust time patience centuries liberty courage property membranes decay bonds teamwork motivation competition alignment collusion anger paper ink folding metals steel aluminum brass wood seeds wheels wedges stars exploration fabric food trees breath smell rain budgeting bookkeeping screws payroll batteries software scroll marketing twitter hydration hurricanes currency bitcoin guitar piano drums singing actuators rockets transistors mitochondria cancer fusion raising attraction basketball football soccer boxing golf baseball flow gluons bosons solar knowbooks".split(' ');
+  const text = scroll.replace(/\r\n?/g, '\n').replace(/\n*$/, '\n');
+  const hash = new Uint8Array(await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode('checkoGeneratorV1\n' + text)));
+  let value = BigInt('0x' + Array.from(hash, byte => byte.toString(16).padStart(2, '0')).join(''));
+  const phrase = Array(5), base = BigInt(words.length);
+  for (let i = 4; i >= 0; i--) { phrase[i] = words[Number(value % base)]; value /= base; }
+  return phrase.join(' ');
+}
