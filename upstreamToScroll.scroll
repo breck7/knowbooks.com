@@ -27,7 +27,7 @@ additionalHtmlElementParser
 
 additionalHtmlAttributeParser
  extends abstractAftertextAttributeParser
- pattern ^(aria-modal|aria-hidden|aria-describedby|inert|autocomplete|autocapitalize|spellcheck|rel)( |$)
+ pattern ^(aria-modal|aria-hidden|aria-describedby|inert|autocomplete|autocapitalize|spellcheck|rel|download)( |$)
  catchAllAtomType htmlAnyAtom
 
 htmlHiddenAttributeParser
@@ -52,3 +52,9 @@ htmlLinkifyParser
  extends linkifyParser
  cue linkify
  boolean isMarkup false
+
+// Native aftertext code currently emits a malformed <codeclass> tag.
+htmlCodeMarkupParser
+ extends abstractMarkupParser
+ cue code
+ string tag code

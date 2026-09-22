@@ -6,33 +6,87 @@ permalink index.html
 buildHtml
 metaTags
 
-<header><a href="../../">Knowbooks</a><a href="checko.js" download>One function ↓</a></header>
-<main>
-<p class="eyebrow">CHECKSUM + POEM</p>
-<h1>Checko.</h1>
-<p class="lead">A checksum you can say.</p>
-<p>Same Scroll, same poem. Tiny edits ripple through the phrase.</p>
-<div class="workbench">
-<section><label for="document">Your Scroll</label><textarea id="document" spellcheck="false"></textarea><small>Everything stays in your browser.</small></section>
-<section class="result"><label for="generated">Your checko · v1</label><textarea id="generated" readonly spellcheck="false" rows="4" aria-label="Generated checko"></textarea><p id="spoken"></p><label for="candidate">Check a phrase</label><textarea id="candidate" spellcheck="false" rows="3" placeholder="Paste a checko, then edit it…" aria-describedby="match"></textarea><div class="verify"><output id="match" aria-live="polite"></output><button id="use-current" type="button">Use current</button></div></section>
-</div>
+../../upstreamToScroll.scroll
 
-<h2>The document supplies the words.</h2>
-<p>Hash the Scroll. Use its own vocabulary to spell the result in camelCase. Same document, same phrase. Change the text, and its checko usually changes dramatically.</p>
-<p>We encode 72 hash bits. More distinct words mean a shorter checko: 64 words need 12; 16 need 18; two need 72. Repeats are allowed. Fewer than two distinct words cannot produce a useful word-only checko.</p>
-<p>Useful for comparing copies, not proving authorship. For a fixed vocabulary, an accidental pair match is about 1 in 4.7 sextillion; deliberate collision search takes roughly 2<sup>36</sup> work. This is a new encoding, not a new cryptographic hash.</p>
-<details><summary>Exact v1 rules</summary>
-<ol><li>Normalize CRLF and CR to LF. Remove top-level <code>checko</code> lines. Collapse trailing newlines to one LF. All other text, indentation, punctuation and Unicode remain significant.</li><li>Extract letter/combining-mark tokens. Lowercase, keep only A–Z words, deduplicate and sort alphabetically. V1 does not use numbers or non-A–Z words as vocabulary; they still affect the hash.</li><li>Hash UTF-8 bytes of <code>checko:v1\n</code> followed by the normalized text. The prefix ends in an actual LF.</li><li>Interpret SHA-256’s first 72 bits as an unsigned big-endian integer. For N distinct words, use the smallest L with N<sup>L</sup> ≥ 2<sup>72</sup>. Write that integer as L base-N digits, padding on the left with zeros; each digit indexes the sorted vocabulary.</li><li>Join the words in camelCase. Store <code>checko v1 yourCamelCasePhrase</code>; this reserved metadata line is excluded. Compare phrases exactly. Freeze these rules for v1.</li></ol>
-<p>This fingerprints text, not a parsed tree. A tiny edit is not guaranteed to change every word, and collisions remain possible. The vocabulary is local to each document; no outside words are introduced.</p>
-</details>
-<details><summary>The whole function</summary><pre><code id="implementation"></code></pre></details>
-
-Built on SHA-256. Human-readable hash encodings have precedents, including RFC 1751.
- https://www.nist.gov/publications/secure-hash-standard SHA-256
- https://datatracker.ietf.org/doc/html/rfc1751 RFC 1751
-
-</main>
-<footer>Checko v1 · Made for Scroll · <a href="readme.scroll" download>Page source ↓</a></footer>
+header
+ a Knowbooks
+  href ../../
+ a One function ↓
+  href checko.js
+  download checko.js
+main
+ CHECKSUM + POEM
+  addClass eyebrow
+ h1 Checko.
+ A checksum you can say.
+  addClass lead
+ Same Scroll, same poem. Tiny edits ripple through the phrase.
+ div
+  addClass workbench
+  section
+   label Your Scroll
+    for document
+   textarea
+    id document
+    spellcheck false
+   small Everything stays in your browser.
+  section
+   addClass result
+   label Your checko · v1
+    for generated
+   textarea
+    id generated
+    readonly true
+    spellcheck false
+    rows 4
+    aria-label Generated checko
+   p
+    id spoken
+   label Check a phrase
+    for candidate
+   textarea
+    id candidate
+    spellcheck false
+    rows 3
+    placeholder Paste a checko, then edit it…
+    aria-describedby match
+   div
+    addClass verify
+    output
+     id match
+     aria-live polite
+    button Use current
+     id use-current
+     type button
+ h2 The document supplies the words.
+ Hash the Scroll. Use its own vocabulary to spell the result in camelCase. Same document, same phrase. Change the text, and its checko usually changes dramatically.
+ We encode 72 hash bits. More distinct words mean a shorter checko: 64 words need 12; 16 need 18; two need 72. Repeats are allowed. Fewer than two distinct words cannot produce a useful word-only checko.
+ Useful for comparing copies, not proving authorship. For a fixed vocabulary, an accidental pair match is about 1 in 4.7 sextillion; deliberate collision search takes roughly 2³⁶ work. This is a new encoding, not a new cryptographic hash.
+ details
+  summary Exact v1 rules
+  ol
+   li Normalize CRLF and CR to LF. Remove top-level checko lines. Collapse trailing newlines to one LF. All other text, indentation, punctuation and Unicode remain significant.
+    code checko
+   li Extract letter/combining-mark tokens. Lowercase, keep only A–Z words, deduplicate and sort alphabetically. V1 does not use numbers or non-A–Z words as vocabulary; they still affect the hash.
+   li Hash UTF-8 bytes of checko:v1\n followed by the normalized text. The prefix ends in an actual LF.
+    code checko:v1\n
+   li Interpret SHA-256’s first 72 bits as an unsigned big-endian integer. For N distinct words, use the smallest L with Nᴸ ≥ 2⁷². Write that integer as L base-N digits, padding on the left with zeros; each digit indexes the sorted vocabulary.
+   li Join the words in camelCase. Store checko v1 yourCamelCasePhrase; this reserved metadata line is excluded. Compare phrases exactly. Freeze these rules for v1.
+    code checko v1 yourCamelCasePhrase
+  This fingerprints text, not a parsed tree. A tiny edit is not guaranteed to change every word, and collisions remain possible. The vocabulary is local to each document; no outside words are introduced.
+ details
+  summary The whole function
+  pre
+   inlineCode
+    id implementation
+ Built on SHA-256. Human-readable hash encodings have precedents, including RFC 1751.
+  https://www.nist.gov/publications/secure-hash-standard SHA-256
+  https://datatracker.ietf.org/doc/html/rfc1751 RFC 1751
+footer
+ span Checko v1 · Made for Scroll ·
+ a Page source ↓
+  href readme.scroll
+  download readme.scroll
 
 checko.js
 script
