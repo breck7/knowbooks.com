@@ -402,7 +402,7 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
 <noscript>This shop needs JavaScript to manage its cart.</noscript>
 <script  src="catalog.js"></script>
 <script  src="tags.js"></script>
-<script  src="s/checkem/checkem.js"></script>
+<script  src="s/checko/checko.js"></script>
 <script>(() => {
  "use strict";
  const coverPalette = {
@@ -788,13 +788,13 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
     ' art', ...strokes(d.art), ' signature', '  translate 0 200', ...strokes(d.signature)
    ].join('\n') + '\n';
   };
-  const signText = async brief => brief + `checkem v1 ${await checkem(brief)}\n`;
+  const signText = async brief => brief + `checko v1 ${await checko(brief)}\n`;
   const signedProposal = d => signText(proposal(d));
   const code = $('#design-code'), codeStatus = $('#design-code-status'), designLink = $('#design-link');
   designLink.addEventListener('focus', () => designLink.select());
   let codeVersion=0, codeInvalid=false;
   async function syncCode(fromEditor=false) {
-   const version=++codeVersion, text=await signText(fromEditor ? code.value.replace(/^(?:checksum|checkem)(?:[ \t][^\n]*)?(?:\n|$)/gm,'').replace(/\n?$/, '\n') : proposal(design));
+   const version=++codeVersion, text=await signText(fromEditor ? code.value.replace(/^(?:checksum|checko)(?:[ \t][^\n]*)?(?:\n|$)/gm,'').replace(/\n?$/, '\n') : proposal(design));
    if(version!==codeVersion || codeInvalid || (!fromEditor && document.activeElement===code)) return;
    const [start,end]=[code.selectionStart,code.selectionEnd]; code.value=text; if(fromEditor) code.setSelectionRange(start,end); codeInvalid=false; code.setCustomValidity(''); codeStatus.textContent='';
    const url=new URL(location.href);url.search='';url.hash='knowbook='+encodeURIComponent(text);designLink.value=url.href;
@@ -812,7 +812,7 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
     const result={};for(const child of node.children) {if(!allowed.includes(child.key) || result[child.key]) fail(`Unexpected or repeated field: ${child.key}`);result[child.key]=child;}return result;
    };
    const scalar = (node, fallback='') => {if(node?.children.length) fail(`Unexpected indentation below ${node.key}.`);return node?.value ?? fallback;};
-   const top=fields(root,['title','id','edition','byline','color','designFeeUsd','depositUsd','prototype','balance','copies','experiments','cover','checksum','checkem']);
+   const top=fields(root,['title','id','edition','byline','color','designFeeUsd','depositUsd','prototype','balance','copies','experiments','cover','checksum','checko']);
    const d={...fresh(),title:scalar(top.title),id:scalar(top.id),mode:scalar(top.edition),byline:scalar(top.byline),color:scalar(top.color),verbs:scalar(top.experiments).split(/\s+/).filter(Boolean)};
    if(!d.title.trim() || d.title.length>60 || d.byline.length>60) fail('Use a title and byline of at most 60 characters.');
    if(!/^custom-[a-f0-9-]{8}$/.test(d.id)) fail('ID must be custom- followed by eight hexadecimal characters.');
