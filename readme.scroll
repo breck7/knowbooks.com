@@ -114,8 +114,7 @@ css
  .design-price { font: 30px Georgia, serif; margin: 14px 0 8px; }
  .design-price small { display: inline !important; }
  #design-add { width: 100%; padding: 12px; border: 0; border-radius: 5px; color: white; background: #243d32; font-weight: bold; cursor: pointer; }
- .design-handoff, #design-status { font-size: 12px; }
- #designer:has(#design-source[open]) .design-spread { display: none; }
+ #design-status { font-size: 12px; }
  #design-code { height: min(52dvh, 440px); min-height: 120px; }
  @media(max-width: 600px) {
   #designer { padding: 12px; } .designer-head h2 { font-size: 21px; }
@@ -1264,7 +1263,7 @@ script
     if(key==='i') h.inverse=!h.inverse;
     else if(key==='0') {h.inverse=false;h.gamma=1;}
     else h.gamma=Math.max(.25,Math.min(4,h.gamma*(key==='[' ? 1.25 : .8)));
-    applyHedcut(h); status.textContent=`Hedcut: ${h.inverse ? 'inverted' : 'normal'}, ink ${Math.round(100/h.gamma)}%.`;
+    applyHedcut(h);
    });
    function applyHedcut(h) {
     design.portrait=!h.inverse && h.gamma===1 ? structuredClone(h.original) : h.tones.flatMap(([x,y,tone])=>{
@@ -1333,7 +1332,6 @@ script
     title.textContent=design.title; byline.value=design.byline || '';
     verbs.forEach((input,i)=>input.value=design.verbs[i]);
     $('#design-add').textContent=editing ? 'Update cart' : 'Add $5,000 deposit to cart';
-    $('#design-email').href=`mailto:signature@knowbooks.com?subject=${encodeURIComponent('Knowbook design '+design.id)}`;
     render();
    }
    function open(event,existing,newDesign) {
