@@ -10,7 +10,7 @@ metaTags
 
 header
  a Knowbooks
-  href ../../
+  href ../index.html
  a Download JavaScript ↓
   href checko.js
   download checko.js
@@ -52,9 +52,8 @@ main
  Experimental. Collisions are possible. Everything stays in your browser.
 footer
  span Experimental ·
- a Page source ↓
-  href readme.scroll
-  download readme.scroll
+ a Page source
+  href https://github.com/breck7/knowbooks.com/tree/main/s/checko
 
 checko.js
 script
