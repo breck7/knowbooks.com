@@ -1,15 +1,5 @@
 // Map boundaries: world-atlas@2 countries-50m (Natural Earth, public domain); us-atlas@3 states-10m (US Census, public domain).
 // Paths projected with D3 geoNaturalEarth1. The HQ pin locates Hawaii, not a street address.
-partnerMapSvgParser
- extends abstractIndentableParagraphParser
- cue partnerMapSvg
- catchAllParser htmlLineParser
- javascript
-  buildHtml() { return this.subparticlesToString() }
-
-partnerDialogElementParser
- extends abstractHtmlElementParser
- cue dialog
 
 dialog
  id partner-dialog
@@ -33,7 +23,7 @@ dialog
   tabindex 0
   role region
   aria-label Partner map. Drag to move, pinch or scroll to zoom. Arrow keys move; plus and minus zoom; Home resets.
-  partnerMapSvg
+  inlineSvg
    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img" aria-labelledby="partner-map-title partner-map-desc">
    <title id="partner-map-title">Knowbooks around the world</title>
    <desc id="partner-map-desc">World map with countries, US states, and Knowbooks HQ in Hawaii.</desc>
