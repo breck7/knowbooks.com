@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+ <title>Checko — a checksum you can say</title>
+ <script>/* This HTML was generated from readme.scroll by 📜 Scroll v180.0.1. https://scroll.surf */</script>
+ <style>@media print {.doNotPrint {display: none !important;}}</style>
+ <link rel="canonical" href="/index.html">
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="description" content="A poem-shaped fingerprint for Scroll documents. Paste, edit, and compare.">
+ 
+ <meta name="generator" content="Scroll v180.0.1">
+ <meta property="og:title" content="Checko — a checksum you can say">
+ <meta property="og:description" content="A poem-shaped fingerprint for Scroll documents. Paste, edit, and compare.">
+ <meta property="og:image" content="">
+ 
+ <link rel="source" type="application/git" title="Source Code Repository" href="readme.scroll">
+ 
+ <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header><a href="../../">Knowbooks</a><a href="checkem.js" download>One function ↓</a></header>
+<main>
+<p class="eyebrow">CHECKSUM + POEM</p>
+<h1>Checko.</h1>
+<p class="lead">A checksum you can say.</p>
+<p>Same Scroll, same poem. Tiny edits ripple through the phrase.</p>
+<div class="workbench">
+<section><label for="document">Your Scroll</label><textarea id="document" spellcheck="false"></textarea><small>Everything stays in your browser.</small></section>
+<section class="result"><label for="generated">Your checkem · v1</label><textarea id="generated" readonly spellcheck="false" rows="4" aria-label="Generated checkem"></textarea><p id="spoken"></p><label for="candidate">Check a phrase</label><textarea id="candidate" spellcheck="false" rows="3" placeholder="Paste a checkem, then edit it…" aria-describedby="match"></textarea><div class="verify"><output id="match" aria-live="polite"></output><button id="use-current" type="button">Use current</button></div></section>
+</div>
+<h2>The document supplies the words.</h2>
+<p>Hash the Scroll. Use its own vocabulary to spell the result in camelCase. Same document, same phrase. Change the text, and its checkem usually changes dramatically.</p>
+<p>We encode 72 hash bits. More distinct words mean a shorter checkem: 64 words need 12; 16 need 18; two need 72. Repeats are allowed. Fewer than two distinct words cannot produce a useful word-only checkem.</p>
+<p>Useful for comparing copies, not proving authorship. For a fixed vocabulary, an accidental pair match is about 1 in 4.7 sextillion; deliberate collision search takes roughly 2<sup>36</sup> work. This is a new encoding, not a new cryptographic hash.</p>
+<details><summary>Exact v1 rules</summary>
+<ol><li>Normalize CRLF and CR to LF. Remove top-level <code>checkem</code> lines. Collapse trailing newlines to one LF. All other text, indentation, punctuation and Unicode remain significant.</li><li>Extract letter/combining-mark tokens. Lowercase, keep only A–Z words, deduplicate and sort alphabetically. V1 does not use numbers or non-A–Z words as vocabulary; they still affect the hash.</li><li>Hash UTF-8 bytes of <code>checkem:v1\n</code> followed by the normalized text. The prefix ends in an actual LF.</li><li>Interpret SHA-256’s first 72 bits as an unsigned big-endian integer. For N distinct words, use the smallest L with N<sup>L</sup> ≥ 2<sup>72</sup>. Write that integer as L base-N digits, padding on the left with zeros; each digit indexes the sorted vocabulary.</li><li>Join the words in camelCase. Store <code>checkem v1 yourCamelCasePhrase</code>; this reserved metadata line is excluded. Compare phrases exactly. Freeze these rules for v1.</li></ol>
+<p>This fingerprints text, not a parsed tree. A tiny edit is not guaranteed to change every word, and collisions remain possible. The vocabulary is local to each document; no outside words are introduced.</p>
+</details>
+<details><summary>The whole function</summary><pre><code id="implementation"></code></pre></details>
+<p id="particle27" class="scrollParagraph">Built on <a href="https://www.nist.gov/publications/secure-hash-standard">SHA-256</a>. Human-readable hash encodings have precedents, including <a href="https://datatracker.ietf.org/doc/html/rfc1751">RFC 1751</a>.</p>
+</main>
+<footer>Checko v1 · Made for Scroll · <a href="readme.scroll" download>Page source ↓</a></footer>
+<script  src="checkem.js"></script>
+<script>(() => {
+ const input=document.querySelector('#document'), generated=document.querySelector('#generated'), candidate=document.querySelector('#candidate'), result=document.querySelector('#match'), use=document.querySelector('#use-current');
+ input.value='title A little discovery\nexperiments Bend Build Explore\ncover\n color coral\n materials wood paper magnets string\naudience curious people\npurpose Make invisible forces visible through small playful experiments\n';
+ let revision=0, current='', busy=false;
+ const compare=()=>{const value=candidate.value.trim().replace(/^checkem v1 /,'');result.textContent=busy?'Computing…':!current?'Unavailable':!value?'Paste a phrase to compare':value===current?'Matches':'Does not match';result.dataset.match=value===current && Boolean(current);};
+ async function update() {
+  const version=++revision;busy=true;use.disabled=true;compare();
+  try {const value=await checkem(input.value);if(version!==revision)return;current=value;generated.value=value;document.querySelector('#spoken').textContent=value.replace(/([A-Z])/g,' $1').toLowerCase();busy=false;use.disabled=false;compare();}
+  catch(error) {if(version!==revision)return;current='';busy=false;generated.value='';document.querySelector('#spoken').textContent='';result.textContent=globalThis.crypto?.subtle ? error.message : 'Use HTTPS or localhost: this browser needs Web Crypto.';}
+ }
+ input.addEventListener('input',update);candidate.addEventListener('input',compare);
+ use.onclick=()=>{candidate.value=current;compare();};
+ document.querySelector('#implementation').textContent=checkem.toString();
+ update();
+})();</script>
+<style>:root { color-scheme: light; font-family: Georgia, serif; color: #243a32; background: #f5f1e8; }
+* { box-sizing: border-box; }
+body { max-width: 1000px; margin: auto; padding: 28px 30px; }
+header { display: flex; justify-content: space-between; font: 12px Arial, sans-serif; }
+a { color: inherit; text-underline-offset: 3px; }
+main { margin: 65px 0 40px; }
+.eyebrow { font: 11px Arial, sans-serif; letter-spacing: .18em; color: #88723e; }
+h1 { font-weight: normal; font-size: clamp(64px,10vw,104px); letter-spacing: -.06em; line-height: 1; margin: 15px 0; }
+.lead { font-size: 25px; margin-bottom: 10px; }
+p, li { line-height: 1.55; }
+.workbench { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 35px 0; }
+label { display: block; margin-bottom: 10px; font: bold 12px Arial, sans-serif; }
+textarea { display: block; width: 100%; border: 1px solid #c7cabe; border-radius: 6px; background: #fffdf8; padding: 16px; color: inherit; resize: vertical; font: 14px/1.6 monospace; }
+textarea:focus { outline: 2px solid #8d9f89; outline-offset: 2px; }
+#document { min-height: 350px; }
+#generated { background: #253e34; color: #f0dca2; font-size: 16px; border: 0; }
+#spoken { font-size: 13px; color: #6c766b; min-height: 40px; }
+small, footer { font: 12px/1.5 Arial, sans-serif; color: #6c766b; }
+small { display: block; margin-top: 8px; }
+.verify { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 12px; font: 12px Arial, sans-serif; }
+button { border: 1px solid #9ba894; border-radius: 5px; padding: 8px 12px; background: transparent; color: inherit; cursor: pointer; }
+#match[data-match=true] { color: #236536; } #match[data-match=false] { color: #8c482e; }
+h2 { font-weight: normal; font-size: 28px; }
+details { border-top: 1px solid #d4d5c9; padding: 16px 0; }
+summary { cursor: pointer; }
+li { margin: 8px 0; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; line-height: 1.5; padding: 15px; background: #eeece2; }
+footer { border-top: 1px solid #d4d5c9; padding-top: 18px; }
+@media(max-width:650px) { body { padding: 22px 18px; } main { margin-top: 40px; } .workbench { grid-template-columns: 1fr; } #document { min-height: 220px; } }</style>
+</body>
+</html>
