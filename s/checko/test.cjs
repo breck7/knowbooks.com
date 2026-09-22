@@ -8,7 +8,7 @@ const checko = runInNewContext(source + '\nchecko', {crypto:webcrypto, TextEncod
 const sample = 'title A little discovery\nexperiments Bend Build Explore\n';
 (async () => {
  const generator = runInNewContext(source + '\ncheckoGeneratorV1', {crypto:webcrypto, TextEncoder});
- const vocabulary = source.match(/const words = "([^"]+)"\.split/)[1].split(' ');
+ const vocabulary = runInNewContext(source + '\nknowbooksCheckoWords').split(' ');
  const details = 'orderDetails\n currency USD\n items\n  item magnets\n   quantity 1\n   unitPriceUsd 249.00\n';
  const phrase = await generator(details);
  assert.equal(phrase.split(' ').length,5);
@@ -19,6 +19,12 @@ const sample = 'title A little discovery\nexperiments Bend Build Explore\n';
  assert.equal(phrase,expected.join(' '));
  assert.equal(await generator(details.replaceAll('\n','\r\n')+'\r\n'),phrase);
  for(const edit of [details.replace('249.00','250.00'),details.replace('quantity 1','quantity 2'),details+'   customization forest\n']) assert.notEqual(await generator(edit),phrase);
+ const custom = await generator(details, 'alpha beta gamma');
+ assert.equal(custom.split(' ').length, 5);
+ assert.ok(custom.split(' ').every(word => ['alpha', 'beta', 'gamma'].includes(word)));
+ assert.equal(await generator(details, ' alpha\n beta  gamma alpha '), custom);
+ for (const words of ['', '   ', 'alpha', 'alpha alpha']) await assert.rejects(generator(details, words), /two different/);
+ assert.equal((await generator('', 'alpha beta')).split(' ').length, 5);
  console.log('checkoGeneratorV1 passed: 5 frozen-vocabulary words, independent SHA-256 encoding, normalization, price/quantity/customization changes.');
  const base=await checko(sample);
  // Frozen vector independently produced with Python hashlib and integer base conversion.
