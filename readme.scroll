@@ -164,7 +164,7 @@ css
  .cart-toggle > svg { position: relative; z-index: 2; }
  .cart-toggle .cart-count { z-index: 3; }
  .cart-toggle:hover { transform: rotate(-5deg); }
- .cart-toggle svg, .cart-art svg { width: 100%; height: 100%; overflow: visible; }
+ .cart-toggle > svg, .cart-art > svg { width: 100%; height: 100%; overflow: visible; }
  .cart-count { position: absolute; top: 0; right: 0; display: grid; place-items: center; min-width: 25px; height: 25px; padding: 0 5px; border-radius: 50%; color: var(--paper); background: var(--ink); font: 700 11px Arial, sans-serif; }
  body.cart-open .cart-toggle, body.cart-travelling .cart-toggle { opacity: 0; pointer-events: none; }
  .cart-art { display: block; position: relative; width: 200px; height: 148px; margin: 0 auto 12px; flex-shrink: 0; }
@@ -172,10 +172,8 @@ css
  #cart .cart-art:has(.basket-books:empty) { display: none; }
  .cart-art > svg { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
  .basket-books { position: absolute; inset: 8px 24px 43px 50px; display: flex; align-items: end; justify-content: center; }
- .basket-book { width: 48px; height: 74px; flex-shrink: 0; margin: 0; transform: rotate(var(--tilt)); border-radius: 2px 5px 5px 2px; background: var(--cover); box-shadow: inset 3px 0 #0002, 2px 2px 4px #0003; padding: 8px 5px; text-align: center; }
+ .basket-book { --mini-width: 48px; --book-scale: .177777778; flex-shrink: 0; margin: 0; transform: rotate(var(--tilt)); }
  .basket-book + .basket-book { margin-left: var(--pile-overlap, -18px); }
- .basket-book span { display: block; overflow: hidden; color: #fff; font: 5px Georgia, serif; text-transform: uppercase; }
- .basket-book svg { width: 24px; height: 24px; margin-top: 8px; }
  .cart-flight, .flying-book { position: fixed; z-index: 50; pointer-events: none; margin: 0; transform-origin: center; }
  .cart-flight { display: block; z-index: 19; }
  .cart-flight.is-returning { z-index: 1000; }
@@ -282,8 +280,8 @@ css
  .cart-close { width: 42px; height: 42px; border: 0; background: transparent; cursor: pointer; font-size: 32px; font-weight: 300; }
  .cart-lines { overflow-y: auto; min-height: 90px; flex: 1 0 auto; }
  .cart-line { display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 15px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
- .line-swatch { position: relative; width: 54px; aspect-ratio: .72; }
- .line-swatch .book-cover { position: absolute; width: 270px; padding: 29.7px 24.3px; transform: scale(.2); transform-origin: top left; pointer-events: none; }
+ .line-swatch, .basket-book { position: relative; width: var(--mini-width, 54px); aspect-ratio: .72; }
+ .line-swatch .book-cover, .basket-book .book-cover { position: absolute; width: 270px; padding: 29.7px 24.3px; transform: scale(var(--book-scale, .2)); transform-origin: top left; pointer-events: none; }
  .line-copy h3 { margin: 0 0 6px; font-size: 18px; font-weight: 400; }
  .line-copy p { margin: 0; color: var(--muted); font: 12px/1 Arial, sans-serif; }
  .quantity { display: flex; align-items: center; gap: 8px; }
@@ -838,7 +836,7 @@ script
   const fitBookTitles = () => {
    cancelAnimationFrame(titleFitFrame);
    titleFitFrame = requestAnimationFrame(() => {
-    document.querySelectorAll(".product:not([hidden]) .book-cover h3, .line-swatch .book-cover h3").forEach(title => {
+    document.querySelectorAll(".product:not([hidden]) .book-cover h3, .line-swatch .book-cover h3, .basket-book .book-cover h3").forEach(title => {
      title.style.removeProperty("font-size");
      if (title.scrollWidth > title.clientWidth) {
       const baseSize = Number.parseFloat(getComputedStyle(title).fontSize);
@@ -921,7 +919,7 @@ script
    const { enteredCode, referralCode, discountCents, amount } = pricing;
    count.textContent = quantity;
    toggle.setAttribute("aria-label", `Open shopping cart, ${quantity} ${quantity === 1 ? "book" : "books"}`);
-   const bookPile = [...cart].flatMap(([id, quantity]) => Array.from({ length: Math.min(quantity, 5) }, () => products.get(id))).slice(0, 7).map((product, i) => `<span class="basket-book" style="--cover:${escapeHtml(product.coverColor)};--tilt:${(i % 3 - 1) * 12}deg"><span>${escapeHtml(product.title)}</span>${product.cover || ""}</span>`).join("");
+   const bookPile = [...cart].flatMap(([id, quantity]) => Array.from({ length: Math.min(quantity, 5) }, () => products.get(id))).slice(0, 7).map((product, i) => `<span class="basket-book" style="--tilt:${(i % 3 - 1) * 12}deg" aria-hidden="true" inert>${bookCover(product)}</span>`).join("");
    document.querySelectorAll(".cart-toggle .basket-books, #cart .basket-books").forEach(pile => { pile.innerHTML = bookPile; pile.style.setProperty("--pile-overlap", `${Math.min(30, 62 / Math.max(1, pile.children.length - 1)) - 48}px`); });
    grid.querySelectorAll("[data-add]").forEach(button => {
     const added = cart.has(button.dataset.add);
