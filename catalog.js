@@ -474,6 +474,30 @@ const catalog = [
     "priceUsd": 249
   },
   {
+    "id": "trees",
+    "title": "Trees",
+    "status": "believer",
+    "priceUsd": 249
+  },
+  {
+    "id": "breathing",
+    "title": "Breathing",
+    "status": "believer",
+    "priceUsd": 249
+  },
+  {
+    "id": "smell",
+    "title": "Smell",
+    "status": "believer",
+    "priceUsd": 349
+  },
+  {
+    "id": "rain",
+    "title": "Rain",
+    "status": "believer",
+    "priceUsd": 249
+  },
+  {
     "id": "budgeting",
     "title": "Budgeting",
     "status": "believer",
