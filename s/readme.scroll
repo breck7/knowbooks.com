@@ -1,0 +1,98 @@
+title Free software by Knowbooks.com
+description Three small tools for a brighter day. Track a storm, make a checksum you can say, or turn a PDF into one long image. Free to use and make your own.
+baseUrl https://knowbooks.com/s/
+permalink index.html
+openGraphImage stormTracker/norbert.jpg
+htmlLang en
+buildHtml
+metaTags
+
+header
+ id software-header
+ a Knowbooks.com
+  href ../index.html
+  addClass brand
+ a Source ↗
+  href https://github.com/breck7/knowbooks.com/tree/main/s
+  addClass header-link
+main
+ id software-main
+ section
+  addClass hero
+  h1 Free software by Knowbooks.com
+ section
+  addClass tool-grid
+  aria-label Free utilities
+  a
+   href stormTracker/index.html
+   addClass tool
+   img
+    src stormTracker/norbert.jpg
+    alt Storm Tracker dashboard with a Hawaii map, live cameras, and forecasts.
+    width 1280
+    height 720
+   div
+    addClass tool-copy
+    h2 Storm Tracker
+    Live cameras, satellite imagery, and forecasts. One clear view of the storm.
+    span Open tracker ↗
+     addClass tool-action
+  a
+   href checko/index.html
+   addClass tool
+   img
+    src checko/og.jpg
+    alt Checko: A checksum you can say. A paper scroll becomes a speech bubble of colorful words.
+    width 1200
+    height 629
+   div
+    addClass tool-copy
+    h2 Checko
+    A checksum you can say. Compare documents with a memorable phrase.
+    span Try Checko ↗
+     addClass tool-action
+  a
+   href longpic/index.html
+   addClass tool
+   img
+    src longpic/og.png
+    alt Longpic: a small PDF becomes one wonderfully long picture.
+   div
+    addClass tool-copy
+    h2 Longpic
+    Big PDF. One looong JPG. Stitch every page into an image, right in your browser.
+    span Make a Longpic ↗
+     addClass tool-action
+footer
+ id software-footer
+ Built with Scroll.
+  https://scroll.surf Scroll
+ Copying is a human right.
+
+css
+ :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #243d32; background: #f6f8f0; font-synthesis: none; }
+ * { box-sizing: border-box; }
+ body { margin: 0; min-height: 100vh; background: radial-gradient(ellipse at 50% 0, #e7f2d9, transparent 65%); }
+ a { color: inherit; text-decoration: none; }
+ header, main, footer { max-width: 1180px; margin: auto; }
+ header { padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+ .brand { font-size: 17px; font-weight: 750; letter-spacing: -.03em; }
+ .header-link { font-size: 13px; color: #526c5c; }
+ main { padding: 0 28px; }
+ .hero { max-width: 750px; margin: 24px auto 32px; text-align: center; }
+ .eyebrow { margin: 0 0 12px; color: #547244; font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+ h1 { margin: 0 auto 14px; max-width: 700px; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.08; letter-spacing: -.055em; font-weight: 750; text-wrap: balance; }
+ .intro { max-width: 590px; margin: auto; color: #596d5f; font-size: 16px; line-height: 1.6; text-wrap: balance; }
+ .tool-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+ .tool { display: flex; flex-direction: column; overflow: hidden; border: 1px solid #d7e1cd; border-radius: 14px; background: #fffffc; transition: transform .18s, border-color .18s; }
+ .tool:hover { transform: translateY(-3px); border-color: #8aa876; }
+ .tool img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: #f6f3e8; border-bottom: 1px solid #e3e9dc; }
+ .tool-copy { flex: 1; display: flex; flex-direction: column; padding: 20px; }
+ .tool h2 { margin: 0 0 8px; font-size: 22px; letter-spacing: -.035em; }
+ .tool p { margin: 0 0 18px; font-size: 14px; line-height: 1.6; color: #617064; }
+ .tool-action { margin-top: auto; font-size: 13px; font-weight: 650; color: #376b37; }
+ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 26px 28px; font-size: 12px; color: #6b7c6c; }
+ footer p { margin: 0; } footer a { text-decoration: underline; text-underline-offset: 3px; }
+ a:focus-visible { outline: 3px solid #547c39; outline-offset: 4px; }
+ @media (max-width: 760px) { header { padding: 20px; } main { padding: 0 20px; } .hero { margin: 16px auto 24px; } .intro { font-size: 14px; } .tool-grid { grid-template-columns: 1fr; gap: 14px; } .tool { display: grid; grid-template-columns: 32% 1fr; } .tool img { height: 100%; aspect-ratio: auto; border-bottom: 0; border-right: 1px solid #e3e9dc; } .tool-copy { padding: 16px; } .tool h2 { font-size: 20px; } .tool p { font-size: 13px; margin-bottom: 12px; } footer { padding: 24px 20px; } }
+ @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

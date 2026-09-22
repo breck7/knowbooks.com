@@ -1,5 +1,7 @@
 title Checko — a checksum you can say
 description A poem-shaped fingerprint for Scroll documents. Paste, edit, and compare.
+baseUrl https://knowbooks.com/s/checko/
+openGraphImage og.jpg
 permalink index.html
 buildHtml
 metaTags
