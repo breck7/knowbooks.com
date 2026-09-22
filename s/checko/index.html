@@ -7,11 +7,11 @@
  <style>@media print {.doNotPrint {display: none !important;}}</style>
  <link rel="canonical" href="https://knowbooks.com/s/checko/index.html">
  <meta name="viewport" content="width=device-width,initial-scale=1">
- <meta name="description" content="A poem-shaped fingerprint for Scroll documents. Paste, edit, and compare.">
+ <meta name="description" content="Experimental, human-friendly five-word checksums. Your text, your word list.">
  
  <meta name="generator" content="Scroll v180.0.1">
  <meta property="og:title" content="Checko — a checksum you can say">
- <meta property="og:description" content="A poem-shaped fingerprint for Scroll documents. Paste, edit, and compare.">
+ <meta property="og:description" content="Experimental, human-friendly five-word checksums. Your text, your word list.">
  <meta property="og:image" content="https://knowbooks.com/s/checko/og.jpg">
  
  <link rel="source" type="application/git" title="Source Code Repository" href="readme.scroll">
@@ -20,51 +20,34 @@
 </head>
 <body>
 <header id="particle37" ><a id="particle0" href="../../" >Knowbooks</a>
-<a id="particle1" href="checko.js" download="checko.js" >One function ↓</a></header>
-<main id="particle38" ><p id="particle0" class="eyebrow">CHECKSUM + POEM</p>
+<a id="particle1" href="checko.js" download="checko.js" >Download JavaScript ↓</a></header>
+<main id="particle38" ><p id="particle0" class="eyebrow">FIVE-WORD CHECKSUM</p>
 <h1 id="particle1" >Checko.</h1>
 <p id="particle2" class="lead">A checksum you can say.</p>
-<p id="particle3" class="scrollParagraph">Same Scroll, same poem. Tiny edits ripple through the phrase.</p>
-<div id="particle4" class="workbench"><section id="particle1" ><label id="particle0" for="document" >Your Scroll</label>
-<textarea id="document" spellcheck="false" ></textarea>
-<small id="particle2" >Everything stays in your browser.</small></section>
-<section id="particle2" class="result"><label id="particle1" for="generated" >Your checko · v1</label>
-<textarea id="generated" readonly="true" spellcheck="false" rows="4" aria-label="Generated checko" ></textarea>
-<p id="spoken" class="scrollParagraph"></p>
-<label id="particle4" for="candidate" >Check a phrase</label>
-<textarea id="candidate" spellcheck="false" rows="3" placeholder="Paste a checko, then edit it…" aria-describedby="match" ></textarea>
-<div id="particle6" class="verify"><output id="match" ><p id="particle1" class="scrollParagraph">aria-live polite</p></output>
-<button id="use-current" type="button" >Use current</button></div></section></div>
-<h2 id="particle5" >The document supplies the words.</h2>
-<p id="particle6" class="scrollParagraph">Hash the Scroll. Use its own vocabulary to spell the result in camelCase. Same document, same phrase. Change the text, and its checko usually changes dramatically.</p>
-<p id="particle7" class="scrollParagraph">We encode 72 hash bits. More distinct words mean a shorter checko: 64 words need 12; 16 need 18; two need 72. Repeats are allowed. Fewer than two distinct words cannot produce a useful word-only checko.</p>
-<p id="particle8" class="scrollParagraph">Useful for comparing copies, not proving authorship. For a fixed vocabulary, an accidental pair match is about 1 in 4.7 sextillion; deliberate collision search takes roughly 2³⁶ work. This is a new encoding, not a new cryptographic hash.</p>
-<details id="particle9" ><summary id="particle0" >Exact v1 rules</summary>
-<ol id="particle1" ><li id="particle0" >Normalize CRLF and CR to LF. Remove top-level <code>checko</code> lines. Collapse trailing newlines to one LF. All other text, indentation, punctuation and Unicode remain significant.</li>
-<li id="particle1" >Extract letter/combining-mark tokens. Lowercase, keep only A–Z words, deduplicate and sort alphabetically. V1 does not use numbers or non-A–Z words as vocabulary; they still affect the hash.</li>
-<li id="particle2" >Hash UTF-8 bytes of <code>checko:v1\n</code> followed by the normalized text. The prefix ends in an actual LF.</li>
-<li id="particle3" >Interpret SHA-256’s first 72 bits as an unsigned big-endian integer. For N distinct words, use the smallest L with Nᴸ ≥ 2⁷². Write that integer as L base-N digits, padding on the left with zeros; each digit indexes the sorted vocabulary.</li>
-<li id="particle4" >Join the words in camelCase. Store <code>checko v1 yourCamelCasePhrase</code>; this reserved metadata line is excluded. Compare phrases exactly. Freeze these rules for v1.</li></ol>
-<p id="particle2" class="scrollParagraph">This fingerprints text, not a parsed tree. A tiny edit is not guaranteed to change every word, and collisions remain possible. The vocabulary is local to each document; no outside words are introduced.</p></details>
-<details id="particle10" ><summary id="particle0" >The whole function</summary>
-<pre id="particle1" ><code id="implementation" ></code></pre></details>
-<p id="particle11" class="scrollParagraph">Built on <a href="https://www.nist.gov/publications/secure-hash-standard">SHA-256</a>. Human-readable hash encodings have precedents, including <a href="https://datatracker.ietf.org/doc/html/rfc1751">RFC 1751</a>.</p></main>
-<footer id="particle39" ><span id="particle0" >Checko v1 · Made for Scroll ·</span>
+<div id="particle3" class="workbench"><section id="particle1" ><label id="particle0" for="document" >Your Scroll</label>
+<textarea id="document" spellcheck="false" ></textarea></section>
+<section id="particle2" class="result"><label id="particle1" for="generated" >Your checko</label>
+<textarea id="generated" readonly="undefined" spellcheck="false" rows="4" aria-label="Generated checko" ></textarea>
+<output id="status" ><p id="particle1" class="scrollParagraph">aria-live polite</p></output>
+<label id="particle4" for="words" >Word list</label>
+<textarea id="words" spellcheck="false" rows="8" ></textarea>
+<small id="particle6" >Separate words with spaces or newlines.</small></section></div>
+<p id="particle4" class="scrollParagraph">Same text + same word list = same five words.</p>
+<p id="particle5" class="scrollParagraph">Experimental. Collisions are possible. Everything stays in your browser.</p></main>
+<footer id="particle39" ><span id="particle0" >Experimental ·</span>
 <a id="particle1" href="readme.scroll" download="readme.scroll" >Page source ↓</a></footer>
 <script  src="checko.js"></script>
 <script>(() => {
- const input=document.querySelector('#document'), generated=document.querySelector('#generated'), candidate=document.querySelector('#candidate'), result=document.querySelector('#match'), use=document.querySelector('#use-current');
- input.value='title A little discovery\nexperiments Bend Build Explore\ncover\n color coral\n materials wood paper magnets string\naudience curious people\npurpose Make invisible forces visible through small playful experiments\n';
- let revision=0, current='', busy=false;
- const compare=()=>{const value=candidate.value.trim().replace(/^checko v1 /,'');result.textContent=busy?'Computing…':!current?'Unavailable':!value?'Paste a phrase to compare':value===current?'Matches':'Does not match';result.dataset.match=value===current && Boolean(current);};
+ const input=document.querySelector('#document'), generated=document.querySelector('#generated'), words=document.querySelector('#words'), status=document.querySelector('#status');
+ input.value='orderDetails\n totalUsd 249.00\n shippingAndTax Included\n items\n  item magnets\n   title Magnets\n   lineTotalUsd 249.00\n';
+ words.value=knowbooksCheckoWords;
+ let revision=0;
  async function update() {
-  const version=++revision;busy=true;use.disabled=true;compare();
-  try {const value=await checko(input.value);if(version!==revision)return;current=value;generated.value=value;document.querySelector('#spoken').textContent=value.replace(/([A-Z])/g,' $1').toLowerCase();busy=false;use.disabled=false;compare();}
-  catch(error) {if(version!==revision)return;current='';busy=false;generated.value='';document.querySelector('#spoken').textContent='';result.textContent=globalThis.crypto?.subtle ? error.message : 'Use HTTPS or localhost: this browser needs Web Crypto.';}
+  const request=++revision;generated.value='';status.textContent='Computing…';
+  try {const value=await checkoGeneratorV1(input.value,words.value);if(request!==revision)return;generated.value=value;status.textContent='';}
+  catch(error) {if(request!==revision)return;status.textContent=globalThis.crypto?.subtle ? error.message : 'Use HTTPS or localhost to generate a checko.';}
  }
- input.addEventListener('input',update);candidate.addEventListener('input',compare);
- use.onclick=()=>{candidate.value=current;compare();};
- document.querySelector('#implementation').textContent=checko.toString();
+ input.addEventListener('input',update);words.addEventListener('input',update);
  update();
 })();</script>
 <style>:root { color-scheme: light; font-family: Georgia, serif; color: #243a32; background: #f5f1e8; }
@@ -76,24 +59,16 @@ main { margin: 65px 0 40px; }
 .eyebrow { font: 11px Arial, sans-serif; letter-spacing: .18em; color: #88723e; }
 h1 { font-weight: normal; font-size: clamp(64px,10vw,104px); letter-spacing: -.06em; line-height: 1; margin: 15px 0; }
 .lead { font-size: 25px; margin-bottom: 10px; }
-p, li { line-height: 1.55; }
+p { line-height: 1.55; }
 .workbench { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 35px 0; }
 label { display: block; margin-bottom: 10px; font: bold 12px Arial, sans-serif; }
 textarea { display: block; width: 100%; border: 1px solid #c7cabe; border-radius: 6px; background: #fffdf8; padding: 16px; color: inherit; resize: vertical; font: 14px/1.6 monospace; }
 textarea:focus { outline: 2px solid #8d9f89; outline-offset: 2px; }
-#document { min-height: 350px; }
+#document { min-height: 440px; }
 #generated { background: #253e34; color: #f0dca2; font-size: 16px; border: 0; }
-#spoken { font-size: 13px; color: #6c766b; min-height: 40px; }
 small, footer { font: 12px/1.5 Arial, sans-serif; color: #6c766b; }
 small { display: block; margin-top: 8px; }
-.verify { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 12px; font: 12px Arial, sans-serif; }
-button { border: 1px solid #9ba894; border-radius: 5px; padding: 8px 12px; background: transparent; color: inherit; cursor: pointer; }
-#match[data-match=true] { color: #236536; } #match[data-match=false] { color: #8c482e; }
-h2 { font-weight: normal; font-size: 28px; }
-details { border-top: 1px solid #d4d5c9; padding: 16px 0; }
-summary { cursor: pointer; }
-li { margin: 8px 0; }
-pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; line-height: 1.5; padding: 15px; background: #eeece2; }
+#status { display: block; font: 12px/1.5 Arial, sans-serif; min-height: 20px; margin-bottom: 16px; color: #8c482e; }
 footer { border-top: 1px solid #d4d5c9; padding-top: 18px; }
 @media(max-width:650px) { body { padding: 22px 18px; } main { margin-top: 40px; } .workbench { grid-template-columns: 1fr; } #document { min-height: 220px; } }</style>
 </body>
