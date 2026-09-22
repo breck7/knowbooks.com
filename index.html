@@ -38,10 +38,9 @@ body:has(#designer[open]) { overflow: hidden; }
 #design-byline { display: block; width: 100%; margin: -2px 0 12px; padding: 4px; border: 0; background: transparent; color: inherit; text-align: center; font: italic 16px Georgia, serif; }
 #design-byline::placeholder { color: inherit; opacity: .7; }
 #designer [hidden] { display: none; }
-[data-brief], [data-edit-design] { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; text-align: left; }
-[data-brief]:hover, [data-edit-design]:hover { text-decoration: underline; }
+[data-edit-design] { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; text-align: left; }
+[data-edit-design]:hover { text-decoration: underline; }
 .design-actions { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 6px 0; }
-[data-brief] svg { width: 14px; height: 14px; flex-shrink: 0; }
 .book-byline { margin-top: 8px; font: italic 14px Georgia, serif; text-align: center; }
 #design-title:focus { outline: 1px dashed var(--gold); }
 .design-cover svg { display: block; width: 100%; touch-action: none; cursor: crosshair; }
@@ -237,14 +236,15 @@ main > .scrollSection:last-child .scrollParagraph { border-bottom: 1px solid var
 .paypal-button { display: block; padding: 20px; border-radius: 999px; color: white; background: #243d32; box-shadow: 0 6px 16px #243d3226; text-align: center; text-decoration: none; font: 700 14px/1 Arial, sans-serif; }
 .paypal-button:hover { background: #172e24; transform: translateY(-1px); }
 .wallet-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
-.wallet-buttons a { padding: 14px 8px; border: 1px solid var(--line); border-radius: 16px; color: var(--ink); text-align: center; text-decoration: none; font: 700 14px/1.4 Arial, sans-serif; }
-.wallet-buttons a:hover { background: #243d320a; }
+.wallet-buttons a, .wallet-buttons button { padding: 14px 8px; border: 1px solid var(--line); border-radius: 16px; color: var(--ink); text-align: center; text-decoration: none; font: 700 14px/1.4 Arial, sans-serif; }
+.wallet-buttons a:hover, .wallet-buttons button:hover { background: #243d320a; }
+.wallet-buttons button { background: transparent; cursor: pointer; }
+#download-order-slip { display: block; width: 100%; margin-top: 18px; padding: 12px; border: 0; background: transparent; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; font: 12px Arial, sans-serif; cursor: pointer; }
+#payment-status { font: 12px/1.5 Arial, sans-serif; overflow-wrap: anywhere; }
+#payment-status:empty { display: none; }
 .wallet-buttons span { display: block; margin-top: 4px; overflow-wrap: anywhere; font-size: 11px; font-weight: 400; }
 .cart-footer small { display: block; margin-top: 12px; color: var(--muted); text-align: center; font: 10px/1.4 Arial, sans-serif; }
 .cart-footer .shipping-note { margin: -8px 0 12px; }
-.crypto { margin-top: 16px; font: 12px/1.5 Arial, sans-serif; }
-.crypto summary { cursor: pointer; text-align: center; text-decoration: underline; text-underline-offset: 3px; }
-.crypto p { display: grid; grid-template-columns: auto 1fr; gap: 8px 10px; } .crypto output, .crypto code { display: block; } .crypto code { overflow-wrap: anywhere; user-select: all; }
 .site-footer { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 360px); gap: 36px 64px; padding: 0 clamp(20px, 8vw, 124px) 32px; color: var(--muted); }
 .contact-heading { margin: 0 0 24px; color: var(--ink); font-size: clamp(38px, 4vw, 56px); font-weight: 400; line-height: 1.05; letter-spacing: -.04em; }
 .email-invite { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin: 0; font-size: clamp(18px, 2vw, 22px); line-height: 1.5; }
@@ -363,25 +363,17 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
 <p id="cart-element-13" class="cart-total"><span id="cart-element-14" >Total</span>
 <strong id="cart-element-15" >$0</strong></p>
 <small id="cart-element-16" class="shipping-note">Includes shipping and tax.</small>
-<a id="cart-element-17" href="https://www.paypal.com/cgi-bin/webscr" rel="noopener" class="paypal-button">Checkout with PayPal &nbsp; ↗</a>
-<div id="cart-element-18" class="wallet-buttons"><a id="cart-element-19" href="https://cash.app/$knowbooksdotcom" target="_blank" rel="noopener" >Cash App &nbsp; ↗<span id="cart-element-20" >$knowbooksdotcom</span></a>
-<a id="cart-element-21" href="https://venmo.com/u/knowbooks" target="_blank" rel="noopener" >Venmo &nbsp; ↗<span id="cart-element-22" >@knowbooks</span></a></div>
-<small id="cart-element-23" >For Cash App or Venmo, send the cart total shown above then email your order to <a href="mailto:founders@knowbooks.com?subject=Cash%20App%20or%20Venmo%20order">founders@knowbooks.com</a>.</small>
-<small id="cart-element-24" >Cash/check accepted at all our Hawaii locations.</small>
-<details id="cart-element-25" class="crypto"><summary id="cart-element-26" >Pay with crypto</summary>
-<p id="cart-element-27" class="scrollParagraph"><b id="cart-element-28" >NEAR</b>
-<span id="cart-element-29" ><output id="cart-element-30" data-crypto="NEAR" ></output>
-<code id="cart-element-31" >knowbooks.near</code></span>
-<b id="cart-element-32" >BTC</b>
-<span id="cart-element-33" ><output id="cart-element-34" data-crypto="BTC" ></output>
-<code id="cart-element-35" >3G9q4tRjkTSP8PP4eFVZuNLtXxKuERJcJr</code></span>
-<b id="cart-element-36" >ETH</b>
-<span id="cart-element-37" ><output id="cart-element-38" data-crypto="ETH" ></output>
-<code id="cart-element-39" >0xaEe37CE75AcC6341abfa1c73c6Bb1B73963a6ccD</code></span>
-<b id="cart-element-40" >USDC <i>(Base)</i></b>
-<span id="cart-element-41" ><output id="cart-element-42" data-crypto="USDC" ></output>
-<code id="cart-element-43" >0x3d3e69E8f208A782E09f018643fE9796e918e45e</code></span></p>
-<small id="cart-element-44" >Send the amount shown, then email your transaction ID, cart, and shipping address to <a href="mailto:paybycrypto@knowbooks.com">paybycrypto@knowbooks.com</a>.</small></details></div></aside>
+<a id="cart-element-17" data-payment="PayPal" target="_blank" href="https://www.paypal.com/cgi-bin/webscr" rel="noopener" class="paypal-button">Checkout with PayPal &nbsp; ↗</a>
+<div id="payment-options" class="wallet-buttons"><a id="pay-cash-app" data-payment="Cash App" href="https://cash.app/$knowbooksdotcom" target="_blank" rel="noopener" >Cash App ↗<span id="cash-app-account" >$knowbooksdotcom</span></a>
+<a id="pay-venmo" data-payment="Venmo" href="https://venmo.com/u/knowbooks" target="_blank" rel="noopener" >Venmo ↗<span id="venmo-account" >@knowbooks</span></a>
+<button id="pay-near" type="button" data-payment="NEAR" data-address="knowbooks.near" >NEAR<span id="near-caption" >knowbooks.near</span></button>
+<button id="pay-bitcoin" type="button" data-payment="BTC" data-address="3G9q4tRjkTSP8PP4eFVZuNLtXxKuERJcJr" >Bitcoin<span id="bitcoin-caption" >Copy address</span></button>
+<button id="pay-ethereum" type="button" data-payment="ETH" data-address="0xaEe37CE75AcC6341abfa1c73c6Bb1B73963a6ccD" >Ethereum<span id="ethereum-caption" >Copy address</span></button>
+<button id="pay-usdc" type="button" data-payment="USDC (Base)" data-address="0x3d3e69E8f208A782E09f018643fE9796e918e45e" >USDC · Base<span id="usdc-caption" >Copy address</span></button>
+<button id="pay-cash" type="button" data-payment="Cash" >Cash<span id="cash-caption" >Accepted in Hawaii</span></button>
+<button id="pay-check" type="button" data-payment="Check" >Check<span id="check-caption" >Accepted in Hawaii</span></button></div>
+<p id="payment-status" role="status" class="scrollParagraph"></p></div>
+<button id="download-order-slip" type="button" >Download Order Slip</button></aside>
 <dialog id="designer" aria-labelledby="designer-heading"><form id="design-form">
 <div class="designer-head"><h2 id="designer-heading">Build your Knowbook</h2><button type="button" id="design-close" aria-label="Close designer">×</button></div>
 <div class="design-spread">
@@ -396,7 +388,7 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
 <small id="design-hint">Draw freely. Lines straighten; curves smooth. Eraser removes a stroke.</small>
 <label id="portrait-label">Upload an image → gold hedcut<input id="portrait-file" type="file" accept="image/png,image/jpeg,image/webp"></label><button type="button" id="remove-image" hidden>Remove image</button><small id="signature-hint" hidden>Upload your portrait; draw your signature beneath it.</small>
 </div>
-<div class="design-inside"><h3>What’s inside?</h3><p>Five experiments. One verb each.</p><div id="design-experiments"></div><small>Up to five verbs. Bend. Build. Test.</small><p class="design-price">$10,000 <small>design fee</small></p><p>50% now. One prototype shipped within 30 days of deposit. Balance before shipment.</p><p>More copies: our cost + 30% per knowbook. You sell or give away or let us handle sales and distribution.</p><button id="design-add" type="submit">Add $5,000 deposit to cart</button><p class="design-handoff">Your brief downloads when added. Email it to <a href="mailto:startups@knowbooks.com" id="design-email">startups@knowbooks.com</a> with your order.</p><p id="design-status" role="status"></p></div>
+<div class="design-inside"><h3>What’s inside?</h3><p>Five experiments. One verb each.</p><div id="design-experiments"></div><small>Up to five verbs. Bend. Build. Test.</small><p class="design-price">$10,000 <small>design fee</small></p><p>50% now. One prototype shipped within 30 days of deposit. Balance before shipment.</p><p>More copies: our cost + 30% per knowbook. You sell or give away or let us handle sales and distribution.</p><button id="design-add" type="submit">Add $5,000 deposit to cart</button><p class="design-handoff">Your design is included in your order slip. Email the slip to <a href="mailto:startups@knowbooks.com" id="design-email">startups@knowbooks.com</a> with your order.</p><p id="design-status" role="status"></p></div>
 </div><details id="design-source"><summary>See/Edit code</summary><textarea id="design-code" aria-label="Knowbook Scroll code" aria-describedby="design-code-status" spellcheck="false"></textarea><small id="design-code-status" role="status"></small><label for="design-link">Design link</label><input id="design-link" type="text" readonly spellcheck="false"></details></form>
 </dialog>
 <dialog id="partner-dialog" aria-labelledby="partner-heading" aria-describedby="partner-description" ><div id="partner-ui-1" class="partner-head"><div id="partner-ui-2" ><h2 id="partner-heading" >We’re rooted in Hawaii.</h2></div>
@@ -867,7 +859,6 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
  };
  const statusOrder = ["trailblazer", "believer", "frontier", "partner"];
  const collapsedEditions = new Set(["believer", "frontier"]);
- const crypto = { BTC: [81080.75, 8], ETH: [2622.79, 6], NEAR: [3.7381, 2], USDC: [1, 2] }; // USD price, display decimals; Coinbase snapshot September 19, 2026 04:32 UTC (https://api.coinbase.com/v2/exchange-rates?currency=USD)
  const cart = new Map();
  const grid = document.querySelector("#product-grid");
  const preview = document.querySelector(".book-preview");
@@ -979,6 +970,51 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   });
   return url.href;
  };
+ let designToScroll;
+ const orderSlip = async (method = 'Not selected', address = '') => {
+  const { referralCode, amount } = cartPricing();
+  const leaf = value => String(value).replace(/[\r\n]+/g, ' ').trim();
+  const totals = [` totalUsd ${amount.toFixed(2)}`, ' shippingAndTax Included'];
+  const itemText = ([id, quantity], canonical = false) => {
+   const product = products.get(id), design = product.design;
+   const item = [`  item ${canonical && design ? 'custom' : id}`,
+    `   title ${leaf(design?.title || product.title)}`,
+    ...(quantity > 1 ? [`   quantity ${quantity}`, `   unitPriceUsd ${Number(product.priceUsd).toFixed(2)}`] : []),
+    `   lineTotalUsd ${(product.priceUsd * quantity).toFixed(2)}`];
+   if (product.status) item.push(`   edition ${product.status}`);
+   if (product.description) item.push(`   description ${leaf(product.description)}`);
+   if (design) item.push('   design', ...designToScroll(design).trimEnd().split('\n').filter(line => !canonical || !line.startsWith('id ')).map(line => '    ' + line));
+   return item.join('\n');
+  };
+  const entries = [...cart];
+  const createdAt = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'long' }).format(new Date());
+  const details = ['orderDetails', ...totals, ' items', ...entries.map(entry => itemText(entry, true)).sort()].join('\n') + '\n';
+  const slip = ['// Review your order details and send to us via email, twitter, whatsapp, phone or other method to confirm.',
+   'knowbookOrderSlip', ` createdAt ${createdAt}`,
+   ...totals, ...(referralCode ? [` referralCode ${referralCode}`] : []),
+   ' customer', '  name', '  email', '  preferredContactAddress [email, phone number, Twitter, Instagram, etc.]', '  shippingAddress', '   line1', '   line2', '   city', '   region', '   postalCode', '   country',
+   ' payment', `  method ${leaf(method)}`, '  status Unconfirmed', '  reference', ...(address ? [`  address ${address}`] : []),
+   ' items', ...entries.map(entry => itemText(entry))];
+  try { slip.push(` checko ${await checkoGeneratorV1(details)}`); }
+  catch { document.querySelector('#payment-status').textContent = 'Could not generate the order slip. Please use HTTPS or localhost and try again.'; return; }
+  const url = URL.createObjectURL(new Blob([slip.join('\n') + '\n'], { type: 'text/plain;charset=utf-8' }));
+  const link = Object.assign(document.createElement('a'), { href: url, download: 'knowbookOrderSlip.scroll' });
+  document.body.append(link); link.click(); link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
+ };
+ document.querySelector('#download-order-slip').addEventListener('click', () => orderSlip());
+ drawer.addEventListener('click', event => {
+  const button = event.target.closest('[data-payment]'); if (!button) return;
+  if (!cart.size) { event.preventDefault(); return; }
+  const address = button.dataset.address;
+  if (address) {
+   const status = document.querySelector('#payment-status');
+   const fallback = () => { status.textContent = `Copy ${button.dataset.payment} address: ${address}`; };
+   if (navigator.clipboard?.writeText) navigator.clipboard.writeText(address).then(() => { status.textContent = `${button.dataset.payment} address copied.`; }, fallback);
+   else fallback();
+  }
+  orderSlip(button.dataset.payment, address);
+ });
  const save = () => {
   try { localStorage.setItem("knowbooks-cart", JSON.stringify([...cart])); } catch {}
  };
@@ -997,7 +1033,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   });
   lines.innerHTML = [...cart].map(([id, value]) => {
    const product = products.get(id);
-   return `<div class="cart-line"><div class="line-swatch" aria-hidden="true" inert>${bookCover(product)}</div><div class="line-copy"><h3>${escapeHtml(product.title)}</h3><p>${money.format(product.priceUsd)} ${product.design ? "deposit · 50% of $10,000" : "each"}</p>${product.id === "knowbook" ? "<p>Includes initial partner conversation.</p>" : ""}${product.design ? `<div class="design-actions"><button type="button" data-edit-design="${escapeHtml(id)}">Edit</button><button type="button" data-brief="${escapeHtml(id)}">Download design brief <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg></button></div><p>Email brief to ${designModes[product.design.mode].inbox}@knowbooks.com</p>` : ""}</div><div class="quantity"><button type="button" data-less="${escapeHtml(id)}" aria-label="Remove one ${escapeHtml(product.title)}">−</button><span>${value}</span><button type="button" data-more="${escapeHtml(id)}" aria-label="Add one ${escapeHtml(product.title)}">+</button></div></div>`;
+   return `<div class="cart-line"><div class="line-swatch" aria-hidden="true" inert>${bookCover(product)}</div><div class="line-copy"><h3>${escapeHtml(product.title)}</h3><p>${money.format(product.priceUsd)} ${product.design ? "deposit · 50% of $10,000" : "each"}</p>${product.id === "knowbook" ? "<p>Includes initial partner conversation.</p>" : ""}${product.design ? `<div class="design-actions"><button type="button" data-edit-design="${escapeHtml(id)}">Edit</button></div>` : ""}</div><div class="quantity"><button type="button" data-less="${escapeHtml(id)}" aria-label="Remove one ${escapeHtml(product.title)}">−</button><span>${value}</span><button type="button" data-more="${escapeHtml(id)}" aria-label="Add one ${escapeHtml(product.title)}">+</button></div></div>`;
   }).join("");
   fitBookTitles();
   empty.hidden = quantity > 0;
@@ -1005,7 +1041,6 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   total.textContent = checkoutMoney.format(amount);
   referralInput.setAttribute("aria-invalid", String(Boolean(enteredCode && !referralCode)));
   referralStatus.textContent = referralCode ? `10% off your cart — you save ${checkoutMoney.format(discountCents / 100)}.` : enteredCode ? "That referral code isn’t valid." : "";
-  document.querySelectorAll("[data-crypto]").forEach(output => { const [usd, decimals] = crypto[output.dataset.crypto]; output.textContent = `${(amount / usd).toFixed(decimals)} ${output.dataset.crypto}`; });
   checkout.href = quantity ? paypalUrl(pricing) : "https://www.paypal.com/cgi-bin/webscr";
   save();
  };
@@ -1172,7 +1207,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
    syncCode();
    if (editing) return;
    drafts[mode] = design;
-   try { localStorage.setItem(key, JSON.stringify(drafts)); } catch { status.textContent = 'Draft could not be saved on this device. Download your brief before leaving.'; }
+   try { localStorage.setItem(key, JSON.stringify(drafts)); } catch { status.textContent = 'Draft could not be saved on this device. Save your design using the code panel before leaving.'; }
   };
   // Saved drawings allow only numeric SVG path commands; no uploaded HTML/SVG is inserted.
   try {
@@ -1201,7 +1236,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
    ].join('\n') + '\n';
   };
   const signText = async brief => brief + `checko v1 ${await checko(brief)}\n`;
-  const signedProposal = d => signText(proposal(d));
+  designToScroll = proposal;
   const code = $('#design-code'), codeStatus = $('#design-code-status'), designLink = $('#design-link');
   designLink.addEventListener('focus', () => designLink.select());
   let codeVersion=0, codeInvalid=false;
@@ -1263,17 +1298,10 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
    catch(error) {codeInvalid=true;designLink.value='';code.setCustomValidity(error.message);codeStatus.textContent=error.message;}
   });
   code.addEventListener('blur', () => {if(!codeInvalid) syncCode();});
-  const download = async d => {
-   const parts = d.title.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/([a-z])([A-Z])/g,'$1 $2').toLowerCase().match(/[a-z0-9]+/g) || ['untitled'];
-   const filename = parts.map((part,i) => i ? part[0].toUpperCase()+part.slice(1) : part).join('') + 'KnowbooksProposal.scroll';
-   const url = URL.createObjectURL(new Blob([await signedProposal(d)], {type:'text/plain;charset=utf-8'}));
-   const a = Object.assign(document.createElement('a'), {href:url, download:filename});
-   a.click(); setTimeout(() => URL.revokeObjectURL(url),1000);
-  };
   lines.addEventListener('click', event => {
-   const button = event.target.closest('[data-brief], [data-edit-design]'); if (!button) return;
-   const saved = products.get(button.dataset.brief || button.dataset.editDesign).design;
-   button.hasAttribute('data-brief') ? download(saved) : open(saved.mode, event, saved);
+   const button = event.target.closest('[data-edit-design]'); if (!button) return;
+   const saved = products.get(button.dataset.editDesign).design;
+   open(saved.mode, event, saved);
   });
   $('#design-experiments').innerHTML = Array.from({length:5},(_,i) => `<input aria-label="Experiment ${i+1} verb" placeholder="Verb ${i+1}" maxlength="24" pattern="[^\\s]+">`).join('');
   const verbs = [...$('#design-experiments').querySelectorAll('input')];
@@ -1409,7 +1437,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
    event.preventDefault(); remember();
    if(!design.title) {status.textContent='Give your Knowbook a title.';title.focus();return;}
    if(mode==='signature' && (!design.portrait.length || !design.signature.length)) {status.textContent='Add a creator photo and draw your signature.';return;}
-   editing=false; remember(); products.set(design.id,product(structuredClone(design))); cart.set(design.id,1); refresh(); download(design); dialog.close(); openCart();
+   editing=false; remember(); products.set(design.id,product(structuredClone(design))); cart.set(design.id,1); refresh(); dialog.close(); openCart();
   };
   const loadDesignLink = () => {
    if(!location.hash.startsWith('#knowbook=')) return;
