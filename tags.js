@@ -22,7 +22,7 @@ const tags = [
   {
     "id": "economicsTag",
     "question": "Is money, ownership, trade, or the allocation of scarce resources central to this topic?",
-    "knowbooks": "capital sales gold banking liberty property competition collusion budgeting bookkeeping payroll marketing currency bitcoin venture"
+    "knowbooks": "capital sales gold banking liberty property competition collusion budgeting bookkeeping payroll marketing currency bitcoin venture knowbook"
   },
   {
     "id": "psychologyTag",
@@ -73,7 +73,7 @@ const tags = [
   {
     "id": "buildingTag",
     "question": "Is assembling, shaping, or programming something a central hands-on way to learn this topic?",
-    "knowbooks": "beams tools carpentry levers electricity motors gears ropes paper ink folding wood wheels wedges fabric screws batteries software scroll guitar piano drums actuators transistors helices springs rockets solar"
+    "knowbooks": "beams tools carpentry levers electricity motors gears ropes paper ink folding wood wheels wedges fabric screws batteries software scroll guitar piano drums actuators transistors helices springs rockets solar knowbook"
   },
   {
     "id": "measurementTag",
@@ -83,7 +83,7 @@ const tags = [
   {
     "id": "creativeTag",
     "question": "Is creating an expressive work, design, or performance a central activity?",
-    "knowbooks": "carpentry sound colors paper ink folding fabric software scroll marketing twitter guitar piano drums singing"
+    "knowbooks": "carpentry sound colors paper ink folding fabric software scroll marketing twitter guitar piano drums singing knowbook"
   },
   {
     "id": "instantTag",
@@ -98,7 +98,7 @@ const tags = [
   {
     "id": "multiplePeopleTag",
     "question": "Does practicing this topic in real life centrally involve interaction between multiple people?",
-    "knowbooks": "sales liberty property teamwork competition collusion payroll marketing twitter alignment raising attraction basketball football soccer boxing baseball venture"
+    "knowbooks": "sales liberty property teamwork competition collusion payroll marketing twitter alignment raising attraction basketball football soccer boxing baseball venture knowbook"
   },
   {
     "id": "hazardTag",
@@ -187,25 +187,25 @@ const tags = [
     "id": "businessTag",
     "keywords": "business enterprise commerce commercial market markets entrepreneurship",
     "question": "Is operating a business or participating in a market a central goal?",
-    "knowbooks": "capital sales banking property competition collusion budgeting bookkeeping payroll marketing venture"
+    "knowbooks": "capital sales banking property competition collusion budgeting bookkeeping payroll marketing venture knowbook"
   },
   {
     "id": "startupsTag",
     "keywords": "startup startups founder founders founding entrepreneur entrepreneurs entrepreneurship venture ventures",
     "question": "Does this topic directly support founding, funding, or building an early-stage business?",
-    "knowbooks": "focus capital sales banking teamwork competition budgeting bookkeeping payroll software marketing twitter motivation venture"
+    "knowbooks": "focus capital sales banking teamwork competition budgeting bookkeeping payroll software marketing twitter motivation venture knowbook"
   },
   {
     "id": "communicationTag",
     "keywords": "communication communicating message messages media writing publishing persuasion",
     "question": "Is conveying information to other people a central activity?",
-    "knowbooks": "sales teamwork ink software scroll marketing twitter raising attraction basketball football soccer baseball venture"
+    "knowbooks": "sales teamwork ink software scroll marketing twitter raising attraction basketball football soccer baseball venture knowbook"
   },
   {
     "id": "cooperationTag",
     "keywords": "cooperation collaboration coordination collaborating teams group social",
     "question": "Is coordinating people's actions toward a shared goal central to this topic?",
-    "knowbooks": "teamwork collusion payroll alignment raising basketball football soccer baseball"
+    "knowbooks": "teamwork collusion payroll alignment raising basketball football soccer baseball knowbook"
   },
   {
     "id": "machinesTag",

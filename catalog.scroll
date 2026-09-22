@@ -666,3 +666,11 @@ id solar
 title Solar
 status frontier
 priceUsd 10000
+
+// Partner onboarding: purchase includes the initial conversation.
+id knowbook
+title Knowbooks
+status partner
+priceUsd 999
+color forest
+description Includes an initial partner conversation about building Knowbooks in your community.

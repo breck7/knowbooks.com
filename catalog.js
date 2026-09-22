@@ -706,5 +706,13 @@ const catalog = [
     "title": "Solar",
     "status": "frontier",
     "priceUsd": 10000
+  },
+  {
+    "id": "knowbook",
+    "description": "Includes an initial partner conversation about building Knowbooks in your community.",
+    "title": "Knowbooks",
+    "color": "forest",
+    "status": "partner",
+    "priceUsd": 999
   }
 ]
