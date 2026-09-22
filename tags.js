@@ -2,22 +2,22 @@ const tags = [
   {
     "id": "physicsTag",
     "question": "Is understanding physical forces, energy, waves, or matter a central goal?",
-    "knowbooks": "magnets beams focus levers light gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter atoms motion friction ropes wind aerodynamics water rust membranes bonds metals steel aluminum brass wheels wedges stars screws batteries hurricanes guitar piano drums singing actuators transistors fusion flow gluons bosons frequency waves helices springs momentum rockets solar"
+    "knowbooks": "magnets beams focus levers light gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter atoms motion friction ropes wind aerodynamics water rust membranes bonds metals steel aluminum brass wheels wedges stars screws batteries hurricanes guitar piano drums singing actuators transistors fusion flow gluons bosons frequency waves helices springs momentum rockets solar plumbing rain"
   },
   {
     "id": "chemistryTag",
     "question": "Is chemical composition or chemical change central to this topic?",
-    "knowbooks": "heat glass cells iron elements copper gold fire matter atoms water rust membranes decay bonds ink metals steel aluminum brass food batteries mitochondria cancer"
+    "knowbooks": "heat glass cells iron elements copper gold fire matter atoms water rust membranes decay bonds ink metals steel aluminum brass food batteries mitochondria cancer smell"
   },
   {
     "id": "biologyTag",
     "question": "Is understanding living organisms or the human body's functions a central goal?",
-    "knowbooks": "cells sleep membranes decay seeds food hydration mitochondria cancer raising"
+    "knowbooks": "cells sleep membranes decay seeds food hydration mitochondria cancer raising trees breath smell"
   },
   {
     "id": "plantTag",
     "question": "Does this knowbook centrally involve plants or materials obtained from plants?",
-    "knowbooks": "carpentry paper wood seeds fabric food"
+    "knowbooks": "carpentry paper wood seeds fabric food trees"
   },
   {
     "id": "economicsTag",
@@ -42,7 +42,7 @@ const tags = [
   {
     "id": "mechanicsTag",
     "question": "Are forces, motion, or mechanical advantage central to this topic?",
-    "knowbooks": "magnets beams tools carpentry gravity levers motors gears motion friction ropes wind aerodynamics wheels wedges screws actuators flow hurricanes springs momentum rockets basketball football soccer boxing golf baseball"
+    "knowbooks": "magnets beams tools carpentry gravity levers motors gears motion friction ropes wind aerodynamics wheels wedges screws actuators flow hurricanes springs momentum rockets basketball football soccer boxing golf baseball plumbing"
   },
   {
     "id": "electricityTag",
@@ -63,22 +63,22 @@ const tags = [
   {
     "id": "fluidsTag",
     "question": "Is the behavior or movement of liquids or gases central to this topic?",
-    "knowbooks": "air heat wind aerodynamics water membranes hydration hurricanes flow rockets"
+    "knowbooks": "air heat wind aerodynamics water membranes hydration hurricanes flow rockets plumbing breath rain"
   },
   {
     "id": "natureTag",
     "question": "Is observing natural environments, weather, or the sky a central learning activity?",
-    "knowbooks": "air wind water centuries decay seeds stars exploration hurricanes solar"
+    "knowbooks": "air wind water centuries decay seeds stars exploration hurricanes solar trees rain"
   },
   {
     "id": "buildingTag",
     "question": "Is assembling, shaping, or programming something a central hands-on way to learn this topic?",
-    "knowbooks": "beams tools carpentry levers electricity motors gears ropes paper ink folding wood wheels wedges fabric screws batteries software scroll guitar piano drums actuators transistors helices springs rockets solar knowbook"
+    "knowbooks": "beams tools carpentry levers electricity motors gears ropes paper ink folding wood wheels wedges fabric screws batteries software scroll guitar piano drums actuators transistors helices springs rockets solar knowbook plumbing"
   },
   {
     "id": "measurementTag",
     "question": "Is taking numerical measurements or keeping quantitative records a central way to explore this topic?",
-    "knowbooks": "beams capital gravity sound electricity heat banking sleep energy voltage motion friction wind aerodynamics water time centuries stars budgeting bookkeeping payroll batteries hydration hurricanes currency bitcoin flow frequency waves springs momentum rockets solar venture"
+    "knowbooks": "beams capital gravity sound electricity heat banking sleep energy voltage motion friction wind aerodynamics water time centuries stars budgeting bookkeeping payroll batteries hydration hurricanes currency bitcoin flow frequency waves springs momentum rockets solar venture plumbing breath rain"
   },
   {
     "id": "creativeTag",
@@ -88,12 +88,12 @@ const tags = [
   {
     "id": "instantTag",
     "question": "Can a typical introductory activity give directly observable feedback within a minute of setup?",
-    "knowbooks": "magnets beams focus levers light tools gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter motion friction ropes wind aerodynamics water membranes paper ink folding metals steel aluminum brass wood wheels wedges fabric screws batteries software scroll guitar piano drums singing actuators transistors flow frequency waves springs momentum basketball football soccer boxing golf baseball solar"
+    "knowbooks": "magnets beams focus levers light tools gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter motion friction ropes wind aerodynamics water membranes paper ink folding metals steel aluminum brass wood wheels wedges fabric screws batteries software scroll guitar piano drums singing actuators transistors flow frequency waves springs momentum basketball football soccer boxing golf baseball solar plumbing breath smell"
   },
   {
     "id": "longTermTag",
     "question": "Is tracking change over weeks or months a central way to deepen learning about this topic?",
-    "knowbooks": "capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing twitter cancer raising attraction basketball football soccer boxing golf baseball venture"
+    "knowbooks": "capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing twitter cancer raising attraction basketball football soccer boxing golf baseball venture trees"
   },
   {
     "id": "multiplePeopleTag",
@@ -103,19 +103,19 @@ const tags = [
   {
     "id": "hazardTag",
     "question": "Does direct experimentation with the real phenomenon involve hazards such as heat, cutting, electricity, contamination, or severe weather?",
-    "knowbooks": "tools carpentry electricity heat glass fire voltage motors wedges food screws batteries hurricanes actuators cancer fusion solar"
+    "knowbooks": "tools carpentry electricity heat glass fire voltage motors wedges food screws batteries hurricanes actuators cancer fusion solar plumbing"
   },
   {
     "id": "gasTag",
     "keywords": "gas gases gaseous air atmosphere vapor vapour steam",
     "question": "Are gases or their behavior a central part of this topic?",
-    "knowbooks": "air fire wind aerodynamics hurricanes flow rockets"
+    "knowbooks": "air fire wind aerodynamics hurricanes flow rockets breath smell rain"
   },
   {
     "id": "liquidTag",
     "keywords": "liquid liquids fluid fluids water viscosity",
     "question": "Are liquids or their behavior a central part of this topic?",
-    "knowbooks": "water membranes ink hydration flow"
+    "knowbooks": "water membranes ink hydration flow plumbing rain"
   },
   {
     "id": "solidTag",
@@ -139,13 +139,13 @@ const tags = [
     "id": "temperatureTag",
     "keywords": "temperature thermal heating cooling hot cold thermodynamics",
     "question": "Is temperature or heat transfer central to this topic?",
-    "knowbooks": "heat fire energy stars fusion solar"
+    "knowbooks": "heat fire energy stars fusion solar rain"
   },
   {
     "id": "pressureTag",
     "keywords": "pressure compression compressed pneumatic hydraulic hydraulics buoyancy",
     "question": "Is pressure in liquids or gases central to this topic?",
-    "knowbooks": "air wind aerodynamics water hurricanes flow rockets"
+    "knowbooks": "air wind aerodynamics water hurricanes flow rockets plumbing breath"
   },
   {
     "id": "opticsTag",
@@ -163,7 +163,7 @@ const tags = [
     "id": "growthTag",
     "keywords": "growth growing grow germination reproduction division",
     "question": "Is the growth or reproduction of living things central to this topic?",
-    "knowbooks": "cells seeds cancer raising"
+    "knowbooks": "cells seeds cancer raising trees"
   },
   {
     "id": "nutritionTag",
@@ -175,7 +175,7 @@ const tags = [
     "id": "healthTag",
     "keywords": "health healthy wellbeing wellness body physiology",
     "question": "Is understanding or supporting human health a central goal?",
-    "knowbooks": "sleep food hydration mitochondria cancer raising"
+    "knowbooks": "sleep food hydration mitochondria cancer raising breath"
   },
   {
     "id": "financeTag",
@@ -235,7 +235,7 @@ const tags = [
     "id": "cyclesTag",
     "keywords": "cycle cycles cyclic cyclical periodic periodicity repetition repeating oscillation oscillations rhythm rhythms rotation rotating spiral spirals helix helices helixes coil coils coiled frequency",
     "question": "Are repeated turns, oscillations, or patterns in space or time central to this topic?",
-    "knowbooks": "light sound sleep frequency helices springs motors gears ropes time wheels screws hurricanes guitar piano drums singing waves"
+    "knowbooks": "light sound sleep frequency helices springs motors gears ropes time wheels screws hurricanes guitar piano drums singing waves breath rain"
   },
   {
     "id": "flightTag",

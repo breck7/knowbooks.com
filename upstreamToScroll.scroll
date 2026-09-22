@@ -1,0 +1,54 @@
+// Reusable HTML elements, attributes, and integrations missing from Scroll.
+// Keep candidate upstream additions here; keep Knowbooks-specific behavior in its own source.
+
+dlElementParser
+ extends abstractHtmlElementParser
+ cue dl
+
+dtElementParser
+ extends abstractHtmlElementParser
+ cue dt
+
+ddElementParser
+ extends abstractHtmlElementParser
+ cue dd
+
+htmlLabelledByParser
+ extends abstractAftertextAttributeParser
+ cue aria-labelledby
+ catchAllAtomType htmlAnyAtom
+
+additionalHtmlElementParser
+ description Additional semantic HTML elements.
+ extends abstractHtmlElementParser
+ pattern ^(small|details|summary|output|b|i|inlineCode)( |$)
+ javascript
+  get tag() { return this.cue === "inlineCode" ? "code" : this.cue }
+
+additionalHtmlAttributeParser
+ extends abstractAftertextAttributeParser
+ pattern ^(aria-modal|aria-hidden|aria-describedby|inert|autocomplete|autocapitalize|spellcheck|rel)( |$)
+ catchAllAtomType htmlAnyAtom
+
+htmlHiddenAttributeParser
+ description Emit the native hidden attribute without omitting the element from HTML.
+ extends abstractAftertextAttributeParser
+ cue htmlHidden
+ string htmlAttributes hidden
+
+inlineSvgParser
+ extends abstractIndentableParagraphParser
+ cue inlineSvg
+ catchAllParser htmlLineParser
+ javascript
+  buildHtml() { return this.subparticlesToString() }
+
+dialogElementParser
+ extends abstractHtmlElementParser
+ cue dialog
+
+// linkify configures automatic linking; it is not a text-matching markup directive.
+htmlLinkifyParser
+ extends linkifyParser
+ cue linkify
+ boolean isMarkup false

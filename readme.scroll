@@ -7,40 +7,7 @@ favicon knowbooksLogo.svg
 buildHtml
 metaTags
 
-dlElementParser
- extends abstractHtmlElementParser
- cue dl
-
-dtElementParser
- extends abstractHtmlElementParser
- cue dt
-
-ddElementParser
- extends abstractHtmlElementParser
- cue dd
-
-offeringLabelledByParser
- extends abstractAftertextAttributeParser
- cue aria-labelledby
- catchAllAtomType htmlAnyAtom
-
-checkoutElementParser
- description Additional semantic elements for the checkout.
- extends abstractHtmlElementParser
- pattern ^(small|details|summary|output|b|i|inlineCode)( |$)
- javascript
-  get tag() { return this.cue === "inlineCode" ? "code" : this.cue }
-
-checkoutAttributeParser
- extends abstractAftertextAttributeParser
- pattern ^(aria-modal|aria-hidden|aria-describedby|inert|autocomplete|autocapitalize|spellcheck|rel)( |$)
- catchAllAtomType htmlAnyAtom
-
-htmlHiddenAttributeParser
- description Keep the element in HTML, initially hidden, for the cart script to reveal.
- extends abstractAftertextAttributeParser
- cue htmlHidden
- string htmlAttributes hidden
+upstreamToScroll.scroll
 
 buildToFileParser
  description Write the raw body to one or more files during the first build pass.
@@ -577,8 +544,8 @@ aside
   div
    id cart-element-6
    addClass basket-books
-  span <svg viewBox="0 0 160 120" fill="none" aria-hidden="true"><path d="M13 15h19l16 69h88" stroke="#343e35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 34h108l-13 40H47z" fill="#c7ad7029" stroke="#343e35" stroke-width="3" stroke-linejoin="round"/><path d="M62 35l5 38m20-38v38m23-38-5 38M43 54h96" stroke="#8b805f" stroke-width="2"/><circle cx="59" cy="100" r="9" fill="#343e35"/><circle cx="126" cy="100" r="9" fill="#343e35"/><circle cx="59" cy="100" r="3" fill="#efe9da"/><circle cx="126" cy="100" r="3" fill="#efe9da"/></svg>
-   tag none
+  inlineSvg
+   <svg viewBox="0 0 160 120" fill="none" aria-hidden="true"><path d="M13 15h19l16 69h88" stroke="#343e35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 34h108l-13 40H47z" fill="#c7ad7029" stroke="#343e35" stroke-width="3" stroke-linejoin="round"/><path d="M62 35l5 38m20-38v38m23-38-5 38M43 54h96" stroke="#8b805f" stroke-width="2"/><circle cx="59" cy="100" r="9" fill="#343e35"/><circle cx="126" cy="100" r="9" fill="#343e35"/><circle cx="59" cy="100" r="3" fill="#efe9da"/><circle cx="126" cy="100" r="3" fill="#efe9da"/></svg>
  div
   id cart-element-7
   addClass cart-lines
@@ -663,7 +630,6 @@ aside
       data-crypto NEAR
      inlineCode knowbooks.near
       id cart-element-31
-      linkify false
     b BTC
      id cart-element-32
     span
@@ -673,7 +639,6 @@ aside
       data-crypto BTC
      inlineCode 3G9q4tRjkTSP8PP4eFVZuNLtXxKuERJcJr
       id cart-element-35
-      linkify false
     b ETH
      id cart-element-36
     span
@@ -683,7 +648,6 @@ aside
       data-crypto ETH
      inlineCode 0xaEe37CE75AcC6341abfa1c73c6Bb1B73963a6ccD
       id cart-element-39
-      linkify false
     b USDC (Base)
      id cart-element-40
      italics (Base)
@@ -694,7 +658,6 @@ aside
       data-crypto USDC
      inlineCode 0x3d3e69E8f208A782E09f018643fE9796e918e45e
       id cart-element-43
-      linkify false
    small Send the amount shown, then email your transaction ID, cart, and shipping address to paybycrypto@knowbooks.com.
     id cart-element-44
     linkify false
@@ -1401,4 +1364,4 @@ script
 
 catalog.scroll
 buildConcepts catalog.js
-buildZip knowbooks.zip index.html catalog.js catalog.csv tags.js knowbooksLogo.svg kbc.jpg readme.scroll catalog.scroll catalogCsv.scroll covers.scroll tags.scroll partners.scroll s/checko
+buildZip knowbooks.zip index.html catalog.js catalog.csv tags.js knowbooksLogo.svg kbc.jpg readme.scroll catalog.scroll catalogCsv.scroll covers.scroll tags.scroll partners.scroll upstreamToScroll.scroll s/checko
