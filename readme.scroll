@@ -65,8 +65,8 @@ buildToFile knowbooksLogo.svg
  </svg>
 
 css
- #designer { width: min(850px, calc(100% - 24px)); max-height: 92dvh; padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); }
- #design-source { margin-top: 20px; font: 13px/1.5 Arial, sans-serif; }
+ #designer { width: min(850px, calc(100% - 24px)); max-height: 96dvh; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); }
+ #design-source { margin-top: 10px; font: 13px/1.5 Arial, sans-serif; }
  #design-source summary { cursor: pointer; }
  #design-link { width: 100%; margin-top: 6px; padding: 8px; border: 1px solid var(--line); border-radius: 4px; background: #fff8; font: 12px monospace; }
  #design-source label { display: block; margin-top: 12px; }
@@ -75,13 +75,13 @@ css
  .cover-drop-target { position: fixed; inset: 12px; z-index: 10000; display: grid; place-items: center; padding: 24px; border: 3px dashed #d9bc78; border-radius: 12px; background: #151d19e6; color: #f4e5bf; text-align: center; font: 600 clamp(20px, 4vw, 32px)/1.4 Arial, sans-serif; pointer-events: none; }
  .cover-drop-target[hidden] { display: none; }
  body:has(#designer[open]) { overflow: hidden; }
- .designer-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+ .designer-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
  .designer-head h2 { margin: 0; font-size: 26px; font-weight: normal; }
  #design-close { border: 0; background: none; font-size: 28px; }
- .design-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
- .design-cover { background: var(--cover, #294575); color: var(--gold); border-radius: 5px 12px 12px 5px; box-shadow: inset 8px 0 8px #0003, 5px 5px 0 #dcd1b9; padding: 24px 22px 18px; text-align: center; }
- #design-title { font: 24px/1.2 Georgia, serif; min-height: 58px; overflow-wrap: anywhere; margin: 0 0 10px; }
- #design-byline { display: block; width: 100%; margin: -2px 0 12px; padding: 4px; border: 0; background: transparent; color: inherit; text-align: center; font: italic 16px Georgia, serif; }
+ .design-spread { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
+ .design-cover { background: var(--cover, #294575); color: var(--gold); border-radius: 5px 12px 12px 5px; box-shadow: inset 8px 0 8px #0003, 5px 5px 0 #dcd1b9; padding: 16px 18px 12px; text-align: center; max-width: 320px; margin: auto; }
+ #design-title { font: 24px/1.2 Georgia, serif; min-height: 29px; overflow-wrap: anywhere; margin: 0 0 10px; }
+ #design-byline { display: block; width: 100%; margin: -2px 0 6px; padding: 4px; border: 0; background: transparent; color: inherit; text-align: center; font: italic 16px Georgia, serif; }
  #design-byline::placeholder { color: inherit; opacity: .7; }
  #designer [hidden] { display: none; }
  [data-edit-design] { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; text-align: left; }
@@ -90,25 +90,48 @@ css
  .book-byline { margin-top: 8px; font: italic 14px Georgia, serif; text-align: center; }
  #design-title:focus { outline: 1px dashed var(--gold); }
  .design-cover svg { display: block; width: 100%; touch-action: none; cursor: crosshair; }
+ #design-art { height: clamp(110px, 27dvh, 210px); }
+ #design-signature { height: 42px; }
  .design-cover .strokes { fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; pointer-events: stroke; }
- .design-cover > span { display: block; margin-top: 18px; font: 10px Arial, sans-serif; letter-spacing: .25em; }
- #design-colors { display: flex; flex-wrap: wrap; gap: 7px; margin: 18px 0 10px; }
+ .design-cover > span { display: block; margin-top: 10px; font: 10px Arial, sans-serif; letter-spacing: .25em; }
+ #design-colors { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 6px; justify-content: center; }
  #design-colors button { width: 24px; height: 24px; border: 2px solid transparent; border-radius: 50%; background: var(--swatch); cursor: pointer; }
  #design-colors button[aria-pressed=true] { outline: 2px solid var(--ink); outline-offset: 2px; }
- .design-tools { display: flex; align-items: center; gap: 15px; }
+ .design-tools { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px 14px; font: 13px Arial, sans-serif; }
  .design-tools button { cursor: pointer; border: 0; background: none; padding: 8px 0; }
  #design-marker { display: flex; align-items: center; gap: 8px; }
  #design-marker[aria-pressed=true] svg { transform: rotate(180deg); }
  #designer small { display: block; font: 12px/1.5 Arial, sans-serif; color: var(--muted); }
- #portrait-file { display: block; width: 100%; margin: 8px 0; }
- .design-inside { font: 14px/1.5 Arial, sans-serif; }
+ .design-upload { position: relative; cursor: pointer; padding: 8px 0; }
+ #portrait-file { position: absolute; inset: 0; width: 100%; opacity: 0; cursor: pointer; }
+ .design-upload:focus-within { outline: 2px solid var(--ink); outline-offset: 3px; }
+ #design-marker svg { width: 64px; }
+ .design-inside { font: 13px/1.4 Arial, sans-serif; }
+ .design-inside p { margin: 10px 0; }
+ #design-status:empty { display: none; }
  .design-inside h3 { font: 26px Georgia, serif; margin: 0; }
- #design-experiments input { display: block; margin: 8px 0; width: 100%; min-width: 0; padding: 10px; border: 1px solid var(--line); border-radius: 4px; background: #fff8; font: inherit; }
- .design-price { font: 30px Georgia, serif; margin: 24px 0 12px; }
+ #design-experiments input { display: block; margin: 4px 0; width: 100%; min-width: 0; padding: 6px; border: 1px solid var(--line); border-radius: 4px; background: #fff8; font: inherit; }
+ .design-price { font: 30px Georgia, serif; margin: 14px 0 8px; }
  .design-price small { display: inline !important; }
- #design-add { width: 100%; padding: 15px; border: 0; border-radius: 5px; color: white; background: #243d32; font-weight: bold; cursor: pointer; }
+ #design-add { width: 100%; padding: 12px; border: 0; border-radius: 5px; color: white; background: #243d32; font-weight: bold; cursor: pointer; }
  .design-handoff, #design-status { font-size: 12px; }
- @media(max-width: 600px) { #designer { padding: 18px; } .design-spread { grid-template-columns: 1fr; } .design-cover { max-width: 320px; margin: auto; } .designer-head h2 { font-size: 23px; } }
+ #designer:has(#design-source[open]) .design-spread { display: none; }
+ #design-code { height: min(52dvh, 440px); min-height: 120px; }
+ @media(max-width: 600px) {
+  #designer { padding: 12px; } .designer-head h2 { font-size: 21px; }
+  .design-spread { gap: 6px 10px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .design-inside, .design-spread > div:first-child { display: contents; }
+  .design-cover { grid-column: 1; grid-row: 1; width: 100%; }
+  #design-colors { grid-column: 1 / -1; grid-row: 2; }
+  .design-tools { grid-column: 1 / -1; grid-row: 3; }
+  .design-inside h3 { grid-column: 2; grid-row: 1; align-self: start; font-size: 20px; }
+  #design-experiments { grid-column: 2; grid-row: 1; margin-top: 28px; }
+  .design-inside > p, #design-add { grid-column: 1 / -1; margin: 0; }
+  .design-cover { padding: 12px 8px 8px; } #design-title { font-size: 18px; margin-bottom: 4px; }
+  #design-byline { font-size: 12px; } #design-art { height: 100px; } #design-signature { height: 25px; }
+  #design-colors { gap: 5px; margin: 8px 0 4px; } #design-colors button { width: 17px; height: 17px; }
+  .design-tools { gap: 2px 8px; font-size: 11px; } #design-marker { gap: 3px; } #design-marker svg { width: 24px; }
+ }
  :root {
   --paper: #f4efe5;
   --ink: #20211e;
@@ -671,10 +694,9 @@ aside
  <svg id="design-signature" viewBox="0 0 200 55" aria-label="Draw your signature"><g class="strokes"></g></svg>
  <span>KNOWBOOKS</span></div>
  <div id="design-colors" role="group" aria-label="Cover color"></div>
- <div class="design-tools"><button type="button" id="design-marker" aria-pressed="false" aria-label="Flip marker to eraser"><svg viewBox="0 0 100 24" width="100" height="24" aria-hidden="true"><path d="M5 12 19 5v14z" fill="currentColor"/><rect x="19" y="4" width="60" height="16" rx="3" fill="currentColor"/><rect x="80" y="4" width="15" height="16" rx="3" fill="#d9bc78"/></svg><span>Flip to erase</span></button><button type="button" id="design-undo">Undo</button></div>
- <label><input id="portrait-file" type="file" aria-label="Upload cover image" accept="image/png,image/jpeg,image/webp"></label><button type="button" id="remove-image" hidden>Remove image</button>
+ <div class="design-tools"><button type="button" id="design-marker" aria-pressed="false" aria-label="Flip marker to eraser"><svg viewBox="0 0 100 24" width="100" height="24" aria-hidden="true"><path d="M5 12 19 5v14z" fill="currentColor"/><rect x="19" y="4" width="60" height="16" rx="3" fill="currentColor"/><rect x="80" y="4" width="15" height="16" rx="3" fill="#d9bc78"/></svg><span>Flip to erase</span></button><button type="button" id="design-undo">Undo</button><label class="design-upload">Upload<input id="portrait-file" type="file" aria-label="Upload cover image" accept="image/png,image/jpeg,image/webp"></label><button type="button" id="remove-image" hidden>Remove image</button></div>
  </div>
- <div class="design-inside"><h3>What’s inside?</h3><p>Five experiments. One verb each.</p><div id="design-experiments"></div><small>Up to five verbs. Bend. Build. Test.</small><p class="design-price">$10,000 <small>design fee</small></p><p>50% now. One prototype shipped within 30 days of deposit. Balance before shipment.</p><p>More copies: our cost + 30% per knowbook. You sell or give away or let us handle sales and distribution.</p><button id="design-add" type="submit">Add $5,000 deposit to cart</button><p class="design-handoff">Your design is included in your order slip. Email the slip to <a href="mailto:signature@knowbooks.com" id="design-email">signature@knowbooks.com</a> with your order.</p><p id="design-status" role="status"></p></div>
+ <div class="design-inside"><h3>What’s inside?</h3><div id="design-experiments"></div><p class="design-price">$10,000 <small>design fee</small></p><p>50% now. One prototype shipped within 30 days of deposit. Balance before shipment.</p><p>More copies: our cost + 30% per knowbook. You sell or give away or let us handle sales and distribution.</p><button id="design-add" type="submit">Add $5,000 deposit to cart</button><p id="design-status" role="status"></p></div>
  </div><details id="design-source"><summary>See/Edit code</summary><textarea id="design-code" aria-label="Knowbook Scroll code" aria-describedby="design-code-status" spellcheck="false"></textarea><small id="design-code-status" role="status"></small><label for="design-link">Design link</label><input id="design-link" type="text" readonly spellcheck="false"></details></form>
 </dialog>
 partners.scroll
@@ -1171,7 +1193,7 @@ script
     const saved = products.get(button.dataset.editDesign).design;
     open(event, saved);
    });
-   $('#design-experiments').innerHTML = Array.from({length:5},(_,i) => `<input aria-label="Experiment ${i+1} verb" placeholder="Verb ${i+1}" maxlength="24" pattern="[^\\s]+">`).join('');
+   $('#design-experiments').innerHTML = Array.from({length:5},(_,i) => `<input aria-label="Experiment ${i+1}" placeholder="experiment ${i+1}" maxlength="24" pattern="[^\\s]+">`).join('');
    const verbs = [...$('#design-experiments').querySelectorAll('input')];
    verbs.forEach((input,i) => input.addEventListener('input', () => { input.value = input.value.replace(/\s/g,''); design.verbs[i] = input.value; remember(); }));
    $('#design-colors').innerHTML = Object.entries(coverPalette).map(([name,color]) => `<button type="button" style="--swatch:${color}" data-color="${name}" aria-label="${name}" title="${name}" aria-pressed="false"></button>`).join('');
