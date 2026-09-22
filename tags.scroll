@@ -56,7 +56,7 @@ knowbooks carpentry paper wood seeds fabric food
 
 id economicsTag
 question Is money, ownership, trade, or the allocation of scarce resources central to this topic?
-knowbooks capital sales gold banking liberty property competition collusion budgeting bookkeeping payroll marketing currency bitcoin venture
+knowbooks capital sales gold banking liberty property competition collusion budgeting bookkeeping payroll marketing currency bitcoin venture knowbook
 
 id psychologyTag
 question Is understanding or changing attention, emotion, motivation, or social behavior a central goal?
@@ -97,7 +97,7 @@ knowbooks air wind water centuries decay seeds stars exploration hurricanes sola
 
 id buildingTag
 question Is assembling, shaping, or programming something a central hands-on way to learn this topic?
-knowbooks beams tools carpentry levers electricity motors gears ropes paper ink folding wood wheels wedges fabric screws batteries software scroll guitar piano drums actuators transistors helices springs rockets solar
+knowbooks beams tools carpentry levers electricity motors gears ropes paper ink folding wood wheels wedges fabric screws batteries software scroll guitar piano drums actuators transistors helices springs rockets solar knowbook
 
 id measurementTag
 question Is taking numerical measurements or keeping quantitative records a central way to explore this topic?
@@ -105,7 +105,7 @@ knowbooks beams capital gravity sound electricity heat banking sleep energy volt
 
 id creativeTag
 question Is creating an expressive work, design, or performance a central activity?
-knowbooks carpentry sound colors paper ink folding fabric software scroll marketing twitter guitar piano drums singing
+knowbooks carpentry sound colors paper ink folding fabric software scroll marketing twitter guitar piano drums singing knowbook
 
 id instantTag
 question Can a typical introductory activity give directly observable feedback within a minute of setup?
@@ -117,7 +117,7 @@ knowbooks capital sales banking sleep rust patience centuries decay motivation s
 
 id multiplePeopleTag
 question Does practicing this topic in real life centrally involve interaction between multiple people?
-knowbooks sales liberty property teamwork competition collusion payroll marketing twitter alignment raising attraction basketball football soccer boxing baseball venture
+knowbooks sales liberty property teamwork competition collusion payroll marketing twitter alignment raising attraction basketball football soccer boxing baseball venture knowbook
 
 id hazardTag
 question Does direct experimentation with the real phenomenon involve hazards such as heat, cutting, electricity, contamination, or severe weather?
@@ -191,22 +191,22 @@ knowbooks capital gold banking property budgeting bookkeeping payroll currency b
 id businessTag
 question Is operating a business or participating in a market a central goal?
 keywords business enterprise commerce commercial market markets entrepreneurship
-knowbooks capital sales banking property competition collusion budgeting bookkeeping payroll marketing venture
+knowbooks capital sales banking property competition collusion budgeting bookkeeping payroll marketing venture knowbook
 
 id startupsTag
 question Does this topic directly support founding, funding, or building an early-stage business?
 keywords startup startups founder founders founding entrepreneur entrepreneurs entrepreneurship venture ventures
-knowbooks focus capital sales banking teamwork competition budgeting bookkeeping payroll software marketing twitter motivation venture
+knowbooks focus capital sales banking teamwork competition budgeting bookkeeping payroll software marketing twitter motivation venture knowbook
 
 id communicationTag
 question Is conveying information to other people a central activity?
 keywords communication communicating message messages media writing publishing persuasion
-knowbooks sales teamwork ink software scroll marketing twitter raising attraction basketball football soccer baseball venture
+knowbooks sales teamwork ink software scroll marketing twitter raising attraction basketball football soccer baseball venture knowbook
 
 id cooperationTag
 question Is coordinating people's actions toward a shared goal central to this topic?
 keywords cooperation collaboration coordination collaborating teams group social
-knowbooks teamwork collusion payroll alignment raising basketball football soccer baseball
+knowbooks teamwork collusion payroll alignment raising basketball football soccer baseball knowbook
 
 id machinesTag
 question Is understanding or using mechanisms that transmit force or motion a central goal?

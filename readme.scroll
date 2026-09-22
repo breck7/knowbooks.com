@@ -519,7 +519,7 @@ section
   a Become a Knowbooks partner <span aria-hidden="true">↗</span>
    id partners-element-6
    addClass down
-   href mailto:partners@knowbooks.com?subject=Becoming%20a%20Knowbooks%20Partner
+   href #partner-dialog
 
 </main>
 
@@ -717,6 +717,8 @@ aside
  <div class="design-inside"><h3>What’s inside?</h3><p>Five experiments. One verb each.</p><div id="design-experiments"></div><small>Up to five verbs. Bend. Build. Test.</small><p class="design-price">$10,000 <small>design fee</small></p><p>50% now. One prototype shipped within 30 days of deposit. Balance before shipment.</p><p>More copies: our cost + 30% per knowbook. You sell or give away or let us handle sales and distribution.</p><button id="design-add" type="submit">Add $5,000 deposit to cart</button><p class="design-handoff">Your brief downloads when added. Email it to <a href="mailto:startups@knowbooks.com" id="design-email">startups@knowbooks.com</a> with your order.</p><p id="design-status" role="status"></p></div>
  </div><details id="design-source"><summary>See/Edit code</summary><textarea id="design-code" aria-label="Knowbook Scroll code" aria-describedby="design-code-status" spellcheck="false"></textarea><small id="design-code-status" role="status"></small><label for="design-link">Design link</label><input id="design-link" type="text" readonly spellcheck="false"></details></form>
 </dialog>
+partners.scroll
+
 <noscript>This shop needs JavaScript to manage its cart.</noscript>
 
 catalog.js
@@ -767,14 +769,16 @@ script
   const shippingByStatus = {
    believer: "Ship within 90 days",
    trailblazer: "Ship within 60 days",
-   frontier: "Ship within 6 months"
+   frontier: "Ship within 6 months",
+   partner: "Includes initial partner conversation"
   };
   const editionNameByStatus = {
    believer: "Believer",
    trailblazer: "Trailblazer",
-   frontier: "Frontier"
+   frontier: "Frontier",
+   partner: "Partner"
   };
-  const statusOrder = ["trailblazer", "believer", "frontier"];
+  const statusOrder = ["trailblazer", "believer", "frontier", "partner"];
   const collapsedEditions = new Set(["believer", "frontier"]);
   const crypto = { BTC: [81080.75, 8], ETH: [2622.79, 6], NEAR: [3.7381, 2], USDC: [1, 2] }; // USD price, display decimals; Coinbase snapshot September 19, 2026 04:32 UTC (https://api.coinbase.com/v2/exchange-rates?currency=USD)
   const cart = new Map();
@@ -812,7 +816,7 @@ script
    const { name, shipping } = editionDetails(product.status);
    return `<article class="product" id="${escapeHtml(product.id)}">
     ${bookCover(product)}
-    <div class="product-info"><div class="product-meta"><span class="price">${money.format(product.priceUsd)}</span><p>Experiment kit in a book.<br><i>${escapeHtml(name)} edition<br>${escapeHtml(shipping)}</i></p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
+    <div class="product-info"><div class="product-meta"><span class="price">${money.format(product.priceUsd)}</span><p>${escapeHtml(product.id === "knowbook" ? product.description : "Experiment kit in a book.")}<br><i>${escapeHtml(name)} edition<br>${escapeHtml(shipping)}</i></p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
    </article>`;
   };
   const editionDivider = status => {
@@ -881,7 +885,7 @@ script
    [...cart].forEach(([id, quantity], index) => {
     const product = products.get(id);
     const number = index + 1;
-    url.searchParams.set(`item_name_${number}`, `${product.title} Knowbook${referralCode ? ` (Referral: ${referralCode})` : ""}`);
+    url.searchParams.set(`item_name_${number}`, `${product.title} Knowbook${product.id === "knowbook" ? " + initial partner conversation" : ""}${referralCode ? ` (Referral: ${referralCode})` : ""}`);
     url.searchParams.set(`item_number_${number}`, product.id);
     url.searchParams.set(`amount_${number}`, Number(product.priceUsd).toFixed(2));
     url.searchParams.set(`quantity_${number}`, String(quantity));
@@ -906,7 +910,7 @@ script
    });
    lines.innerHTML = [...cart].map(([id, value]) => {
     const product = products.get(id);
-    return `<div class="cart-line"><div class="line-swatch" aria-hidden="true" inert>${bookCover(product)}</div><div class="line-copy"><h3>${escapeHtml(product.title)}</h3><p>${money.format(product.priceUsd)} ${product.design ? "deposit · 50% of $10,000" : "each"}</p>${product.design ? `<div class="design-actions"><button type="button" data-edit-design="${escapeHtml(id)}">Edit</button><button type="button" data-brief="${escapeHtml(id)}">Download design brief <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg></button></div><p>Email brief to ${designModes[product.design.mode].inbox}@knowbooks.com</p>` : ""}</div><div class="quantity"><button type="button" data-less="${escapeHtml(id)}" aria-label="Remove one ${escapeHtml(product.title)}">−</button><span>${value}</span><button type="button" data-more="${escapeHtml(id)}" aria-label="Add one ${escapeHtml(product.title)}">+</button></div></div>`;
+    return `<div class="cart-line"><div class="line-swatch" aria-hidden="true" inert>${bookCover(product)}</div><div class="line-copy"><h3>${escapeHtml(product.title)}</h3><p>${money.format(product.priceUsd)} ${product.design ? "deposit · 50% of $10,000" : "each"}</p>${product.id === "knowbook" ? "<p>Includes initial partner conversation.</p>" : ""}${product.design ? `<div class="design-actions"><button type="button" data-edit-design="${escapeHtml(id)}">Edit</button><button type="button" data-brief="${escapeHtml(id)}">Download design brief <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg></button></div><p>Email brief to ${designModes[product.design.mode].inbox}@knowbooks.com</p>` : ""}</div><div class="quantity"><button type="button" data-less="${escapeHtml(id)}" aria-label="Remove one ${escapeHtml(product.title)}">−</button><span>${value}</span><button type="button" data-more="${escapeHtml(id)}" aria-label="Add one ${escapeHtml(product.title)}">+</button></div></div>`;
    }).join("");
    fitBookTitles();
    empty.hidden = quantity > 0;
@@ -1351,6 +1355,11 @@ script
   }
   fitBookTitles();
   initDesigner();
+  document.querySelector("#partner-buy").addEventListener("click", () => {
+   document.querySelector("#partner-dialog").close();
+   change("knowbook", 1);
+   openCart();
+  });
   try {
    const saved = JSON.parse(localStorage.getItem("knowbooks-cart") || "[]");
    saved.forEach(([id, quantity]) => { if (products.has(id) && Number.isInteger(quantity) && quantity > 0) cart.set(id, products.get(id).design ? 1 : quantity); });
@@ -1392,4 +1401,4 @@ script
 
 catalog.scroll
 buildConcepts catalog.js
-buildZip knowbooks.zip index.html catalog.js catalog.csv tags.js knowbooksLogo.svg kbc.jpg readme.scroll catalog.scroll catalogCsv.scroll covers.scroll tags.scroll s/checko
+buildZip knowbooks.zip index.html catalog.js catalog.csv tags.js knowbooksLogo.svg kbc.jpg readme.scroll catalog.scroll catalogCsv.scroll covers.scroll tags.scroll partners.scroll s/checko
