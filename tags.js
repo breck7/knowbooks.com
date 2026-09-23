@@ -22,7 +22,7 @@ const tags = [
   {
     "id": "economicsTag",
     "question": "Is money, ownership, trade, or the allocation of scarce resources central to this topic?",
-    "knowbooks": "capital sales gold banking liberty property competition collusion budgeting bookkeeping payroll marketing currency bitcoin venture knowbook buildings"
+    "knowbooks": "capital sales gold banking liberty property competition collusion budgeting bookkeeping payroll marketing currency bitcoin venture knowbook buildings launch"
   },
   {
     "id": "psychologyTag",
@@ -78,12 +78,12 @@ const tags = [
   {
     "id": "measurementTag",
     "question": "Is taking numerical measurements or keeping quantitative records a central way to explore this topic?",
-    "knowbooks": "beams capital gravity sound electricity heat banking sleep energy voltage motion friction wind aerodynamics water time centuries stars budgeting bookkeeping payroll batteries hydration hurricanes currency bitcoin flow frequency waves springs momentum rockets solar venture plumbing breath rain buildings"
+    "knowbooks": "beams capital gravity sound electricity heat banking sleep energy voltage motion friction wind aerodynamics water time centuries stars budgeting bookkeeping payroll batteries hydration hurricanes currency bitcoin flow frequency waves springs momentum rockets solar venture plumbing breath rain buildings launch"
   },
   {
     "id": "creativeTag",
     "question": "Is creating an expressive work, design, or performance a central activity?",
-    "knowbooks": "carpentry sound colors paper ink folding fabric software scroll marketing twitter guitar piano drums singing knowbook"
+    "knowbooks": "carpentry sound colors paper ink folding fabric software scroll marketing twitter guitar piano drums singing knowbook launch"
   },
   {
     "id": "instantTag",
@@ -93,12 +93,12 @@ const tags = [
   {
     "id": "longTermTag",
     "question": "Is tracking change over weeks or months a central way to deepen learning about this topic?",
-    "knowbooks": "capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing twitter cancer raising attraction basketball football soccer boxing golf baseball venture trees buildings"
+    "knowbooks": "capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing twitter cancer raising attraction basketball football soccer boxing golf baseball venture trees buildings launch"
   },
   {
     "id": "multiplePeopleTag",
     "question": "Does practicing this topic in real life centrally involve interaction between multiple people?",
-    "knowbooks": "sales liberty property teamwork competition collusion payroll marketing twitter alignment raising attraction basketball football soccer boxing baseball venture knowbook buildings"
+    "knowbooks": "sales liberty property teamwork competition collusion payroll marketing twitter alignment raising attraction basketball football soccer boxing baseball venture knowbook buildings launch"
   },
   {
     "id": "hazardTag",
@@ -187,25 +187,25 @@ const tags = [
     "id": "businessTag",
     "keywords": "business enterprise commerce commercial market markets entrepreneurship",
     "question": "Is operating a business or participating in a market a central goal?",
-    "knowbooks": "capital sales banking property competition collusion budgeting bookkeeping payroll marketing venture knowbook buildings"
+    "knowbooks": "capital sales banking property competition collusion budgeting bookkeeping payroll marketing venture knowbook buildings launch"
   },
   {
     "id": "startupsTag",
     "keywords": "startup startups founder founders founding entrepreneur entrepreneurs entrepreneurship venture ventures",
     "question": "Does this topic directly support founding, funding, or building an early-stage business?",
-    "knowbooks": "focus capital sales banking teamwork competition budgeting bookkeeping payroll software marketing twitter motivation venture knowbook"
+    "knowbooks": "focus capital sales banking teamwork competition budgeting bookkeeping payroll software marketing twitter motivation venture knowbook launch"
   },
   {
     "id": "communicationTag",
     "keywords": "communication communicating message messages media writing publishing persuasion",
     "question": "Is conveying information to other people a central activity?",
-    "knowbooks": "sales teamwork ink software scroll marketing twitter raising attraction basketball football soccer baseball venture knowbook"
+    "knowbooks": "sales teamwork ink software scroll marketing twitter raising attraction basketball football soccer baseball venture knowbook launch"
   },
   {
     "id": "cooperationTag",
     "keywords": "cooperation collaboration coordination collaborating teams group social",
     "question": "Is coordinating people's actions toward a shared goal central to this topic?",
-    "knowbooks": "teamwork collusion payroll alignment raising basketball football soccer baseball knowbook"
+    "knowbooks": "teamwork collusion payroll alignment raising basketball football soccer baseball knowbook launch"
   },
   {
     "id": "machinesTag",

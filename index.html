@@ -860,17 +860,17 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
  const money = new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 });
  const checkoutMoney = new Intl.NumberFormat("en-US", { style: "currency", currency });
  const referralCodes = new Set(["john", "kendric", "nico", "cora"]);
- const shippingByStatus = {
+ const shippingByShelf = {
   believer: "Ship within 90 days",
-  trailblazer: "Ship within 30 days",
+  trailblazer: "Ship within 60 days",
   frontier: "Ship within 6 months"
  };
- const editionNameByStatus = {
+ const editionNameByShelf = {
   believer: "Believer",
   trailblazer: "Trailblazer",
   frontier: "Frontier"
  };
- const statusOrder = ["trailblazer", "believer", "frontier", "special"];
+ const shelfOrder = ["trailblazer", "believer", "frontier", "special"];
  const collapsedEditions = new Set(["believer", "frontier", "special"]);
  const cart = new Map();
  const grid = document.querySelector("#product-grid");
@@ -894,29 +894,34 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   return { enteredCode, referralCode, discountCents, amount: (subtotalCents - discountCents) / 100 };
  };
  const escapeHtml = value => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
- const editionDetails = status => {
-  if (status === "special") return { name: "Special items", shipping: "" };
-  const name = editionNameByStatus[status];
-  const shipping = shippingByStatus[status];
-  if (!name || !shipping) throw new Error(`Unknown product status: ${status}`);
+ const shelvesOf = product => (product.shelf || "").trim().split(/\s+/).filter(Boolean);
+ const primaryShelf = product => shelvesOf(product)[0];
+ const cardId = (product, shelf) => shelf === primaryShelf(product) ? product.id : `${product.id}--${shelf}`;
+ const editionDetails = shelf => {
+  if (shelf === "special") return { name: "Special items", shipping: "" };
+  const name = editionNameByShelf[shelf];
+  const shipping = shippingByShelf[shelf];
+  if (!name || !shipping) throw new Error(`Unknown product shelf: ${shelf}`);
   return { name, shipping };
  };
+ const pickupNote = product => product.fulfillment === "pickup" ? "In-person pickup only — will not be shipped." : "";
+ const cartDeliveryNote = () => [...cart.keys()].some(id => pickupNote(products.get(id))) ? "Includes tax and shipping for shippable items. Pickup-only items must be collected in person." : "Includes shipping and tax.";
  const bookCover = product => `<div class="book-cover" style="--cover:${escapeHtml(product.coverColor)}">
     <h3><a href="?knowbookId=${escapeHtml(product.id)}" onclick="return false">${escapeHtml(product.design?.title || product.title)}</a></h3>${product.design?.byline ? `<span class="book-byline">by ${escapeHtml(product.design.byline)}</span>` : ""}<span class="book-symbol" aria-hidden="true">${product.cover || ""}</span><span class="book-brand">Knowbooks</span>
    </div>`;
- const productCard = product => {
-  const { name, shipping } = editionDetails(product.status);
-  return `<article class="product" id="${escapeHtml(product.id)}">
+ const productCard = (product, shelf) => {
+  const { name, shipping } = editionDetails(shelf);
+  return `<article class="product" id="${escapeHtml(cardId(product, shelf))}" data-product-id="${escapeHtml(product.id)}" data-shelf="${escapeHtml(shelf)}">
    ${bookCover(product)}
-   <div class="product-info"><div class="product-meta"><span class="price">${money.format(product.priceUsd)}</span><p>${escapeHtml(product.description || (product.status === "special" ? "" : "Experiment kit in a book."))}${product.status === "special" ? "" : `<br><i>${escapeHtml(name)} edition<br>${escapeHtml(shipping)}</i>`}</p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
+   <div class="product-info"><div class="product-meta"><span class="price">${money.format(product.priceUsd)}</span><p>${escapeHtml(product.description || (shelf === "special" ? "" : "Experiment kit in a book."))}${shelf === "special" ? (pickupNote(product) ? `<br><i>${escapeHtml(pickupNote(product))}</i>` : "") : `<br><i>${escapeHtml(name)} edition<br>${escapeHtml(pickupNote(product) || shipping)}</i>`}</p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
   </article>`;
  };
- const editionDivider = status => {
-  const { name, shipping } = editionDetails(status);
-  const heading = status === "special" ? name : `${name} editions`;
-  const sectionId = status === "special" ? "special-items" : `${status}-editions`;
-  const controls = productCatalog.filter(product => product.status === status).map(product => escapeHtml(product.id)).join(" ");
-  return `<div class="edition-divider" id="${sectionId}" data-status="${escapeHtml(status)}"><a class="edition-toggle" href="#${sectionId}" role="button" aria-expanded="${!collapsedEditions.has(status)}" aria-controls="${controls}"><h2>${escapeHtml(heading)}</h2>${shipping ? `<p>${escapeHtml(shipping)}</p>` : ""}</a></div>`;
+ const editionDivider = shelf => {
+  const { name, shipping } = editionDetails(shelf);
+  const heading = shelf === "special" ? name : `${name} editions`;
+  const sectionId = shelf === "special" ? "special-items" : `${shelf}-editions`;
+  const controls = productCatalog.filter(product => shelvesOf(product).includes(shelf)).map(product => escapeHtml(cardId(product, shelf))).join(" ");
+  return `<div class="edition-divider" id="${sectionId}" data-shelf="${escapeHtml(shelf)}"><a class="edition-toggle" href="#${sectionId}" role="button" aria-expanded="${!collapsedEditions.has(shelf)}" aria-controls="${controls}"><h2>${escapeHtml(heading)}</h2>${shipping ? `<p>${escapeHtml(shipping)}</p>` : ""}</a></div>`;
  };
  const filterCatalog = () => {
   const query = document.querySelector("#catalog-search").value.trim();
@@ -937,20 +942,20 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   query ? url.searchParams.set("q", query) : url.searchParams.delete("q");
   if (url.href !== location.href) history.replaceState(null, "", url);
   document.querySelector("#search-heading").hidden = !query;
-  const visibleStatuses = new Set();
+  const visibleShelves = new Set();
   grid.querySelectorAll(".product").forEach(card => {
-   const status = products.get(card.id).status;
-   const matches = !query || hitIds.has(card.id);
-   card.hidden = !matches || (!query && collapsedEditions.has(status));
-   if (matches) visibleStatuses.add(status);
+   const shelf = card.dataset.shelf;
+   const matches = !query || (hitIds.has(card.dataset.productId) && card.id === card.dataset.productId);
+   card.hidden = !matches || (!query && collapsedEditions.has(shelf));
+   if (matches) visibleShelves.add(shelf);
   });
-  const firstStatus = statusOrder.find(status => visibleStatuses.has(status));
+  const firstShelf = shelfOrder.find(shelf => visibleShelves.has(shelf));
   grid.querySelectorAll(".edition-divider").forEach(divider => {
-   divider.querySelector(".edition-toggle").setAttribute("aria-expanded", String(!collapsedEditions.has(divider.dataset.status)));
-   divider.hidden = Boolean(query) || !visibleStatuses.has(divider.dataset.status);
-   divider.classList.toggle("is-first", divider.dataset.status === firstStatus);
+   divider.querySelector(".edition-toggle").setAttribute("aria-expanded", String(!collapsedEditions.has(divider.dataset.shelf)));
+   divider.hidden = Boolean(query) || !visibleShelves.has(divider.dataset.shelf);
+   divider.classList.toggle("is-first", divider.dataset.shelf === firstShelf);
   });
-  document.querySelector(".catalog-empty").textContent = visibleStatuses.size ? "" : "No knowbooks match this search.";
+  document.querySelector(".catalog-empty").textContent = visibleShelves.size ? "" : "No knowbooks match this search.";
   fitBookTitles();
  };
  let titleFitFrame;
@@ -979,7 +984,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   [...cart].forEach(([id, quantity], index) => {
    const product = products.get(id);
    const number = index + 1;
-   url.searchParams.set(`item_name_${number}`, `${product.title}${product.status === "special" && product.id !== "knowbook" ? "" : " Knowbook"}${product.id === "knowbook" ? " + initial partner conversation" : ""}${referralCode ? ` (Referral: ${referralCode})` : ""}`);
+   url.searchParams.set(`item_name_${number}`, `${product.title}${product.shelf === "special" && product.id !== "knowbook" ? "" : " Knowbook"}${product.id === "knowbook" ? " + initial partner conversation" : ""}${pickupNote(product) ? " — in-person pickup only; no shipping" : ""}${referralCode ? ` (Referral: ${referralCode})` : ""}`);
    url.searchParams.set(`item_number_${number}`, product.id);
    url.searchParams.set(`amount_${number}`, Number(product.priceUsd).toFixed(2));
    url.searchParams.set(`quantity_${number}`, String(quantity));
@@ -990,14 +995,15 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
  const orderSlip = async (method = 'Not selected', address = '') => {
   const { referralCode, amount } = cartPricing();
   const leaf = value => String(value).replace(/[\r\n]+/g, ' ').trim();
-  const totals = [` totalUsd ${amount.toFixed(2)}`, ' shippingAndTax Included'];
+  const totals = [` totalUsd ${amount.toFixed(2)}`, ` shippingAndTax ${cartDeliveryNote()}`];
   const itemText = ([id, quantity], canonical = false) => {
    const product = products.get(id), design = product.design;
    const item = [`  item ${canonical && design ? 'custom' : id}`,
     `   title ${leaf(design?.title || product.title)}`,
     ...(quantity > 1 ? [`   quantity ${quantity}`, `   unitPriceUsd ${Number(product.priceUsd).toFixed(2)}`] : []),
     `   lineTotalUsd ${(product.priceUsd * quantity).toFixed(2)}`];
-   if (product.status && product.status !== "special") item.push(`   edition ${product.status}`);
+   if (product.shelf) item.push(`   shelf ${leaf(product.shelf)}`);
+   if (pickupNote(product)) item.push("   fulfillment pickup", `   fulfillmentNote ${pickupNote(product)}`);
    if (product.description) item.push(`   description ${leaf(product.description)}`);
    if (design) item.push('   design', ...designToScroll(design).trimEnd().split('\n').map(line => '    ' + line));
    return item.join('\n');
@@ -1049,12 +1055,13 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   });
   lines.innerHTML = [...cart].map(([id, value]) => {
    const product = products.get(id);
-   return `<div class="cart-line"><div class="line-swatch" aria-hidden="true" inert>${bookCover(product)}</div><div class="line-copy"><h3>${escapeHtml(product.title)}</h3><p>${money.format(product.priceUsd)} ${product.design ? "deposit · 50% of $10,000" : "each"}</p>${product.id === "knowbook" ? "<p>Includes initial partner conversation.</p>" : ""}${product.design ? `<div class="design-actions"><button type="button" data-edit-design="${escapeHtml(id)}">Edit</button></div>` : ""}</div><div class="quantity"><button type="button" data-less="${escapeHtml(id)}" aria-label="Remove one ${escapeHtml(product.title)}">−</button><span>${value}</span><button type="button" data-more="${escapeHtml(id)}" aria-label="Add one ${escapeHtml(product.title)}">+</button></div></div>`;
+   return `<div class="cart-line"><div class="line-swatch" aria-hidden="true" inert>${bookCover(product)}</div><div class="line-copy"><h3>${escapeHtml(product.title)}</h3><p>${money.format(product.priceUsd)} ${product.design ? "deposit · 50% of $10,000" : "each"}</p>${product.description ? `<p>${escapeHtml(product.description)}</p>` : ""}${pickupNote(product) ? `<p><strong>${escapeHtml(pickupNote(product))}</strong></p>` : ""}${product.design ? `<div class="design-actions"><button type="button" data-edit-design="${escapeHtml(id)}">Edit</button></div>` : ""}</div><div class="quantity"><button type="button" data-less="${escapeHtml(id)}" aria-label="Remove one ${escapeHtml(product.title)}">−</button><span>${value}</span><button type="button" data-more="${escapeHtml(id)}" aria-label="Add one ${escapeHtml(product.title)}">+</button></div></div>`;
   }).join("");
   fitBookTitles();
   empty.hidden = quantity > 0;
   footer.hidden = quantity === 0;
   total.textContent = checkoutMoney.format(amount);
+  document.querySelector("#cart-element-16").textContent = cartDeliveryNote();
   referralInput.setAttribute("aria-invalid", String(Boolean(enteredCode && !referralCode)));
   referralStatus.textContent = referralCode ? `10% off your cart — you save ${checkoutMoney.format(discountCents / 100)}.` : enteredCode ? "That referral code isn’t valid." : "";
   checkout.href = quantity ? paypalUrl(pricing) : "https://www.paypal.com/cgi-bin/webscr";
@@ -1146,11 +1153,11 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
  };
  const openBook = cover => {
   previewFocus = document.activeElement;
-  const product = products.get(cover.closest(".product").id);
+  const product = products.get(cover.closest(".product").dataset.productId);
   backgroundInert(true);
   document.body.classList.add("cart-open");
   const rect = cover.getBoundingClientRect();
-  preview.innerHTML = `<div class="preview-book"><div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>Each Knowbook is currently built by hand in Hawaii, and each version is currently still unique. Order yours to see what's inside.</p><button class="preview-add" data-add="${escapeHtml(product.id)}">Add to cart <span>${money.format(product.priceUsd)}</span></button></div>${cover.outerHTML}</div>`;
+  preview.innerHTML = `<div class="preview-book"><div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>Each Knowbook is currently built by hand in Hawaii, and each version is currently still unique. Order yours to see what's inside.</p>${product.description ? `<p>${escapeHtml(product.description)}</p>` : ""}${pickupNote(product) ? `<p><strong>${escapeHtml(pickupNote(product))}</strong></p>` : ""}<button class="preview-add" data-add="${escapeHtml(product.id)}">Add to cart <span>${money.format(product.priceUsd)}</span></button></div>${cover.outerHTML}</div>`;
   preview.querySelector(".book-cover").classList.add("preview-cover");
   preview.hidden = false;
   const book = preview.firstElementChild;
@@ -1476,10 +1483,14 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   };
   window.addEventListener('hashchange',loadDesignLink);loadDesignLink();
  }
- productCatalog.forEach(product => editionDetails(product.status));
- grid.innerHTML = statusOrder.flatMap(status => {
-  const stageProducts = productCatalog.filter(product => product.status === status);
-  return stageProducts.length ? [editionDivider(status), ...stageProducts.map(productCard)] : [];
+ productCatalog.forEach(product => {
+  const shelves = shelvesOf(product);
+  if (!shelves.length || new Set(shelves).size !== shelves.length) throw new Error(`Invalid shelves for ${product.id}`);
+  shelves.forEach(editionDetails);
+ });
+ grid.innerHTML = shelfOrder.flatMap(shelf => {
+  const stageProducts = productCatalog.filter(product => shelvesOf(product).includes(shelf));
+  return stageProducts.length ? [editionDivider(shelf), ...stageProducts.map(product => productCard(product, shelf))] : [];
  }).join("");
  const catalogNodes = Array.from(grid.children);
  const restoreSearch = () => {
@@ -1490,7 +1501,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
  window.addEventListener("popstate", restoreSearch);
  const linkedBook = document.getElementById(new URLSearchParams(location.search).get("knowbookId"));
  if (linkedBook?.classList.contains("product") && !document.querySelector("#catalog-search").value.trim()) {
-  collapsedEditions.delete(products.get(linkedBook.id).status);
+  collapsedEditions.delete(linkedBook.dataset.shelf);
   filterCatalog();
  }
  if (linkedBook && !linkedBook.hidden) { document.addEventListener("scrollend", () => openBook(linkedBook.querySelector(".book-cover")), { once: true }); linkedBook.scrollIntoView(); }
@@ -1512,15 +1523,15 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   const link = event.target.closest(".edition-toggle");
   if (!link) return;
   event.preventDefault();
-  const status = link.closest(".edition-divider").dataset.status;
-  collapsedEditions.has(status) ? collapsedEditions.delete(status) : collapsedEditions.add(status);
+  const shelf = link.closest(".edition-divider").dataset.shelf;
+  collapsedEditions.has(shelf) ? collapsedEditions.delete(shelf) : collapsedEditions.add(shelf);
   filterCatalog();
   link.focus({ preventScroll: true });
  });
  grid.addEventListener("keydown", event => {
   if (event.key === " " && event.target.matches(".edition-toggle")) { event.preventDefault(); event.target.click(); }
  });
- grid.addEventListener("click", event => { const cover = event.target.closest(".book-cover"); const button = event.target.closest("[data-add]"); if (cover) { const url = new URL(location.href); url.searchParams.set("knowbookId", cover.closest(".product").id); history.replaceState(null, "", url); openBook(cover); } if (button) { addToCart(button.dataset.add, button.closest(".product").querySelector(".book-cover"), button); } });
+ grid.addEventListener("click", event => { const cover = event.target.closest(".book-cover"); const button = event.target.closest("[data-add]"); if (cover) { const url = new URL(location.href); url.searchParams.set("knowbookId", cover.closest(".product").dataset.productId); history.replaceState(null, "", url); openBook(cover); } if (button) { addToCart(button.dataset.add, button.closest(".product").querySelector(".book-cover"), button); } });
  preview.addEventListener("click", event => { const button = event.target.closest(".preview-add"); if (button) addToCart(button.dataset.add, preview.querySelector(".preview-book"), button); if (event.target === preview || event.target.closest(".preview-close")) closeBook(); });
  lines.addEventListener("click", event => { const more = event.target.closest("[data-more]"); const less = event.target.closest("[data-less]"); if (more) change(more.dataset.more, 1); if (less) change(less.dataset.less, -1); });
  referralInput.addEventListener("input", refresh);
