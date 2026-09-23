@@ -50,14 +50,14 @@ a
    addClass open-example
 
 a
- href ixtapa-zihuatanejo.polo.html
+ href hawaii.polo.html
  addClass example
- aria-label Open the Polo tracker for Ixtapa–Zihuatanejo, Mexico
+ aria-label Open the Polo tracker for Hawaiʻi
  div
   addClass example-caption
   div
    h3 Polo
-   Ixtapa–Zihuatanejo, Mexico
+   Hawaiʻi · All main islands
   span Open tracker ↗
    addClass open-example
 

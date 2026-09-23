@@ -50,21 +50,19 @@ youtubeId Fp7l8XASb9Y
 
 id waikiki
 name Waikīkī Beach
-place Oʻahu · Sheraton Waikiki
-lat 21.277
-lng -157.829
-src https://relay.ozolio.com/pub.api?cmd=explore&oid=CID_HCOU00000057
-live true
-sourceUrl https://marriott.ozolio.com/sheraton-waikiki/
+place Oʻahu · Waikiki Beach Marriott
+lat 21.272
+lng -157.823
+youtubeId 4CK0CsimBHs
+sourceUrl https://www.youtube.com/watch?v=4CK0CsimBHs
 
 id kaanapali
 name Kāʻanapali Beach
 place Maui · Sheraton Maui
 lat 20.926
 lng -156.695
-src https://relay.ozolio.com/pub.api?channel=0&cmd=explore&oid=CID_PUYX0000005C
-live true
-sourceUrl https://www.ozolio.com/explore/PUYX0000005C
+youtubeId YXji6UQ0bwY
+sourceUrl https://www.youtube.com/watch?v=YXji6UQ0bwY
 
 id kilauea
 name Kīlauea Volcano
@@ -74,12 +72,12 @@ lng -155.283
 youtubeId gXKuUyKt8mc
 
 id field
+group broadcast
 name West Coast Storm Chasers
 place DL Scales · Storm coverage
 youtubeId Hxn3IcYvy9M
 
 id hnn
-group broadcast
 name Hawaii News Now
 place TV · Hawaii coverage
 youtubeId khBbm5h76I4

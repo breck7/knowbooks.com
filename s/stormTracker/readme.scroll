@@ -278,7 +278,7 @@ script
  }
  function addFeedInfo(item,root,timeParent=root,badgeParent=root){
   const time=document.createElement('time');time.className='feed-time';time.title='Local time of the last successful media load. Provider issue/recording time may differ.';timeParent.append(time);
-  if(item.kind!=='image'){const badge=document.createElement('span');badge.className='stream-badge';badgeParent.append(badge);}
+  if(item.kind!=='image'&&!weather.includes(item)){const badge=document.createElement('span');badge.className='stream-badge';badgeParent.append(badge);}
   renderFeedInfo(item);
  }
  function mediaLoaded(item){item.updatedAt=Date.now();item.mediaError=false;renderFeedInfo(item);}
