@@ -742,7 +742,7 @@ script
   const referralCodes = new Set(["john", "kendric", "nico", "cora"]);
   const shippingByStatus = {
    believer: "Ship within 90 days",
-   trailblazer: "Ship within 60 days",
+   trailblazer: "Ship within 30 days",
    frontier: "Ship within 6 months",
    partner: "Includes initial partner conversation"
   };
