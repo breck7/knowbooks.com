@@ -1,5 +1,5 @@
 title Storm Tracker — make your own interactieve storm dashboard with live feeds
-description A simple, open-source storm dashboard. Explore live examples for Norbert, Marie, and Lowell, then get the source to track a storm of your own.
+description A simple, open-source storm dashboard. Explore live examples for Nolo, Norbert, Marie, and Lowell, then get the source to track a storm of your own.
 baseUrl https://knowbooks.com/s/stormTracker/
 permalink index.html
 openGraphImage norbert.jpg
@@ -32,6 +32,23 @@ Copy a storm file. Update the settings and feeds. Share with your community.
 
 // Newest storms first; prepend new storm cards here.
 <div class="example-grid">
+a
+ href nolo.html
+ addClass example
+ aria-label Open the Nolo tracker for Hawaiʻi
+ div
+  addClass nolo-preview
+  span HAWAIʻI · LIVE CAMERAS & NOAA
+  strong Nolo
+  span Kauaʻi · Oʻahu · Maui · Hawaiʻi Island
+ div
+  addClass example-caption
+  div
+   h3 Nolo
+   Hawaiʻi · All main islands
+  span Open tracker ↗
+   addClass open-example
+
 <a class="example" href="norbert.html" aria-label="Open the Norbert tracker for Hawaiʻi">
  <img src="norbert.jpg" alt="Norbert dashboard with a Hawaii-wide map, island cameras, and NOAA forecasts" width="1280" height="720">
  <div class="example-caption"><div><h3>Norbert</h3><p>Hawaiʻi · All main islands</p></div><span class="open-example">Open tracker <span aria-hidden="true">↗</span></span></div>
@@ -75,6 +92,7 @@ css
  .example-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
  .example{display:block;overflow:hidden;border:1px solid #25404c;border-radius:14px;background:#0c1921;transition:border-color .18s,transform .18s}
  .example:hover{border-color:#68e1f8;transform:translateY(-3px)}
+ .nolo-preview{aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;background:radial-gradient(ellipse at center,#164857,#071016 75%);border-bottom:1px solid #25404c;color:#93afbd;font-size:12px;letter-spacing:.08em;text-align:center;padding:20px;box-sizing:border-box}.nolo-preview strong{font-size:clamp(40px,6vw,76px);color:#eaf7ff;letter-spacing:-.04em}
  .example img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-bottom:1px solid #25404c}
  .example-caption{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:20px 22px}
  .example h3{font-size:21px;letter-spacing:-.025em;margin:0 0 5px}
