@@ -146,6 +146,25 @@ cover
  filledCircle 55 56 4
  filledCircle 72 74 13
 
+// real estate investing
+id realestate
+tags economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag
+color burgundy
+title Real Estate
+status trailblazer
+priceUsd 99
+symbol a teepee, a pitched tent, and a home increasing in height from left to right, showing greater investment
+cover
+ path M 17 44 L 29 70 L 11 70 L 23 44
+ path M 17 70 L 20 61 L 23 70
+ polygon 35 70 44 42 53 70
+ path M 44 42 L 53 48 L 61 70 L 53 70
+ line 44 57 44 70 2
+ path M 66 42 L 78 29 L 90 42
+ path M 68 40 L 68 70 L 88 70 L 88 40
+ path M 75 70 L 75 57 L 81 57 L 81 70
+ rect 75 44 6 6 2
+
 id light
 tags physicsTag electromagnetismTag wavesTag instantTag opticsTag cyclesTag
 title Light
