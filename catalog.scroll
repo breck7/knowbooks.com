@@ -105,6 +105,19 @@ cover
  filledPolygon 46 54 38 82 18 62
  filledPolygon 82 18 74 46 54 26
 
+id anger
+tags psychologyTag emotionalSkillsTag
+color orange
+title Anger
+status trailblazer
+priceUsd 249
+symbol two scowling eyebrows and eyes
+cover
+ line 28 49 42 56 3
+ line 58 56 72 49 3
+ filledCircle 35 63 3
+ filledCircle 65 63 3
+
 id carpentry
 tags plantTag materialsTag mechanicsTag buildingTag creativeTag hazardTag solidTag machinesTag geometryTag
 title Carpentry
@@ -474,12 +487,6 @@ priceUsd 249
 id collusion
 tags economicsTag psychologyTag multiplePeopleTag businessTag cooperationTag socialTag
 title Collusion
-status believer
-priceUsd 249
-
-id anger
-tags psychologyTag emotionalSkillsTag
-title Anger
 status believer
 priceUsd 249
 

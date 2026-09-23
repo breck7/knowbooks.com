@@ -50,6 +50,16 @@ const catalog = [
     "priceUsd": 399
   },
   {
+    "id": "anger",
+    "tags": "psychologyTag emotionalSkillsTag",
+    "title": "Anger",
+    "color": "orange",
+    "symbol": "two scowling eyebrows and eyes",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"28\" y1=\"49\" x2=\"42\" y2=\"56\" stroke-width=\"3\"/><line x1=\"58\" y1=\"56\" x2=\"72\" y2=\"49\" stroke-width=\"3\"/><circle cx=\"35\" cy=\"63\" r=\"3\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"65\" cy=\"63\" r=\"3\" fill=\"currentColor\" stroke=\"none\"/></svg>",
+    "status": "trailblazer",
+    "priceUsd": 249
+  },
+  {
     "id": "carpentry",
     "tags": "plantTag materialsTag mechanicsTag buildingTag creativeTag hazardTag solidTag machinesTag geometryTag",
     "title": "Carpentry",
@@ -443,13 +453,6 @@ const catalog = [
     "id": "collusion",
     "tags": "economicsTag psychologyTag multiplePeopleTag businessTag cooperationTag socialTag",
     "title": "Collusion",
-    "status": "believer",
-    "priceUsd": 249
-  },
-  {
-    "id": "anger",
-    "tags": "psychologyTag emotionalSkillsTag",
-    "title": "Anger",
     "status": "believer",
     "priceUsd": 249
   },
