@@ -1,23 +1,20 @@
-// Nolo dashboard. Build with: scroll build nolo.scroll
-// Hawaii camera feeds inherited from the Norbert dashboard. Coordinates are approximate.
-// NOAA advisory 12, 2026-09-23 05:00 HST: Tropical Depression Fifteen-E, EP152026.
-// Nolo is the anticipated name; use the official advisory for current classification.
+importOnly
 
-replace STORM_NAME Nolo
+// Shared Hawaii map, cameras and weather feeds. Import after the storm replacements.
 replace REGION_LABEL Hawaiʻi
-replace EMERGENCY_LABEL CPHC storm updates ↗
-replace EMERGENCY_URL https://www.nhc.noaa.gov/graphics_cp2.shtml?cone#contents
+replace EMERGENCY_LABEL STORM_NAME updates ↗
+replace EMERGENCY_URL https://www.nhc.noaa.gov/graphics_FORECAST_SLOT.shtml?cone#contents
 replace MAP_LABEL HAWAIʻI CAMERA MAP
 replace MAP_NOTE All main islands · Pins approximate
 replace TV_HEADING Live TV coverage
-replace PAGE_NOTE Nolo watch: the September 23, 2026, 5 a.m. HST advisory identifies this system as Tropical Depression Fifteen-E. Follow CPHC for its current name and strength. Camera feeds may stop or require Play. Storm coverage may show replays between broadcasts. Forecast issue times are printed on NOAA graphics.
+replace PAGE_NOTE STORM_NOTE Camera feeds may stop or require Play. Storm coverage may show replays between broadcasts. Forecast issue times are printed on NOAA graphics.
 replace WEATHER_PROVIDER NOAA
 replace MAP_LATITUDE 20.6
 replace MAP_LONGITUDE -157.55
 replace MAP_ZOOM 6
 
 title STORM_NAME - REGION_LABEL · Storm Tracker
-description Five Hawaii cameras, West Coast Storm Chasers, and NOAA satellite and forecast graphics for Nolo.
+description Five Hawaii cameras, West Coast Storm Chasers, and NOAA satellite and forecast graphics for STORM_NAME.
 baseUrl https://knowbooks.com/s/stormTracker/
 htmlLang en
 
@@ -40,6 +37,7 @@ place Kauaʻi · Nukumoi
 lat 21.8733
 lng -159.4538
 src https://iframe.dacast.com/b/125968/c/496219
+live true
 sourceUrl https://nukumoi.com/live-cam/
 dacast 41f4cb2177aceea6b7d20c1f8179c161-live-27d3f3cef1d5f598a98344b9a8111c49
 
@@ -56,6 +54,7 @@ place Oʻahu · Sheraton Waikiki
 lat 21.277
 lng -157.829
 src https://relay.ozolio.com/pub.api?cmd=explore&oid=CID_HCOU00000057
+live true
 sourceUrl https://marriott.ozolio.com/sheraton-waikiki/
 
 id kaanapali
@@ -64,6 +63,7 @@ place Maui · Sheraton Maui
 lat 20.926
 lng -156.695
 src https://relay.ozolio.com/pub.api?channel=0&cmd=explore&oid=CID_PUYX0000005C
+live true
 sourceUrl https://www.ozolio.com/explore/PUYX0000005C
 
 id kilauea
@@ -97,24 +97,24 @@ group weather
 name Wind probabilities
 place 34 kt · 5 days
 kind image
-src https://www.nhc.noaa.gov/storm_graphics/EP15/EP152026_wind_probs_34_F120.png
-sourceUrl https://www.nhc.noaa.gov/graphics_cp2.shtml?tswind120#contents
+src https://www.nhc.noaa.gov/storm_graphics/STORM_BASIN_NUMBER/STORM_ID_wind_probs_34_F120.png
+sourceUrl https://www.nhc.noaa.gov/graphics_FORECAST_SLOT.shtml?tswind120#contents
 
 id history
 group weather
 name Wind history
-place Nolo · Observed wind extent
+place STORM_NAME · Observed wind extent
 kind image
-src https://www.nhc.noaa.gov/storm_graphics/EP15/EP152026_wind_history.png
-sourceUrl https://www.nhc.noaa.gov/graphics_cp2.shtml?swath#contents
+src https://www.nhc.noaa.gov/storm_graphics/STORM_BASIN_NUMBER/STORM_ID_wind_history.png
+sourceUrl https://www.nhc.noaa.gov/graphics_FORECAST_SLOT.shtml?swath#contents
 
 id cone
 group weather
 name Forecast cone
 place 5-day track
 kind image
-src https://www.nhc.noaa.gov/storm_graphics/EP15/EP152026_5day_cone.png
-sourceUrl https://www.nhc.noaa.gov/graphics_cp2.shtml?cone#contents
+src https://www.nhc.noaa.gov/storm_graphics/STORM_BASIN_NUMBER/STORM_ID_5day_cone.png
+sourceUrl https://www.nhc.noaa.gov/graphics_FORECAST_SLOT.shtml?cone#contents
 
 id outlook
 group weather

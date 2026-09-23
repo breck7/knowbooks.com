@@ -1,0 +1,8 @@
+// Shared Hawaii viewing area with Odalys-specific NOAA forecasts.
+replace STORM_NAME Odalys
+replace STORM_ID EP162026
+replace STORM_BASIN_NUMBER EP16
+replace FORECAST_SLOT ep1
+replace STORM_NOTE Hawaii is the camera viewing area, not a forecast landfall location for Odalys. Follow NHC for the latest track and warnings.
+
+hawaii.scroll
