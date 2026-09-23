@@ -1,0 +1,8 @@
+// Shared Hawaii dashboard; only storm metadata lives here.
+replace STORM_NAME Nolo
+replace STORM_ID EP152026
+replace STORM_BASIN_NUMBER EP15
+replace FORECAST_SLOT cp2
+replace STORM_NOTE Nolo watch: the September 23, 2026, 5 a.m. HST advisory identifies this system as Tropical Depression Fifteen-E. Follow CPHC for its current name and strength.
+
+hawaii.scroll
