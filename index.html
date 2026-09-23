@@ -863,17 +863,15 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
  const shippingByStatus = {
   believer: "Ship within 90 days",
   trailblazer: "Ship within 30 days",
-  frontier: "Ship within 6 months",
-  partner: "Includes initial partner conversation"
+  frontier: "Ship within 6 months"
  };
  const editionNameByStatus = {
   believer: "Believer",
   trailblazer: "Trailblazer",
-  frontier: "Frontier",
-  partner: "Partner"
+  frontier: "Frontier"
  };
- const statusOrder = ["trailblazer", "believer", "frontier", "partner"];
- const collapsedEditions = new Set(["believer", "frontier", "partner"]);
+ const statusOrder = ["trailblazer", "believer", "frontier", "special"];
+ const collapsedEditions = new Set(["believer", "frontier", "special"]);
  const cart = new Map();
  const grid = document.querySelector("#product-grid");
  const preview = document.querySelector(".book-preview");
@@ -897,6 +895,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
  };
  const escapeHtml = value => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
  const editionDetails = status => {
+  if (status === "special") return { name: "Special items", shipping: "" };
   const name = editionNameByStatus[status];
   const shipping = shippingByStatus[status];
   if (!name || !shipping) throw new Error(`Unknown product status: ${status}`);
@@ -909,13 +908,15 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   const { name, shipping } = editionDetails(product.status);
   return `<article class="product" id="${escapeHtml(product.id)}">
    ${bookCover(product)}
-   <div class="product-info"><div class="product-meta"><span class="price">${money.format(product.priceUsd)}</span><p>${escapeHtml(product.id === "knowbook" ? product.description : "Experiment kit in a book.")}<br><i>${escapeHtml(name)} edition<br>${escapeHtml(shipping)}</i></p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
+   <div class="product-info"><div class="product-meta"><span class="price">${money.format(product.priceUsd)}</span><p>${escapeHtml(product.description || (product.status === "special" ? "" : "Experiment kit in a book."))}${product.status === "special" ? "" : `<br><i>${escapeHtml(name)} edition<br>${escapeHtml(shipping)}</i>`}</p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
   </article>`;
  };
  const editionDivider = status => {
   const { name, shipping } = editionDetails(status);
+  const heading = status === "special" ? name : `${name} editions`;
+  const sectionId = status === "special" ? "special-items" : `${status}-editions`;
   const controls = productCatalog.filter(product => product.status === status).map(product => escapeHtml(product.id)).join(" ");
-  return `<div class="edition-divider" id="${escapeHtml(status)}-editions" data-status="${escapeHtml(status)}"><a class="edition-toggle" href="#${escapeHtml(status)}-editions" role="button" aria-expanded="${!collapsedEditions.has(status)}" aria-controls="${controls}"><h2>${escapeHtml(name)} editions</h2><p>${escapeHtml(shipping)}</p></a></div>`;
+  return `<div class="edition-divider" id="${sectionId}" data-status="${escapeHtml(status)}"><a class="edition-toggle" href="#${sectionId}" role="button" aria-expanded="${!collapsedEditions.has(status)}" aria-controls="${controls}"><h2>${escapeHtml(heading)}</h2>${shipping ? `<p>${escapeHtml(shipping)}</p>` : ""}</a></div>`;
  };
  const filterCatalog = () => {
   const query = document.querySelector("#catalog-search").value.trim();
@@ -978,7 +979,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   [...cart].forEach(([id, quantity], index) => {
    const product = products.get(id);
    const number = index + 1;
-   url.searchParams.set(`item_name_${number}`, `${product.title} Knowbook${product.id === "knowbook" ? " + initial partner conversation" : ""}${referralCode ? ` (Referral: ${referralCode})` : ""}`);
+   url.searchParams.set(`item_name_${number}`, `${product.title}${product.status === "special" && product.id !== "knowbook" ? "" : " Knowbook"}${product.id === "knowbook" ? " + initial partner conversation" : ""}${referralCode ? ` (Referral: ${referralCode})` : ""}`);
    url.searchParams.set(`item_number_${number}`, product.id);
    url.searchParams.set(`amount_${number}`, Number(product.priceUsd).toFixed(2));
    url.searchParams.set(`quantity_${number}`, String(quantity));
@@ -996,7 +997,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
     `   title ${leaf(design?.title || product.title)}`,
     ...(quantity > 1 ? [`   quantity ${quantity}`, `   unitPriceUsd ${Number(product.priceUsd).toFixed(2)}`] : []),
     `   lineTotalUsd ${(product.priceUsd * quantity).toFixed(2)}`];
-   if (product.status) item.push(`   edition ${product.status}`);
+   if (product.status && product.status !== "special") item.push(`   edition ${product.status}`);
    if (product.description) item.push(`   description ${leaf(product.description)}`);
    if (design) item.push('   design', ...designToScroll(design).trimEnd().split('\n').map(line => '    ' + line));
    return item.join('\n');

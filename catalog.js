@@ -840,7 +840,7 @@ const catalog = [
     "tags": "economicsTag buildingTag creativeTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag",
     "title": "Knowbooks",
     "color": "forest",
-    "status": "partner",
+    "status": "special",
     "priceUsd": 999
   }
 ]
