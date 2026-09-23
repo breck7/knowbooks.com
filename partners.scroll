@@ -339,7 +339,7 @@ dialog
  div
   addClass partner-invite
   id partner-invite
-  button Buy the Knowbooks Knowbook · $999
+  button Buy the Knowbooks Knowbook
    id partner-buy
    type button
 

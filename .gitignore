@@ -1,0 +1,8 @@
+*.html
+.*
+*.svg
+*.js
+!s/checko/checko.js
+*.zip
+*.csv
+output/
