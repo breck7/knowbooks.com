@@ -12,7 +12,7 @@ titleParser
 
 statusParser
  extends abstractStringMeasureParser
- description Product status.
+ description Catalog grouping: trailblazer, believer, frontier, or special for non-edition items.
 
 priceUsdParser
  extends abstractIntegerMeasureParser
@@ -822,7 +822,7 @@ priceUsd 10000
 id knowbook
 tags economicsTag buildingTag creativeTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag
 title Knowbooks
-status partner
+status special
 priceUsd 999
 color forest
 description Includes an initial partner conversation about building Knowbooks in your community.
