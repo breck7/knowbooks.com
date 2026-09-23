@@ -841,6 +841,6 @@ const catalog = [
     "title": "Knowbooks",
     "color": "forest",
     "status": "special",
-    "priceUsd": 999
+    "priceUsd": 10000
   }
 ]

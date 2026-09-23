@@ -32,15 +32,6 @@ buildToFileParser
    }
   }
 
-buildToFile .gitignore
- *.html
- .*
- *.svg
- *.js
- !s/checko/checko.js
- *.zip
- *.csv
-
 buildZipParser
  description Zip the listed files or folders after preceding build commands. Requires the zip command.
  extends abstractBuildCommandParser
