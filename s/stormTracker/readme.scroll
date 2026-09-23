@@ -125,6 +125,7 @@ stormDashboardParser
 
 buildHtml
 openGraphImage lowell.jpg
+favicon favicon.svg
 metaTags
 stormDashboard
  heading STORM_NAME - REGION_LABEL

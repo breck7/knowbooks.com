@@ -5,6 +5,7 @@ permalink index.html
 htmlLang en
 buildHtml
 openGraphImage lowell.jpg
+favicon favicon.svg
 metaTags
 
 <header><a class="brand" href="index.html"><span aria-hidden="true">◉</span> Storm Tracker</a><a class="header-link" href="https://github.com/breck7/knowbooks.com/tree/main/s/stormTracker">GitHub ↗</a></header>

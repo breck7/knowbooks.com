@@ -74,13 +74,14 @@ youtubeId gXKuUyKt8mc
 id field
 group broadcast
 name West Coast Storm Chasers
-place DL Scales · Storm coverage
-youtubeId Hxn3IcYvy9M
+place DL Scales · Kauaʻi survey · Sep 9 replay
+youtubeId L94GOkagga8
+live false
 
 id hnn
 name Hawaii News Now
-place TV · Hawaii coverage
-youtubeId khBbm5h76I4
+place This Is Now · Sep 23, 2026
+youtubeId 1rTQvaQ4eCI
 
 id noaa
 group weather
