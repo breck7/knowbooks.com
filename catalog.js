@@ -90,9 +90,9 @@ const catalog = [
     "priceUsd": 699
   },
   {
-    "id": "realestate",
+    "id": "buildings",
     "tags": "economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag",
-    "title": "Real Estate",
+    "title": "Buildings",
     "color": "burgundy",
     "symbol": "a teepee, a pitched tent, and a home increasing in height from left to right, showing greater investment",
     "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M 17 44 L 29 70 L 11 70 L 23 44\"/><path d=\"M 17 70 L 20 61 L 23 70\"/><polygon points=\"35 70 44 42 53 70\"/><path d=\"M 44 42 L 53 48 L 61 70 L 53 70\"/><line x1=\"44\" y1=\"57\" x2=\"44\" y2=\"70\" stroke-width=\"2\"/><path d=\"M 66 42 L 78 29 L 90 42\"/><path d=\"M 68 40 L 68 70 L 88 70 L 88 40\"/><path d=\"M 75 70 L 75 57 L 81 57 L 81 70\"/><rect x=\"75\" y=\"44\" width=\"6\" height=\"6\" stroke-width=\"2\"/></svg>",
