@@ -99,13 +99,14 @@ kind image
 src https://www.nhc.noaa.gov/storm_graphics/STORM_BASIN_NUMBER/STORM_ID_wind_probs_34_F120.png
 sourceUrl https://www.nhc.noaa.gov/graphics_FORECAST_SLOT.shtml?tswind120#contents
 
-id history
+// Shared Hawaii rainfall outlook; explicitly identifies the storm producing this forecast.
+id rainfall
 group weather
-name Wind history
-place STORM_NAME · Observed wind extent
+name Rainfall potential
+place Hawaiʻi · Nolo rainfall
 kind image
-src https://www.nhc.noaa.gov/storm_graphics/STORM_BASIN_NUMBER/STORM_ID_wind_history.png
-sourceUrl https://www.nhc.noaa.gov/graphics_FORECAST_SLOT.shtml?swath#contents
+src https://www.nhc.noaa.gov/storm_graphics/EP15/EP1526WPCQPF.gif
+sourceUrl https://www.nhc.noaa.gov/graphics_cp2.shtml?rainqpf#contents
 
 id cone
 group weather
