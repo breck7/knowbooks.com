@@ -57,7 +57,7 @@ knowbooks carpentry paper wood seeds fabric food trees
 
 id economicsTag
 question Is money, ownership, trade, or the allocation of scarce resources central to this topic?
-knowbooks capital sales gold banking liberty property competition collusion budgeting bookkeeping payroll marketing currency bitcoin venture knowbook realestate
+knowbooks capital sales gold banking liberty property competition collusion budgeting bookkeeping payroll marketing currency bitcoin venture knowbook buildings
 
 id psychologyTag
 question Is understanding or changing attention, emotion, motivation, or social behavior a central goal?
@@ -102,7 +102,7 @@ knowbooks beams tools carpentry levers electricity motors gears ropes paper ink 
 
 id measurementTag
 question Is taking numerical measurements or keeping quantitative records a central way to explore this topic?
-knowbooks beams capital gravity sound electricity heat banking sleep energy voltage motion friction wind aerodynamics water time centuries stars budgeting bookkeeping payroll batteries hydration hurricanes currency bitcoin flow frequency waves springs momentum rockets solar venture plumbing breath rain realestate
+knowbooks beams capital gravity sound electricity heat banking sleep energy voltage motion friction wind aerodynamics water time centuries stars budgeting bookkeeping payroll batteries hydration hurricanes currency bitcoin flow frequency waves springs momentum rockets solar venture plumbing breath rain buildings
 
 id creativeTag
 question Is creating an expressive work, design, or performance a central activity?
@@ -114,11 +114,11 @@ knowbooks magnets beams focus levers light tools gravity sound electricity air h
 
 id longTermTag
 question Is tracking change over weeks or months a central way to deepen learning about this topic?
-knowbooks capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing twitter cancer raising attraction basketball football soccer boxing golf baseball venture trees realestate
+knowbooks capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing twitter cancer raising attraction basketball football soccer boxing golf baseball venture trees buildings
 
 id multiplePeopleTag
 question Does practicing this topic in real life centrally involve interaction between multiple people?
-knowbooks sales liberty property teamwork competition collusion payroll marketing twitter alignment raising attraction basketball football soccer boxing baseball venture knowbook realestate
+knowbooks sales liberty property teamwork competition collusion payroll marketing twitter alignment raising attraction basketball football soccer boxing baseball venture knowbook buildings
 
 id hazardTag
 question Does direct experimentation with the real phenomenon involve hazards such as heat, cutting, electricity, contamination, or severe weather?
@@ -187,12 +187,12 @@ knowbooks sleep food hydration mitochondria cancer raising breath
 id financeTag
 question Is managing, recording, or exchanging money and financial assets central to this topic?
 keywords finance financial money investing investment savings accounting payment payments
-knowbooks capital gold banking property budgeting bookkeeping payroll currency bitcoin venture realestate
+knowbooks capital gold banking property budgeting bookkeeping payroll currency bitcoin venture buildings
 
 id businessTag
 question Is operating a business or participating in a market a central goal?
 keywords business enterprise commerce commercial market markets entrepreneurship
-knowbooks capital sales banking property competition collusion budgeting bookkeeping payroll marketing venture knowbook realestate
+knowbooks capital sales banking property competition collusion budgeting bookkeeping payroll marketing venture knowbook buildings
 
 id startupsTag
 question Does this topic directly support founding, funding, or building an early-stage business?
