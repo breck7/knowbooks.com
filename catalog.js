@@ -1,7 +1,7 @@
 const catalog = [
   {
     "id": "launch",
-    "description": "Includes ticket to Knowbooks Oahu launch party on a weekend in October 2026. Final date, time, and location decided by nolo, odalys, polo, etc.",
+    "description": "Includes ticket to Knowbooks Oahu launch celebration on a weekend day in October 2026. Final date, time, and location decided by nolo, odalys, polo, etc.",
     "tags": "economicsTag measurementTag creativeTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag",
     "title": "launch",
     "color": "forest",
