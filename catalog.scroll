@@ -160,10 +160,10 @@ cover
  filledCircle 72 74 13
 
 // real estate investing
-id realestate
+id buildings
 tags economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag
 color burgundy
-title Real Estate
+title Buildings
 status trailblazer
 priceUsd 299
 symbol a teepee, a pitched tent, and a home increasing in height from left to right, showing greater investment
