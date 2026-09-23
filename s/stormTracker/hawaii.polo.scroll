@@ -1,0 +1,8 @@
+// Shared Hawaii viewing area with Polo-specific NOAA forecasts.
+replace STORM_NAME Polo
+replace STORM_ID EP172026
+replace STORM_BASIN_NUMBER EP17
+replace FORECAST_SLOT ep2
+replace STORM_NOTE Hawaii is the camera viewing area, not a forecast landfall location for Polo. Follow NHC for the latest track and warnings.
+
+hawaii.scroll
