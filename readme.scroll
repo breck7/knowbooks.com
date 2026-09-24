@@ -745,8 +745,8 @@ script
    trailblazer: "Trailblazer",
    frontier: "Frontier"
   };
-  const shelfOrder = ["trailblazer", "believer", "frontier", "special"];
-  const collapsedEditions = new Set(["believer", "frontier", "special"]);
+  const shelfOrder = ["trailblazer", "believer", "frontier", "signatures", "special"];
+  const collapsedEditions = new Set(["believer", "frontier", "signatures", "special"]);
   const cart = new Map();
   const grid = document.querySelector("#product-grid");
   const preview = document.querySelector(".book-preview");
@@ -774,6 +774,7 @@ script
   const cardId = (product, shelf) => shelf === primaryShelf(product) ? product.id : `${product.id}--${shelf}`;
   const editionDetails = shelf => {
    if (shelf === "special") return { name: "Special items", shipping: "" };
+   if (shelf === "signatures") return { name: "Signature", shipping: "Ship within 90 days" };
    const name = editionNameByShelf[shelf];
    const shipping = shippingByShelf[shelf];
    if (!name || !shipping) throw new Error(`Unknown product shelf: ${shelf}`);
@@ -793,8 +794,8 @@ script
   };
   const editionDivider = shelf => {
    const { name, shipping } = editionDetails(shelf);
-   const heading = shelf === "special" ? name : `${name} editions`;
-   const sectionId = shelf === "special" ? "special-items" : `${shelf}-editions`;
+   const heading = shelf === "signatures" ? "Signature Knowbooks" : shelf === "special" ? name : `${name} editions`;
+   const sectionId = shelf === "signatures" ? "signatures" : shelf === "special" ? "special-items" : `${shelf}-editions`;
    const controls = productCatalog.filter(product => shelvesOf(product).includes(shelf)).map(product => escapeHtml(cardId(product, shelf))).join(" ");
    return `<div class="edition-divider" id="${sectionId}" data-shelf="${escapeHtml(shelf)}"><a class="edition-toggle" href="#${sectionId}" role="button" aria-expanded="${!collapsedEditions.has(shelf)}" aria-controls="${controls}"><h2>${escapeHtml(heading)}</h2>${shipping ? `<p>${escapeHtml(shipping)}</p>` : ""}</a></div>`;
   };
