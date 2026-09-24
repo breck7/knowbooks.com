@@ -19,7 +19,8 @@
  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
-<style>#designer { width: min(850px, calc(100% - 24px)); max-height: 96dvh; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); }
+<style>@font-face { font-family: Allura; src: url("allura.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
+#designer { width: min(850px, calc(100% - 24px)); max-height: 96dvh; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); }
 #design-source { margin-top: 10px; font: 13px/1.5 Arial, sans-serif; }
 #design-source summary { cursor: pointer; }
 #design-link { width: 100%; margin-top: 6px; padding: 8px; border: 1px solid var(--line); border-radius: 4px; background: #fff8; font: 12px monospace; }
@@ -35,17 +36,16 @@ body:has(#designer[open]) { overflow: hidden; }
 .design-spread { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
 .design-cover { background: var(--cover, #294575); color: var(--gold); border-radius: 5px 12px 12px 5px; box-shadow: inset 8px 0 8px #0003, 5px 5px 0 #dcd1b9; padding: 16px 18px 12px; text-align: center; max-width: 320px; margin: auto; }
 #design-title { font: 24px/1.2 Georgia, serif; min-height: 29px; overflow-wrap: anywhere; margin: 0 0 10px; }
-#design-byline { display: block; width: 100%; margin: -2px 0 6px; padding: 4px; border: 0; background: transparent; color: inherit; text-align: center; font: italic 16px Georgia, serif; }
-#design-byline::placeholder { color: inherit; opacity: .7; }
+#design-signature { display: block; width: 100%; margin: -2px 0 6px; padding: 4px; border: 0; background: transparent; color: inherit; text-align: center; font: 400 23px/1.15 Allura, cursive; }
+#design-signature::placeholder { color: inherit; opacity: .7; }
 #designer [hidden] { display: none; }
 [data-edit-design] { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; text-align: left; }
 [data-edit-design]:hover { text-decoration: underline; }
 .design-actions { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 6px 0; }
-.book-byline { margin-top: 8px; font: italic 14px Georgia, serif; text-align: center; }
+.book-signature { max-width: 100%; margin-top: 5px; font: 400 23px/1.15 Allura, cursive; text-align: center; overflow-wrap: anywhere; }
 #design-title:focus { outline: 1px dashed var(--gold); }
 .design-cover svg { display: block; width: 100%; touch-action: none; cursor: crosshair; }
 #design-art { height: clamp(110px, 27dvh, 210px); }
-#design-signature { height: 42px; }
 .design-cover .strokes { fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; pointer-events: stroke; }
 .design-cover > span { display: block; margin-top: 10px; font: 10px Arial, sans-serif; letter-spacing: .25em; }
 #design-colors { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 6px; justify-content: center; }
@@ -81,7 +81,7 @@ body:has(#designer[open]) { overflow: hidden; }
  #design-experiments { grid-column: 2; grid-row: 1; margin-top: 28px; }
  .design-inside > p, #design-add { grid-column: 1 / -1; margin: 0; }
  .design-cover { padding: 12px 8px 8px; } #design-title { font-size: 18px; margin-bottom: 4px; }
- #design-byline { font-size: 12px; } #design-art { height: 100px; } #design-signature { height: 25px; }
+ #design-signature { font-size: 20px; } #design-art { height: 100px; }
  #design-colors { gap: 5px; margin: 8px 0 4px; } #design-colors button { width: 17px; height: 17px; }
  .design-tools { gap: 2px 8px; font-size: 11px; } #design-marker { gap: 3px; } #design-marker svg { width: 24px; }
 }
@@ -214,9 +214,9 @@ h1 { position: relative; z-index: 1; max-width: 820px; margin: 0; font-size: cla
 .preview-pages .preview-add { font-size: 13px; }
 .preview-close { position: absolute; z-index: 1; top: 8px; right: 8px; border: 0; background: transparent; cursor: pointer; font-size: 25px; }
 .preview-cover { position: absolute; inset: 0; height: 100%; transform-origin: left; transition: transform 650ms cubic-bezier(.2,.7,.2,1) 450ms; }
-.preview-cover h3, .preview-cover .book-symbol, .preview-cover .book-brand { transition: opacity 100ms 450ms; }
+.preview-cover h3, .preview-cover .book-signature, .preview-cover .book-symbol, .preview-cover .book-brand { transition: opacity 100ms 450ms; }
 .book-preview.is-open .preview-cover { transform: rotateY(-155deg); }
-.book-preview.is-open .preview-cover h3, .book-preview.is-open .preview-cover .book-symbol, .book-preview.is-open .preview-cover .book-brand { opacity: 0; }
+.book-preview.is-open .preview-cover h3, .book-preview.is-open .preview-cover .book-signature, .book-preview.is-open .preview-cover .book-symbol, .book-preview.is-open .preview-cover .book-brand { opacity: 0; }
 .product-info { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-top: 23px; }
 .product-meta p { margin: 4px 0 0; color: var(--muted); font: 12px/1.4 Arial, sans-serif; }
 .price { font-size: 19px; }
@@ -406,9 +406,8 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
 <div class="design-spread">
 <div><div class="design-cover">
 <h3 id="design-title" contenteditable="plaintext-only" role="textbox" aria-label="Knowbook title" aria-multiline="false" spellcheck="false">Your Knowbook</h3>
-<input id="design-byline" aria-label="Expert name" placeholder="by Your name (optional)" maxlength="60">
+<input id="design-signature" aria-label="Expert name" placeholder="Your name (optional)" maxlength="60">
 <svg id="design-art" viewBox="0 0 200 200" tabindex="0" aria-label="Draw your cover with the marker"><g id="design-portrait"></g><g class="strokes"></g></svg>
-<svg id="design-signature" viewBox="0 0 200 55" aria-label="Draw your signature"><g class="strokes"></g></svg>
 <span>KNOWBOOKS</span></div>
 <div id="design-colors" role="group" aria-label="Cover color"></div>
 <div class="design-tools"><button type="button" id="design-marker" aria-pressed="false" aria-label="Flip marker to eraser"><svg viewBox="0 0 100 24" width="100" height="24" aria-hidden="true"><path d="M5 12 19 5v14z" fill="currentColor"/><rect x="19" y="4" width="60" height="16" rx="3" fill="currentColor"/><rect x="80" y="4" width="15" height="16" rx="3" fill="#d9bc78"/></svg><span>Flip to erase</span></button><button type="button" id="design-undo">Undo</button><label class="design-upload">Upload<input id="portrait-file" type="file" aria-label="Upload cover image" accept="image/png,image/jpeg,image/webp"></label><button type="button" id="remove-image" hidden>Remove image</button></div>
@@ -912,7 +911,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
  const pickupNote = product => product.fulfillment === "pickup" ? "In-person pickup only — will not be shipped." : "";
  const cartDeliveryNote = () => [...cart.keys()].some(id => pickupNote(products.get(id))) ? "Includes tax and shipping for shippable items. Pickup-only items must be collected in person." : "Includes shipping and tax.";
  const bookCover = product => `<div class="book-cover" style="--cover:${escapeHtml(product.coverColor)}">
-    <h3><a href="?knowbookId=${escapeHtml(product.id)}" onclick="return false">${escapeHtml(product.design?.title || product.title)}</a></h3>${product.design?.byline ? `<span class="book-byline">by ${escapeHtml(product.design.byline)}</span>` : ""}<span class="book-symbol" aria-hidden="true">${product.cover || ""}</span><span class="book-brand">Knowbooks</span>
+    <h3><a href="?knowbookId=${escapeHtml(product.id)}" onclick="return false">${escapeHtml(product.design?.title || product.title)}</a></h3>${(product.design?.signature || product.signature) ? `<span class="book-signature">${escapeHtml(product.design?.signature || product.signature)}</span>` : ""}<span class="book-symbol" aria-hidden="true">${product.cover || ""}</span><span class="book-brand">Knowbooks</span>
    </div>`;
  const productCard = (product, shelf) => {
   const { name, shipping } = editionDetails(shelf);
@@ -1218,20 +1217,20 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   }
  };
  function initDesigner() {
-  const $ = selector => document.querySelector(selector), dialog = $('#designer'), title = $('#design-title'), byline = $('#design-byline');
-  const art = $('#design-art'), signature = $('#design-signature'), marker = $('#design-marker'), status = $('#design-status');
+  const $ = selector => document.querySelector(selector), dialog = $('#designer'), title = $('#design-title'), signature = $('#design-signature');
+  const art = $('#design-art'), marker = $('#design-marker'), status = $('#design-status');
   const key = 'knowbooks-signature-design', undo = [], hedcuts = new WeakMap();
   let design, draft, editing = false, erase = false, drawing, opener, photoVersion = 0;
-  const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', byline: '', color: 'navy', verbs: Array(5).fill(''), art: [], signature: [], portrait: [] });
+  const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', signature: '', color: 'navy', verbs: Array(5).fill(''), art: [], portrait: [] });
   function cryptoId() { return globalThis.crypto.randomUUID().slice(0, 8); }
   const svg = body => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 255" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
   const paths = values => values.map(d => `<path d="${d}"/>`).join('');
   const dots = values => values.map(([x,y,r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="currentColor" stroke="none"/>`).join('');
-  const cover = d => svg(dots(d.portrait) + paths(d.art) + `<g transform="translate(0 200)">${paths(d.signature)}</g>`);
+  const cover = d => svg(dots(d.portrait) + paths(d.art));
   const product = d => ({ id: d.id, title: `${d.title} — Signature design deposit (${d.id})`, priceUsd: 5000, coverColor: coverPalette[d.color], cover: cover(d), design: d });
   const remember = () => {
    design.title = title.textContent.replace(/\s+/g,' ').trim().slice(0, 60);
-   design.byline = byline.value.trim();
+   design.signature = signature.value.trim();
    syncCode();
    if (editing) return;
    draft = design;
@@ -1241,9 +1240,9 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   try {
    const d = JSON.parse(localStorage.getItem(key) || 'null');
    if (d && /^custom-[a-f0-9-]{8}$/.test(d.id) && Object.hasOwn(coverPalette,d.color)) {
-    d.title = String(d.title).slice(0,60); d.byline = String(d.byline || '').replace(/\s+/g,' ').slice(0,60);
+    d.title = String(d.title).slice(0,60); d.signature = String(typeof d.signature === 'string' ? d.signature : '').replace(/\s+/g,' ').slice(0,60);
     d.verbs = Array.from({length:5},(_,i) => String(d.verbs?.[i] ?? '').replace(/\s/g,'').slice(0,24));
-    for (const field of ['art','signature']) d[field] = (Array.isArray(d[field]) ? d[field] : []).filter(p => typeof p === 'string' && p.length < 20000 && /^[MLQ0-9., -]+$/.test(p)).slice(0,200);
+    for (const field of ['art']) d[field] = (Array.isArray(d[field]) ? d[field] : []).filter(p => typeof p === 'string' && p.length < 20000 && /^[MLQ0-9., -]+$/.test(p)).slice(0,200);
     d.portrait = (Array.isArray(d.portrait) ? d.portrait : []).filter(p => Array.isArray(p) && p.length === 3 && p.every(Number.isFinite) && p[0]>=0 && p[0]<=200 && p[1]>=0 && p[1]<=200 && p[2]>0 && p[2]<3).slice(0,4500);
     draft = d; products.set(d.id, product(d));
    }
@@ -1252,13 +1251,13 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
    const leaf = value => String(value || '').replace(/\s+/g,' ').trim();
    const strokes = paths => paths.flatMap(path => ['  path', ...(path.match(/[MLQ][^MLQ]*/g) || []).map(command => `   ${{M:'moveTo', L:'lineTo', Q:'quadraticTo'}[command[0]]} ${command.slice(1).trim().replace(/[ ,]+/g,' ')}`)]);
    return [
-    `title ${leaf(d.title)}`, ...(d.byline ? [`byline ${leaf(d.byline)}`] : []), `color ${d.color}`,
+    `title ${leaf(d.title)}`, ...(d.signature ? [`signature ${leaf(d.signature)}`] : []), `color ${d.color}`,
     'designFeeUsd 10000', 'depositUsd 5000', 'prototype One shipped within 30 days of deposit', 'balance Due before shipment',
     'copies Our production cost + 30%',
     ['experiments', ...d.verbs.filter(Boolean).map(leaf)].join(' '),
     'cover', ' viewBox 0 0 200 255', ' ink #d9bc78', ' strokeWidth 2.5', ' lineCap round', ' lineJoin round',
     ' portrait', ...d.portrait.map(dot => `  filledCircle ${dot.join(' ')}`),
-    ' art', ...strokes(d.art), ' signature', '  translate 0 200', ...strokes(d.signature)
+    ' art', ...strokes(d.art)
    ].join('\n') + '\n';
   };
   designToScroll = proposal;
@@ -1284,9 +1283,9 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
     const result={};for(const child of node.children) {if(!allowed.includes(child.key) || result[child.key]) fail(`Unexpected or repeated field: ${child.key}`);result[child.key]=child;}return result;
    };
    const scalar = (node, fallback='') => {if(node?.children.length) fail(`Unexpected indentation below ${node.key}.`);return node?.value ?? fallback;};
-   const top=fields(root,['title','byline','color','designFeeUsd','depositUsd','prototype','balance','copies','experiments','cover']);
-   const d={...fresh(),title:scalar(top.title),id:design.id,byline:scalar(top.byline),color:scalar(top.color),verbs:scalar(top.experiments).split(/\s+/).filter(Boolean)};
-   if(!d.title.trim() || d.title.length>60 || d.byline.length>60) fail('Use a title and byline of at most 60 characters.');
+   const top=fields(root,['title','signature','color','designFeeUsd','depositUsd','prototype','balance','copies','experiments','cover']);
+   const d={...fresh(),title:scalar(top.title),id:design.id,signature:scalar(top.signature),color:scalar(top.color),verbs:scalar(top.experiments).split(/\s+/).filter(Boolean)};
+   if(!d.title.trim() || d.title.length>60 || d.signature.length>60) fail('Use a title and signature of at most 60 characters.');
    if(!Object.hasOwn(coverPalette,d.color)) fail('Use a listed cover color.');
    if(d.verbs.length>5 || d.verbs.some(v=>v.length>24)) fail('Use up to five verbs, at most 24 characters each.');
    for(const line of proposal(d).split('\n').filter(line=>/^(designFeeUsd|depositUsd|prototype|balance|copies) /.test(line))) {
@@ -1296,19 +1295,18 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
    const coverFields=fields(top.cover,['viewBox','ink','strokeWidth','lineCap','lineJoin','portrait','art','signature']);
    for(const [key,value] of Object.entries({viewBox:'0 0 200 255',ink:'#d9bc78',strokeWidth:'2.5',lineCap:'round',lineJoin:'round'})) if(scalar(coverFields[key])!==value) fail(`Keep cover ${key} ${value}.`);
    const numbers = (node,count) => {const nums=scalar(node).trim().split(/\s+/).map(Number);if(nums.length!==count || nums.some(n=>!Number.isFinite(n) || Math.abs(n)>10000)) fail(`Invalid ${node.key} coordinates.`);return nums;};
-   for(const key of ['portrait','art','signature']) {
+   // Accept old proposals, but omit their hand-drawn signature.
+   for(const key of ['portrait','art']) {
     const group=coverFields[key];if(!group || group.value) fail(`Include the ${key} group.`);
     if(group.children.length>(key==='portrait'?4500:201)) fail('Too many drawing elements.');
     for(const node of group.children) {
      if(key==='portrait' && node.key==='filledCircle') {const dot=numbers(node,3);if(dot[0]<0 || dot[0]>200 || dot[1]<0 || dot[1]>200 || dot[2]<=0 || dot[2]>=3) fail('Portrait dots must fit the cover.');d.portrait.push(dot);}
-     else if(key==='signature' && node.key==='translate') {if(scalar(node)!=='0 200') fail('Keep signature translate 0 200.');}
      else if(key!=='portrait' && node.key==='path' && !node.value) {
       if(!node.children.length || node.children[0].key!=='moveTo') fail('Start each path with moveTo.');
       d[key].push(node.children.map(command=>{const spec={moveTo:['M',2],lineTo:['L',2],quadraticTo:['Q',4]}[command.key];if(!spec) fail(`Unknown drawing command: ${command.key}`);return spec[0]+numbers(command,spec[1]).join(',');}).join(' '));
       if(d[key].at(-1).length>20000) fail('Path is too long.');
      } else fail(`Unexpected ${node.key} in ${key}.`);
     }
-    if(key==='signature' && group.children.filter(n=>n.key==='translate').length!==1) fail('Include signature translate 0 200 once.');
    }
    d.verbs=Array.from({length:5},(_,i)=>d.verbs[i] || '');
    return d;
@@ -1332,15 +1330,14 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
    $('#design-colors').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed',b.dataset.color === design.color));
    $('#design-portrait').innerHTML = dots(design.portrait); $('#remove-image').hidden = !design.portrait.length && !hedcuts.has(design);
    art.querySelector('.strokes').innerHTML = paths(design.art);
-   signature.querySelector('.strokes').innerHTML = paths(design.signature);
   }
   $('#design-colors').onclick = event => { const b = event.target.closest('[data-color]'); if(b) { design.color = b.dataset.color; render(); remember(); } };
   title.addEventListener('keydown', event => { if(event.key === 'Enter') event.preventDefault(); });
   title.addEventListener('input', () => { if(title.textContent.length > 60) title.textContent = title.textContent.slice(0,60); remember(); });
-  byline.addEventListener('input', remember);
+  signature.addEventListener('input', remember);
   marker.onclick = () => { erase = !erase; marker.setAttribute('aria-pressed',erase); marker.setAttribute('aria-label',erase ? 'Flip eraser to marker' : 'Flip marker to eraser'); marker.querySelector('span').textContent = erase ? 'Flip to draw' : 'Flip to erase'; };
-  const snapshot = () => { undo.push(JSON.stringify([design.art, design.signature])); if(undo.length>30) undo.shift(); };
-  $('#design-undo').onclick = () => { if(undo.length) { [design.art,design.signature] = JSON.parse(undo.pop()); render(); remember(); } };
+  const snapshot = () => { undo.push(JSON.stringify(design.art)); if(undo.length>30) undo.shift(); };
+  $('#design-undo').onclick = () => { if(undo.length) { design.art = JSON.parse(undo.pop()); render(); remember(); } };
   // Reduce a stroke to its bends, then round them. Nearly straight strokes become a single line.
   const distance = (p,a,b) => { const dx=b[0]-a[0],dy=b[1]-a[1], t=Math.max(0,Math.min(1,((p[0]-a[0])*dx+(p[1]-a[1])*dy)/(dx*dx+dy*dy || 1))); return Math.hypot(p[0]-a[0]-t*dx,p[1]-a[1]-t*dy); };
   const simplify = points => {
@@ -1352,8 +1349,8 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
    for(let i=1;i<p.length-1;i++) d+=` Q${p[i]} ${(p[i][0]+p[i+1][0])/2},${(p[i][1]+p[i+1][1])/2}`;
    return `${d} L${last}`;
   };
-  [art,signature].forEach(surface => {
-   const field=surface === art ? 'art' : 'signature';
+  [art].forEach(surface => {
+   const field='art';
    const point = e => { const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(surface.getScreenCTM().inverse()); return [Math.round(Math.max(0,Math.min(200,p.x))),Math.round(Math.max(0,Math.min(surface.viewBox.baseVal.height,p.y)))]; };
    const remove = e => {
     const hit=document.elementFromPoint(e.clientX,e.clientY), group=surface.querySelector('.strokes');
@@ -1377,7 +1374,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
     if(!drawing.erase) { drawing.points.push(point(e)); design[field].push(smooth(drawing.points)); }
     drawing=null; surface.releasePointerCapture(e.pointerId); render(); remember();
    };
-   surface.onpointercancel = () => { if(drawing) { [design.art,design.signature]=JSON.parse(undo.pop()); drawing=null; render(); } };
+   surface.onpointercancel = () => { if(drawing) { design.art=JSON.parse(undo.pop()); drawing=null; render(); } };
   });
   $('#remove-image').onclick = () => { photoVersion++; hedcuts.delete(design); design.portrait=[]; $('#portrait-file').value=''; render(); remember(); };
   // Keep original tones so repeated adjustments never degrade an uploaded image.
@@ -1460,7 +1457,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   window.addEventListener('blur',clearDropTarget);
   document.addEventListener('dragend',clearDropTarget);
   function showDesign() {
-   title.textContent=design.title; byline.value=design.byline || '';
+   title.textContent=design.title; signature.value=design.signature || '';
    verbs.forEach((input,i)=>input.value=design.verbs[i]);
    $('#design-add').textContent=editing ? 'Update cart' : 'Add $5,000 deposit to cart';
    render();
