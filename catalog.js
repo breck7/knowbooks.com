@@ -623,6 +623,13 @@ const catalog = [
     "priceUsd": 249
   },
   {
+    "id": "ironing",
+    "tags": "physicsTag plantTag materialsTag instantTag hazardTag gasTag energyTag temperatureTag",
+    "title": "Ironing",
+    "shelf": "believer",
+    "priceUsd": 199
+  },
+  {
     "id": "payroll",
     "tags": "economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag startupsTag cooperationTag",
     "title": "Payroll",

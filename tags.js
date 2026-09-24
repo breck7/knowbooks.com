@@ -2,7 +2,7 @@ const tags = [
   {
     "id": "physicsTag",
     "question": "Is understanding physical forces, energy, waves, or matter a central goal?",
-    "knowbooks": "magnets beams focus levers light gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter atoms motion friction ropes wind aerodynamics water rust membranes bonds metals steel aluminum brass wheels wedges stars screws batteries hurricanes guitar piano drums singing actuators transistors fusion flow gluons bosons frequency waves helices springs momentum rockets solar plumbing rain"
+    "knowbooks": "magnets beams focus levers light gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter atoms motion friction ropes wind aerodynamics water rust membranes bonds metals steel aluminum brass wheels wedges stars screws batteries hurricanes guitar piano drums singing actuators transistors fusion flow gluons bosons frequency waves helices springs momentum rockets solar plumbing rain ironing"
   },
   {
     "id": "chemistryTag",
@@ -17,7 +17,7 @@ const tags = [
   {
     "id": "plantTag",
     "question": "Does this knowbook centrally involve plants or materials obtained from plants?",
-    "knowbooks": "carpentry paper wood seeds fabric food trees"
+    "knowbooks": "carpentry paper wood seeds fabric food trees ironing"
   },
   {
     "id": "economicsTag",
@@ -37,7 +37,7 @@ const tags = [
   {
     "id": "materialsTag",
     "question": "Is exploring the properties or uses of a tangible material a central goal?",
-    "knowbooks": "beams carpentry air glass iron elements copper gold matter water rust membranes bonds paper ink folding metals steel aluminum brass wood fabric food springs"
+    "knowbooks": "beams carpentry air glass iron elements copper gold matter water rust membranes bonds paper ink folding metals steel aluminum brass wood fabric food springs ironing"
   },
   {
     "id": "mechanicsTag",
@@ -88,7 +88,7 @@ const tags = [
   {
     "id": "instantTag",
     "question": "Can a typical introductory activity give directly observable feedback within a minute of setup?",
-    "knowbooks": "magnets beams focus levers light tools gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter motion friction ropes wind aerodynamics water membranes paper ink folding metals steel aluminum brass wood wheels wedges fabric screws batteries software scroll guitar piano drums singing actuators transistors flow frequency waves springs momentum basketball football soccer boxing golf baseball solar plumbing breath smell"
+    "knowbooks": "magnets beams focus levers light tools gravity sound electricity air heat glass iron elements copper gold fire fields energy voltage motors gears colors matter motion friction ropes wind aerodynamics water membranes paper ink folding metals steel aluminum brass wood wheels wedges fabric screws batteries software scroll guitar piano drums singing actuators transistors flow frequency waves springs momentum basketball football soccer boxing golf baseball solar plumbing breath smell ironing"
   },
   {
     "id": "longTermTag",
@@ -103,13 +103,13 @@ const tags = [
   {
     "id": "hazardTag",
     "question": "Does direct experimentation with the real phenomenon involve hazards such as heat, cutting, electricity, contamination, or severe weather?",
-    "knowbooks": "tools carpentry electricity heat glass fire voltage motors wedges food screws batteries hurricanes actuators cancer fusion solar plumbing"
+    "knowbooks": "tools carpentry electricity heat glass fire voltage motors wedges food screws batteries hurricanes actuators cancer fusion solar plumbing ironing"
   },
   {
     "id": "gasTag",
     "keywords": "gas gases gaseous air atmosphere vapor vapour steam",
     "question": "Are gases or their behavior a central part of this topic?",
-    "knowbooks": "air fire wind aerodynamics hurricanes flow rockets breath smell rain"
+    "knowbooks": "air fire wind aerodynamics hurricanes flow rockets breath smell rain ironing"
   },
   {
     "id": "liquidTag",
@@ -133,13 +133,13 @@ const tags = [
     "id": "energyTag",
     "keywords": "energy power work conversion storage",
     "question": "Is storing, transferring, or converting energy a central goal?",
-    "knowbooks": "levers gravity sound electricity heat fire energy voltage motors motion friction wind food batteries mitochondria fusion springs momentum rockets waves solar"
+    "knowbooks": "levers gravity sound electricity heat fire energy voltage motors motion friction wind food batteries mitochondria fusion springs momentum rockets waves solar ironing"
   },
   {
     "id": "temperatureTag",
     "keywords": "temperature thermal heating cooling hot cold thermodynamics",
     "question": "Is temperature or heat transfer central to this topic?",
-    "knowbooks": "heat fire energy stars fusion solar rain"
+    "knowbooks": "heat fire energy stars fusion solar rain ironing"
   },
   {
     "id": "pressureTag",
