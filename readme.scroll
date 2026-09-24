@@ -335,7 +335,7 @@ css
    <a class="down" href="#catalog">Build your shelf <span aria-hidden="true">↓</span></a>
   </section>
   <section class="catalog-section" id="catalog" aria-labelledby="catalog-title">
-   <div class="catalog-tools"><input id="catalog-search" type="search" placeholder="Search books…" aria-label="Search knowbooks" aria-controls="product-grid" title="Search book titles; separate words with spaces to match any." autocomplete="off"></div>
+   <div class="catalog-tools"><input id="catalog-search" type="search" placeholder="Search books…" aria-label="Search knowbooks" aria-controls="product-grid" title="Search book titles, signatures, or tags; separate words with spaces to match any." autocomplete="off"></div>
    <div class="edition-divider is-first" id="search-heading" hidden><h2>Search results</h2></div>
    <p class="catalog-empty" role="status" aria-live="polite"></p>
    <div class="product-grid" id="product-grid"></div>
@@ -725,7 +725,7 @@ script
   const products = new Map(productCatalog.map(product => [product.id, product]));
   const tagMembers = tags.map(tag => new Set(tag.knowbooks.split(/\s+/)));
   const tagVectors = new Map(productCatalog.map(product => [product.id, tagMembers.map(members => Number(members.has(product.id)))]));
-  const searchableTitles = new Map(productCatalog.map(product => [product.id, [product.id, product.title, ...tags.filter((tag, index) => tagMembers[index].has(product.id)).map(tag => `${tag.id} ${tag.keywords || ""}`)].join(" ").toLowerCase()]));
+  const searchableTitles = new Map(productCatalog.map(product => [product.id, [product.id, product.title, product.signature || "", ...tags.filter((tag, index) => tagMembers[index].has(product.id)).map(tag => `${tag.id} ${tag.keywords || ""}`)].join(" ").toLowerCase()]));
   const vectorDistance = (a, b) => {
    const left = tagVectors.get(a), right = tagVectors.get(b);
    return 1 - left.reduce((sum, bit, i) => sum + (bit & right[i]), 0) / (left.reduce((sum, bit, i) => sum + (bit | right[i]), 0) || 1);
@@ -802,7 +802,7 @@ script
   const filterCatalog = () => {
    const query = document.querySelector("#catalog-search").value.trim();
    const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
-   const rank = product => [product.id, product.title.toLowerCase()].includes(query.toLowerCase()) ? 0 : terms.some(term => product.title.toLowerCase().includes(term)) ? 1 : 2;
+   const rank = product => [product.id, product.title.toLowerCase()].includes(query.toLowerCase()) ? 0 : terms.some(term => [product.title, product.signature || ""].some(value => value.toLowerCase().includes(term))) ? 1 : 2;
    const direct = !query ? [] : productCatalog.filter(product => terms.some(term => searchableTitles.get(product.id).includes(term))).sort((a, b) => rank(a) - rank(b));
    const directIds = new Set(direct.map(product => product.id));
    const seeds = (direct.some(product => rank(product) === 0) ? direct.filter(product => rank(product) === 0) : direct).map(product => product.id);
