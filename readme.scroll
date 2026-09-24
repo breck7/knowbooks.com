@@ -686,7 +686,7 @@ aside
  <svg id="design-art" viewBox="0 0 200 200" tabindex="0" aria-label="Draw your cover with the marker"><g id="design-portrait"></g><g class="strokes"></g></svg>
  <span>KNOWBOOKS</span></div>
  <div id="design-colors" role="group" aria-label="Cover color"></div>
- <div class="design-tools"><button type="button" id="design-marker" aria-pressed="false" aria-label="Flip marker to eraser"><svg viewBox="0 0 100 24" width="100" height="24" aria-hidden="true"><path d="M5 12 19 5v14z" fill="currentColor"/><rect x="19" y="4" width="60" height="16" rx="3" fill="currentColor"/><rect x="80" y="4" width="15" height="16" rx="3" fill="#d9bc78"/></svg><span>Flip to erase</span></button><button type="button" id="design-undo">Undo</button><label class="design-upload">Upload<input id="portrait-file" type="file" aria-label="Upload cover image" accept="image/png,image/jpeg,image/webp"></label><button type="button" id="remove-image" hidden>Remove image</button></div>
+ <div class="design-tools"><button type="button" id="design-marker" aria-pressed="false" aria-label="Flip marker to eraser"><svg viewBox="0 0 100 24" width="100" height="24" aria-hidden="true"><path d="M5 12 19 5v14z" fill="currentColor"/><rect x="19" y="4" width="60" height="16" rx="3" fill="currentColor"/><rect x="80" y="4" width="15" height="16" rx="3" fill="#d9bc78"/></svg><span>Flip to erase</span></button><button type="button" id="design-undo">Undo</button><label class="design-upload">Upload<input id="portrait-file" type="file" aria-label="Upload cover image" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,.svg"></label><button type="button" id="remove-image" hidden>Remove image</button></div>
  </div>
  <div class="design-inside"><h3>What’s inside?</h3><div id="design-experiments"></div><p class="design-price">$10,000 <small>design fee</small></p><p>50% now. One prototype shipped within 30 days of deposit. Balance before shipment.</p><p>More copies: our cost + 30% per knowbook. You sell or give away or let us handle sales and distribution.</p><button id="design-add" type="submit">Add $5,000 deposit to cart</button><p id="design-status" role="status"></p></div>
  </div><details id="design-source"><summary>See/Edit code</summary><textarea id="design-code" aria-label="Knowbook Scroll code" aria-describedby="design-code-status" spellcheck="false"></textarea><small id="design-code-status" role="status"></small><label for="design-link">Design link</label><input id="design-link" type="text" readonly spellcheck="false"></details></form>
@@ -913,7 +913,10 @@ script
    orderSlip(button.dataset.payment, address);
   });
   const save = () => {
-   try { localStorage.setItem("knowbooks-cart", JSON.stringify([...cart])); } catch {}
+   try {
+    localStorage.setItem("knowbooks-cart", JSON.stringify([...cart].map(([id, quantity]) => [id, quantity, products.get(id).design || null])));
+    return true;
+   } catch { return false; }
   };
   const refresh = () => {
    const quantity = [...cart.values()].reduce((sum, value) => sum + value, 0);
@@ -940,7 +943,7 @@ script
    referralInput.setAttribute("aria-invalid", String(Boolean(enteredCode && !referralCode)));
    referralStatus.textContent = referralCode ? `10% off your cart — you save ${checkoutMoney.format(discountCents / 100)}.` : enteredCode ? "That referral code isn’t valid." : "";
    checkout.href = quantity ? paypalUrl(pricing) : "https://www.paypal.com/cgi-bin/webscr";
-   save();
+   return save();
   };
   const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
   let returnFocus, previewFocus, adding = false;
@@ -1092,12 +1095,19 @@ script
    const art = $('#design-art'), marker = $('#design-marker'), status = $('#design-status');
    const key = 'knowbooks-signature-design', undo = [], hedcuts = new WeakMap();
    let design, draft, editing = false, erase = false, drawing, opener, photoVersion = 0;
-   const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', signature: '', color: 'navy', verbs: Array(5).fill(''), art: [], portrait: [] });
+   const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', signature: '', color: 'navy', verbs: Array(5).fill(''), art: [], portrait: [], svgImage: '' });
    function cryptoId() { return globalThis.crypto.randomUUID().slice(0, 8); }
    const svg = body => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 255" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
    const paths = values => values.map(d => `<path d="${d}"/>`).join('');
    const dots = values => values.map(([x,y,r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="currentColor" stroke="none"/>`).join('');
-   const cover = d => svg(dots(d.portrait) + paths(d.art));
+   const validSvgImage = value => typeof value === 'string' && /^data:image\/svg\+xml;base64,[A-Za-z0-9+/]+={0,2}$/.test(value);
+   // SVGs stay in an image context: uploaded markup never becomes active page DOM.
+   const vectorImage = value => {
+    if (!validSvgImage(value)) return '';
+    const id = `gold-${cryptoId()}`;
+    return `<defs><filter id="${id}" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feFlood flood-color="currentColor"/><feComposite in2="SourceAlpha" operator="in"/></filter></defs><image href="${value}" width="200" height="200" preserveAspectRatio="xMidYMid meet" filter="url(#${id})"/>`;
+   };
+   const cover = d => svg(vectorImage(d.svgImage) + dots(d.portrait) + paths(d.art));
    const product = d => ({ id: d.id, title: `${d.title} — Signature design deposit (${d.id})`, priceUsd: 5000, coverColor: coverPalette[d.color], cover: cover(d), design: d });
    const remember = () => {
     design.title = title.textContent.replace(/\s+/g,' ').trim().slice(0, 60);
@@ -1107,15 +1117,25 @@ script
     draft = design;
     try { localStorage.setItem(key, JSON.stringify(draft)); } catch { status.textContent = 'Draft could not be saved on this device. Save your design using the code panel before leaving.'; }
    };
-   // Saved drawings allow only numeric SVG path commands; no uploaded HTML/SVG is inserted.
+   // Rebuild saved custom products from validated design data, never stored HTML.
+   const restoreDesign = d => {
+    if (!d || !/^custom-[a-f0-9-]{8}$/.test(d.id) || !Object.hasOwn(coverPalette,d.color)) return null;
+    d.title = String(d.title).slice(0,60); d.signature = String(typeof d.signature === 'string' ? d.signature : '').replace(/\s+/g,' ').slice(0,60);
+    d.verbs = Array.from({length:5},(_,i) => String(d.verbs?.[i] ?? '').replace(/\s/g,'').slice(0,24));
+    d.art = (Array.isArray(d.art) ? d.art : []).filter(p => typeof p === 'string' && p.length < 20000 && /^[MLQ0-9., -]+$/.test(p)).slice(0,200);
+    d.portrait = (Array.isArray(d.portrait) ? d.portrait : []).filter(p => Array.isArray(p) && p.length === 3 && p.every(Number.isFinite) && p[0]>=0 && p[0]<=200 && p[1]>=0 && p[1]<=200 && p[2]>0 && p[2]<3).slice(0,4500);
+    d.svgImage = validSvgImage(d.svgImage) ? d.svgImage : '';
+    return d;
+   };
    try {
-    const d = JSON.parse(localStorage.getItem(key) || 'null');
-    if (d && /^custom-[a-f0-9-]{8}$/.test(d.id) && Object.hasOwn(coverPalette,d.color)) {
-     d.title = String(d.title).slice(0,60); d.signature = String(typeof d.signature === 'string' ? d.signature : '').replace(/\s+/g,' ').slice(0,60);
-     d.verbs = Array.from({length:5},(_,i) => String(d.verbs?.[i] ?? '').replace(/\s/g,'').slice(0,24));
-     for (const field of ['art']) d[field] = (Array.isArray(d[field]) ? d[field] : []).filter(p => typeof p === 'string' && p.length < 20000 && /^[MLQ0-9., -]+$/.test(p)).slice(0,200);
-     d.portrait = (Array.isArray(d.portrait) ? d.portrait : []).filter(p => Array.isArray(p) && p.length === 3 && p.every(Number.isFinite) && p[0]>=0 && p[0]<=200 && p[1]>=0 && p[1]<=200 && p[2]>0 && p[2]<3).slice(0,4500);
-     draft = d; products.set(d.id, product(d));
+    draft = restoreDesign(JSON.parse(localStorage.getItem(key) || 'null'));
+    if(draft) products.set(draft.id, product(draft));
+   } catch {}
+   try {
+    const saved = JSON.parse(localStorage.getItem('knowbooks-cart') || '[]');
+    for(const [id, quantity, data] of saved) {
+     const d = restoreDesign(data);
+     if(d && d.id === id && Number.isInteger(quantity) && quantity > 0) products.set(id, product(d));
     }
    } catch {}
    const proposal = d => {
@@ -1127,6 +1147,7 @@ script
      'copies Our production cost + 30%',
      ['experiments', ...d.verbs.filter(Boolean).map(leaf)].join(' '),
      'cover', ' viewBox 0 0 200 255', ' ink #d9bc78', ' strokeWidth 2.5', ' lineCap round', ' lineJoin round',
+     ...(d.svgImage ? [` svgImage ${d.svgImage}`] : []),
      ' portrait', ...d.portrait.map(dot => `  filledCircle ${dot.join(' ')}`),
      ' art', ...strokes(d.art)
     ].join('\n') + '\n';
@@ -1163,10 +1184,11 @@ script
      const space=line.indexOf(' '), key=line.slice(0,space);if(scalar(top[key])!==line.slice(space+1)) fail(`${key} is a fixed offer term.`);
     }
     if(!top.cover || top.cover.value) fail('Include the cover tree.');
-    const coverFields=fields(top.cover,['viewBox','ink','strokeWidth','lineCap','lineJoin','portrait','art','signature']);
+    const coverFields=fields(top.cover,['viewBox','ink','strokeWidth','lineCap','lineJoin','portrait','art','svgImage']);
     for(const [key,value] of Object.entries({viewBox:'0 0 200 255',ink:'#d9bc78',strokeWidth:'2.5',lineCap:'round',lineJoin:'round'})) if(scalar(coverFields[key])!==value) fail(`Keep cover ${key} ${value}.`);
     const numbers = (node,count) => {const nums=scalar(node).trim().split(/\s+/).map(Number);if(nums.length!==count || nums.some(n=>!Number.isFinite(n) || Math.abs(n)>10000)) fail(`Invalid ${node.key} coordinates.`);return nums;};
-    // Accept old proposals, but omit their hand-drawn signature.
+    d.svgImage = scalar(coverFields.svgImage);
+    if(d.svgImage && !validSvgImage(d.svgImage)) fail('Use an SVG image data URL.');
     for(const key of ['portrait','art']) {
      const group=coverFields[key];if(!group || group.value) fail(`Include the ${key} group.`);
      if(group.children.length>(key==='portrait'?4500:201)) fail('Too many drawing elements.');
@@ -1199,7 +1221,7 @@ script
    function render() {
     $('.design-cover').style.setProperty('--cover', coverPalette[design.color]);
     $('#design-colors').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed',b.dataset.color === design.color));
-    $('#design-portrait').innerHTML = dots(design.portrait); $('#remove-image').hidden = !design.portrait.length && !hedcuts.has(design);
+    $('#design-portrait').innerHTML = vectorImage(design.svgImage) + dots(design.portrait); $('#remove-image').hidden = !design.svgImage && !design.portrait.length && !hedcuts.has(design);
     art.querySelector('.strokes').innerHTML = paths(design.art);
    }
    $('#design-colors').onclick = event => { const b = event.target.closest('[data-color]'); if(b) { design.color = b.dataset.color; render(); remember(); } };
@@ -1247,7 +1269,7 @@ script
     };
     surface.onpointercancel = () => { if(drawing) { design.art=JSON.parse(undo.pop()); drawing=null; render(); } };
    });
-   $('#remove-image').onclick = () => { photoVersion++; hedcuts.delete(design); design.portrait=[]; $('#portrait-file').value=''; render(); remember(); };
+   $('#remove-image').onclick = () => { photoVersion++; hedcuts.delete(design); design.portrait=[]; design.svgImage=''; $('#portrait-file').value=''; render(); remember(); };
    // Keep original tones so repeated adjustments never degrade an uploaded image.
    art.addEventListener('keydown', event => {
     if(event.ctrlKey || event.metaKey || event.altKey || !['i','[',']','0'].includes(event.key.toLowerCase())) return;
@@ -1271,11 +1293,22 @@ script
     });
     render(); remember();
    }
+   const isSvgFile = file => file.type === 'image/svg+xml' || /\.svg$/i.test(file.name);
+   const isCoverImage = file => isSvgFile(file) || ['image/png','image/jpeg','image/webp','image/gif'].includes(file.type);
    const useCoverImage = async file => {
     const version=++photoVersion;
     if(!file) return;
-    if(!['image/png','image/jpeg','image/webp'].includes(file.type) || file.size>10000000) {status.textContent='Choose a PNG, JPEG or WebP photo under 10 MB.';return;}
+    if(!isCoverImage(file)) {status.textContent='Choose a PNG, JPEG, WebP, GIF or SVG image.';return;}
     try {
+     if(isSvgFile(file)) {
+      const source=await file.text(), doc=new DOMParser().parseFromString(source, 'image/svg+xml');
+      if(doc.querySelector('parsererror') || doc.documentElement.localName!=='svg' || doc.documentElement.namespaceURI!=='http://www.w3.org/2000/svg') throw Error('Invalid SVG');
+      const data=await new Promise((resolve,reject) => { const reader=new FileReader(); reader.onload=()=>resolve(reader.result); reader.onerror=()=>reject(reader.error); reader.readAsDataURL(new Blob([source],{type:'image/svg+xml'})); });
+      const image=new Image(); image.src=data; await image.decode();
+      if(version!==photoVersion) return;
+      design.svgImage=data; design.portrait=[]; design.art=[]; hedcuts.delete(design); undo.length=0;
+      status.textContent=''; render(); remember(); art.focus(); return;
+     }
      const image=await createImageBitmap(file); if(version!==photoVersion) {image.close();return;}
      const canvas=document.createElement('canvas'); canvas.width=canvas.height=200;
      const ctx=canvas.getContext('2d'); ctx.fillStyle='white'; ctx.fillRect(0,0,200,200);
@@ -1283,8 +1316,8 @@ script
      const pixels=ctx.getImageData(0,0,200,200).data, tones=[]; design.portrait=[];
      for(let y=3;y<198;y+=3) for(let x=3;x<198;x+=3) { const i=(y*200+x)*4, ink=1-(pixels[i]*.299+pixels[i+1]*.587+pixels[i+2]*.114)/255; tones.push([x,y,ink]); if(ink>.15) design.portrait.push([x,y,+(ink*1.45).toFixed(2)]); }
      hedcuts.set(design,{tones,original:structuredClone(design.portrait),inverse:false,gamma:1});
-     design.art=[]; undo.length=0; render(); remember(); art.focus(); status.textContent='';
-    } catch {if(version===photoVersion) status.textContent='Could not read that photo. Try another PNG or JPEG.';}
+     design.svgImage=''; design.art=[]; undo.length=0; status.textContent=''; render(); remember(); art.focus();
+    } catch {if(version===photoVersion) status.textContent='Could not read that image. Try another PNG, JPEG, WebP, GIF or SVG.';}
    };
    $('#portrait-file').onchange = event => useCoverImage(event.target.files[0]);
    const dropTarget = document.createElement('div');
@@ -1316,8 +1349,8 @@ script
     clearDropTarget();
     if(!isFileDrag(event)) return;
     event.preventDefault();
-    const file=[...event.dataTransfer.files].find(file => ['image/png','image/jpeg','image/webp'].includes(file.type));
-    if(!file) {if(dialog.open) status.textContent='Choose a PNG, JPEG or WebP photo under 10 MB.';return;}
+    const file=[...event.dataTransfer.files].find(isCoverImage);
+    if(!file) {if(dialog.open) status.textContent='Choose a PNG, JPEG, WebP, GIF or SVG image.';return;}
     if(!dialog.open) {
      const next=fresh();
      next.title=file.name.replace(/\.[^.]+$/, '').replace(/[_-]+/g,' ').replace(/\s+/g,' ').trim().slice(0,60) || next.title;
@@ -1340,13 +1373,26 @@ script
     status.textContent=''; $('#portrait-file').value=''; render(); dialog.showModal(); title.focus();
    }
    ['#signature-element-13','#startups-element-13','#training-element-6'].forEach(selector => { $(selector).onclick = event => open(event); });
+   document.addEventListener('keydown', event => {
+    if(event.key !== 'd' || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || event.repeat || event.isComposing || event.defaultPrevented) return;
+    if(event.target.isContentEditable || event.target.closest('input, textarea, select, [role="textbox"]') || document.querySelector('dialog[open]')) return;
+    event.preventDefault(); closeCart(); closeBook(); open();
+   });
    $('#design-close').onclick = () => dialog.close();
    dialog.addEventListener('click', event => { if(event.target===dialog) { const r=dialog.getBoundingClientRect(); if(event.clientX<r.left || event.clientX>r.right || event.clientY<r.top || event.clientY>r.bottom) dialog.close(); } });
    dialog.addEventListener('close', () => {photoVersion++; remember(); editing=false; (opener?.isConnected ? opener : drawer.querySelector('.cart-close')).focus();});
    $('#design-form').onsubmit = event => {
     event.preventDefault(); remember();
     if(!design.title) {status.textContent='Give your Knowbook a title.';title.focus();return;}
-    editing=false; remember(); products.set(design.id,product(structuredClone(design))); cart.set(design.id,1); refresh(); dialog.close(); openCart();
+    const previousProduct=products.get(design.id), previousQuantity=cart.get(design.id);
+    products.set(design.id,product(structuredClone(design))); cart.set(design.id,1);
+    if(!refresh()) {
+     if(previousProduct) products.set(design.id,previousProduct); else products.delete(design.id);
+     if(previousQuantity) cart.set(design.id,previousQuantity); else cart.delete(design.id);
+     refresh(); status.textContent='Could not save your cart on this device. Your design is still here; save it using the code panel or free up browser storage and try again.'; return;
+    }
+    if(!editing) { design=fresh(); draft=design; showDesign(); syncCode(); }
+    dialog.close(); openCart();
    };
    const loadDesignLink = () => {
     if(!location.hash.startsWith('#knowbook=')) return;
