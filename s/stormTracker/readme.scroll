@@ -75,6 +75,11 @@ dacastParser
 // Implementation. Keyboard shortcuts: 1–9, A–Z; arrows cycle; Escape closes.
 // Forecast media refresh every ten minutes. Layout, player libraries, and styling live here.
 
+resourceLinksParser
+ extends abstractScrollParser
+ cueFromId
+ baseParser blobParser
+
 stormDashboardParser
  extends abstractScrollParser
  cueFromId
@@ -113,10 +118,11 @@ stormDashboardParser
     }
    }
    const escape = value => String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll('"', "&quot;");
+   const resourceLinks = (this.root.getParticle("resourceLinks")?.getSubparticles() || []).map(node => `<a class="source-link" href="${escape(node.cue)}" target="_blank" rel="noopener">${escape(node.content)} ↗</a>`).join("");
    const json = JSON.stringify(config).replaceAll("<", "\\u003c");
    return `<script>const config = ${json};</script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-    <header><div><a class="eyebrow" href="index.html" style="text-decoration:none">Storm Tracker</a><h1>${escape(config.heading)}</h1></div><span class="live"><i></i>live</span><div class="header-spacer"></div><a class="source-link" href="${escape(config.emergencyUrl)}" target="_blank" rel="noopener">${escape(config.emergencyLabel)}</a></header>
+    <header><div><a class="eyebrow" href="index.html" style="text-decoration:none">Storm Tracker</a><h1>${escape(config.heading)}</h1></div><span class="live"><i></i>live</span><div class="header-spacer"></div><nav class="resource-links" aria-label="Storm resources">${resourceLinks}<a class="source-link" href="${escape(config.emergencyUrl)}" target="_blank" rel="noopener">${escape(config.emergencyLabel)}</a></nav></header>
     <svg id="connectors" aria-hidden="true"></svg>
     <main><div class="layout"><section class="rail" id="leftRail" aria-label="Camera views"></section><section class="center"><div id="map" aria-label="${escape(config.mapLabel)}"></div><div class="center-label"><b>${escape(config.mapLabel)}</b><span>${escape(config.mapNote)}</span></div></section><section class="rail" id="rightRail" aria-label="More camera views"></section></div><section class="media-row" id="weather" aria-label="Satellite and forecast graphics"></section><h2 class="section-title">${escape(config.tvHeading)}</h2><section class="media-row tv-row" id="tv" aria-label="Television coverage"></section><p class="page-note">${escape(config.pageNote)}</p></main>
     <div id="windows" aria-label="Expanded live windows"></div>
@@ -153,6 +159,8 @@ css
    .live i{width:8px;height:8px;background:var(--danger);border-radius:50%;box-shadow:0 0 0 0 rgba(255,101,95,.7);animation:pulse 1.6s infinite}
    @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(255,101,95,0)}100%{box-shadow:0 0 0 0 rgba(255,101,95,0)}}
    .header-spacer{flex:1}
+   .resource-links{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px 16px;min-width:0}
+   .resource-links .source-link{white-space:nowrap;margin-left:0}
    .source-link{color:#9ac8d9;text-decoration:none;font-size:11px;border-bottom:1px dotted #4e7b8d}
    .layout{height:calc(100vh - 70px);position:relative;padding:12px 14px 14px;display:grid;grid-template-columns:minmax(220px,23vw) 1fr minmax(220px,23vw);gap:12px;z-index:1}
    .rail{display:grid;grid-template-rows:repeat(3,1fr);gap:12px;min-height:0}
@@ -200,10 +208,11 @@ css
    [role=button]:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--line);outline-offset:3px}.leaflet-control-attribution{font-size:10px!important}
    @media(max-width:900px){.layout{height:auto;min-height:0;grid-template-columns:1fr}.center{height:60dvh;min-height:380px;order:-1}.rail{grid-template-columns:repeat(3,minmax(200px,1fr));grid-template-rows:210px;overflow-x:auto}.cam{height:210px}#connectors{display:none}.media-row{grid-template-columns:repeat(2,minmax(0,1fr))}.center-label{top:10px}.live{font-size:12px}h1{font-size:19px}}
    @media(max-width:550px){header{gap:8px;padding:12px}.source-link{font-size:12px;margin-left:auto}.eyebrow{font-size:10px}.rail{grid-template-columns:1fr;grid-template-rows:none;overflow:visible}.cam{height:235px}.media-row{grid-template-columns:1fr}.weather-window img,.weather-window video{height:220px}.center-label span{font-size:12px}.modal-foot{align-items:flex-start;flex-direction:column}.modal-status{font-size:11px}}
+   @media(max-width:900px){.resource-links{flex-basis:100%;justify-content:flex-start}}
    /* Keep the desktop dashboard within the viewport; short screens can still scroll. */
    @media(min-width:901px){
      body{height:100dvh;min-height:620px;display:flex;flex-direction:column}
-     header{flex:0 0 64px;min-height:64px;padding:8px 14px;flex-wrap:nowrap}
+     header{flex:0 0 auto;min-height:64px;padding:8px 14px;flex-wrap:nowrap}
      main{flex:1;min-height:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:minmax(0,1fr) clamp(155px,25dvh,240px) auto;gap:8px;padding:8px 12px}
      .layout{grid-column:1/-1;height:auto;min-height:0;padding:0;gap:8px;grid-template-columns:minmax(200px,23%) minmax(0,1fr) minmax(200px,23%)}
      .rail{grid-template-rows:repeat(var(--camera-rows,3),minmax(0,1fr));gap:8px}
