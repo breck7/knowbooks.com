@@ -57,15 +57,15 @@ knowbooks carpentry paper wood seeds fabric food trees ironing
 
 id economicsTag
 question Is money, ownership, trade, or the allocation of scarce resources central to this topic?
-knowbooks capital sales gold banking liberty property competition collusion budgeting bookkeeping payroll marketing currency bitcoin venture knowbook buildings launch ecommerce
+knowbooks capital sales gold banking liberty property competition collusion budgeting bookkeeping payroll marketing currency bitcoin venture knowbook buildings launch breck.ecommerce
 
 id psychologyTag
 question Is understanding or changing attention, emotion, motivation, or social behavior a central goal?
-knowbooks focus sales sleep patience liberty courage teamwork motivation competition collusion anger marketing twitter alignment raising attraction
+knowbooks focus sales sleep patience liberty courage teamwork motivation competition collusion anger marketing breck.twitter alignment raising attraction
 
 id computingTag
 question Is software, digital information, or electronic computation central to this topic?
-knowbooks software scroll twitter bitcoin transistors ecommerce
+knowbooks software scroll breck.twitter bitcoin transistors breck.ecommerce
 
 id materialsTag
 question Is exploring the properties or uses of a tangible material a central goal?
@@ -102,11 +102,11 @@ knowbooks beams tools carpentry levers electricity motors gears ropes paper ink 
 
 id measurementTag
 question Is taking numerical measurements or keeping quantitative records a central way to explore this topic?
-knowbooks beams capital gravity sound electricity heat banking sleep energy voltage motion friction wind aerodynamics water time centuries stars budgeting bookkeeping payroll batteries hydration hurricanes currency bitcoin flow frequency waves springs momentum rockets solar venture plumbing breath rain buildings launch ecommerce
+knowbooks beams capital gravity sound electricity heat banking sleep energy voltage motion friction wind aerodynamics water time centuries stars budgeting bookkeeping payroll batteries hydration hurricanes currency bitcoin flow frequency waves springs momentum rockets solar venture plumbing breath rain buildings launch breck.ecommerce
 
 id creativeTag
 question Is creating an expressive work, design, or performance a central activity?
-knowbooks carpentry sound colors paper ink folding fabric software scroll marketing twitter guitar piano drums singing knowbook launch ecommerce
+knowbooks carpentry sound colors paper ink folding fabric software scroll marketing breck.twitter guitar piano drums singing knowbook launch breck.ecommerce
 
 id instantTag
 question Can a typical introductory activity give directly observable feedback within a minute of setup?
@@ -114,11 +114,11 @@ knowbooks magnets beams focus levers light tools gravity sound electricity air h
 
 id longTermTag
 question Is tracking change over weeks or months a central way to deepen learning about this topic?
-knowbooks capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing twitter cancer raising attraction basketball football soccer boxing golf baseball venture trees buildings launch ecommerce
+knowbooks capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing breck.twitter cancer raising attraction basketball football soccer boxing golf baseball venture trees buildings launch breck.ecommerce
 
 id multiplePeopleTag
 question Does practicing this topic in real life centrally involve interaction between multiple people?
-knowbooks sales liberty property teamwork competition collusion payroll marketing twitter alignment raising attraction basketball football soccer boxing baseball venture knowbook buildings launch ecommerce
+knowbooks sales liberty property teamwork competition collusion payroll marketing breck.twitter alignment raising attraction basketball football soccer boxing baseball venture knowbook buildings launch breck.ecommerce
 
 id hazardTag
 question Does direct experimentation with the real phenomenon involve hazards such as heat, cutting, electricity, contamination, or severe weather?
@@ -187,22 +187,22 @@ knowbooks sleep food hydration mitochondria cancer raising breath
 id financeTag
 question Is managing, recording, or exchanging money and financial assets central to this topic?
 keywords finance financial money investing investment savings accounting payment payments
-knowbooks capital gold banking property budgeting bookkeeping payroll currency bitcoin venture buildings ecommerce
+knowbooks capital gold banking property budgeting bookkeeping payroll currency bitcoin venture buildings breck.ecommerce
 
 id businessTag
 question Is operating a business or participating in a market a central goal?
 keywords business enterprise commerce commercial market markets entrepreneurship
-knowbooks capital sales banking property competition collusion budgeting bookkeeping payroll marketing venture knowbook buildings launch ecommerce
+knowbooks capital sales banking property competition collusion budgeting bookkeeping payroll marketing venture knowbook buildings launch breck.ecommerce
 
 id startupsTag
 question Does this topic directly support founding, funding, or building an early-stage business?
 keywords startup startups founder founders founding entrepreneur entrepreneurs entrepreneurship venture ventures
-knowbooks focus capital sales banking teamwork competition budgeting bookkeeping payroll software marketing twitter motivation venture knowbook launch ecommerce
+knowbooks focus capital sales banking teamwork competition budgeting bookkeeping payroll software marketing breck.twitter motivation venture knowbook launch breck.ecommerce
 
 id communicationTag
 question Is conveying information to other people a central activity?
 keywords communication communicating message messages media writing publishing persuasion
-knowbooks sales teamwork ink software scroll marketing twitter raising attraction basketball football soccer baseball venture knowbook launch ecommerce
+knowbooks sales teamwork ink software scroll marketing breck.twitter raising attraction basketball football soccer baseball venture knowbook launch breck.ecommerce
 
 id cooperationTag
 question Is coordinating people's actions toward a shared goal central to this topic?
@@ -287,7 +287,7 @@ knowbooks attraction
 id socialTag
 question Is understanding social relationships or practicing interpersonal skills a central goal?
 keywords social interpersonal interaction interactions relationships relating socializing
-knowbooks sales liberty teamwork competition collusion marketing twitter alignment raising attraction
+knowbooks sales liberty teamwork competition collusion marketing breck.twitter alignment raising attraction
 
 id sportsTag
 question Is learning or practicing an athletic sport a central goal?

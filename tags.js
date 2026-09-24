@@ -22,17 +22,17 @@ const tags = [
   {
     "id": "economicsTag",
     "question": "Is money, ownership, trade, or the allocation of scarce resources central to this topic?",
-    "knowbooks": "capital sales gold banking liberty property competition collusion budgeting bookkeeping payroll marketing currency bitcoin venture knowbook buildings launch ecommerce"
+    "knowbooks": "capital sales gold banking liberty property competition collusion budgeting bookkeeping payroll marketing currency bitcoin venture knowbook buildings launch breck.ecommerce"
   },
   {
     "id": "psychologyTag",
     "question": "Is understanding or changing attention, emotion, motivation, or social behavior a central goal?",
-    "knowbooks": "focus sales sleep patience liberty courage teamwork motivation competition collusion anger marketing twitter alignment raising attraction"
+    "knowbooks": "focus sales sleep patience liberty courage teamwork motivation competition collusion anger marketing breck.twitter alignment raising attraction"
   },
   {
     "id": "computingTag",
     "question": "Is software, digital information, or electronic computation central to this topic?",
-    "knowbooks": "software scroll twitter bitcoin transistors ecommerce"
+    "knowbooks": "software scroll breck.twitter bitcoin transistors breck.ecommerce"
   },
   {
     "id": "materialsTag",
@@ -78,12 +78,12 @@ const tags = [
   {
     "id": "measurementTag",
     "question": "Is taking numerical measurements or keeping quantitative records a central way to explore this topic?",
-    "knowbooks": "beams capital gravity sound electricity heat banking sleep energy voltage motion friction wind aerodynamics water time centuries stars budgeting bookkeeping payroll batteries hydration hurricanes currency bitcoin flow frequency waves springs momentum rockets solar venture plumbing breath rain buildings launch ecommerce"
+    "knowbooks": "beams capital gravity sound electricity heat banking sleep energy voltage motion friction wind aerodynamics water time centuries stars budgeting bookkeeping payroll batteries hydration hurricanes currency bitcoin flow frequency waves springs momentum rockets solar venture plumbing breath rain buildings launch breck.ecommerce"
   },
   {
     "id": "creativeTag",
     "question": "Is creating an expressive work, design, or performance a central activity?",
-    "knowbooks": "carpentry sound colors paper ink folding fabric software scroll marketing twitter guitar piano drums singing knowbook launch ecommerce"
+    "knowbooks": "carpentry sound colors paper ink folding fabric software scroll marketing breck.twitter guitar piano drums singing knowbook launch breck.ecommerce"
   },
   {
     "id": "instantTag",
@@ -93,12 +93,12 @@ const tags = [
   {
     "id": "longTermTag",
     "question": "Is tracking change over weeks or months a central way to deepen learning about this topic?",
-    "knowbooks": "capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing twitter cancer raising attraction basketball football soccer boxing golf baseball venture trees buildings launch ecommerce"
+    "knowbooks": "capital sales banking sleep rust patience centuries decay motivation seeds budgeting bookkeeping payroll marketing breck.twitter cancer raising attraction basketball football soccer boxing golf baseball venture trees buildings launch breck.ecommerce"
   },
   {
     "id": "multiplePeopleTag",
     "question": "Does practicing this topic in real life centrally involve interaction between multiple people?",
-    "knowbooks": "sales liberty property teamwork competition collusion payroll marketing twitter alignment raising attraction basketball football soccer boxing baseball venture knowbook buildings launch ecommerce"
+    "knowbooks": "sales liberty property teamwork competition collusion payroll marketing breck.twitter alignment raising attraction basketball football soccer boxing baseball venture knowbook buildings launch breck.ecommerce"
   },
   {
     "id": "hazardTag",
@@ -181,25 +181,25 @@ const tags = [
     "id": "financeTag",
     "keywords": "finance financial money investing investment savings accounting payment payments",
     "question": "Is managing, recording, or exchanging money and financial assets central to this topic?",
-    "knowbooks": "capital gold banking property budgeting bookkeeping payroll currency bitcoin venture buildings ecommerce"
+    "knowbooks": "capital gold banking property budgeting bookkeeping payroll currency bitcoin venture buildings breck.ecommerce"
   },
   {
     "id": "businessTag",
     "keywords": "business enterprise commerce commercial market markets entrepreneurship",
     "question": "Is operating a business or participating in a market a central goal?",
-    "knowbooks": "capital sales banking property competition collusion budgeting bookkeeping payroll marketing venture knowbook buildings launch ecommerce"
+    "knowbooks": "capital sales banking property competition collusion budgeting bookkeeping payroll marketing venture knowbook buildings launch breck.ecommerce"
   },
   {
     "id": "startupsTag",
     "keywords": "startup startups founder founders founding entrepreneur entrepreneurs entrepreneurship venture ventures",
     "question": "Does this topic directly support founding, funding, or building an early-stage business?",
-    "knowbooks": "focus capital sales banking teamwork competition budgeting bookkeeping payroll software marketing twitter motivation venture knowbook launch ecommerce"
+    "knowbooks": "focus capital sales banking teamwork competition budgeting bookkeeping payroll software marketing breck.twitter motivation venture knowbook launch breck.ecommerce"
   },
   {
     "id": "communicationTag",
     "keywords": "communication communicating message messages media writing publishing persuasion",
     "question": "Is conveying information to other people a central activity?",
-    "knowbooks": "sales teamwork ink software scroll marketing twitter raising attraction basketball football soccer baseball venture knowbook launch ecommerce"
+    "knowbooks": "sales teamwork ink software scroll marketing breck.twitter raising attraction basketball football soccer baseball venture knowbook launch breck.ecommerce"
   },
   {
     "id": "cooperationTag",
@@ -301,7 +301,7 @@ const tags = [
     "id": "socialTag",
     "keywords": "social interpersonal interaction interactions relationships relating socializing",
     "question": "Is understanding social relationships or practicing interpersonal skills a central goal?",
-    "knowbooks": "sales liberty teamwork competition collusion marketing twitter alignment raising attraction"
+    "knowbooks": "sales liberty teamwork competition collusion marketing breck.twitter alignment raising attraction"
   },
   {
     "id": "sportsTag",

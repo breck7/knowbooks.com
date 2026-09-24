@@ -665,13 +665,6 @@ const catalog = [
     "priceUsd": 1499
   },
   {
-    "id": "twitter",
-    "tags": "psychologyTag computingTag creativeTag longTermTag multiplePeopleTag startupsTag communicationTag socialTag",
-    "title": "Twitter",
-    "shelf": "believer",
-    "priceUsd": 1499
-  },
-  {
     "id": "hydration",
     "tags": "biologyTag fluidsTag measurementTag liquidTag nutritionTag healthTag",
     "title": "Hydration",
@@ -863,7 +856,7 @@ const catalog = [
     "priceUsd": 10000
   },
   {
-    "id": "ecommerce",
+    "id": "breck.ecommerce",
     "tags": "economicsTag computingTag measurementTag creativeTag longTermTag multiplePeopleTag financeTag businessTag startupsTag communicationTag",
     "title": "ECommerce",
     "color": "navy",
@@ -872,5 +865,16 @@ const catalog = [
     "signature": "Breck Yunits",
     "shelf": "signatures",
     "priceUsd": 420
+  },
+  {
+    "id": "breck.twitter",
+    "tags": "psychologyTag computingTag creativeTag longTermTag multiplePeopleTag startupsTag communicationTag socialTag",
+    "title": "Twitter",
+    "color": "teal",
+    "symbol": "4 vertical bars increasingly tall from left to right. the twitter bird is on level 2 and jumping to level 3. lines show the previous jumps",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"12\" y=\"74\" width=\"12\" height=\"14\" fill=\"currentColor\" stroke=\"none\"/><rect x=\"34\" y=\"62\" width=\"12\" height=\"26\" fill=\"currentColor\" stroke=\"none\"/><rect x=\"56\" y=\"50\" width=\"12\" height=\"38\" fill=\"currentColor\" stroke=\"none\"/><rect x=\"78\" y=\"38\" width=\"12\" height=\"50\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M 60.52 30.2 C 59.08 30.92 57.64 31.64 56.2 31.64 C 54.76 29.48 51.16 29.48 49.72 31.64 C 48.28 33.08 48.28 35.24 49 36.68 C 44.68 36.68 41.08 34.52 38.92 31.64 C 37.48 34.52 38.92 37.4 41.08 38.84 C 39.64 38.84 38.92 38.12 38.2 38.12 C 38.2 41 40.36 43.16 43.24 43.88 C 41.8 44.6 40.36 44.6 39.64 43.88 C 41.08 46.76 43.24 47.48 46.12 47.48 C 43.24 49.64 39.64 50.36 36.76 49.64 C 40.36 51.8 45.4 52.52 49.72 50.36 C 55.48 47.48 57.64 41.72 56.92 35.96 C 58.36 34.52 59.8 33.08 60.52 31.64 L 57.64 32.36 Z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M 16 62 Q 18 52 23 51\"/><path d=\"M 23 51 Q 31 51 33 54\"/></svg>",
+    "signature": "Breck Yunits",
+    "shelf": "signatures",
+    "priceUsd": 690
   }
 ]
