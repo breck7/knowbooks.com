@@ -2,7 +2,7 @@ importOnly
 
 // Shared Hawaii map, cameras and weather feeds. Import after the storm replacements.
 replace REGION_LABEL Hawaiʻi
-replace EMERGENCY_LABEL STORM_NAME updates ↗
+replace EMERGENCY_LABEL National Hurricane Center ↗
 replace EMERGENCY_URL https://www.nhc.noaa.gov/graphics_FORECAST_SLOT.shtml?cone#contents
 replace MAP_LABEL HAWAIʻI CAMERA MAP
 replace MAP_NOTE All main islands · Pins approximate
@@ -19,6 +19,10 @@ baseUrl https://knowbooks.com/s/stormTracker/
 htmlLang en
 
 readme.scroll
+
+resourceLinks
+ https://dod.hawaii.gov/hiema/ Hawaiʻi Emergency Management
+ https://www.honolulu.gov/dem/ Honolulu Emergency Management
 
 // Fit Niʻihau through Hawaiʻi Island on desktop and mobile.
 script
