@@ -16,7 +16,7 @@ signatureParser
 
 shelfAtom
  extends atomAtom
- enum trailblazer believer frontier special
+ enum trailblazer believer frontier signatures special
 
 shelfParser
  extends abstractStringMeasureParser
@@ -868,3 +868,21 @@ shelf special
 priceUsd 10000
 color forest
 description Includes an initial partner conversation about building Knowbooks in your community.
+
+
+id ecommerce
+tags economicsTag computingTag measurementTag creativeTag longTermTag multiplePeopleTag financeTag businessTag startupsTag communicationTag
+title ECommerce
+signature Breck Yunits
+shelf signatures
+priceUsd 420
+color navy
+symbol a circle in the middle surrounded by other circles
+cover
+ circle 50 50 12
+ circle 50 18 8
+ circle 78 34 8
+ circle 78 66 8
+ circle 50 82 8
+ circle 22 66 8
+ circle 22 34 8

@@ -861,5 +861,16 @@ const catalog = [
     "color": "forest",
     "shelf": "special",
     "priceUsd": 10000
+  },
+  {
+    "id": "ecommerce",
+    "tags": "economicsTag computingTag measurementTag creativeTag longTermTag multiplePeopleTag financeTag businessTag startupsTag communicationTag",
+    "title": "ECommerce",
+    "color": "navy",
+    "symbol": "a circle in the middle surrounded by other circles",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"50\" cy=\"50\" r=\"12\" stroke-width=\"3\"/><circle cx=\"50\" cy=\"18\" r=\"8\" stroke-width=\"3\"/><circle cx=\"78\" cy=\"34\" r=\"8\" stroke-width=\"3\"/><circle cx=\"78\" cy=\"66\" r=\"8\" stroke-width=\"3\"/><circle cx=\"50\" cy=\"82\" r=\"8\" stroke-width=\"3\"/><circle cx=\"22\" cy=\"66\" r=\"8\" stroke-width=\"3\"/><circle cx=\"22\" cy=\"34\" r=\"8\" stroke-width=\"3\"/></svg>",
+    "signature": "Breck Yunits",
+    "shelf": "signatures",
+    "priceUsd": 420
   }
 ]
