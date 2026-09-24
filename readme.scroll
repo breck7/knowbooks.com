@@ -1346,18 +1346,27 @@ script
     if(!isFileDrag(event) && !dragDepth) return;
     if(--dragDepth<=0 || !event.relatedTarget) clearDropTarget();
    });
-   document.addEventListener('drop', event => {
-    clearDropTarget();
-    if(!isFileDrag(event)) return;
-    event.preventDefault();
-    const file=[...event.dataTransfer.files].find(isCoverImage);
-    if(!file) {if(dialog.open) status.textContent='Choose a PNG, JPEG, WebP, GIF or SVG image.';return;}
+   const openCoverImage = file => {
     if(!dialog.open) {
      const next=fresh();
      next.title=file.name.replace(/\.[^.]+$/, '').replace(/[_-]+/g,' ').replace(/\s+/g,' ').trim().slice(0,60) || next.title;
      open(undefined,undefined,next);
     }
     useCoverImage(file);
+   };
+   document.addEventListener('drop', event => {
+    clearDropTarget();
+    if(!isFileDrag(event)) return;
+    event.preventDefault();
+    const file=[...event.dataTransfer.files].find(isCoverImage);
+    if(!file) {if(dialog.open) status.textContent='Choose a PNG, JPEG, WebP, GIF or SVG image.';return;}
+    openCoverImage(file);
+   });
+   document.addEventListener('paste', event => {
+    const file=[...(event.clipboardData?.files || [])].find(isCoverImage);
+    if(!file) return;
+    event.preventDefault();
+    openCoverImage(file);
    });
    window.addEventListener('blur',clearDropTarget);
    document.addEventListener('dragend',clearDropTarget);
