@@ -213,6 +213,16 @@ cover
  path M 75 70 L 75 57 L 81 57 L 81 70
  rect 75 44 6 6 2
 
+id electricity
+tags physicsTag electricityTag electromagnetismTag buildingTag measurementTag instantTag hazardTag energyTag
+title Electricity
+shelf trailblazer
+priceUsd 249
+color navy
+symbol a simple lightning bolt
+cover
+ filledPolygon 58 12 27 55 47 55 39 88 73 43 53 43
+
 id light
 tags physicsTag electromagnetismTag wavesTag instantTag opticsTag cyclesTag
 title Light
@@ -234,12 +244,6 @@ priceUsd 249
 id sound
 tags physicsTag wavesTag measurementTag creativeTag instantTag energyTag musicTag cyclesTag
 title Sound
-shelf believer
-priceUsd 249
-
-id electricity
-tags physicsTag electricityTag electromagnetismTag buildingTag measurementTag instantTag hazardTag energyTag
-title Electricity
 shelf believer
 priceUsd 249
 

@@ -112,6 +112,16 @@ const catalog = [
     "priceUsd": 299
   },
   {
+    "id": "electricity",
+    "tags": "physicsTag electricityTag electromagnetismTag buildingTag measurementTag instantTag hazardTag energyTag",
+    "title": "Electricity",
+    "color": "navy",
+    "symbol": "a simple lightning bolt",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"58 12 27 55 47 55 39 88 73 43 53 43\" fill=\"currentColor\" stroke=\"none\"/></svg>",
+    "shelf": "trailblazer",
+    "priceUsd": 249
+  },
+  {
     "id": "light",
     "tags": "physicsTag electromagnetismTag wavesTag instantTag opticsTag cyclesTag",
     "title": "Light",
@@ -136,13 +146,6 @@ const catalog = [
     "id": "sound",
     "tags": "physicsTag wavesTag measurementTag creativeTag instantTag energyTag musicTag cyclesTag",
     "title": "Sound",
-    "shelf": "believer",
-    "priceUsd": 249
-  },
-  {
-    "id": "electricity",
-    "tags": "physicsTag electricityTag electromagnetismTag buildingTag measurementTag instantTag hazardTag energyTag",
-    "title": "Electricity",
     "shelf": "believer",
     "priceUsd": 249
   },
