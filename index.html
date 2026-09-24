@@ -78,7 +78,7 @@ body:has(#designer[open]) { overflow: hidden; }
  #design-colors { grid-column: 1 / -1; grid-row: 2; }
  .design-tools { grid-column: 1 / -1; grid-row: 3; }
  .design-inside h3 { grid-column: 2; grid-row: 1; align-self: start; font-size: 20px; }
- #design-experiments { grid-column: 2; grid-row: 1; margin-top: 28px; }
+ #design-experiments { grid-column: 2; grid-row: 1; }
  .design-inside > p, #design-add { grid-column: 1 / -1; margin: 0; }
  .design-cover { padding: 12px 8px 8px; } #design-title { font-size: 18px; margin-bottom: 4px; }
  #design-signature { font-size: 20px; } #design-art { height: 100px; }
@@ -412,7 +412,7 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
 <div id="design-colors" role="group" aria-label="Cover color"></div>
 <div class="design-tools"><button type="button" id="design-marker" aria-pressed="false" aria-label="Flip marker to eraser"><svg viewBox="0 0 100 24" width="100" height="24" aria-hidden="true"><path d="M5 12 19 5v14z" fill="currentColor"/><rect x="19" y="4" width="60" height="16" rx="3" fill="currentColor"/><rect x="80" y="4" width="15" height="16" rx="3" fill="#d9bc78"/></svg><span>Flip to erase</span></button><button type="button" id="design-undo">Undo</button><label class="design-upload">Upload<input id="portrait-file" type="file" aria-label="Upload cover image" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,.svg"></label><button type="button" id="remove-image" hidden>Remove image</button></div>
 </div>
-<div class="design-inside"><h3>What’s inside?</h3><div id="design-experiments"></div><p class="design-price">$10,000 <small>design fee</small></p><p>50% now. One prototype shipped within 30 days of deposit. Balance before shipment.</p><p>More copies: our cost + 30% per knowbook. You sell or give away or let us handle sales and distribution.</p><button id="design-add" type="submit">Add $5,000 deposit to cart</button><p id="design-status" role="status"></p></div>
+<div class="design-inside"><div id="design-experiments"><h3><label for="design-superpowers">What superpowers will your Knowbook teach?</label></h3><input id="design-superpowers" placeholder="write 5 verbs...." maxlength="124" aria-describedby="design-superpowers-help"><small id="design-superpowers-help">We’ll work with you to design 5 hands-on experiments using real objects.</small></div><p class="design-price">$10,000 <small>design fee</small></p><p>50% now. One prototype shipped within 30 days of deposit. Balance upon delivery.</p><p>More copies: you set price and keep 80% of net revenue. We handle manufacturing, distribution, and delivery.</p><button id="design-add" type="submit">Add $5,000 deposit to cart</button><p id="design-status" role="status"></p></div>
 </div><details id="design-source"><summary>See/Edit code</summary><textarea id="design-code" aria-label="Knowbook Scroll code" aria-describedby="design-code-status" spellcheck="false"></textarea><small id="design-code-status" role="status"></small><label for="design-link">Design link</label><input id="design-link" type="text" readonly spellcheck="false"></details></form>
 </dialog>
 <dialog id="partner-dialog" aria-labelledby="partner-heading" aria-describedby="partner-description" ><div id="partner-ui-1" class="partner-head"><div id="partner-ui-2" ><h2 id="partner-heading" >We’re rooted in Hawaii.</h2></div>
@@ -1225,7 +1225,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   const art = $('#design-art'), marker = $('#design-marker'), status = $('#design-status');
   const key = 'knowbooks-signature-design', undo = [], hedcuts = new WeakMap();
   let design, draft, editing = false, erase = false, drawing, opener, photoVersion = 0;
-  const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', signature: '', color: 'navy', verbs: Array(5).fill(''), art: [], portrait: [], svgImage: '' });
+  const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', signature: '', color: 'navy', superpowers: '', art: [], portrait: [], svgImage: '' });
   function cryptoId() { return globalThis.crypto.randomUUID().slice(0, 8); }
   const svg = body => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 255" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
   const paths = values => values.map(d => `<path d="${d}"/>`).join('');
@@ -1251,7 +1251,8 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   const restoreDesign = d => {
    if (!d || !/^custom-[a-f0-9-]{8}$/.test(d.id) || !Object.hasOwn(coverPalette,d.color)) return null;
    d.title = String(d.title).slice(0,60); d.signature = String(typeof d.signature === 'string' ? d.signature : '').replace(/\s+/g,' ').slice(0,60);
-   d.verbs = Array.from({length:5},(_,i) => String(d.verbs?.[i] ?? '').replace(/\s/g,'').slice(0,24));
+   d.superpowers = String(d.superpowers ?? (Array.isArray(d.verbs) ? d.verbs.filter(Boolean).join(' ') : '')).trim().split(/\s+/).slice(0,5).join(' ').slice(0,124);
+   delete d.verbs;
    d.art = (Array.isArray(d.art) ? d.art : []).filter(p => typeof p === 'string' && p.length < 20000 && /^[MLQ0-9., -]+$/.test(p)).slice(0,200);
    d.portrait = (Array.isArray(d.portrait) ? d.portrait : []).filter(p => Array.isArray(p) && p.length === 3 && p.every(Number.isFinite) && p[0]>=0 && p[0]<=200 && p[1]>=0 && p[1]<=200 && p[2]>0 && p[2]<3).slice(0,4500);
    d.svgImage = validSvgImage(d.svgImage) ? d.svgImage : '';
@@ -1275,7 +1276,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
     `title ${leaf(d.title)}`, ...(d.signature ? [`signature ${leaf(d.signature)}`] : []), `color ${d.color}`,
     'designFeeUsd 10000', 'depositUsd 5000', 'prototype One shipped within 30 days of deposit', 'balance Due before shipment',
     'copies Our production cost + 30%',
-    ['experiments', ...d.verbs.filter(Boolean).map(leaf)].join(' '),
+    `superpowers ${leaf(d.superpowers)}`,
     'cover', ' viewBox 0 0 200 255', ' ink #d9bc78', ' strokeWidth 2.5', ' lineCap round', ' lineJoin round',
     ...(d.svgImage ? [` svgImage ${d.svgImage}`] : []),
     ' portrait', ...d.portrait.map(dot => `  filledCircle ${dot.join(' ')}`),
@@ -1305,11 +1306,11 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
     const result={};for(const child of node.children) {if(!allowed.includes(child.key) || result[child.key]) fail(`Unexpected or repeated field: ${child.key}`);result[child.key]=child;}return result;
    };
    const scalar = (node, fallback='') => {if(node?.children.length) fail(`Unexpected indentation below ${node.key}.`);return node?.value ?? fallback;};
-   const top=fields(root,['title','signature','color','designFeeUsd','depositUsd','prototype','balance','copies','experiments','cover']);
-   const d={...fresh(),title:scalar(top.title),id:design.id,signature:scalar(top.signature),color:scalar(top.color),verbs:scalar(top.experiments).split(/\s+/).filter(Boolean)};
+   const top=fields(root,['title','signature','color','designFeeUsd','depositUsd','prototype','balance','copies','superpowers','experiments','cover']);
+   const d={...fresh(),title:scalar(top.title),id:design.id,signature:scalar(top.signature),color:scalar(top.color),superpowers:scalar(top.superpowers,scalar(top.experiments))};
    if(!d.title.trim() || d.title.length>60 || d.signature.length>60) fail('Use a title and signature of at most 60 characters.');
    if(!Object.hasOwn(coverPalette,d.color)) fail('Use a listed cover color.');
-   if(d.verbs.length>5 || d.verbs.some(v=>v.length>24)) fail('Use up to five verbs, at most 24 characters each.');
+   if(d.superpowers.trim().split(/\s+/).length>5 || d.superpowers.length>124) fail('Use up to 5 space-separated words (124 characters maximum).');
    for(const line of proposal(d).split('\n').filter(line=>/^(designFeeUsd|depositUsd|prototype|balance|copies) /.test(line))) {
     const space=line.indexOf(' '), key=line.slice(0,space);if(scalar(top[key])!==line.slice(space+1)) fail(`${key} is a fixed offer term.`);
    }
@@ -1331,7 +1332,6 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
      } else fail(`Unexpected ${node.key} in ${key}.`);
     }
    }
-   d.verbs=Array.from({length:5},(_,i)=>d.verbs[i] || '');
    return d;
   }
   code.addEventListener('input', () => {
@@ -1344,9 +1344,12 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
    const saved = products.get(button.dataset.editDesign).design;
    open(event, saved);
   });
-  $('#design-experiments').innerHTML = Array.from({length:5},(_,i) => `<input aria-label="Experiment ${i+1}" placeholder="experiment ${i+1}" maxlength="24" pattern="[^\\s]+">`).join('');
-  const verbs = [...$('#design-experiments').querySelectorAll('input')];
-  verbs.forEach((input,i) => input.addEventListener('input', () => { input.value = input.value.replace(/\s/g,''); design.verbs[i] = input.value; remember(); }));
+  const superpowers = $('#design-superpowers');
+  superpowers.addEventListener('input', () => {
+   const words=superpowers.value.trim().split(/\s+/);
+   if(words.length>5) superpowers.value=words.slice(0,5).join(' ')+' ';
+   design.superpowers=superpowers.value; remember();
+  });
   $('#design-colors').innerHTML = Object.entries(coverPalette).map(([name,color]) => `<button type="button" style="--swatch:${color}" data-color="${name}" aria-label="${name}" title="${name}" aria-pressed="false"></button>`).join('');
   function render() {
    $('.design-cover').style.setProperty('--cover', coverPalette[design.color]);
@@ -1501,7 +1504,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   document.addEventListener('dragend',clearDropTarget);
   function showDesign() {
    title.textContent=design.title; signature.value=design.signature || '';
-   verbs.forEach((input,i)=>input.value=design.verbs[i]);
+   superpowers.value=design.superpowers;
    $('#design-add').textContent=editing ? 'Update cart' : 'Add $5,000 deposit to cart';
    render();
   }
