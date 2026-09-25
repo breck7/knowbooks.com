@@ -423,7 +423,7 @@ section
  div
   id startups-element-3
   addClass offering-body
-  p A one-of-a-kind Knowbook, built around your startup.
+  p A one-of-a-kind tactile pitch kit to help your startup raise capital.
    id startups-element-4
    addClass offering-lead
   p We develop custom Knowbooks for startups raising funds. Turn your big idea into hands-on experiments that help investors explore what you're building and understand why it matters.
@@ -442,7 +442,7 @@ section
     id startups-element-10
     dt Build on demand.
      id startups-element-11
-    dd Order more at our cost + 30%. Any quantity, whenever you need it.
+    dd Order more, any quantity, whenever you need it.
      id startups-element-12
   a Let's build your Knowbook <span aria-hidden="true">↗</span>
    id startups-element-13
