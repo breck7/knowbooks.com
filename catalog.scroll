@@ -864,8 +864,15 @@ tags economicsTag buildingTag creativeTag multiplePeopleTag businessTag startups
 title Knowbooks
 shelf special
 priceUsd 10000
-color forest
+color brown
 description Includes an initial partner conversation about building Knowbooks in your community.
+
+id bitokens
+title Bitokens
+shelf special
+priceUsd 1000
+color navy
+description 100 bitokens. Can be used to pay for both input and output tokens. Send prompts to bi@knowbooks.com.
 
 id breck.ecommerce
 tags economicsTag computingTag measurementTag creativeTag longTermTag multiplePeopleTag financeTag businessTag startupsTag communicationTag
