@@ -854,9 +854,17 @@ const catalog = [
     "description": "Includes an initial partner conversation about building Knowbooks in your community.",
     "tags": "economicsTag buildingTag creativeTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag",
     "title": "Knowbooks",
-    "color": "forest",
+    "color": "brown",
     "shelf": "special",
     "priceUsd": 10000
+  },
+  {
+    "id": "bitokens",
+    "description": "100 bitokens. Can be used to pay for both input and output tokens. Send prompts to bi@knowbooks.com.",
+    "title": "Bitokens",
+    "color": "navy",
+    "shelf": "special",
+    "priceUsd": 1000
   },
   {
     "id": "breck.ecommerce",
