@@ -14,7 +14,7 @@ replace MAP_LONGITUDE -157.55
 replace MAP_ZOOM 6
 
 title STORM_NAME - REGION_LABEL · Storm Tracker
-description Five Hawaii cameras, West Coast Storm Chasers, and NOAA satellite and forecast graphics for STORM_NAME.
+description Five Hawaii cameras, Hawaii News Now, KHON2, KITV, storm coverage, and NOAA forecast graphics for STORM_NAME.
 baseUrl https://knowbooks.com/s/stormTracker/
 htmlLang en
 
@@ -138,6 +138,29 @@ lat 19.406
 lng -155.283
 youtubeId gXKuUyKt8mc
 
+// Official station players checked September 25, 2026; live coverage may switch to replays.
+id hnn
+group broadcast
+name Hawaii News Now
+place Tracking Hurricane Nolo · YouTube coverage
+youtubeId wqGV75Plr2c
+sourceUrl https://www.youtube.com/@hawaiinews/live
+
+id khon
+group broadcast
+name KHON2
+place Watch on KHON2 · Opens a new tab
+kind external
+src https://www.khon2.com/live-stream/
+sourceUrl https://www.khon2.com/live-stream/
+
+id kitv
+group broadcast
+name KITV · Island News
+place Live newscasts & latest replays
+fuelChannel 64df5026-9a0c-402d-9907-34decb06fb0c
+sourceUrl https://www.kitv.com/livestream/
+
 id field
 group broadcast
 name West Coast Storm Chasers
@@ -145,10 +168,14 @@ place DL Scales · Kauaʻi survey · Sep 9 replay
 youtubeId L94GOkagga8
 live false
 
-id hnn
-name Hawaii News Now
-place This Is Now · Sep 23, 2026
-youtubeId 1rTQvaQ4eCI
+id windy
+group broadcast
+name Windy.com
+place Hawaii
+kind iframe
+src https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=5&overlay=wind&product=ecmwf&level=surface&lat=21.507&lon=-157.992
+sourceUrl https://www.windy.com/
+
 
 id noaa
 group weather
@@ -190,3 +217,7 @@ place NHC · All disturbances
 kind image
 src https://www.nhc.noaa.gov/ftp/graphics/xgtwo/xgtwo_pac_7d0.png
 sourceUrl https://www.nhc.noaa.gov/?epac
+
+
+
+

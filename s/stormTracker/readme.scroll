@@ -48,6 +48,10 @@ youtubeIdParser
  extends abstractStringMeasureParser
  description YouTube video identifier.
 
+fuelChannelParser
+ extends abstractStringMeasureParser
+ description Fuel Media channel identifier for an inline official station player.
+
 srcParser
  extends abstractUrlMeasureParser
  description Embeddable player or direct media URL.
@@ -58,7 +62,7 @@ sourceUrlParser
 
 kindParser
  extends abstractStringMeasureParser
- description iframe, image, or video; omitted means iframe.
+ description iframe, image, video, or external; omitted means iframe.
 
 liveParser
  extends abstractBooleanMeasureParser
@@ -100,7 +104,7 @@ stormDashboardParser
     const item = Object.fromEntries(Object.entries(row).filter(([,value]) => value !== ""));
     const group = groups[item.group || "camera"];
     if (!group) fail(item.id + " has an unknown group");
-    item.title = item.name; item.source = item.sourceUrl; item.youtube = item.youtubeId;
+    item.broadcast = group === "broadcasts"; item.title = item.name; item.source = item.sourceUrl; item.youtube = item.youtubeId;
     delete item.name; delete item.sourceUrl; delete item.group; delete item.youtubeId;
     config[group].push(item);
    }
@@ -110,8 +114,9 @@ stormDashboardParser
     for (const item of config[group]) {
      if (!/^[a-z][a-z0-9_-]*$/i.test(item.id) || ids.has(item.id) || ["map","windows","weather","tv","leftRail","rightRail","connectors","links"].includes(item.id)) fail("invalid or duplicate feed ID: " + item.id);
      ids.add(item.id);
-     if (!item.title || (!item.offline && !item.youtube && !item.src)) fail(item.id + " needs title and youtube or src");
-     if (item.kind && !["image","video","iframe"].includes(item.kind)) fail(item.id + " has unsupported kind");
+     if (!item.title || (!item.offline && !item.youtube && !item.src && !item.fuelChannel)) fail(item.id + " needs title and youtube, src, or fuelChannel");
+     if (item.fuelChannel && !/^[a-f0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i.test(item.fuelChannel)) fail(item.id + " has invalid Fuel channel ID");
+     if (item.kind && !["image","video","iframe","external"].includes(item.kind)) fail(item.id + " has unsupported kind");
      if ((item.lat !== undefined || item.lng !== undefined) && (!Number.isFinite(item.lat) || !Number.isFinite(item.lng) || Math.abs(item.lat) > 90 || Math.abs(item.lng) > 180)) fail(item.id + " has invalid coordinates");
      item.place ||= "";
      item.source ||= item.src;
@@ -227,31 +232,37 @@ css
    @media(max-width:550px){header{gap:8px;padding:12px}.source-link{font-size:12px;margin-left:auto}.eyebrow{font-size:10px}.rail{grid-template-columns:1fr;grid-template-rows:none;overflow:visible}.cam{height:235px}.media-row{grid-template-columns:1fr}.weather-window img,.weather-window video{height:220px}.center-label span{font-size:12px}.modal-foot{align-items:flex-start;flex-direction:column}.modal-status{font-size:11px}}
    /* Keep the desktop dashboard within the viewport; short screens can still scroll. */
    @media(min-width:901px){
-     body{height:100dvh;min-height:620px;display:flex;flex-direction:column}
+     body{height:100dvh;min-height:850px;display:flex;flex-direction:column}
      header{flex:0 0 auto;min-height:64px;padding:8px 14px;flex-wrap:nowrap}
-     main{flex:1;min-height:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:minmax(0,1fr) clamp(155px,25dvh,240px) auto;gap:8px;padding:8px 12px}
+     main{flex:1;min-height:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:minmax(260px,1fr) clamp(155px,23dvh,220px) auto 180px auto;gap:8px;padding:8px 12px}
      .layout{grid-column:1/-1;height:auto;min-height:0;padding:0;gap:8px;grid-template-columns:minmax(200px,23%) minmax(0,1fr) minmax(200px,23%)}
      .rail{grid-template-rows:repeat(var(--camera-rows,3),minmax(0,1fr));gap:8px}
      .cam,.tv-row .cam{height:100%;min-height:0}
      .cam-meta{left:8px;right:8px;bottom:7px;gap:4px}.cam-title{font-size:12px}.cam-place{font-size:10px}.status{font-size:9px;white-space:nowrap}
-     .media-row{padding:0;gap:8px;min-height:0}.media-row:not(.tv-row){grid-column:1/5;grid-row:2}
+     .media-row{padding:0;gap:8px;min-height:0}.media-row:not(.tv-row){grid-column:1/-1;grid-row:2}
      .weather-window{display:flex;flex-direction:column;min-height:0}.weather-window img,.weather-window video{flex:1;height:0;min-height:0}
      .window-label{padding:6px 8px 3px;display:block;font-size:12px}.window-label span{display:block;font-size:10px;margin-top:2px}
      .window-status{font-size:10px;padding:0 8px 6px;min-height:0}
-     .tv-row{grid-column:5;grid-row:2;grid-template-columns:minmax(0,1fr)}.tv-row .cam-meta{display:block}.tv-row .status{display:none}
-     .section-title{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%)}
+     .tv-row{grid-column:1/-1;grid-row:4;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}.tv-row .cam-meta{display:block}.tv-row .status{display:none}
+     .section-title{grid-column:1/-1;grid-row:3;margin:0;padding:3px 0;font-size:12px}
      .page-note{grid-column:1/-1;padding:0;font-size:10px;line-height:1.4}
      .center-label{top:8px;left:8px;padding:6px 8px}.center-label b{font-size:11px}.center-label span{font-size:10px}
    }
+   .tv-row{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+   .station-launch{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px 16px 70px;text-align:center;background:radial-gradient(ellipse at top,#17465b,#09151b);color:var(--ink)}
+   .station-launch strong{font-size:clamp(15px,2vw,23px)}
+   .station-launch a,.station-launch>span{font-size:12px;color:#a4e7ff;padding:9px 12px;border:1px solid #36677b;border-radius:6px;text-decoration:none}
+   .station-launch a{position:relative;z-index:4}
+   .floating-media .station-launch{padding:30px}
    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
  
    #windows{position:fixed;inset:0;pointer-events:none;z-index:100}
    .floating-window{position:absolute;pointer-events:auto;display:flex;flex-direction:column;background:#061016;border:1px solid #376478;border-radius:12px;overflow:hidden;box-shadow:0 12px 40px #0009;transform-origin:top left}
-   .window-head{display:flex;align-items:center;gap:10px;padding:7px 9px 7px 14px;min-height:46px;flex-shrink:0;cursor:grab;touch-action:none;background:#122630;user-select:none}
-   .window-head b{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}.window-actions{display:flex;gap:6px;flex-shrink:0}
+   .window-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:7px 9px 7px 14px;min-height:46px;flex-shrink:0;cursor:grab;touch-action:none;background:#122630;user-select:none}
+   .window-heading{flex:1 1 180px;min-width:0}.window-head b{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.window-actions{display:flex;gap:6px;flex-shrink:0}
    .window-actions button{border:1px solid #365563;border-radius:7px;background:#09171e;color:#eaf7ff;min-height:32px;min-width:32px;cursor:pointer}.window-actions .audio-toggle{padding:0 10px;font-size:12px}.window-actions button:disabled{opacity:.5}.window-close{font-size:23px}
    .floating-media{flex:1;min-height:0;background:#000;position:relative}.floating-media>iframe,.floating-media>video,.floating-media>img{display:block;width:100%;height:100%;border:0;object-fit:contain}
-   .window-foot{display:flex;justify-content:space-between;gap:8px;padding:6px 32px 6px 10px;min-height:28px;font-size:10px;color:var(--muted)}.window-foot a{color:#9ac8d9;white-space:nowrap}
+   .window-info{display:flex;align-items:center;flex-wrap:wrap;gap:3px 10px;margin-top:3px;font-size:10px;line-height:1.4;color:var(--muted)}.window-note:empty{display:none}.window-head .feed-time{margin:0}.window-head .stream-badge{position:static;margin:0}.window-source{align-self:center;color:#9ac8d9;font-size:12px;white-space:nowrap;text-decoration:none;padding:6px 2px}.window-source:hover{text-decoration:underline}
    .resize-handle{position:absolute;bottom:0;right:0;width:28px;height:28px;padding:0;border:0;color:#76d9f4;background:#122630;cursor:nwse-resize;touch-action:none;font-size:19px}
    .manipulating .floating-media{pointer-events:none}.manipulating .window-head{cursor:grabbing}
    .view-number{position:absolute;top:7px;left:7px;z-index:5;display:grid;place-items:center;min-width:23px;height:23px;padding:0 5px;border:1px solid #497c90;border-radius:6px;background:#07151ee8;color:#d4f5ff;font:700 12px ui-monospace,monospace;pointer-events:none;box-shadow:0 2px 7px #0006}
@@ -266,7 +277,6 @@ css
  .weather-window>.feed-time{padding:0 8px 6px;margin-top:0}
  .stream-badge{position:absolute;right:7px;top:7px;z-index:6;padding:4px 6px;border-radius:4px;background:#071016e8;font-size:10px;font-weight:800;line-height:1.2;pointer-events:none;color:#aec3ce}
  .stream-badge.is-live{color:#ff655f}.stream-badge.is-repeat{color:#ffad55}
- .window-foot{flex-wrap:wrap}.window-foot .feed-time{flex-basis:100%;margin:0}
  .cam-meta>div{min-width:0}.cam-place{letter-spacing:.03em}
  .layout.no-left #leftRail,.layout.no-right #rightRail{display:none}
 
@@ -307,10 +317,11 @@ script
  function renderFeedInfo(item){
   for(const root of [item.element,panels.get(item.id)?.el].filter(Boolean)){
    const time=root.querySelector('.feed-time');if(time){time.textContent=updateText(item);if(item.updatedAt)time.dateTime=new Date(item.updatedAt).toISOString();}
-   const badge=root.querySelector('.stream-badge');if(badge){const state=item.offline||item.mediaError?'unavailable':item.streamState;badge.textContent=state==='live'?'LIVE':state==='repeat'?'Repeat':state==='unavailable'?'Unavailable':'Status unknown';badge.className='stream-badge'+(state==='live'?' is-live':state==='repeat'?' is-repeat':'');}
+   const badge=root.querySelector('.stream-badge');if(badge){const state=item.offline||item.mediaError?'unavailable':item.streamState;badge.textContent=state==='live'?'LIVE':state==='repeat'?'Repeat':state==='unavailable'?'Unavailable':item.broadcast&&!item.youtube?'Live / replay':'Status unknown';badge.className='stream-badge'+(state==='live'?' is-live':state==='repeat'?' is-repeat':'');}
   }
  }
  function addFeedInfo(item,root,timeParent=root,badgeParent=root){
+  if(item.kind==='external')return;
   const time=document.createElement('time');time.className='feed-time';time.title='Local time of the last successful media load. Provider issue/recording time may differ.';timeParent.append(time);
   if(item.kind!=='image'&&!weather.includes(item)){const badge=document.createElement('span');badge.className='stream-badge';badgeParent.append(badge);}
   renderFeedInfo(item);
@@ -328,6 +339,13 @@ script
  setInterval(()=>{feedViews.forEach(item=>{if(item.previewPlayer)youtubeState(item,item.previewPlayer);renderFeedInfo(item);});},15000);
  function watchYouTube(item,media){youtubeAPI().then(()=>{if(!media.isConnected)return;item.previewPlayer=new YT.Player(media,{events:{onReady:e=>{mediaLoaded(item);youtubeState(item,e.target);},onStateChange:e=>youtubeState(item,e.target),onError:()=>showError(item)}});}).catch(()=>{item.streamState='unknown';renderFeedInfo(item);});}
  function createMedia(item,expanded=false){
+  if(item.kind==='external'){
+   const notice=document.createElement('div');notice.className='station-launch';
+   const label=document.createElement('strong');label.textContent=item.title;
+   const action=document.createElement('a');action.textContent='Watch on station site ↗';
+   action.href=item.source;action.target='_blank';action.rel='noopener noreferrer';
+   notice.append(label,action);return notice;
+  }
   if(item.offline){const notice=document.createElement('div');notice.className='unavailable-view';notice.textContent='Camera unavailable';return notice;}
   if(item.kind==='image'){
    const img=document.createElement('img');img.alt=item.title+' — '+item.place+'; issue time shown on graphic';img.addEventListener('load',()=>mediaLoaded(item));img.addEventListener('error',()=>showError(item));img.src=item.currentSrc||item.src;return img;
@@ -337,10 +355,13 @@ script
   }
   const f=document.createElement('iframe');f.title=item.title;f.allow='autoplay; fullscreen; picture-in-picture';f.allowFullscreen=true;f.referrerPolicy='strict-origin-when-cross-origin';if(!expanded)f.tabIndex=-1;
   if(!item.youtube)f.addEventListener('load',()=>mediaLoaded(item));
-  f.src=item.src;
+  if(item.fuelChannel){
+   // Official KITV Fuel embed, isolated inline so no separate player file is required.
+   f.srcdoc='<!doctype html><html lang="en"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Station player</title><style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}fuel-video{display:block;width:100%;height:100%}fuel-video .video-js{width:100%!important;height:100%!important;padding:0!important}</style><fuel-video data-channel="'+item.fuelChannel+'" data-audio-and-autoplay="2" data-ad-method="1"></fuel-video><script src="https://fuel-streaming-prod01.fuelmedia.io/player/v3/fuel.js"></scr'+'ipt></html>';
+  }else f.src=item.src;
   return f;
  }
- function activate(el,item){const badge=document.createElement('span');badge.className='view-number';badge.textContent=item.number;badge.title='Press '+item.number+' to open';badge.setAttribute('aria-hidden','true');el.append(badge);el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label','Expand '+item.number+'. '+item.title);el.onclick=()=>openModal(item,el);el.onkeydown=e=>{if(e.target===el&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openModal(item,el);}};}
+ function activate(el,item){const badge=document.createElement('span');badge.className='view-number';badge.textContent=item.number;badge.title='Press '+item.number+' to open';badge.setAttribute('aria-hidden','true');el.append(badge);el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label','Expand '+item.number+'. '+item.title);el.onclick=e=>{if(!e.target.closest('a'))openModal(item,el);};el.onkeydown=e=>{if(e.target===el&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openModal(item,el);}};}
  function cameraWindow(item,parent){const el=document.createElement('article');el.className='cam';el.id=item.id;el.append(createMedia(item));const meta=document.createElement('div');meta.className='cam-meta';meta.innerHTML='<div><div class="cam-title"></div><div class="cam-place"></div></div><span class="status" hidden></span>';if(item.offline){meta.querySelector('.status').hidden=false;meta.querySelector('.status').textContent='Unavailable';meta.querySelector('.status').classList.add('offline');}meta.querySelector('.cam-title').textContent=item.title+' ↗';meta.querySelector('.cam-place').textContent=item.place;el.append(meta);activate(el,item);$(parent).append(el);item.element=el;addFeedInfo(item,el,meta.firstElementChild);if(item.youtube&&!item.offline)watchYouTube(item,el.querySelector('iframe'));}
  const leftCount=Math.ceil(cameras.length/2);
  cameras.forEach((c,i)=>cameraWindow(c,i<leftCount?'leftRail':'rightRail'));
@@ -356,9 +377,9 @@ script
   selectedView=numberedViews.indexOf(item);
   if(panels.has(item.id)){const p=panels.get(item.id);p.el.style.zIndex=++windowZ;p.head.focus();return;}
   const el=document.createElement('section');el.className='floating-window';el.setAttribute('role','dialog');el.setAttribute('aria-label',item.title);
-  el.innerHTML='<div class="window-head" tabindex="0"><b></b><div class="window-actions"><button class="audio-toggle" disabled>Audio…</button><button class="size-toggle" aria-label="Maximize window" title="Maximize or restore">⤢</button><button class="window-close" aria-label="Close window" title="Close">×</button></div></div><div class="floating-media"></div><div class="window-foot"><span></span><a target="_blank" rel="noopener">Source ↗</a></div><button class="resize-handle" aria-label="Resize window" title="Drag to resize, or use arrow keys">◢</button>';
-  const head=el.querySelector('.window-head'),mediaBox=el.querySelector('.floating-media'),audio=el.querySelector('.audio-toggle'),note=el.querySelector('.window-foot span');
-  head.querySelector('b').textContent=item.number+' · '+item.title;head.setAttribute('aria-label',item.number+'. '+item.title+'. Left or right to cycle; Shift plus arrows to move.');const source=el.querySelector('.window-foot a');if(item.source)source.href=item.source;else source.hidden=true;
+  el.innerHTML='<div class="window-head" tabindex="0"><div class="window-heading"><b></b><div class="window-info"><span class="window-note"></span></div></div><div class="window-actions"><a class="window-source" target="_blank" rel="noopener">Source ↗</a><button class="audio-toggle" disabled>Audio…</button><button class="size-toggle" aria-label="Maximize window" title="Maximize or restore">⤢</button><button class="window-close" aria-label="Close window" title="Close">×</button></div></div><div class="floating-media"></div><button class="resize-handle" aria-label="Resize window" title="Drag to resize, or use arrow keys">◢</button>';
+  const head=el.querySelector('.window-head'),note=el.querySelector('.window-note');
+  head.querySelector('b').textContent=item.number+' · '+item.title;head.setAttribute('aria-label',item.number+'. '+item.title+'. Left or right to cycle; Shift plus arrows to move.');const source=el.querySelector('.window-source');if(item.source){source.href=item.source;source.setAttribute('aria-label','Open '+item.title+' source');}else source.hidden=true;
   const panel={el,head,item,opener,note,muted:true};panels.set(item.id,panel);$('windows').append(el);
   const width=Math.min(innerWidth-24,960),height=Math.min(innerHeight-24,640),offset=(panels.size-1)%5*24;
   Object.assign(el.style,{width:width+'px',height:height+'px',left:Math.max(8,(innerWidth-width)/2+offset)+'px',top:Math.max(8,(innerHeight-height)/2+offset)+'px',zIndex:++windowZ});fitPanel(panel);
@@ -376,10 +397,11 @@ script
  }
  function mountMedia(panel){
   const {item,el,note}=panel,mediaBox=el.querySelector('.floating-media'),audio=el.querySelector('.audio-toggle');
-  const media=createMedia(item,true);mediaBox.append(media);panel.media=media;addFeedInfo(item,el,el.querySelector('.window-foot'),mediaBox);
+  const media=createMedia(item,true);mediaBox.append(media);panel.media=media;addFeedInfo(item,el,el.querySelector('.window-info'),el.querySelector('.window-info'));
   const labelAudio=()=>{audio.textContent=panel.muted?'Unmute':'Mute';audio.setAttribute('aria-label',(panel.muted?'Unmute ':'Mute ')+item.title);audio.setAttribute('aria-pressed',String(!panel.muted));};labelAudio();
   audio.onclick=()=>{panel.muted=!panel.muted;if(item.youtube){panel.muted?panel.player.mute():panel.player.unMute();}else if(panel.player){panel.muted?panel.player.muteOn():panel.player.muteOff();}else{media.muted=panel.muted;}labelAudio();};
-  if(item.offline){audio.hidden=true;note.textContent='No replacement stream available.';}
+  if(item.kind==='external'){audio.hidden=true;note.textContent='Watch coverage on the station’s website.';}
+  else if(item.offline){audio.hidden=true;note.textContent='No replacement stream available.';}
   else if(item.kind==='image'||item.kind==='video'){audio.hidden=true;note.textContent=item.kind==='image'?config.weatherProvider+' · Issue time on graphic':config.weatherProvider+' · Animation';}
   else if(item.youtube){note.textContent='';youtubeAPI().then(()=>{if(!el.isConnected)return;panel.player=new YT.Player(media,{events:{onReady:e=>{panel.player.mute();audio.disabled=false;mediaLoaded(item);youtubeState(item,e.target);},onStateChange:e=>youtubeState(item,e.target),onError:()=>{showError(item);note.textContent='Use player controls or open source';}}});}).catch(()=>{note.textContent='Use the player’s volume control';audio.hidden=true;});}
   else if(item.dacast) {
