@@ -21,8 +21,71 @@ htmlLang en
 readme.scroll
 
 resourceLinks
- https://dod.hawaii.gov/hiema/ Hawaiʻi Emergency Management
- https://www.honolulu.gov/dem/ Honolulu Emergency Management
+ section Federal government
+  https://www.weather.gov/hfo/ National Weather Service · Honolulu
+  https://www.nhc.noaa.gov/?cpac Central Pacific Hurricane Center
+  https://www.tsunami.gov/ NOAA tsunami alerts
+  https://www.usgs.gov/observatories/hvo Hawaiian Volcano Observatory
+  https://www.fema.gov/ FEMA · Disaster assistance
+  https://www.ready.gov/ Ready.gov · Preparedness
+ section State government
+  https://www.hawaii.gov/ Hawaiʻi.gov · Services & information
+  https://dod.hawaii.gov/hiema/ Hawaiʻi Emergency Management
+  https://health.hawaii.gov/ Department of Health
+  https://hidot.hawaii.gov/ Transportation · Roads & airports
+  https://dlnr.hawaii.gov/ Land & Natural Resources
+  https://www.capitol.hawaii.gov/ State Legislature
+ section County government
+  https://www.honolulu.gov/ Honolulu · Oʻahu
+  https://www.honolulu.gov/dem/ Honolulu Emergency Management
+  https://www.mauicounty.gov/ Maui County · Maui, Molokaʻi & Lānaʻi
+  https://www.kauai.gov/ Kauaʻi County
+  https://www.hawaiicounty.gov/ Hawaiʻi County · Big Island
+  https://portal.ehawaii.gov/residents/emergency-information/ County emergency contacts & alerts
+ section Weather tools
+  https://weather.com/ Weather.com
+  https://www.accuweather.com/ AccuWeather
+  https://www.wunderground.com/ Weather Underground
+  https://www.windy.com/ Windy · Forecast models & wind maps
+  https://zoom.earth/ Zoom Earth · Satellite & hurricane tracking
+  https://www.ventusky.com/ Ventusky · Animated weather maps
+ section TV stations
+  https://www.hawaiinewsnow.com/ Hawaii News Now
+  https://www.khon2.com/ KHON2
+  https://www.kitv.com/ KITV · Island News
+  https://www.pbshawaii.org/ PBS Hawaiʻi
+ section Radio stations
+  https://www.hawaiipublicradio.org/ Hawaiʻi Public Radio
+  https://ksskradio.iheart.com/ KSSK · 92.3 FM / 590 AM
+  https://khvhradio.iheart.com/ KHVH · NewsRadio 830 AM
+  https://www.kkcr.org/ KKCR · Kauaʻi Community Radio
+ section Newspapers & local journalism
+  https://www.staradvertiser.com/ Honolulu Star-Advertiser
+  https://www.mauinews.com/ The Maui News
+  https://www.thegardenisland.com/ The Garden Island
+  https://www.hawaiitribune-herald.com/ Hawaiʻi Tribune-Herald
+  https://www.westhawaiitoday.com/ West Hawaii Today
+  https://www.civilbeat.org/ Honolulu Civil Beat
+  https://mauinow.com/ Maui Now
+  https://bigislandnow.com/ Big Island Now
+ section Reddit communities
+  https://www.reddit.com/r/Hawaii/ r/Hawaii · Statewide conversation
+  https://www.reddit.com/r/Oahu/ r/Oahu
+  https://www.reddit.com/r/Maui/ r/Maui
+  https://www.reddit.com/r/kauai/ r/kauai
+  https://www.reddit.com/r/BigIsland/ r/BigIsland
+ section X / Twitter accounts
+  https://x.com/NWSHonolulu @NWSHonolulu · Weather service
+  https://x.com/Hawaii_EMA @Hawaii_EMA · Emergency management
+  https://x.com/HawaiiNewsNow @HawaiiNewsNow · Local news
+  https://x.com/HawaiiDOT @HawaiiDOT · Transportation
+ section Community & classifieds
+  https://hawaii.craigslist.org/ Craigslist · All islands
+  https://hawaii.craigslist.org/oah/ Craigslist · Oʻahu
+  https://hawaii.craigslist.org/mau/ Craigslist · Maui
+  https://hawaii.craigslist.org/kau/ Craigslist · Kauaʻi
+  https://hawaii.craigslist.org/big/ Craigslist · Big Island
+  https://auw211.org/ Aloha United Way 211 · Local help
 
 // Fit Niʻihau through Hawaiʻi Island on desktop and mobile.
 script

@@ -108,7 +108,7 @@ stormDashboardParser
    for (const group of ["cameras","weather","broadcasts"]) {
     config[group] ||= [];
     for (const item of config[group]) {
-     if (!/^[a-z][a-z0-9_-]*$/i.test(item.id) || ids.has(item.id) || ["map","windows","weather","tv","leftRail","rightRail","connectors"].includes(item.id)) fail("invalid or duplicate feed ID: " + item.id);
+     if (!/^[a-z][a-z0-9_-]*$/i.test(item.id) || ids.has(item.id) || ["map","windows","weather","tv","leftRail","rightRail","connectors","links"].includes(item.id)) fail("invalid or duplicate feed ID: " + item.id);
      ids.add(item.id);
      if (!item.title || (!item.offline && !item.youtube && !item.src)) fail(item.id + " needs title and youtube or src");
      if (item.kind && !["image","video","iframe"].includes(item.kind)) fail(item.id + " has unsupported kind");
@@ -118,11 +118,16 @@ stormDashboardParser
     }
    }
    const escape = value => String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll('"', "&quot;");
-   const resourceLinks = (this.root.getParticle("resourceLinks")?.getSubparticles() || []).map(node => `<a class="source-link" href="${escape(node.cue)}" target="_blank" rel="noopener">${escape(node.content)} ↗</a>`).join("");
+   const resourceLink = (url, label) => {
+    if (!/^https:\/\//.test(url)) fail("resource link must use HTTPS: " + url);
+    return `<li><a href="${escape(url)}" target="_blank" rel="noopener noreferrer">${escape(label)}<span aria-hidden="true">↗</span></a></li>`;
+   };
+   const resourceLinks = (this.root.getParticle("resourceLinks")?.getSubparticles() || []).map((section, index) => `<section class="link-section" aria-labelledby="link-section-${index}"><h3 id="link-section-${index}">${escape(section.content)}</h3><ul>${section.getSubparticles().map(node => resourceLink(node.cue, node.content)).join("")}</ul></section>`).join("");
    const json = JSON.stringify(config).replaceAll("<", "\\u003c");
    return `<script>const config = ${json};</script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-    <header><div><a class="eyebrow" href="index.html" style="text-decoration:none">Storm Tracker</a><h1>${escape(config.heading)}</h1></div><span class="live"><i></i>live</span><div class="header-spacer"></div><nav class="resource-links" aria-label="Storm resources">${resourceLinks}<a class="source-link" href="${escape(config.emergencyUrl)}" target="_blank" rel="noopener">${escape(config.emergencyLabel)}</a></nav></header>
+    <header><div><a class="eyebrow" href="index.html" style="text-decoration:none">Storm Tracker</a><h1>${escape(config.heading)}</h1></div><span class="live"><i></i>live</span><div class="header-spacer"></div><button id="linksButton" class="links-button" type="button" aria-haspopup="dialog" aria-keyshortcuts="l" title="Open links (L)">Links <kbd>L</kbd></button></header>
+    <template id="linksContent"><div class="links-content"><div class="links-feature"><a href="${escape(config.emergencyUrl)}" target="_blank" rel="noopener noreferrer">${escape(config.emergencyLabel)}</a></div><div class="links-grid">${resourceLinks}</div></div></template>
     <svg id="connectors" aria-hidden="true"></svg>
     <main><div class="layout"><section class="rail" id="leftRail" aria-label="Camera views"></section><section class="center"><div id="map" aria-label="${escape(config.mapLabel)}"></div><div class="center-label"><b>${escape(config.mapLabel)}</b><span>${escape(config.mapNote)}</span></div></section><section class="rail" id="rightRail" aria-label="More camera views"></section></div><section class="media-row" id="weather" aria-label="Satellite and forecast graphics"></section><h2 class="section-title">${escape(config.tvHeading)}</h2><section class="media-row tv-row" id="tv" aria-label="Television coverage"></section><p class="page-note">${escape(config.pageNote)}</p></main>
     <div id="windows" aria-label="Expanded live windows"></div>
@@ -159,8 +164,20 @@ css
    .live i{width:8px;height:8px;background:var(--danger);border-radius:50%;box-shadow:0 0 0 0 rgba(255,101,95,.7);animation:pulse 1.6s infinite}
    @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(255,101,95,0)}100%{box-shadow:0 0 0 0 rgba(255,101,95,0)}}
    .header-spacer{flex:1}
-   .resource-links{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px 16px;min-width:0}
-   .resource-links .source-link{white-space:nowrap;margin-left:0}
+   .links-button{display:flex;align-items:center;gap:14px;padding:10px 14px;border:1px solid #376478;border-radius:8px;background:#10242f;color:var(--ink);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
+   .links-button:hover{background:#1b3848}
+   kbd{font:11px ui-monospace,monospace;padding:3px 6px;border:1px solid #47616f;border-radius:4px;color:#9ac8d9}
+   .links-content{height:100%;background:#09161e;overflow:auto;overscroll-behavior:contain;padding:20px 28px 28px;min-height:0}
+   .links-feature{display:flex;gap:10px 20px;flex-wrap:wrap;justify-content:space-between;padding:14px 16px;margin-bottom:24px;background:#102a35;border:1px solid #245469;border-radius:8px;font-size:13px}
+   .links-feature a{color:#8fe5ff;text-decoration:none}
+   .links-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:28px 24px}
+   .link-section h3{font-size:12px;font-weight:750;letter-spacing:.04em;color:#81cfe5;margin:0 0 10px;padding-bottom:10px;border-bottom:1px solid #26404d}
+   .link-section ul{list-style:none;margin:0;padding:0}
+   .link-section a{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:8px 6px;border-radius:5px;color:#dcebf1;text-decoration:none;font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+   .link-section a span{color:#618293;flex-shrink:0}
+   .link-section a:hover{background:#16303d;color:#fff}
+   .links-content :focus-visible,.links-button:focus-visible{outline:2px solid var(--line);outline-offset:3px}
+   @media(max-width:520px){.links-content{padding:16px 20px 24px}.link-section a{padding:11px 6px}.links-button{gap:8px;padding:9px 10px}}
    .source-link{color:#9ac8d9;text-decoration:none;font-size:11px;border-bottom:1px dotted #4e7b8d}
    .layout{height:calc(100vh - 70px);position:relative;padding:12px 14px 14px;display:grid;grid-template-columns:minmax(220px,23vw) 1fr minmax(220px,23vw);gap:12px;z-index:1}
    .rail{display:grid;grid-template-rows:repeat(3,1fr);gap:12px;min-height:0}
@@ -208,7 +225,6 @@ css
    [role=button]:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--line);outline-offset:3px}.leaflet-control-attribution{font-size:10px!important}
    @media(max-width:900px){.layout{height:auto;min-height:0;grid-template-columns:1fr}.center{height:60dvh;min-height:380px;order:-1}.rail{grid-template-columns:repeat(3,minmax(200px,1fr));grid-template-rows:210px;overflow-x:auto}.cam{height:210px}#connectors{display:none}.media-row{grid-template-columns:repeat(2,minmax(0,1fr))}.center-label{top:10px}.live{font-size:12px}h1{font-size:19px}}
    @media(max-width:550px){header{gap:8px;padding:12px}.source-link{font-size:12px;margin-left:auto}.eyebrow{font-size:10px}.rail{grid-template-columns:1fr;grid-template-rows:none;overflow:visible}.cam{height:235px}.media-row{grid-template-columns:1fr}.weather-window img,.weather-window video{height:220px}.center-label span{font-size:12px}.modal-foot{align-items:flex-start;flex-direction:column}.modal-status{font-size:11px}}
-   @media(max-width:900px){.resource-links{flex-basis:100%;justify-content:flex-start}}
    /* Keep the desktop dashboard within the viewport; short screens can still scroll. */
    @media(min-width:901px){
      body{height:100dvh;min-height:620px;display:flex;flex-direction:column}
@@ -263,8 +279,16 @@ script
  $('weather').style.setProperty('--weather-columns',Math.max(1,Math.min(5,weather.length)));
  if(!broadcasts.length){$('tv').hidden=true;document.querySelector('.section-title').hidden=true;$('weather').style.gridColumn='1/-1';}
  if(!weather.length){$('weather').hidden=true;$('tv').style.gridColumn='1/-1';}
- const numberedViews=[...cameras,...weather,...broadcasts];
- numberedViews.forEach((item,index)=>item.number=index<9?String(index+1):index<35?String.fromCharCode(65+index-9):String(index+1));
+ const feedViews=[...cameras,...weather,...broadcasts];
+ const viewShortcuts='123456789ABCDEFGHIJKMNOPQRSTUVWXYZ'; // L is reserved for Links.
+ feedViews.forEach((item,index)=>item.number=viewShortcuts[index]||String(index+1));
+ const linksView={id:'links',title:'Links',number:'L',element:$('linksButton'),mount(panel){
+  panel.el.querySelector('.floating-media').append($('linksContent').content.cloneNode(true));
+  panel.el.querySelector('.audio-toggle').hidden=true;
+  panel.note.textContent='Links open in a new tab. · L toggle · Esc close';
+ }};
+ const numberedViews=[...feedViews,linksView];
+ linksView.element.addEventListener('click',()=>selectShortcut('L'));
  let selectedView=-1;
  let map,windowZ=100;
  const panels=new Map();
@@ -300,8 +324,8 @@ script
   if(player.getPlayerState?.()===0&&item.streamState==='live')item.streamState='unknown';
   renderFeedInfo(item);
  }
- numberedViews.forEach(item=>{item.streamState=item.kind==='video'?(item.live?'live':'repeat'):item.live===true?'live':item.live===false?'repeat':'unknown';});
- setInterval(()=>{numberedViews.forEach(item=>{if(item.previewPlayer)youtubeState(item,item.previewPlayer);renderFeedInfo(item);});},15000);
+ feedViews.forEach(item=>{item.streamState=item.kind==='video'?(item.live?'live':'repeat'):item.live===true?'live':item.live===false?'repeat':'unknown';});
+ setInterval(()=>{feedViews.forEach(item=>{if(item.previewPlayer)youtubeState(item,item.previewPlayer);renderFeedInfo(item);});},15000);
  function watchYouTube(item,media){youtubeAPI().then(()=>{if(!media.isConnected)return;item.previewPlayer=new YT.Player(media,{events:{onReady:e=>{mediaLoaded(item);youtubeState(item,e.target);},onStateChange:e=>youtubeState(item,e.target),onError:()=>showError(item)}});}).catch(()=>{item.streamState='unknown';renderFeedInfo(item);});}
  function createMedia(item,expanded=false){
   if(item.offline){const notice=document.createElement('div');notice.className='unavailable-view';notice.textContent='Camera unavailable';return notice;}
@@ -334,10 +358,24 @@ script
   const el=document.createElement('section');el.className='floating-window';el.setAttribute('role','dialog');el.setAttribute('aria-label',item.title);
   el.innerHTML='<div class="window-head" tabindex="0"><b></b><div class="window-actions"><button class="audio-toggle" disabled>Audio…</button><button class="size-toggle" aria-label="Maximize window" title="Maximize or restore">⤢</button><button class="window-close" aria-label="Close window" title="Close">×</button></div></div><div class="floating-media"></div><div class="window-foot"><span></span><a target="_blank" rel="noopener">Source ↗</a></div><button class="resize-handle" aria-label="Resize window" title="Drag to resize, or use arrow keys">◢</button>';
   const head=el.querySelector('.window-head'),mediaBox=el.querySelector('.floating-media'),audio=el.querySelector('.audio-toggle'),note=el.querySelector('.window-foot span');
-  head.querySelector('b').textContent=item.number+' · '+item.title;head.setAttribute('aria-label',item.number+'. '+item.title+'. Left or right to cycle; Shift plus arrows to move.');el.querySelector('a').href=item.source;
+  head.querySelector('b').textContent=item.number+' · '+item.title;head.setAttribute('aria-label',item.number+'. '+item.title+'. Left or right to cycle; Shift plus arrows to move.');const source=el.querySelector('.window-foot a');if(item.source)source.href=item.source;else source.hidden=true;
   const panel={el,head,item,opener,note,muted:true};panels.set(item.id,panel);$('windows').append(el);
   const width=Math.min(innerWidth-24,960),height=Math.min(innerHeight-24,640),offset=(panels.size-1)%5*24;
   Object.assign(el.style,{width:width+'px',height:height+'px',left:Math.max(8,(innerWidth-width)/2+offset)+'px',top:Math.max(8,(innerHeight-height)/2+offset)+'px',zIndex:++windowZ});fitPanel(panel);
+  if(item.mount)item.mount(panel);else mountMedia(panel);
+  el.onpointerdown=()=>{selectedView=numberedViews.indexOf(item);el.style.zIndex=++windowZ;};el.addEventListener('focusin',()=>{selectedView=numberedViews.indexOf(item);});el.querySelector('.window-close').onclick=()=>closePanel(panel);
+  el.querySelector('.size-toggle').onclick=()=>{if(panel.saved){Object.assign(el.style,panel.saved);panel.saved=null;fitPanel(panel);}else{panel.saved={left:el.style.left,top:el.style.top,width:el.style.width,height:el.style.height};Object.assign(el.style,{left:'8px',top:'8px',width:(innerWidth-16)+'px',height:(innerHeight-16)+'px'});}el.querySelector('.size-toggle').setAttribute('aria-label',panel.saved?'Restore window':'Maximize window');};
+  function gesture(handle,resize){handle.onpointerdown=e=>{if(e.button!==0||(!resize&&e.target.closest('button,a')))return;e.preventDefault();handle.setPointerCapture(e.pointerId);const r=el.getBoundingClientRect(),x=e.clientX,y=e.clientY;el.classList.add('manipulating');panel.saved=null;
+  const move=e=>{if(resize){el.style.width=Math.max(Math.min(280,innerWidth-16),Math.min(innerWidth-r.left-8,r.width+e.clientX-x))+'px';el.style.height=Math.max(Math.min(220,innerHeight-16),Math.min(innerHeight-r.top-8,r.height+e.clientY-y))+'px';}else{el.style.left=Math.max(8,Math.min(innerWidth-r.width-8,r.left+e.clientX-x))+'px';el.style.top=Math.max(8,Math.min(innerHeight-r.height-8,r.top+e.clientY-y))+'px';}};
+  const end=()=>{el.classList.remove('manipulating');handle.removeEventListener('pointermove',move);handle.removeEventListener('pointerup',end);handle.removeEventListener('pointercancel',end);};handle.addEventListener('pointermove',move);handle.addEventListener('pointerup',end);handle.addEventListener('pointercancel',end);};
+  handle.onkeydown=e=>{if(e.target!==handle||(!resize&&!e.shiftKey)||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;e.preventDefault();e.stopPropagation();const r=el.getBoundingClientRect(),dx=e.key==='ArrowLeft'?-20:e.key==='ArrowRight'?20:0,dy=e.key==='ArrowUp'?-20:e.key==='ArrowDown'?20:0;if(resize){el.style.width=Math.max(280,r.width+dx)+'px';el.style.height=Math.max(220,r.height+dy)+'px';}else{el.style.left=r.left+dx+'px';el.style.top=r.top+dy+'px';}panel.saved=null;fitPanel(panel);};}
+  gesture(head,false);gesture(el.querySelector('.resize-handle'),true);
+  el.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();closePanel(panel);}});
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const from=opener.getBoundingClientRect(),to=el.getBoundingClientRect();el.animate([{transform:`translate(${from.left-to.left}px,${from.top-to.top}px) scale(${from.width/to.width},${from.height/to.height})`,opacity:.3},{transform:'none',opacity:1}],{duration:300,easing:'cubic-bezier(.2,.8,.2,1)'});}
+  head.focus({preventScroll:true});
+ }
+ function mountMedia(panel){
+  const {item,el,note}=panel,mediaBox=el.querySelector('.floating-media'),audio=el.querySelector('.audio-toggle');
   const media=createMedia(item,true);mediaBox.append(media);panel.media=media;addFeedInfo(item,el,el.querySelector('.window-foot'),mediaBox);
   const labelAudio=()=>{audio.textContent=panel.muted?'Unmute':'Mute';audio.setAttribute('aria-label',(panel.muted?'Unmute ':'Mute ')+item.title);audio.setAttribute('aria-pressed',String(!panel.muted));};labelAudio();
   audio.onclick=()=>{panel.muted=!panel.muted;if(item.youtube){panel.muted?panel.player.mute():panel.player.unMute();}else if(panel.player){panel.muted?panel.player.muteOn():panel.player.muteOff();}else{media.muted=panel.muted;}labelAudio();};
@@ -349,16 +387,6 @@ script
    dacastReady.then(()=>{if(!el.isConnected)return;const mount=document.createElement('div');mount.id='dacast-expanded-'+item.id;mount.style.cssText='width:100%;height:100%';media.replaceWith(mount);panel.player=window.dacast(item.dacast,mount.id,{width:'100%',height:'100%'});panel.player.onReady(()=>{if(!el.isConnected)return;panel.player.muteOn();panel.player.play();audio.disabled=false;});}).catch(()=>{mediaBox.querySelector('[id^=dacast-expanded-]')?.replaceWith(media);note.textContent='Use the player’s volume control';audio.hidden=true;});
   }
   else {audio.hidden=true;note.textContent='Use the player’s volume control';}
-  el.onpointerdown=()=>{selectedView=numberedViews.indexOf(item);el.style.zIndex=++windowZ;};el.addEventListener('focusin',()=>{selectedView=numberedViews.indexOf(item);});el.querySelector('.window-close').onclick=()=>closePanel(panel);
-  el.querySelector('.size-toggle').onclick=()=>{if(panel.saved){Object.assign(el.style,panel.saved);panel.saved=null;fitPanel(panel);}else{panel.saved={left:el.style.left,top:el.style.top,width:el.style.width,height:el.style.height};Object.assign(el.style,{left:'8px',top:'8px',width:(innerWidth-16)+'px',height:(innerHeight-16)+'px'});}el.querySelector('.size-toggle').setAttribute('aria-label',panel.saved?'Restore window':'Maximize window');};
-  function gesture(handle,resize){handle.onpointerdown=e=>{if(e.button!==0||(!resize&&e.target.closest('button,a')))return;e.preventDefault();handle.setPointerCapture(e.pointerId);const r=el.getBoundingClientRect(),x=e.clientX,y=e.clientY;el.classList.add('manipulating');panel.saved=null;
-  const move=e=>{if(resize){el.style.width=Math.max(Math.min(280,innerWidth-16),Math.min(innerWidth-r.left-8,r.width+e.clientX-x))+'px';el.style.height=Math.max(Math.min(220,innerHeight-16),Math.min(innerHeight-r.top-8,r.height+e.clientY-y))+'px';}else{el.style.left=Math.max(8,Math.min(innerWidth-r.width-8,r.left+e.clientX-x))+'px';el.style.top=Math.max(8,Math.min(innerHeight-r.height-8,r.top+e.clientY-y))+'px';}};
-  const end=()=>{el.classList.remove('manipulating');handle.removeEventListener('pointermove',move);handle.removeEventListener('pointerup',end);handle.removeEventListener('pointercancel',end);};handle.addEventListener('pointermove',move);handle.addEventListener('pointerup',end);handle.addEventListener('pointercancel',end);};
-  handle.onkeydown=e=>{if(e.target!==handle||(!resize&&!e.shiftKey)||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;e.preventDefault();e.stopPropagation();const r=el.getBoundingClientRect(),dx=e.key==='ArrowLeft'?-20:e.key==='ArrowRight'?20:0,dy=e.key==='ArrowUp'?-20:e.key==='ArrowDown'?20:0;if(resize){el.style.width=Math.max(280,r.width+dx)+'px';el.style.height=Math.max(220,r.height+dy)+'px';}else{el.style.left=r.left+dx+'px';el.style.top=r.top+dy+'px';}panel.saved=null;fitPanel(panel);};}
-  gesture(head,false);gesture(el.querySelector('.resize-handle'),true);
-  el.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();closePanel(panel);}});
-  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const from=opener.getBoundingClientRect(),to=el.getBoundingClientRect();el.animate([{transform:`translate(${from.left-to.left}px,${from.top-to.top}px) scale(${from.width/to.width},${from.height/to.height})`,opacity:.3},{transform:'none',opacity:1}],{duration:300,easing:'cubic-bezier(.2,.8,.2,1)'});}
-  head.focus({preventScroll:true});
  }
  function selectShortcut(key){const item=numberedViews.find(item=>item.number===key.toUpperCase());if(!item)return;const panel=panels.get(item.id);if(panel)closePanel(panel);else openModal(item,item.element);}
  function cycleView(direction){
