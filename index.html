@@ -863,7 +863,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
  const currency = "USD";
  const money = new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 });
  const checkoutMoney = new Intl.NumberFormat("en-US", { style: "currency", currency });
- const referralCodes = new Set(["john", "kendric", "nico", "cora"]);
+ const referralCodes = new Set(["john", "kendric", "nico", "cora", "yc"]);
  const shippingByShelf = {
   believer: "Ship within 90 days",
   trailblazer: "Ship within 60 days",
@@ -894,8 +894,9 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   const enteredCode = referralInput.value.trim().toLowerCase();
   const referralCode = referralCodes.has(enteredCode) ? enteredCode : "";
   const subtotalCents = [...cart].reduce((sum, [id, quantity]) => sum + Math.round(products.get(id).priceUsd * 100) * quantity, 0);
-  const discountCents = referralCode ? Math.round(subtotalCents * 0.1) : 0;
-  return { enteredCode, referralCode, discountCents, amount: (subtotalCents - discountCents) / 100 };
+  const discountAmount = referralCode === "yc" ? -200 : 10
+  const discountCents = referralCode ? Math.round(subtotalCents * (discountAmount/100)) : 0;
+  return { enteredCode, discountAmount, referralCode, discountCents, amount: (subtotalCents - discountCents) / 100 };
  };
  const escapeHtml = value => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
  const shelvesOf = product => (product.shelf || "").trim().split(/\s+/).filter(Boolean);
@@ -1051,7 +1052,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
  const refresh = () => {
   const quantity = [...cart.values()].reduce((sum, value) => sum + value, 0);
   const pricing = cartPricing();
-  const { enteredCode, referralCode, discountCents, amount } = pricing;
+  const { enteredCode, referralCode, discountCents, amount, discountAmount } = pricing;
   count.textContent = quantity;
   toggle.setAttribute("aria-label", `Open shopping cart, ${quantity} ${quantity === 1 ? "book" : "books"}`);
   const bookPile = [...cart].flatMap(([id, quantity]) => Array.from({ length: Math.min(quantity, 5) }, () => products.get(id))).slice(0, 7).map((product, i) => `<span class="basket-book" style="--tilt:${(i % 3 - 1) * 12}deg" aria-hidden="true" inert>${bookCover(product)}</span>`).join("");
@@ -1071,7 +1072,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   total.textContent = checkoutMoney.format(amount);
   document.querySelector("#cart-element-16").textContent = cartDeliveryNote();
   referralInput.setAttribute("aria-invalid", String(Boolean(enteredCode && !referralCode)));
-  referralStatus.textContent = referralCode ? `10% off your cart — you save ${checkoutMoney.format(discountCents / 100)}.` : enteredCode ? "That referral code isn’t valid." : "";
+  referralStatus.textContent = referralCode ? `${discountAmount}% code applied — you save ${checkoutMoney.format(discountCents / 100)}.` : enteredCode ? "That referral code isn’t valid." : "";
   checkout.href = quantity ? paypalUrl(pricing) : "https://www.paypal.com/cgi-bin/webscr";
   return save();
  };
