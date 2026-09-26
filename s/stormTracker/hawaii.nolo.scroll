@@ -7,8 +7,11 @@ replace STORM_NOTE Nolo watch: the September 23, 2026, 5 a.m. HST advisory ident
 
 hawaii.scroll
 
-id worldwide-weather-watch
-group broadcast
-name MAJOR Hurricane Forecast to Approach Hawaii!
-place World Wide Weather Watch · Forecast commentary
-youtubeId V-DUV3sC3Io
+
+//
+ id worldwide-weather-watch
+ group broadcast
+ name MAJOR Hurricane Forecast to Approach Hawaii!
+ place World Wide Weather Watch · Forecast commentary
+ youtubeId V-DUV3sC3Io
+ 
