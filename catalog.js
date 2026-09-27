@@ -283,6 +283,13 @@ const catalog = [
     "priceUsd": 249
   },
   {
+    "id": "wires",
+    "tags": "physicsTag electricityTag electromagnetismTag measurementTag instantTag hazardTag energyTag",
+    "title": "Wires",
+    "shelf": "believer",
+    "priceUsd": 249
+  },
+  {
     "id": "motors",
     "tags": "physicsTag mechanicsTag electricityTag electromagnetismTag buildingTag instantTag hazardTag energyTag machinesTag cyclesTag motionTag",
     "title": "Motors",
