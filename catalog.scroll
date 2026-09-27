@@ -54,7 +54,7 @@ descriptionParser
  extends abstractStringMeasureParser
  description Optional product description.
 
-// Mirror tags.scroll memberships here. Update both sides.
+// Source of truth for tag memberships. Tag definitions live in tags.scroll.
 knowbookTagAtom
  extends atomAtom
  enum physicsTag chemistryTag biologyTag plantTag economicsTag psychologyTag computingTag materialsTag mechanicsTag electricityTag electromagnetismTag wavesTag fluidsTag natureTag buildingTag measurementTag creativeTag instantTag longTermTag multiplePeopleTag hazardTag gasTag liquidTag solidTag combustionTag energyTag temperatureTag pressureTag opticsTag musicTag growthTag nutritionTag healthTag financeTag businessTag startupsTag communicationTag cooperationTag machinesTag metalTag timeTag nuclearTag cyclesTag flightTag spaceTag motionTag geometryTag emotionalSkillsTag explorationTag parentingTag datingTag familyTag matingTag socialTag sportsTag teamSportsTag ballSportsTag combatSportsTag individualSportsTag
@@ -63,7 +63,7 @@ tagsParser
  extends abstractStringMeasureParser
  atoms measureNameAtom knowbookTagAtom
  catchAllAtomType knowbookTagAtom
- description Tags with an editorial Yes answer, mirrored from tags.scroll. At least one tag per Knowbook.
+ description Tags with an editorial Yes answer; tag definitions live in tags.scroll. At least one tag per Knowbook.
 
 // data
 
