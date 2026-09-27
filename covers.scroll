@@ -1,39 +1,97 @@
 importOnly
 
-// Cover microlanguage: a 100 by 100 canvas, one ink, no fonts or raster images.
-// circle cx cy radius [strokeWidth]
-// filledCircle cx cy radius
-// ellipse cx cy rx ry [strokeWidth]
-// rect x y width height [strokeWidth]
-// filledRect x y width height
-// line x1 y1 x2 y2 [strokeWidth]
-// polygon x1 y1 x2 y2 x3 y3 ...
-// filledPolygon x1 y1 x2 y2 x3 y3 ...
-// path SVG path data (M, L, C, Q, A, Z and their lowercase forms)
-// filledPath SVG path data (same commands as path)
-// Shapes are outlines except filled commands; strokeWidth defaults to 3 canvas units.
-// Keep artwork inside 10..90 to leave room for the stroke.
-// The compiled SVG uses currentColor, matching the cover title.
-// For fabrication, set the desired physical size and expand strokes in the cutter software.
+// Cover language shared by the catalog compiler and browser designer.
+// Every cover uses a 256 × 256 canvas, currentColor ink, and round 8-unit strokes.
+// All shape coordinates, sizes, and stroke widths use at most one decimal place.
+// Shapes: circle, filledCircle, ellipse, rect, filledRect, line, polygon,
+// filledPolygon, path, filledPath. Outlined shapes accept a final stroke width.
+// portrait and art are optional groups. Paths may use moveTo/lineTo/quadraticTo children.
+// dotRow y x radius x radius ... losslessly packs circles on the same row.
+// svgImage accepts an SVG data URL, rendered only in an inert image context.
 
 coverParser
  extends abstractTextareaMeasureParser
- description Single-color cover symbol compiled to an SVG on a 100 by 100 canvas.
+ description Vector cover compiled with the same language used by the designer.
  javascript
-  get measureValue() {
-   const specs = { circle: ["cx", "cy", "r"], ellipse: ["cx", "cy", "rx", "ry"], rect: ["x", "y", "width", "height"], line: ["x1", "y1", "x2", "y2"] }
-   const fail = message => { throw new Error(`Invalid cover: ${message}`) }
-   const shapes = this.subparticlesToString().split("\n").filter(line => line.trim()).map(line => {
-    if (line !== line.trim()) fail("drawing commands must be direct children of cover")
-    const [command, ...args] = line.split(/\s+/)
+  createCoverRuntime() {
+   const fail = message => { throw new Error(`Invalid cover: ${message}`) };
+   const parse = text => {
+    const root={children:[]}, stack=[root];
+    for(const line of text.split(/\r?\n/).filter(line=>line.trim())) {
+     const match=line.match(/^( *)(\S+)(?: (.*))?$/);
+     if(!match || line.includes('\t')) fail('Use spaces for indentation');
+     const [,spaces,key,value='']=match, depth=spaces.length;
+     if(depth>=stack.length) fail('Indent one space per level');
+     const node={key,value,children:[]}; stack[depth].children.push(node); stack[depth+1]=node; stack.length=depth+2;
+    }
+    return root;
+   };
+   const validSvgImage = value => typeof value==='string' && /^data:image\/svg\+xml;base64,[A-Za-z0-9+/]+={0,2}$/.test(value);
+   const tonesFromPixels = pixels => {
+    const tones=[];
+    for(let y=4;y<256;y+=4) for(let x=4;x<256;x+=4) {
+     const i=(y*256+x)*4;
+     tones.push([x,y,1-(pixels[i]*.299+pixels[i+1]*.587+pixels[i+2]*.114)/255]);
+    }
+    return tones;
+   };
+   const tonesToDots = (tones,inverse=false,gamma=1) => tones.flatMap(([x,y,tone])=>{
+    const ink=Math.pow(inverse ? 1-tone : tone,gamma);
+    const radius=Math.round(ink*20)/10;
+    return radius ? [[x,y,radius]] : [];
+   });
+   const packDots = dots => {
+    const rows=new Map();
+    for(const [x,y,r] of dots) {if(!rows.has(y)) rows.set(y,[]);rows.get(y).push(x,r);}
+    return [...rows].map(([y,values])=>`dotRow ${y} ${values.join(' ')}`);
+   };
+   const numbers = (value,count) => {
+    const values=value.trim().split(/\s+/).map(Number);
+    if(!value.trim() || (count!==undefined && values.length!==count) || values.some(n=>!Number.isFinite(n) || Math.abs(n)>10000) || !/^-?\d+(?:\.\d)?(?:\s+-?\d+(?:\.\d)?)*$/.test(value.trim())) fail('Use at most one decimal place');
+    return values;
+   };
+   const rowDots = value => {
+    const [y,...pairs]=numbers(value);
+    if(!pairs.length || pairs.length%2) fail('dotRow needs y followed by x radius pairs');
+    return Array.from({length:pairs.length/2},(_,i)=>[pairs[i*2],y,pairs[i*2+1]]);
+   };
+   const pathData = node => {
+    if(node.value) {if(node.children.length) fail('Path cannot have both inline data and children');return node.value;}
+    if(node.children[0]?.key!=='moveTo') fail('Start paths with moveTo');
+    return node.children.map(n=>{
+     const spec={moveTo:['M',2],lineTo:['L',2],quadraticTo:['Q',4]}[n.key];
+     if(!spec || n.children.length) fail('Invalid path command');
+     return spec[0]+numbers(n.value,spec[1]).join(',');
+    }).join(' ');
+   };
+   const designerSource = d => [
+    ...(d.svgImage ? [`svgImage ${d.svgImage}`] : []),
+    ...(d.portrait.length ? ['portrait', ...packDots(d.portrait).map(line=>' '+line)] : []),
+    ...(d.art.length ? ['art', ...d.art.map(path=>' path '+path)] : [])
+   ].join('\n');
+   const compile = text => {
+    const root=parse(text), strokeWidth=8;
+    const specs = { circle: ["cx", "cy", "r"], ellipse: ["cx", "cy", "rx", "ry"], rect: ["x", "y", "width", "height"], line: ["x1", "y1", "x2", "y2"] };
+    const render = node => {
+     const command=node.key;
+     if(command==='portrait' || command==='art') {if(node.value) fail('Groups do not take arguments');return node.children.map(render).join('');}
+     if(command==='dotRow') {if(node.children.length) fail('Unexpected dotRow children');return rowDots(node.value).map(dot=>render({key:'filledCircle',value:dot.join(' '),children:[]})).join('');}
+     if(command==='svgImage') {
+      if(node.children.length || !validSvgImage(node.value)) fail('Invalid SVG image');
+      const id='cover-image-'+Math.random().toString(36).slice(2);
+      return `<defs><filter id="${id}" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feFlood flood-color="currentColor"/><feComposite in2="SourceAlpha" operator="in"/></filter></defs><image href="${node.value}" width="256" height="256" preserveAspectRatio="xMidYMid meet" filter="url(#${id})"/>`;
+     }
+     const value=(command==='path' || command==='filledPath') ? pathData(node) : node.value;
+     if(node.children.length && command!=='path' && command!=='filledPath') fail('Unexpected children');
+     const args=value.split(/\s+/), line=command+' '+value;
     if (command === "path" || command === "filledPath") {
      const d = args.join(" ")
-     if (!/^[Mm]/.test(d) || !/^[MmLlHhVvCcSsQqTtAaZz0-9., +eE-]+$/.test(d)) fail(`invalid path: ${d}`)
+     if (!/^[Mm]/.test(d) || !/^[MmLlHhVvCcSsQqTtAaZz0-9., -]+$/.test(d)) fail(`invalid path: ${d}`)
+     if (/\.\d{2}/.test(d)) fail('Use at most one decimal place')
      if (command === "filledPath") return `<path d="${d}" fill="currentColor" stroke="none"/>`
      return `<path d="${d}"/>`
     }
-    const values = args.map(Number)
-    if (!values.length || values.some(value => !Number.isFinite(value))) fail(`invalid numbers: ${line}`)
+    const values = numbers(value)
     if (command === "polygon" || command === "filledPolygon") {
      if (values.length < 6 || values.length % 2) fail("polygon needs at least three coordinate pairs")
      if (command === "filledPolygon") return `<polygon points="${values.join(" ")}" fill="currentColor" stroke="none"/>`
@@ -44,7 +102,7 @@ coverParser
     if (!attributes) fail(`unknown command: ${command}`)
     if (filledShape && values.length !== attributes.length) fail(`wrong argument count: ${line}`)
     if (values.length !== attributes.length && values.length !== attributes.length + 1) fail(`wrong argument count: ${line}`)
-    const width = values[attributes.length] ?? 3
+    const width = values[attributes.length] ?? strokeWidth
     if (width <= 0) fail("stroke width must be positive")
     const attrs = attributes.map((name, index) => {
      if (["r", "rx", "ry", "width", "height"].includes(name) && values[index] <= 0) fail(`${name} must be positive`)
@@ -52,7 +110,40 @@ coverParser
     }).join(" ")
     if (filledShape) return `<${filledShape} ${attrs} fill="currentColor" stroke="none"/>`
     return `<${command} ${attrs} stroke-width="${width}"/>`
-   })
-   if (!shapes.length) fail("empty symbol")
-   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${shapes.join("")}</svg>`
+    };
+    const body=root.children.map(render).join('');
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
+   };
+   const readDesigner = text => {
+    compile(text);
+    const root=parse(text), result={portrait:[],art:[],svgImage:''};
+    const seen=new Set();
+    for(const node of root.children) {
+     if(seen.has(node.key)) fail('Repeated designer field: '+node.key);seen.add(node.key);
+     if(node.key==='svgImage') result.svgImage=node.value;
+     else if(node.key==='portrait' || node.key==='art') for(const child of node.children) {
+      if(node.key==='portrait' && child.key==='filledCircle') result.portrait.push(numbers(child.value,3));
+      else if(node.key==='portrait' && child.key==='dotRow') result.portrait.push(...rowDots(child.value));
+      else if(node.key==='art' && child.key==='path') result.art.push(pathData(child));
+      else fail('Unsupported designer drawing: '+child.key);
+     }
+     else fail('Unsupported designer field: '+node.key);
+    }
+    if(result.portrait.length>4500 || result.portrait.some(([x,y,r])=>x<0 || x>256 || y<0 || y>256 || r<=0 || r>=4)) fail('Portrait dots must fit the cover');
+    if(result.art.length>200 || result.art.some(p=>p.length>20000 || !/^[MLQ0-9., -]+$/.test(p))) fail('Invalid designer path');
+    return result;
+   };
+   return {compile,parse,packDots,designerSource,readDesigner,validSvgImage,tonesFromPixels,tonesToDots};
+  }
+  get measureValue() { return this.createCoverRuntime().compile(this.subparticlesToString()); }
+
+buildCoverRuntimeParser
+ extends abstractBuildOneCommandParser
+ cueFromId
+ javascript
+  async buildOne() {
+   const {folderPath,fileSystem,path}=this.root;
+   const method=coverParser.prototype.createCoverRuntime.toString();
+   const source='window.KnowbookCovers = (function '+method.slice(method.indexOf('('))+')();';
+   await fileSystem.writeProduct(path.join(folderPath,'covers.js'),source);
   }

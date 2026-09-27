@@ -83,7 +83,7 @@ css
  #design-title:focus { outline: 1px dashed var(--gold); }
  .design-cover svg { display: block; width: 100%; touch-action: none; cursor: crosshair; }
  #design-art { height: clamp(110px, 27dvh, 210px); }
- .design-cover .strokes { fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; pointer-events: stroke; }
+ .design-cover .strokes { fill: none; stroke: currentColor; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; pointer-events: stroke; }
  .design-cover > span { display: block; margin-top: 10px; font: 10px Arial, sans-serif; letter-spacing: .25em; }
  #design-colors { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 6px; justify-content: center; }
  #design-colors button { width: 24px; height: 24px; border: 2px solid transparent; border-radius: 50%; background: var(--swatch); cursor: pointer; }
@@ -683,7 +683,7 @@ aside
  <div><div class="design-cover">
  <h3 id="design-title" contenteditable="plaintext-only" role="textbox" aria-label="Knowbook title" aria-multiline="false" spellcheck="false">Your Knowbook</h3>
  <input id="design-signature" aria-label="Expert name" placeholder="Your name (optional)" maxlength="60">
- <svg id="design-art" viewBox="0 0 200 200" tabindex="0" aria-label="Draw your cover with the marker"><g id="design-portrait"></g><g class="strokes"></g></svg>
+ <svg id="design-art" viewBox="0 0 256 256" tabindex="0" aria-label="Draw your cover with the marker"><g id="design-portrait"></g><g class="strokes"></g></svg>
  <span>KNOWBOOKS</span></div>
  <div id="design-colors" role="group" aria-label="Cover color"></div>
  <div class="design-tools"><button type="button" id="design-marker" aria-pressed="false" aria-label="Flip marker to eraser"><svg viewBox="0 0 100 24" width="100" height="24" aria-hidden="true"><path d="M5 12 19 5v14z" fill="currentColor"/><rect x="19" y="4" width="60" height="16" rx="3" fill="currentColor"/><rect x="80" y="4" width="15" height="16" rx="3" fill="#d9bc78"/></svg><span>Flip to erase</span></button><button type="button" id="design-undo">Undo</button><label class="design-upload">Upload<input id="portrait-file" type="file" aria-label="Upload cover image" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,.svg"></label><button type="button" id="remove-image" hidden>Remove image</button></div>
@@ -695,6 +695,7 @@ partners.scroll
 
 <noscript>This shop needs JavaScript to manage its cart.</noscript>
 
+covers.js
 catalog.js
 tags.js
 s/checko/checko.js
@@ -1098,19 +1099,15 @@ script
    const art = $('#design-art'), marker = $('#design-marker'), status = $('#design-status');
    const key = 'knowbooks-signature-design', undo = [], hedcuts = new WeakMap();
    let design, draft, editing = false, erase = false, drawing, opener, photoVersion = 0;
-   const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', signature: '', color: 'navy', superpowers: '', art: [], portrait: [], svgImage: '' });
+   const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', signature: '', color: 'navy', superpowers: '', art: [], portrait: [], svgImage: '', coverDescription: '' });
    function cryptoId() { return globalThis.crypto.randomUUID().slice(0, 8); }
-   const svg = body => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 255" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
-   const paths = values => values.map(d => `<path d="${d}"/>`).join('');
-   const dots = values => values.map(([x,y,r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="currentColor" stroke="none"/>`).join('');
-   const validSvgImage = value => typeof value === 'string' && /^data:image\/svg\+xml;base64,[A-Za-z0-9+/]+={0,2}$/.test(value);
-   // SVGs stay in an image context: uploaded markup never becomes active page DOM.
-   const vectorImage = value => {
-    if (!validSvgImage(value)) return '';
-    const id = `gold-${cryptoId()}`;
-    return `<defs><filter id="${id}" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feFlood flood-color="currentColor"/><feComposite in2="SourceAlpha" operator="in"/></filter></defs><image href="${value}" width="200" height="200" preserveAspectRatio="xMidYMid meet" filter="url(#${id})"/>`;
-   };
-   const cover = d => svg(vectorImage(d.svgImage) + dots(d.portrait) + paths(d.art));
+   const covers = window.KnowbookCovers;
+   const validSvgImage = covers.validSvgImage;
+   const body = source => covers.compile(source).replace(/^<svg[^>]*>|<\/svg>$/g,'');
+   const paths = values => body(values.map(d=>'path '+d).join('\n'));
+   const dots = values => body(covers.packDots(values).join('\n'));
+   const vectorImage = value => value ? body('svgImage '+value) : '';
+   const cover = d => covers.compile(covers.designerSource(d));
    const product = d => ({ id: d.id, title: `${d.title} — Signature design deposit (${d.id})`, priceUsd: 5000, coverColor: coverPalette[d.color], cover: cover(d), design: d });
    const remember = () => {
     design.title = title.textContent.replace(/\s+/g,' ').trim().slice(0, 60);
@@ -1126,8 +1123,10 @@ script
     d.title = String(d.title).slice(0,60); d.signature = String(typeof d.signature === 'string' ? d.signature : '').replace(/\s+/g,' ').slice(0,60);
     d.superpowers = String(d.superpowers ?? (Array.isArray(d.verbs) ? d.verbs.filter(Boolean).join(' ') : '')).trim().split(/\s+/).slice(0,5).join(' ').slice(0,124);
     delete d.verbs;
-    d.art = (Array.isArray(d.art) ? d.art : []).filter(p => typeof p === 'string' && p.length < 20000 && /^[MLQ0-9., -]+$/.test(p)).slice(0,200);
-    d.portrait = (Array.isArray(d.portrait) ? d.portrait : []).filter(p => Array.isArray(p) && p.length === 3 && p.every(Number.isFinite) && p[0]>=0 && p[0]<=200 && p[1]>=0 && p[1]<=200 && p[2]>0 && p[2]<3).slice(0,4500);
+    d.coverDescription = String(d.coverDescription || d.symbol || '').replace(/\s+/g,' ').trim();
+    delete d.symbol;
+    d.art = (Array.isArray(d.art) ? d.art : []).filter(p => typeof p === 'string' && p.length < 20000 && /^[MLQ0-9., -]+$/.test(p) && !/\.\d{2}/.test(p)).slice(0,200);
+    d.portrait = (Array.isArray(d.portrait) ? d.portrait : []).filter(p => Array.isArray(p) && p.length === 3 && p.every(n=>Number.isFinite(n) && /^-?\d+(?:\.\d)?$/.test(String(n))) && p[0]>=0 && p[0]<=256 && p[1]>=0 && p[1]<=256 && p[2]>0 && p[2]<4).slice(0,4500);
     d.svgImage = validSvgImage(d.svgImage) ? d.svgImage : '';
     return d;
    };
@@ -1144,16 +1143,13 @@ script
    } catch {}
    const proposal = d => {
     const leaf = value => String(value || '').replace(/\s+/g,' ').trim();
-    const strokes = paths => paths.flatMap(path => ['  path', ...(path.match(/[MLQ][^MLQ]*/g) || []).map(command => `   ${{M:'moveTo', L:'lineTo', Q:'quadraticTo'}[command[0]]} ${command.slice(1).trim().replace(/[ ,]+/g,' ')}`)]);
     return [
      `title ${leaf(d.title)}`, ...(d.signature ? [`signature ${leaf(d.signature)}`] : []), `color ${d.color}`,
      'designFeeUsd 10000', 'depositUsd 5000', 'prototype One shipped within 30 days of deposit', 'balance Due before shipment',
      'copies Our production cost + 30%',
      `superpowers ${leaf(d.superpowers)}`,
-     'cover', ' viewBox 0 0 200 255', ' ink #d9bc78', ' strokeWidth 2.5', ' lineCap round', ' lineJoin round',
-     ...(d.svgImage ? [` svgImage ${d.svgImage}`] : []),
-     ' portrait', ...d.portrait.map(dot => `  filledCircle ${dot.join(' ')}`),
-     ' art', ...strokes(d.art)
+     ...(d.coverDescription ? [`coverDescription ${leaf(d.coverDescription)}`] : []),
+     'cover', ...covers.designerSource(d).split('\n').map(line=>' '+line)
     ].join('\n') + '\n';
    };
    designToScroll = proposal;
@@ -1179,8 +1175,8 @@ script
      const result={};for(const child of node.children) {if(!allowed.includes(child.key) || result[child.key]) fail(`Unexpected or repeated field: ${child.key}`);result[child.key]=child;}return result;
     };
     const scalar = (node, fallback='') => {if(node?.children.length) fail(`Unexpected indentation below ${node.key}.`);return node?.value ?? fallback;};
-    const top=fields(root,['title','signature','color','designFeeUsd','depositUsd','prototype','balance','copies','superpowers','experiments','cover']);
-    const d={...fresh(),title:scalar(top.title),id:design.id,signature:scalar(top.signature),color:scalar(top.color),superpowers:scalar(top.superpowers,scalar(top.experiments))};
+    const top=fields(root,['title','signature','color','designFeeUsd','depositUsd','prototype','balance','copies','superpowers','experiments','coverDescription','symbol','cover']);
+    const d={...fresh(),title:scalar(top.title),id:design.id,signature:scalar(top.signature),color:scalar(top.color),coverDescription:scalar(top.coverDescription,scalar(top.symbol)),superpowers:scalar(top.superpowers,scalar(top.experiments))};
     if(!d.title.trim() || d.title.length>60 || d.signature.length>60) fail('Use a title and signature of at most 60 characters.');
     if(!Object.hasOwn(coverPalette,d.color)) fail('Use a listed cover color.');
     if(d.superpowers.trim().split(/\s+/).length>5 || d.superpowers.length>124) fail('Use up to 5 space-separated words (124 characters maximum).');
@@ -1188,23 +1184,8 @@ script
      const space=line.indexOf(' '), key=line.slice(0,space);if(scalar(top[key])!==line.slice(space+1)) fail(`${key} is a fixed offer term.`);
     }
     if(!top.cover || top.cover.value) fail('Include the cover tree.');
-    const coverFields=fields(top.cover,['viewBox','ink','strokeWidth','lineCap','lineJoin','portrait','art','svgImage']);
-    for(const [key,value] of Object.entries({viewBox:'0 0 200 255',ink:'#d9bc78',strokeWidth:'2.5',lineCap:'round',lineJoin:'round'})) if(scalar(coverFields[key])!==value) fail(`Keep cover ${key} ${value}.`);
-    const numbers = (node,count) => {const nums=scalar(node).trim().split(/\s+/).map(Number);if(nums.length!==count || nums.some(n=>!Number.isFinite(n) || Math.abs(n)>10000)) fail(`Invalid ${node.key} coordinates.`);return nums;};
-    d.svgImage = scalar(coverFields.svgImage);
-    if(d.svgImage && !validSvgImage(d.svgImage)) fail('Use an SVG image data URL.');
-    for(const key of ['portrait','art']) {
-     const group=coverFields[key];if(!group || group.value) fail(`Include the ${key} group.`);
-     if(group.children.length>(key==='portrait'?4500:201)) fail('Too many drawing elements.');
-     for(const node of group.children) {
-      if(key==='portrait' && node.key==='filledCircle') {const dot=numbers(node,3);if(dot[0]<0 || dot[0]>200 || dot[1]<0 || dot[1]>200 || dot[2]<=0 || dot[2]>=3) fail('Portrait dots must fit the cover.');d.portrait.push(dot);}
-      else if(key!=='portrait' && node.key==='path' && !node.value) {
-       if(!node.children.length || node.children[0].key!=='moveTo') fail('Start each path with moveTo.');
-       d[key].push(node.children.map(command=>{const spec={moveTo:['M',2],lineTo:['L',2],quadraticTo:['Q',4]}[command.key];if(!spec) fail(`Unknown drawing command: ${command.key}`);return spec[0]+numbers(command,spec[1]).join(',');}).join(' '));
-       if(d[key].at(-1).length>20000) fail('Path is too long.');
-      } else fail(`Unexpected ${node.key} in ${key}.`);
-     }
-    }
+    const serialize = (node,depth=0) => [' '.repeat(depth)+node.key+(node.value?' '+node.value:''), ...node.children.flatMap(child=>serialize(child,depth+1))];
+    Object.assign(d,covers.readDesigner(top.cover.children.flatMap(node=>serialize(node)).join('\n')));
     return d;
    }
    code.addEventListener('input', () => {
@@ -1250,7 +1231,7 @@ script
    };
    [art].forEach(surface => {
     const field='art';
-    const point = e => { const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(surface.getScreenCTM().inverse()); return [Math.round(Math.max(0,Math.min(200,p.x))),Math.round(Math.max(0,Math.min(surface.viewBox.baseVal.height,p.y)))]; };
+    const point = e => { const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(surface.getScreenCTM().inverse()); return [Math.round(Math.max(0,Math.min(256,p.x))),Math.round(Math.max(0,Math.min(surface.viewBox.baseVal.height,p.y)))]; };
     const remove = e => {
      const hit=document.elementFromPoint(e.clientX,e.clientY), group=surface.querySelector('.strokes');
      if(hit?.parentNode === group) { design[field].splice([...group.children].indexOf(hit),1); render(); }
@@ -1282,8 +1263,8 @@ script
     if(!design.portrait.length && !hedcuts.has(design)) return;
     event.preventDefault();
     if(!hedcuts.has(design)) {
-     const radii=new Map(design.portrait.map(([x,y,r])=>[`${x},${y}`,r/1.45])), tones=[];
-     for(let y=3;y<198;y+=3) for(let x=3;x<198;x+=3) tones.push([x,y,radii.get(`${x},${y}`) || 0]);
+     const radii=new Map(design.portrait.map(([x,y,r])=>[`${x},${y}`,r/2])), tones=[];
+     for(let y=4;y<256;y+=4) for(let x=4;x<256;x+=4) tones.push([x,y,radii.get(`${x},${y}`) || 0]);
      hedcuts.set(design,{tones,original:structuredClone(design.portrait),inverse:false,gamma:1});
     }
     const h=hedcuts.get(design), key=event.key.toLowerCase();
@@ -1293,10 +1274,7 @@ script
     applyHedcut(h);
    });
    function applyHedcut(h) {
-    design.portrait=!h.inverse && h.gamma===1 ? structuredClone(h.original) : h.tones.flatMap(([x,y,tone])=>{
-     const ink=Math.pow(h.inverse ? 1-tone : tone,h.gamma);
-     return ink>.15 ? [[x,y,+(ink*1.45).toFixed(2)]] : [];
-    });
+    design.portrait=!h.inverse && h.gamma===1 ? structuredClone(h.original) : covers.tonesToDots(h.tones,h.inverse,h.gamma);
     render(); remember();
    }
    const isSvgFile = file => file.type === 'image/svg+xml' || /\.svg$/i.test(file.name);
@@ -1312,15 +1290,17 @@ script
       const data=await new Promise((resolve,reject) => { const reader=new FileReader(); reader.onload=()=>resolve(reader.result); reader.onerror=()=>reject(reader.error); reader.readAsDataURL(new Blob([source],{type:'image/svg+xml'})); });
       const image=new Image(); image.src=data; await image.decode();
       if(version!==photoVersion) return;
+      design.coverDescription ||= `generated from ${file.name}`;
       design.svgImage=data; design.portrait=[]; design.art=[]; hedcuts.delete(design); undo.length=0;
       status.textContent=''; render(); remember(); art.focus(); return;
      }
      const image=await createImageBitmap(file); if(version!==photoVersion) {image.close();return;}
-     const canvas=document.createElement('canvas'); canvas.width=canvas.height=200;
-     const ctx=canvas.getContext('2d'); ctx.fillStyle='white'; ctx.fillRect(0,0,200,200);
-     const size=Math.min(image.width,image.height); ctx.drawImage(image,(image.width-size)/2,(image.height-size)/2,size,size,0,0,200,200); image.close();
-     const pixels=ctx.getImageData(0,0,200,200).data, tones=[]; design.portrait=[];
-     for(let y=3;y<198;y+=3) for(let x=3;x<198;x+=3) { const i=(y*200+x)*4, ink=1-(pixels[i]*.299+pixels[i+1]*.587+pixels[i+2]*.114)/255; tones.push([x,y,ink]); if(ink>.15) design.portrait.push([x,y,+(ink*1.45).toFixed(2)]); }
+     const canvas=document.createElement('canvas'); canvas.width=canvas.height=256;
+     const ctx=canvas.getContext('2d'); ctx.fillStyle='white'; ctx.fillRect(0,0,256,256);
+     const size=Math.min(image.width,image.height); ctx.drawImage(image,(image.width-size)/2,(image.height-size)/2,size,size,0,0,256,256); image.close();
+     design.coverDescription ||= `generated from ${file.name}`;
+     const tones=covers.tonesFromPixels(ctx.getImageData(0,0,256,256).data);
+     design.portrait=covers.tonesToDots(tones);
      hedcuts.set(design,{tones,original:structuredClone(design.portrait),inverse:false,gamma:1});
      design.svgImage=''; design.art=[]; undo.length=0; status.textContent=''; render(); remember(); art.focus();
     } catch {if(version===photoVersion) status.textContent='Could not read that image. Try another PNG, JPEG, WebP, GIF or SVG.';}
@@ -1489,5 +1469,6 @@ script
  })();
 
 catalog.scroll
+buildCoverRuntime
 buildConcepts catalog.js
-buildZip knowbooks.zip index.html catalog.js catalog.csv tags.js knowbooksLogo.svg og.png hero-background.png kbc.jpg readme.scroll catalog.scroll catalogCsv.scroll covers.scroll tags.scroll partners.scroll upstreamToScroll.scroll s/checko allura.ttf
+buildZip knowbooks.zip index.html catalog.js covers.js catalog.csv tags.js knowbooksLogo.svg og.png hero-background.png kbc.jpg readme.scroll catalog.scroll catalogCsv.scroll covers.scroll tags.scroll partners.scroll upstreamToScroll.scroll s/checko allura.ttf
