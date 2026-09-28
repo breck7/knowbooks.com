@@ -738,17 +738,15 @@ script
   const checkoutMoney = new Intl.NumberFormat("en-US", { style: "currency", currency });
   const referralCodes = new Set(["john", "kendric", "blake", "daniel", "francisco", "butler", "hassam", "ash", "goodman", "frank", "ari", "leah", "mystery", "nico", "cora", "yc"]);
   const shippingByShelf = {
-   believer: "Ship within 90 days",
-   trailblazer: "Ship within 60 days",
-   frontier: "Ship within 6 months"
+   believer: "Ship within 60 days",
+   frontier: "Ship within 12 months"
   };
   const editionNameByShelf = {
    believer: "Believer",
-   trailblazer: "Trailblazer",
    frontier: "Frontier"
   };
-  const shelfOrder = ["trailblazer", "believer", "frontier", "signatures", "special"];
-  const collapsedEditions = new Set(["believer", "frontier", "signatures", "special"]);
+  const shelfOrder = ["believer", "frontier", "signatures", "special"];
+  const collapsedEditions = new Set(["frontier", "signatures", "special"]);
   const cart = new Map();
   const grid = document.querySelector("#product-grid");
   const preview = document.querySelector(".book-preview");
