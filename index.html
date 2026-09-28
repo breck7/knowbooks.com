@@ -312,7 +312,7 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
 <p id="particle58" class="scrollParagraph">Our first Knowbooks are Believer editions. Each one is hand-crafted in Hawaii. They are complete and usable, but their objects, experiments, packaging, and instructions are improving as we learn from our first customers.</p>
 </div>
 <div class="scrollSection"><h4 id="particle60" class="scrollQuestion">What are 808 Knowbooks?</h4>
-<p id="particle61" class="scrollParagraph">All our Knowbooks go through many prototype editions. Some of these prototypes we refurbish and sell at discounted prices at local markets in Hawaii. Though these prototype Knowbooks are quirky, like everything we make, we back 808 Knowbooks with lifetime support.</p>
+<p id="particle61" class="scrollParagraph">All Knowbooks go through many prototype editions. Some of these prototypes we refurbish and sell at discounted prices at local markets in Hawaii. Though these prototype Knowbooks are quirky, like everything we make, we back 808 Knowbooks with lifetime support.</p>
 </div>
 <div class="scrollSection"><h4 id="particle63" class="scrollQuestion">Can I use a Knowbook more than once?</h4>
 <p id="particle64" class="scrollParagraph">Yes. Knowbooks are designed to last a lifetime and can be explored repeatedly, shared, and returned to the shelf. Most objects are reusable; some contain consumable/replaceable materials.</p>
@@ -324,7 +324,7 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
 <p id="particle70" class="scrollParagraph">Orders begin assembly immediately. You'll receive tracking when your order is on its way. Delivery times will improve as we scale up.</p>
 </div>
 <div class="scrollSection"><h4 id="particle72" class="scrollQuestion">What's the support policy?</h4>
-<p id="particle73" class="scrollParagraph">All our Knowbooks come with lifetime support.</p>
+<p id="particle73" class="scrollParagraph">All Knowbooks come with lifetime support.</p>
 </div>
 <div class="scrollSection"><h4 id="particle75" class="scrollQuestion">What's the return policy?</h4>
 <p id="particle76" class="scrollParagraph">Your satisfaction is our top priority. If we don't reach your expectations, get in touch and we'll coordinate a replacement and/or refund.</p>
@@ -880,8 +880,8 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   believer: "Believer",
   frontier: "Frontier"
  };
- const shelfOrder = ["believer", "frontier", "signatures", "special"];
- const collapsedEditions = new Set(["frontier", "signatures", "special"]);
+ const shelfOrder = ["believer", "frontier", "special"];
+ const collapsedEditions = new Set(["frontier", "special"]);
  const cart = new Map();
  const grid = document.querySelector("#product-grid");
  const preview = document.querySelector(".book-preview");
@@ -910,7 +910,6 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
  const cardId = (product, shelf) => shelf === primaryShelf(product) ? product.id : `${product.id}--${shelf}`;
  const editionDetails = shelf => {
   if (shelf === "special") return { name: "Special items", shipping: "" };
-  if (shelf === "signatures") return { name: "Signature", shipping: "Ship within 90 days" };
   const name = editionNameByShelf[shelf];
   const shipping = shippingByShelf[shelf];
   if (!name || !shipping) throw new Error(`Unknown product shelf: ${shelf}`);
@@ -930,8 +929,8 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
  };
  const editionDivider = shelf => {
   const { name, shipping } = editionDetails(shelf);
-  const heading = shelf === "signatures" ? "Signature Knowbooks" : shelf === "special" ? name : `${name} editions`;
-  const sectionId = shelf === "signatures" ? "signatures" : shelf === "special" ? "special-items" : `${shelf}-editions`;
+  const heading = shelf === "special" ? name : `${name} editions`;
+  const sectionId = shelf === "special" ? "special-items" : `${shelf}-editions`;
   const controls = productCatalog.filter(product => shelvesOf(product).includes(shelf)).map(product => escapeHtml(cardId(product, shelf))).join(" ");
   return `<div class="edition-divider" id="${sectionId}" data-shelf="${escapeHtml(shelf)}"><a class="edition-toggle" href="#${sectionId}" role="button" aria-expanded="${!collapsedEditions.has(shelf)}" aria-controls="${controls}"><h2>${escapeHtml(heading)}</h2>${shipping ? `<p>${escapeHtml(shipping)}</p>` : ""}</a></div>`;
  };

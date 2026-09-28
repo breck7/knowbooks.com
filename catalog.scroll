@@ -16,7 +16,7 @@ signatureParser
 
 shelfAtom
  extends atomAtom
- enum believer frontier signatures special
+ enum believer frontier special
 
 shelfParser
  extends abstractStringMeasureParser
@@ -1105,8 +1105,8 @@ id breck.ecommerce
 tags economicsTag computingTag measurementTag creativeTag longTermTag multiplePeopleTag financeTag businessTag startupsTag communicationTag
 title ECommerce
 signature Breck Yunits
-shelf signatures
-priceUsd 420
+shelf believer
+priceUsd 4200
 color navy
 coverDescription a circle in the middle surrounded by other circles
 cover
@@ -1122,8 +1122,8 @@ id breck.twitter
 tags psychologyTag computingTag creativeTag longTermTag multiplePeopleTag startupsTag communicationTag socialTag
 title Twitter
 signature Breck Yunits
-shelf signatures
-priceUsd 690
+shelf believer
+priceUsd 6900
 color teal
 coverDescription 4 vertical bars increasingly tall from left to right. the twitter bird is on level 2 and jumping to level 3. lines show the previous jumps
 cover
