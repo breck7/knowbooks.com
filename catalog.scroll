@@ -1004,6 +1004,12 @@ title Boxing
 shelf frontier
 priceUsd 4956
 
+id chimps
+tags animalsTag biologyTag
+title Chimps
+shelf frontier
+priceUsd 699
+
 id golf
 tags mechanicsTag instantTag longTermTag motionTag sportsTag ballSportsTag individualSportsTag
 title Golf

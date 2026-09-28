@@ -43,6 +43,11 @@ question Is chemical composition or chemical change central to this topic?
 
 id biologyTag
 question Is understanding living organisms or the human body's functions a central goal?
+keywords organism life
+
+id animalsTag
+question Is understanding an animal a central goal?
+keywords organism life
 
 id plantTag
 question Does this knowbook centrally involve plants or materials obtained from plants?
