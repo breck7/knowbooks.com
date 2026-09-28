@@ -9,7 +9,13 @@ const tags = [
   },
   {
     "id": "biologyTag",
+    "keywords": "organism life",
     "question": "Is understanding living organisms or the human body's functions a central goal?"
+  },
+  {
+    "id": "animalsTag",
+    "keywords": "organism life",
+    "question": "Is understanding an animal a central goal?"
   },
   {
     "id": "plantTag",
