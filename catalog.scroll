@@ -936,6 +936,18 @@ title Transistors
 shelf frontier
 priceUsd 1499
 
+id ibuprofen
+tags medicineTag chemistryTag biologyTag healthTag
+title Ibuprofen
+shelf frontier
+priceUsd 449
+
+id ivermectin
+tags medicineTag chemistryTag biologyTag healthTag
+title Ivermectin
+shelf frontier
+priceUsd 849
+
 id mitochondria
 tags chemistryTag biologyTag energyTag nutritionTag healthTag
 title Mitochondria

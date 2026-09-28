@@ -147,6 +147,10 @@ id healthTag
 question Is understanding or supporting human health a central goal?
 keywords health healthy wellbeing wellness body physiology
 
+id medicineTag
+question Is it about a substance that helps solve a specific condition?
+keywords medicine pharma pharmacy drug drugs
+
 id financeTag
 question Is managing, recording, or exchanging money and financial assets central to this topic?
 keywords finance financial money investing investment savings accounting payment payments

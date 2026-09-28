@@ -780,6 +780,20 @@ const catalog = [
     "priceUsd": 1499
   },
   {
+    "id": "ibuprofen",
+    "tags": "medicineTag chemistryTag biologyTag healthTag",
+    "title": "Ibuprofen",
+    "shelf": "frontier",
+    "priceUsd": 449
+  },
+  {
+    "id": "ivermectin",
+    "tags": "medicineTag chemistryTag biologyTag healthTag",
+    "title": "Ivermectin",
+    "shelf": "frontier",
+    "priceUsd": 849
+  },
+  {
     "id": "mitochondria",
     "tags": "chemistryTag biologyTag energyTag nutritionTag healthTag",
     "title": "Mitochondria",
@@ -890,7 +904,7 @@ const catalog = [
     "tags": "economicsTag buildingTag creativeTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag",
     "title": "Knowbooks",
     "color": "brown",
-    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 256 256\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><filter id=\"cover-image-awyjw8e13sl\" x=\"0\" y=\"0\" width=\"100%\" height=\"100%\" color-interpolation-filters=\"sRGB\"><feFlood flood-color=\"currentColor\"/><feComposite in2=\"SourceAlpha\" operator=\"in\"/></filter></defs><image href=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiA8dGl0bGUgaWQ9InRpdGxlIj5Lbm93Ym9va3M8L3RpdGxlPgogPGRlc2MgaWQ9ImRlc2MiPkEgY2lyY3VsYXIgcmluZyBzdXBwb3J0ZWQgYnkgdHdvIGhhbmRzLjwvZGVzYz4KIDxnIGZpbGw9IiNkOWJjNzgiPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEyOCAxNEM2OC40NSAxNCAyMCA2Mi40NSAyMCAxMjJjMCAxOC4xMiA0LjUgMzUuMiAxMi40MiA1MC4ybDEyLjM3LTcuMTVBOTMuMjggOTMuMjggMCAwIDEgMzQuMyAxMjJjMC01MS42NyA0Mi4wMy05My43IDkzLjctOTMuN3M5My43IDQyLjAzIDkzLjcgOTMuN2E5My4yOCA5My4yOCAwIDAgMS0xMC40OSA0My4wNWwxMi4zNyA3LjE1QTEwNy40MiAxMDcuNDIgMCAwIDAgMjM2IDEyMmMwLTU5LjU1LTQ4LjQ1LTEwOC0xMDgtMTA4WiIvPgogIDxwYXRoIGQ9Ik0yOS4zMSAxNTYuNDJjLTQuMzQtNy4yMy0zLjY2LTEzLjc3LjA3LTE1Ljg0IDMuMzgtMS44NyA3LjMzLjMxIDEwLjUzIDQuNGwyMi44MiAyNS4xNmMxLjEyIDEuMjQgMi44NS0uMzEgMS44OC0xLjY2bC0xOS4xLTI2LjY3Yy0zLjY3LTUuMTMtMy4zMy0xMC4xOS4yLTEyLjQxIDMuNzctMi4zOCA4LjU0LjY1IDEyLjUyIDUuMjZsMTguMSAyMC45N2MzLjcgNC4yOSA4LjM2IDcuNjUgMTIuMDUgMTIuNiA1Ljk2IDcuOTkgNi4wOCAxOS40OCA2LjA4IDMxLjM2djI1Ljk5Yy0yNC4xLTIuODYtNDMuMDItMTIuNTEtNTMuODUtMjYuNDgtNy4zOC05LjUyLTguNzYtMjMuNTMtMTEuMy00Mi42OFoiLz4KICA8cGF0aCBkPSJNMjI2LjY5IDE1Ni40MmM0LjM0LTcuMjMgMy42Ni0xMy43Ny0uMDctMTUuODQtMy4zOC0xLjg3LTcuMzMuMzEtMTAuNTMgNC40bC0yMi44MiAyNS4xNmMtMS4xMiAxLjI0LTIuODUtLjMxLTEuODgtMS42NmwxOS4xLTI2LjY3YzMuNjctNS4xMyAzLjMzLTEwLjE5LS4yLTEyLjQxLTMuNzctMi4zOC04LjU0LjY1LTEyLjUyIDUuMjZsLTE4LjEgMjAuOTdjLTMuNyA0LjI5LTguMzYgNy42NS0xMi4wNSAxMi42LTUuOTYgNy45OS02LjA4IDE5LjQ4LTYuMDggMzEuMzZ2MjUuOTljMjQuMS0yLjg2IDQzLjAyLTEyLjUxIDUzLjg1LTI2LjQ4IDcuMzgtOS41MiA4Ljc2LTIzLjUzIDExLjMtNDIuNjhaIi8+CiA8L2c+Cjwvc3ZnPg==\" width=\"256\" height=\"256\" preserveAspectRatio=\"xMidYMid meet\" filter=\"url(#cover-image-awyjw8e13sl)\"/></svg>",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 256 256\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><filter id=\"cover-image-ezkp7vb6t8p\" x=\"0\" y=\"0\" width=\"100%\" height=\"100%\" color-interpolation-filters=\"sRGB\"><feFlood flood-color=\"currentColor\"/><feComposite in2=\"SourceAlpha\" operator=\"in\"/></filter></defs><image href=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiA8dGl0bGUgaWQ9InRpdGxlIj5Lbm93Ym9va3M8L3RpdGxlPgogPGRlc2MgaWQ9ImRlc2MiPkEgY2lyY3VsYXIgcmluZyBzdXBwb3J0ZWQgYnkgdHdvIGhhbmRzLjwvZGVzYz4KIDxnIGZpbGw9IiNkOWJjNzgiPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEyOCAxNEM2OC40NSAxNCAyMCA2Mi40NSAyMCAxMjJjMCAxOC4xMiA0LjUgMzUuMiAxMi40MiA1MC4ybDEyLjM3LTcuMTVBOTMuMjggOTMuMjggMCAwIDEgMzQuMyAxMjJjMC01MS42NyA0Mi4wMy05My43IDkzLjctOTMuN3M5My43IDQyLjAzIDkzLjcgOTMuN2E5My4yOCA5My4yOCAwIDAgMS0xMC40OSA0My4wNWwxMi4zNyA3LjE1QTEwNy40MiAxMDcuNDIgMCAwIDAgMjM2IDEyMmMwLTU5LjU1LTQ4LjQ1LTEwOC0xMDgtMTA4WiIvPgogIDxwYXRoIGQ9Ik0yOS4zMSAxNTYuNDJjLTQuMzQtNy4yMy0zLjY2LTEzLjc3LjA3LTE1Ljg0IDMuMzgtMS44NyA3LjMzLjMxIDEwLjUzIDQuNGwyMi44MiAyNS4xNmMxLjEyIDEuMjQgMi44NS0uMzEgMS44OC0xLjY2bC0xOS4xLTI2LjY3Yy0zLjY3LTUuMTMtMy4zMy0xMC4xOS4yLTEyLjQxIDMuNzctMi4zOCA4LjU0LjY1IDEyLjUyIDUuMjZsMTguMSAyMC45N2MzLjcgNC4yOSA4LjM2IDcuNjUgMTIuMDUgMTIuNiA1Ljk2IDcuOTkgNi4wOCAxOS40OCA2LjA4IDMxLjM2djI1Ljk5Yy0yNC4xLTIuODYtNDMuMDItMTIuNTEtNTMuODUtMjYuNDgtNy4zOC05LjUyLTguNzYtMjMuNTMtMTEuMy00Mi42OFoiLz4KICA8cGF0aCBkPSJNMjI2LjY5IDE1Ni40MmM0LjM0LTcuMjMgMy42Ni0xMy43Ny0uMDctMTUuODQtMy4zOC0xLjg3LTcuMzMuMzEtMTAuNTMgNC40bC0yMi44MiAyNS4xNmMtMS4xMiAxLjI0LTIuODUtLjMxLTEuODgtMS42NmwxOS4xLTI2LjY3YzMuNjctNS4xMyAzLjMzLTEwLjE5LS4yLTEyLjQxLTMuNzctMi4zOC04LjU0LjY1LTEyLjUyIDUuMjZsLTE4LjEgMjAuOTdjLTMuNyA0LjI5LTguMzYgNy42NS0xMi4wNSAxMi42LTUuOTYgNy45OS02LjA4IDE5LjQ4LTYuMDggMzEuMzZ2MjUuOTljMjQuMS0yLjg2IDQzLjAyLTEyLjUxIDUzLjg1LTI2LjQ4IDcuMzgtOS41MiA4Ljc2LTIzLjUzIDExLjMtNDIuNjhaIi8+CiA8L2c+Cjwvc3ZnPg==\" width=\"256\" height=\"256\" preserveAspectRatio=\"xMidYMid meet\" filter=\"url(#cover-image-ezkp7vb6t8p)\"/></svg>",
     "shelf": "special",
     "priceUsd": 10000
   },

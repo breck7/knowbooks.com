@@ -145,6 +145,11 @@ const tags = [
     "question": "Is understanding or supporting human health a central goal?"
   },
   {
+    "id": "medicineTag",
+    "keywords": "medicine pharma pharmacy drug drugs",
+    "question": "Is it about a substance that helps solve a specific condition?"
+  },
+  {
     "id": "financeTag",
     "keywords": "finance financial money investing investment savings accounting payment payments",
     "question": "Is managing, recording, or exchanging money and financial assets central to this topic?"
