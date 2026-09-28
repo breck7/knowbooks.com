@@ -430,6 +430,12 @@ title Glass
 shelf believer
 priceUsd 249
 
+id plastics
+tags materialsTag solidTag
+title Plastics
+shelf believer
+priceUsd 249
+
 id cells
 tags chemistryTag biologyTag growthTag
 title Cells
