@@ -1010,6 +1010,12 @@ title Chimps
 shelf frontier
 priceUsd 699
 
+id dolphins
+tags animalsTag biologyTag
+title Dolphins
+shelf frontier
+priceUsd 750
+
 id golf
 tags mechanicsTag instantTag longTermTag motionTag sportsTag ballSportsTag individualSportsTag
 title Golf
