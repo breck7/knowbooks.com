@@ -27,7 +27,7 @@ main
    href stormTracker/index.html
    addClass tool
    img
-    src stormTracker/norbert.jpg
+    src stormTracker/lowell.jpg
     alt Storm Tracker dashboard with a Hawaii map, live cameras, and forecasts.
     width 1280
     height 720
