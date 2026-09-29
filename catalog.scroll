@@ -54,6 +54,10 @@ descriptionParser
  extends abstractStringMeasureParser
  description Optional product description.
 
+skillsParser
+ extends abstractStringMeasureParser
+ description Space-separated verbs naming what the Knowbook teaches. At least five.
+
 // Source of truth for tag memberships. Tag definitions live in tags.scroll.
 knowbookTagAtom
  extends atomAtom
@@ -74,6 +78,7 @@ fulfillment pickup
 tags economicsTag measurementTag creativeTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag
 color forest
 title launch
+skills plan wait gather celebrate launch surf
 shelf believer special
 priceUsd 175
 coverDescription four sine-like launch waves from left to right: a nearly flat ripple, a small rise and fall, another nearly flat ripple, then a steep rise and fall
@@ -87,6 +92,7 @@ id magnets
 tags physicsTag mechanicsTag electricityTag electromagnetismTag instantTag metalTag
 color navy
 title Magnets
+skills push pull point test see lift find
 shelf believer
 priceUsd 199
 coverDescription vertical bar magnet. south half is solid color
@@ -100,6 +106,7 @@ id focus
 tags physicsTag psychologyTag instantTag startupsTag emotionalSkillsTag
 color coral
 title Focus
+skills aim concentrate narrow commit persist notice
 shelf believer
 priceUsd 199
 coverDescription two triangles touching horizontally, like a bowtie. solid fill
@@ -111,6 +118,7 @@ id levers
 tags physicsTag mechanicsTag buildingTag instantTag energyTag machinesTag motionTag
 color navy
 title Levers
+skills lift pry balance push leverage
 shelf believer
 priceUsd 199
 coverDescription tilted lever with an aligned square load and a small touching fulcrum near the load. solid shapes
@@ -123,6 +131,7 @@ id beams
 tags physicsTag materialsTag mechanicsTag buildingTag measurementTag instantTag solidTag machinesTag geometryTag
 color brown
 title Beams
+skills span support load bend stiffen stack
 shelf believer
 priceUsd 199
 coverDescription vertical bar. solid fill.
@@ -133,6 +142,7 @@ id sales
 tags economicsTag psychologyTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag socialTag
 color forest
 title Sales
+skills pitch listen persuade close follow
 shelf believer
 priceUsd 399
 coverDescription two triangles in alignment, pointed north east
@@ -144,6 +154,7 @@ id anger
 tags psychologyTag emotionalSkillsTag
 color orange
 title Anger
+skills notice pause breathe name soothe
 shelf believer
 priceUsd 199
 coverDescription two scowling eyebrows and eyes
@@ -156,6 +167,7 @@ cover
 id carpentry
 tags plantTag materialsTag mechanicsTag buildingTag creativeTag hazardTag solidTag machinesTag geometryTag
 title Carpentry
+skills measure mark cut join fasten sand
 shelf believer
 color brown
 priceUsd 349
@@ -167,6 +179,7 @@ cover
 id plumbing
 tags physicsTag mechanicsTag fluidsTag buildingTag measurementTag instantTag hazardTag liquidTag pressureTag
 title Plumbing
+skills measure cut join seal flow drain
 color ocean
 shelf believer
 priceUsd 349
@@ -181,6 +194,7 @@ id capital
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 color forest
 title Capital
+skills earn save invest allocate compound
 shelf believer
 priceUsd 699
 coverDescription four pairs of two solid circles. each pair has 1 small circle, 2 are bigger, 1 is bigger than that, 1 bigger than that. arranged in a scattered way.
@@ -199,6 +213,7 @@ id buildings
 tags economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag
 color burgundy
 title Buildings
+skills site frame roof rent value
 shelf believer
 priceUsd 299
 coverDescription a teepee, a pitched tent, and a home increasing in height from left to right, showing greater investment
@@ -216,6 +231,7 @@ cover
 id electricity
 tags physicsTag electricityTag electromagnetismTag buildingTag measurementTag instantTag hazardTag energyTag
 title Electricity
+skills wire connect switch conduct insulate
 shelf believer
 priceUsd 249
 color navy
@@ -226,6 +242,7 @@ cover
 id gold
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Gold
+skills melt weigh refine trade store
 color yellow
 shelf believer
 priceUsd 999
@@ -285,6 +302,7 @@ cover
 id silver
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Silver
+skills melt weigh polish trade store
 color teal
 shelf believer
 priceUsd 899
@@ -339,6 +357,7 @@ cover
 id bronze
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Bronze
+skills alloy melt pour cast mix
 color navy
 shelf believer
 priceUsd 799
@@ -1134,6 +1153,7 @@ cover
 id breck.ecommerce
 tags economicsTag computingTag measurementTag creativeTag longTermTag multiplePeopleTag financeTag businessTag startupsTag communicationTag
 title ECommerce
+skills build launch sell ship support
 signature Breck Yunits
 shelf believer
 priceUsd 4200
@@ -1151,6 +1171,7 @@ cover
 id breck.twitter
 tags psychologyTag computingTag creativeTag longTermTag multiplePeopleTag startupsTag communicationTag socialTag
 title Twitter
+skills write post follow engage grow
 signature Breck Yunits
 shelf believer
 priceUsd 6900

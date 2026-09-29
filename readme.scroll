@@ -249,6 +249,11 @@ css
  .preview-pages p { margin: 0; font: 400 16px/1.5 Arial, sans-serif; text-wrap: pretty; }
  .preview-pages .preview-note { color: var(--muted); font-size: 12px; line-height: 1.4; }
  .preview-pages .preview-add { font-size: 13px; }
+ .preview-know { display: flex; flex-direction: column; align-items: center; gap: 11px; padding-top: 14px; border-top: 1px solid #e8dcc0; }
+ .preview-know h4 { margin: 0; color: #7c6631; font: italic 400 14px/1 Georgia, "Times New Roman", serif; letter-spacing: .14em; }
+ .preview-skills { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 0; padding: 0; list-style: none; }
+ .preview-skills li { padding: 3px 11px; border: 1px solid #e4d5ad; border-radius: 999px; background: #f7eed7; color: #6b5626; font: 400 13px/1.7 Arial, sans-serif; }
+ .preview-know .preview-more { margin: 0; color: #7c6631; font: italic 400 13px/1 Georgia, "Times New Roman", serif; letter-spacing: .06em; }
  .preview-close { position: absolute; z-index: 1; top: 8px; right: 8px; border: 0; background: transparent; cursor: pointer; font-size: 25px; }
  .preview-cover { position: absolute; inset: 0; height: 100%; transform-origin: left; transition: transform 650ms cubic-bezier(.2,.7,.2,1) 450ms; }
  .preview-cover h3, .preview-cover .book-signature, .preview-cover .book-symbol, .preview-cover .book-brand { transition: opacity 100ms 450ms; }
@@ -320,7 +325,7 @@ css
  @media (max-width: 850px) { .product-grid { grid-template-columns: repeat(2, 1fr); } .section-heading { grid-template-columns: 1fr; } }
  @media (max-width: 520px) { .product-grid { grid-template-columns: 1fr; } .cart { padding: 22px; } }
  @media (max-width: 520px) { .preview-book { width: min(320px, 78vw, 62svh); left: 50%; translate: -50% -50%; } .preview-pages { gap: 16px; } }
- @media (max-height: 440px) { .preview-book { width: min(320px, 42vw, 80svh); aspect-ratio: 1; } .preview-pages { padding: 32px 8% 16px; gap: 10px; } .preview-pages p { font-size: 14px; line-height: 1.35; } }
+ @media (max-height: 440px) { .preview-book { width: min(320px, 42vw, 80svh); aspect-ratio: 1; } .preview-pages { padding: 32px 8% 16px; gap: 10px; } .preview-pages p { font-size: 14px; line-height: 1.35; } .preview-know { gap: 6px; padding-top: 8px; } .preview-skills li { padding: 1px 8px; font-size: 11px; } }
  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
 
 <header class="site-header">
@@ -793,6 +798,7 @@ script
    return { name, shipping };
   };
   const pickupNote = product => product.fulfillment === "pickup" ? "In-person pickup only — will not be shipped." : "";
+  const skillsOf = product => (product.skills || product.design?.superpowers || "").trim().split(/\s+/).filter(Boolean);
   const cartDeliveryNote = () => [...cart.keys()].some(id => pickupNote(products.get(id))) ? "Includes tax and shipping for shippable items. Pickup-only items must be collected in person." : "Includes shipping and tax.";
   const bookCover = product => `<div class="book-cover" style="--cover:${escapeHtml(product.coverColor)}">
      <h3><a href="?knowbookId=${escapeHtml(product.id)}" onclick="return false">${escapeHtml(product.design?.title || product.title)}</a></h3>${(product.design?.signature || product.signature) ? `<span class="book-signature">${escapeHtml(product.design?.signature || product.signature)}</span>` : ""}<span class="book-symbol" aria-hidden="true">${product.cover || ""}</span><span class="book-brand">Knowbooks</span>
@@ -1045,10 +1051,11 @@ script
   const openBook = cover => {
    previewFocus = document.activeElement;
    const product = products.get(cover.closest(".product").dataset.productId);
+   const know = skillsOf(product);
    backgroundInert(true);
    document.body.classList.add("cart-open");
    const rect = cover.getBoundingClientRect();
-   preview.innerHTML = `<div class="preview-book"><div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>${escapeHtml(product.description || "Handmade in Hawaii. Every Knowbook is unique. Open yours and experiment.")}</p>${pickupNote(product) ? `<p class="preview-note">In-person pickup only.</p>` : ""}<button class="preview-add" data-add="${escapeHtml(product.id)}">Add to cart <span>${money.format(product.priceUsd)}</span></button></div>${cover.outerHTML}</div>`;
+   preview.innerHTML = `<div class="preview-book"><div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>${escapeHtml(product.description || "Handmade in Hawaii. Every Knowbook is unique. Open yours and experiment.")}</p>${know.length ? `<div class="preview-know"><h4>Learn:</h4><ul class="preview-skills">${know.slice(0, 5).map(verb => `<li>${escapeHtml(verb)}</li>`).join("")}</ul>${know.length > 5 ? `<p class="preview-more">and more!</p>` : ""}</div>` : ""}${pickupNote(product) ? `<p class="preview-note">In-person pickup only.</p>` : ""}<button class="preview-add" data-add="${escapeHtml(product.id)}">Add to cart <span>${money.format(product.priceUsd)}</span></button></div>${cover.outerHTML}</div>`;
    preview.querySelector(".book-cover").classList.add("preview-cover");
    preview.hidden = false;
    const book = preview.firstElementChild;
