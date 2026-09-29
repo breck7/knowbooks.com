@@ -1076,6 +1076,18 @@ script
    if (!drawer.classList.contains("is-open")) { backgroundInert(false); document.body.classList.remove("cart-open"); }
    if (restoreFocus) { previewFocus?.focus(); previewFocus = null; }
   };
+  const navigateBook = step => {
+   const cards = [...grid.querySelectorAll(".product:not([hidden])")];
+   if (cards.length < 2) return;
+   const currentId = preview.querySelector(".preview-add")?.dataset.add;
+   const current = cards.findIndex(card => card.dataset.productId === currentId);
+   if (current === -1) return;
+   const cover = cards[(current + step + cards.length) % cards.length].querySelector(".book-cover");
+   if (!cover) return;
+   closeBook(false);
+   cover.click();
+   previewFocus = cover.querySelector("a") || cover;
+  };
   const addToCart = async (id, source, button) => {
    if (adding) return;
    adding = true;
@@ -1474,6 +1486,10 @@ script
   document.addEventListener("keydown", event => {
    if (document.querySelector("#designer").open) return;
    if (event.key === "Escape") { closeCart(); closeBook(); }
+   if (!preview.hidden && (event.key === "ArrowLeft" || event.key === "ArrowRight") && !event.metaKey && !event.ctrlKey && !event.altKey && !event.shiftKey && !event.repeat && !event.isComposing) {
+    event.preventDefault();
+    navigateBook(event.key === "ArrowRight" ? 1 : -1);
+   }
    const modal = drawer.classList.contains("is-open") ? drawer : !preview.hidden ? preview : null;
    if (event.key !== "Tab" || !modal) return;
    const focusable = [...modal.querySelectorAll("button:not(:disabled), input:not(:disabled), a[href], summary")].filter(element => element.getClientRects().length);
