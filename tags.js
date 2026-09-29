@@ -4,6 +4,11 @@ const tags = [
     "question": "Is understanding physical forces, energy, waves, or matter a central goal?"
   },
   {
+    "id": "mathTag",
+    "keywords": "numbers matrix matrices algebra calculus geometry functions charts graphs binary logarithms exponents magnitudes scales arithmetic equations mathematics symmetries symmetry",
+    "question": "Is understanding math a central goal?"
+  },
+  {
     "id": "chemistryTag",
     "question": "Is chemical composition or chemical change central to this topic?"
   },

@@ -38,6 +38,10 @@ keywordsParser
 id physicsTag
 question Is understanding physical forces, energy, waves, or matter a central goal?
 
+id mathTag
+question Is understanding math a central goal?
+keywords numbers matrix matrices algebra calculus geometry functions charts graphs binary logarithms exponents magnitudes scales arithmetic equations mathematics symmetries symmetry
+
 id chemistryTag
 question Is chemical composition or chemical change central to this topic?
 
