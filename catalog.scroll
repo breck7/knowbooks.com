@@ -918,6 +918,12 @@ title Singing
 shelf frontier
 priceUsd 599
 
+id matrices
+tags mathTag physicsTag computingTag
+title Matrices
+shelf frontier
+priceUsd 800
+
 id actuators
 tags physicsTag mechanicsTag electricityTag electromagnetismTag buildingTag instantTag hazardTag machinesTag motionTag
 title Actuators
