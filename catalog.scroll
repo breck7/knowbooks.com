@@ -82,8 +82,8 @@ fulfillment pickup
 tags economicsTag measurementTag creativeTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag
 color forest
 title launch
-skills plan wait gather celebrate launch surf
-tools ticket tote lantern sunscreen chairs
+skills live laugh love learn launch
+tools cup sunglasses paper lighter balloons
 shelf believer special
 priceUsd 175
 coverDescription four sine-like launch waves from left to right: a nearly flat ripple, a small rise and fall, another nearly flat ripple, then a steep rise and fall
@@ -151,8 +151,8 @@ id sales
 tags economicsTag psychologyTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag socialTag
 color forest
 title Sales
-skills listen persuade close follow
-tools scripts tokens timer ledger
+skills listen clarify electrify expand compound
+tools stethoscope recorder circuit pens seeds
 shelf believer
 priceUsd 399
 coverDescription two triangles in alignment, pointed north east
@@ -176,8 +176,8 @@ cover
 id carpentry
 tags plantTag materialsTag mechanicsTag buildingTag creativeTag hazardTag solidTag machinesTag geometryTag
 title Carpentry
-skills measure mark cut join sand
-tools saw hammer level sandpaper clamps
+skills measure mark cut shape level
+tools tape pencil saw chisel level
 shelf believer
 color brown
 priceUsd 349
@@ -238,8 +238,8 @@ cover
 id electricity
 tags physicsTag electricityTag electromagnetismTag buildingTag measurementTag instantTag hazardTag energyTag
 title Electricity
-skills wire connect switch conduct insulate
-tools batteries wires bulbs switches meters
+skills make connect switch measure move
+tools magnet wires bulb meter motor
 shelf believer
 priceUsd 249
 color navy
