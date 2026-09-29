@@ -112,8 +112,8 @@ id focus
 tags physicsTag psychologyTag instantTag startupsTag emotionalSkillsTag
 color coral
 title Focus
-skills aim concentrate narrow commit persist notice
-tools lenses targets timers clamps cards
+skills pierce spark direct cut spread 
+tools needle magnifier funnel scissors paper
 shelf believer
 priceUsd 199
 coverDescription two triangles touching horizontally, like a bowtie. solid fill
@@ -125,8 +125,8 @@ id levers
 tags physicsTag mechanicsTag buildingTag instantTag energyTag machinesTag motionTag
 color navy
 title Levers
-skills lift pry balance push leverage
-tools levers fulcrums weights rulers blocks
+skills lift pry balance push move
+tools beams prybar fulcrums weights ruler
 shelf believer
 priceUsd 199
 coverDescription tilted lever with an aligned square load and a small touching fulcrum near the load. solid shapes
@@ -139,8 +139,8 @@ id beams
 tags physicsTag materialsTag mechanicsTag buildingTag measurementTag instantTag solidTag machinesTag geometryTag
 color brown
 title Beams
-skills span support load bend stiffen stack
-tools beams supports weights clamps ruler
+skills hold cross push bend snap
+tools beams studfinder scale clamp toothpicks
 shelf believer
 priceUsd 199
 coverDescription vertical bar. solid fill.
@@ -151,8 +151,8 @@ id sales
 tags economicsTag psychologyTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag socialTag
 color forest
 title Sales
-skills pitch listen persuade close follow
-tools cards scripts tokens timer ledger
+skills listen persuade close follow
+tools scripts tokens timer ledger
 shelf believer
 priceUsd 399
 coverDescription two triangles in alignment, pointed north east
@@ -164,9 +164,7 @@ id anger
 tags psychologyTag emotionalSkillsTag
 color orange
 title Anger
-skills notice pause breathe name soothe
-tools cards timer mirror journal prompts
-shelf believer
+shelf frontier
 priceUsd 199
 coverDescription two scowling eyebrows and eyes
 cover
@@ -178,8 +176,8 @@ cover
 id carpentry
 tags plantTag materialsTag mechanicsTag buildingTag creativeTag hazardTag solidTag machinesTag geometryTag
 title Carpentry
-skills measure mark cut join fasten sand
-tools saw square level sandpaper clamps
+skills measure mark cut join sand
+tools saw hammer level sandpaper clamps
 shelf believer
 color brown
 priceUsd 349
@@ -191,10 +189,8 @@ cover
 id plumbing
 tags physicsTag mechanicsTag fluidsTag buildingTag measurementTag instantTag hazardTag liquidTag pressureTag
 title Plumbing
-skills measure cut join seal flow drain
-tools pipes fittings wrench tape sealant
 color ocean
-shelf believer
+shelf frontier
 priceUsd 349
 coverDescription two elbow pipes one coming from left a drip of water flowing out and into the other elbow pipe leaving to right. all solids
 cover
@@ -207,9 +203,7 @@ id capital
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 color forest
 title Capital
-skills earn save invest allocate compound
-tools coins ledgers charts tokens calculator
-shelf believer
+shelf frontier
 priceUsd 699
 coverDescription four pairs of two solid circles. each pair has 1 small circle, 2 are bigger, 1 is bigger than that, 1 bigger than that. arranged in a scattered way.
 cover
@@ -227,9 +221,7 @@ id buildings
 tags economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag
 color burgundy
 title Buildings
-skills site frame roof rent value
-tools blocks plans tape levels scale
-shelf believer
+shelf frontier
 priceUsd 299
 coverDescription a teepee, a pitched tent, and a home increasing in height from left to right, showing greater investment
 cover
@@ -258,10 +250,8 @@ cover
 id gold
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Gold
-skills melt weigh refine trade store
-tools nuggets scale tongs crucible loupe
 color yellow
-shelf believer
+shelf frontier
 priceUsd 999
 cover
  portrait
@@ -319,10 +309,8 @@ cover
 id silver
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Silver
-skills melt weigh polish trade store
-tools bars scale tongs crucible loupe
 color teal
-shelf believer
+shelf frontier
 priceUsd 899
 cover
  portrait
@@ -375,10 +363,8 @@ cover
 id bronze
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Bronze
-skills alloy melt pour cast mix
-tools ingots crucible mold tongs scale
 color navy
-shelf believer
+shelf frontier
 priceUsd 799
 coverDescription Stippled portrait supplied from the designer
 cover
@@ -1172,10 +1158,8 @@ cover
 id breck.ecommerce
 tags economicsTag computingTag measurementTag creativeTag longTermTag multiplePeopleTag financeTag businessTag startupsTag communicationTag
 title ECommerce
-skills build launch sell ship support
-tools storefront cards ledgers tokens calculator
 signature Breck Yunits
-shelf believer
+shelf frontier
 priceUsd 4200
 color navy
 coverDescription a circle in the middle surrounded by other circles
@@ -1191,10 +1175,8 @@ cover
 id breck.twitter
 tags psychologyTag computingTag creativeTag longTermTag multiplePeopleTag startupsTag communicationTag socialTag
 title Twitter
-skills write post follow engage grow
-tools cards tokens filters ledger feed
 signature Breck Yunits
-shelf believer
+shelf frontier
 priceUsd 6900
 color teal
 coverDescription 4 vertical bars increasingly tall from left to right. the twitter bird is on level 2 and jumping to level 3. lines show the previous jumps
