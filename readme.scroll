@@ -56,7 +56,6 @@ buildToFile knowbooksLogo.svg
  </svg>
 
 css
- @font-face { font-family: Allura; src: url("allura.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
  #designer { width: min(850px, calc(100% - 24px)); max-height: 96dvh; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); }
  #design-source { margin-top: 10px; font: 13px/1.5 Arial, sans-serif; }
  #design-source summary { cursor: pointer; }
@@ -73,13 +72,19 @@ css
  .design-spread { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
  .design-cover { background: var(--cover, #294575); color: var(--gold); border-radius: 5px 12px 12px 5px; box-shadow: inset 8px 0 8px #0003, 5px 5px 0 #dcd1b9; padding: 16px 18px 12px; text-align: center; max-width: 320px; margin: auto; }
  #design-title { font: 24px/1.2 Georgia, serif; min-height: 29px; overflow-wrap: anywhere; margin: 0 0 10px; }
- #design-signature { display: block; width: 100%; margin: -2px 0 6px; padding: 4px; border: 0; background: transparent; color: inherit; text-align: center; font: 400 23px/1.15 Allura, cursive; }
+ .design-signature-wrap { position: relative; display: block; margin: -2px 0 6px; }
+ #design-signature { display: block; width: 100%; padding: 3px; border: 0; background: transparent; color: inherit; text-align: center; font: 400 22px/1.15 Georgia, serif; }
  #design-signature::placeholder { color: inherit; opacity: .7; }
+ #design-signature-art { position: absolute; inset: 0; display: block; padding: 3px; pointer-events: none; }
+ #design-signature-art svg { display: block; width: 100%; height: 100%; }
+ .design-signature-wrap:not(:focus-within) #design-signature:not(:placeholder-shown) { color: transparent; }
+ .design-signature-wrap:focus-within #design-signature-art, .design-signature-wrap #design-signature:placeholder-shown ~ #design-signature-art { visibility: hidden; }
  #designer [hidden] { display: none; }
  [data-edit-design] { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; text-align: left; }
  [data-edit-design]:hover { text-decoration: underline; }
  .design-actions { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 6px 0; }
- .book-signature { max-width: 100%; margin-top: 5px; font: 400 23px/1.15 Allura, cursive; text-align: center; overflow-wrap: anywhere; }
+ .book-signature { display: block; margin-top: 5px; }
+ .book-signature svg { display: block; width: 100%; height: 26px; }
  #design-title:focus { outline: 1px dashed var(--gold); }
  .design-cover svg { display: block; width: 100%; touch-action: none; cursor: crosshair; }
  #design-art { height: clamp(110px, 27dvh, 210px); }
@@ -118,7 +123,7 @@ css
   #design-experiments { grid-column: 2; grid-row: 1; }
   .design-inside > p, #design-add { grid-column: 1 / -1; margin: 0; }
   .design-cover { padding: 12px 8px 8px; } #design-title { font-size: 18px; margin-bottom: 4px; }
-  #design-signature { font-size: 20px; } #design-art { height: 100px; }
+  #design-signature { font-size: 19px; } #design-art { height: 100px; }
   #design-colors { gap: 5px; margin: 8px 0 4px; } #design-colors button { width: 17px; height: 17px; }
   .design-tools { gap: 2px 8px; font-size: 11px; } #design-marker { gap: 3px; } #design-marker svg { width: 24px; }
  }
@@ -699,7 +704,7 @@ aside
  <div class="design-spread">
  <div><div class="design-cover">
  <h3 id="design-title" contenteditable="plaintext-only" role="textbox" aria-label="Knowbook title" aria-multiline="false" spellcheck="false">Your Knowbook</h3>
- <input id="design-signature" aria-label="Expert name" placeholder="Your name (optional)" maxlength="60">
+ <span class="design-signature-wrap"><input id="design-signature" aria-label="Expert name" placeholder="Your name (optional)" maxlength="60"><span id="design-signature-art" aria-hidden="true"></span></span>
  <svg id="design-art" viewBox="0 0 256 256" tabindex="0" aria-label="Draw your cover with the marker"><g id="design-portrait"></g><g class="strokes"></g></svg>
  <span>KNOWBOOKS</span></div>
  <div id="design-colors" role="group" aria-label="Cover color"></div>
@@ -712,6 +717,7 @@ partners.scroll
 
 <noscript>This shop needs JavaScript to manage its cart.</noscript>
 
+signature.js
 covers.js
 catalog.js
 tags.js
@@ -787,6 +793,9 @@ script
    return { enteredCode, discountAmount, referralCode, discountCents, amount: (subtotalCents - discountCents) / 100 };
   };
   const escapeHtml = value => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+  // A book's signature is seeded by its title plus its author, so each book stays
+  // stable while the same author's hand varies slightly from book to book.
+  const signatureFor = (title, author) => author ? getSignature(author, `${title || ""}\u0000${author}`) : "";
   const shelvesOf = product => (product.shelf || "").trim().split(/\s+/).filter(Boolean);
   const primaryShelf = product => shelvesOf(product)[0];
   const cardId = (product, shelf) => shelf === primaryShelf(product) ? product.id : `${product.id}--${shelf}`;
@@ -803,7 +812,7 @@ script
   const chipSection = (label, items) => items.length ? `<div class="preview-know"><h4>${escapeHtml(label)}</h4><ul class="preview-skills">${items.slice(0, 5).map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul><p class="preview-more">and more!</p></div>` : "";
   const cartDeliveryNote = () => [...cart.keys()].some(id => pickupNote(products.get(id))) ? "Includes tax and shipping for shippable items. Pickup-only items must be collected in person." : "Includes shipping and tax.";
   const bookCover = product => `<div class="book-cover" style="--cover:${escapeHtml(product.coverColor)}">
-     <h3><a href="?knowbookId=${escapeHtml(product.id)}" onclick="return false">${escapeHtml(product.design?.title || product.title)}</a></h3>${(product.design?.signature || product.signature) ? `<span class="book-signature">${escapeHtml(product.design?.signature || product.signature)}</span>` : ""}<span class="book-symbol" aria-hidden="true">${product.cover || ""}</span><span class="book-brand">Knowbooks</span>
+     <h3><a href="?knowbookId=${escapeHtml(product.id)}" onclick="return false">${escapeHtml(product.design?.title || product.title)}</a></h3>${(product.design?.signature || product.signature) ? `<span class="book-signature">${signatureFor(product.design?.title || product.title, product.design?.signature || product.signature)}</span>` : ""}<span class="book-symbol" aria-hidden="true">${product.cover || ""}</span><span class="book-brand">Knowbooks</span>
     </div>`;
   const productCard = (product, shelf) => {
    const { name, shipping } = editionDetails(shelf);
@@ -1125,7 +1134,7 @@ script
    }
   };
   function initDesigner() {
-   const $ = selector => document.querySelector(selector), dialog = $('#designer'), title = $('#design-title'), signature = $('#design-signature');
+   const $ = selector => document.querySelector(selector), dialog = $('#designer'), title = $('#design-title'), signature = $('#design-signature'), signatureArt = $('#design-signature-art');
    const art = $('#design-art'), marker = $('#design-marker'), status = $('#design-status');
    const key = 'knowbooks-signature-design', undo = [], hedcuts = new WeakMap();
    let design, draft, editing = false, erase = false, drawing, opener, photoVersion = 0;
@@ -1240,11 +1249,12 @@ script
     $('#design-colors').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed',b.dataset.color === design.color));
     $('#design-portrait').innerHTML = vectorImage(design.svgImage) + dots(design.portrait); $('#remove-image').hidden = !design.svgImage && !design.portrait.length && !hedcuts.has(design);
     art.querySelector('.strokes').innerHTML = paths(design.art);
+    signatureArt.innerHTML = signatureFor(design.title, design.signature);
    }
    $('#design-colors').onclick = event => { const b = event.target.closest('[data-color]'); if(b) { design.color = b.dataset.color; render(); remember(); } };
    title.addEventListener('keydown', event => { if(event.key === 'Enter') event.preventDefault(); });
-   title.addEventListener('input', () => { if(title.textContent.length > 60) title.textContent = title.textContent.slice(0,60); remember(); });
-   signature.addEventListener('input', remember);
+   title.addEventListener('input', () => { if(title.textContent.length > 60) title.textContent = title.textContent.slice(0,60); remember(); signatureArt.innerHTML = signatureFor(design.title, design.signature); });
+   signature.addEventListener('input', () => { remember(); signatureArt.innerHTML = signatureFor(design.title, design.signature); });
    marker.onclick = () => { erase = !erase; marker.setAttribute('aria-pressed',erase); marker.setAttribute('aria-label',erase ? 'Flip eraser to marker' : 'Flip marker to eraser'); marker.querySelector('span').textContent = erase ? 'Flip to draw' : 'Flip to erase'; };
    const snapshot = () => { undo.push(JSON.stringify(design.art)); if(undo.length>30) undo.shift(); };
    $('#design-undo').onclick = () => { if(undo.length) { design.art = JSON.parse(undo.pop()); render(); remember(); } };
@@ -1505,4 +1515,4 @@ script
 catalog.scroll
 buildCoverRuntime
 buildConcepts catalog.js
-buildZip knowbooks.zip index.html catalog.js covers.js catalog.csv tags.js knowbooksLogo.svg og.png hero-background.png kbc.jpg readme.scroll catalog.scroll catalogCsv.scroll covers.scroll tags.scroll partners.scroll upstreamToScroll.scroll s/checko allura.ttf
+buildZip knowbooks.zip index.html signature.js catalog.js covers.js catalog.csv tags.js knowbooksLogo.svg og.png hero-background.png kbc.jpg readme.scroll catalog.scroll catalogCsv.scroll covers.scroll tags.scroll partners.scroll upstreamToScroll.scroll s/checko
