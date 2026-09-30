@@ -940,7 +940,6 @@ script
     if (navigator.clipboard?.writeText) navigator.clipboard.writeText(address).then(() => { status.textContent = `${button.dataset.payment} address copied.`; }, fallback);
     else fallback();
    }
-   orderSlip(button.dataset.payment, address);
   });
   const save = () => {
    try {
