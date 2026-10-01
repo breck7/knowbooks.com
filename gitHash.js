@@ -1,0 +1,1 @@
+const KNOWBOOKS_GIT_HASH = "d403ee7";

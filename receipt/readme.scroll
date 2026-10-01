@@ -1,0 +1,45 @@
+// Four 4.25 by 5.5 inch receipts on US Letter. Print at 100%, without headers or footers.
+// Build from this folder: scroll build readme.scroll
+title Knowbooks order
+permalink index.html
+buildHtml
+buildPdf
+
+replace RECEIPT
+ article
+  header
+   img
+    src logo.svg
+    alt Knowbooks
+   h1 KNOWBOOKS ORDER
+  div
+   class fields
+   p NAME
+   p KNOWBOOKS
+   p LOCATION
+   p DATE
+   p SHIPPED
+   p COLLECTED
+  footer KNOWBOOKS
+
+RECEIPT
+RECEIPT
+RECEIPT
+RECEIPT
+
+css
+ @page { size: letter portrait; margin: 0; }
+ * { box-sizing: border-box; }
+ html, body { margin: 0; padding: 0; background: white; }
+ body { font-family: Arial, sans-serif; color: #d9bc78; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+ body { position: relative; display: grid; grid-template-columns: repeat(2, 4.25in); grid-template-rows: repeat(2, 5.5in); width: 8.5in; height: 11in; }
+ body::before, body::after { content: ""; position: absolute; pointer-events: none; }
+ body::before { top: .15in; bottom: .15in; left: 50%; border-left: .25pt dashed #eeeeee; }
+ body::after { left: .15in; right: .15in; top: 50%; border-top: .25pt dashed #eeeeee; }
+ article { display: flex; flex-direction: column; padding: .32in .4in; break-inside: avoid; }
+ header { text-align: center; }
+ header img { display: block; width: .25in; height: .25in; margin: 0 auto .12in; }
+ h1 { margin: 0; font-size: 17pt; line-height: 1.2; font-weight: 400; letter-spacing: .06em; }
+ .fields { margin-top: .42in; }
+ .fields p { height: .57in; margin: 0; padding: 0; color: #e5e5e5; font-size: 18pt; line-height: 1.2; letter-spacing: .06em; }
+ footer { margin-top: auto; text-align: center; font-size: 7px; line-height: 1; font-weight: 700; letter-spacing: .18em; }
