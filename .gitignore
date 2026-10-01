@@ -3,6 +3,8 @@
 *.svg
 *.js
 !s/checko/checko.js
+!s/qrcode/qrcode.js
 *.zip
 *.csv
 output/
+*.pdf
