@@ -75,28 +75,11 @@ tagsParser
 
 // data
 
-// new product launches
-id launch
-description Includes ticket to Knowbooks launch celebration. Beachside on Oahu. Date to be determined by El Niño. November 2026.
-fulfillment pickup
-tags economicsTag measurementTag creativeTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag
-color forest
-title launch
-skills live laugh love learn launch
-tools cup sunglasses paper lighter balloons
-shelf believer special
-priceUsd 175
-coverDescription four sine-like launch waves from left to right: a nearly flat ripple, a small rise and fall, another nearly flat ripple, then a steep rise and fall
-cover
- path M 30.7 194.6 C 35.8 194.6 38.4 192 47.4 192 C 56.3 192 58.9 194.6 64 194.6
- path M 84.5 194.6 C 92.2 194.6 92.2 179.2 101.1 179.2 C 110.1 179.2 110.1 194.6 117.8 194.6
- path M 138.2 194.6 C 143.4 194.6 145.9 192 154.9 192 C 163.8 192 166.4 194.6 171.5 194.6
- path M 192 194.6 C 199.7 194.6 199.7 61.4 208.6 61.4 C 217.6 61.4 217.6 194.6 225.3 194.6
-
 id magnets
 tags physicsTag mechanicsTag electricityTag electromagnetismTag instantTag metalTag
 color navy
 title Magnets
+description Make invisible forces visible: drag metal with a lodestone, map a magnet's field with iron filings, and watch a compass swing as you move the poles. Teaches push, pull, lift, and how to test a claim by watching what actually happens.
 skills push pull point test see lift find
 tools magnets filings compasses lodestones lifter
 shelf believer
@@ -112,6 +95,7 @@ id focus
 tags physicsTag psychologyTag instantTag startupsTag emotionalSkillsTag
 color coral
 title Focus
+description Take a small force and concentrate it until it pierces, sparks, and cuts. A hands-on lesson in gathering your energy, aiming it at one point, and seeing how much more it can do when nothing is wasted.
 skills pierce spark direct cut spread 
 tools needle magnifier funnel scissors paper
 shelf believer
@@ -125,6 +109,7 @@ id levers
 tags physicsTag mechanicsTag buildingTag instantTag energyTag machinesTag motionTag
 color navy
 title Levers
+description Move something heavy with one hand. Build levers, find the right fulcrum, and load the arm until you feel why leverage multiplies what you can lift, then use it to pry, balance, and move real weight.
 skills lift pry balance push move
 tools beams prybar fulcrums weights ruler
 shelf believer
@@ -139,6 +124,7 @@ id beams
 tags physicsTag materialsTag mechanicsTag buildingTag measurementTag instantTag solidTag machinesTag geometryTag
 color brown
 title Beams
+description Find out which shapes hold, which bend, and which snap. Clamp and load your own structures until you understand why some things stand up and others collapse.
 skills hold cross push bend snap
 tools beams studfinder scale clamp toothpicks
 shelf believer
@@ -151,6 +137,7 @@ id sales
 tags economicsTag psychologyTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag socialTag
 color forest
 title Sales
+description Learn to hear what people actually mean. With a stethoscope, a recorder, and hands-on experiments in attention, you'll practice listening and clarifying until a conversation builds into something that grows.
 skills listen clarify electrify expand compound
 tools stethoscope recorder circuit pens seeds
 shelf believer
@@ -176,6 +163,7 @@ cover
 id carpentry
 tags plantTag materialsTag mechanicsTag buildingTag creativeTag hazardTag solidTag machinesTag geometryTag
 title Carpentry
+description Measure twice, cut once. Saw, chisel, and level your first real woodworking project while you learn how careful measurement turns a rough board into something true and square.
 skills measure mark cut shape level
 tools tape pencil saw chisel level
 shelf believer
@@ -238,6 +226,7 @@ cover
 id electricity
 tags physicsTag electricityTag electromagnetismTag buildingTag measurementTag instantTag hazardTag energyTag
 title Electricity
+description Build a circuit and watch a bulb light. Connect wires, flip switches, and meter the flow until you can make, measure, and move electricity on purpose.
 skills make connect switch measure move
 tools magnet wires bulb meter motor
 shelf believer
@@ -250,6 +239,7 @@ cover
 id fire
 tags physicsTag chemistryTag instantTag hazardTag gasTag combustionTag energyTag temperatureTag
 title Fire
+description Make fire, then learn to use it. Light, warm, melt, and join with real flames under your control, and see the chemistry that turns a spark into useful work.
 skills cook light warm melt join
 tools stove candle warmers lighter iron
 shelf believer
@@ -257,6 +247,24 @@ color coral
 priceUsd 249
 cover
  svgImage data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBTVkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xzIC0tPg0KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTQuNDUyNyA4LjQ4Njc5TDEyLjE4NDIgMy45Mzg5NkwxMS40NDcxIDQuNzQzMDlDNy4zMDk0NSA5LjI1NjkzIDYgMTEuOTYwOSA2IDE0LjI0OTlDNiAxNy40MjIgOC43MzQ1MiAxOS45MDkgMTIgMTkuOTA5QzE1LjI2NTUgMTkuOTA5IDE4IDE3LjQyMiAxOCAxNC4yNDk5QzE4IDEzLjMxNzkgMTcuNjc0NiAxMi4zMTI0IDE3LjIzODEgMTEuMzY1OEMxNi43OTYgMTAuNDA2OSAxNi4yMDkxIDkuNDQzMzUgMTUuNjIgOC41Nzc4OEwxNS4xMDY1IDcuODIzNDJMMTQuNDUyNyA4LjQ4Njc5Wk0xNC4wNDczIDExLjAzNDhMMTQuODgxOCAxMC4xODgzQzE1LjI1NiAxMC43ODQ2IDE1LjYwMDggMTEuMzk3IDE1Ljg3NiAxMS45OTM4QzE2LjI3NjUgMTIuODYyNSAxNi41IDEzLjYzNTcgMTYuNSAxNC4yNDk5QzE2LjUgMTUuMDk0MSAxNi4yMjMzIDE1Ljg5MDEgMTUuNzQzOCAxNi41NTU0QzE1Ljc0NzkgMTYuNDkzNSAxNS43NSAxNi40MzA5IDE1Ljc1IDE2LjM2NzVDMTUuNzUgMTUuODA1NiAxNS41MjMxIDE1LjI0MTMgMTUuMjYzMiAxNC43NjI0QzE0Ljk5NDYgMTQuMjY3OSAxNC42NDM0IDEzLjc3OTggMTQuMjk5NSAxMy4zNTA3TDEzLjgxMzUgMTIuNzQ0M0wxMy40NzcyIDEzLjAzNEwxMi4xNzQ0IDEwLjgxNTlMMTEuNDkwMyAxMS40NDk3QzkuMTM3MjEgMTMuNjI5OCA4LjI1IDE1LjA1MDggOC4yNSAxNi4zNjc1QzguMjUgMTYuNDMwOSA4LjI1MjA5IDE2LjQ5MzUgOC4yNTYyMiAxNi41NTU0QzcuNzc2NjkgMTUuODkwMSA3LjUgMTUuMDk0MSA3LjUgMTQuMjQ5OUM3LjUgMTIuNjc4NiA4LjMyNyAxMC41MzA4IDExLjgyMDYgNi41NzA1TDE0LjA0NzMgMTEuMDM0OFpNMTMuMDk0MyAxNS4zNDRMMTMuNTk0OCAxNC45MTI3QzEzLjcyNTkgMTUuMTAzNiAxMy44NDQ3IDE1LjI5MzYgMTMuOTQ0OSAxNS40NzgxQzE0LjE2MzIgMTUuODgwMiAxNC4yNSAxNi4xNzkxIDE0LjI1IDE2LjM2NzVDMTQuMjUgMTcuMTE3MSAxMy40MTMxIDE3Ljk5OTkgMTIgMTcuOTk5OUMxMC41ODY5IDE3Ljk5OTkgOS43NSAxNy4xMTcxIDkuNzUgMTYuMzY3NUM5Ljc1IDE1LjgyMzUgMTAuMDY5NyAxNC45NDY0IDExLjgzMzQgMTMuMTk3MkwxMy4wOTQzIDE1LjM0NFoiIGZpbGw9IiMwODAzNDEiLz4NCjwvc3ZnPg==
+
+// launch celebration ticket (pickup only)
+id launch
+description Includes ticket to Knowbooks launch celebration. Beachside on Oahu. Date to be determined by El Niño. November 2026.
+fulfillment pickup
+tags economicsTag measurementTag creativeTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag
+color forest
+title launch
+skills live laugh love learn launch
+tools cup sunglasses paper lighter balloons
+shelf believer special
+priceUsd 175
+coverDescription four sine-like launch waves from left to right: a nearly flat ripple, a small rise and fall, another nearly flat ripple, then a steep rise and fall
+cover
+ path M 30.7 194.6 C 35.8 194.6 38.4 192 47.4 192 C 56.3 192 58.9 194.6 64 194.6
+ path M 84.5 194.6 C 92.2 194.6 92.2 179.2 101.1 179.2 C 110.1 179.2 110.1 194.6 117.8 194.6
+ path M 138.2 194.6 C 143.4 194.6 145.9 192 154.9 192 C 163.8 192 166.4 194.6 171.5 194.6
+ path M 192 194.6 C 199.7 194.6 199.7 61.4 208.6 61.4 C 217.6 61.4 217.6 194.6 225.3 194.6
 
 id gold
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
