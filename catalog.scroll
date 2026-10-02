@@ -65,7 +65,7 @@ toolsParser
 // Source of truth for tag memberships. Tag definitions live in tags.scroll.
 knowbookTagAtom
  extends atomAtom
- enum physicsTag chemistryTag biologyTag plantTag economicsTag psychologyTag computingTag materialsTag mechanicsTag electricityTag electromagnetismTag wavesTag fluidsTag natureTag buildingTag measurementTag creativeTag instantTag longTermTag multiplePeopleTag hazardTag gasTag liquidTag solidTag combustionTag energyTag temperatureTag pressureTag opticsTag musicTag growthTag nutritionTag healthTag financeTag businessTag startupsTag communicationTag cooperationTag machinesTag metalTag timeTag nuclearTag cyclesTag flightTag spaceTag motionTag geometryTag emotionalSkillsTag explorationTag parentingTag datingTag familyTag matingTag socialTag sportsTag teamSportsTag ballSportsTag combatSportsTag individualSportsTag
+ enum physicsTag chemistryTag biologyTag neuroscienceTag plantTag economicsTag psychologyTag computingTag materialsTag mechanicsTag electricityTag electromagnetismTag wavesTag fluidsTag natureTag buildingTag measurementTag creativeTag instantTag longTermTag multiplePeopleTag hazardTag gasTag liquidTag solidTag combustionTag energyTag temperatureTag pressureTag opticsTag musicTag growthTag nutritionTag healthTag financeTag businessTag startupsTag communicationTag cooperationTag machinesTag metalTag timeTag nuclearTag cyclesTag flightTag spaceTag motionTag geometryTag emotionalSkillsTag explorationTag parentingTag datingTag familyTag matingTag socialTag sportsTag teamSportsTag ballSportsTag combatSportsTag individualSportsTag
 
 tagsParser
  extends abstractStringMeasureParser
@@ -1087,6 +1087,13 @@ tags physicsTag electricityTag electromagnetismTag wavesTag natureTag buildingTa
 title Solar
 shelf frontier
 priceUsd 10000
+
+// the brain and nervous system
+id neurons
+tags neuroscienceTag biologyTag healthTag
+title Neurons
+shelf frontier
+priceUsd 799
 
 // Partner onboarding: purchase includes the initial conversation.
 id knowbook
