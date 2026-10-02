@@ -1,7 +1,20 @@
 const catalog = [
   {
+    "id": "launch",
+    "description": "Includes ticket to Knowbooks launch celebration. Beachside on Oahu. Date to be determined by El Niño. November 2026.",
+    "tags": "economicsTag measurementTag creativeTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag",
+    "title": "launch",
+    "color": "forest",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 256 256\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M 30.7 194.6 C 35.8 194.6 38.4 192 47.4 192 C 56.3 192 58.9 194.6 64 194.6\"/><path d=\"M 84.5 194.6 C 92.2 194.6 92.2 179.2 101.1 179.2 C 110.1 179.2 110.1 194.6 117.8 194.6\"/><path d=\"M 138.2 194.6 C 143.4 194.6 145.9 192 154.9 192 C 163.8 192 166.4 194.6 171.5 194.6\"/><path d=\"M 192 194.6 C 199.7 194.6 199.7 61.4 208.6 61.4 C 217.6 61.4 217.6 194.6 225.3 194.6\"/></svg>",
+    "shelf": "believer special",
+    "priceUsd": 175,
+    "coverDescription": "four sine-like launch waves from left to right: a nearly flat ripple, a small rise and fall, another nearly flat ripple, then a steep rise and fall",
+    "fulfillment": "pickup",
+    "skills": "live laugh love learn launch",
+    "tools": "cup sunglasses paper lighter balloons"
+  },
+  {
     "id": "magnets",
-    "description": "Make invisible forces visible: drag metal with a lodestone, map a magnet's field with iron filings, and watch a compass swing as you move the poles. Teaches push, pull, lift, and how to test a claim by watching what actually happens.",
     "tags": "physicsTag mechanicsTag electricityTag electromagnetismTag instantTag metalTag",
     "title": "Magnets",
     "color": "navy",
@@ -14,7 +27,6 @@ const catalog = [
   },
   {
     "id": "focus",
-    "description": "Take a small force and concentrate it until it pierces, sparks, and cuts. A hands-on lesson in gathering your energy, aiming it at one point, and seeing how much more it can do when nothing is wasted.",
     "tags": "physicsTag psychologyTag instantTag startupsTag emotionalSkillsTag",
     "title": "Focus",
     "color": "coral",
@@ -27,7 +39,6 @@ const catalog = [
   },
   {
     "id": "levers",
-    "description": "Move something heavy with one hand. Build levers, find the right fulcrum, and load the arm until you feel why leverage multiplies what you can lift, then use it to pry, balance, and move real weight.",
     "tags": "physicsTag mechanicsTag buildingTag instantTag energyTag machinesTag motionTag",
     "title": "Levers",
     "color": "navy",
@@ -40,7 +51,6 @@ const catalog = [
   },
   {
     "id": "beams",
-    "description": "Find out which shapes hold, which bend, and which snap. Clamp and load your own structures until you understand why some things stand up and others collapse.",
     "tags": "physicsTag materialsTag mechanicsTag buildingTag measurementTag instantTag solidTag machinesTag geometryTag",
     "title": "Beams",
     "color": "brown",
@@ -53,7 +63,6 @@ const catalog = [
   },
   {
     "id": "sales",
-    "description": "Learn to hear what people actually mean. With a stethoscope, a recorder, and hands-on experiments in attention, you'll practice listening and clarifying until a conversation builds into something that grows.",
     "tags": "economicsTag psychologyTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag socialTag",
     "title": "Sales",
     "color": "forest",
@@ -76,7 +85,6 @@ const catalog = [
   },
   {
     "id": "carpentry",
-    "description": "Measure twice, cut once. Saw, chisel, and level your first real woodworking project while you learn how careful measurement turns a rough board into something true and square.",
     "tags": "plantTag materialsTag mechanicsTag buildingTag creativeTag hazardTag solidTag machinesTag geometryTag",
     "title": "Carpentry",
     "color": "brown",
@@ -119,7 +127,6 @@ const catalog = [
   },
   {
     "id": "electricity",
-    "description": "Build a circuit and watch a bulb light. Connect wires, flip switches, and meter the flow until you can make, measure, and move electricity on purpose.",
     "tags": "physicsTag electricityTag electromagnetismTag buildingTag measurementTag instantTag hazardTag energyTag",
     "title": "Electricity",
     "color": "navy",
@@ -132,29 +139,14 @@ const catalog = [
   },
   {
     "id": "fire",
-    "description": "Make fire, then learn to use it. Light, warm, melt, and join with real flames under your control, and see the chemistry that turns a spark into useful work.",
     "tags": "physicsTag chemistryTag instantTag hazardTag gasTag combustionTag energyTag temperatureTag",
     "title": "Fire",
     "color": "coral",
-    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 256 256\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><filter id=\"cover-image-rnnulinwuc\" x=\"0\" y=\"0\" width=\"100%\" height=\"100%\" color-interpolation-filters=\"sRGB\"><feFlood flood-color=\"currentColor\"/><feComposite in2=\"SourceAlpha\" operator=\"in\"/></filter></defs><image href=\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBTVkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xzIC0tPg0KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTQuNDUyNyA4LjQ4Njc5TDEyLjE4NDIgMy45Mzg5NkwxMS40NDcxIDQuNzQzMDlDNy4zMDk0NSA5LjI1NjkzIDYgMTEuOTYwOSA2IDE0LjI0OTlDNiAxNy40MjIgOC43MzQ1MiAxOS45MDkgMTIgMTkuOTA5QzE1LjI2NTUgMTkuOTA5IDE4IDE3LjQyMiAxOCAxNC4yNDk5QzE4IDEzLjMxNzkgMTcuNjc0NiAxMi4zMTI0IDE3LjIzODEgMTEuMzY1OEMxNi43OTYgMTAuNDA2OSAxNi4yMDkxIDkuNDQzMzUgMTUuNjIgOC41Nzc4OEwxNS4xMDY1IDcuODIzNDJMMTQuNDUyNyA4LjQ4Njc5Wk0xNC4wNDczIDExLjAzNDhMMTQuODgxOCAxMC4xODgzQzE1LjI1NiAxMC43ODQ2IDE1LjYwMDggMTEuMzk3IDE1Ljg3NiAxMS45OTM4QzE2LjI3NjUgMTIuODYyNSAxNi41IDEzLjYzNTcgMTYuNSAxNC4yNDk5QzE2LjUgMTUuMDk0MSAxNi4yMjMzIDE1Ljg5MDEgMTUuNzQzOCAxNi41NTU0QzE1Ljc0NzkgMTYuNDkzNSAxNS43NSAxNi40MzA5IDE1Ljc1IDE2LjM2NzVDMTUuNzUgMTUuODA1NiAxNS41MjMxIDE1LjI0MTMgMTUuMjYzMiAxNC43NjI0QzE0Ljk5NDYgMTQuMjY3OSAxNC42NDM0IDEzLjc3OTggMTQuMjk5NSAxMy4zNTA3TDEzLjgxMzUgMTIuNzQ0M0wxMy40NzcyIDEzLjAzNEwxMi4xNzQ0IDEwLjgxNTlMMTEuNDkwMyAxMS40NDk3QzkuMTM3MjEgMTMuNjI5OCA4LjI1IDE1LjA1MDggOC4yNSAxNi4zNjc1QzguMjUgMTYuNDMwOSA4LjI1MjA5IDE2LjQ5MzUgOC4yNTYyMiAxNi41NTU0QzcuNzc2NjkgMTUuODkwMSA3LjUgMTUuMDk0MSA3LjUgMTQuMjQ5OUM3LjUgMTIuNjc4NiA4LjMyNyAxMC41MzA4IDExLjgyMDYgNi41NzA1TDE0LjA0NzMgMTEuMDM0OFpNMTMuMDk0MyAxNS4zNDRMMTMuNTk0OCAxNC45MTI3QzEzLjcyNTkgMTUuMTAzNiAxMy44NDQ3IDE1LjI5MzYgMTMuOTQ0OSAxNS40NzgxQzE0LjE2MzIgMTUuODgwMiAxNC4yNSAxNi4xNzkxIDE0LjI1IDE2LjM2NzVDMTQuMjUgMTcuMTE3MSAxMy40MTMxIDE3Ljk5OTkgMTIgMTcuOTk5OUMxMC41ODY5IDE3Ljk5OTkgOS43NSAxNy4xMTcxIDkuNzUgMTYuMzY3NUM5Ljc1IDE1LjgyMzUgMTAuMDY5NyAxNC45NDY0IDExLjgzMzQgMTMuMTk3MkwxMy4wOTQzIDE1LjM0NFoiIGZpbGw9IiMwODAzNDEiLz4NCjwvc3ZnPg==\" width=\"256\" height=\"256\" preserveAspectRatio=\"xMidYMid meet\" filter=\"url(#cover-image-rnnulinwuc)\"/></svg>",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 256 256\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><filter id=\"cover-image-yypgqggd2y\" x=\"0\" y=\"0\" width=\"100%\" height=\"100%\" color-interpolation-filters=\"sRGB\"><feFlood flood-color=\"currentColor\"/><feComposite in2=\"SourceAlpha\" operator=\"in\"/></filter></defs><image href=\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBTVkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xzIC0tPg0KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTQuNDUyNyA4LjQ4Njc5TDEyLjE4NDIgMy45Mzg5NkwxMS40NDcxIDQuNzQzMDlDNy4zMDk0NSA5LjI1NjkzIDYgMTEuOTYwOSA2IDE0LjI0OTlDNiAxNy40MjIgOC43MzQ1MiAxOS45MDkgMTIgMTkuOTA5QzE1LjI2NTUgMTkuOTA5IDE4IDE3LjQyMiAxOCAxNC4yNDk5QzE4IDEzLjMxNzkgMTcuNjc0NiAxMi4zMTI0IDE3LjIzODEgMTEuMzY1OEMxNi43OTYgMTAuNDA2OSAxNi4yMDkxIDkuNDQzMzUgMTUuNjIgOC41Nzc4OEwxNS4xMDY1IDcuODIzNDJMMTQuNDUyNyA4LjQ4Njc5Wk0xNC4wNDczIDExLjAzNDhMMTQuODgxOCAxMC4xODgzQzE1LjI1NiAxMC43ODQ2IDE1LjYwMDggMTEuMzk3IDE1Ljg3NiAxMS45OTM4QzE2LjI3NjUgMTIuODYyNSAxNi41IDEzLjYzNTcgMTYuNSAxNC4yNDk5QzE2LjUgMTUuMDk0MSAxNi4yMjMzIDE1Ljg5MDEgMTUuNzQzOCAxNi41NTU0QzE1Ljc0NzkgMTYuNDkzNSAxNS43NSAxNi40MzA5IDE1Ljc1IDE2LjM2NzVDMTUuNzUgMTUuODA1NiAxNS41MjMxIDE1LjI0MTMgMTUuMjYzMiAxNC43NjI0QzE0Ljk5NDYgMTQuMjY3OSAxNC42NDM0IDEzLjc3OTggMTQuMjk5NSAxMy4zNTA3TDEzLjgxMzUgMTIuNzQ0M0wxMy40NzcyIDEzLjAzNEwxMi4xNzQ0IDEwLjgxNTlMMTEuNDkwMyAxMS40NDk3QzkuMTM3MjEgMTMuNjI5OCA4LjI1IDE1LjA1MDggOC4yNSAxNi4zNjc1QzguMjUgMTYuNDMwOSA4LjI1MjA5IDE2LjQ5MzUgOC4yNTYyMiAxNi41NTU0QzcuNzc2NjkgMTUuODkwMSA3LjUgMTUuMDk0MSA3LjUgMTQuMjQ5OUM3LjUgMTIuNjc4NiA4LjMyNyAxMC41MzA4IDExLjgyMDYgNi41NzA1TDE0LjA0NzMgMTEuMDM0OFpNMTMuMDk0MyAxNS4zNDRMMTMuNTk0OCAxNC45MTI3QzEzLjcyNTkgMTUuMTAzNiAxMy44NDQ3IDE1LjI5MzYgMTMuOTQ0OSAxNS40NzgxQzE0LjE2MzIgMTUuODgwMiAxNC4yNSAxNi4xNzkxIDE0LjI1IDE2LjM2NzVDMTQuMjUgMTcuMTE3MSAxMy40MTMxIDE3Ljk5OTkgMTIgMTcuOTk5OUMxMC41ODY5IDE3Ljk5OTkgOS43NSAxNy4xMTcxIDkuNzUgMTYuMzY3NUM5Ljc1IDE1LjgyMzUgMTAuMDY5NyAxNC45NDY0IDExLjgzMzQgMTMuMTk3MkwxMy4wOTQzIDE1LjM0NFoiIGZpbGw9IiMwODAzNDEiLz4NCjwvc3ZnPg==\" width=\"256\" height=\"256\" preserveAspectRatio=\"xMidYMid meet\" filter=\"url(#cover-image-yypgqggd2y)\"/></svg>",
     "shelf": "believer",
     "priceUsd": 249,
     "skills": "cook light warm melt join",
     "tools": "stove candle warmers lighter iron"
-  },
-  {
-    "id": "launch",
-    "description": "Includes ticket to Knowbooks launch celebration. Beachside on Oahu. Date to be determined by El Niño. November 2026.",
-    "tags": "economicsTag measurementTag creativeTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag",
-    "title": "launch",
-    "color": "forest",
-    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 256 256\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M 30.7 194.6 C 35.8 194.6 38.4 192 47.4 192 C 56.3 192 58.9 194.6 64 194.6\"/><path d=\"M 84.5 194.6 C 92.2 194.6 92.2 179.2 101.1 179.2 C 110.1 179.2 110.1 194.6 117.8 194.6\"/><path d=\"M 138.2 194.6 C 143.4 194.6 145.9 192 154.9 192 C 163.8 192 166.4 194.6 171.5 194.6\"/><path d=\"M 192 194.6 C 199.7 194.6 199.7 61.4 208.6 61.4 C 217.6 61.4 217.6 194.6 225.3 194.6\"/></svg>",
-    "shelf": "believer special",
-    "priceUsd": 175,
-    "coverDescription": "four sine-like launch waves from left to right: a nearly flat ripple, a small rise and fall, another nearly flat ripple, then a steep rise and fall",
-    "fulfillment": "pickup",
-    "skills": "live laugh love learn launch",
-    "tools": "cup sunglasses paper lighter balloons"
   },
   {
     "id": "gold",
@@ -960,7 +952,7 @@ const catalog = [
     "tags": "economicsTag buildingTag creativeTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag",
     "title": "Knowbooks",
     "color": "brown",
-    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 256 256\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><filter id=\"cover-image-u8nvbjb5ke\" x=\"0\" y=\"0\" width=\"100%\" height=\"100%\" color-interpolation-filters=\"sRGB\"><feFlood flood-color=\"currentColor\"/><feComposite in2=\"SourceAlpha\" operator=\"in\"/></filter></defs><image href=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiA8dGl0bGUgaWQ9InRpdGxlIj5Lbm93Ym9va3M8L3RpdGxlPgogPGRlc2MgaWQ9ImRlc2MiPkEgY2lyY3VsYXIgcmluZyBzdXBwb3J0ZWQgYnkgdHdvIGhhbmRzLjwvZGVzYz4KIDxnIGZpbGw9IiNkOWJjNzgiPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEyOCAxNEM2OC40NSAxNCAyMCA2Mi40NSAyMCAxMjJjMCAxOC4xMiA0LjUgMzUuMiAxMi40MiA1MC4ybDEyLjM3LTcuMTVBOTMuMjggOTMuMjggMCAwIDEgMzQuMyAxMjJjMC01MS42NyA0Mi4wMy05My43IDkzLjctOTMuN3M5My43IDQyLjAzIDkzLjcgOTMuN2E5My4yOCA5My4yOCAwIDAgMS0xMC40OSA0My4wNWwxMi4zNyA3LjE1QTEwNy40MiAxMDcuNDIgMCAwIDAgMjM2IDEyMmMwLTU5LjU1LTQ4LjQ1LTEwOC0xMDgtMTA4WiIvPgogIDxwYXRoIGQ9Ik0yOS4zMSAxNTYuNDJjLTQuMzQtNy4yMy0zLjY2LTEzLjc3LjA3LTE1Ljg0IDMuMzgtMS44NyA3LjMzLjMxIDEwLjUzIDQuNGwyMi44MiAyNS4xNmMxLjEyIDEuMjQgMi44NS0uMzEgMS44OC0xLjY2bC0xOS4xLTI2LjY3Yy0zLjY3LTUuMTMtMy4zMy0xMC4xOS4yLTEyLjQxIDMuNzctMi4zOCA4LjU0LjY1IDEyLjUyIDUuMjZsMTguMSAyMC45N2MzLjcgNC4yOSA4LjM2IDcuNjUgMTIuMDUgMTIuNiA1Ljk2IDcuOTkgNi4wOCAxOS40OCA2LjA4IDMxLjM2djI1Ljk5Yy0yNC4xLTIuODYtNDMuMDItMTIuNTEtNTMuODUtMjYuNDgtNy4zOC05LjUyLTguNzYtMjMuNTMtMTEuMy00Mi42OFoiLz4KICA8cGF0aCBkPSJNMjI2LjY5IDE1Ni40MmM0LjM0LTcuMjMgMy42Ni0xMy43Ny0uMDctMTUuODQtMy4zOC0xLjg3LTcuMzMuMzEtMTAuNTMgNC40bC0yMi44MiAyNS4xNmMtMS4xMiAxLjI0LTIuODUtLjMxLTEuODgtMS42NmwxOS4xLTI2LjY3YzMuNjctNS4xMyAzLjMzLTEwLjE5LS4yLTEyLjQxLTMuNzctMi4zOC04LjU0LjY1LTEyLjUyIDUuMjZsLTE4LjEgMjAuOTdjLTMuNyA0LjI5LTguMzYgNy42NS0xMi4wNSAxMi42LTUuOTYgNy45OS02LjA4IDE5LjQ4LTYuMDggMzEuMzZ2MjUuOTljMjQuMS0yLjg2IDQzLjAyLTEyLjUxIDUzLjg1LTI2LjQ4IDcuMzgtOS41MiA4Ljc2LTIzLjUzIDExLjMtNDIuNjhaIi8+CiA8L2c+Cjwvc3ZnPg==\" width=\"256\" height=\"256\" preserveAspectRatio=\"xMidYMid meet\" filter=\"url(#cover-image-u8nvbjb5ke)\"/></svg>",
+    "cover": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 256 256\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><filter id=\"cover-image-r89gz0p03pp\" x=\"0\" y=\"0\" width=\"100%\" height=\"100%\" color-interpolation-filters=\"sRGB\"><feFlood flood-color=\"currentColor\"/><feComposite in2=\"SourceAlpha\" operator=\"in\"/></filter></defs><image href=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiA8dGl0bGUgaWQ9InRpdGxlIj5Lbm93Ym9va3M8L3RpdGxlPgogPGRlc2MgaWQ9ImRlc2MiPkEgY2lyY3VsYXIgcmluZyBzdXBwb3J0ZWQgYnkgdHdvIGhhbmRzLjwvZGVzYz4KIDxnIGZpbGw9IiNkOWJjNzgiPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEyOCAxNEM2OC40NSAxNCAyMCA2Mi40NSAyMCAxMjJjMCAxOC4xMiA0LjUgMzUuMiAxMi40MiA1MC4ybDEyLjM3LTcuMTVBOTMuMjggOTMuMjggMCAwIDEgMzQuMyAxMjJjMC01MS42NyA0Mi4wMy05My43IDkzLjctOTMuN3M5My43IDQyLjAzIDkzLjcgOTMuN2E5My4yOCA5My4yOCAwIDAgMS0xMC40OSA0My4wNWwxMi4zNyA3LjE1QTEwNy40MiAxMDcuNDIgMCAwIDAgMjM2IDEyMmMwLTU5LjU1LTQ4LjQ1LTEwOC0xMDgtMTA4WiIvPgogIDxwYXRoIGQ9Ik0yOS4zMSAxNTYuNDJjLTQuMzQtNy4yMy0zLjY2LTEzLjc3LjA3LTE1Ljg0IDMuMzgtMS44NyA3LjMzLjMxIDEwLjUzIDQuNGwyMi44MiAyNS4xNmMxLjEyIDEuMjQgMi44NS0uMzEgMS44OC0xLjY2bC0xOS4xLTI2LjY3Yy0zLjY3LTUuMTMtMy4zMy0xMC4xOS4yLTEyLjQxIDMuNzctMi4zOCA4LjU0LjY1IDEyLjUyIDUuMjZsMTguMSAyMC45N2MzLjcgNC4yOSA4LjM2IDcuNjUgMTIuMDUgMTIuNiA1Ljk2IDcuOTkgNi4wOCAxOS40OCA2LjA4IDMxLjM2djI1Ljk5Yy0yNC4xLTIuODYtNDMuMDItMTIuNTEtNTMuODUtMjYuNDgtNy4zOC05LjUyLTguNzYtMjMuNTMtMTEuMy00Mi42OFoiLz4KICA8cGF0aCBkPSJNMjI2LjY5IDE1Ni40MmM0LjM0LTcuMjMgMy42Ni0xMy43Ny0uMDctMTUuODQtMy4zOC0xLjg3LTcuMzMuMzEtMTAuNTMgNC40bC0yMi44MiAyNS4xNmMtMS4xMiAxLjI0LTIuODUtLjMxLTEuODgtMS42NmwxOS4xLTI2LjY3YzMuNjctNS4xMyAzLjMzLTEwLjE5LS4yLTEyLjQxLTMuNzctMi4zOC04LjU0LjY1LTEyLjUyIDUuMjZsLTE4LjEgMjAuOTdjLTMuNyA0LjI5LTguMzYgNy42NS0xMi4wNSAxMi42LTUuOTYgNy45OS02LjA4IDE5LjQ4LTYuMDggMzEuMzZ2MjUuOTljMjQuMS0yLjg2IDQzLjAyLTEyLjUxIDUzLjg1LTI2LjQ4IDcuMzgtOS41MiA4Ljc2LTIzLjUzIDExLjMtNDIuNjhaIi8+CiA8L2c+Cjwvc3ZnPg==\" width=\"256\" height=\"256\" preserveAspectRatio=\"xMidYMid meet\" filter=\"url(#cover-image-r89gz0p03pp)\"/></svg>",
     "shelf": "special",
     "priceUsd": 10000
   },
