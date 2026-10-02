@@ -783,7 +783,7 @@ script
   const referralCodes = new Set("john kendric liz daylight kemi mikayla joe blake daniel francisco butler hassam ash goodman frank ari leah mystery nico cora yc".split(" "));
   const shippingByShelf = {
    believer: "Ship within 30 days",
-   frontier: "Ship within 12 months"
+   frontier: "Ship within 6 months"
   };
   const editionNameByShelf = {
    believer: "Believer",
