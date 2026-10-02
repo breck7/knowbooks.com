@@ -53,6 +53,10 @@ id animalsTag
 question Is understanding an animal a central goal?
 keywords organism life
 
+id neuroscienceTag
+question Is understanding the brain, neurons, or the nervous system a central goal?
+keywords neuroscience neuro neuron neurons neural nerve nerves nervous brain brains synapse synapses
+
 id plantTag
 question Does this knowbook centrally involve plants or materials obtained from plants?
 

@@ -23,6 +23,11 @@ const tags = [
     "question": "Is understanding an animal a central goal?"
   },
   {
+    "id": "neuroscienceTag",
+    "keywords": "neuroscience neuro neuron neurons neural nerve nerves nervous brain brains synapse synapses",
+    "question": "Is understanding the brain, neurons, or the nervous system a central goal?"
+  },
+  {
     "id": "plantTag",
     "question": "Does this knowbook centrally involve plants or materials obtained from plants?"
   },
