@@ -771,6 +771,7 @@ script
   const tagMembers = tags.map(tag => new Set(productCatalog.filter(product => productTags.get(product.id).has(tag.id)).map(product => product.id)));
   const tagVectors = new Map(productCatalog.map(product => [product.id, tagMembers.map(members => Number(members.has(product.id)))]));
   const searchableTitles = new Map(productCatalog.map(product => [product.id, [product.id, product.title, product.signature || "", ...tags.filter((tag, index) => tagMembers[index].has(product.id)).map(tag => `${tag.id} ${tag.keywords || ""}`)].join(" ").toLowerCase()]));
+  const searchableDetails = new Map(productCatalog.map(product => [product.id, [product.skills || "", product.tools || ""].join(" ").toLowerCase()]));
   const vectorDistance = (a, b) => {
    const left = tagVectors.get(a), right = tagVectors.get(b);
    return 1 - left.reduce((sum, bit, i) => sum + (bit & right[i]), 0) / (left.reduce((sum, bit, i) => sum + (bit | right[i]), 0) || 1);
@@ -861,6 +862,8 @@ script
     distance: Math.min(...seeds.map(id => vectorDistance(product.id, id)))
    })).filter(product => product.distance <= 0.25).sort((a, b) => a.distance - b.distance).slice(0, 6) : [];
    const hits = [...direct, ...neighbors], hitIds = new Set(hits.map(product => product.id));
+   // After the title/tag results, append products whose skills or tools lines match the query.
+   if (query) productCatalog.forEach(product => { if (!hitIds.has(product.id) && terms.some(term => searchableDetails.get(product.id).includes(term))) { hits.push(product); hitIds.add(product.id); } });
    if (query) hits.forEach(product => grid.appendChild(document.getElementById(product.id)));
    else catalogNodes.forEach(node => grid.appendChild(node));
    const url = new URL(location.href);
