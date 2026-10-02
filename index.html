@@ -1594,9 +1594,10 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
   }
   ['#signature-element-13','#startups-element-13','#training-element-6'].forEach(selector => { $(selector).onclick = event => open(event); });
   document.addEventListener('keydown', event => {
-   if(event.key !== 'd' || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || event.repeat || event.isComposing || event.defaultPrevented) return;
+   if(!['d','c'].includes(event.key) || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || event.repeat || event.isComposing || event.defaultPrevented) return;
    if(event.target.isContentEditable || event.target.closest('input, textarea, select, [role="textbox"]') || document.querySelector('dialog[open]')) return;
-   event.preventDefault(); closeCart(); closeBook(); open();
+   event.preventDefault();
+   event.key === 'c' ? openCart() : (closeCart(), closeBook(), open());
   });
   $('#design-close').onclick = () => dialog.close();
   dialog.addEventListener('click', event => { if(event.target===dialog) { const r=dialog.getBoundingClientRect(); if(event.clientX<r.left || event.clientX>r.right || event.clientY<r.top || event.clientY>r.bottom) dialog.close(); } });
