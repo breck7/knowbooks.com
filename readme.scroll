@@ -359,7 +359,7 @@ css
   <section class="hero">
    <h1>Knowbooks are books you <em>do</em>.</h1>
    <p class="intro">No pages. No screens. A Knowbook is an experiment kit in a book. Open one, do the experiments, and grow superpowers.</p>
-   <a class="down" href="#catalog">Build your shelf <span aria-hidden="true">↓</span></a>
+   <a class="down" href="#catalog">Shop books that ship in 30 days <span aria-hidden="true">↓</span></a>
   </section>
   <section class="catalog-section" id="catalog" aria-labelledby="catalog-title">
    <div class="catalog-tools"><input id="catalog-search" type="search" placeholder="Search books…" aria-label="Search knowbooks" aria-controls="product-grid" title="Search book titles, signatures, or tags; separate words with spaces to match any." autocomplete="off"></div>
