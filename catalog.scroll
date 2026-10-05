@@ -54,6 +54,10 @@ descriptionParser
  extends abstractStringMeasureParser
  description Optional product description.
 
+videoParser
+ extends abstractStringMeasureParser
+ description Optional video path shown on the inside front cover when the Knowbook is opened.
+
 skillsParser
  extends abstractStringMeasureParser
  description Space-separated verbs naming what the Knowbook teaches. At least five.
@@ -76,8 +80,10 @@ tagsParser
 // data
 
 // new product launches
+
 id launch
-description Includes ticket to Knowbooks launch celebration. Beachside on Oahu. Date to be determined by El Niño. November 2026.
+description Includes Knowbooks launch brunch ticket. Beachside on Oahu. November 4-6 2026.
+video videos/launch.mp4
 fulfillment pickup
 tags economicsTag measurementTag creativeTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag
 color forest
@@ -95,6 +101,7 @@ cover
 
 id magnets
 tags physicsTag mechanicsTag electricityTag electromagnetismTag instantTag metalTag
+video videos/magnets.mp4
 color navy
 title Magnets
 skills push pull point test see lift find
@@ -108,11 +115,12 @@ cover
  line 94.7 128 161.3 128
 
 // physical experiments that teach both non-linear physical jumps and metaphorically the personal/social power of focus
+
 id focus
 tags physicsTag psychologyTag instantTag startupsTag emotionalSkillsTag
 color coral
 title Focus
-skills pierce spark direct cut spread 
+skills pierce spark direct cut spread
 tools needle magnifier funnel scissors paper
 shelf believer
 priceUsd 199
@@ -199,6 +207,7 @@ cover
  filledPath M128 117.8 C122.9 128 115.2 135.7 115.2 143.4 A12.8 12.8 0 0 0 140.8 143.4 C140.8 135.7 133.1 128 128 117.8 Z
 
 // economic system
+
 id capital
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 color forest
@@ -217,6 +226,7 @@ cover
  filledCircle 184.3 189.4 33.3
 
 // real estate investing
+
 id buildings
 tags economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag
 color burgundy
@@ -316,7 +326,6 @@ cover
   dotRow 216 120 1.1 124 1.5 128 0.9
   dotRow 220 120 0.9 124 1.2 128 0.4
 
-
 id silver
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Silver
@@ -369,7 +378,6 @@ cover
   dotRow 196 32 1 36 1.1 40 1.1 44 1.2 48 1.2 52 1 56 1.2 60 1.1 64 1.1 68 1 72 1.2 76 1.1 80 1.1 84 1 88 1.1 92 1.2 96 1.1 100 1 104 1 108 1.2 112 1.2 116 1 120 1 124 1.1 128 1.2 132 1.1 136 1 140 0.9 144 1.2 148 1.2 152 1 156 0.9 160 1.2 164 1.2 168 1 172 1 176 0.9 180 1.1 184 1.2 188 1 192 1.1 196 1.2 200 1.2
   dotRow 200 40 0.8 44 0.9 48 0.9 52 1.1 56 0.9 60 0.9 64 1 68 1.1 72 0.9 76 0.9 80 1 84 1 88 0.4 92 0.9 96 1 100 1.1 108 0.9 112 0.9 120 0.7 124 0.9 128 0.9 136 0.9 140 0.9 144 0.9 148 0.9 152 0.9 156 0.9 160 0.9 164 1 168 1 172 1 176 1 180 0.9 184 1 188 0.9 192 1 196 1 200 1
   dotRow 204 124 0.1 152 0.3 168 0.2 180 0.8 184 0.2
-
 
 id bronze
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
@@ -496,6 +504,7 @@ shelf frontier
 priceUsd 249
 
 // venture capital
+
 id venture
 tags economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag startupsTag communicationTag
 title Venture
@@ -503,6 +512,7 @@ shelf frontier
 priceUsd 10000
 
 // fed
+
 id banking
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 title Banking
@@ -516,6 +526,7 @@ shelf frontier
 priceUsd 499
 
 // electromagnetic and other fields
+
 id fields
 tags physicsTag electricityTag electromagnetismTag wavesTag instantTag
 title Fields
@@ -547,6 +558,7 @@ shelf frontier
 priceUsd 299
 
 // the coiled machine
+
 id springs
 tags physicsTag materialsTag mechanicsTag buildingTag measurementTag instantTag solidTag energyTag machinesTag cyclesTag motionTag
 title Springs
@@ -692,6 +704,7 @@ shelf frontier
 priceUsd 299
 
 // chemical and other bonds
+
 id bonds
 tags physicsTag chemistryTag materialsTag
 title Bonds
@@ -717,6 +730,7 @@ shelf frontier
 priceUsd 249
 
 // benefits of rowing in sync.
+
 id alignment
 tags psychologyTag multiplePeopleTag cooperationTag socialTag
 title Alignment
@@ -874,6 +888,7 @@ shelf frontier
 priceUsd 249
 
 // aka wrinkles/steaming
+
 id ironing
 tags physicsTag plantTag materialsTag instantTag hazardTag gasTag energyTag temperatureTag
 title Ironing
@@ -899,6 +914,7 @@ shelf frontier
 priceUsd 599
 
 // the language/software
+
 id scroll
 tags computingTag buildingTag creativeTag instantTag communicationTag
 title Scroll
@@ -1014,6 +1030,7 @@ shelf frontier
 priceUsd 1499
 
 // aka parenting
+
 id raising
 tags biologyTag psychologyTag longTermTag multiplePeopleTag growthTag healthTag communicationTag cooperationTag timeTag emotionalSkillsTag parentingTag familyTag socialTag
 title Raising
@@ -1021,6 +1038,7 @@ shelf frontier
 priceUsd 1921
 
 // aka dating
+
 id attraction
 tags psychologyTag longTermTag multiplePeopleTag communicationTag emotionalSkillsTag datingTag familyTag matingTag socialTag
 title Attraction
@@ -1076,6 +1094,7 @@ shelf frontier
 priceUsd 406
 
 // Fluids / Navier–Stokes
+
 id flow
 tags physicsTag mechanicsTag fluidsTag measurementTag instantTag gasTag liquidTag pressureTag
 title Flow
@@ -1101,6 +1120,7 @@ shelf frontier
 priceUsd 10000
 
 // the brain and nervous system
+
 id neurons
 tags neuroscienceTag biologyTag healthTag
 title Neurons
@@ -1108,6 +1128,7 @@ shelf frontier
 priceUsd 799
 
 // Partner onboarding: purchase includes the initial conversation.
+
 id knowbook
 tags economicsTag buildingTag creativeTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag
 title Knowbooks
