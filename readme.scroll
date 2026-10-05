@@ -266,6 +266,7 @@ css
  .book-preview { position: fixed; z-index: 30; inset: 0; background: rgba(23,23,20,.55); opacity: 0; visibility: hidden; transition: opacity 250ms, visibility 250ms; }
  .book-preview.is-open { opacity: 1; visibility: visible; }
  .preview-book { position: absolute; left: 50%; top: 50%; width: min(320px, 42vw, 62svh); aspect-ratio: .72; translate: 0 -50%; transform: translate(var(--x), var(--y)) scale(var(--scale)); transition: transform 450ms cubic-bezier(.2,.8,.2,1); perspective: 1400px; }
+ .preview-book-video { width: min(42vw, 56svh, 560px); perspective: 1600px; }
  .book-preview.is-open .preview-book { transform: none; }
  .preview-pages { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 36px 10% 22px; overflow: clip; border-radius: 2px 12px 12px 2px; background: #fffaf0; box-shadow: 11px 16px 35px rgba(0,0,0,.28), inset 7px 0 12px rgba(90,70,35,.12); }
  .preview-pages p { margin: 0; font: 400 16px/1.5 Arial, sans-serif; text-wrap: pretty; }
@@ -281,6 +282,11 @@ css
  .preview-cover h3, .preview-cover .book-signature, .preview-cover .book-symbol, .preview-cover .book-brand { transition: opacity 100ms 450ms; }
  .book-preview.is-open .preview-cover { transform: rotateY(-155deg); }
  .book-preview.is-open .preview-cover h3, .book-preview.is-open .preview-cover .book-signature, .book-preview.is-open .preview-cover .book-symbol, .book-preview.is-open .preview-cover .book-brand { opacity: 0; }
+ .preview-flip { transform-style: preserve-3d; }
+ .preview-flip .book-cover { width: 100%; height: 100%; }
+ .preview-face { position: absolute; inset: 0; overflow: hidden; border-radius: 2px 12px 12px 2px; backface-visibility: hidden; }
+ .preview-back { transform: rotateY(180deg); background: #140f0a; box-shadow: inset 0 0 26px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.06); }
+ .preview-back video { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.36); }
  .product-info { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-top: 23px; }
  .product-meta p { margin: 4px 0 0; color: var(--muted); font: 12px/1.4 Arial, sans-serif; }
  .price { font-size: 19px; }
@@ -346,7 +352,7 @@ css
  noscript { display: block; padding: 12px; color: white; background: #8a2d21; text-align: center; }
  @media (max-width: 850px) { .product-grid { grid-template-columns: repeat(2, 1fr); } .section-heading { grid-template-columns: 1fr; } }
  @media (max-width: 520px) { .product-grid { grid-template-columns: 1fr; } .cart { padding: 22px; } }
- @media (max-width: 520px) { .preview-book { width: min(320px, 78vw, 62svh); left: 50%; translate: -50% -50%; } .preview-pages { gap: 16px; } }
+ @media (max-width: 520px) { .preview-book { width: min(320px, 78vw, 62svh); left: 50%; translate: -50% -50%; } .preview-book-video { width: min(48vw, 56svh); translate: 0 -50%; } .preview-pages { gap: 16px; } }
  @media (max-height: 440px) { .preview-book { width: min(320px, 42vw, 80svh); aspect-ratio: 1; } .preview-pages { padding: 28px 8% 14px; gap: 9px; } .preview-pages p { font-size: 13px; line-height: 1.3; } .preview-know { gap: 5px; } .preview-know h4 { font-size: 12px; } .preview-skills li { padding: 1px 8px; font-size: 10px; } }
  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
 
@@ -1137,8 +1143,10 @@ script
    backgroundInert(true);
    document.body.classList.add("cart-open");
    const rect = cover.getBoundingClientRect();
-   preview.innerHTML = `<div class="preview-book"><div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>${escapeHtml(product.description || "Handmade in Hawaii. Every Knowbook is unique. Open yours and experiment.")}</p>${chipSection("Learn:", know)}${chipSection("Includes:", toolsOf(product))}${pickupNote(product) ? `<p class="preview-note">In-person pickup only.</p>` : ""}<button class="preview-add" data-add="${escapeHtml(product.id)}">Add to cart <span>${money.format(product.priceUsd)}</span></button></div>${cover.outerHTML}</div>`;
-   preview.querySelector(".book-cover").classList.add("preview-cover");
+   const pagesHtml = `<div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>${escapeHtml(product.description || "Handmade in Hawaii. Every Knowbook is unique. Open yours and experiment.")}</p>${chipSection("Learn:", know)}${chipSection("Includes:", toolsOf(product))}${pickupNote(product) ? `<p class="preview-note">In-person pickup only.</p>` : ""}<button class="preview-add" data-add="${escapeHtml(product.id)}">Add to cart <span>${money.format(product.priceUsd)}</span></button></div>`;
+   const coverHtml = product.video ? `<div class="preview-cover preview-flip"><div class="preview-face preview-front">${cover.outerHTML}</div><div class="preview-face preview-back"><video src="${escapeHtml(product.video)}" autoplay muted loop playsinline></video></div></div>` : `${cover.outerHTML}`;
+   preview.innerHTML = `<div class="preview-book${product.video ? " preview-book-video" : ""}">${pagesHtml}${coverHtml}</div>`;
+   if (!product.video) preview.querySelector(".book-cover").classList.add("preview-cover");
    preview.hidden = false;
    const book = preview.firstElementChild;
    book.style.transition = "none";
@@ -1153,6 +1161,7 @@ script
    if (preview.hidden) return;
    const url = new URL(location.href); url.searchParams.delete("knowbookId"); history.replaceState(null, "", url);
    preview.classList.remove("is-open"); preview.hidden = true;
+   preview.querySelector("video")?.pause();
    if (!drawer.classList.contains("is-open")) { backgroundInert(false); document.body.classList.remove("cart-open"); }
    if (restoreFocus) { previewFocus?.focus(); previewFocus = null; }
   };

@@ -343,7 +343,6 @@ dialog
    id partner-buy
    type button
 
-
 css
  #partner-dialog { width: min(1160px, calc(100% - 32px)); max-height: 92dvh; padding: 30px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); color: var(--ink); }
  #partner-dialog::backdrop { background: #18271ed0; backdrop-filter: blur(4px); }

@@ -1,5 +1,5 @@
-catalog.scroll
 buildCsv catalog.csv
+catalog.scroll
 concepts
  select id title signature shelf priceUsd description fulfillment
   printTable
