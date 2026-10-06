@@ -564,6 +564,7 @@ section
   <div>
   <p class="footer-label">&nbsp;</p>
   <nav class="footer-links" aria-label="Site and social links">
+  <a href="about.html">About</a>
   <a href="https://videos.knowbooks.com">Videos</a>
   <a href="https://x.com/breckyunits">X</a>
   <a href="https://github.com/breck7/knowbooks.com">GitHub</a>
@@ -1633,4 +1634,4 @@ script
 catalog.scroll
 buildCoverRuntime
 buildConcepts catalog.js
-buildZip knowbooks.zip index.html signature.js catalog.js covers.js catalog.csv tags.js gitHash.js knowbooksLogo.svg og.png hero-background.png kbc.jpg readme.scroll catalog.scroll catalogCsv.scroll covers.scroll tags.scroll partners.scroll upstreamToScroll.scroll s/checko s/qrcode
+buildZip knowbooks.zip index.html about.html signature.js catalog.js covers.js catalog.csv tags.js gitHash.js knowbooksLogo.svg og.png hero-background.png kbc.jpg readme.scroll about.scroll catalog.scroll catalogCsv.scroll covers.scroll tags.scroll partners.scroll upstreamToScroll.scroll s/checko s/qrcode
