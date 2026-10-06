@@ -22,7 +22,7 @@ main
   p Our mission
    addClass eyebrow
   h1 The mission of Knowbooks cannot be put in words…
-  p Knowbooks arose from research into making science, language, and information better for humans.
+  p Knowbooks arose from research into making science, language, and knowledge better serve humans.
    addClass intro
    link https://breck.lol/fordCat.html research
  section
