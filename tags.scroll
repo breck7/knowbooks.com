@@ -40,7 +40,7 @@ question Is understanding physical forces, energy, waves, or matter a central go
 
 id mathTag
 question Is understanding math a central goal?
-keywords numbers matrix matrices algebra calculus geometry functions charts graphs binary logarithms exponents magnitudes scales arithmetic equations mathematics symmetries symmetry
+keywords numbers matrix matrices algebra calculus geometry functions charts graphs binary logarithms exponents magnitudes scales arithmetic equations mathematics symmetries symmetry fourier transform linear vector vectors eigenvalue eigenvalues eigenvector eigenvectors differential derivative derivatives integral integrals
 
 id chemistryTag
 question Is chemical composition or chemical change central to this topic?
@@ -84,6 +84,7 @@ keywords electromagnetism electromagnetic electromagnet electromagnets magnetism
 
 id wavesTag
 question Are light, sound, or other wave phenomena central to this topic?
+keywords fourier spectrum spectral signal signals harmonic harmonics sine cosine sinusoid sinusoidal waveform
 
 id fluidsTag
 question Is the behavior or movement of liquids or gases central to this topic?

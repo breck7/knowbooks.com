@@ -5,7 +5,7 @@ const tags = [
   },
   {
     "id": "mathTag",
-    "keywords": "numbers matrix matrices algebra calculus geometry functions charts graphs binary logarithms exponents magnitudes scales arithmetic equations mathematics symmetries symmetry",
+    "keywords": "numbers matrix matrices algebra calculus geometry functions charts graphs binary logarithms exponents magnitudes scales arithmetic equations mathematics symmetries symmetry fourier transform linear vector vectors eigenvalue eigenvalues eigenvector eigenvectors differential derivative derivatives integral integrals",
     "question": "Is understanding math a central goal?"
   },
   {
@@ -62,6 +62,7 @@ const tags = [
   },
   {
     "id": "wavesTag",
+    "keywords": "fourier spectrum spectral signal signals harmonic harmonics sine cosine sinusoid sinusoidal waveform",
     "question": "Are light, sound, or other wave phenomena central to this topic?"
   },
   {
