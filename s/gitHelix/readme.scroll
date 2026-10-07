@@ -11,7 +11,10 @@ header
  a GitHelix
   href ./
   addClass wordmark
- span drag to spin
+ a Star us on GitHub ↗
+  href https://github.com/breck7/knowbooks.com/tree/main/s/gitHelix
+  target _blank
+  rel noopener noreferrer
   addClass hint
 section
  addClass panel
@@ -53,7 +56,8 @@ css
  header, footer, .panel { position: fixed; z-index: 2; }
  header { top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: baseline; padding: 18px 22px; pointer-events: none; }
  .wordmark { font-size: 18px; font-weight: 800; letter-spacing: -.03em; color: #eafff1; text-decoration: none; pointer-events: auto; }
- .hint { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #5f8a70; }
+ .hint { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #5f8a70; text-decoration: none; pointer-events: auto; transition: color .18s; }
+ .hint:hover { color: #9fe6b8; }
  .panel { top: 56px; left: 22px; width: min(348px, calc(100vw - 44px)); pointer-events: none; }
  .panel > * { pointer-events: auto; }
  form { display: flex; gap: 8px; padding: 7px; border: 1px solid #1c3a29; border-radius: 11px; background: rgba(9, 20, 14, .74); backdrop-filter: blur(10px); }
@@ -70,7 +74,7 @@ css
  footer a { color: #7fb894; text-decoration: none; }
  body.drop #stage { outline: 2px dashed #39d353; outline-offset: -12px; }
  a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid #39d353; outline-offset: 2px; }
- @media (max-width: 560px) { .panel { top: 52px; } .hint { display: none; } }
+ @media (max-width: 560px) { .panel { top: 52px; } .hint { font-size: 10px; letter-spacing: .06em; } }
 
 script
  (() => {
