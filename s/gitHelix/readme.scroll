@@ -79,6 +79,16 @@ script
   const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';
   const $ = id => document.getElementById(id);
   const stage = $('stage'), form = $('lookup'), input = $('username'), status = $('status'), meta = $('meta');
+  // Deep link: ?u=username (also accepts ?user= or ?q=). The URL updates as you load.
+  const params = new URLSearchParams(location.search);
+  const DEFAULT = input.value || 'breck7';
+  const shared = params.get('u') || params.get('user') || params.get('q');
+  const setLink = name => {
+   const url = new URL(location.href);
+   if (name) url.searchParams.set('u', name);
+   else url.searchParams.delete('u');
+   history.replaceState(null, '', url);
+  };
   const RADIUS = 1, PITCH = 0.46;
   let scene, camera, renderer, group, ready = false, pending = null;
   let theta = 0.7, phi = 1.3, targetPhi = 1.3, dist = 16, targetDist = 16;
@@ -231,13 +241,14 @@ script
   const load = async raw => {
    const name = usernameOf(raw);
    if (!name) { say('Enter a GitHub username or profile URL.', true); return; }
+   input.value = name;
    say('Loading ' + name + '…');
    try {
     const res = await fetch(API + encodeURIComponent(name) + '?y=all', { headers: { Accept: 'application/json' } });
     if (!res.ok) throw new Error(res.status === 404 ? 'No GitHub user named ' + name : 'GitHub data unavailable');
     const days = normalize(await res.json());
     if (!days.length) throw new Error('No public contributions found for ' + name);
-    input.value = name;
+    setLink(name);
     show(days, name + ' · ' + totalOf(days).toLocaleString() + ' contributions · ' + spanOf(days) + ' years');
    } catch (error) {
     say(error.message || 'Could not load that profile.', true);
@@ -249,6 +260,7 @@ script
     const rows = /^\s*[\[{]/.test(text) ? JSON.parse(text) : parseCsv(text);
     const days = normalize(rows);
     if (!days.length) throw new Error('No contributions in that file');
+    setLink('');
     show(days, file.name + ' · ' + totalOf(days).toLocaleString() + ' contributions · ' + spanOf(days) + ' years');
    }).catch(error => say(error.message || 'Could not read that file.', true));
   };
@@ -257,5 +269,6 @@ script
   addEventListener('dragleave', event => { if (!event.relatedTarget) document.body.classList.remove('drop'); });
   addEventListener('drop', event => { event.preventDefault(); document.body.classList.remove('drop'); if (event.dataTransfer.files[0]) readFile(event.dataTransfer.files[0]); });
   loadThree();
-  load(input.value);
+  load(shared || DEFAULT);
+  addEventListener('popstate', () => { load(new URLSearchParams(location.search).get('u') || DEFAULT); });
  })();
