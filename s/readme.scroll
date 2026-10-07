@@ -1,5 +1,5 @@
 title Free software by Knowbooks.com
-description Three small tools for a brighter day. Track a storm, make a checksum you can say, or turn a PDF into one long image. Free to use and make your own.
+description Small tools for a brighter day. Track a storm, make a checksum you can say, turn a PDF into one long image, or coil your GitHub years into a 3D helix. Free to use and make your own.
 baseUrl https://knowbooks.com/s/
 permalink index.html
 openGraphImage og.png
@@ -63,6 +63,20 @@ main
     Big PDF. One looong JPG. Stitch every page into an image, right in your browser.
     span Make a Longpic ↗
      addClass tool-action
+  a
+   href gitHelix/index.html
+   addClass tool
+   img
+    src gitHelix/og.png
+    alt GitHelix: a green spring of GitHub contribution dots, one loop for each year.
+    width 1200
+    height 630
+   div
+    addClass tool-copy
+    h2 GitHelix
+    Paste a GitHub profile. Watch your years become a spring.
+    span Spin your helix ↗
+     addClass tool-action
 footer
  id software-footer
  Built with Scroll.
@@ -83,7 +97,7 @@ css
  .eyebrow { margin: 0 0 12px; color: #547244; font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
  h1 { margin: 0 auto 14px; max-width: 700px; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.08; letter-spacing: -.055em; font-weight: 750; text-wrap: balance; }
  .intro { max-width: 590px; margin: auto; color: #596d5f; font-size: 16px; line-height: 1.6; text-wrap: balance; }
- .tool-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+ .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
  .tool { display: flex; flex-direction: column; overflow: hidden; border: 1px solid #d7e1cd; border-radius: 14px; background: #fffffc; transition: transform .18s, border-color .18s; }
  .tool:hover { transform: translateY(-3px); border-color: #8aa876; }
  .tool img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: #f6f3e8; border-bottom: 1px solid #e3e9dc; }
