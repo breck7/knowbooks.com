@@ -53,7 +53,12 @@ main
    li
     span October 2, 2026
      addClass when
-    span Knowbooks Inc. name registered in Hawaii.
+    span Knowbooks Inc. name reserved in Hawaii.
+     addClass what
+   li
+    span October 7, 2026
+     addClass when
+    span Knowbooks Inc. incorporates in Hawaii.
      addClass what
  section
   addClass about-section
