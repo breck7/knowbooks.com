@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="GitHelix">
+ <defs>
+  <linearGradient id="g" x1="0" y1="1" x2="0" y2="0">
+   <stop offset="0" stop-color="#1d6b3c"/>
+   <stop offset="1" stop-color="#63e39a"/>
+  </linearGradient>
+ </defs>
+ <path d="M6 5C26 8 26 12 6 15 26 18 26 22 6 25" fill="none" stroke="url(#g)" stroke-width="2.6" stroke-linecap="round"/>
+ <path d="M26 5C6 8 6 12 26 15 6 18 6 22 26 25" fill="none" stroke="url(#g)" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+ <circle cx="6" cy="5" r="2" fill="#eafff1"/>
+ <circle cx="26" cy="25" r="2" fill="#eafff1"/>
+</svg>
