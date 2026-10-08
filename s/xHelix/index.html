@@ -25,7 +25,7 @@
 <button id="particle2" type="submit" >Load</button></form>
 <div id="status" role="status" ></div>
 <div id="meta" ></div>
-<p id="particle4" class="tip">Drop data/tweets.js from your X archive.</p>
+<p id="particle4" class="tip">Drop data/tweets.js, JSON, CSV, or TSV.</p>
 <p id="particle5" class="help">x.com → Settings → Your account → Download an archive of your data.</p></section>
 <main id="stage" ></main>
 <footer id="particle12" ><a id="particle0" href="../index.html" >Free software from Knowbooks.com</a>
@@ -105,40 +105,80 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   return out;
  };
  const defaultSeries = () => fillRange(new Map(), Number(new Date().toISOString().slice(0, 4)) - 9);
- // Accept a tweets.js archive, tweet arrays, date/count arrays, a date map, or CSV text.
- const normalize = raw => {
-  let rows = [];
-  if (Array.isArray(raw)) rows = raw;
-  else if (raw && typeof raw === 'object') rows = Object.entries(raw).map(([date, count]) => ({ date, count }));
-  const today = new Date().toISOString().slice(0, 10);
-  return rows.map(r => ({ date: String(r.date || r.day || '').slice(0, 10), count: Math.max(0, Math.floor(Number(r.count != null ? r.count : r.total) || 0)) }))
-   .filter(r => isDate(r.date) && r.date <= today)
-   .sort((a, b) => (a.date < b.date ? -1 : 1));
+ // Be liberal in what we accept: any shape, any common date format.
+ const MONTHS = { jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12 };
+ const toISODate = value => {
+  if (value == null) return '';
+  const raw = String(value).trim();
+  if (/^\d{9,13}$/.test(raw)) { const n = Number(raw); const d = new Date(raw.length <= 10 ? n * 1000 : n); return isNaN(d) ? '' : d.toISOString().slice(0, 10); }
+  const iso = raw.match(/(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/);
+  if (iso) return iso[1] + '-' + String(iso[2]).padStart(2, '0') + '-' + String(iso[3]).padStart(2, '0');
+  const named = raw.match(/([A-Za-z]{3})[a-z]*\s+(\d{1,2})\b.*?(\d{4})\s*$/);
+  if (named && MONTHS[named[1].toLowerCase()]) return named[3] + '-' + String(MONTHS[named[1].toLowerCase()]).padStart(2, '0') + '-' + String(named[2]).padStart(2, '0');
+  if (/[A-Za-z]/.test(raw)) { const parsed = Date.parse(raw); if (!isNaN(parsed)) return new Date(parsed).toISOString().slice(0, 10); }
+  return '';
  };
+ const STAMPS = ['created_at', 'createdAt', 'created', 'date', 'day', 'time', 'timestamp', 'posted_at', 'postedAt', 'tweeted_at', 'epoch', 'when'];
  const stamp = row => {
-  const t = row && (row.tweet || row);
-  const v = t && (t.created_at || t.createdAt || t.date || t.time);
-  return v ? String(v).slice(0, 10) : '';
+  if (typeof row === 'string' || typeof row === 'number') return toISODate(row);
+  if (!row || typeof row !== 'object') return '';
+  const inner = row.tweet && typeof row.tweet === 'object' ? row.tweet : row;
+  for (const field of STAMPS) { if (inner[field] != null) { const date = toISODate(inner[field]); if (isDate(date)) return date; } }
+  return '';
  };
- const looksLikePosts = rows => Array.isArray(rows) && rows.some(r => r && ((r.tweet && r.tweet.created_at) || (r.created_at && r.count == null)));
- const toDays = raw => {
-  if (looksLikePosts(raw)) {
-   const counts = new Map();
-   for (const row of raw) { const d = stamp(row); if (isDate(d)) counts.set(d, (counts.get(d) || 0) + 1); }
-   return fillRange(counts);
+ const rowCount = row => Math.max(0, Math.floor(Number(row.count != null ? row.count : row.total != null ? row.total : 1) || 0));
+ const unwrap = raw => {
+  if (Array.isArray(raw)) return raw;
+  if (raw && typeof raw === 'object') { for (const key of ['tweets', 'data', 'items', 'posts', 'results', 'statuses', 'contributions', 'rows', 'records', 'activity']) if (Array.isArray(raw[key])) return raw[key]; }
+  return raw;
+ };
+ const collect = rows => {
+  const counts = new Map();
+  if (Array.isArray(rows)) {
+   const hasCount = rows.some(row => row && typeof row === 'object' && (row.count != null || row.total != null));
+   for (const row of rows) {
+    const date = stamp(row);
+    if (!isDate(date)) continue;
+    counts.set(date, (counts.get(date) || 0) + (hasCount && row && typeof row === 'object' ? rowCount(row) : 1));
+   }
+  } else if (rows && typeof rows === 'object') {
+   for (const [key, value] of Object.entries(rows)) { const date = toISODate(key); if (isDate(date)) counts.set(date, (counts.get(date) || 0) + Math.max(0, Math.floor(Number(value) || 0))); }
   }
-  return normalize(raw);
+  return counts;
+ };
+ const toDays = raw => fillRange(collect(unwrap(raw)));
+ const firstDate = cells => {
+  for (const cell of cells) if (/^\d{4}[-/.]\d{1,2}[-/.]\d{1,2}/.test(cell)) return toISODate(cell);
+  for (const cell of cells) if (/^\d{9,13}$/.test(cell)) return toISODate(cell);
+  for (const cell of cells) { const date = toISODate(cell); if (isDate(date)) return date; }
+  return '';
+ };
+ // JSON (any wrapper), tweets.js/`var x = [...]`, or delimited text (comma, tab, semicolon, pipe).
+ const parseDelimited = text => {
+  const lines = text.split(/\r?\n/).filter(line => line.trim());
+  if (!lines.length) return [];
+  let delimiter = ',', best = -1;
+  for (const candidate of ['\t', ',', ';', '|']) { const n = lines[0].split(candidate).length; if (n > best) { best = n; delimiter = candidate; } }
+  const cells = lines.map(line => line.split(delimiter).map(cell => cell.trim().replace(/^"|"$/g, '')));
+  const head = cells[0].map(cell => cell.toLowerCase());
+  const di = head.findIndex(cell => /date|time|created|posted|when|day/.test(cell));
+  const ci = head.findIndex(cell => /^(count|total|posts|tweets|number|num|n)$/.test(cell));
+  const hasHeader = di >= 0 || ci >= 0;
+  const body = hasHeader ? cells.slice(1) : cells;
+  if (di >= 0 && ci >= 0) return body.map(row => ({ date: row[di], count: Number(row[ci]) })).filter(row => isDate(toISODate(row.date)));
+  if (di >= 0) return body.map(row => ({ created_at: row[di] })).filter(row => isDate(toISODate(row.created_at)));
+  return body.map(row => {
+   const date = firstDate(row);
+   if (!date) return null;
+   const num = row.map(Number).find(n => Number.isFinite(n) && n >= 0 && n < 1e7);
+   return { date, count: hasHeader || !Number.isFinite(num) ? 1 : num };
+  }).filter(Boolean);
  };
  const parseArchive = (text, filename) => {
-  const t = text.trim();
-  if (/^window\.YTD\./.test(t)) return JSON.parse(t.replace(/^\s*window\.YTD\.[^=]+=\s*/, '').replace(/;\s*$/, ''));
-  if (/^[\[{]/.test(t) && !/\.csv$/i.test(filename || '')) return JSON.parse(t);
-  const rows = [];
-  for (const line of t.split(/\r?\n/)) {
-   const match = line.match(/(\d{4}-\d{2}-\d{2})\D+(\d+)/);
-   if (match) rows.push({ date: match[1], count: +match[2] });
-  }
-  return rows;
+  let body = String(text).replace(/^\uFEFF/, '').trim();
+  if (/^(window|var|const|let)\b/.test(body)) { const eq = body.indexOf('='); if (eq > -1) body = body.slice(eq + 1).trim().replace(/;\s*$/, ''); }
+  if (/^[\[{]/.test(body) && !/\.(csv|tsv|txt)$/i.test(filename || '')) { try { return JSON.parse(body); } catch (error) { return parseDelimited(body); } }
+  return parseDelimited(body);
  };
  // X-ish blue ramp for a 0–1 intensity.
  const ramp = t => {
