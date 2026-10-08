@@ -78,16 +78,16 @@ main
     span Spin your helix ↗
      addClass tool-action
   a
-   href xHelix/index.html
+   href heliX/index.html
    addClass tool
    img
-    src xHelix/og.png
-    alt xHelix: a blue spring of X post dots, one loop for each year.
+    src heliX/og.png
+    alt heliX: a blue spring of X post dots, one loop for each year.
     width 1200
     height 630
    div
     addClass tool-copy
-    h2 xHelix
+    h2 heliX
     Drop your X archive. Watch your posts become a spring.
     span Spin your helix ↗
      addClass tool-action

@@ -1,6 +1,6 @@
-title xHelix — Your X posts as a helix
+title heliX — Your X posts as a helix
 description Drop your X archive and watch every year of posts coil into one 3D helix. Runs in your browser.
-baseUrl https://knowbooks.com/s/xHelix/
+baseUrl https://knowbooks.com/s/heliX/
 openGraphImage og.png
 favicon favicon.svg
 permalink index.html
@@ -8,11 +8,13 @@ buildHtml
 metaTags
 
 header
- a xHelix
+ a heli
   href ./
   addClass wordmark
+  span X
+   addClass wordmarkX
  a Star us on GitHub ↗
-  href https://github.com/breck7/knowbooks.com/tree/main/s/xHelix
+  href https://github.com/breck7/knowbooks.com/tree/main/s/heliX
   target _blank
   rel noopener noreferrer
   addClass hint
@@ -56,6 +58,7 @@ css
  header, footer, .panel { position: fixed; z-index: 2; }
  header { top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: baseline; padding: 18px 22px; pointer-events: none; }
  .wordmark { font-size: 18px; font-weight: 800; letter-spacing: -.03em; color: #eaf6ff; text-decoration: none; pointer-events: auto; }
+ .wordmarkX { color: #4fc3ff; }
  .hint { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #5b7f9e; text-decoration: none; pointer-events: auto; transition: color .18s; }
  .hint:hover { color: #8fd0ff; }
  .panel { top: 56px; left: 22px; width: min(348px, calc(100vw - 44px)); pointer-events: none; }
