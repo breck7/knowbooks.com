@@ -1,1 +1,1 @@
-const KNOWBOOKS_GIT_HASH = "20c1c83";
+const KNOWBOOKS_GIT_HASH = "b779aa2";

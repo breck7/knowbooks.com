@@ -1,0 +1,313 @@
+title xHelix — Your X posts as a helix
+description Drop your X archive and watch every year of posts coil into one 3D helix. Runs in your browser.
+baseUrl https://knowbooks.com/s/xHelix/
+openGraphImage og.png
+favicon favicon.svg
+permalink index.html
+buildHtml
+metaTags
+
+header
+ a xHelix
+  href ./
+  addClass wordmark
+ a Star us on GitHub ↗
+  href https://github.com/breck7/knowbooks.com/tree/main/s/xHelix
+  target _blank
+  rel noopener noreferrer
+  addClass hint
+section
+ addClass panel
+ form
+  id lookup
+  input
+   id username
+   name username
+   type text
+   value breckyunits
+   placeholder @handle or x.com/handle
+   aria-label X handle or profile URL
+   autocomplete off
+  button Load
+   type submit
+ div
+  id status
+  role status
+ div
+  id meta
+ p Drop data/tweets.js from your X archive.
+  addClass tip
+ p x.com → Settings → Your account → Download an archive of your data.
+  addClass help
+  linkify false
+main
+ id stage
+footer
+ a Free software from Knowbooks.com
+  href ../index.html
+ span one loop = one year
+
+css
+ :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; color: #dff0ff; background: #05080d; }
+ * { box-sizing: border-box; }
+ html, body { height: 100%; margin: 0; overflow: hidden; background: radial-gradient(ellipse at 50% -10%, #0b1c2e, transparent 62%), #05080d; }
+ #stage { position: fixed; inset: 0; z-index: 0; }
+ #stage canvas { display: block; }
+ header, footer, .panel { position: fixed; z-index: 2; }
+ header { top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: baseline; padding: 18px 22px; pointer-events: none; }
+ .wordmark { font-size: 18px; font-weight: 800; letter-spacing: -.03em; color: #eaf6ff; text-decoration: none; pointer-events: auto; }
+ .hint { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #5b7f9e; text-decoration: none; pointer-events: auto; transition: color .18s; }
+ .hint:hover { color: #8fd0ff; }
+ .panel { top: 56px; left: 22px; width: min(348px, calc(100vw - 44px)); pointer-events: none; }
+ .panel > * { pointer-events: auto; }
+ form { display: flex; gap: 8px; padding: 7px; border: 1px solid #16324a; border-radius: 11px; background: rgba(9, 16, 26, .74); backdrop-filter: blur(10px); }
+ input { flex: 1; min-width: 0; padding: 7px 9px; border: 0; background: transparent; color: #eaf6ff; font: inherit; font-size: 14px; outline: none; }
+ input::placeholder { color: #46617a; }
+ button { padding: 0 14px; border: 0; border-radius: 7px; background: #1d9bf0; color: #04121f; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+ button:hover { background: #45b0f5; }
+ #status { min-height: 16px; margin: 8px 4px 0; font-size: 12px; color: #6fa8c8; }
+ #status.bad { color: #ff9a8a; }
+ #meta { margin: 4px 4px 0; font-size: 12px; color: #86b6d6; }
+ .tip { margin: 14px 4px 0; font-size: 11px; line-height: 1.7; color: #5b7f9e; }
+ .help { margin: 4px 4px 0; font-size: 10px; line-height: 1.6; color: #527a96; }
+ footer { bottom: 0; left: 0; right: 0; display: flex; justify-content: space-between; gap: 12px; padding: 14px 22px; font-size: 11px; color: #4f6f86; }
+ footer a { color: #7fb4d6; text-decoration: none; }
+ body.drop #stage { outline: 2px dashed #1d9bf0; outline-offset: -12px; }
+ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid #1d9bf0; outline-offset: 2px; }
+ @media (max-width: 560px) { .panel { top: 52px; } .hint { font-size: 10px; letter-spacing: .06em; } }
+
+script
+ (() => {
+  // Data and 3D library.
+  const PROFILE = 'https://api.fxtwitter.com/';
+  const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';
+  const $ = id => document.getElementById(id);
+  const stage = $('stage'), form = $('lookup'), input = $('username'), status = $('status'), meta = $('meta');
+  // Deep link: ?u=handle (also accepts ?user= or ?q=). The URL updates as you load.
+  const params = new URLSearchParams(location.search);
+  const DEFAULT = input.value || 'breckyunits';
+  const shared = params.get('u') || params.get('user') || params.get('q');
+  const setLink = name => {
+   const url = new URL(location.href);
+   if (name) url.searchParams.set('u', name);
+   else url.searchParams.delete('u');
+   history.replaceState(null, '', url);
+  };
+  const RADIUS = 1, PITCH = 0.46;
+  let scene, camera, renderer, group, ready = false, pending = null;
+  let theta = 0.7, phi = 1.3, targetPhi = 1.3, dist = 16, targetDist = 16;
+  let dragging = false, lastX = 0, lastY = 0, resumeAt = 0;
+  // Helpers.
+  const now = () => performance.now();
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const isLeap = y => (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
+  const isDate = s => /^\d{4}-\d{2}-\d{2}$/.test(s);
+  const dayOfYear = iso => Math.round((Date.parse(iso + 'T00:00:00Z') - Date.UTC(iso.slice(0, 4), 0, 1)) / 86400000) + 1;
+  const totalOf = days => days.reduce((sum, d) => sum + d.count, 0);
+  const spanOf = days => Number(days[days.length - 1].date.slice(0, 4)) - Number(days[0].date.slice(0, 4)) + 1;
+  const say = (text, bad) => { status.textContent = text || ''; status.classList.toggle('bad', !!bad); };
+  const handleOf = value => {
+   const v = (value || '').trim().replace(/^@/, '');
+   const match = v.match(/(?:x\.com|twitter\.com)\/([A-Za-z0-9_]+)/i);
+   return (match ? match[1] : v).replace(/[^A-Za-z0-9_]/g, '');
+  };
+  // A day per date, zero-filled, so every year forms a full loop.
+  const fillRange = (counts, fromYear) => {
+   const dates = [...counts.keys()].sort();
+   const today = new Date().toISOString().slice(0, 10);
+   const startYear = fromYear || (dates.length ? Number(dates[0].slice(0, 4)) : Number(today.slice(0, 4)));
+   const out = [];
+   const end = Date.parse(today + 'T00:00:00Z');
+   for (let t = Date.parse(startYear + '-01-01T00:00:00Z'); t <= end; t += 86400000) {
+    const iso = new Date(t).toISOString().slice(0, 10);
+    out.push({ date: iso, count: counts.get(iso) || 0 });
+   }
+   return out;
+  };
+  const defaultSeries = () => fillRange(new Map(), Number(new Date().toISOString().slice(0, 4)) - 9);
+  // Accept a tweets.js archive, tweet arrays, date/count arrays, a date map, or CSV text.
+  const normalize = raw => {
+   let rows = [];
+   if (Array.isArray(raw)) rows = raw;
+   else if (raw && typeof raw === 'object') rows = Object.entries(raw).map(([date, count]) => ({ date, count }));
+   const today = new Date().toISOString().slice(0, 10);
+   return rows.map(r => ({ date: String(r.date || r.day || '').slice(0, 10), count: Math.max(0, Math.floor(Number(r.count != null ? r.count : r.total) || 0)) }))
+    .filter(r => isDate(r.date) && r.date <= today)
+    .sort((a, b) => (a.date < b.date ? -1 : 1));
+  };
+  const stamp = row => {
+   const t = row && (row.tweet || row);
+   const v = t && (t.created_at || t.createdAt || t.date || t.time);
+   return v ? String(v).slice(0, 10) : '';
+  };
+  const looksLikePosts = rows => Array.isArray(rows) && rows.some(r => r && ((r.tweet && r.tweet.created_at) || (r.created_at && r.count == null)));
+  const toDays = raw => {
+   if (looksLikePosts(raw)) {
+    const counts = new Map();
+    for (const row of raw) { const d = stamp(row); if (isDate(d)) counts.set(d, (counts.get(d) || 0) + 1); }
+    return fillRange(counts);
+   }
+   return normalize(raw);
+  };
+  const parseArchive = (text, filename) => {
+   const t = text.trim();
+   if (/^window\.YTD\./.test(t)) return JSON.parse(t.replace(/^\s*window\.YTD\.[^=]+=\s*/, '').replace(/;\s*$/, ''));
+   if (/^[\[{]/.test(t) && !/\.csv$/i.test(filename || '')) return JSON.parse(t);
+   const rows = [];
+   for (const line of t.split(/\r?\n/)) {
+    const match = line.match(/(\d{4}-\d{2}-\d{2})\D+(\d+)/);
+    if (match) rows.push({ date: match[1], count: +match[2] });
+   }
+   return rows;
+  };
+  // X-ish blue ramp for a 0–1 intensity.
+  const ramp = t => {
+   const a = [20, 90, 160], b = [29, 155, 240], c = [170, 225, 255];
+   const m = t < 0.5 ? [a, b, t / 0.5] : [b, c, (t - 0.5) / 0.5];
+   const mix = i => Math.round(m[0][i] + (m[1][i] - m[0][i]) * m[2]);
+   return (mix(0) << 16) | (mix(1) << 8) | mix(2);
+  };
+  const labelSprite = text => {
+   const canvas = document.createElement('canvas');
+   canvas.width = 256; canvas.height = 128;
+   const ink = canvas.getContext('2d');
+   ink.font = 'bold 72px Inter, Arial, sans-serif';
+   ink.fillStyle = '#9fd0ff';
+   ink.textBaseline = 'middle';
+   ink.fillText(text, 6, 68);
+   const texture = new THREE.CanvasTexture(canvas);
+   texture.minFilter = THREE.LinearFilter;
+   const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false }));
+   sprite.scale.set(0.85, 0.42, 1);
+   return sprite;
+  };
+  // One turn per year: angle spans each year, height rises with time.
+  const draw = (days, label) => {
+   group.traverse(o => {
+    if (o.geometry) o.geometry.dispose();
+    if (o.material) { if (o.material.map) o.material.map.dispose(); o.material.dispose(); }
+   });
+   group.clear();
+   if (!days.length) { say('No posts in that data.', true); return; }
+   const first = Number(days[0].date.slice(0, 4)), last = Number(days[days.length - 1].date.slice(0, 4));
+   const years = last - first + 1, height = years * PITCH, shift = height / 2;
+   const peak = days.reduce((max, d) => Math.max(max, d.count), 1);
+   const points = [], dots = [];
+   for (const day of days) {
+    const year = Number(day.date.slice(0, 4));
+    const t = (dayOfYear(day.date) - 1) / (isLeap(year) ? 366 : 365);
+    const angle = t * Math.PI * 2;
+    const point = new THREE.Vector3(Math.cos(angle) * RADIUS, (year - first + t) * PITCH - shift, Math.sin(angle) * RADIUS);
+    points.push(point);
+    if (day.count > 0) dots.push([point, day.count]);
+   }
+   group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), new THREE.LineBasicMaterial({ color: 0x2f7fd0, transparent: true, opacity: 0.42 })));
+   if (dots.length) {
+    const mesh = new THREE.InstancedMesh(new THREE.SphereGeometry(1, 10, 10), new THREE.MeshBasicMaterial(), dots.length);
+    const matrix = new THREE.Matrix4(), color = new THREE.Color();
+    dots.forEach(([point, count], i) => {
+     const k = Math.log(1 + count) / Math.log(1 + peak);
+     const size = 0.032 + 0.05 * k;
+     matrix.makeScale(size, size, size).setPosition(point.x, point.y, point.z);
+     mesh.setMatrixAt(i, matrix);
+     mesh.setColorAt(i, color.setHex(ramp(k)));
+    });
+    mesh.instanceMatrix.needsUpdate = true;
+    group.add(mesh);
+   }
+   for (let year = first; year <= last; year++) {
+    const sprite = labelSprite(String(year));
+    sprite.position.set(RADIUS + 0.34, (year - first) * PITCH - shift, 0);
+    group.add(sprite);
+   }
+   const fov = THREE.MathUtils.degToRad(camera.fov);
+   const fitY = (height / 2 + 0.4) / Math.tan(fov / 2);
+   const fitX = (RADIUS + 0.8) / (Math.tan(fov / 2) * camera.aspect);
+   targetDist = Math.max(5, Math.max(fitY, fitX) * 1.16);
+   meta.textContent = label;
+   say('');
+  };
+  const loop = () => {
+   requestAnimationFrame(loop);
+   if (!dragging && now() > resumeAt) theta += 0.0016;
+   phi += (targetPhi - phi) * 0.12;
+   dist += (targetDist - dist) * 0.08;
+   camera.position.set(dist * Math.sin(phi) * Math.sin(theta), dist * Math.cos(phi), dist * Math.sin(phi) * Math.cos(theta));
+   camera.lookAt(0, 0, 0);
+   renderer.render(scene, camera);
+  };
+  // Scene, orbit by drag, zoom by wheel.
+  const setup = () => {
+   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+   renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+   renderer.setSize(innerWidth, innerHeight);
+   stage.appendChild(renderer.domElement);
+   scene = new THREE.Scene();
+   camera = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.1, 400);
+   group = new THREE.Group();
+   scene.add(group);
+   const canvas = renderer.domElement;
+   canvas.style.touchAction = 'none';
+   canvas.addEventListener('pointerdown', event => { dragging = true; lastX = event.clientX; lastY = event.clientY; canvas.setPointerCapture(event.pointerId); });
+   canvas.addEventListener('pointermove', event => {
+    if (!dragging) return;
+    theta -= (event.clientX - lastX) * 0.008;
+    targetPhi = clamp(targetPhi - (event.clientY - lastY) * 0.006, 0.4, 2.5);
+    lastX = event.clientX; lastY = event.clientY; resumeAt = now() + 1400;
+   });
+   const release = () => { dragging = false; resumeAt = now() + 1400; };
+   canvas.addEventListener('pointerup', release);
+   canvas.addEventListener('pointercancel', release);
+   canvas.addEventListener('wheel', event => { event.preventDefault(); targetDist = clamp(targetDist * (1 + Math.sign(event.deltaY) * 0.08), 4, 140); }, { passive: false });
+   addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+   ready = true;
+   requestAnimationFrame(loop);
+   if (pending) { const p = pending; pending = null; draw(p.days, p.label); }
+   else draw(defaultSeries(), 'Drop your X archive to build your helix.');
+  };
+  const loadThree = () => {
+   if (window.THREE) { setup(); return; }
+   const script = document.createElement('script');
+   script.src = THREE_URL;
+   script.onload = setup;
+   script.onerror = () => say('Could not load the 3D library.', true);
+   document.head.appendChild(script);
+  };
+  const show = (days, label) => { if (ready) draw(days, label); else pending = { days, label }; };
+  // A handle shows the profile (joined year) as an empty spring; an archive fills it.
+  const loadProfile = async raw => {
+   const name = handleOf(raw);
+   if (!name) { say('Enter an X handle or profile URL.', true); return; }
+   input.value = name;
+   say('Loading @' + name + '…');
+   try {
+    const res = await fetch(PROFILE + encodeURIComponent(name), { headers: { Accept: 'application/json' } });
+    if (!res.ok) throw new Error(res.status === 404 ? 'No X user @' + name : 'X profile unavailable');
+    const data = await res.json();
+    const user = data.user || data;
+    if (!user || !user.screen_name) throw new Error('No X user @' + name);
+    const joinedYear = (String(user.joined || '').match(/\b(?:19|20)\d{2}\b/g) || []).pop() || String(Number(new Date().toISOString().slice(0, 4)) - 9);
+    setLink(name);
+    show(fillRange(new Map(), Number(joinedYear)), (user.name || '@' + user.screen_name) + ' · ' + Number(user.tweets || 0).toLocaleString() + ' posts · joined ' + joinedYear);
+    say('Drop data/tweets.js to fill it in.');
+   } catch (error) {
+    say(error.message || 'Could not load that profile.', true);
+   }
+  };
+  const readFile = file => {
+   say('Reading ' + file.name + '…');
+   file.text().then(text => {
+    const days = toDays(parseArchive(text, file.name));
+    if (!days.length) throw new Error('No posts found in that file');
+    setLink('');
+    show(days, file.name + ' · ' + totalOf(days).toLocaleString() + ' posts · ' + spanOf(days) + ' years');
+   }).catch(error => say(error.message || 'Could not read that file.', true));
+  };
+  form.addEventListener('submit', event => { event.preventDefault(); loadProfile(input.value); });
+  addEventListener('dragover', event => { event.preventDefault(); document.body.classList.add('drop'); });
+  addEventListener('dragleave', event => { if (!event.relatedTarget) document.body.classList.remove('drop'); });
+  addEventListener('drop', event => { event.preventDefault(); document.body.classList.remove('drop'); if (event.dataTransfer.files[0]) readFile(event.dataTransfer.files[0]); });
+  loadThree();
+  loadProfile(shared || DEFAULT);
+  addEventListener('popstate', () => { loadProfile(new URLSearchParams(location.search).get('u') || DEFAULT); });
+ })();
