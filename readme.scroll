@@ -326,6 +326,7 @@ css
  .cart-footer { margin-top: auto; padding-top: 24px; border-top: 1px solid var(--line); }
  .cart-total { display: flex; justify-content: space-between; margin: 0 0 20px; font: 16px/1 Arial, sans-serif; }
  .cart-total strong { font-size: 20px; }
+ .price-multiplier-note { margin: 0 0 16px; padding: 10px 12px; border: 1px solid var(--gold); border-radius: 8px; background: #d9bc7824; text-align: center; font: 700 12px/1.4 Arial, sans-serif; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
  .referral { margin-bottom: 20px; font: 14px/1.4 Arial, sans-serif; }
  .referral label { display: block; margin-bottom: 8px; }
  .referral input { box-sizing: border-box; width: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: transparent; color: var(--ink); font: 16px Arial, sans-serif; }
@@ -608,6 +609,9 @@ aside
    addClass cart-close
    type button
    aria-label Close cart
+ p
+  addClass price-multiplier-note
+  htmlHidden
  div
   id cart-element-5
   addClass cart-art
@@ -759,6 +763,11 @@ s/checko/checko.js
 script
  (() => {
   "use strict";
+  // Global price multiplier for a one-hour sale. Hardcoded start; prices return to normal after 60 minutes.
+  const priceMultiplier = 2;
+  const priceMultiplierStartsAt = 1791496982354;
+  const priceMultiplierEndsAt = priceMultiplierStartsAt + 60 * 60 * 1000;
+  const salePriceMultiplier = Date.now() >= priceMultiplierStartsAt && Date.now() < priceMultiplierEndsAt ? priceMultiplier : 1;
   const coverPalette = {
    navy: "#294575",
    ocean: "#05638E",
@@ -777,7 +786,7 @@ script
   const productCatalog = (Array.isArray(catalog) ? catalog : []).map(product => {
    const color = product.color?.trim().toLowerCase();
    if (color && !Object.hasOwn(coverPalette, color)) throw new Error(`Unknown cover color "${product.color}" for ${product.id}`);
-   return { ...product, coverColor: color ? coverPalette[color] : coverColors[nextCoverColor++ % coverColors.length] };
+   return { ...product, priceUsd: Math.round(product.priceUsd * salePriceMultiplier), coverColor: color ? coverPalette[color] : coverColors[nextCoverColor++ % coverColors.length] };
   });
   const products = new Map(productCatalog.map(product => [product.id, product]));
   const productTags = new Map(productCatalog.map(product => [product.id, new Set((product.tags || "").split(/\s+/).filter(Boolean))]));
@@ -816,6 +825,19 @@ script
   const footer = document.querySelector(".cart-footer");
   const total = document.querySelector(".cart-total strong");
   const checkout = document.querySelector(".paypal-button");
+  const multiplierNote = document.querySelector(".price-multiplier-note");
+  if (salePriceMultiplier !== 1) {
+   let timer;
+   const countdown = () => {
+    const seconds = Math.max(0, Math.ceil((priceMultiplierEndsAt - Date.now()) / 1000));
+    if (!seconds) { multiplierNote.hidden = true; clearInterval(timer); return; }
+    const clock = `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
+    multiplierNote.textContent = `Current price multiplier: ${salePriceMultiplier} — ${clock} remaining`;
+   };
+   multiplierNote.hidden = false;
+   countdown();
+   timer = setInterval(countdown, 1000);
+  }
   const referralInput = document.querySelector("#referral-code");
   const referralStatus = document.querySelector("#referral-status");
   const cartPricing = () => {

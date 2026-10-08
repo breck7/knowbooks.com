@@ -272,6 +272,7 @@ main > .scrollSection:last-child .scrollParagraph { border-bottom: 1px solid var
 .cart-footer { margin-top: auto; padding-top: 24px; border-top: 1px solid var(--line); }
 .cart-total { display: flex; justify-content: space-between; margin: 0 0 20px; font: 16px/1 Arial, sans-serif; }
 .cart-total strong { font-size: 20px; }
+.price-multiplier-note { margin: 0 0 16px; padding: 10px 12px; border: 1px solid var(--gold); border-radius: 8px; background: #d9bc7824; text-align: center; font: 700 12px/1.4 Arial, sans-serif; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
 .referral { margin-bottom: 20px; font: 14px/1.4 Arial, sans-serif; }
 .referral label { display: block; margin-bottom: 8px; }
 .referral input { box-sizing: border-box; width: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: transparent; color: var(--ink); font: 16px Arial, sans-serif; }
@@ -416,6 +417,7 @@ noscript { display: block; padding: 12px; color: white; background: #8a2d21; tex
 <aside role="dialog" aria-modal="true" inert id="cart" aria-labelledby="cart-title" aria-hidden="true" class="cart"><div id="cart-element-1" class="cart-head"><div id="cart-element-2" ><p id="cart-element-3" class="eyebrow"></p>
 <h2 id="cart-title" >Your cart</h2></div>
 <button id="cart-element-4" type="button" aria-label="Close cart" class="cart-close">×</button></div>
+<p id="particle8" hidden class="price-multiplier-note"></p>
 <div id="cart-element-5" aria-hidden="true" class="cart-art"><div id="cart-element-6" class="basket-books"></div>
 <svg viewBox="0 0 160 120" fill="none" aria-hidden="true"><path d="M13 15h19l16 69h88" stroke="#343e35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 34h108l-13 40H47z" fill="#c7ad7029" stroke="#343e35" stroke-width="3" stroke-linejoin="round"/><path d="M62 35l5 38m20-38v38m23-38-5 38M43 54h96" stroke="#8b805f" stroke-width="2"/><circle cx="59" cy="100" r="9" fill="#343e35"/><circle cx="126" cy="100" r="9" fill="#343e35"/><circle cx="59" cy="100" r="3" fill="#efe9da"/><circle cx="126" cy="100" r="3" fill="#efe9da"/></svg></div>
 <div id="cart-element-7" class="cart-lines"></div>
@@ -871,6 +873,11 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
 <script  src="s/checko/checko.js"></script>
 <script>(() => {
  "use strict";
+ // Global price multiplier for a one-hour sale. Hardcoded start; prices return to normal after 60 minutes.
+ const priceMultiplier = 2;
+ const priceMultiplierStartsAt = 1791496982354;
+ const priceMultiplierEndsAt = priceMultiplierStartsAt + 60 * 60 * 1000;
+ const salePriceMultiplier = Date.now() >= priceMultiplierStartsAt && Date.now() < priceMultiplierEndsAt ? priceMultiplier : 1;
  const coverPalette = {
   navy: "#294575",
   ocean: "#05638E",
@@ -889,7 +896,7 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
  const productCatalog = (Array.isArray(catalog) ? catalog : []).map(product => {
   const color = product.color?.trim().toLowerCase();
   if (color && !Object.hasOwn(coverPalette, color)) throw new Error(`Unknown cover color "${product.color}" for ${product.id}`);
-  return { ...product, coverColor: color ? coverPalette[color] : coverColors[nextCoverColor++ % coverColors.length] };
+  return { ...product, priceUsd: Math.round(product.priceUsd * salePriceMultiplier), coverColor: color ? coverPalette[color] : coverColors[nextCoverColor++ % coverColors.length] };
  });
  const products = new Map(productCatalog.map(product => [product.id, product]));
  const productTags = new Map(productCatalog.map(product => [product.id, new Set((product.tags || "").split(/\s+/).filter(Boolean))]));
@@ -928,6 +935,19 @@ body:has(#partner-dialog[open]) { overflow: hidden; }
  const footer = document.querySelector(".cart-footer");
  const total = document.querySelector(".cart-total strong");
  const checkout = document.querySelector(".paypal-button");
+ const multiplierNote = document.querySelector(".price-multiplier-note");
+ if (salePriceMultiplier !== 1) {
+  let timer;
+  const countdown = () => {
+   const seconds = Math.max(0, Math.ceil((priceMultiplierEndsAt - Date.now()) / 1000));
+   if (!seconds) { multiplierNote.hidden = true; clearInterval(timer); return; }
+   const clock = `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
+   multiplierNote.textContent = `Current price multiplier: ${salePriceMultiplier} — ${clock} remaining`;
+  };
+  multiplierNote.hidden = false;
+  countdown();
+  timer = setInterval(countdown, 1000);
+ }
  const referralInput = document.querySelector("#referral-code");
  const referralStatus = document.querySelector("#referral-status");
  const cartPricing = () => {
