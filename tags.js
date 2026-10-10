@@ -138,7 +138,7 @@ const tags = [
   },
   {
     "id": "opticsTag",
-    "keywords": "optics optical lenses lens reflection refraction color colour vision",
+    "keywords": "optics optical lenses lens reflection refraction color colour vision mirror mirrors laser lasers",
     "question": "Is the behavior or perception of light central to this topic?"
   },
   {
