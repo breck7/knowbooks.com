@@ -641,6 +641,14 @@ tags physicsTag electromagnetismTag wavesTag creativeTag instantTag opticsTag
 title Colors
 shelf frontier
 priceUsd 249
+coverDescription a prism splitting a beam of light into a fan of rays
+cover
+ polygon 128 52 44 196 212 196
+ line 20 136 79 136
+ line 79 136 177 136
+ line 177 136 244 100
+ line 177 136 248 136
+ line 177 136 244 172
 
 id matter
 tags physicsTag chemistryTag materialsTag instantTag solidTag
@@ -873,6 +881,11 @@ tags physicsTag wavesTag natureTag measurementTag temperatureTag opticsTag nucle
 title Stars
 shelf frontier
 priceUsd 249
+coverDescription a bright four-pointed star with a round center
+cover
+ filledCircle 128 128 30
+ filledPolygon 128 14 142 128 128 242 114 128
+ filledPolygon 14 128 128 114 242 128 128 142
 
 id exploration
 tags natureTag explorationTag
@@ -1165,6 +1178,19 @@ tags physicsTag electricityTag electromagnetismTag wavesTag natureTag buildingTa
 title Solar
 shelf frontier
 priceUsd 10000
+coverDescription a sun shining onto a tilted solar panel
+cover
+ filledCircle 128 76 30
+ line 128 34 128 14
+ line 80 76 56 76
+ line 176 76 200 76
+ line 94 42 78 26
+ line 162 42 178 26
+ polygon 70 148 186 148 212 216 44 216
+ line 99 148 88 216
+ line 128 148 128 216
+ line 157 148 168 216
+ line 44 182 212 182
 
 // the brain and nervous system
 
