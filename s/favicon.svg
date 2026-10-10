@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Free software by Knowbooks">
+  <rect width="64" height="64" rx="14" fill="#596d5f"/>
+  <g stroke="#d9bc78" stroke-width="4" stroke-linecap="round">
+    <path d="M32 9v6M32 49v6M9 32h6M49 32h6M15.7 15.7l4.3 4.3M44 44l4.3 4.3M48.3 15.7L44 20M20 44l-4.3 4.3"/>
+  </g>
+  <circle cx="32" cy="32" r="11" fill="#d9bc78"/>
+  <path d="M27 33.5l3.5 3.5 7-8" fill="none" stroke="#596d5f" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

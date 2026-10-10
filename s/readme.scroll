@@ -3,6 +3,7 @@ description Small tools for a brighter day. Track a storm, make a checksum you c
 baseUrl https://knowbooks.com/s/
 permalink index.html
 openGraphImage og.png
+favicon favicon.svg
 htmlLang en
 buildHtml
 metaTags
