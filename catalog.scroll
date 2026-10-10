@@ -497,6 +497,10 @@ tags physicsTag chemistryTag materialsTag electromagnetismTag wavesTag instantTa
 title Glass
 shelf frontier
 priceUsd 249
+coverDescription a magnifying glass with a circular glass lens and a short handle
+cover
+ circle 110 100 52
+ line 148 138 200 190 14
 
 id lasers
 tags physicsTag electromagnetismTag wavesTag energyTag instantTag opticsTag measurementTag machinesTag hazardTag
