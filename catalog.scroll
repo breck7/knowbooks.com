@@ -1320,6 +1320,23 @@ cover
  filledPolygon 80.2 199.6 79.9 190.6 80.2 181.8 81 173.1 82.3 164.6 84 156.2 86.1 148 88.7 140 91.6 132.2 94.8 124.5 98.4 117 102.2 109.7 106.4 102.6 110.7 95.7 115.3 88.9 120.1 82.4 125 76 130.1 69.8 135.3 63.8 140.6 58.1 145.9 52.5 151.3 47.1 156.8 41.8 157.9 43.8 153 49.7 148.4 56 143.9 62.4 139.5 68.9 135.4 75.6 131.4 82.4 127.6 89.4 124.1 96.4 120.8 103.5 117.8 110.7 115.1 118 112.7 125.4 110.6 132.9 108.8 140.4 107.4 148 106.4 155.7 105.8 163.4 105.6 171.2 105.8 179 106.6 186.8 107.7 194.7 109.4 202.6
  filledPolygon 116.6 203.4 114.7 195.7 113.3 188.1 112.3 180.5 111.8 172.9 111.7 165.4 112 157.8 112.7 150.3 113.8 142.9 115.3 135.4 117.1 128 119.2 120.7 121.6 113.4 124.3 106.2 127.2 99 130.4 92 133.9 84.9 137.5 78 141.4 71.1 145.4 64.3 149.5 57.6 153.8 51 158.1 44.2 159.2 46.2 155.5 53.6 152 61.1 148.7 68.6 145.6 76.2 142.8 83.8 140.2 91.4 138 99 136 106.5 134.4 114.1 133 121.6 132 129 131.3 136.5 131 143.8 131.1 151.1 131.5 158.4 132.3 165.5 133.5 172.6 135.1 179.5 137.1 186.4 139.6 193.2 142.5 199.9 145.8 206.4
 
+id watches
+tags measurementTag mechanicsTag timeTag metalTag machinesTag geometryTag
+title Watches
+shelf frontier
+priceUsd 1509
+color navy
+skills measure time regulate calibrate service
+tools movement dial hands crown loupe
+coverDescription a round watch face with hour, minute, and second hands
+cover
+ circle 128 128 72
+ circle 128 128 62
+ line 128 128 128 78
+ line 128 128 170 150
+ line 128 128 92 168 1.5
+ filledCircle 128 128 6
+
 id stone
 tags physicsTag chemistryTag materialsTag buildingTag measurementTag longTermTag natureTag solidTag geometryTag
 title Stone
