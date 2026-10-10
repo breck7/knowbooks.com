@@ -436,6 +436,31 @@ tags physicsTag electromagnetismTag wavesTag instantTag opticsTag cyclesTag
 title Light
 shelf frontier
 priceUsd 249
+coverDescription a glowing circle with short rays radiating outward and a single beam streaming out below
+cover
+ filledCircle 128 96 30
+ line 128 66 128 38
+ line 128 126 128 216
+ line 98 96 70 96
+ line 158 96 186 96
+ line 107 75 87 55
+ line 149 75 169 55
+ line 107 117 87 137
+ line 149 117 169 137
+
+id mirrors
+tags physicsTag electromagnetismTag wavesTag instantTag opticsTag measurementTag geometryTag materialsTag solidTag
+title Mirrors
+shelf frontier
+priceUsd 249
+color ocean
+skills reflect aim align bounce measure
+tools mirrors flashlight protractor cards targets
+coverDescription a vertical mirror with an incoming ray reflecting off at an equal angle
+cover
+ line 168 40 168 216
+ line 48 64 168 140
+ line 168 140 48 216
 
 id tools
 tags mechanicsTag buildingTag instantTag hazardTag solidTag machinesTag
@@ -472,6 +497,24 @@ tags physicsTag chemistryTag materialsTag electromagnetismTag wavesTag instantTa
 title Glass
 shelf frontier
 priceUsd 249
+
+id lasers
+tags physicsTag electromagnetismTag wavesTag energyTag instantTag opticsTag measurementTag machinesTag hazardTag
+title Lasers
+shelf frontier
+priceUsd 349
+color coral
+skills focus aim measure amplify cut
+tools lasers lenses targets goggles sensors
+coverDescription a laser emitter firing a straight beam across the cover into a glowing spot
+cover
+ filledRect 24 118 30 20
+ filledRect 54 124 130 8
+ filledCircle 196 128 12
+ line 196 100 196 84
+ line 196 156 196 172
+ line 168 128 152 128
+ line 224 128 240 128
 
 id plastics
 tags materialsTag solidTag
