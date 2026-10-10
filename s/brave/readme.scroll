@@ -1,0 +1,276 @@
+title BRAVE — Breck's Risky Agreement for Venture Equity
+description A one-page agreement to fund a startup now and own it later, capped at a simple price per share. Fill it in, share the link, print the PDF. No account, no server, no tracking.
+keywords BRAVE, SAFE, venture, equity, agreement, one page, startup, fundraise, future equity, valuation cap
+baseUrl https://knowbooks.com/s/brave/
+canonicalUrl https://knowbooks.com/s/brave/
+openGraphImage og.png
+favicon favicon.svg
+permalink index.html
+htmlLang en
+buildHtml
+buildPdf
+metaTags
+
+<header id="topbar" class="doNotPrint">
+span BRAVE
+ addClass topMark
+span Breck's Risky Agreement for Venture Equity
+ addClass topTag
+
+div
+ addClass actions
+ button Copy share link
+  id copyLink
+ button Print / Save PDF
+  id printBtn
+ button Reset
+  id resetBtn
+
+<div id="status" class="status doNotPrint" aria-live="polite"></div>
+</header>
+<main id="brave">
+<article class="page">
+<div class="titleBlock">
+h1 BRAVE
+
+Breck's Risky Agreement for Venture Equity
+ addClass subtitle
+
+A one-page agreement to fund a startup now, for equity later, with a simple cap on the price per share.
+ addClass lead
+
+</div>
+<div class="partyGrid">
+<p class="capParty">Valuation cap: {Cap}</p>
+<p class="party">Company: {Company}, a {State} corporation.</p>
+<p class="party">Investor: {Investor}</p>
+<p class="party">Founder: {Founder}</p>
+<p class="party">Date: {Date}</p>
+<p class="party">Total shares authorized: {Shares}</p>
+<p class="party">Right to shares: {Purchased}</p>
+<p class="party">Maximum price per share: ${Price}</p>
+<p class="party">Purchase amount: {Amount}</p>
+</div>
+<div class="rule"></div>
+
+*1. The deal.* The Company has {Shares} shares authorized. The Investor pays {Amount} (the “Purchase Amount”) for the right to {Purchased} shares at a maximum of ${Price} each (the “Maximum Price”). No shares are issued to the Investor until conversion. This is not a loan: no interest, no maturity, no expiration.
+
+*2. Equity financing.* If the Company later sells shares to new investors at a price per share (an “Equity Financing”), the Investor’s shares are issued at that same price — or, if that price is higher than the Maximum Price on this agreement, at the lower Maximum Price.
+
+*3. Liquidity event.* If the Company is acquired or goes public (a “Liquidity Event”), the Investor receives the greater of: (a) the Purchase Amount (the “Cash-Out Amount”); or (b) the value of the shares the Investor would receive (the Purchase Amount divided by the Maximum Price).
+
+*4. Dissolution.* If the Company shuts down, the Investor receives the Purchase Amount.
+
+*5. Before conversion.* The Investor is not a shareholder: no vote, no information rights, and no transfer without the Company's consent (except on death or to an affiliate). If the Company pays a cash dividend on common stock, the Investor receives the same per-share amount as if converted.
+
+*6. Ending and amending.* This agreement ends when the Investor is issued shares under Section 2 or paid under Section 3 or 4. It may be amended only with the written consent of the Company and either the Investor or a majority-in-interest of all BRAVEs with the same Maximum Price. The Purchase Amount may never be reduced this way.
+
+*7. Promises.* The Company is duly formed and authorized to sign. The Investor is an accredited investor and understands this is a risky, illiquid investment that can lose all of its value.
+
+*8. The fine print.* Governed by the laws of {Law}. Intended to be treated as stock for U.S. tax purposes. This is the entire agreement; if any part is invalid, the rest stands.
+
+div
+ addClass rule
+
+The parties agree and sign below.
+ addClass signLead
+
+Company: {Company}
+
+By: ____________________________  Name: ____________________________  Title: ____________________________
+ inlineMarkupsOn none
+
+Address / email: ______________________________________________
+ inlineMarkupsOn none
+
+div
+ addClass sigGap
+
+Investor: {Investor}
+
+By: ____________________________  Name: ____________________________  Title: ____________________________
+ inlineMarkupsOn none
+
+Address / email: ______________________________________________
+ inlineMarkupsOn none
+
+
+<footer class="pageFoot">
+
+Everything above lives in this link. Copy the URL to share. Nothing is stored on a server, and no one can see who opens it.
+ addClass fineprint
+
+Derived from the YC SAFE (Valuation Cap, Version 1), cut down to the lines that matter. Not legal advice.
+ addClass fineprint
+
+</footer>
+</article>
+</main>
+
+script
+ (() => {
+  const KEYS = { company: "Company", state: "State", investor: "Investor", founder: "Founder", date: "Date", shares: "Total shares", purchased: "Right to shares", price: "Price per share", law: "Law" };
+  const doc = document.getElementById("brave");
+  const status = document.getElementById("status");
+  const TOKEN = /\{([a-zA-Z]+)\}/g;
+  const state = {};
+  const params = new URLSearchParams(location.search);
+  for (const k in KEYS) if (params.has(k)) state[k] = params.get(k);
+  if (state.date === undefined) state.date = new Date().toISOString().slice(0, 10);
+  function num(v) { const n = parseFloat(String(v || "").replace(/[^0-9.]/g, "")); return isNaN(n) ? 0 : n; }
+  function money(n) { return "$" + n.toLocaleString("en-US", { maximumFractionDigits: 4 }); }
+  function pct(n) { return n.toFixed(2).replace(/\.?0+$/, "") + "%"; }
+  const COMPUTED = { amount() { const p = num(state.purchased), q = num(state.price); return p > 0 && q > 0 ? money(p * q) : ""; }, cap() { const s = num(state.shares), q = num(state.price); return s > 0 && q > 0 ? money(s * q) : ""; } };
+  function enhance(node) {
+   const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, { acceptNode(t) { return t.nodeValue && t.nodeValue.indexOf("{") !== -1 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT; } });
+   const texts = [];
+   let n;
+   while ((n = walker.nextNode())) texts.push(n);
+   for (const t of texts) {
+    const s = t.nodeValue;
+    const frag = document.createDocumentFragment();
+    let last = 0, m, hit = false;
+    TOKEN.lastIndex = 0;
+    while ((m = TOKEN.exec(s))) {
+     const k = m[1].toLowerCase();
+     const isField = k in KEYS, isComputed = k in COMPUTED;
+     if (!isField && !isComputed) continue;
+     hit = true;
+     if (m.index > last) frag.appendChild(document.createTextNode(s.slice(last, m.index)));
+     const span = document.createElement("span");
+     if (isComputed) { span.className = "computed"; span.dataset.k = k; }
+     else {
+      span.className = "field";
+      span.dataset.k = k;
+      span.dataset.ph = KEYS[k];
+      span.contentEditable = "true";
+      span.spellcheck = false;
+      span.setAttribute("role", "textbox");
+      span.setAttribute("aria-label", KEYS[k]);
+     }
+     frag.appendChild(span);
+     last = m.index + m[0].length;
+    }
+    if (!hit) continue;
+    if (last < s.length) frag.appendChild(document.createTextNode(s.slice(last)));
+    t.parentNode.replaceChild(frag, t);
+   }
+  }
+  enhance(doc);
+  const fields = () => Array.from(doc.querySelectorAll(".field"));
+  function paint(el) {
+   const v = state[el.dataset.k] || "";
+   el.textContent = v;
+   el.dataset.empty = v ? "false" : "true";
+  }
+  function paintComputed() {
+   doc.querySelectorAll(".computed").forEach(el => { const fn = COMPUTED[el.dataset.k]; el.textContent = fn ? fn() : ""; });
+  }
+  function render() { fields().forEach(paint); paintComputed(); hint(); }
+  document.addEventListener("input", e => {
+   const el = e.target;
+   if (!el.classList || !el.classList.contains("field")) return;
+   const k = el.dataset.k;
+   const v = el.textContent.replace(/\s+/g, " ").trim();
+   state[k] = v;
+   el.dataset.empty = v ? "false" : "true";
+   fields().forEach(o => { if (o !== el && o.dataset.k === k) paint(o); });
+   paintComputed();
+   syncUrl();
+   hint();
+  });
+  document.addEventListener("keydown", e => {
+   if (e.key === "Enter" && e.target.classList && e.target.classList.contains("field")) { e.preventDefault(); e.target.blur(); }
+  });
+  document.addEventListener("focusout", e => {
+   if (!e.target.classList || !e.target.classList.contains("field")) return;
+   if (!(state[e.target.dataset.k] || "")) paint(e.target);
+  });
+  let statusTimer;
+  function say(text) {
+   status.textContent = text;
+   status.classList.toggle("show", !!text);
+   clearTimeout(statusTimer);
+   if (text) statusTimer = setTimeout(() => { status.classList.remove("show"); }, 4000);
+  }
+  function hint() {
+   const shares = num(state.shares), purchased = num(state.purchased), price = num(state.price);
+   if (purchased > 0 && shares > 0 && price > 0) say("The Investor gets the right to " + purchased.toLocaleString("en-US") + " shares for " + money(purchased * price) + ", about " + pct(purchased / shares * 100) + " of the Company.");
+   else if (purchased > 0 && shares > 0) say("The Investor's " + purchased.toLocaleString("en-US") + " shares are about " + pct(purchased / shares * 100) + " of the Company.");
+   else say("");
+  }
+  function syncUrl() {
+   const url = new URL(location.href);
+   for (const k in KEYS) { if (state[k]) url.searchParams.set(k, state[k]); else url.searchParams.delete(k); }
+   history.replaceState(null, "", url);
+  }
+  document.getElementById("copyLink").addEventListener("click", async () => {
+   syncUrl();
+   try { await navigator.clipboard.writeText(location.href); say("Share link copied to your clipboard."); }
+   catch (err) { say("Copy failed - select the address bar and copy the URL."); }
+  });
+  document.getElementById("printBtn").addEventListener("click", () => window.print());
+  document.getElementById("resetBtn").addEventListener("click", () => {
+   for (const k in KEYS) delete state[k];
+   state.date = new Date().toISOString().slice(0, 10);
+   render(); syncUrl(); say("Cleared.");
+  });
+  render();
+ })();
+
+css
+ :root { color-scheme: light; --ink: #171a1f; --paper: #fdfbf5; --rule: #d9d3c4; --accent: #d83a2c; --muted: #6f6a5f; --field: #fff3cf; --computed: #e9f1e4; }
+ * { box-sizing: border-box; }
+ html { -webkit-text-size-adjust: 100%; }
+ body { margin: 0; background: #ece7db; color: var(--ink); font-family: Georgia, "Times New Roman", serif; }
+ #topbar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 14px 22px; background: #171a1f; color: #f3efe3; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; position: sticky; top: 0; z-index: 5; }
+ .topMark { font-weight: 800; letter-spacing: .22em; font-size: 15px; }
+ .topTag { font-size: 12.5px; color: #b9b3a2; letter-spacing: .01em; }
+ .actions { display: flex; gap: 8px; margin-left: auto; }
+ .actions button { font: inherit; font-size: 12.5px; padding: 8px 13px; border-radius: 9px; border: 1px solid #3a4048; background: #262b32; color: #f3efe3; cursor: pointer; transition: background .15s, border-color .15s; }
+ .actions button:hover { background: #333a43; border-color: #4c545e; }
+ #copyLink { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 650; }
+ #copyLink:hover { background: #ef4a3a; border-color: #ef4a3a; }
+ .status { flex-basis: 100%; font: 12px/1.4 ui-sans-serif, system-ui, sans-serif; color: #9fd6a2; min-height: 0; opacity: 0; transition: opacity .2s; }
+ .status.show { opacity: 1; }
+ #brave { padding: 34px 18px 60px; }
+ .page { max-width: 820px; margin: 0 auto; background: var(--paper); padding: 54px 60px 46px; border: 1px solid var(--rule); border-radius: 3px; box-shadow: 0 18px 50px rgba(30,26,18,.16); }
+ .titleBlock { text-align: center; margin-bottom: 26px; }
+ h1 { font-size: clamp(46px, 9vw, 74px); line-height: .9; letter-spacing: .04em; margin: 0; font-weight: 700; }
+ .subtitle { font-size: 17px; margin: 12px 0 0; font-style: italic; color: #3a3a34; }
+ .lead { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 13px; line-height: 1.55; color: var(--muted); max-width: 540px; margin: 16px auto 0; }
+ .partyGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 26px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 16px 0; margin: 0 0 8px; }
+ .party { margin: 0; font-size: 14px; }
+ .capParty { grid-column: 1 / -1; margin: 0; font-weight: 700; font-size: 15px; }
+ .rule { border-top: 1px solid var(--rule); margin: 14px 0; height: 0; }
+ article p { font-size: 14px; line-height: 1.5; margin: 0 0 9px; text-align: justify; hyphens: auto; }
+ .signLead { margin-top: 12px !important; font-style: italic; }
+ .sigGap { height: 26px; }
+ .pageFoot { border-top: 1px solid var(--rule); margin-top: 22px; padding-top: 12px; }
+ .fineprint { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 11px; line-height: 1.5; color: var(--muted); margin: 0 0 4px; text-align: left; }
+ .field { background: var(--field); border-bottom: 1.5px solid #c9a12f; padding: 0 2px; border-radius: 2px; outline: none; min-width: 34px; display: inline-block; cursor: text; }
+ .field[data-empty="true"]::before { content: attr(data-ph); color: #a89a6a; }
+ .field:focus { background: #ffe9a8; border-bottom-color: var(--accent); box-shadow: 0 0 0 2px rgba(216,58,44,.18); }
+ .computed { background: var(--computed); border-bottom: 1px dotted #8aab7a; padding: 0 3px; border-radius: 2px; font-weight: 650; }
+ @media (max-width: 640px) { .page { padding: 30px 22px; } .partyGrid { grid-template-columns: 1fr; } #brave { padding: 18px 10px 40px; } .actions { margin-left: 0; width: 100%; } }
+ @media print {
+  @page { size: letter; margin: 0.5in; }
+  body { background: #fff; }
+  #topbar, .status, .doNotPrint { display: none !important; }
+  #brave { padding: 0; }
+  .page { max-width: none; margin: 0; padding: 0; border: 0; border-radius: 0; box-shadow: none; background: #fff; }
+  .titleBlock { margin-bottom: 16px; }
+  h1 { font-size: 42px; }
+  .subtitle { font-size: 14px; margin-top: 8px; }
+  .lead { font-size: 10.4px; margin-top: 8px; }
+  .rule { margin: 9px 0; }
+  .partyGrid { padding: 9px 0; margin-bottom: 2px; }
+  .party { font-size: 10.4px; }
+  .capParty { font-size: 11.5px; }
+  article p { font-size: 10.5px; line-height: 1.34; margin-bottom: 5px; }
+  .signLead { margin-top: 9px !important; }
+  .sigGap { height: 18px; }
+  .pageFoot { margin-top: 14px; padding-top: 9px; }
+  .fineprint { font-size: 8.6px; }
+  .field, .computed { background: none; border-bottom: 1px solid #999; padding: 0; font-weight: inherit; }
+ }

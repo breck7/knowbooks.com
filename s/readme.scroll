@@ -24,6 +24,20 @@ main
   addClass tool-grid
   aria-label Free utilities
   a
+   href brave/index.html
+   addClass tool
+   img
+    src brave/og.png
+    alt BRAVE: a one-page agreement for venture equity, capped at a simple price per share.
+    width 1200
+    height 630
+   div
+    addClass tool-copy
+    h2 BRAVE
+    A one-page agreement for venture equity, capped at a simple price per share. Fill it in, share the link, print the PDF. No server, no tracking.
+    span Draft a BRAVE ↗
+     addClass tool-action
+  a
    href stormTracker/index.html
    addClass tool
    img
@@ -74,7 +88,7 @@ main
    div
     addClass tool-copy
     h2 GitHelix
-    Paste a GitHub profile. Watch your years become a spring.
+    See your entire GitHub timeline as helix.
     span Spin your helix ↗
      addClass tool-action
   a
@@ -88,7 +102,7 @@ main
    div
     addClass tool-copy
     h2 heliX
-    Drop your X archive. Watch your posts become a spring.
+    See your entire X timeline as helix.
     span Spin your helix ↗
      addClass tool-action
 footer
