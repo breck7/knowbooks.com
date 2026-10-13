@@ -82,7 +82,7 @@ tagsParser
 // new product launches
 
 id launch
-description Includes Knowbooks launch brunch ticket. Beachside on Oahu. November 4-6 2026.
+description Includes Knowbooks launch package for up to 4 people. Oahu, Hawaii. November 4-6 2026. Airfare not provided. Email questions to breck@knowbooks.com.
 video videos/launch.mp4
 fulfillment pickup
 tags economicsTag measurementTag creativeTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag
@@ -91,7 +91,7 @@ title Launch
 skills live laugh love learn launch
 tools cup sunglasses paper lighter balloons
 shelf believer special
-priceUsd 750
+priceUsd 2500
 coverDescription four sine-like launch waves from left to right: a nearly flat ripple, a small rise and fall, another nearly flat ripple, then a steep rise and fall
 cover
  path M 30.7 194.6 C 35.8 194.6 38.4 192 47.4 192 C 56.3 192 58.9 194.6 64 194.6
