@@ -385,7 +385,7 @@ css
    <p class="intro">No pages. No screens. A Knowbook is an experiment kit in a book. Open one, do the experiments, and grow superpowers.</p>
    <a class="down" href="#catalog">Build your shelf <span aria-hidden="true">↓</span></a>
   </section>
-  <aside class="bos-banner" role="status" aria-live="polite" hidden><span class="bos-spark" aria-hidden="true">✦</span><span class="bos-label">Bonus Opportunity Sale</span><span class="bos-rule" aria-hidden="true"></span><strong class="bos-percent">20% off</strong><span class="bos-ends">everything · ends in <span class="bos-clock">3:00:00</span></span><span class="bos-spark" aria-hidden="true">✦</span></aside>
+  <aside class="bos-banner" role="status" aria-live="polite" hidden><span class="bos-spark" aria-hidden="true">✦</span><span class="bos-label">Never Forget Sarah Marshall Sale</span><span class="bos-rule" aria-hidden="true"></span><strong class="bos-percent">19.84% off</strong><span class="bos-ends">everything · ends in <span class="bos-clock">33:04:00</span></span><span class="bos-spark" aria-hidden="true">✦</span></aside>
   <section class="catalog-section" id="catalog" aria-labelledby="catalog-title">
    <div class="catalog-tools"><input id="catalog-search" type="search" placeholder="Search books…" aria-label="Search knowbooks" aria-controls="product-grid" title="Search book titles, signatures, or tags; separate words with spaces to match any." autocomplete="off"></div>
    <div class="edition-divider is-first" id="search-heading" hidden><h2>Search results</h2></div>
@@ -776,11 +776,13 @@ s/checko/checko.js
 script
  (() => {
   "use strict";
-  // Global Bonus Opportunity Sale price factor for a timed sale. Hardcoded start; prices return to normal after bonusOpportunitySaleHours.
-  const bonusOpportunitySale = 0.8;
-  const bonusOpportunitySaleStartsAt = 1791938265587;
-  const bonusOpportunitySaleHours = 3;
-  const bonusOpportunitySaleEndsAt = bonusOpportunitySaleStartsAt + bonusOpportunitySaleHours * 60 * 60 * 1000;
+  // Global Bonus Opportunity Sale price factor for a timed sale. Hardcoded start; prices return to normal after bonusOpportunitySaleMinutes.
+  const bonusOpportunitySaleDiscount = 0.1984;
+  const bonusOpportunitySale = 1 - bonusOpportunitySaleDiscount;
+  const bonusOpportunitySaleStartsAt = 1791938497360;
+  const bonusOpportunitySaleName = "Never Forget Sarah Marshall Sale";
+  const bonusOpportunitySaleMinutes = 1984;
+  const bonusOpportunitySaleEndsAt = bonusOpportunitySaleStartsAt + bonusOpportunitySaleMinutes * 60 * 1000;
   const saleBonusOpportunitySale = Date.now() >= bonusOpportunitySaleStartsAt && Date.now() < bonusOpportunitySaleEndsAt ? bonusOpportunitySale : 1;
   const coverPalette = {
    navy: "#294575",
@@ -848,10 +850,11 @@ script
     if (!seconds) { bonusOpportunitySaleNote.hidden = true; bosBanner.hidden = true; clearInterval(timer); return; }
     const hh = Math.floor(seconds / 3600), mm = Math.floor(seconds % 3600 / 60), ss = seconds % 60;
     const clock = `${hh ? hh + ":" : ""}${String(mm).padStart(2, "0")}:${String(ss).padStart(2, "0")}`;
-    const pctOff = Math.round((1 - saleBonusOpportunitySale) * 100);
-    bonusOpportunitySaleNote.textContent = `Bonus Opportunity Sale: ${pctOff}% off — ${clock} remaining`;
+    const pctOff = +(bonusOpportunitySaleDiscount * 100).toFixed(2);
+    bonusOpportunitySaleNote.textContent = `${bonusOpportunitySaleName}: ${pctOff}% off — ${clock} remaining`;
     bosBanner.querySelector(".bos-percent").textContent = `${pctOff}% off`;
     bosBanner.querySelector(".bos-clock").textContent = clock;
+    bosBanner.querySelector(".bos-label").textContent = bonusOpportunitySaleName;
    };
    bonusOpportunitySaleNote.hidden = false;
    bosBanner.hidden = false;
