@@ -230,6 +230,13 @@ css
  @keyframes bos-twinkle { 50% { opacity: .35; } }
  @media (prefers-reduced-motion: reduce) { .bos-spark { animation: none; } }
  @media (max-width: 600px) { .bos-rule { display: none; } }
+ button.sale-tag { border: 0; cursor: pointer; }
+ .bos-dialog { width: min(440px, calc(100% - 32px)); padding: 0; border: 1px solid #d9bc78; border-radius: 12px; background: none; box-shadow: 0 20px 60px #0008; }
+ .bos-dialog::backdrop { background: #1f2a22b3; }
+ .bos-dialog .bos-banner { flex-direction: column; gap: 14px; padding: 44px 28px 36px; border-radius: 11px; text-align: center; }
+ .bos-dialog .bos-rule { display: block; }
+ .bos-dialog .bos-percent { font-size: 44px; }
+ .bos-dialog-close { position: absolute; top: 8px; right: 12px; border: 0; background: none; color: #d9bc78; font-size: 26px; cursor: pointer; }
  .catalog-section { padding: 100px clamp(20px, 5vw, 72px) 120px; }
  .offering { padding: 72px clamp(20px, 8vw, 124px); border-top: 1px solid var(--line); }
  .offering:last-of-type { margin-bottom: 80px; }
@@ -337,6 +344,14 @@ css
  .cart-footer { margin-top: auto; padding-top: 24px; border-top: 1px solid var(--line); }
  .cart-total { display: flex; justify-content: space-between; margin: 0 0 20px; font: 16px/1 Arial, sans-serif; }
  .cart-total strong { font-size: 20px; }
+ .is-sale { white-space: nowrap; }
+ .is-sale del { margin-right: .3em; font-size: .72em; font-weight: 400; opacity: .6; text-decoration-thickness: 1px; text-decoration-color: currentColor; }
+ .is-sale ins { text-decoration: none; box-shadow: inset 0 -.18em 0 #d9bc7866; }
+ .sale-tag { display: inline-block; margin-left: .45em; padding: 2px 5px 1px; border-radius: 3px; background: #2f3d30; color: #d9bc78; font: 700 9px/1.2 Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; vertical-align: .2em; }
+ .sale-was-note { display: block; margin-top: 4px; font: 11px Arial, sans-serif; opacity: .75; }
+ .sale-was-note del { text-decoration-thickness: 1px; }
+ .cart-savings { margin: -14px 0 18px; text-align: right; color: #9a7a2e; font: 600 12px Arial, sans-serif; }
+ .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
  .bonus-opportunity-sale-note { margin: 0 0 16px; padding: 10px 12px; border: 1px solid var(--gold); border-radius: 8px; background: #d9bc7824; text-align: center; font: 700 12px/1.4 Arial, sans-serif; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
  .referral { margin-bottom: 20px; font: 14px/1.4 Arial, sans-serif; }
  .referral label { display: block; margin-bottom: 8px; }
@@ -766,7 +781,7 @@ aside
  <div id="design-colors" role="group" aria-label="Cover color"></div>
  <div class="design-tools"><button type="button" id="design-marker" aria-pressed="false" aria-label="Flip marker to eraser"><svg viewBox="0 0 100 24" width="100" height="24" aria-hidden="true"><path d="M5 12 19 5v14z" fill="currentColor"/><rect x="19" y="4" width="60" height="16" rx="3" fill="currentColor"/><rect x="80" y="4" width="15" height="16" rx="3" fill="#d9bc78"/></svg><span>Flip to erase</span></button><button type="button" id="design-undo">Undo</button><label class="design-upload">Upload<input id="portrait-file" type="file" aria-label="Upload cover image" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,.svg"></label><button type="button" id="remove-image" hidden>Remove image</button></div>
  </div>
- <div class="design-inside"><div id="design-experiments"><h3><label for="design-superpowers">What skills will customers learn?</label></h3><input id="design-superpowers" placeholder="write 5 verbs...." maxlength="124" aria-describedby="design-superpowers-help"><small id="design-superpowers-help">We’ll work with you to design 5 hands-on experiments.</small><h3><label for="design-tools">What tools will they acquire?</label></h3><input id="design-tools" placeholder="write 5 tools...." maxlength="124" aria-describedby="design-tools-help"><small id="design-tools-help">We'll work with you to pick 5 durable tools for customer homes.</small></div><p class="design-price">$10,000 <small>design fee</small></p><p>50% now. One prototype shipped within 30 days of deposit. Balance upon delivery.</p><p>More copies: you set price and keep 80% of net revenue. We handle manufacturing, distribution, and delivery.</p><button id="design-add" type="submit">Add $5,000 deposit to cart</button><p id="design-status" role="status"></p></div>
+ <div class="design-inside"><div id="design-experiments"><h3><label for="design-superpowers">What skills will customers learn?</label></h3><input id="design-superpowers" placeholder="write 5 verbs...." maxlength="124" aria-describedby="design-superpowers-help"><small id="design-superpowers-help">We’ll work with you to design 5 hands-on experiments.</small><h3><label for="design-tools">What tools will they acquire?</label></h3><input id="design-tools" placeholder="write 5 tools...." maxlength="124" aria-describedby="design-tools-help"><small id="design-tools-help">We'll work with you to pick 5 durable tools for customer homes.</small></div><p class="design-price"><span id="design-fee"></span> <small>design fee</small></p><p><span id="design-deposit"></span> deposit now. One prototype shipped within 30 days of deposit. <span id="design-balance"></span> balance upon delivery.</p><p>More copies: you set price and keep 80% of net revenue. We handle manufacturing, distribution, and delivery.</p><button id="design-add" type="submit"></button><p id="design-status" role="status"></p></div>
  </div><details id="design-source"><summary>See/Edit code</summary><textarea id="design-code" aria-label="Knowbook Scroll code" aria-describedby="design-code-status" spellcheck="false"></textarea><small id="design-code-status" role="status"></small><label for="design-link">Design link</label><input id="design-link" type="text" readonly spellcheck="false"></details></form>
 </dialog>
 partners.scroll
@@ -792,6 +807,12 @@ script
   const bonusOpportunitySaleMinutes = 1984;
   const bonusOpportunitySaleEndsAt = bonusOpportunitySaleStartsAt + bonusOpportunitySaleMinutes * 60 * 1000;
   const saleBonusOpportunitySale = Date.now() >= bonusOpportunitySaleStartsAt && Date.now() < bonusOpportunitySaleEndsAt ? bonusOpportunitySale : 1;
+  // Every price on the site goes through salePrice. The sale state is decided once at page load.
+  const salePrice = usd => Math.round(usd * saleBonusOpportunitySale);
+  const saleActive = saleBonusOpportunitySale !== 1;
+  // Shared price markup: plain when no sale; struck regular price + sale price during a sale.
+  const priceHtml = (listUsd, format = usd => money.format(usd), { saleUsd = salePrice(listUsd), tag = false } = {}) => !saleActive || saleUsd === listUsd ? format(saleUsd)
+   : `<span class="is-sale"><del><span class="sr-only">Regular price </span>${format(listUsd)}</del><ins><span class="sr-only">Sale price </span>${format(saleUsd)}</ins>${tag ? '<button type="button" class="sale-tag" aria-label="About the sale">Sale</button>' : ''}</span>`;
   const coverPalette = {
    navy: "#294575",
    ocean: "#05638E",
@@ -810,7 +831,7 @@ script
   const productCatalog = (Array.isArray(catalog) ? catalog : []).map(product => {
    const color = product.color?.trim().toLowerCase();
    if (color && !Object.hasOwn(coverPalette, color)) throw new Error(`Unknown cover color "${product.color}" for ${product.id}`);
-   return { ...product, priceUsd: Math.round(product.priceUsd * saleBonusOpportunitySale), coverColor: color ? coverPalette[color] : coverColors[nextCoverColor++ % coverColors.length] };
+   return { ...product, listPriceUsd: product.priceUsd, priceUsd: salePrice(product.priceUsd), coverColor: color ? coverPalette[color] : coverColors[nextCoverColor++ % coverColors.length] };
   });
   const products = new Map(productCatalog.map(product => [product.id, product]));
   const productTags = new Map(productCatalog.map(product => [product.id, new Set((product.tags || "").split(/\s+/).filter(Boolean))]));
@@ -825,6 +846,10 @@ script
   const paypalEmail = "breck7@gmail.com";
   const currency = "USD";
   const money = new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 });
+  // Custom Knowbook list pricing: the only place to change the design fee or deposit. Sale prices are derived below.
+  const customKnowbookPricing = { designFeeUsd: 1998, depositUsd: 999 };
+  const customKnowbookSalePricing = { designFeeUsd: salePrice(customKnowbookPricing.designFeeUsd), depositUsd: salePrice(customKnowbookPricing.depositUsd) };
+  customKnowbookSalePricing.balanceUsd = customKnowbookSalePricing.designFeeUsd - customKnowbookSalePricing.depositUsd;
   const checkoutMoney = new Intl.NumberFormat("en-US", { style: "currency", currency });
   const referralCodes = new Set("john kendric producthunt fireplace liz daylight kemi mikayla joe blake daniel francisco butler hassam ash goodman frank ari leah mystery nico cora yc".split(" "));
   const shippingByShelf = {
@@ -848,24 +873,35 @@ script
   const empty = document.querySelector(".cart-empty");
   const footer = document.querySelector(".cart-footer");
   const total = document.querySelector(".cart-total strong");
+  const cartSavings = Object.assign(document.createElement("p"), { className: "cart-savings", hidden: true });
+  cartSavings.setAttribute("aria-live", "polite");
+  total.closest(".cart-total").after(cartSavings);
   const checkout = document.querySelector(".paypal-button");
   const bonusOpportunitySaleNote = document.querySelector(".bonus-opportunity-sale-note");
   const bosBanner = document.querySelector(".bos-banner");
+  // Sale tags open a dialog holding a live copy of the banner.
+  const bosDialog = Object.assign(document.createElement("dialog"), { className: "bos-dialog", ariaLabel: bonusOpportunitySaleName });
+  bosDialog.append(Object.assign(bosBanner.cloneNode(true), { role: "" }), Object.assign(document.createElement("button"), { type: "button", className: "bos-dialog-close", ariaLabel: "Close", textContent: "×" }));
+  document.body.append(bosDialog);
+  bosDialog.addEventListener("click", event => { if (event.target === bosDialog || event.target.closest(".bos-dialog-close")) bosDialog.close(); });
+  document.addEventListener("click", event => { if (!event.target.closest(".sale-tag")) return; event.preventDefault(); event.stopPropagation(); bosDialog.showModal(); }, true);
   if (saleBonusOpportunitySale !== 1) {
    let timer;
    const countdown = () => {
     const seconds = Math.max(0, Math.ceil((bonusOpportunitySaleEndsAt - Date.now()) / 1000));
-    if (!seconds) { bonusOpportunitySaleNote.hidden = true; bosBanner.hidden = true; clearInterval(timer); return; }
+    if (!seconds) { bonusOpportunitySaleNote.hidden = true; bosBanner.hidden = true; bosDialog.close(); clearInterval(timer); return; }
     const hh = Math.floor(seconds / 3600), mm = Math.floor(seconds % 3600 / 60), ss = seconds % 60;
     const clock = `${hh ? hh + ":" : ""}${String(mm).padStart(2, "0")}:${String(ss).padStart(2, "0")}`;
     const pctOff = +(bonusOpportunitySaleDiscount * 100).toFixed(2);
     bonusOpportunitySaleNote.textContent = `${bonusOpportunitySaleName}: ${pctOff}% off — ${clock} remaining`;
-    bosBanner.querySelector(".bos-percent").textContent = `${pctOff}% off`;
-    bosBanner.querySelector(".bos-clock").textContent = clock;
-    bosBanner.querySelector(".bos-label").textContent = bonusOpportunitySaleName;
+    for (const banner of [bosBanner, bosDialog.firstChild]) {
+     banner.querySelector(".bos-percent").textContent = `${pctOff}% off`;
+     banner.querySelector(".bos-clock").textContent = clock;
+     banner.querySelector(".bos-label").textContent = bonusOpportunitySaleName;
+    }
    };
    bonusOpportunitySaleNote.hidden = false;
-   bosBanner.hidden = false;
+   bosBanner.hidden = bosDialog.firstChild.hidden = false;
    countdown();
    timer = setInterval(countdown, 1000);
   }
@@ -877,7 +913,9 @@ script
    const subtotalCents = [...cart].reduce((sum, [id, quantity]) => sum + Math.round(products.get(id).priceUsd * 100) * quantity, 0);
    const discountAmount = referralCode === "yc" ? -200 : 10
    const discountCents = referralCode ? Math.round(subtotalCents * (discountAmount/100)) : 0;
-   return { enteredCode, discountAmount, referralCode, discountCents, amount: (subtotalCents - discountCents) / 100 };
+   const listSubtotalCents = [...cart].reduce((sum, [id, quantity]) => sum + Math.round((products.get(id).listPriceUsd ?? products.get(id).priceUsd) * 100) * quantity, 0);
+   const listAmount = (listSubtotalCents - (referralCode ? Math.round(listSubtotalCents * (discountAmount/100)) : 0)) / 100;
+   return { enteredCode, discountAmount, referralCode, discountCents, amount: (subtotalCents - discountCents) / 100, listAmount };
   };
   const escapeHtml = value => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
   // A book's signature is seeded by its title plus its author, so each book stays
@@ -905,7 +943,7 @@ script
    const { name, shipping } = editionDetails(shelf);
    return `<article class="product" id="${escapeHtml(cardId(product, shelf))}" data-product-id="${escapeHtml(product.id)}" data-shelf="${escapeHtml(shelf)}">
     ${bookCover(product)}
-    <div class="product-info"><div class="product-meta"><span class="price">${money.format(product.priceUsd)}</span><p>${escapeHtml(product.description || (shelf === "special" ? "" : "Experiment kit in a book."))}${shelf === "special" ? (pickupNote(product) ? `<br><i>${escapeHtml(pickupNote(product))}</i>` : "") : `<br><i>${escapeHtml(name)} edition<br>${escapeHtml(pickupNote(product) || shipping)}</i>`}</p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
+    <div class="product-info"><div class="product-meta"><span class="price">${priceHtml(product.listPriceUsd, undefined, { tag: true })}</span><p>${escapeHtml(product.description || (shelf === "special" ? "" : "Experiment kit in a book."))}${shelf === "special" ? (pickupNote(product) ? `<br><i>${escapeHtml(pickupNote(product))}</i>` : "") : `<br><i>${escapeHtml(name)} edition<br>${escapeHtml(pickupNote(product) || shipping)}</i>`}</p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
    </article>`;
   };
   const editionDivider = shelf => {
@@ -1088,7 +1126,7 @@ script
   const refresh = () => {
    const quantity = [...cart.values()].reduce((sum, value) => sum + value, 0);
    const pricing = cartPricing();
-   const { enteredCode, referralCode, discountCents, amount, discountAmount } = pricing;
+   const { enteredCode, referralCode, discountCents, amount, discountAmount, listAmount } = pricing;
    count.textContent = quantity;
    toggle.setAttribute("aria-label", `Open shopping cart, ${quantity} ${quantity === 1 ? "book" : "books"}`);
    const bookPile = [...cart].flatMap(([id, quantity]) => Array.from({ length: Math.min(quantity, 5) }, () => products.get(id))).slice(0, 7).map((product, i) => `<span class="basket-book" style="--tilt:${(i % 3 - 1) * 12}deg" aria-hidden="true" inert>${bookCover(product)}</span>`).join("");
@@ -1100,12 +1138,14 @@ script
    });
    lines.innerHTML = [...cart].map(([id, value]) => {
     const product = products.get(id);
-    return `<div class="cart-line"><div class="line-swatch" aria-hidden="true" inert>${bookCover(product)}</div><div class="line-copy"><h3>${escapeHtml(product.title)}</h3><p>${money.format(product.priceUsd)} ${product.design ? "deposit · 50% of $10,000" : "each"}</p>${product.description ? `<p>${escapeHtml(product.description)}</p>` : ""}${pickupNote(product) ? `<p><strong>${escapeHtml(pickupNote(product))}</strong></p>` : ""}${product.design ? `<div class="design-actions"><button type="button" data-edit-design="${escapeHtml(id)}">Edit</button></div>` : ""}</div><div class="quantity"><button type="button" data-less="${escapeHtml(id)}" aria-label="Remove one ${escapeHtml(product.title)}">−</button><span>${value}</span><button type="button" data-more="${escapeHtml(id)}" aria-label="Add one ${escapeHtml(product.title)}">+</button></div></div>`;
+    return `<div class="cart-line"><div class="line-swatch" aria-hidden="true" inert>${bookCover(product)}</div><div class="line-copy"><h3>${escapeHtml(product.title)}</h3><p>${priceHtml(product.listPriceUsd)} ${product.design ? `deposit of ${priceHtml(customKnowbookPricing.designFeeUsd)} design fee` : "each"}</p>${product.description ? `<p>${escapeHtml(product.description)}</p>` : ""}${pickupNote(product) ? `<p><strong>${escapeHtml(pickupNote(product))}</strong></p>` : ""}${product.design ? `<div class="design-actions"><button type="button" data-edit-design="${escapeHtml(id)}">Edit</button></div>` : ""}</div><div class="quantity"><button type="button" data-less="${escapeHtml(id)}" aria-label="Remove one ${escapeHtml(product.title)}">−</button><span>${value}</span><button type="button" data-more="${escapeHtml(id)}" aria-label="Add one ${escapeHtml(product.title)}">+</button></div></div>`;
    }).join("");
    fitBookTitles();
    empty.hidden = quantity > 0;
    footer.hidden = quantity === 0;
-   total.textContent = checkoutMoney.format(amount);
+   total.innerHTML = priceHtml(listAmount, usd => checkoutMoney.format(usd), { saleUsd: amount });
+   cartSavings.hidden = !(saleActive && listAmount > amount);
+   cartSavings.textContent = cartSavings.hidden ? "" : `You save ${checkoutMoney.format(listAmount - amount)} in the ${bonusOpportunitySaleName}`;
    document.querySelector("#cart-element-16").textContent = cartDeliveryNote();
    referralInput.setAttribute("aria-invalid", String(Boolean(enteredCode && !referralCode)));
    referralStatus.textContent = referralCode ? `${discountAmount}% code applied — you save ${checkoutMoney.format(discountCents / 100)}.` : enteredCode ? "That referral code isn’t valid." : "";
@@ -1294,17 +1334,29 @@ script
    const $ = selector => document.querySelector(selector), dialog = $('#designer'), title = $('#design-title'), signature = $('#design-signature'), signatureArt = $('#design-signature-art');
    const art = $('#design-art'), marker = $('#design-marker'), status = $('#design-status');
    const key = 'knowbooks-signature-design', undo = [], hedcuts = new WeakMap();
+   $('#design-fee').innerHTML = priceHtml(customKnowbookPricing.designFeeUsd, undefined, { tag: true });
+   $('#design-deposit').innerHTML = priceHtml(customKnowbookPricing.depositUsd);
+   $('#design-balance').innerHTML = priceHtml(customKnowbookPricing.designFeeUsd - customKnowbookPricing.depositUsd, undefined, { saleUsd: customKnowbookSalePricing.balanceUsd });
+   if (saleActive) $('#design-add').insertAdjacentHTML('afterend', `<small class="sale-was-note">Regular deposit <del>${money.format(customKnowbookPricing.depositUsd)}</del></small>`);
    let design, draft, editing = false, erase = false, drawing, opener, photoVersion = 0;
    const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', signature: '', color: 'navy', superpowers: '', tools: '', art: [], portrait: [], svgImage: '', coverDescription: '' });
    function cryptoId() { return globalThis.crypto.randomUUID().slice(0, 8); }
+   // Superpowers and tools share the same rule: up to 5 space-separated words, 124 characters.
+   const maxWords = 5, maxWordChars = 124;
+   const fiveWords = value => String(value || '').trim().split(/\s+/).slice(0, maxWords).join(' ').slice(0, maxWordChars);
+   const tooManyWords = value => value.trim().split(/\s+/).length > maxWords || value.length > maxWordChars;
+   const limitWordsInput = (input, field) => input.addEventListener('input', () => {
+    const words = input.value.trim().split(/\s+/);
+    if (words.length > maxWords) input.value = words.slice(0, maxWords).join(' ') + ' ';
+    design[field] = input.value; remember();
+   });
    const covers = window.KnowbookCovers;
-   const validSvgImage = covers.validSvgImage;
    const body = source => covers.compile(source).replace(/^<svg[^>]*>|<\/svg>$/g,'');
    const paths = values => body(values.map(d=>'path '+d).join('\n'));
    const dots = values => body(covers.packDots(values).join('\n'));
    const vectorImage = value => value ? body('svgImage '+value) : '';
    const cover = d => covers.compile(covers.designerSource(d));
-   const product = d => ({ id: d.id, title: `${d.title} — Signature design deposit (${d.id})`, priceUsd: 5000, coverColor: coverPalette[d.color], cover: cover(d), design: d });
+   const product = d => ({ id: d.id, title: `${d.title} — Signature design deposit (${d.id})`, listPriceUsd: customKnowbookPricing.depositUsd, priceUsd: customKnowbookSalePricing.depositUsd, coverColor: coverPalette[d.color], cover: cover(d), design: d });
    const remember = () => {
     design.title = title.textContent.replace(/\s+/g,' ').trim().slice(0, 60);
     design.signature = signature.value.trim();
@@ -1317,14 +1369,14 @@ script
    const restoreDesign = d => {
     if (!d || !/^custom-[a-f0-9-]{8}$/.test(d.id) || !Object.hasOwn(coverPalette,d.color)) return null;
     d.title = String(d.title).slice(0,60); d.signature = String(typeof d.signature === 'string' ? d.signature : '').replace(/\s+/g,' ').slice(0,60);
-    d.superpowers = String(d.superpowers ?? (Array.isArray(d.verbs) ? d.verbs.filter(Boolean).join(' ') : '')).trim().split(/\s+/).slice(0,5).join(' ').slice(0,124);
+    d.superpowers = fiveWords(d.superpowers ?? (Array.isArray(d.verbs) ? d.verbs.filter(Boolean).join(' ') : ''));
     delete d.verbs;
-    d.tools = String(d.tools || '').trim().split(/\s+/).slice(0,5).join(' ').slice(0,124);
+    d.tools = fiveWords(d.tools);
     d.coverDescription = String(d.coverDescription || d.symbol || '').replace(/\s+/g,' ').trim();
     delete d.symbol;
     d.art = (Array.isArray(d.art) ? d.art : []).filter(p => typeof p === 'string' && p.length < 20000 && /^[MLQ0-9., -]+$/.test(p) && !/\.\d{2}/.test(p)).slice(0,200);
     d.portrait = (Array.isArray(d.portrait) ? d.portrait : []).filter(p => Array.isArray(p) && p.length === 3 && p.every(n=>Number.isFinite(n) && /^-?\d+(?:\.\d)?$/.test(String(n))) && p[0]>=0 && p[0]<=256 && p[1]>=0 && p[1]<=256 && p[2]>0 && p[2]<4).slice(0,4500);
-    d.svgImage = validSvgImage(d.svgImage) ? d.svgImage : '';
+    d.svgImage = covers.validSvgImage(d.svgImage) ? d.svgImage : '';
     return d;
    };
    try {
@@ -1342,7 +1394,7 @@ script
     const leaf = value => String(value || '').replace(/\s+/g,' ').trim();
     return [
      `title ${leaf(d.title)}`, ...(d.signature ? [`signature ${leaf(d.signature)}`] : []), `color ${d.color}`,
-     'designFeeUsd 10000', 'depositUsd 5000', 'prototype One shipped within 30 days of deposit', 'balance Due before shipment',
+     `designFeeUsd ${customKnowbookPricing.designFeeUsd}`, `depositUsd ${customKnowbookPricing.depositUsd}`, 'prototype One shipped within 30 days of deposit', 'balance Due before shipment',
      'copies Our production cost + 30%',
      `superpowers ${leaf(d.superpowers)}`,
      ...(d.tools ? [`tools ${leaf(d.tools)}`] : []),
@@ -1379,8 +1431,8 @@ script
     const d={...fresh(),title:scalar(top.title),id:design.id,signature:scalar(top.signature),color:scalar(top.color),coverDescription:scalar(top.coverDescription,scalar(top.symbol)),superpowers:scalar(top.superpowers,scalar(top.experiments)),tools:scalar(top.tools)};
     if(!d.title.trim() || d.title.length>60 || d.signature.length>60) fail('Use a title and signature of at most 60 characters.');
     if(!Object.hasOwn(coverPalette,d.color)) fail('Use a listed cover color.');
-    if(d.superpowers.trim().split(/\s+/).length>5 || d.superpowers.length>124) fail('Use up to 5 space-separated words (124 characters maximum).');
-    if(d.tools.trim().split(/\s+/).length>5 || d.tools.length>124) fail('Use up to 5 space-separated tools (124 characters maximum).');
+    if(tooManyWords(d.superpowers)) fail('Use up to 5 space-separated words (124 characters maximum).');
+    if(tooManyWords(d.tools)) fail('Use up to 5 space-separated tools (124 characters maximum).');
     for(const line of proposal(d).split('\n').filter(line=>/^(designFeeUsd|depositUsd|prototype|balance|copies) /.test(line))) {
      const space=line.indexOf(' '), key=line.slice(0,space);if(scalar(top[key])!==line.slice(space+1)) fail(`${key} is a fixed offer term.`);
     }
@@ -1399,18 +1451,9 @@ script
     const saved = products.get(button.dataset.editDesign).design;
     open(event, saved);
    });
-   const superpowers = $('#design-superpowers');
-   superpowers.addEventListener('input', () => {
-    const words=superpowers.value.trim().split(/\s+/);
-    if(words.length>5) superpowers.value=words.slice(0,5).join(' ')+' ';
-    design.superpowers=superpowers.value; remember();
-   });
-   const tools = $('#design-tools');
-   tools.addEventListener('input', () => {
-    const words=tools.value.trim().split(/\s+/);
-    if(words.length>5) tools.value=words.slice(0,5).join(' ')+' ';
-    design.tools=tools.value; remember();
-   });
+   const superpowers = $('#design-superpowers'), tools = $('#design-tools');
+   limitWordsInput(superpowers, 'superpowers');
+   limitWordsInput(tools, 'tools');
    $('#design-colors').innerHTML = Object.entries(coverPalette).map(([name,color]) => `<button type="button" style="--swatch:${color}" data-color="${name}" aria-label="${name}" title="${name}" aria-pressed="false"></button>`).join('');
    function render() {
     $('.design-cover').style.setProperty('--cover', coverPalette[design.color]);
@@ -1566,8 +1609,8 @@ script
    function showDesign() {
     title.textContent=design.title; signature.value=design.signature || '';
     superpowers.value=design.superpowers;
-    tools.value=design.tools || '';
-    $('#design-add').textContent=editing ? 'Update cart' : 'Add $5,000 deposit to cart';
+    tools.value=design.tools;
+    $('#design-add').textContent=editing ? 'Update cart' : `Add ${money.format(customKnowbookSalePricing.depositUsd)} deposit to cart`;
     render();
    }
    function open(event,existing,newDesign) {
