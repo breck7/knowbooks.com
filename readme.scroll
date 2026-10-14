@@ -766,7 +766,7 @@ aside
  <div id="design-colors" role="group" aria-label="Cover color"></div>
  <div class="design-tools"><button type="button" id="design-marker" aria-pressed="false" aria-label="Flip marker to eraser"><svg viewBox="0 0 100 24" width="100" height="24" aria-hidden="true"><path d="M5 12 19 5v14z" fill="currentColor"/><rect x="19" y="4" width="60" height="16" rx="3" fill="currentColor"/><rect x="80" y="4" width="15" height="16" rx="3" fill="#d9bc78"/></svg><span>Flip to erase</span></button><button type="button" id="design-undo">Undo</button><label class="design-upload">Upload<input id="portrait-file" type="file" aria-label="Upload cover image" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,.svg"></label><button type="button" id="remove-image" hidden>Remove image</button></div>
  </div>
- <div class="design-inside"><div id="design-experiments"><h3><label for="design-superpowers">What superpowers will your Knowbook teach?</label></h3><input id="design-superpowers" placeholder="write 5 verbs...." maxlength="124" aria-describedby="design-superpowers-help"><small id="design-superpowers-help">We’ll work with you to design 5 hands-on experiments using real objects.</small></div><p class="design-price">$10,000 <small>design fee</small></p><p>50% now. One prototype shipped within 30 days of deposit. Balance upon delivery.</p><p>More copies: you set price and keep 80% of net revenue. We handle manufacturing, distribution, and delivery.</p><button id="design-add" type="submit">Add $5,000 deposit to cart</button><p id="design-status" role="status"></p></div>
+ <div class="design-inside"><div id="design-experiments"><h3><label for="design-superpowers">What skills will customers learn?</label></h3><input id="design-superpowers" placeholder="write 5 verbs...." maxlength="124" aria-describedby="design-superpowers-help"><small id="design-superpowers-help">We’ll work with you to design 5 hands-on experiments.</small><h3><label for="design-tools">What tools will they acquire?</label></h3><input id="design-tools" placeholder="write 5 tools...." maxlength="124" aria-describedby="design-tools-help"><small id="design-tools-help">We'll work with you to pick 5 durable tools for customer homes.</small></div><p class="design-price">$10,000 <small>design fee</small></p><p>50% now. One prototype shipped within 30 days of deposit. Balance upon delivery.</p><p>More copies: you set price and keep 80% of net revenue. We handle manufacturing, distribution, and delivery.</p><button id="design-add" type="submit">Add $5,000 deposit to cart</button><p id="design-status" role="status"></p></div>
  </div><details id="design-source"><summary>See/Edit code</summary><textarea id="design-code" aria-label="Knowbook Scroll code" aria-describedby="design-code-status" spellcheck="false"></textarea><small id="design-code-status" role="status"></small><label for="design-link">Design link</label><input id="design-link" type="text" readonly spellcheck="false"></details></form>
 </dialog>
 partners.scroll
@@ -1295,7 +1295,7 @@ script
    const art = $('#design-art'), marker = $('#design-marker'), status = $('#design-status');
    const key = 'knowbooks-signature-design', undo = [], hedcuts = new WeakMap();
    let design, draft, editing = false, erase = false, drawing, opener, photoVersion = 0;
-   const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', signature: '', color: 'navy', superpowers: '', art: [], portrait: [], svgImage: '', coverDescription: '' });
+   const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', signature: '', color: 'navy', superpowers: '', tools: '', art: [], portrait: [], svgImage: '', coverDescription: '' });
    function cryptoId() { return globalThis.crypto.randomUUID().slice(0, 8); }
    const covers = window.KnowbookCovers;
    const validSvgImage = covers.validSvgImage;
@@ -1319,6 +1319,7 @@ script
     d.title = String(d.title).slice(0,60); d.signature = String(typeof d.signature === 'string' ? d.signature : '').replace(/\s+/g,' ').slice(0,60);
     d.superpowers = String(d.superpowers ?? (Array.isArray(d.verbs) ? d.verbs.filter(Boolean).join(' ') : '')).trim().split(/\s+/).slice(0,5).join(' ').slice(0,124);
     delete d.verbs;
+    d.tools = String(d.tools || '').trim().split(/\s+/).slice(0,5).join(' ').slice(0,124);
     d.coverDescription = String(d.coverDescription || d.symbol || '').replace(/\s+/g,' ').trim();
     delete d.symbol;
     d.art = (Array.isArray(d.art) ? d.art : []).filter(p => typeof p === 'string' && p.length < 20000 && /^[MLQ0-9., -]+$/.test(p) && !/\.\d{2}/.test(p)).slice(0,200);
@@ -1344,6 +1345,7 @@ script
      'designFeeUsd 10000', 'depositUsd 5000', 'prototype One shipped within 30 days of deposit', 'balance Due before shipment',
      'copies Our production cost + 30%',
      `superpowers ${leaf(d.superpowers)}`,
+     ...(d.tools ? [`tools ${leaf(d.tools)}`] : []),
      ...(d.coverDescription ? [`coverDescription ${leaf(d.coverDescription)}`] : []),
      'cover', ...covers.designerSource(d).split('\n').map(line=>' '+line)
     ].join('\n') + '\n';
@@ -1373,11 +1375,12 @@ script
      const result={};for(const child of node.children) {if(!allowed.includes(child.key) || result[child.key]) fail(`Unexpected or repeated field: ${child.key}`);result[child.key]=child;}return result;
     };
     const scalar = (node, fallback='') => {if(node?.children.length) fail(`Unexpected indentation below ${node.key}.`);return node?.value ?? fallback;};
-    const top=fields(root,['title','signature','color','designFeeUsd','depositUsd','prototype','balance','copies','superpowers','experiments','coverDescription','symbol','cover']);
-    const d={...fresh(),title:scalar(top.title),id:design.id,signature:scalar(top.signature),color:scalar(top.color),coverDescription:scalar(top.coverDescription,scalar(top.symbol)),superpowers:scalar(top.superpowers,scalar(top.experiments))};
+    const top=fields(root,['title','signature','color','designFeeUsd','depositUsd','prototype','balance','copies','superpowers','tools','experiments','coverDescription','symbol','cover']);
+    const d={...fresh(),title:scalar(top.title),id:design.id,signature:scalar(top.signature),color:scalar(top.color),coverDescription:scalar(top.coverDescription,scalar(top.symbol)),superpowers:scalar(top.superpowers,scalar(top.experiments)),tools:scalar(top.tools)};
     if(!d.title.trim() || d.title.length>60 || d.signature.length>60) fail('Use a title and signature of at most 60 characters.');
     if(!Object.hasOwn(coverPalette,d.color)) fail('Use a listed cover color.');
     if(d.superpowers.trim().split(/\s+/).length>5 || d.superpowers.length>124) fail('Use up to 5 space-separated words (124 characters maximum).');
+    if(d.tools.trim().split(/\s+/).length>5 || d.tools.length>124) fail('Use up to 5 space-separated tools (124 characters maximum).');
     for(const line of proposal(d).split('\n').filter(line=>/^(designFeeUsd|depositUsd|prototype|balance|copies) /.test(line))) {
      const space=line.indexOf(' '), key=line.slice(0,space);if(scalar(top[key])!==line.slice(space+1)) fail(`${key} is a fixed offer term.`);
     }
@@ -1401,6 +1404,12 @@ script
     const words=superpowers.value.trim().split(/\s+/);
     if(words.length>5) superpowers.value=words.slice(0,5).join(' ')+' ';
     design.superpowers=superpowers.value; remember();
+   });
+   const tools = $('#design-tools');
+   tools.addEventListener('input', () => {
+    const words=tools.value.trim().split(/\s+/);
+    if(words.length>5) tools.value=words.slice(0,5).join(' ')+' ';
+    design.tools=tools.value; remember();
    });
    $('#design-colors').innerHTML = Object.entries(coverPalette).map(([name,color]) => `<button type="button" style="--swatch:${color}" data-color="${name}" aria-label="${name}" title="${name}" aria-pressed="false"></button>`).join('');
    function render() {
@@ -1557,6 +1566,7 @@ script
    function showDesign() {
     title.textContent=design.title; signature.value=design.signature || '';
     superpowers.value=design.superpowers;
+    tools.value=design.tools || '';
     $('#design-add').textContent=editing ? 'Update cart' : 'Add $5,000 deposit to cart';
     render();
    }
