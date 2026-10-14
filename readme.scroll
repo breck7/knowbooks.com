@@ -700,6 +700,14 @@ aside
     rel noopener
     span @knowbooks
      id venmo-account
+   a X Money ↗
+    id pay-x-money
+    data-payment X Money
+    href https://x.com/breckyunits
+    target _blank
+    rel noopener
+    span @breckyunits
+     id x-money-account
    button NEAR
     id pay-near
     type button
