@@ -847,7 +847,7 @@ script
   const currency = "USD";
   const money = new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 });
   // Creator-set price for custom Knowbooks: whole dollars within these limits.
-  const customKnowbookPrice = { defaultUsd: 249, minUsd: 20, maxUsd: 10000000000 };
+  const customKnowbookPrice = { defaultUsd: 349, minUsd: 199, maxUsd: 10000000000 };
   const validCustomPrice = value => Number.isInteger(value) && value >= customKnowbookPrice.minUsd && value <= customKnowbookPrice.maxUsd;
   const checkoutMoney = new Intl.NumberFormat("en-US", { style: "currency", currency });
   const referralCodes = new Set("john kendric producthunt fireplace liz daylight kemi mikayla joe blake daniel francisco butler hassam ash goodman frank ari leah mystery nico cora yc".split(" "));
