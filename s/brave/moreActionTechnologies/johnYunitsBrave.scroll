@@ -1,0 +1,51 @@
+title BRAVE — More Action Technologies, Inc. and John Yunits
+description A BRAVE (Breck's Risky Agreement for Venture Equity) between More Action Technologies, Inc. and John Yunits, dated October 15, 2026.
+buildHtml
+buildTxt
+
+# BRAVE
+Breck's Risky Agreement for Venture Equity
+
+A one-page agreement to fund a startup now, for equity later, with a simple cap on the price per share.
+
+*Valuation cap:* $4
+*Company:* More Action Technologies, Inc., a Delaware corporation.
+*Investor:* John Yunits
+*Founder:* Ethan Willis
+*Date:* 2026-10-15
+*Total shares authorized:* 10,000,000
+*Right to shares:* 1,000,000
+*Maximum price per share:* $0.0000004
+*Purchase amount:* $0.40
+
+---
+
+*1. The deal.* The Company has 10,000,000 shares authorized. The Investor pays $0.40 (the “Purchase Amount”) for the right to 1,000,000 shares at a maximum of $0.0000004 each (the “Maximum Price”). No shares are issued to the Investor until conversion. This is not a loan: no interest, no maturity, no expiration.
+
+*2. Equity financing.* If the Company later sells shares to new investors at a price per share (an “Equity Financing”), the Investor’s shares are issued at that same price — or, if that price is higher than the Maximum Price on this agreement, at the lower Maximum Price.
+
+*3. Liquidity event.* If the Company is acquired or goes public (a “Liquidity Event”), the Investor receives the greater of: (a) the Purchase Amount (the “Cash-Out Amount”); or (b) the value of the shares the Investor would receive (the Purchase Amount divided by the Maximum Price).
+
+*4. Dissolution.* If the Company shuts down, the Investor receives the Purchase Amount.
+
+*5. Before conversion.* The Investor is not a shareholder: no vote, no information rights, and no transfer without the Company's consent (except on death or to an affiliate). If the Company pays a cash dividend on common stock, the Investor receives the same per-share amount as if converted.
+
+*6. Ending and amending.* This agreement ends when the Investor is issued shares under Section 2 or paid under Section 3 or 4. It may be amended only with the written consent of the Company and either the Investor or a majority-in-interest of all BRAVEs with the same Maximum Price. The Purchase Amount may never be reduced this way.
+
+*7. Promises.* The Company is duly formed and authorized to sign. The Investor is an accredited investor and understands this is a risky, illiquid investment that can lose all of its value.
+
+*8. The fine print.* Governed by the laws of Delaware. Intended to be treated as stock for U.S. tax purposes. This is the entire agreement; if any part is invalid, the rest stands.
+
+---
+
+The parties agree and sign below. One party signs by committing this agreement, the other by pull request. Once merged, the Investor sends the money.
+
+## Investor: John Yunits
+Signature: by signed git commit or pull request.
+
+## Company: More Action Technologies, Inc.
+Signature: by signed git commit or pull request.
+Title: 
+Date: 
+
+Derived from the YC SAFE (Valuation Cap, Version 1), cut down to the lines that matter. Not legal advice.

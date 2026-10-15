@@ -76,24 +76,36 @@ The parties agree and sign below.
  addClass signLead
 
 Company: {Company}
+ addClass sigParty
 
-By: ____________________________  Name: ____________________________  Title: ____________________________
- inlineMarkupsOn none
+Signature
+ addClass sigLine
 
-Address / email: ______________________________________________
- inlineMarkupsOn none
+Name
+ addClass sigLine
 
-div
- addClass sigGap
+Title
+ addClass sigLine
 
+Date
+ addClass sigLine
 Investor: {Investor}
+ addClass sigParty
 
-By: ____________________________  Name: ____________________________  Title: ____________________________
- inlineMarkupsOn none
+Signature
+ addClass sigLine
 
-Address / email: ______________________________________________
- inlineMarkupsOn none
+Name
+ addClass sigLine
 
+Date
+ addClass sigLine
+
+## Sign with Git
+ addClass gitHead
+
+One party signs by committing this agreement. The other signs by pull request. Once merged, the Investor sends the money.
+ addClass gitNote
 
 <footer class="pageFoot">
 
@@ -247,7 +259,10 @@ css
  .rule { border-top: 1px solid var(--rule); margin: 14px 0; height: 0; }
  article p { font-size: 14px; line-height: 1.5; margin: 0 0 9px; text-align: justify; hyphens: auto; }
  .signLead { margin-top: 12px !important; font-style: italic; }
- .sigGap { height: 26px; }
+ .sigParty { font-weight: 700; margin-top: 18px !important; break-after: avoid; }
+ .sigLine { border-top: 1px solid var(--ink); max-width: 360px; margin-top: 26px !important; padding-top: 3px; font: 10.5px ui-sans-serif, system-ui, sans-serif !important; color: var(--muted); text-align: left !important; break-inside: avoid; }
+ .gitHead { font-size: 18px; margin: 24px 0 8px; } .gitNote { text-align: left !important; }
+ article code.scrollCodeBlock { display: block; white-space: pre; font: 12px/1.45 ui-monospace, Menlo, monospace; background: #f1ece0; padding: 10px 12px; border-radius: 4px; overflow: auto; }
  .pageFoot { border-top: 1px solid var(--rule); margin-top: 22px; padding-top: 12px; }
  .fineprint { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 11px; line-height: 1.5; color: var(--muted); margin: 0 0 4px; text-align: left; }
  .field { background: var(--field); border-bottom: 1.5px solid #c9a12f; padding: 0 2px; border-radius: 2px; outline: none; min-width: 34px; display: inline-block; cursor: text; }
@@ -271,7 +286,7 @@ css
   .capParty { font-size: 11.5px; }
   article p { font-size: 10.5px; line-height: 1.34; margin-bottom: 5px; }
   .signLead { margin-top: 9px !important; }
-  .sigGap { height: 18px; }
+  .sigLine { margin-top: 16px !important; font-size: 8.5px !important; } .gitHead { font-size: 13px; } article code.scrollCodeBlock { font-size: 9px; }
   .pageFoot { margin-top: 14px; padding-top: 9px; }
   .fineprint { font-size: 8.6px; }
   .field, .computed { background: none; border-bottom: 1px solid #999; padding: 0; font-weight: inherit; }
