@@ -172,6 +172,14 @@ css
  }
  .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font: 700 11px/1 Arial, sans-serif; letter-spacing: .2em; }
  .brand img { width: 30px; height: 30px; padding: 5px; border-radius: 50%; background: var(--ink); }
+ .per-month { float: right; margin-top: 7px; padding: 0; border: 0; background: none; cursor: pointer; vertical-align: middle; font: 700 8px/1 Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; opacity: .55; transition: opacity 200ms; }
+ .per-month:hover, .per-month:focus-visible, .per-month[aria-checked="true"] { opacity: 1; }
+ .per-month .track { position: relative; display: inline-grid; grid-template-columns: 1fr 1fr; padding: 2px; border-radius: 999px; background: #596d5f; }
+ .per-month .track span { position: relative; z-index: 1; padding: 3px 6px; text-align: center; color: #f4efe5; }
+ .per-month .track::before { content: ""; position: absolute; inset: 2px auto 2px 2px; width: calc(50% - 2px); border-radius: 999px; background: #d9bc78; transition: transform 200ms; }
+ .per-month[aria-checked="true"] .track::before { transform: translateX(100%); }
+ .per-month[aria-checked="false"] .track span:first-child, .per-month[aria-checked="true"] .track span:last-child { color: #262b22; }
+ .per-month:focus-visible { outline: 2px solid #d9bc78; outline-offset: 2px; border-radius: 999px; }
  .faq-link { margin-left: auto; margin-right: 100px; text-decoration: none; text-transform: uppercase; font: 700 10px/1 Arial, sans-serif; letter-spacing: .13em; }
  .faq-link:hover, .faq-link:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
  .cart-toggle { position: fixed; z-index: 25; top: 16px; right: clamp(16px, 4vw, 60px); width: 86px; height: 78px; padding: 0; border: 0; background: transparent; cursor: pointer; filter: drop-shadow(0 5px 5px #0002); transition: opacity 200ms, transform 200ms; }
@@ -609,7 +617,7 @@ section
   <a href="https://media.knowbooks.com">Media</a>
   </nav>
   </div>
-  <p class="footer-download"><a href="knowbooks.zip" download>Download this website</a></p>
+  <p class="footer-download"><a href="knowbooks.zip" download>Download this website</a> <button class="per-month" type="button" role="switch" aria-checked="false" title="Per month over 100 years (price ÷ 1,200)"><span class="track"><span>Total</span><span>/mo</span></span></button></p>
  </footer>
 
 <div class="scrim" hidden></div>
@@ -811,8 +819,17 @@ script
   const salePrice = usd => Math.round(usd * saleBonusOpportunitySale);
   const saleActive = saleBonusOpportunitySale !== 1;
   // Shared price markup: plain when no sale; struck regular price + sale price during a sale.
-  const priceHtml = (listUsd, format = usd => money.format(usd), { saleUsd = salePrice(listUsd), tag = false } = {}) => !saleActive || saleUsd === listUsd ? format(saleUsd)
-   : `<span class="is-sale"><del><span class="sr-only">Regular price </span>${format(listUsd)}</del><ins><span class="sr-only">Sale price </span>${format(saleUsd)}</ins>${tag ? '<button type="button" class="sale-tag" aria-label="About the sale">Sale</button>' : ''}</span>`;
+  // Per-month display toggle: Knowbooks last 100 years, so price / 1200 months. Display only; charges stay total.
+  let perMonth = false;
+  try { perMonth = new URLSearchParams(location.search).get("perMonth") === "1"; } catch {}
+  const monthly = usd => { const m = usd / 1200; return "$" + m.toFixed(m && m < 0.01 ? Math.max(2, 1 - Math.floor(Math.log10(m))) : 2) + "/mo"; };
+  const shown = (usd, format) => perMonth ? monthly(usd) : format(usd);
+  const priceHtml = (listUsd, format = usd => money.format(usd), { saleUsd = salePrice(listUsd), tag = false } = {}) => !saleActive || saleUsd === listUsd ? shown(saleUsd, format)
+   : `<span class="is-sale"><del><span class="sr-only">Regular price </span>${shown(listUsd, format)}</del><ins><span class="sr-only">Sale price </span>${shown(saleUsd, format)}</ins>${tag ? '<button type="button" class="sale-tag" aria-label="About the sale">Sale</button>' : ''}</span>`;
+  const perMonthSwitch = document.querySelector(".per-month");
+  perMonthSwitch.setAttribute("aria-checked", String(perMonth));
+  // The URL is the source of truth (?perMonth=1). Toggling rewrites it and reloads; cart and designer drafts persist in localStorage.
+  perMonthSwitch.addEventListener("click", () => { const url = new URL(location.href); perMonth ? url.searchParams.delete("perMonth") : url.searchParams.set("perMonth", "1"); history.replaceState(null, "", url); location.reload(); });
   const coverPalette = {
    navy: "#294575",
    ocean: "#05638E",
@@ -1144,10 +1161,10 @@ script
    footer.hidden = quantity === 0;
    total.innerHTML = priceHtml(listAmount, usd => checkoutMoney.format(usd), { saleUsd: amount });
    cartSavings.hidden = !(saleActive && listAmount > amount);
-   cartSavings.textContent = cartSavings.hidden ? "" : `You save ${checkoutMoney.format(listAmount - amount)} in the ${bonusOpportunitySaleName}`;
+   cartSavings.textContent = cartSavings.hidden ? "" : `You save ${shown(listAmount - amount, usd => checkoutMoney.format(usd))} in the ${bonusOpportunitySaleName}`;
    document.querySelector("#cart-element-16").textContent = cartDeliveryNote();
    referralInput.setAttribute("aria-invalid", String(Boolean(enteredCode && !referralCode)));
-   referralStatus.textContent = referralCode ? `${discountAmount}% code applied — you save ${checkoutMoney.format(discountCents / 100)}.` : enteredCode ? "That referral code isn’t valid." : "";
+   referralStatus.textContent = referralCode ? `${discountAmount}% code applied — you save ${shown(discountCents / 100, usd => checkoutMoney.format(usd))}.` : enteredCode ? "That referral code isn’t valid." : "";
    checkout.href = quantity ? paypalUrl(pricing) : "https://www.paypal.com/cgi-bin/webscr";
    return save();
   };
@@ -1242,7 +1259,7 @@ script
    backgroundInert(true);
    document.body.classList.add("cart-open");
    const rect = cover.getBoundingClientRect();
-   const pagesHtml = `<div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>${escapeHtml(product.description || "Handmade in Hawaii. Every Knowbook is unique. Open yours and experiment.")}</p>${chipSection("Learn:", know)}${chipSection("Includes:", toolsOf(product))}${pickupNote(product) ? `<p class="preview-note">In-person pickup only.</p>` : ""}<button class="preview-add" data-add="${escapeHtml(product.id)}">Add to cart <span>${money.format(product.priceUsd)}</span></button></div>`;
+   const pagesHtml = `<div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>${escapeHtml(product.description || "Handmade in Hawaii. Every Knowbook is unique. Open yours and experiment.")}</p>${chipSection("Learn:", know)}${chipSection("Includes:", toolsOf(product))}${pickupNote(product) ? `<p class="preview-note">In-person pickup only.</p>` : ""}<button class="preview-add" data-add="${escapeHtml(product.id)}">Add to cart <span>${shown(product.priceUsd, usd => money.format(usd))}</span></button></div>`;
    const soundButtonHtml = `<button type="button" class="preview-sound" aria-label="Turn sound on" aria-pressed="false"><svg class="preview-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><line x1="17" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="17" y2="15"/></svg><svg class="preview-loud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg></button>`;
    const coverHtml = product.video ? `<div class="preview-cover preview-flip"><div class="preview-face preview-front">${cover.outerHTML}</div><div class="preview-face preview-back"><video src="${escapeHtml(product.video)}" autoplay muted loop playsinline></video>${soundButtonHtml}</div></div>` : `${cover.outerHTML}`;
    preview.innerHTML = `<div class="preview-book${product.video ? " preview-book-video" : ""}">${pagesHtml}${coverHtml}</div>`;
