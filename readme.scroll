@@ -241,6 +241,11 @@ css
  @media (prefers-reduced-motion: reduce) { .bos-spark { animation: none; } }
  @media (max-width: 600px) { .bos-rule { display: none; } }
  button.sale-tag { border: 0; cursor: pointer; }
+ .sold-out { flex: 0 0 auto; padding: 6px 8px 5px; border: 1px solid #d9bc78; border-radius: 3px; outline: 1px solid #596d5f; outline-offset: -4px; background: #2f3d30; color: #d9bc78; cursor: pointer; transform: rotate(-4deg); font: 700 10px/1 Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; box-shadow: 0 4px 10px #20211e33; }
+ .sold-out:hover, .preview-add.sold-out { transform: none; }
+ .is-sold-out .price { opacity: .45; }
+ .bos-dialog .bos-banner a { color: #d9bc78; }
+ .bos-dialog .bos-ends { line-height: 2; }
  .bos-dialog { width: min(440px, calc(100% - 32px)); padding: 0; border: 1px solid #d9bc78; border-radius: 12px; background: none; box-shadow: 0 20px 60px #0008; }
  .bos-dialog::backdrop { background: #1f2a22b3; }
  .bos-dialog .bos-banner { flex-direction: column; gap: 14px; padding: 44px 28px 36px; border-radius: 11px; text-align: center; }
@@ -899,8 +904,11 @@ script
   const bosDialog = Object.assign(document.createElement("dialog"), { className: "bos-dialog", ariaLabel: bonusOpportunitySaleName });
   bosDialog.append(Object.assign(bosBanner.cloneNode(true), { role: "" }), Object.assign(document.createElement("button"), { type: "button", className: "bos-dialog-close", ariaLabel: "Close", textContent: "×" }));
   document.body.append(bosDialog);
-  bosDialog.addEventListener("click", event => { if (event.target === bosDialog || event.target.closest(".bos-dialog-close")) bosDialog.close(); });
-  document.addEventListener("click", event => { if (!event.target.closest(".sale-tag")) return; event.preventDefault(); event.stopPropagation(); bosDialog.showModal(); }, true);
+  const soldOutDialog = Object.assign(bosDialog.cloneNode(), { ariaLabel: "Sold out" });
+  soldOutDialog.innerHTML = '<div class="bos-banner"><span class="bos-label">Sold out</span><strong class="bos-percent">This one is full</strong><span class="bos-ends">Get on the waitlist<br><a href="mailto:launchation@knowbooks.com">launchation@knowbooks.com</a> · <a href="tel:+18083682541">808-368-2541</a></span></div><button type="button" class="bos-dialog-close" aria-label="Close">×</button>';
+  document.body.append(soldOutDialog);
+  for (const dialog of [bosDialog, soldOutDialog]) dialog.addEventListener("click", event => { if (event.target === dialog || event.target.closest(".bos-dialog-close")) dialog.close(); });
+  document.addEventListener("click", event => { const tag = event.target.closest(".sale-tag, .sold-out"); if (!tag) return; event.preventDefault(); event.stopPropagation(); (tag.matches(".sold-out") ? soldOutDialog : bosDialog).showModal(); }, true);
   if (saleBonusOpportunitySale !== 1) {
    let timer;
    const countdown = () => {
@@ -959,7 +967,7 @@ script
    const { name, shipping } = editionDetails(shelf);
    return `<article class="product" id="${escapeHtml(cardId(product, shelf))}" data-product-id="${escapeHtml(product.id)}" data-shelf="${escapeHtml(shelf)}">
     ${bookCover(product)}
-    <div class="product-info"><div class="product-meta"><span class="price">${priceHtml(product.listPriceUsd, undefined, { tag: true })}</span><p>${escapeHtml(product.description || (shelf === "special" ? "" : "Experiment kit in a book."))}${shelf === "special" ? (pickupNote(product) ? `<br><i>${escapeHtml(pickupNote(product))}</i>` : "") : `<br><i>${escapeHtml(name)} edition<br>${escapeHtml(pickupNote(product) || shipping)}</i>`}</p></div><button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button></div>
+    <div class="product-info${product.soldOut ? " is-sold-out" : ""}"><div class="product-meta"><span class="price">${priceHtml(product.listPriceUsd, undefined, { tag: true })}</span><p>${escapeHtml(product.description || (shelf === "special" ? "" : "Experiment kit in a book."))}${shelf === "special" ? (pickupNote(product) ? `<br><i>${escapeHtml(pickupNote(product))}</i>` : "") : `<br><i>${escapeHtml(name)} edition<br>${escapeHtml(pickupNote(product) || shipping)}</i>`}</p></div>${product.soldOut ? '<button class="sold-out" type="button">Sold out</button>' : `<button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button>`}</div>
    </article>`;
   };
   const editionDivider = shelf => {
@@ -1259,7 +1267,7 @@ script
    backgroundInert(true);
    document.body.classList.add("cart-open");
    const rect = cover.getBoundingClientRect();
-   const pagesHtml = `<div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>${escapeHtml(product.description || "Handmade in Hawaii. Every Knowbook is unique. Open yours and experiment.")}</p>${chipSection("Learn:", know)}${chipSection("Includes:", toolsOf(product))}${pickupNote(product) ? `<p class="preview-note">In-person pickup only.</p>` : ""}<button class="preview-add" data-add="${escapeHtml(product.id)}">Add to cart <span>${shown(product.priceUsd, usd => money.format(usd))}</span></button></div>`;
+   const pagesHtml = `<div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>${escapeHtml(product.description || "Handmade in Hawaii. Every Knowbook is unique. Open yours and experiment.")}</p>${chipSection("Learn:", know)}${chipSection("Includes:", toolsOf(product))}${pickupNote(product) ? `<p class="preview-note">In-person pickup only.</p>` : ""}${product.soldOut ? '<button class="preview-add sold-out" type="button">Sold out</button>' : `<button class="preview-add" data-add="${escapeHtml(product.id)}">Add to cart <span>${shown(product.priceUsd, usd => money.format(usd))}</span></button>`}</div>`;
    const soundButtonHtml = `<button type="button" class="preview-sound" aria-label="Turn sound on" aria-pressed="false"><svg class="preview-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><line x1="17" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="17" y2="15"/></svg><svg class="preview-loud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg></button>`;
    const coverHtml = product.video ? `<div class="preview-cover preview-flip"><div class="preview-face preview-front">${cover.outerHTML}</div><div class="preview-face preview-back"><video src="${escapeHtml(product.video)}" autoplay muted loop playsinline></video>${soundButtonHtml}</div></div>` : `${cover.outerHTML}`;
    preview.innerHTML = `<div class="preview-book${product.video ? " preview-book-video" : ""}">${pagesHtml}${coverHtml}</div>`;
@@ -1311,6 +1319,7 @@ script
    previewFocus = cover.querySelector("a") || cover;
   };
   const addToCart = async (id, source, button) => {
+   if (products.get(id)?.soldOut) return soldOutDialog.showModal();
    if (adding) return;
    adding = true;
    button.disabled = true;

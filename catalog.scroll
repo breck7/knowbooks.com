@@ -45,6 +45,10 @@ fulfillmentAtom
  extends atomAtom
  enum shipping pickup
 
+soldOutParser
+ extends abstractStringMeasureParser
+ description Optional. Set to true to show a Sold out badge and block adding to cart.
+
 fulfillmentParser
  extends abstractEnumMeasureParser
  atoms measureNameAtom fulfillmentAtom
@@ -85,6 +89,7 @@ id launch
 description Includes Knowbooks launchation package for up to 4 people. Oahu, Hawaii. November 4-6 2026. Includes 2 nights hotel, resort fees, Knowbooks activities and all taxes. Airfare not provided. Questions? launchation@knowbooks.com.
 video videos/launch.mp4
 fulfillment pickup
+soldOut true
 tags economicsTag measurementTag creativeTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag
 color forest
 title Launch
