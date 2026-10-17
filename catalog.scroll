@@ -715,6 +715,22 @@ title Water
 shelf frontier
 priceUsd 249
 
+id buoyancy
+tags physicsTag mechanicsTag fluidsTag measurementTag instantTag liquidTag pressureTag
+title Buoyancy
+shelf believer
+priceUsd 749
+color ocean
+skills float sink weigh displace balance
+tools beaker boat scale hydrometer clay
+coverDescription a block floating at a waterline, its lower part submerged and solid
+cover
+ rect 88 60 80 120
+ filledRect 88 132 80 48
+ line 24 132 232 132
+ circle 62 184 7
+ circle 196 204 5
+
 id rust
 tags physicsTag chemistryTag materialsTag longTermTag metalTag timeTag
 title Rust
