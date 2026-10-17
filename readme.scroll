@@ -305,6 +305,9 @@ css
  .preview-pages p { margin: 0; font: 400 16px/1.5 Arial, sans-serif; text-wrap: pretty; }
  .preview-pages .preview-note { color: var(--muted); font-size: 12px; line-height: 1.4; }
  .preview-pages .preview-add { font-size: 13px; }
+ .preview-instructions { flex-shrink: 0; width: 100%; margin-bottom: -6px; padding: 4px 2px; border: 0; outline: 0; background: transparent; color: inherit; text-align: center; font: italic 13px/1.3 Georgia, serif; }
+ .preview-instructions::placeholder { color: inherit; opacity: .45; }
+ .line-copy .line-note { margin: 0 0 6px; font: italic 13px/1.3 Georgia, serif; }
  .preview-know { display: flex; flex-direction: column; align-items: center; gap: 8px; }
  .preview-know h4 { margin: 0; color: #7c6631; font: italic 400 14px/1 Georgia, "Times New Roman", serif; letter-spacing: .14em; }
  .preview-skills { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 0; padding: 0; list-style: none; }
@@ -1042,7 +1045,7 @@ script
    [...cart].forEach(([id, quantity], index) => {
     const product = products.get(id);
     const number = index + 1;
-    url.searchParams.set(`item_name_${number}`, `${product.title}${product.shelf === "special" && product.id !== "knowbook" ? "" : " Knowbook"}${product.id === "knowbook" ? " + initial partner conversation" : ""}${pickupNote(product) ? " — in-person pickup only; no shipping" : ""}${referralCode ? ` (Referral: ${referralCode})` : ""}`);
+    url.searchParams.set(`item_name_${number}`, `${product.title}${product.shelf === "special" && product.id !== "knowbook" ? "" : " Knowbook"}${product.id === "knowbook" ? " + initial partner conversation" : ""}${pickupNote(product) ? " — in-person pickup only; no shipping" : ""}${product.note ? ` — Instructions: ${product.note}` : ""}${referralCode ? ` (Referral: ${referralCode})` : ""}`);
     url.searchParams.set(`item_number_${number}`, product.id);
     url.searchParams.set(`amount_${number}`, Number(product.priceUsd).toFixed(2));
     url.searchParams.set(`quantity_${number}`, String(quantity));
@@ -1062,7 +1065,7 @@ script
    const { amount, discountCents, referralCode } = cartPricing();
    const rows = [...cart].map(([id, quantity]) => {
     const product = products.get(id);
-    return { title: product.design?.title || product.title, quantity, total: product.priceUsd * quantity };
+    return { title: `${product.design?.title || product.title}${product.note ? ` “${product.note}”` : ""}`, quantity, total: product.priceUsd * quantity };
    });
    const W = 640, scale = 2, pad = 48, rowH = 34, qrSize = 200;
    let qr = null;
@@ -1145,7 +1148,7 @@ script
   });
   const save = () => {
    try {
-    localStorage.setItem("knowbooks-cart", JSON.stringify([...cart].map(([id, quantity]) => [id, quantity, products.get(id).design || null])));
+    localStorage.setItem("knowbooks-cart", JSON.stringify([...cart].map(([id, quantity]) => [id, quantity, products.get(id).design || null, products.get(id).note || null])));
     return true;
    } catch { return false; }
   };
@@ -1164,7 +1167,7 @@ script
    });
    lines.innerHTML = [...cart].map(([id, value]) => {
     const product = products.get(id);
-    return `<div class="cart-line"><div class="line-swatch" aria-hidden="true" inert>${bookCover(product)}</div><div class="line-copy"><h3>${escapeHtml(product.title)}</h3><p>${priceHtml(product.listPriceUsd)} each</p>${product.description ? `<p>${escapeHtml(product.description)}</p>` : ""}${pickupNote(product) ? `<p><strong>${escapeHtml(pickupNote(product))}</strong></p>` : ""}${product.design ? `<div class="design-actions"><button type="button" data-edit-design="${escapeHtml(id)}">Edit</button></div>` : ""}</div><div class="quantity"><button type="button" data-less="${escapeHtml(id)}" aria-label="Remove one ${escapeHtml(product.title)}">−</button><span>${value}</span><button type="button" data-more="${escapeHtml(id)}" aria-label="Add one ${escapeHtml(product.title)}">+</button></div></div>`;
+    return `<div class="cart-line"><div class="line-swatch" aria-hidden="true" inert>${bookCover(product)}</div><div class="line-copy"><h3>${escapeHtml(product.title)}</h3>${product.note ? `<p class="line-note">“${escapeHtml(product.note)}”</p>` : ""}<p>${priceHtml(product.listPriceUsd)} each</p>${product.description ? `<p>${escapeHtml(product.description)}</p>` : ""}${pickupNote(product) ? `<p><strong>${escapeHtml(pickupNote(product))}</strong></p>` : ""}${product.design ? `<div class="design-actions"><button type="button" data-edit-design="${escapeHtml(id)}">Edit</button></div>` : ""}</div><div class="quantity"><button type="button" data-less="${escapeHtml(id)}" aria-label="Remove one ${escapeHtml(product.title)}">−</button><span>${value}</span><button type="button" data-more="${escapeHtml(id)}" aria-label="Add one ${escapeHtml(product.title)}">+</button></div></div>`;
    }).join("");
    fitBookTitles();
    empty.hidden = quantity > 0;
@@ -1269,7 +1272,7 @@ script
    backgroundInert(true);
    document.body.classList.add("cart-open");
    const rect = cover.getBoundingClientRect();
-   const pagesHtml = `<div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>${escapeHtml(product.description || "Handmade in Hawaii. Every Knowbook is unique. Open yours and experiment.")}</p>${chipSection("Learn:", know)}${chipSection("Includes:", toolsOf(product))}${pickupNote(product) ? `<p class="preview-note">In-person pickup only.</p>` : ""}${product.soldOut ? '<button class="preview-add sold-out" type="button">Sold out</button>' : `<button class="preview-add" data-add="${escapeHtml(product.id)}">Add to cart <span>${shown(product.priceUsd, usd => money.format(usd))}</span></button>`}</div>`;
+   const pagesHtml = `<div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>${escapeHtml(product.description || "Handmade in Hawaii. Every Knowbook is unique. Open yours and experiment.")}</p>${chipSection("Learn:", know)}${chipSection("Includes:", toolsOf(product))}${pickupNote(product) ? `<p class="preview-note">In-person pickup only.</p>` : ""}${product.soldOut ? '<button class="preview-add sold-out" type="button">Sold out</button>' : `<input class="preview-instructions" maxlength="124" placeholder="optional special instructions...up to 5 words" aria-label="Special instructions" autocomplete="off"><button class="preview-add" data-add="${escapeHtml(product.id)}">Add to cart <span>${shown(product.priceUsd, usd => money.format(usd))}</span></button>`}</div>`;
    const soundButtonHtml = `<button type="button" class="preview-sound" aria-label="Turn sound on" aria-pressed="false"><svg class="preview-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><line x1="17" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="17" y2="15"/></svg><svg class="preview-loud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg></button>`;
    const coverHtml = product.video ? `<div class="preview-cover preview-flip"><div class="preview-face preview-front">${cover.outerHTML}</div><div class="preview-face preview-back"><video src="${escapeHtml(product.video)}" autoplay muted loop playsinline></video>${soundButtonHtml}</div></div>` : `${cover.outerHTML}`;
    preview.innerHTML = `<div class="preview-book${product.video ? " preview-book-video" : ""}">${pagesHtml}${coverHtml}</div>`;
@@ -1346,6 +1349,8 @@ script
    (previewFocus?.isConnected ? previewFocus : button).focus();
    previewFocus = null;
   };
+  // Special instructions (up to 5 words) make a separate cart line: id~note, sharing the base product.
+  const withNote = (id, note) => { if (!note || !products.has(id)) return id; const lineId = `${id}~${note}`; if (!products.has(lineId)) products.set(lineId, { ...products.get(id), note }); return lineId; };
   const change = (id, delta) => {
    const focused = document.activeElement;
    const control = focused?.hasAttribute("data-more") ? "data-more" : focused?.hasAttribute("data-less") ? "data-less" : null;
@@ -1716,7 +1721,7 @@ script
   });
   try {
    const saved = JSON.parse(localStorage.getItem("knowbooks-cart") || "[]");
-   saved.forEach(([id, quantity]) => { if (products.has(id) && Number.isInteger(quantity) && quantity > 0) cart.set(id, products.get(id).design ? 1 : quantity); });
+   saved.forEach(([id, quantity, , note]) => { if (note) withNote(id.split("~")[0], note); if (products.has(id) && Number.isInteger(quantity) && quantity > 0) cart.set(id, products.get(id).design ? 1 : quantity); });
   } catch {}
   grid.addEventListener("click", event => {
    const link = event.target.closest(".edition-toggle");
@@ -1731,7 +1736,8 @@ script
    if (event.key === " " && event.target.matches(".edition-toggle")) { event.preventDefault(); event.target.click(); }
   });
   grid.addEventListener("click", event => { const cover = event.target.closest(".book-cover"); const button = event.target.closest("[data-add]"); if (cover) { const url = new URL(location.href); url.searchParams.set("knowbookId", cover.closest(".product").dataset.productId); history.replaceState(null, "", url); openBook(cover); } if (button) { addToCart(button.dataset.add, button.closest(".product").querySelector(".book-cover"), button); } });
-  preview.addEventListener("click", event => { const button = event.target.closest(".preview-add"); if (button) addToCart(button.dataset.add, preview.querySelector(".preview-book"), button); if (event.target === preview || event.target.closest(".preview-close")) closeBook(); });
+  preview.addEventListener("input", event => { const input = event.target.closest(".preview-instructions"), words = input?.value.trimStart().split(/\s+/); if (words?.length > 5) input.value = words.slice(0, 5).join(" "); });
+  preview.addEventListener("click", event => { const button = event.target.closest(".preview-add"); if (button) addToCart(withNote(button.dataset.add, preview.querySelector(".preview-instructions")?.value.trim()), preview.querySelector(".preview-book"), button); if (event.target === preview || event.target.closest(".preview-close")) closeBook(); });
   lines.addEventListener("click", event => { const more = event.target.closest("[data-more]"); const less = event.target.closest("[data-less]"); if (more) change(more.dataset.more, 1); if (less) change(less.dataset.less, -1); });
   referralInput.addEventListener("input", refresh);
   toggle.addEventListener("click", openCart);

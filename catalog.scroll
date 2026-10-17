@@ -442,8 +442,11 @@ cover
 id light
 tags physicsTag electromagnetismTag wavesTag instantTag opticsTag cyclesTag
 title Light
-shelf frontier
+shelf believer
 priceUsd 249
+color yellow
+skills see measure colorize illuminate enhance
+tools headlamp flashlight prism glowstick leds
 coverDescription a glowing circle with short rays radiating outward and a single beam streaming out below
 cover
  filledCircle 128 96 30
