@@ -603,7 +603,7 @@ section
 <footer class="site-footer">
   <div>
   <h2 class="contact-heading">Contact us</h2>
-  <p class="email-invite"><a href="mailto:founders@knowbooks.com">founders@knowbooks.com</a><a href="tel:+18083682541">1-808-368-2541</a></p>
+  <p class="email-invite"><a href="mailto:founders@knowbooks.com">founders@knowbooks.com</a><a href="tel:+18087241776">1-808-724-1776</a></p>
   </div>
   <div>
   <p class="footer-label">&nbsp;</p>
@@ -910,7 +910,7 @@ script
   bosDialog.append(Object.assign(bosBanner.cloneNode(true), { role: "" }), Object.assign(document.createElement("button"), { type: "button", className: "bos-dialog-close", ariaLabel: "Close", textContent: "×" }));
   document.body.append(bosDialog);
   const soldOutDialog = Object.assign(bosDialog.cloneNode(), { ariaLabel: "Sold out" });
-  soldOutDialog.innerHTML = '<div class="bos-banner"><span class="bos-label">Sold out</span><strong class="bos-percent">This one is full</strong><span class="bos-ends">Get on the waitlist<br><a href="mailto:launchation@knowbooks.com">launchation@knowbooks.com</a> · <a href="tel:+18083682541">808-368-2541</a></span></div><button type="button" class="bos-dialog-close" aria-label="Close">×</button>';
+  soldOutDialog.innerHTML = '<div class="bos-banner"><span class="bos-label">Sold out</span><strong class="bos-percent">This one is full</strong><span class="bos-ends">Get on the waitlist<br><a href="mailto:launchation@knowbooks.com">launchation@knowbooks.com</a> · <a href="tel:+18087241776">808-724-1776</a></span></div><button type="button" class="bos-dialog-close" aria-label="Close">×</button>';
   document.body.append(soldOutDialog);
   for (const dialog of [bosDialog, soldOutDialog]) dialog.addEventListener("click", event => { if (event.target === dialog || event.target.closest(".bos-dialog-close")) dialog.close(); });
   document.addEventListener("click", event => { const tag = event.target.closest(".sale-tag, .sold-out"); if (!tag) return; event.preventDefault(); event.stopPropagation(); (tag.matches(".sold-out") ? soldOutDialog : bosDialog).showModal(); }, true);
