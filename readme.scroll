@@ -1739,7 +1739,12 @@ script
   preview.addEventListener("input", event => { const input = event.target.closest(".preview-instructions"), words = input?.value.trimStart().split(/\s+/); if (words?.length > 5) input.value = words.slice(0, 5).join(" "); });
   preview.addEventListener("click", event => { const button = event.target.closest(".preview-add"); if (button) addToCart(withNote(button.dataset.add, preview.querySelector(".preview-instructions")?.value.trim()), preview.querySelector(".preview-book"), button); if (event.target === preview || event.target.closest(".preview-close")) closeBook(); });
   lines.addEventListener("click", event => { const more = event.target.closest("[data-more]"); const less = event.target.closest("[data-less]"); if (more) change(more.dataset.more, 1); if (less) change(less.dataset.less, -1); });
-  referralInput.addEventListener("input", refresh);
+  // Referral code from ?r=code (e.g. ?r=john) or a previous visit; typing a code replaces the saved one.
+  const saveReferral = () => { try { localStorage.setItem("knowbooks-referral", referralInput.value.trim().toLowerCase()); } catch {} };
+  try { referralInput.value = (new URLSearchParams(location.search).get("r") || localStorage.getItem("knowbooks-referral") || "").trim().toLowerCase(); } catch {}
+  saveReferral();
+  refresh();
+  referralInput.addEventListener("input", () => { saveReferral(); refresh(); });
   toggle.addEventListener("click", openCart);
   drawer.querySelector(".cart-close").addEventListener("click", closeCart);
   empty.querySelector("a").addEventListener("click", closeCart);
