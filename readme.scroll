@@ -834,7 +834,7 @@ script
   try { perMonth = new URLSearchParams(location.search).get("perMonth") === "1"; } catch {}
   const monthly = usd => { const m = usd / 1200; return "$" + m.toFixed(m && m < 0.01 ? Math.max(2, 1 - Math.floor(Math.log10(m))) : 2) + "/mo"; };
   const shown = (usd, format) => perMonth ? monthly(usd) : format(usd);
-  const priceHtml = (listUsd, format = usd => money.format(usd), { saleUsd = salePrice(listUsd), tag = false } = {}) => !saleActive || saleUsd === listUsd ? shown(saleUsd, format)
+  const priceHtml = (listUsd, format = usd => money.format(usd), { saleUsd = salePrice(listUsd) * referralFactor, tag = false } = {}) => !(saleActive || referralFactor !== 1) || saleUsd === listUsd ? shown(saleUsd, format)
    : `<span class="is-sale"><del><span class="sr-only">Regular price </span>${shown(listUsd, format)}</del><ins><span class="sr-only">Sale price </span>${shown(saleUsd, format)}</ins>${tag ? '<button type="button" class="sale-tag" aria-label="About the sale">Sale</button>' : ''}</span>`;
   const perMonthSwitch = document.querySelector(".per-month");
   perMonthSwitch.setAttribute("aria-checked", String(perMonth));
@@ -878,6 +878,12 @@ script
   const validCustomPrice = value => Number.isInteger(value) && value >= customKnowbookPrice.minUsd && value <= customKnowbookPrice.maxUsd;
   const checkoutMoney = new Intl.NumberFormat("en-US", { style: "currency", currency });
   const referralCodes = new Set("john kendric tyler producthunt fireplace liz daylight kemi mikayla joe blake daniel francisco butler hassam ash goodman frank ari leah mystery nico cora yc".split(" "));
+  // Referral percent off (yc is intentionally negative).
+  const referralPercent = code => referralCodes.has(code) ? (code === "yc" ? -200 : 10) : 0;
+  // Like the sale, the display referral is decided at page load (?r= or saved code); the cart charges it once as discount_amount on the sale-priced subtotal.
+  let loadReferral = "";
+  try { loadReferral = (new URLSearchParams(location.search).get("r") || localStorage.getItem("knowbooks-referral") || "").trim().toLowerCase(); } catch {}
+  const referralFactor = 1 - referralPercent(loadReferral) / 100;
   const shippingByShelf = {
    believer: "Ship within 30 days",
    frontier: "Ship within 6 months"
@@ -933,6 +939,9 @@ script
    bosBanner.hidden = bosDialog.firstChild.hidden = false;
    countdown();
    timer = setInterval(countdown, 1000);
+  } else if (referralFactor !== 1) {
+   for (const banner of [bosBanner, bosDialog.firstChild]) Object.entries({ ".bos-label": `Referral code ${loadReferral} entered`, ".bos-percent": `${referralPercent(loadReferral)}% off`, ".bos-ends": "site wide applied" }).forEach(([selector, text]) => { banner.querySelector(selector).textContent = text; });
+   bosBanner.hidden = bosDialog.firstChild.hidden = false;
   }
   const referralInput = document.querySelector("#referral-code");
   const referralStatus = document.querySelector("#referral-status");
@@ -940,10 +949,10 @@ script
    const enteredCode = referralInput.value.trim().toLowerCase();
    const referralCode = referralCodes.has(enteredCode) ? enteredCode : "";
    const subtotalCents = [...cart].reduce((sum, [id, quantity]) => sum + Math.round(products.get(id).priceUsd * 100) * quantity, 0);
-   const discountAmount = referralCode === "yc" ? -200 : 10
+   const discountAmount = referralPercent(referralCode);
    const discountCents = referralCode ? Math.round(subtotalCents * (discountAmount/100)) : 0;
    const listSubtotalCents = [...cart].reduce((sum, [id, quantity]) => sum + Math.round((products.get(id).listPriceUsd ?? products.get(id).priceUsd) * 100) * quantity, 0);
-   const listAmount = (listSubtotalCents - (referralCode ? Math.round(listSubtotalCents * (discountAmount/100)) : 0)) / 100;
+   const listAmount = listSubtotalCents / 100;
    return { enteredCode, discountAmount, referralCode, discountCents, amount: (subtotalCents - discountCents) / 100, listAmount };
   };
   const escapeHtml = value => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
@@ -1173,8 +1182,8 @@ script
    empty.hidden = quantity > 0;
    footer.hidden = quantity === 0;
    total.innerHTML = priceHtml(listAmount, usd => checkoutMoney.format(usd), { saleUsd: amount });
-   cartSavings.hidden = !(saleActive && listAmount > amount);
-   cartSavings.textContent = cartSavings.hidden ? "" : `You save ${shown(listAmount - amount, usd => checkoutMoney.format(usd))} in the ${bonusOpportunitySaleName}`;
+   cartSavings.hidden = !(listAmount > amount);
+   cartSavings.textContent = cartSavings.hidden ? "" : `You save ${shown(listAmount - amount, usd => checkoutMoney.format(usd))}${saleActive ? ` in the ${bonusOpportunitySaleName}` : ""}`;
    document.querySelector("#cart-element-16").textContent = cartDeliveryNote();
    referralInput.setAttribute("aria-invalid", String(Boolean(enteredCode && !referralCode)));
    referralStatus.textContent = referralCode ? `${discountAmount}% code applied — you save ${shown(discountCents / 100, usd => checkoutMoney.format(usd))}.` : enteredCode ? "That referral code isn’t valid." : "";
@@ -1741,10 +1750,12 @@ script
   lines.addEventListener("click", event => { const more = event.target.closest("[data-more]"); const less = event.target.closest("[data-less]"); if (more) change(more.dataset.more, 1); if (less) change(less.dataset.less, -1); });
   // Referral code from ?r=code (e.g. ?r=john) or a previous visit; typing a code replaces the saved one.
   const saveReferral = () => { try { localStorage.setItem("knowbooks-referral", referralInput.value.trim().toLowerCase()); } catch {} };
-  try { referralInput.value = (new URLSearchParams(location.search).get("r") || localStorage.getItem("knowbooks-referral") || "").trim().toLowerCase(); } catch {}
+  referralInput.value = loadReferral;
   saveReferral();
   refresh();
   referralInput.addEventListener("input", () => { saveReferral(); refresh(); });
+  // A committed code that changes the sitewide discount reloads so every displayed price matches.
+  referralInput.addEventListener("change", () => { const typed = referralPercent(referralInput.value.trim().toLowerCase()); if (1 - typed / 100 !== referralFactor) location.reload(); });
   toggle.addEventListener("click", openCart);
   drawer.querySelector(".cart-close").addEventListener("click", closeCart);
   empty.querySelector("a").addEventListener("click", closeCart);
