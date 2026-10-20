@@ -105,6 +105,7 @@ css
  #design-title:focus { outline: 1px dashed var(--gold); }
  .design-cover svg { display: block; width: 100%; touch-action: none; cursor: crosshair; }
  #design-art { height: clamp(110px, 27dvh, 210px); }
+ #design-code-status { color: #b42318; white-space: pre-line; }
  .design-cover .strokes { fill: none; stroke: currentColor; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; pointer-events: stroke; }
  .design-cover > span { display: block; margin-top: 10px; font: 10px Arial, sans-serif; letter-spacing: .25em; }
  #design-colors { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 6px; justify-content: center; }
@@ -1416,6 +1417,7 @@ script
     d.art = (Array.isArray(d.art) ? d.art : []).filter(p => typeof p === 'string' && p.length < 20000 && /^[MLQ0-9., -]+$/.test(p) && !/\.\d{2}/.test(p)).slice(0,200);
     d.portrait = (Array.isArray(d.portrait) ? d.portrait : []).filter(p => Array.isArray(p) && p.length === 3 && p.every(n=>Number.isFinite(n) && /^-?\d+(?:\.\d)?$/.test(String(n))) && p[0]>=0 && p[0]<=256 && p[1]>=0 && p[1]<=256 && p[2]>0 && p[2]<4).slice(0,4500);
     d.svgImage = covers.validSvgImage(d.svgImage) ? d.svgImage : '';
+    d.shapes = (Array.isArray(d.shapes) ? d.shapes : []).filter(line => { try { return typeof line === 'string' && !line.includes('\n') && line.length < 2000 && !!covers.compile(line); } catch { return false; } }).slice(0, 200);
     return d;
    };
    try {
@@ -1452,36 +1454,43 @@ script
     const [start,end]=[code.selectionStart,code.selectionEnd]; code.value=text; if(fromEditor) code.setSelectionRange(start,end); codeInvalid=false; code.setCustomValidity(''); codeStatus.textContent='';
     const url=new URL(location.href);url.search='';url.hash='knowbook='+encodeURIComponent(text);designLink.value=url.href;
    }
+   // Forgiving parser: applies every recognized line, never throws, and returns warnings like "line 3: ...".
+   const fieldAliases = { title: 'title', name: 'title', signature: 'signature', author: 'signature', color: 'color', colour: 'color', price: 'priceUsd', priceusd: 'priceUsd', superpowers: 'superpowers', verbs: 'superpowers', skills: 'superpowers', experiments: 'superpowers', tools: 'tools', coverdescription: 'coverDescription', symbol: 'coverDescription', cover: 'cover' };
+   const legacyFields = ['designfeeusd', 'depositusd', 'prototype', 'balance', 'copies'];
    function readProposal(text) {
-    const root={children:[]}, stack=[root];
-    const fail = message => {throw Error(message);};
-    for(const line of text.replace(/\r\n/g,'\n').split('\n').filter(line=>line.trim())) {
-     const match=line.match(/^( *)(\S+)(?: (.*))?$/); if(!match || line.includes('\t')) fail('Use spaces for indentation.');
-     const [,spaces,key,value='']=match, depth=spaces.length;
-     if(depth>=stack.length) fail('Indent one space per level.');
-     const node={key,value,children:[]};stack[depth].children.push(node);stack[depth+1]=node;stack.length=depth+2;
+    const d = { ...fresh(), id: design.id, shapes: [] }, warnings = [], chunks = [];
+    const warn = (n, message) => warnings.push(`line ${n}: ${message}`);
+    let inCover = false;
+    text.replace(/\r/g, '').replace(/\t/g, ' ').split('\n').forEach((raw, i) => {
+     const n = i + 1, line = raw.trimEnd();
+     if (!line.trim()) return;
+     if (/^ /.test(line)) { if (!inCover) return warn(n, 'unexpected indentation, skipped'); return /^ \S/.test(line) || !chunks.length ? chunks.push({ n, lines: [line.trim()] }) : chunks.at(-1).lines.push(line.slice(1)); }
+     const [, rawKey, value = ''] = line.match(/^(\S+)\s*(.*)$/), key = fieldAliases[rawKey.toLowerCase()];
+     inCover = key === 'cover';
+     if (inCover || legacyFields.includes(rawKey.toLowerCase())) return;
+     if (!key) return warn(n, `unknown field "${rawKey.slice(0, 30)}", skipped`);
+     if (key === 'color') return Object.hasOwn(coverPalette, value.toLowerCase()) ? d.color = value.toLowerCase() : warn(n, `unknown color "${value}", using ${d.color}`);
+     if (key === 'priceUsd') {
+      const price = Math.round(Number(value.replace(/[$,\s]/g, '')));
+      if (!Number.isFinite(price)) return warn(n, `invalid price "${value}", using ${d.priceUsd}`);
+      d.priceUsd = Math.min(customKnowbookPrice.maxUsd, Math.max(customKnowbookPrice.minUsd, price));
+      return d.priceUsd !== price && warn(n, `price must be ${customKnowbookPrice.minUsd}–${customKnowbookPrice.maxUsd}, using ${d.priceUsd}`);
+     }
+     if (key === 'superpowers' || key === 'tools') { if (tooManyWords(value)) warn(n, `${rawKey}: kept the first 5 words`); return d[key] = fiveWords(value); }
+     if (key === 'title' && !value.trim()) return warn(n, 'empty title, using default');
+     if (value.length > 60 && key !== 'coverDescription') warn(n, `${rawKey} cut to 60 characters`);
+     d[key] = key === 'coverDescription' ? value.replace(/\s+/g, ' ') : value.slice(0, 60);
+    });
+    for (const { n, lines } of chunks) {
+     const source = lines.join('\n');
+     try { const part = covers.readDesigner(source); d.portrait.push(...part.portrait); d.art.push(...part.art); d.svgImage = part.svgImage || d.svgImage; continue; } catch {}
+     try { covers.compile(source); if (lines.length === 1) { d.shapes.push(source); continue; } } catch (error) { warn(n, `cover: ${error.message}, skipped`); continue; }
+     warn(n, `cover: unsupported "${lines[0].split(' ')[0]}", skipped`);
     }
-    const fields = (node, allowed) => {
-     const result={};for(const child of node.children) {if(!allowed.includes(child.key) || result[child.key]) fail(`Unexpected or repeated field: ${child.key}`);result[child.key]=child;}return result;
-    };
-    const scalar = (node, fallback='') => {if(node?.children.length) fail(`Unexpected indentation below ${node.key}.`);return node?.value ?? fallback;};
-    const top=fields(root,['title','signature','color','priceUsd','designFeeUsd','depositUsd','prototype','balance','copies','superpowers','tools','experiments','coverDescription','symbol','cover']);
-    const d={...fresh(),title:scalar(top.title),id:design.id,signature:scalar(top.signature),color:scalar(top.color),coverDescription:scalar(top.coverDescription,scalar(top.symbol)),superpowers:scalar(top.superpowers,scalar(top.experiments)),tools:scalar(top.tools)};
-    if(!d.title.trim() || d.title.length>60 || d.signature.length>60) fail('Use a title and signature of at most 60 characters.');
-    if(!Object.hasOwn(coverPalette,d.color)) fail('Use a listed cover color.');
-    if(tooManyWords(d.superpowers)) fail('Use up to 5 space-separated words (124 characters maximum).');
-    if(tooManyWords(d.tools)) fail('Use up to 5 space-separated tools (124 characters maximum).');
-    // Legacy designFeeUsd/depositUsd/prototype/balance/copies lines are accepted and ignored.
-    const priceText=scalar(top.priceUsd,String(customKnowbookPrice.defaultUsd));
-    d.priceUsd=/^\d+$/.test(priceText) ? Number(priceText) : NaN;
-    if(!validCustomPrice(d.priceUsd)) fail(`Use a whole-dollar priceUsd from ${customKnowbookPrice.minUsd} to ${customKnowbookPrice.maxUsd}.`);
-    if(!top.cover || top.cover.value) fail('Include the cover tree.');
-    const serialize = (node,depth=0) => [' '.repeat(depth)+node.key+(node.value?' '+node.value:''), ...node.children.flatMap(child=>serialize(child,depth+1))];
-    Object.assign(d,covers.readDesigner(top.cover.children.flatMap(node=>serialize(node)).join('\n')));
-    return d;
+    return { d, warnings };
    }
    code.addEventListener('input', () => {
-    try {const next=readProposal(code.value);photoVersion++;undo.length=0;design=next;codeInvalid=false;showDesign();remember();code.setCustomValidity('');codeStatus.textContent='';syncCode(true);}
+    try {const {d:next,warnings}=readProposal(code.value);photoVersion++;undo.length=0;design=next;codeInvalid=false;showDesign();remember();code.setCustomValidity('');syncCode(true);codeStatus.textContent=warnings.join('\n');}
     catch(error) {codeInvalid=true;designLink.value='';code.setCustomValidity(error.message);codeStatus.textContent=error.message;}
    });
    code.addEventListener('blur', () => {if(!codeInvalid) syncCode();});
@@ -1503,7 +1512,7 @@ script
    function render() {
     $('.design-cover').style.setProperty('--cover', coverPalette[design.color]);
     $('#design-colors').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed',b.dataset.color === design.color));
-    $('#design-portrait').innerHTML = vectorImage(design.svgImage) + dots(design.portrait); $('#remove-image').hidden = !design.svgImage && !design.portrait.length && !hedcuts.has(design);
+    $('#design-portrait').innerHTML = vectorImage(design.svgImage) + dots(design.portrait) + body((design.shapes || []).join('\n')); $('#remove-image').hidden = !design.svgImage && !design.portrait.length && !design.shapes?.length && !hedcuts.has(design);
     art.querySelector('.strokes').innerHTML = paths(design.art);
     signatureArt.innerHTML = signatureFor(design.title, design.signature);
    }
@@ -1552,7 +1561,7 @@ script
     };
     surface.onpointercancel = () => { if(drawing) { design.art=JSON.parse(undo.pop()); drawing=null; render(); } };
    });
-   $('#remove-image').onclick = () => { photoVersion++; hedcuts.delete(design); design.portrait=[]; design.svgImage=''; $('#portrait-file').value=''; render(); remember(); };
+   $('#remove-image').onclick = () => { photoVersion++; hedcuts.delete(design); design.portrait=[]; design.shapes=[]; design.svgImage=''; $('#portrait-file').value=''; render(); remember(); };
    // Keep original tones so repeated adjustments never degrade an uploaded image.
    art.addEventListener('keydown', event => {
     if(event.ctrlKey || event.metaKey || event.altKey || !['i','[',']','0'].includes(event.key.toLowerCase())) return;

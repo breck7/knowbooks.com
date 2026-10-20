@@ -67,7 +67,8 @@ coverParser
    const designerSource = d => [
     ...(d.svgImage ? [`svgImage ${d.svgImage}`] : []),
     ...(d.portrait.length ? ['portrait', ...packDots(d.portrait).map(line=>' '+line)] : []),
-    ...(d.art.length ? ['art', ...d.art.map(path=>' path '+path)] : [])
+    ...(d.art.length ? ['art', ...d.art.map(path=>' path '+path)] : []),
+    ...(d.shapes || [])
    ].join('\n');
    const compile = text => {
     const root=parse(text), strokeWidth=8;
