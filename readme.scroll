@@ -417,7 +417,7 @@ css
    <p class="intro">No pages. No screens. A Knowbook is an experiment kit in a book. Open one, do the experiments, and grow superpowers.</p>
    <a class="down" href="#catalog">Build your shelf <span aria-hidden="true">↓</span></a>
   </section>
-  <aside class="bos-banner" role="status" aria-live="polite" hidden><span class="bos-spark" aria-hidden="true">✦</span><span class="bos-label">Never Forget Sarah Marshall Sale</span><span class="bos-rule" aria-hidden="true"></span><strong class="bos-percent">19.84% off</strong><span class="bos-ends">everything · ends in <span class="bos-clock">33:04:00</span></span><span class="bos-spark" aria-hidden="true">✦</span></aside>
+  <aside class="bos-banner" role="status" aria-live="polite" hidden><span class="bos-spark" aria-hidden="true">✦</span><span class="bos-label">1776 Launchation Celebration Sale</span><span class="bos-rule" aria-hidden="true"></span><strong class="bos-percent">17.76% off</strong><span class="bos-ends">everything · ends in <span class="bos-clock">33:04:00</span></span><span class="bos-spark" aria-hidden="true">✦</span></aside>
   <section class="catalog-section" id="catalog" aria-labelledby="catalog-title">
    <div class="catalog-tools"><input id="catalog-search" type="search" placeholder="Search books…" aria-label="Search knowbooks" aria-controls="product-grid" title="Search book titles, signatures, or tags; separate words with spaces to match any." autocomplete="off"></div>
    <div class="edition-divider is-first" id="search-heading" hidden><h2>Search results</h2></div>
@@ -818,16 +818,15 @@ s/checko/checko.js
 script
  (() => {
   "use strict";
-  // Global Bonus Opportunity Sale price factor for a timed sale. Hardcoded start; prices return to normal after bonusOpportunitySaleMinutes.
-  const bonusOpportunitySaleDiscount = 0.1984;
+  // Global Bonus Opportunity Sale price factor for a timed sale. Hardcoded start; prices return to normal at bonusOpportunitySaleEndsAt.
+  const bonusOpportunitySaleDiscount = 0.1776;
   const bonusOpportunitySale = 1 - bonusOpportunitySaleDiscount;
-  const bonusOpportunitySaleStartsAt = 1791938497360;
-  const bonusOpportunitySaleName = "Never Forget Sarah Marshall Sale";
-  const bonusOpportunitySaleMinutes = 1984;
-  const bonusOpportunitySaleEndsAt = bonusOpportunitySaleStartsAt + bonusOpportunitySaleMinutes * 60 * 1000;
+  const bonusOpportunitySaleStartsAt = 1792682343407;
+  const bonusOpportunitySaleName = "1776 Launchation Celebration Sale";
+  const bonusOpportunitySaleEndsAt = Date.parse("2026-11-04T19:04:00-10:00");
   const saleBonusOpportunitySale = Date.now() >= bonusOpportunitySaleStartsAt && Date.now() < bonusOpportunitySaleEndsAt ? bonusOpportunitySale : 1;
   // Every price on the site goes through salePrice. The sale state is decided once at page load.
-  const salePrice = usd => Math.round(usd * saleBonusOpportunitySale);
+  const salePrice = usd => Math.round(usd * saleBonusOpportunitySale * 100) / 100;
   const saleActive = saleBonusOpportunitySale !== 1;
   // Shared price markup: plain when no sale; struck regular price + sale price during a sale.
   // Per-month display toggle: Knowbooks last 100 years, so price / 1200 months. Display only; charges stay total.
@@ -873,7 +872,8 @@ script
   };
   const paypalEmail = "breck7@gmail.com";
   const currency = "USD";
-  const money = new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 });
+  // Whole dollars stay whole ($199); anything with cents shows two decimals ($287.02).
+  const money = { format: usd => new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: Number.isInteger(Math.round(usd * 100) / 100) ? 0 : 2 }).format(usd) };
   // Creator-set price for custom Knowbooks: whole dollars within these limits.
   const customKnowbookPrice = { defaultUsd: 349, minUsd: 199, maxUsd: 10000000000 };
   const validCustomPrice = value => Number.isInteger(value) && value >= customKnowbookPrice.minUsd && value <= customKnowbookPrice.maxUsd;
@@ -926,8 +926,8 @@ script
    const countdown = () => {
     const seconds = Math.max(0, Math.ceil((bonusOpportunitySaleEndsAt - Date.now()) / 1000));
     if (!seconds) { bonusOpportunitySaleNote.hidden = true; bosBanner.hidden = true; bosDialog.close(); clearInterval(timer); return; }
-    const hh = Math.floor(seconds / 3600), mm = Math.floor(seconds % 3600 / 60), ss = seconds % 60;
-    const clock = `${hh ? hh + ":" : ""}${String(mm).padStart(2, "0")}:${String(ss).padStart(2, "0")}`;
+    const unit = (n, name) => `${n} ${name}${n === 1 ? "" : "s"}`, days = Math.floor(seconds / 86400);
+    const clock = [days ? unit(days, "day") : "", unit(Math.floor(seconds % 86400 / 3600), "hour"), unit(Math.floor(seconds % 3600 / 60), "minute"), unit(seconds % 60, "second")].filter(Boolean).join(", ");
     const pctOff = +(bonusOpportunitySaleDiscount * 100).toFixed(2);
     bonusOpportunitySaleNote.textContent = `${bonusOpportunitySaleName}: ${pctOff}% off — ${clock} remaining`;
     for (const banner of [bosBanner, bosDialog.firstChild]) {
@@ -1282,7 +1282,7 @@ script
    backgroundInert(true);
    document.body.classList.add("cart-open");
    const rect = cover.getBoundingClientRect();
-   const pagesHtml = `<div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>${escapeHtml(product.description || "Handmade in Hawaii. Every Knowbook is unique. Open yours and experiment.")}</p>${chipSection("Learn:", know)}${chipSection("Includes:", toolsOf(product))}${pickupNote(product) ? `<p class="preview-note">In-person pickup only.</p>` : ""}${product.soldOut ? '<button class="preview-add sold-out" type="button">Sold out</button>' : `<input class="preview-instructions" maxlength="124" placeholder="optional special instructions...up to 5 words" aria-label="Special instructions" autocomplete="off"><button class="preview-add" data-add="${escapeHtml(product.id)}">Add to cart <span>${shown(product.priceUsd, usd => money.format(usd))}</span></button>`}</div>`;
+   const pagesHtml = `<div class="preview-pages"><button class="preview-close" aria-label="Close">×</button><p>${escapeHtml(product.description || "Handmade in Hawaii. Every Knowbook is unique. Open yours and experiment.")}</p>${chipSection("Learn:", know)}${chipSection("Includes:", toolsOf(product))}${pickupNote(product) ? `<p class="preview-note">In-person pickup only.</p>` : ""}${product.soldOut ? '<button class="preview-add sold-out" type="button">Sold out</button>' : `<input class="preview-instructions" maxlength="124" placeholder="optional special instructions...up to 5 words" aria-label="Special instructions" autocomplete="off"><button class="preview-add" data-add="${escapeHtml(product.id)}">Add to cart <span>${shown(salePrice(product.listPriceUsd) * referralFactor, usd => money.format(usd))}</span></button>`}</div>`;
    const soundButtonHtml = `<button type="button" class="preview-sound" aria-label="Turn sound on" aria-pressed="false"><svg class="preview-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><line x1="17" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="17" y2="15"/></svg><svg class="preview-loud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg></button>`;
    const coverHtml = product.video ? `<div class="preview-cover preview-flip"><div class="preview-face preview-front">${cover.outerHTML}</div><div class="preview-face preview-back"><video src="${escapeHtml(product.video)}" autoplay muted loop playsinline></video>${soundButtonHtml}</div></div>` : `${cover.outerHTML}`;
    preview.innerHTML = `<div class="preview-book${product.video ? " preview-book-video" : ""}">${pagesHtml}${coverHtml}</div>`;
