@@ -4,7 +4,8 @@ importOnly
 // Every cover uses a 256 × 256 canvas, currentColor ink, and round 8-unit strokes.
 // All shape coordinates, sizes, and stroke widths use at most one decimal place.
 // Shapes: circle, filledCircle, ellipse, rect, filledRect, line, polygon,
-// filledPolygon, path, filledPath. Outlined shapes accept a final stroke width.
+// filledPolygon, path, filledPath, emoji. Outlined shapes accept a final stroke width.
+// emoji stores as emoji 🚀; render wraps it in an SVG data URL and reuses the svgImage gold-foil filter.
 // portrait and art are optional groups. Paths may use moveTo/lineTo/quadraticTo children.
 // dotRow y x radius x radius ... losslessly packs circles on the same row.
 // svgImage accepts an SVG data URL, rendered only in an inert image context.
@@ -81,6 +82,15 @@ coverParser
       if(node.children.length || !validSvgImage(node.value)) fail('Invalid SVG image');
       const id='cover-image-'+Math.random().toString(36).slice(2);
       return `<defs><filter id="${id}" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feFlood flood-color="currentColor"/><feComposite in2="SourceAlpha" operator="in"/></filter></defs><image href="${node.value}" width="256" height="256" preserveAspectRatio="xMidYMid meet" filter="url(#${id})"/>`;
+     }
+     if(command==='emoji') {
+      if(node.children.length) fail('Unexpected emoji children');
+      const emoji=node.value.trim();
+      if(!emoji || [...emoji].length>8 || /[A-Za-z0-9]/.test(emoji) || !/\p{Extended_Pictographic}/u.test(emoji)) fail('Invalid emoji');
+      // Same gold foil as uploaded SVGs: emoji → SVG data URL → feFlood currentColor on its alpha.
+      const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><text x="128" y="148" text-anchor="middle" font-size="140">${emoji.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</text></svg>`;
+      const data='data:image/svg+xml;base64,'+(typeof Buffer!=='undefined'?Buffer.from(svg,'utf8').toString('base64'):btoa(unescape(encodeURIComponent(svg))));
+      return render({key:'svgImage',value:data,children:[]});
      }
      const value=(command==='path' || command==='filledPath') ? pathData(node) : node.value;
      if(node.children.length && command!=='path' && command!=='filledPath') fail('Unexpected children');

@@ -837,6 +837,8 @@ script
   const shown = (usd, format) => perMonth ? monthly(usd) : format(usd);
   const priceHtml = (listUsd, format = usd => money.format(usd), { saleUsd = salePrice(listUsd) * referralFactor, tag = false } = {}) => !(saleActive || referralFactor !== 1) || saleUsd === listUsd ? shown(saleUsd, format)
    : `<span class="is-sale"><del><span class="sr-only">Regular price </span>${shown(listUsd, format)}</del><ins><span class="sr-only">Sale price </span>${shown(saleUsd, format)}</ins>${tag ? '<button type="button" class="sale-tag" aria-label="About the sale">Sale</button>' : ''}</span>`;
+  // Designer/share payloads: accept #name=… or ?name=… (knowbook, order).
+  const fromUrl = name => location.hash.startsWith('#'+name+'=') ? location.hash.slice(name.length+2) : (new URLSearchParams(location.search).get(name) || '');
   const perMonthSwitch = document.querySelector(".per-month");
   perMonthSwitch.setAttribute("aria-checked", String(perMonth));
   // The URL is the source of truth (?perMonth=1). Toggling rewrites it and reloads; cart and designer drafts persist in localStorage.
@@ -1653,11 +1655,22 @@ script
     if(!file) {if(dialog.open) status.textContent='Choose a PNG, JPEG, WebP, GIF or SVG image.';return;}
     openCoverImage(file);
    });
+   // Paste an image file or a single emoji onto the cover (same as dropping a file).
+   const isEmojiCover = text => { const emoji = String(text || '').trim(); return emoji && [...emoji].length <= 8 && !/[A-Za-z0-9]/.test(emoji) && /\p{Extended_Pictographic}/u.test(emoji); };
+   const useEmojiCover = emoji => {
+    if(!dialog.open) open(undefined, undefined, fresh());
+    design.shapes = [`emoji ${emoji}`]; design.portrait = []; design.art = []; design.svgImage = '';
+    design.coverDescription ||= emoji; hedcuts.delete(design); undo.length = 0;
+    status.textContent = ''; render(); remember(); art.focus();
+   };
    document.addEventListener('paste', event => {
     const file=[...(event.clipboardData?.files || [])].find(isCoverImage);
-    if(!file) return;
+    if(file) { event.preventDefault(); openCoverImage(file); return; }
+    if(event.target?.closest?.('input, textarea, [contenteditable]')) return;
+    const emoji = (event.clipboardData?.getData('text') || '').trim();
+    if(!isEmojiCover(emoji)) return;
     event.preventDefault();
-    openCoverImage(file);
+    useEmojiCover(emoji);
    });
    window.addEventListener('blur',clearDropTarget);
    document.addEventListener('dragend',clearDropTarget);
@@ -1699,9 +1712,9 @@ script
     dialog.close(); openCart();
    };
    const loadDesignLink = () => {
-    if(!location.hash.startsWith('#knowbook=')) return;
+    const payload = fromUrl('knowbook'); if(!payload) return;
     open();$('#design-source').open=true;
-    try {code.value=decodeURIComponent(location.hash.slice('#knowbook='.length));code.dispatchEvent(new Event('input'));}
+    try {code.value=decodeURIComponent(payload);code.dispatchEvent(new Event('input'));}
     catch {code.value='';codeInvalid=true;designLink.value='';codeStatus.textContent='This design link has invalid URL encoding.';code.setCustomValidity(codeStatus.textContent);}
    };
    window.addEventListener('hashchange',loadDesignLink);loadDesignLink();
@@ -1788,7 +1801,7 @@ script
   window.addEventListener("resize", fitBookTitles);
   refresh();
   try {
-   const order = location.hash.startsWith("#order=") ? location.hash.slice(7) : "";
+   const order = fromUrl("order");
    if (order) {
     JSON.parse(fromBase64Url(order.slice(7))).forEach(([id, quantity, data]) => {
      const restored = data && restoreDesignFromData(data);
