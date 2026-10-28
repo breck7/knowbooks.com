@@ -60,6 +60,16 @@ main
      addClass when
     span Knowbooks Inc. incorporates in Hawaii.
      addClass what
+   li
+    span October 27, 2026
+     addClass when
+    span Knowbooks Inc. Articles of Incorporation approved by Hawaii.
+     addClass what
+   li
+    span October 27, 2026
+     addClass when
+    span First Knowbooks Inc. bank account opened.
+     addClass what
  section
   addClass about-section
   h2 Values
