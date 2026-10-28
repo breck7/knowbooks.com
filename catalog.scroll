@@ -86,7 +86,7 @@ tagsParser
 // new product launches
 
 id launch
-description Includes Knowbooks launchation package for up to 4 people. Oahu, Hawaii. November 4-6 2026. Includes 2 nights hotel, resort fees, Knowbooks activities and all taxes. Airfare not provided. Questions? launchation@knowbooks.com.
+description VIP Launchation Package. Oahu, Hawaii. November 4-6 2026. Airfare not included. Some regular rooms remain, visit Launchation.com to book.
 video videos/launch.mp4
 fulfillment pickup
 soldOut true
