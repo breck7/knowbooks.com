@@ -12,9 +12,9 @@ metaTags
 
 import uncommonApp.scroll
 
-// The questions in uncommonApp.scroll become window.questions
-buildConcepts questions.json
-jsonScript questions.json
+// The questions in uncommonApp.scroll and accelerators in uncommonApp.scroll become window.uncommonApp
+buildConcepts uncommonApp.json
+jsonScript uncommonApp.json
 
 header
  a uncommon<b>App</b>
@@ -28,6 +28,9 @@ header
    id scrollMode
   button Copy link
    id copyLink
+  button Submit
+   id submit
+   addClass on
 
 main
  section
@@ -43,8 +46,10 @@ main
  section
   addClass apply
   h2 Then apply
-  div
+  table
    id accelerators
+
+<dialog id="mail"><button id="closeMail">×</button><h2>Paste into your email</h2><label>BCC <button data-copy="bcc">Copy</button></label><input id="bcc" readonly><label>Subject <button data-copy="subject">Copy</button></label><input id="subject" readonly><label>Body <button data-copy="body">Copy</button></label><textarea id="body" readonly></textarea><p><a id="mailto">Open in my email app ↗</a></p></dialog>
 
 footer
  a Source ↗
@@ -71,24 +76,16 @@ css
  input:focus,textarea:focus{outline:2px solid var(--gold)}
  #particles{display:none;min-height:70vh;font:15px/1.6 ui-monospace,Menlo,monospace;margin-top:20px}
  body.scroll #particles{display:block}body.scroll #classic{display:none}
- #accelerators a{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
- #accelerators span{color:var(--sage)}
+ #accelerators{width:100%;border-collapse:collapse;font-size:15px}#accelerators td,#accelerators th{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}#accelerators a{color:var(--sage);font-weight:600}
+ dialog{max-width:720px;width:92vw;border:0;border-radius:16px;padding:24px;background:var(--paper)}dialog::backdrop{background:#0006}
+ dialog label button,#closeMail{font-size:12px;border:1px solid var(--sage);background:none;border-radius:99px;padding:2px 10px;cursor:pointer}#closeMail{float:right;font-size:18px}
+ #body{min-height:40vh;font:14px/1.5 ui-monospace,Menlo,monospace}
  footer{text-align:center;padding:40px;color:var(--sage)}footer a{color:var(--sage)}
 
 script
- const accelerators = {
-  yc: ["Y Combinator", "https://www.ycombinator.com/apply"],
-  techstars: ["Techstars", "https://www.techstars.com/accelerators"],
-  "500global": ["500 Global", "https://500.co/accelerator"],
-  antler: ["Antler", "https://www.antler.co/apply"],
-  ef: ["Entrepreneur First", "https://www.joinef.com/"],
-  plugandplay: ["Plug and Play", "https://www.plugandplaytechcenter.com/"],
-  masschallenge: ["MassChallenge", "https://masschallenge.org/programs-all/"],
-  spc: ["South Park Commons", "https://www.southparkcommons.com/apply/"],
-  blue: ["Blue Startups (Hawaiʻi)", "https://www.bluestartups.com/apply/"],
-  elemental: ["Elemental Impact (Hawaiʻi)", "https://elementalimpact.com/funding-opportunities/apply/"]
- }
- const questions = window.questions
+ const questions = window.uncommonApp.filter(c => c.ask)
+ const accelerators = window.uncommonApp.filter(c => c.firm)
+ const firm = id => accelerators.find(a => a.id === id).firm
  const $ = id => document.getElementById(id)
  let data = {}
  // Patch (https://breck.lol/patch.html): rows split by &, cells by =. Each line of an answer is a cell.
@@ -111,12 +108,12 @@ script
   if (source !== "form") questions.forEach(q => $("q-" + q.id).value = data[q.id] || "")
   if (source !== "scroll") $("particles").value = toScroll(data)
   history.replaceState(null, "", "?" + toPatch(data))
-  $("accelerators").innerHTML = Object.entries(accelerators).map(([id, [name, link]]) => {
-   const asked = questions.filter(q => q.askedBy.split(" ").includes(id))
-   return `<a href="${link}" target="_blank" rel="noopener">${name}<span>${asked.filter(q => data[q.id]).length}/${asked.length} answered ↗</span></a>`
+  $("accelerators").innerHTML = "<tr><th>Accelerator</th><th>Based in</th><th>Invests</th><th>Answered</th></tr>" + accelerators.map(a => {
+   const asked = questions.filter(q => q.askedBy.split(" ").includes(a.id))
+   return `<tr><td><a href="${a.applyUrl}" target="_blank" rel="noopener">${a.firm} ↗</a></td><td>${a.basedIn}</td><td>${a.invests}</td><td>${asked.filter(q => data[q.id]).length}/${asked.length}</td></tr>`
   }).join("")
  }
- $("classic").innerHTML = questions.map(q => `<label for="q-${q.id}">${q.ask}<small>${q.askedBy.split(" ").map(a => accelerators[a][0]).join(" · ")}</small></label>` + (q.field === "text" ? `<textarea id="q-${q.id}"></textarea>` : `<input id="q-${q.id}">`)).join("")
+ $("classic").innerHTML = questions.map(q => `<label for="q-${q.id}">${q.ask}<small>${q.askedBy.split(" ").map(firm).join(" · ")}</small></label>` + (q.field === "text" ? `<textarea id="q-${q.id}"></textarea>` : `<input id="q-${q.id}">`)).join("")
  $("classic").addEventListener("input", e => { data[e.target.id.slice(2)] = e.target.value; render("form") })
  $("particles").addEventListener("input", () => { data = fromScroll($("particles").value); render("scroll") })
  const mode = scroll => { document.body.classList.toggle("scroll", scroll); $("scrollMode").classList.toggle("on", scroll); $("formMode").classList.toggle("on", !scroll) }
@@ -125,3 +122,13 @@ script
  $("copyLink").onclick = () => navigator.clipboard.writeText(location.href).then(() => $("copyLink").textContent = "Copied!")
  data = fromPatch(location.search || location.hash)
  render()
+ $("submit").onclick = () => {
+  $("bcc").value = accelerators.map(a => a.applyEmail).join(", ")
+  $("subject").value = "Application for " + (data.company || "")
+  $("body").value = questions.filter(q => data[q.id]).map(q => "## " + q.ask + "\n\n" + data[q.id]).join("\n\n")
+  $("mailto").href = "mailto:?bcc=" + encodeURIComponent($("bcc").value) + "&subject=" + encodeURIComponent($("subject").value) + "&body=" + encodeURIComponent($("body").value)
+  $("mail").showModal()
+ }
+ $("closeMail").onclick = () => $("mail").close()
+ $("mail").querySelectorAll("[data-copy]").forEach(b => b.onclick = () => navigator.clipboard.writeText($(b.dataset.copy).value).then(() => b.textContent = "Copied!"))
+

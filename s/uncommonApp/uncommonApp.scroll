@@ -27,6 +27,98 @@ askedByParser
  cue askedBy
  description Accelerators that ask this.
  extends abstractQuestionMeasureParser
+firmParser
+ cue firm
+ description Accelerator name.
+ extends abstractQuestionMeasureParser
+applyUrlParser
+ cue applyUrl
+ extends abstractQuestionMeasureParser
+applyEmailParser
+ cue applyEmail
+ description Public applications or contact email, from the firm's own site where possible.
+ extends abstractQuestionMeasureParser
+basedInParser
+ cue basedIn
+ extends abstractQuestionMeasureParser
+investsParser
+ cue invests
+ description Standard investment, from official terms pages as of Oct 2026.
+ extends abstractQuestionMeasureParser
+
+// Accelerators
+
+id yc
+firm Y Combinator
+applyUrl https://www.ycombinator.com/apply
+applyEmail apply@ycombinator.com
+basedIn San Francisco, CA, USA
+invests $500k ($125k for 7% + $375k uncapped MFN SAFE)
+
+id techstars
+firm Techstars
+applyUrl https://www.techstars.com/accelerators
+applyEmail startups@techstars.com
+basedIn Programs worldwide (HQ Boulder, CO, USA)
+invests $220k ($20k for 5% + $200k uncapped MFN SAFE); $100k in Asia-Pacific
+
+id 500global
+firm 500 Global
+applyUrl https://500.co/accelerator
+applyEmail partnerships@500.co
+basedIn San Francisco, CA, USA (plus regional programs)
+invests Varies: 500 Fellowship up to $50k upfront, up to $1M more; $35k program fee
+
+id antler
+firm Antler
+applyUrl https://www.antler.co/apply
+applyEmail applications@antler.co
+basedIn 25+ cities (HQ Singapore)
+invests Varies by city: e.g. $150k for ~10% in Singapore, up to $400k with matching
+
+id ef
+firm Entrepreneur First
+applyUrl https://www.joinef.com/
+applyEmail applications@joinef.com
+basedIn San Francisco, USA and London, UK
+invests Up to $250k ($125k for 8% + optional $125k MFN SAFE)
+
+id plugandplay
+firm Plug and Play
+applyUrl https://www.plugandplaytechcenter.com/
+applyEmail info@pnptc.com
+basedIn Sunnyvale, CA, USA (plus 50+ locations)
+invests No standard check; most programs are equity-free, investments case by case
+
+id masschallenge
+firm MassChallenge
+applyUrl https://masschallenge.org/programs-all/
+applyEmail contact@masschallenge.org
+basedIn Boston, MA, USA (plus Switzerland, Israel, others)
+invests $0, equity-free (some programs award cash prizes)
+
+id spc
+firm South Park Commons
+applyUrl https://www.southparkcommons.com/apply/
+applyEmail info@southparkcommons.com
+basedIn San Francisco and New York, USA
+invests $1M ($400k for 7% + $600k in your next round)
+
+id blue
+firm Blue Startups
+applyUrl https://www.bluestartups.com/apply/
+applyEmail admin@bluestartups.com
+basedIn Honolulu, Hawaiʻi, USA
+invests $25k–$100k SAFE by stage, up to $250k with follow-on, for 2–5%
+
+id elemental
+firm Elemental Impact
+applyUrl https://elementalimpact.com/funding-opportunities/apply/
+applyEmail apply@elementalimpact.com
+basedIn Honolulu, Hawaiʻi, USA (invests globally)
+invests Varies: Strategy Track ~$350k, Project Track $1M–$3M, case by case
+
+// Questions
 
 id name
 ask Your full name
