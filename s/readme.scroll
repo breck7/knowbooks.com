@@ -39,6 +39,20 @@ main
     span Draft a BRAVE ↗
      addClass tool-action
   a
+   href uncommonApp/index.html
+   addClass tool
+   img
+    src uncommonApp/og.png
+    alt uncommonApp: one application for every accelerator.
+    width 1200
+    height 630
+   div
+    addClass tool-copy
+    h2 uncommonApp
+    One application for every startup accelerator. Fill it in as a form or as one plain-text Scroll document. Everything lives in the link, so share it to collaborate.
+    span Start your application ↗
+     addClass tool-action
+  a
    href stormTracker/index.html
    addClass tool
    img

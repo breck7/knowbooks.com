@@ -1,0 +1,139 @@
+importOnly
+
+// uncommonApp: one application for every accelerator.
+// Each concept below is one canonical question. readme.scroll turns them into
+// questions.json, a classic form, and a one-textarea Scroll form.
+
+abstractQuestionMeasureParser
+ extends abstractStringMeasureParser
+ javascript
+  buildHtml() { return "" }
+questionIdParser
+ cue id
+ extends abstractIdParser
+ boolean isConceptDelimiter true
+ boolean isMeasureRequired true
+ javascript
+  buildHtml() { return "" }
+askParser
+ cue ask
+ description The question, merged from every accelerator that asks it.
+ extends abstractQuestionMeasureParser
+fieldParser
+ cue field
+ description line or text
+ extends abstractQuestionMeasureParser
+askedByParser
+ cue askedBy
+ description Accelerators that ask this.
+ extends abstractQuestionMeasureParser
+
+id name
+ask Your full name
+field line
+askedBy yc techstars 500global antler ef plugandplay masschallenge spc blue elemental
+
+id email
+ask Email
+field line
+askedBy yc techstars 500global antler ef plugandplay masschallenge spc blue elemental
+
+id phone
+ask Phone
+field line
+askedBy techstars plugandplay masschallenge blue
+
+id linkedin
+ask LinkedIn or personal site
+field line
+askedBy yc techstars antler ef plugandplay spc blue
+
+id location
+ask Where do you live now, and where will the company be based?
+field line
+askedBy yc techstars 500global antler ef plugandplay masschallenge spc blue elemental
+
+id company
+ask Company name
+field line
+askedBy yc techstars 500global plugandplay masschallenge blue elemental
+
+id url
+ask Company or product URL
+field line
+askedBy yc techstars 500global antler plugandplay masschallenge blue elemental
+
+id oneLiner
+ask Describe what you do in one sentence (50 characters is best).
+field line
+askedBy yc 500global antler plugandplay masschallenge blue
+
+id stage
+ask Stage: idea, prototype, launched, revenue, preseed, seed, seriesA...
+field line
+askedBy 500global antler plugandplay masschallenge spc elemental
+
+id problem
+ask What problem are you solving, for whom, and how do they get by today?
+field text
+askedBy techstars 500global masschallenge blue elemental
+
+id make
+ask What are you going to make? What does it do?
+field text
+askedBy yc techstars 500global masschallenge blue elemental
+
+id founders
+ask Who are the founders? How did you meet, who builds the product, and is everyone full-time?
+field text
+askedBy yc techstars 500global antler ef masschallenge blue elemental
+
+id edge
+ask What is the most impressive thing you have built or done? Links welcome.
+field text
+askedBy yc techstars antler ef spc
+
+id progress
+ask How far along are you? Users, revenue, growth, and how long you have been at it.
+field text
+askedBy yc techstars 500global plugandplay masschallenge blue elemental
+
+id whyYou
+ask Why this idea, why you, and why now?
+field text
+askedBy yc techstars blue elemental
+
+id competitors
+ask Who are your competitors, and what do you understand that they don't?
+field text
+askedBy yc techstars 500global masschallenge blue
+
+id money
+ask How do you or will you make money? How much could you make?
+field text
+askedBy yc techstars 500global blue
+
+id funding
+ask Legal entity, equity split, money raised so far, burn and runway.
+field text
+askedBy yc techstars 500global plugandplay masschallenge blue elemental
+
+id ask
+ask What do you want from an accelerator? Name the milestone it would unlock.
+field text
+askedBy yc techstars 500global masschallenge blue elemental
+
+id ideas
+ask Other ideas you considered.
+field text
+askedBy yc ef spc
+
+id deck
+ask Pitch deck link
+field line
+askedBy techstars 500global antler plugandplay masschallenge blue elemental
+
+id video
+ask One minute founder video link
+field line
+askedBy yc techstars masschallenge blue

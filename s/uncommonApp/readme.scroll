@@ -1,0 +1,127 @@
+title uncommonApp — one application for every accelerator
+description Fill out one form to apply to the top startup accelerators in the world. Edit it as a form or as one plain-text Scroll document. Everything lives in the URL, so share the link to collaborate.
+keywords accelerator application, Y Combinator, Techstars, 500 Global, Antler, Entrepreneur First, Blue Startups, Elemental, startup, one textarea, Scroll
+baseUrl https://knowbooks.com/s/uncommonApp/
+canonicalUrl https://knowbooks.com/s/uncommonApp/
+openGraphImage og.png
+favicon favicon.svg
+permalink index.html
+htmlLang en
+buildHtml
+metaTags
+
+import uncommonApp.scroll
+
+// The questions in uncommonApp.scroll become window.questions
+buildConcepts questions.json
+jsonScript questions.json
+
+header
+ a uncommon<b>App</b>
+  href ./
+  addClass mark
+ nav
+  button Form
+   id formMode
+   addClass on
+  button Scroll
+   id scrollMode
+  button Copy link
+   id copyLink
+
+main
+ section
+  addClass hero
+  h1 One application. Every accelerator.
+  For uncommon people: rare outliers who think they can lead. 22 questions, merged from the 10 top accelerators in the world. Type as a form or as one plain-text Scroll document. Every keystroke is saved in the URL, so send the link to a cofounder and edit together.
+ div
+  id classic
+ textarea
+  id particles
+  spellcheck false
+  placeholder name Ada Lovelace
+ section
+  addClass apply
+  h2 Then apply
+  div
+   id accelerators
+
+footer
+ a Source ↗
+  href https://github.com/breck7/knowbooks.com/tree/main/s/uncommonApp
+ span ·
+ a More free software
+  href ../index.html
+
+css
+ :root{--sage:#596d5f;--gold:#d9bc78;--ink:#1d2620;--paper:#f7f4ec;--line:#e2dccb}
+ *{box-sizing:border-box}
+ body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+ header{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:12px 24px;background:var(--sage);z-index:2}
+ .mark{color:#fff;text-decoration:none;font:600 22px Georgia,serif}.mark b{color:var(--gold)}
+ nav button{font:inherit;font-size:14px;border:1px solid var(--gold);background:none;color:#fff;border-radius:99px;padding:5px 14px;margin-left:6px;cursor:pointer}
+ nav button.on{background:var(--gold);color:var(--ink)}
+ main{max-width:760px;margin:0 auto;padding:24px}
+ h1{font:600 40px/1.1 Georgia,serif;color:var(--sage);margin:24px 0 8px}
+ h2{font:600 26px Georgia,serif;color:var(--sage)}
+ label{display:block;margin:22px 0 6px;font-weight:600}
+ label small{display:block;font-weight:400;color:var(--sage);font-size:12px;letter-spacing:.03em}
+ input,textarea{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+ #classic textarea{min-height:110px}
+ input:focus,textarea:focus{outline:2px solid var(--gold)}
+ #particles{display:none;min-height:70vh;font:15px/1.6 ui-monospace,Menlo,monospace;margin-top:20px}
+ body.scroll #particles{display:block}body.scroll #classic{display:none}
+ #accelerators a{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
+ #accelerators span{color:var(--sage)}
+ footer{text-align:center;padding:40px;color:var(--sage)}footer a{color:var(--sage)}
+
+script
+ const accelerators = {
+  yc: ["Y Combinator", "https://www.ycombinator.com/apply"],
+  techstars: ["Techstars", "https://www.techstars.com/accelerators"],
+  "500global": ["500 Global", "https://500.co/accelerator"],
+  antler: ["Antler", "https://www.antler.co/apply"],
+  ef: ["Entrepreneur First", "https://www.joinef.com/"],
+  plugandplay: ["Plug and Play", "https://www.plugandplaytechcenter.com/"],
+  masschallenge: ["MassChallenge", "https://masschallenge.org/programs-all/"],
+  spc: ["South Park Commons", "https://www.southparkcommons.com/apply/"],
+  blue: ["Blue Startups (Hawaiʻi)", "https://www.bluestartups.com/apply/"],
+  elemental: ["Elemental Impact (Hawaiʻi)", "https://elementalimpact.com/funding-opportunities/apply/"]
+ }
+ const questions = window.questions
+ const $ = id => document.getElementById(id)
+ let data = {}
+ // Patch (https://breck.lol/patch.html): rows split by &, cells by =. Each line of an answer is a cell.
+ const enc = s => encodeURIComponent(s).replace(/%20/g, "+")
+ const dec = s => decodeURIComponent(s.replace(/\+/g, "%20"))
+ const toPatch = d => Object.keys(d).filter(k => d[k]).map(k => [k, ...d[k].split("\n")].map(enc).join("=")).join("&")
+ const fromPatch = s => Object.fromEntries(s.replace(/^[?#]/, "").split("&").filter(r => r).map(r => r.split("=").map(dec)).map(([k, ...v]) => [k, v.join("\n")]))
+ // Scroll: one particle per answer. Multiline answers are indented one space.
+ const toScroll = d => questions.filter(q => d[q.id]).map(q => q.field === "text" ? q.id + "\n " + d[q.id].replace(/\n/g, "\n ") : q.id + " " + d[q.id]).join("\n")
+ const fromScroll = s => {
+  const d = {}
+  let key
+  s.split("\n").forEach(line => {
+   if (line.startsWith(" ") && key) d[key] += (d[key] ? "\n" : "") + line.slice(1)
+   else if (line.trim()) [key, d[line.split(" ")[0]]] = [line.split(" ")[0], line.split(" ").slice(1).join(" ")]
+  })
+  return d
+ }
+ const render = source => {
+  if (source !== "form") questions.forEach(q => $("q-" + q.id).value = data[q.id] || "")
+  if (source !== "scroll") $("particles").value = toScroll(data)
+  history.replaceState(null, "", "?" + toPatch(data))
+  $("accelerators").innerHTML = Object.entries(accelerators).map(([id, [name, link]]) => {
+   const asked = questions.filter(q => q.askedBy.split(" ").includes(id))
+   return `<a href="${link}" target="_blank" rel="noopener">${name}<span>${asked.filter(q => data[q.id]).length}/${asked.length} answered ↗</span></a>`
+  }).join("")
+ }
+ $("classic").innerHTML = questions.map(q => `<label for="q-${q.id}">${q.ask}<small>${q.askedBy.split(" ").map(a => accelerators[a][0]).join(" · ")}</small></label>` + (q.field === "text" ? `<textarea id="q-${q.id}"></textarea>` : `<input id="q-${q.id}">`)).join("")
+ $("classic").addEventListener("input", e => { data[e.target.id.slice(2)] = e.target.value; render("form") })
+ $("particles").addEventListener("input", () => { data = fromScroll($("particles").value); render("scroll") })
+ const mode = scroll => { document.body.classList.toggle("scroll", scroll); $("scrollMode").classList.toggle("on", scroll); $("formMode").classList.toggle("on", !scroll) }
+ $("formMode").onclick = () => mode(false)
+ $("scrollMode").onclick = () => mode(true)
+ $("copyLink").onclick = () => navigator.clipboard.writeText(location.href).then(() => $("copyLink").textContent = "Copied!")
+ data = fromPatch(location.search || location.hash)
+ render()
