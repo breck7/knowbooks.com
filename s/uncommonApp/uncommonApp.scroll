@@ -112,7 +112,7 @@ id spc
 firm South Park Commons
 x spc
 applyUrl https://www.southparkcommons.com/apply/
-applyEmail info@southparkcommons.com
+applyEmail arian@southparkcommons.com
 basedIn San Francisco and New York, USA
 invests $1M ($400k for 7% + $600k in your next round)
 
@@ -140,13 +140,6 @@ applyEmail sr-team@a16z.com
 basedIn San Francisco, CA, USA
 invests Up to $1M ($500k for 10% SAFE + up to $500k in your next round)
 
-id alliance
-firm Alliance
-x alliance
-applyUrl https://alliance.xyz/apply
-applyEmail info@alliance.xyz
-basedIn New York City, NY, USA
-invests $400k SAFE at $4M post-money (10%) + 1:1 token side letter
 
 id pear
 firm PearX (Pear VC)
@@ -168,7 +161,7 @@ id 16vc
 firm 16VC
 x 16vchq
 applyUrl https://16vc.notion.site/16VC-Accelerator-3d02d0512c558091a17ed9a67cbb10a4
-applyEmail contact@16vc.co
+applyEmail pitch@16vc.co
 basedIn San Francisco, New York and London (on-site)
 invests $200k post-money SAFE, targeting ~6%
 
@@ -258,12 +251,12 @@ invests $30k; prefers student founders, US only
 id name
 ask Your full name
 field line
-askedBy yc techstars 500global antler ef plugandplay masschallenge spc elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
+askedBy yc techstars 500global antler ef plugandplay masschallenge spc elemental speedrun pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id email
 ask Email
 field line
-askedBy yc techstars 500global antler ef plugandplay masschallenge spc elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
+askedBy yc techstars 500global antler ef plugandplay masschallenge spc elemental speedrun pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id phone
 ask Phone
@@ -273,7 +266,7 @@ askedBy techstars plugandplay masschallenge speedrun blue
 id linkedin
 ask LinkedIn or personal site
 field line
-askedBy yc techstars antler ef plugandplay spc speedrun alliance pear residency 16vc blue
+askedBy yc techstars antler ef plugandplay spc speedrun pear residency 16vc blue
 
 id location
 ask Where do you live now, and where will the company be based?
@@ -283,17 +276,17 @@ askedBy yc techstars 500global antler ef plugandplay masschallenge spc elemental
 id company
 ask Company name
 field line
-askedBy yc techstars 500global plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
+askedBy yc techstars 500global plugandplay masschallenge elemental speedrun pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id url
 ask Company or product URL
 field line
-askedBy yc techstars 500global antler plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
+askedBy yc techstars 500global antler plugandplay masschallenge elemental speedrun pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id oneLiner
 ask Describe what you do in one sentence (50 characters is best).
 field line
-askedBy yc 500global antler plugandplay masschallenge alliance 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
+askedBy yc 500global antler plugandplay masschallenge 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id stage
 ask Stage: idea, prototype, launched, revenue, preseed, seed, seriesA...
@@ -308,22 +301,22 @@ askedBy techstars 500global masschallenge elemental speedrun pear blue
 id make
 ask What are you going to make? What does it do?
 field text
-askedBy yc techstars 500global masschallenge elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
+askedBy yc techstars 500global masschallenge elemental speedrun pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id founders
 ask Who are the founders? How did you meet, who builds the product, and is everyone full-time?
 field text
-askedBy yc techstars 500global antler ef masschallenge elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
+askedBy yc techstars 500global antler ef masschallenge elemental speedrun pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id edge
 ask What is the most impressive thing you have built or done? Links welcome.
 field text
-askedBy yc techstars antler ef spc speedrun alliance residency
+askedBy yc techstars antler ef spc speedrun residency
 
 id progress
 ask How far along are you? Users, revenue, growth, and how long you have been at it.
 field text
-askedBy yc techstars 500global plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
+askedBy yc techstars 500global plugandplay masschallenge elemental speedrun pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id whyYou
 ask Why this idea, why you, and why now?
@@ -358,9 +351,9 @@ askedBy yc ef spc
 id deck
 ask Pitch deck link
 field line
-askedBy techstars 500global antler plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
+askedBy techstars 500global antler plugandplay masschallenge elemental speedrun pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id video
 ask One minute founder video link
 field line
-askedBy yc techstars masschallenge alliance blue
+askedBy yc techstars masschallenge blue
