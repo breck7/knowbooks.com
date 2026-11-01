@@ -41,7 +41,7 @@ main
    target _blank
    rel noopener
    addClass video
-  For uncommon people: rare outliers who think they can lead. 22 questions, merged from the 15 top accelerators in the world. Type as a form or as one plain-text Scroll document. Every keystroke is saved in the URL, so send the link to a cofounder and edit together.
+  For uncommon people: rare outliers who think they can lead. 22 questions, merged from the 19 top accelerators in the world. Type as a form or as one plain-text Scroll document. Every keystroke is saved in the URL, so send the link to a cofounder and edit together.
  div
   id classic
  textarea
@@ -90,7 +90,7 @@ css
 
 script
  const questions = window.uncommonApp.filter(c => c.ask)
- const accelerators = window.uncommonApp.filter(c => c.firm)
+ const accelerators = window.uncommonApp.filter(c => c.firm && c.applyEmail && c.x)
  const firm = id => accelerators.find(a => a.id === id).firm
  const $ = id => document.getElementById(id)
  let data = {}

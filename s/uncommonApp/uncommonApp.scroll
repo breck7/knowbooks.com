@@ -50,7 +50,7 @@ investsParser
  description Standard investment, from official terms pages as of Oct 2026.
  extends abstractQuestionMeasureParser
 
-// Accelerators
+// Accelerators. To be included a firm needs applyEmail and x; readme.scroll skips any without both.
 
 id yc
 firm Y Combinator
@@ -118,7 +118,7 @@ invests $1M ($400k for 7% + $600k in your next round)
 
 id blue
 firm Blue Startups
-x bluestartups
+x alohamaya
 applyUrl https://www.bluestartups.com/apply/
 applyEmail admin@bluestartups.com
 basedIn Honolulu, Hawaiʻi, USA
@@ -172,67 +172,100 @@ applyEmail contact@16vc.co
 basedIn San Francisco, New York and London (on-site)
 invests $200k post-money SAFE, targeting ~6%
 
+id homebrew
+firm Homebrew
+x homebrew
+applyUrl https://homebrew.co
+applyEmail hunter@homebrew.co
+basedIn San Francisco, CA, USA
+invests $100k–$500k seed checks
+
+
+id marketplace
+firm Marketplace Capital
+x marketplacevc
+applyUrl https://obsessedwithmarketplaces.com/founders
+applyEmail contact@marketplace.capital
+basedIn USA
+invests $100k–$250k, marketplaces and network-effect businesses
+
+id darkmode
+firm DarkMode Ventures
+x DarkmodeVC
+applyUrl https://darkmode.vc
+applyEmail amir@darkmode.vc
+basedIn USA
+invests $150k–$250k, enterprise AI and dev tools
+
+id sarahsmith
+firm Sarah Smith Fund
+x sasmith4
+applyUrl https://www.sarahsmith.fund
+applyEmail sarah@sarahsmith.fund
+basedIn Menlo Park, CA, USA
+invests $250k+ pre-seed
+
 // Questions
 
 id name
 ask Your full name
 field line
-askedBy yc techstars 500global antler ef plugandplay masschallenge spc blue elemental speedrun alliance pear residency 16vc
+askedBy yc techstars 500global antler ef plugandplay masschallenge spc elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue
 
 id email
 ask Email
 field line
-askedBy yc techstars 500global antler ef plugandplay masschallenge spc blue elemental speedrun alliance pear residency 16vc
+askedBy yc techstars 500global antler ef plugandplay masschallenge spc elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue
 
 id phone
 ask Phone
 field line
-askedBy techstars plugandplay masschallenge blue speedrun
+askedBy techstars plugandplay masschallenge speedrun blue
 
 id linkedin
 ask LinkedIn or personal site
 field line
-askedBy yc techstars antler ef plugandplay spc blue speedrun alliance pear residency 16vc
+askedBy yc techstars antler ef plugandplay spc speedrun alliance pear residency 16vc blue
 
 id location
 ask Where do you live now, and where will the company be based?
 field line
-askedBy yc techstars 500global antler ef plugandplay masschallenge spc blue elemental residency 16vc
+askedBy yc techstars 500global antler ef plugandplay masschallenge spc elemental residency 16vc blue
 
 id company
 ask Company name
 field line
-askedBy yc techstars 500global plugandplay masschallenge blue elemental speedrun alliance pear 16vc
+askedBy yc techstars 500global plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue
 
 id url
 ask Company or product URL
 field line
-askedBy yc techstars 500global antler plugandplay masschallenge blue elemental speedrun alliance pear 16vc
+askedBy yc techstars 500global antler plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue
 
 id oneLiner
 ask Describe what you do in one sentence (50 characters is best).
 field line
-askedBy yc 500global antler plugandplay masschallenge blue alliance 16vc
+askedBy yc 500global antler plugandplay masschallenge alliance 16vc homebrew marketplace darkmode sarahsmith blue
 
 id stage
 ask Stage: idea, prototype, launched, revenue, preseed, seed, seriesA...
 field line
-askedBy 500global antler plugandplay masschallenge spc elemental 16vc
+askedBy 500global antler plugandplay masschallenge spc elemental 16vc homebrew marketplace darkmode sarahsmith
 
 id problem
 ask What problem are you solving, for whom, and how do they get by today?
 field text
-askedBy techstars 500global masschallenge blue elemental speedrun pear
+askedBy techstars 500global masschallenge elemental speedrun pear blue
 
 id make
 ask What are you going to make? What does it do?
 field text
-askedBy yc techstars 500global masschallenge blue elemental speedrun alliance pear residency 16vc
+askedBy yc techstars 500global masschallenge elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue
 
 id founders
 ask Who are the founders? How did you meet, who builds the product, and is everyone full-time?
 field text
-askedBy yc techstars 500global antler ef masschallenge blue elemental speedrun alliance pear residency 16vc
+askedBy yc techstars 500global antler ef masschallenge elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue
 
 id edge
 ask What is the most impressive thing you have built or done? Links welcome.
@@ -242,12 +275,12 @@ askedBy yc techstars antler ef spc speedrun alliance residency
 id progress
 ask How far along are you? Users, revenue, growth, and how long you have been at it.
 field text
-askedBy yc techstars 500global plugandplay masschallenge blue elemental speedrun alliance pear 16vc
+askedBy yc techstars 500global plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue
 
 id whyYou
 ask Why this idea, why you, and why now?
 field text
-askedBy yc techstars blue elemental pear
+askedBy yc techstars elemental pear blue
 
 id competitors
 ask Who are your competitors, and what do you understand that they don't?
@@ -262,12 +295,12 @@ askedBy yc techstars 500global blue
 id funding
 ask Legal entity, equity split, money raised so far, burn and runway.
 field text
-askedBy yc techstars 500global plugandplay masschallenge blue elemental pear 16vc
+askedBy yc techstars 500global plugandplay masschallenge elemental pear 16vc homebrew marketplace darkmode sarahsmith blue
 
 id ask
 ask What do you want from an accelerator? Name the milestone it would unlock.
 field text
-askedBy yc techstars 500global masschallenge blue elemental
+askedBy yc techstars 500global masschallenge elemental blue
 
 id ideas
 ask Other ideas you considered.
@@ -277,9 +310,9 @@ askedBy yc ef spc
 id deck
 ask Pitch deck link
 field line
-askedBy techstars 500global antler plugandplay masschallenge blue elemental speedrun alliance pear 16vc
+askedBy techstars 500global antler plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue
 
 id video
 ask One minute founder video link
 field line
-askedBy yc techstars masschallenge blue alliance
+askedBy yc techstars masschallenge alliance blue
