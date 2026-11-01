@@ -36,6 +36,11 @@ main
  section
   addClass hero
   h1 One application. Every accelerator.
+  a ▶ Watch the explainer video
+   href https://x.com/breckyunits/status/2116584615033135447
+   target _blank
+   rel noopener
+   addClass video
   For uncommon people: rare outliers who think they can lead. 22 questions, merged from the 10 top accelerators in the world. Type as a form or as one plain-text Scroll document. Every keystroke is saved in the URL, so send the link to a cofounder and edit together.
  div
   id classic
@@ -80,6 +85,7 @@ css
  dialog{max-width:720px;width:92vw;border:0;border-radius:16px;padding:24px;background:var(--paper)}dialog::backdrop{background:#0006}
  dialog label button,#closeMail{font-size:12px;border:1px solid var(--sage);background:none;border-radius:99px;padding:2px 10px;cursor:pointer}#closeMail{float:right;font-size:18px}
  #body{min-height:40vh;font:14px/1.5 ui-monospace,Menlo,monospace}
+ .video{display:inline-block;margin:0 0 12px;color:var(--sage);font-weight:600;text-decoration:none;border-bottom:2px solid var(--gold)}
  footer{text-align:center;padding:40px;color:var(--sage)}footer a{color:var(--sage)}
 
 script
