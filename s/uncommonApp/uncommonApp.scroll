@@ -205,17 +205,65 @@ applyEmail sarah@sarahsmith.fund
 basedIn Menlo Park, CA, USA
 invests $250k+ pre-seed
 
+id grahamwalker
+firm Graham & Walker
+x grahamandwalker
+applyUrl https://www.grahamwalker.com/pitch
+applyEmail team@grahamwalker.com
+basedIn Seattle, WA, USA
+invests $50k–$400k
+
+id greatoaks
+firm Great Oaks VC
+x GreatOaksVC
+applyUrl https://www.greatoaksvc.com
+applyEmail info@greatoaksvc.com
+basedIn New York City, NY, USA
+invests $50k–$500k, pre-seed to Series A
+
+id ridehome
+firm Ride Home Fund
+x brianmcc
+applyUrl https://www.ridehomefund.com
+applyEmail brian@ridehomefund.com
+basedIn New York, NY, USA
+invests $75k–$250k
+
+id drf
+firm Dorm Room Fund
+x DormRoomFund
+applyUrl https://drf.vc/apply
+applyEmail info@dormroomfund.com
+basedIn US universities (student and recent-alumni founders)
+invests $90k–$250k, targeting ~1.3%
+
+id sterling
+firm Sterling Road
+x sterlingroadvc
+applyUrl https://apply.sterlingroad.com/
+applyEmail ash@sterlingroad.com
+basedIn San Francisco, CA, USA
+invests $50k first check, up to $150k; B2B, US/Canada/UK
+
+id notyet
+firm Not Yet Ventures
+x azorychta
+applyUrl https://notyet.vc/pitch/
+applyEmail pitch@apply.notyet.vc
+basedIn Charlottesville, VA, USA
+invests $30k; prefers student founders, US only
+
 // Questions
 
 id name
 ask Your full name
 field line
-askedBy yc techstars 500global antler ef plugandplay masschallenge spc elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue
+askedBy yc techstars 500global antler ef plugandplay masschallenge spc elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id email
 ask Email
 field line
-askedBy yc techstars 500global antler ef plugandplay masschallenge spc elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue
+askedBy yc techstars 500global antler ef plugandplay masschallenge spc elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id phone
 ask Phone
@@ -235,22 +283,22 @@ askedBy yc techstars 500global antler ef plugandplay masschallenge spc elemental
 id company
 ask Company name
 field line
-askedBy yc techstars 500global plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue
+askedBy yc techstars 500global plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id url
 ask Company or product URL
 field line
-askedBy yc techstars 500global antler plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue
+askedBy yc techstars 500global antler plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id oneLiner
 ask Describe what you do in one sentence (50 characters is best).
 field line
-askedBy yc 500global antler plugandplay masschallenge alliance 16vc homebrew marketplace darkmode sarahsmith blue
+askedBy yc 500global antler plugandplay masschallenge alliance 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id stage
 ask Stage: idea, prototype, launched, revenue, preseed, seed, seriesA...
 field line
-askedBy 500global antler plugandplay masschallenge spc elemental 16vc homebrew marketplace darkmode sarahsmith
+askedBy 500global antler plugandplay masschallenge spc elemental 16vc homebrew marketplace darkmode sarahsmith grahamwalker greatoaks ridehome drf sterling notyet
 
 id problem
 ask What problem are you solving, for whom, and how do they get by today?
@@ -260,12 +308,12 @@ askedBy techstars 500global masschallenge elemental speedrun pear blue
 id make
 ask What are you going to make? What does it do?
 field text
-askedBy yc techstars 500global masschallenge elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue
+askedBy yc techstars 500global masschallenge elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id founders
 ask Who are the founders? How did you meet, who builds the product, and is everyone full-time?
 field text
-askedBy yc techstars 500global antler ef masschallenge elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue
+askedBy yc techstars 500global antler ef masschallenge elemental speedrun alliance pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id edge
 ask What is the most impressive thing you have built or done? Links welcome.
@@ -275,7 +323,7 @@ askedBy yc techstars antler ef spc speedrun alliance residency
 id progress
 ask How far along are you? Users, revenue, growth, and how long you have been at it.
 field text
-askedBy yc techstars 500global plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue
+askedBy yc techstars 500global plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id whyYou
 ask Why this idea, why you, and why now?
@@ -295,7 +343,7 @@ askedBy yc techstars 500global blue
 id funding
 ask Legal entity, equity split, money raised so far, burn and runway.
 field text
-askedBy yc techstars 500global plugandplay masschallenge elemental pear 16vc homebrew marketplace darkmode sarahsmith blue
+askedBy yc techstars 500global plugandplay masschallenge elemental pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id ask
 ask What do you want from an accelerator? Name the milestone it would unlock.
@@ -310,7 +358,7 @@ askedBy yc ef spc
 id deck
 ask Pitch deck link
 field line
-askedBy techstars 500global antler plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue
+askedBy techstars 500global antler plugandplay masschallenge elemental speedrun alliance pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet
 
 id video
 ask One minute founder video link
