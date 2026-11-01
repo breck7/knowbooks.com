@@ -80,28 +80,36 @@
     "invests": "Varies: Strategy Track ~$350k, Project Track $1M–$3M, case by case"
   },
   {
+    "id": "speedrun",
+    "firm": "a16z speedrun",
+    "applyUrl": "https://speedrun.a16z.com/apply",
+    "applyEmail": "sr-team@a16z.com",
+    "basedIn": "San Francisco, CA, USA",
+    "invests": "Up to $1M ($500k for 10% SAFE + up to $500k in your next round)"
+  },
+  {
     "id": "name",
     "ask": "Your full name",
     "field": "line",
-    "askedBy": "yc techstars 500global antler ef plugandplay masschallenge spc blue elemental"
+    "askedBy": "yc techstars 500global antler ef plugandplay masschallenge spc blue elemental speedrun"
   },
   {
     "id": "email",
     "ask": "Email",
     "field": "line",
-    "askedBy": "yc techstars 500global antler ef plugandplay masschallenge spc blue elemental"
+    "askedBy": "yc techstars 500global antler ef plugandplay masschallenge spc blue elemental speedrun"
   },
   {
     "id": "phone",
     "ask": "Phone",
     "field": "line",
-    "askedBy": "techstars plugandplay masschallenge blue"
+    "askedBy": "techstars plugandplay masschallenge blue speedrun"
   },
   {
     "id": "linkedin",
     "ask": "LinkedIn or personal site",
     "field": "line",
-    "askedBy": "yc techstars antler ef plugandplay spc blue"
+    "askedBy": "yc techstars antler ef plugandplay spc blue speedrun"
   },
   {
     "id": "location",
@@ -113,13 +121,13 @@
     "id": "company",
     "ask": "Company name",
     "field": "line",
-    "askedBy": "yc techstars 500global plugandplay masschallenge blue elemental"
+    "askedBy": "yc techstars 500global plugandplay masschallenge blue elemental speedrun"
   },
   {
     "id": "url",
     "ask": "Company or product URL",
     "field": "line",
-    "askedBy": "yc techstars 500global antler plugandplay masschallenge blue elemental"
+    "askedBy": "yc techstars 500global antler plugandplay masschallenge blue elemental speedrun"
   },
   {
     "id": "oneLiner",
@@ -137,31 +145,31 @@
     "id": "problem",
     "ask": "What problem are you solving, for whom, and how do they get by today?",
     "field": "text",
-    "askedBy": "techstars 500global masschallenge blue elemental"
+    "askedBy": "techstars 500global masschallenge blue elemental speedrun"
   },
   {
     "id": "make",
     "ask": "What are you going to make? What does it do?",
     "field": "text",
-    "askedBy": "yc techstars 500global masschallenge blue elemental"
+    "askedBy": "yc techstars 500global masschallenge blue elemental speedrun"
   },
   {
     "id": "founders",
     "ask": "Who are the founders? How did you meet, who builds the product, and is everyone full-time?",
     "field": "text",
-    "askedBy": "yc techstars 500global antler ef masschallenge blue elemental"
+    "askedBy": "yc techstars 500global antler ef masschallenge blue elemental speedrun"
   },
   {
     "id": "edge",
     "ask": "What is the most impressive thing you have built or done? Links welcome.",
     "field": "text",
-    "askedBy": "yc techstars antler ef spc"
+    "askedBy": "yc techstars antler ef spc speedrun"
   },
   {
     "id": "progress",
     "ask": "How far along are you? Users, revenue, growth, and how long you have been at it.",
     "field": "text",
-    "askedBy": "yc techstars 500global plugandplay masschallenge blue elemental"
+    "askedBy": "yc techstars 500global plugandplay masschallenge blue elemental speedrun"
   },
   {
     "id": "whyYou",
@@ -203,7 +211,7 @@
     "id": "deck",
     "ask": "Pitch deck link",
     "field": "line",
-    "askedBy": "techstars 500global antler plugandplay masschallenge blue elemental"
+    "askedBy": "techstars 500global antler plugandplay masschallenge blue elemental speedrun"
   },
   {
     "id": "video",
