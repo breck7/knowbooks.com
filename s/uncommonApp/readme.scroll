@@ -41,7 +41,7 @@ main
    target _blank
    rel noopener
    addClass video
-  For uncommon people: rare outliers who think they can lead. 22 questions, merged from the 11 top accelerators in the world. Type as a form or as one plain-text Scroll document. Every keystroke is saved in the URL, so send the link to a cofounder and edit together.
+  For uncommon people: rare outliers who think they can lead. 22 questions, merged from the 15 top accelerators in the world. Type as a form or as one plain-text Scroll document. Every keystroke is saved in the URL, so send the link to a cofounder and edit together.
  div
   id classic
  textarea
@@ -114,9 +114,9 @@ script
   if (source !== "form") questions.forEach(q => $("q-" + q.id).value = data[q.id] || "")
   if (source !== "scroll") $("particles").value = toScroll(data)
   history.replaceState(null, "", "?" + toPatch(data))
-  $("accelerators").innerHTML = "<tr><th>Accelerator</th><th>Based in</th><th>Invests</th><th>Answered</th></tr>" + accelerators.map(a => {
+  $("accelerators").innerHTML = "<tr><th>Accelerator</th><th>Based in</th><th>Invests</th><th>X</th><th>Answered</th></tr>" + accelerators.map(a => {
    const asked = questions.filter(q => q.askedBy.split(" ").includes(a.id))
-   return `<tr><td><a href="${a.applyUrl}" target="_blank" rel="noopener">${a.firm} ↗</a></td><td>${a.basedIn}</td><td>${a.invests}</td><td>${asked.filter(q => data[q.id]).length}/${asked.length}</td></tr>`
+   return `<tr><td><a href="${a.applyUrl}" target="_blank" rel="noopener">${a.firm} ↗</a></td><td>${a.basedIn}</td><td>${a.invests}</td><td><a href="https://x.com/${a.x}" target="_blank" rel="noopener">@${a.x}</a></td><td>${asked.filter(q => data[q.id]).length}/${asked.length}</td></tr>`
   }).join("")
  }
  $("classic").innerHTML = questions.map(q => `<label for="q-${q.id}">${q.ask}<small>${q.askedBy.split(" ").map(firm).join(" · ")}</small></label>` + (q.field === "text" ? `<textarea id="q-${q.id}"></textarea>` : `<input id="q-${q.id}">`)).join("")

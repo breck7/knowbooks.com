@@ -1,6 +1,7 @@
 [
   {
     "id": "yc",
+    "x": "ycombinator",
     "firm": "Y Combinator",
     "applyUrl": "https://www.ycombinator.com/apply",
     "applyEmail": "apply@ycombinator.com",
@@ -9,6 +10,7 @@
   },
   {
     "id": "techstars",
+    "x": "Techstars",
     "firm": "Techstars",
     "applyUrl": "https://www.techstars.com/accelerators",
     "applyEmail": "startups@techstars.com",
@@ -17,6 +19,7 @@
   },
   {
     "id": "500global",
+    "x": "500GlobalVC",
     "firm": "500 Global",
     "applyUrl": "https://500.co/accelerator",
     "applyEmail": "partnerships@500.co",
@@ -25,6 +28,7 @@
   },
   {
     "id": "antler",
+    "x": "AntlerGlobal",
     "firm": "Antler",
     "applyUrl": "https://www.antler.co/apply",
     "applyEmail": "applications@antler.co",
@@ -33,6 +37,7 @@
   },
   {
     "id": "ef",
+    "x": "joinef",
     "firm": "Entrepreneur First",
     "applyUrl": "https://www.joinef.com/",
     "applyEmail": "applications@joinef.com",
@@ -41,6 +46,7 @@
   },
   {
     "id": "plugandplay",
+    "x": "PlugandPlayTC",
     "firm": "Plug and Play",
     "applyUrl": "https://www.plugandplaytechcenter.com/",
     "applyEmail": "info@pnptc.com",
@@ -49,6 +55,7 @@
   },
   {
     "id": "masschallenge",
+    "x": "MassChallenge",
     "firm": "MassChallenge",
     "applyUrl": "https://masschallenge.org/programs-all/",
     "applyEmail": "contact@masschallenge.org",
@@ -57,6 +64,7 @@
   },
   {
     "id": "spc",
+    "x": "spc",
     "firm": "South Park Commons",
     "applyUrl": "https://www.southparkcommons.com/apply/",
     "applyEmail": "info@southparkcommons.com",
@@ -65,6 +73,7 @@
   },
   {
     "id": "blue",
+    "x": "bluestartups",
     "firm": "Blue Startups",
     "applyUrl": "https://www.bluestartups.com/apply/",
     "applyEmail": "admin@bluestartups.com",
@@ -73,6 +82,7 @@
   },
   {
     "id": "elemental",
+    "x": "elementalimpact",
     "firm": "Elemental Impact",
     "applyUrl": "https://elementalimpact.com/funding-opportunities/apply/",
     "applyEmail": "apply@elementalimpact.com",
@@ -81,6 +91,7 @@
   },
   {
     "id": "speedrun",
+    "x": "speedrun",
     "firm": "a16z speedrun",
     "applyUrl": "https://speedrun.a16z.com/apply",
     "applyEmail": "sr-team@a16z.com",
@@ -88,16 +99,52 @@
     "invests": "Up to $1M ($500k for 10% SAFE + up to $500k in your next round)"
   },
   {
+    "id": "alliance",
+    "x": "alliance",
+    "firm": "Alliance",
+    "applyUrl": "https://alliance.xyz/apply",
+    "applyEmail": "info@alliance.xyz",
+    "basedIn": "New York City, NY, USA",
+    "invests": "$400k SAFE at $4M post-money (10%) + 1:1 token side letter"
+  },
+  {
+    "id": "pear",
+    "x": "pearvc",
+    "firm": "PearX (Pear VC)",
+    "applyUrl": "https://pear.vc/pearx-application/",
+    "applyEmail": "info@pear.vc",
+    "basedIn": "SF Bay Area, CA, USA",
+    "invests": "$500k–$2M, tailored per company, targeting ~7%"
+  },
+  {
+    "id": "residency",
+    "x": "theresidency",
+    "firm": "The Residency",
+    "applyUrl": "https://apply.livetheresidency.com/apply",
+    "applyEmail": "support@livetheresidency.com",
+    "basedIn": "San Francisco, plus NYC, London and other cities",
+    "invests": "Founder residency: $120k SAFE at a flexible cap; you pay for the residency in equity or cash"
+  },
+  {
+    "id": "16vc",
+    "x": "16vchq",
+    "firm": "16VC",
+    "applyUrl": "https://16vc.notion.site/16VC-Accelerator-3d02d0512c558091a17ed9a67cbb10a4",
+    "applyEmail": "contact@16vc.co",
+    "basedIn": "San Francisco, New York and London (on-site)",
+    "invests": "$200k post-money SAFE, targeting ~6%"
+  },
+  {
     "id": "name",
     "ask": "Your full name",
     "field": "line",
-    "askedBy": "yc techstars 500global antler ef plugandplay masschallenge spc blue elemental speedrun"
+    "askedBy": "yc techstars 500global antler ef plugandplay masschallenge spc blue elemental speedrun alliance pear residency 16vc"
   },
   {
     "id": "email",
     "ask": "Email",
     "field": "line",
-    "askedBy": "yc techstars 500global antler ef plugandplay masschallenge spc blue elemental speedrun"
+    "askedBy": "yc techstars 500global antler ef plugandplay masschallenge spc blue elemental speedrun alliance pear residency 16vc"
   },
   {
     "id": "phone",
@@ -109,73 +156,73 @@
     "id": "linkedin",
     "ask": "LinkedIn or personal site",
     "field": "line",
-    "askedBy": "yc techstars antler ef plugandplay spc blue speedrun"
+    "askedBy": "yc techstars antler ef plugandplay spc blue speedrun alliance pear residency 16vc"
   },
   {
     "id": "location",
     "ask": "Where do you live now, and where will the company be based?",
     "field": "line",
-    "askedBy": "yc techstars 500global antler ef plugandplay masschallenge spc blue elemental"
+    "askedBy": "yc techstars 500global antler ef plugandplay masschallenge spc blue elemental residency 16vc"
   },
   {
     "id": "company",
     "ask": "Company name",
     "field": "line",
-    "askedBy": "yc techstars 500global plugandplay masschallenge blue elemental speedrun"
+    "askedBy": "yc techstars 500global plugandplay masschallenge blue elemental speedrun alliance pear 16vc"
   },
   {
     "id": "url",
     "ask": "Company or product URL",
     "field": "line",
-    "askedBy": "yc techstars 500global antler plugandplay masschallenge blue elemental speedrun"
+    "askedBy": "yc techstars 500global antler plugandplay masschallenge blue elemental speedrun alliance pear 16vc"
   },
   {
     "id": "oneLiner",
     "ask": "Describe what you do in one sentence (50 characters is best).",
     "field": "line",
-    "askedBy": "yc 500global antler plugandplay masschallenge blue"
+    "askedBy": "yc 500global antler plugandplay masschallenge blue alliance 16vc"
   },
   {
     "id": "stage",
     "ask": "Stage: idea, prototype, launched, revenue, preseed, seed, seriesA...",
     "field": "line",
-    "askedBy": "500global antler plugandplay masschallenge spc elemental"
+    "askedBy": "500global antler plugandplay masschallenge spc elemental 16vc"
   },
   {
     "id": "problem",
     "ask": "What problem are you solving, for whom, and how do they get by today?",
     "field": "text",
-    "askedBy": "techstars 500global masschallenge blue elemental speedrun"
+    "askedBy": "techstars 500global masschallenge blue elemental speedrun pear"
   },
   {
     "id": "make",
     "ask": "What are you going to make? What does it do?",
     "field": "text",
-    "askedBy": "yc techstars 500global masschallenge blue elemental speedrun"
+    "askedBy": "yc techstars 500global masschallenge blue elemental speedrun alliance pear residency 16vc"
   },
   {
     "id": "founders",
     "ask": "Who are the founders? How did you meet, who builds the product, and is everyone full-time?",
     "field": "text",
-    "askedBy": "yc techstars 500global antler ef masschallenge blue elemental speedrun"
+    "askedBy": "yc techstars 500global antler ef masschallenge blue elemental speedrun alliance pear residency 16vc"
   },
   {
     "id": "edge",
     "ask": "What is the most impressive thing you have built or done? Links welcome.",
     "field": "text",
-    "askedBy": "yc techstars antler ef spc speedrun"
+    "askedBy": "yc techstars antler ef spc speedrun alliance residency"
   },
   {
     "id": "progress",
     "ask": "How far along are you? Users, revenue, growth, and how long you have been at it.",
     "field": "text",
-    "askedBy": "yc techstars 500global plugandplay masschallenge blue elemental speedrun"
+    "askedBy": "yc techstars 500global plugandplay masschallenge blue elemental speedrun alliance pear 16vc"
   },
   {
     "id": "whyYou",
     "ask": "Why this idea, why you, and why now?",
     "field": "text",
-    "askedBy": "yc techstars blue elemental"
+    "askedBy": "yc techstars blue elemental pear"
   },
   {
     "id": "competitors",
@@ -193,7 +240,7 @@
     "id": "funding",
     "ask": "Legal entity, equity split, money raised so far, burn and runway.",
     "field": "text",
-    "askedBy": "yc techstars 500global plugandplay masschallenge blue elemental"
+    "askedBy": "yc techstars 500global plugandplay masschallenge blue elemental pear 16vc"
   },
   {
     "id": "ask",
@@ -211,12 +258,12 @@
     "id": "deck",
     "ask": "Pitch deck link",
     "field": "line",
-    "askedBy": "techstars 500global antler plugandplay masschallenge blue elemental speedrun"
+    "askedBy": "techstars 500global antler plugandplay masschallenge blue elemental speedrun alliance pear 16vc"
   },
   {
     "id": "video",
     "ask": "One minute founder video link",
     "field": "line",
-    "askedBy": "yc techstars masschallenge blue"
+    "askedBy": "yc techstars masschallenge blue alliance"
   }
 ]

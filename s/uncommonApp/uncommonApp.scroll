@@ -41,6 +41,10 @@ applyEmailParser
 basedInParser
  cue basedIn
  extends abstractQuestionMeasureParser
+xParser
+ cue x
+ description Official X handle.
+ extends abstractQuestionMeasureParser
 investsParser
  cue invests
  description Standard investment, from official terms pages as of Oct 2026.
@@ -50,6 +54,7 @@ investsParser
 
 id yc
 firm Y Combinator
+x ycombinator
 applyUrl https://www.ycombinator.com/apply
 applyEmail apply@ycombinator.com
 basedIn San Francisco, CA, USA
@@ -57,6 +62,7 @@ invests $500k ($125k for 7% + $375k uncapped MFN SAFE)
 
 id techstars
 firm Techstars
+x Techstars
 applyUrl https://www.techstars.com/accelerators
 applyEmail startups@techstars.com
 basedIn Programs worldwide (HQ Boulder, CO, USA)
@@ -64,6 +70,7 @@ invests $220k ($20k for 5% + $200k uncapped MFN SAFE); $100k in Asia-Pacific
 
 id 500global
 firm 500 Global
+x 500GlobalVC
 applyUrl https://500.co/accelerator
 applyEmail partnerships@500.co
 basedIn San Francisco, CA, USA (plus regional programs)
@@ -71,6 +78,7 @@ invests Varies: 500 Fellowship up to $50k upfront, up to $1M more; $35k program 
 
 id antler
 firm Antler
+x AntlerGlobal
 applyUrl https://www.antler.co/apply
 applyEmail applications@antler.co
 basedIn 25+ cities (HQ Singapore)
@@ -78,6 +86,7 @@ invests Varies by city: e.g. $150k for ~10% in Singapore, up to $400k with match
 
 id ef
 firm Entrepreneur First
+x joinef
 applyUrl https://www.joinef.com/
 applyEmail applications@joinef.com
 basedIn San Francisco, USA and London, UK
@@ -85,6 +94,7 @@ invests Up to $250k ($125k for 8% + optional $125k MFN SAFE)
 
 id plugandplay
 firm Plug and Play
+x PlugandPlayTC
 applyUrl https://www.plugandplaytechcenter.com/
 applyEmail info@pnptc.com
 basedIn Sunnyvale, CA, USA (plus 50+ locations)
@@ -92,6 +102,7 @@ invests No standard check; most programs are equity-free, investments case by ca
 
 id masschallenge
 firm MassChallenge
+x MassChallenge
 applyUrl https://masschallenge.org/programs-all/
 applyEmail contact@masschallenge.org
 basedIn Boston, MA, USA (plus Switzerland, Israel, others)
@@ -99,6 +110,7 @@ invests $0, equity-free (some programs award cash prizes)
 
 id spc
 firm South Park Commons
+x spc
 applyUrl https://www.southparkcommons.com/apply/
 applyEmail info@southparkcommons.com
 basedIn San Francisco and New York, USA
@@ -106,6 +118,7 @@ invests $1M ($400k for 7% + $600k in your next round)
 
 id blue
 firm Blue Startups
+x bluestartups
 applyUrl https://www.bluestartups.com/apply/
 applyEmail admin@bluestartups.com
 basedIn Honolulu, Hawaiʻi, USA
@@ -113,6 +126,7 @@ invests $25k–$100k SAFE by stage, up to $250k with follow-on, for 2–5%
 
 id elemental
 firm Elemental Impact
+x elementalimpact
 applyUrl https://elementalimpact.com/funding-opportunities/apply/
 applyEmail apply@elementalimpact.com
 basedIn Honolulu, Hawaiʻi, USA (invests globally)
@@ -120,22 +134,55 @@ invests Varies: Strategy Track ~$350k, Project Track $1M–$3M, case by case
 
 id speedrun
 firm a16z speedrun
+x speedrun
 applyUrl https://speedrun.a16z.com/apply
 applyEmail sr-team@a16z.com
 basedIn San Francisco, CA, USA
 invests Up to $1M ($500k for 10% SAFE + up to $500k in your next round)
+
+id alliance
+firm Alliance
+x alliance
+applyUrl https://alliance.xyz/apply
+applyEmail info@alliance.xyz
+basedIn New York City, NY, USA
+invests $400k SAFE at $4M post-money (10%) + 1:1 token side letter
+
+id pear
+firm PearX (Pear VC)
+x pearvc
+applyUrl https://pear.vc/pearx-application/
+applyEmail info@pear.vc
+basedIn SF Bay Area, CA, USA
+invests $500k–$2M, tailored per company, targeting ~7%
+
+id residency
+firm The Residency
+x theresidency
+applyUrl https://apply.livetheresidency.com/apply
+applyEmail support@livetheresidency.com
+basedIn San Francisco, plus NYC, London and other cities
+invests Founder residency: $120k SAFE at a flexible cap; you pay for the residency in equity or cash
+
+id 16vc
+firm 16VC
+x 16vchq
+applyUrl https://16vc.notion.site/16VC-Accelerator-3d02d0512c558091a17ed9a67cbb10a4
+applyEmail contact@16vc.co
+basedIn San Francisco, New York and London (on-site)
+invests $200k post-money SAFE, targeting ~6%
 
 // Questions
 
 id name
 ask Your full name
 field line
-askedBy yc techstars 500global antler ef plugandplay masschallenge spc blue elemental speedrun
+askedBy yc techstars 500global antler ef plugandplay masschallenge spc blue elemental speedrun alliance pear residency 16vc
 
 id email
 ask Email
 field line
-askedBy yc techstars 500global antler ef plugandplay masschallenge spc blue elemental speedrun
+askedBy yc techstars 500global antler ef plugandplay masschallenge spc blue elemental speedrun alliance pear residency 16vc
 
 id phone
 ask Phone
@@ -145,62 +192,62 @@ askedBy techstars plugandplay masschallenge blue speedrun
 id linkedin
 ask LinkedIn or personal site
 field line
-askedBy yc techstars antler ef plugandplay spc blue speedrun
+askedBy yc techstars antler ef plugandplay spc blue speedrun alliance pear residency 16vc
 
 id location
 ask Where do you live now, and where will the company be based?
 field line
-askedBy yc techstars 500global antler ef plugandplay masschallenge spc blue elemental
+askedBy yc techstars 500global antler ef plugandplay masschallenge spc blue elemental residency 16vc
 
 id company
 ask Company name
 field line
-askedBy yc techstars 500global plugandplay masschallenge blue elemental speedrun
+askedBy yc techstars 500global plugandplay masschallenge blue elemental speedrun alliance pear 16vc
 
 id url
 ask Company or product URL
 field line
-askedBy yc techstars 500global antler plugandplay masschallenge blue elemental speedrun
+askedBy yc techstars 500global antler plugandplay masschallenge blue elemental speedrun alliance pear 16vc
 
 id oneLiner
 ask Describe what you do in one sentence (50 characters is best).
 field line
-askedBy yc 500global antler plugandplay masschallenge blue
+askedBy yc 500global antler plugandplay masschallenge blue alliance 16vc
 
 id stage
 ask Stage: idea, prototype, launched, revenue, preseed, seed, seriesA...
 field line
-askedBy 500global antler plugandplay masschallenge spc elemental
+askedBy 500global antler plugandplay masschallenge spc elemental 16vc
 
 id problem
 ask What problem are you solving, for whom, and how do they get by today?
 field text
-askedBy techstars 500global masschallenge blue elemental speedrun
+askedBy techstars 500global masschallenge blue elemental speedrun pear
 
 id make
 ask What are you going to make? What does it do?
 field text
-askedBy yc techstars 500global masschallenge blue elemental speedrun
+askedBy yc techstars 500global masschallenge blue elemental speedrun alliance pear residency 16vc
 
 id founders
 ask Who are the founders? How did you meet, who builds the product, and is everyone full-time?
 field text
-askedBy yc techstars 500global antler ef masschallenge blue elemental speedrun
+askedBy yc techstars 500global antler ef masschallenge blue elemental speedrun alliance pear residency 16vc
 
 id edge
 ask What is the most impressive thing you have built or done? Links welcome.
 field text
-askedBy yc techstars antler ef spc speedrun
+askedBy yc techstars antler ef spc speedrun alliance residency
 
 id progress
 ask How far along are you? Users, revenue, growth, and how long you have been at it.
 field text
-askedBy yc techstars 500global plugandplay masschallenge blue elemental speedrun
+askedBy yc techstars 500global plugandplay masschallenge blue elemental speedrun alliance pear 16vc
 
 id whyYou
 ask Why this idea, why you, and why now?
 field text
-askedBy yc techstars blue elemental
+askedBy yc techstars blue elemental pear
 
 id competitors
 ask Who are your competitors, and what do you understand that they don't?
@@ -215,7 +262,7 @@ askedBy yc techstars 500global blue
 id funding
 ask Legal entity, equity split, money raised so far, burn and runway.
 field text
-askedBy yc techstars 500global plugandplay masschallenge blue elemental
+askedBy yc techstars 500global plugandplay masschallenge blue elemental pear 16vc
 
 id ask
 ask What do you want from an accelerator? Name the milestone it would unlock.
@@ -230,9 +277,9 @@ askedBy yc ef spc
 id deck
 ask Pitch deck link
 field line
-askedBy techstars 500global antler plugandplay masschallenge blue elemental speedrun
+askedBy techstars 500global antler plugandplay masschallenge blue elemental speedrun alliance pear 16vc
 
 id video
 ask One minute founder video link
 field line
-askedBy yc techstars masschallenge blue
+askedBy yc techstars masschallenge blue alliance
