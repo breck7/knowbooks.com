@@ -131,7 +131,7 @@ script
  $("submit").onclick = () => {
   $("bcc").value = accelerators.map(a => a.applyEmail).join(", ")
   $("subject").value = "Application for " + (data.company || "")
-  $("body").value = questions.filter(q => data[q.id]).map(q => "## " + q.ask + "\n\n" + data[q.id]).join("\n\n")
+  $("body").value = "Made with uncommonApp: https://knowbooks.com/s/uncommonApp/\n\n" + questions.filter(q => data[q.id]).map(q => "## " + q.ask + "\n\n" + data[q.id]).join("\n\n")
   $("mailto").href = "mailto:?bcc=" + encodeURIComponent($("bcc").value) + "&subject=" + encodeURIComponent($("subject").value) + "&body=" + encodeURIComponent($("body").value)
   $("mail").showModal()
  }
