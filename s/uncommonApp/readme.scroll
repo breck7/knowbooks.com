@@ -76,6 +76,7 @@ css
  h2{font:600 26px Georgia,serif;color:var(--sage)}
  label{display:block;margin:22px 0 6px;font-weight:600}
  label small{display:block;font-weight:400;color:var(--sage);font-size:12px;letter-spacing:.03em}
+ small details,small summary,small details::details-content{display:inline;cursor:pointer} small summary{list-style:none} small summary::-webkit-details-marker{display:none} small details:not([open])::details-content{display:none} small details[open] summary{display:none}
  input,textarea{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
  #classic textarea{min-height:110px}
  input:focus,textarea:focus{outline:2px solid var(--gold)}
@@ -90,8 +91,8 @@ css
 
 script
  const questions = window.uncommonApp.filter(c => c.ask)
- const accelerators = window.uncommonApp.filter(c => c.firm && c.applyEmail && c.x)
- const firm = id => accelerators.find(a => a.id === id).firm
+ const accelerators = window.uncommonApp.filter(c => c.firm && c.applyEmail && c.x).sort((a, b) => parseInt(String(b.funded).replace("~", "")) - parseInt(String(a.funded).replace("~", "")))
+ const askers = q => accelerators.filter(a => q.askedBy.split(" ").includes(a.id)).map(a => a.firm)
  const $ = id => document.getElementById(id)
  let data = {}
  // Patch (https://breck.lol/patch.html): rows split by &, cells by =. Each line of an answer is a cell.
@@ -114,12 +115,13 @@ script
   if (source !== "form") questions.forEach(q => $("q-" + q.id).value = data[q.id] || "")
   if (source !== "scroll") $("particles").value = toScroll(data)
   history.replaceState(null, "", "?" + toPatch(data))
-  $("accelerators").innerHTML = "<tr><th>Accelerator</th><th>Based in</th><th>Invests</th><th>X</th><th>Answered</th></tr>" + accelerators.map(a => {
+  $("accelerators").innerHTML = "<tr><th>Accelerator</th><th>Based in</th><th>Invests</th><th>Startups funded</th><th>X</th><th>Answered</th></tr>" + accelerators.map(a => {
    const asked = questions.filter(q => q.askedBy.split(" ").includes(a.id))
-   return `<tr><td><a href="${a.applyUrl}" target="_blank" rel="noopener">${a.firm} ↗</a></td><td>${a.basedIn}</td><td>${a.invests}</td><td><a href="https://x.com/${a.x}" target="_blank" rel="noopener">@${a.x}</a></td><td>${asked.filter(q => data[q.id]).length}/${asked.length}</td></tr>`
+   return `<tr><td><a href="${a.applyUrl}" target="_blank" rel="noopener">${a.firm} ↗</a></td><td>${a.basedIn}</td><td>${a.invests}</td><td>${a.funded}</td><td><a href="https://x.com/${a.x}" target="_blank" rel="noopener">@${a.x}</a></td><td>${asked.filter(q => data[q.id]).length}/${asked.length}</td></tr>`
   }).join("")
  }
- $("classic").innerHTML = questions.map(q => `<label for="q-${q.id}">${q.ask}<small>${q.askedBy.split(" ").map(firm).join(" · ")}</small></label>` + (q.field === "text" ? `<textarea id="q-${q.id}"></textarea>` : `<input id="q-${q.id}">`)).join("")
+ const showLimit = 7;
+ $("classic").innerHTML = questions.map(q => `<label for="q-${q.id}">${q.ask}<small>${askers(q).slice(0, showLimit).join(" · ")}${askers(q).length > showLimit ? ` · <details><summary>+${askers(q).length - showLimit} more</summary> ${askers(q).slice(showLimit).join(" · ")}</details>` : ""}</small></label>` + (q.field === "text" ? `<textarea id="q-${q.id}"></textarea>` : `<input id="q-${q.id}">`)).join("")
  $("classic").addEventListener("input", e => { data[e.target.id.slice(2)] = e.target.value; render("form") })
  $("particles").addEventListener("input", () => { data = fromScroll($("particles").value); render("scroll") })
  const mode = scroll => { document.body.classList.toggle("scroll", scroll); $("scrollMode").classList.toggle("on", scroll); $("formMode").classList.toggle("on", !scroll) }

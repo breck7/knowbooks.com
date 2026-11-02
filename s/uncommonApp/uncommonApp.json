@@ -6,6 +6,7 @@
     "applyUrl": "https://www.ycombinator.com/apply",
     "applyEmail": "apply@ycombinator.com",
     "basedIn": "San Francisco, CA, USA",
+    "funded": "6003",
     "invests": "$500k ($125k for 7% + $375k uncapped MFN SAFE)"
   },
   {
@@ -15,6 +16,7 @@
     "applyUrl": "https://www.techstars.com/accelerators",
     "applyEmail": "startups@techstars.com",
     "basedIn": "Programs worldwide (HQ Boulder, CO, USA)",
+    "funded": "5576",
     "invests": "$220k ($20k for 5% + $200k uncapped MFN SAFE); $100k in Asia-Pacific"
   },
   {
@@ -24,6 +26,7 @@
     "applyUrl": "https://500.co/accelerator",
     "applyEmail": "partnerships@500.co",
     "basedIn": "San Francisco, CA, USA (plus regional programs)",
+    "funded": "2241",
     "invests": "Varies: 500 Fellowship up to $50k upfront, up to $1M more; $35k program fee"
   },
   {
@@ -33,6 +36,7 @@
     "applyUrl": "https://www.antler.co/apply",
     "applyEmail": "applications@antler.co",
     "basedIn": "25+ cities (HQ Singapore)",
+    "funded": "1800",
     "invests": "Varies by city: e.g. $150k for ~10% in Singapore, up to $400k with matching"
   },
   {
@@ -42,6 +46,7 @@
     "applyUrl": "https://www.joinef.com/",
     "applyEmail": "applications@joinef.com",
     "basedIn": "San Francisco, USA and London, UK",
+    "funded": "495",
     "invests": "Up to $250k ($125k for 8% + optional $125k MFN SAFE)"
   },
   {
@@ -51,6 +56,7 @@
     "applyUrl": "https://www.plugandplaytechcenter.com/",
     "applyEmail": "info@pnptc.com",
     "basedIn": "Sunnyvale, CA, USA (plus 50+ locations)",
+    "funded": "1578",
     "invests": "No standard check; most programs are equity-free, investments case by case"
   },
   {
@@ -60,6 +66,7 @@
     "applyUrl": "https://masschallenge.org/programs-all/",
     "applyEmail": "contact@masschallenge.org",
     "basedIn": "Boston, MA, USA (plus Switzerland, Israel, others)",
+    "funded": "~3000",
     "invests": "$0, equity-free (some programs award cash prizes)"
   },
   {
@@ -69,6 +76,7 @@
     "applyUrl": "https://www.southparkcommons.com/apply/",
     "applyEmail": "arian@southparkcommons.com",
     "basedIn": "San Francisco and New York, USA",
+    "funded": "202",
     "invests": "$1M ($400k for 7% + $600k in your next round)"
   },
   {
@@ -78,6 +86,7 @@
     "applyUrl": "https://www.bluestartups.com/apply/",
     "applyEmail": "admin@bluestartups.com",
     "basedIn": "Honolulu, Hawaiʻi, USA",
+    "funded": "~110",
     "invests": "$25k–$100k SAFE by stage, up to $250k with follow-on, for 2–5%"
   },
   {
@@ -87,6 +96,7 @@
     "applyUrl": "https://elementalimpact.com/funding-opportunities/apply/",
     "applyEmail": "apply@elementalimpact.com",
     "basedIn": "Honolulu, Hawaiʻi, USA (invests globally)",
+    "funded": "~150",
     "invests": "Varies: Strategy Track ~$350k, Project Track $1M–$3M, case by case"
   },
   {
@@ -96,6 +106,7 @@
     "applyUrl": "https://speedrun.a16z.com/apply",
     "applyEmail": "sr-team@a16z.com",
     "basedIn": "San Francisco, CA, USA",
+    "funded": "~150",
     "invests": "Up to $1M ($500k for 10% SAFE + up to $500k in your next round)"
   },
   {
@@ -105,6 +116,7 @@
     "applyUrl": "https://pear.vc/pearx-application/",
     "applyEmail": "info@pear.vc",
     "basedIn": "SF Bay Area, CA, USA",
+    "funded": "204",
     "invests": "$500k–$2M, tailored per company, targeting ~7%"
   },
   {
@@ -114,6 +126,7 @@
     "applyUrl": "https://apply.livetheresidency.com/apply",
     "applyEmail": "support@livetheresidency.com",
     "basedIn": "San Francisco, plus NYC, London and other cities",
+    "funded": "~50",
     "invests": "Founder residency: $120k SAFE at a flexible cap; you pay for the residency in equity or cash"
   },
   {
@@ -123,6 +136,7 @@
     "applyUrl": "https://16vc.notion.site/16VC-Accelerator-3d02d0512c558091a17ed9a67cbb10a4",
     "applyEmail": "pitch@16vc.co",
     "basedIn": "San Francisco, New York and London (on-site)",
+    "funded": "~25",
     "invests": "$200k post-money SAFE, targeting ~6%"
   },
   {
@@ -132,6 +146,7 @@
     "applyUrl": "https://homebrew.co",
     "applyEmail": "hunter@homebrew.co",
     "basedIn": "San Francisco, CA, USA",
+    "funded": "~100",
     "invests": "$100k–$500k seed checks"
   },
   {
@@ -141,6 +156,7 @@
     "applyUrl": "https://obsessedwithmarketplaces.com/founders",
     "applyEmail": "contact@marketplace.capital",
     "basedIn": "USA",
+    "funded": "~50",
     "invests": "$100k–$250k, marketplaces and network-effect businesses"
   },
   {
@@ -150,6 +166,7 @@
     "applyUrl": "https://darkmode.vc",
     "applyEmail": "amir@darkmode.vc",
     "basedIn": "USA",
+    "funded": "~30",
     "invests": "$150k–$250k, enterprise AI and dev tools"
   },
   {
@@ -159,6 +176,7 @@
     "applyUrl": "https://www.sarahsmith.fund",
     "applyEmail": "sarah@sarahsmith.fund",
     "basedIn": "Menlo Park, CA, USA",
+    "funded": "~40",
     "invests": "$250k+ pre-seed"
   },
   {
@@ -168,6 +186,7 @@
     "applyUrl": "https://www.grahamwalker.com/pitch",
     "applyEmail": "team@grahamwalker.com",
     "basedIn": "Seattle, WA, USA",
+    "funded": "~50",
     "invests": "$50k–$400k"
   },
   {
@@ -177,6 +196,7 @@
     "applyUrl": "https://www.greatoaksvc.com",
     "applyEmail": "info@greatoaksvc.com",
     "basedIn": "New York City, NY, USA",
+    "funded": "~300",
     "invests": "$50k–$500k, pre-seed to Series A"
   },
   {
@@ -186,6 +206,7 @@
     "applyUrl": "https://www.ridehomefund.com",
     "applyEmail": "brian@ridehomefund.com",
     "basedIn": "New York, NY, USA",
+    "funded": "~100",
     "invests": "$75k–$250k"
   },
   {
@@ -195,6 +216,7 @@
     "applyUrl": "https://drf.vc/apply",
     "applyEmail": "info@dormroomfund.com",
     "basedIn": "US universities (student and recent-alumni founders)",
+    "funded": "502",
     "invests": "$90k–$250k, targeting ~1.3%"
   },
   {
@@ -204,6 +226,7 @@
     "applyUrl": "https://apply.sterlingroad.com/",
     "applyEmail": "ash@sterlingroad.com",
     "basedIn": "San Francisco, CA, USA",
+    "funded": "~150",
     "invests": "$50k first check, up to $150k; B2B, US/Canada/UK"
   },
   {
@@ -213,6 +236,7 @@
     "applyUrl": "https://notyet.vc/pitch/",
     "applyEmail": "pitch@apply.notyet.vc",
     "basedIn": "Charlottesville, VA, USA",
+    "funded": "~100",
     "invests": "$30k; prefers student founders, US only"
   },
   {

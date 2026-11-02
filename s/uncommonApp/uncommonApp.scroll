@@ -45,6 +45,10 @@ xParser
  cue x
  description Official X handle.
  extends abstractQuestionMeasureParser
+fundedParser
+ cue funded
+ description Startups funded. Sources: 5k.vc portfolio counts (Nov 2026), Dealroom for 500 Global and Plug and Play, antler.co for Antler. ~ means a guess.
+ extends abstractQuestionMeasureParser
 investsParser
  cue invests
  description Standard investment, from official terms pages as of Oct 2026.
@@ -54,6 +58,7 @@ investsParser
 
 id yc
 firm Y Combinator
+funded 6003
 x ycombinator
 applyUrl https://www.ycombinator.com/apply
 applyEmail apply@ycombinator.com
@@ -62,6 +67,7 @@ invests $500k ($125k for 7% + $375k uncapped MFN SAFE)
 
 id techstars
 firm Techstars
+funded 5576
 x Techstars
 applyUrl https://www.techstars.com/accelerators
 applyEmail startups@techstars.com
@@ -70,6 +76,7 @@ invests $220k ($20k for 5% + $200k uncapped MFN SAFE); $100k in Asia-Pacific
 
 id 500global
 firm 500 Global
+funded 2241
 x 500GlobalVC
 applyUrl https://500.co/accelerator
 applyEmail partnerships@500.co
@@ -78,6 +85,7 @@ invests Varies: 500 Fellowship up to $50k upfront, up to $1M more; $35k program 
 
 id antler
 firm Antler
+funded 1800
 x AntlerGlobal
 applyUrl https://www.antler.co/apply
 applyEmail applications@antler.co
@@ -86,6 +94,7 @@ invests Varies by city: e.g. $150k for ~10% in Singapore, up to $400k with match
 
 id ef
 firm Entrepreneur First
+funded 495
 x joinef
 applyUrl https://www.joinef.com/
 applyEmail applications@joinef.com
@@ -94,6 +103,7 @@ invests Up to $250k ($125k for 8% + optional $125k MFN SAFE)
 
 id plugandplay
 firm Plug and Play
+funded 1578
 x PlugandPlayTC
 applyUrl https://www.plugandplaytechcenter.com/
 applyEmail info@pnptc.com
@@ -102,6 +112,7 @@ invests No standard check; most programs are equity-free, investments case by ca
 
 id masschallenge
 firm MassChallenge
+funded ~3000
 x MassChallenge
 applyUrl https://masschallenge.org/programs-all/
 applyEmail contact@masschallenge.org
@@ -110,6 +121,7 @@ invests $0, equity-free (some programs award cash prizes)
 
 id spc
 firm South Park Commons
+funded 202
 x spc
 applyUrl https://www.southparkcommons.com/apply/
 applyEmail arian@southparkcommons.com
@@ -118,6 +130,7 @@ invests $1M ($400k for 7% + $600k in your next round)
 
 id blue
 firm Blue Startups
+funded ~110
 x alohamaya
 applyUrl https://www.bluestartups.com/apply/
 applyEmail admin@bluestartups.com
@@ -126,6 +139,7 @@ invests $25k–$100k SAFE by stage, up to $250k with follow-on, for 2–5%
 
 id elemental
 firm Elemental Impact
+funded ~150
 x elementalimpact
 applyUrl https://elementalimpact.com/funding-opportunities/apply/
 applyEmail apply@elementalimpact.com
@@ -134,6 +148,7 @@ invests Varies: Strategy Track ~$350k, Project Track $1M–$3M, case by case
 
 id speedrun
 firm a16z speedrun
+funded ~150
 x speedrun
 applyUrl https://speedrun.a16z.com/apply
 applyEmail sr-team@a16z.com
@@ -143,6 +158,7 @@ invests Up to $1M ($500k for 10% SAFE + up to $500k in your next round)
 
 id pear
 firm PearX (Pear VC)
+funded 204
 x pearvc
 applyUrl https://pear.vc/pearx-application/
 applyEmail info@pear.vc
@@ -151,6 +167,7 @@ invests $500k–$2M, tailored per company, targeting ~7%
 
 id residency
 firm The Residency
+funded ~50
 x theresidency
 applyUrl https://apply.livetheresidency.com/apply
 applyEmail support@livetheresidency.com
@@ -159,6 +176,7 @@ invests Founder residency: $120k SAFE at a flexible cap; you pay for the residen
 
 id 16vc
 firm 16VC
+funded ~25
 x 16vchq
 applyUrl https://16vc.notion.site/16VC-Accelerator-3d02d0512c558091a17ed9a67cbb10a4
 applyEmail pitch@16vc.co
@@ -167,6 +185,7 @@ invests $200k post-money SAFE, targeting ~6%
 
 id homebrew
 firm Homebrew
+funded ~100
 x homebrew
 applyUrl https://homebrew.co
 applyEmail hunter@homebrew.co
@@ -176,6 +195,7 @@ invests $100k–$500k seed checks
 
 id marketplace
 firm Marketplace Capital
+funded ~50
 x marketplacevc
 applyUrl https://obsessedwithmarketplaces.com/founders
 applyEmail contact@marketplace.capital
@@ -184,6 +204,7 @@ invests $100k–$250k, marketplaces and network-effect businesses
 
 id darkmode
 firm DarkMode Ventures
+funded ~30
 x DarkmodeVC
 applyUrl https://darkmode.vc
 applyEmail amir@darkmode.vc
@@ -192,6 +213,7 @@ invests $150k–$250k, enterprise AI and dev tools
 
 id sarahsmith
 firm Sarah Smith Fund
+funded ~40
 x sasmith4
 applyUrl https://www.sarahsmith.fund
 applyEmail sarah@sarahsmith.fund
@@ -200,6 +222,7 @@ invests $250k+ pre-seed
 
 id grahamwalker
 firm Graham & Walker
+funded ~50
 x grahamandwalker
 applyUrl https://www.grahamwalker.com/pitch
 applyEmail team@grahamwalker.com
@@ -208,6 +231,7 @@ invests $50k–$400k
 
 id greatoaks
 firm Great Oaks VC
+funded ~300
 x GreatOaksVC
 applyUrl https://www.greatoaksvc.com
 applyEmail info@greatoaksvc.com
@@ -216,6 +240,7 @@ invests $50k–$500k, pre-seed to Series A
 
 id ridehome
 firm Ride Home Fund
+funded ~100
 x brianmcc
 applyUrl https://www.ridehomefund.com
 applyEmail brian@ridehomefund.com
@@ -224,6 +249,7 @@ invests $75k–$250k
 
 id drf
 firm Dorm Room Fund
+funded 502
 x DormRoomFund
 applyUrl https://drf.vc/apply
 applyEmail info@dormroomfund.com
@@ -232,6 +258,7 @@ invests $90k–$250k, targeting ~1.3%
 
 id sterling
 firm Sterling Road
+funded ~150
 x sterlingroadvc
 applyUrl https://apply.sterlingroad.com/
 applyEmail ash@sterlingroad.com
@@ -240,6 +267,7 @@ invests $50k first check, up to $150k; B2B, US/Canada/UK
 
 id notyet
 firm Not Yet Ventures
+funded ~100
 x azorychta
 applyUrl https://notyet.vc/pitch/
 applyEmail pitch@apply.notyet.vc
