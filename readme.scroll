@@ -824,7 +824,7 @@ script
   const bonusOpportunitySale = 1 - bonusOpportunitySaleDiscount;
   const bonusOpportunitySaleStartsAt = 1792682343407;
   const bonusOpportunitySaleName = "1776 Launchation Celebration Sale";
-  const bonusOpportunitySaleEndsAt = Date.parse("2026-11-04T19:04:00-10:00");
+  const bonusOpportunitySaleEndsAt = Date.parse("2026-11-05T11:31:00-10:00");
   const saleBonusOpportunitySale = Date.now() >= bonusOpportunitySaleStartsAt && Date.now() < bonusOpportunitySaleEndsAt ? bonusOpportunitySale : 1;
   // Every price on the site goes through salePrice. The sale state is decided once at page load.
   const salePrice = usd => Math.round(usd * saleBonusOpportunitySale * 100) / 100;
