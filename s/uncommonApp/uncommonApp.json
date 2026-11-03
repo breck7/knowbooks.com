@@ -240,16 +240,36 @@
     "invests": "$30k; prefers student founders, US only"
   },
   {
+    "id": "argon",
+    "x": "ArgonVc",
+    "firm": "Argon Ventures",
+    "applyUrl": "https://www.argon.vc",
+    "applyEmail": "info@argon.vc",
+    "basedIn": "Cambridge, MA, USA",
+    "funded": "~50",
+    "invests": "$250k–$500k pre-seed, B2B"
+  },
+  {
+    "id": "tworavens",
+    "x": "isaackato",
+    "firm": "Two Ravens",
+    "applyUrl": "https://airtable.com/appTzblALMnZZ6yGB/shr54i8eMjhbzmWfr",
+    "applyEmail": "info@tworavens.vc",
+    "basedIn": "Seattle, WA, USA",
+    "funded": "~30",
+    "invests": "$250k–$500k pre-seed"
+  },
+  {
     "id": "name",
     "ask": "Your full name",
     "field": "line",
-    "askedBy": "yc techstars 500global antler ef plugandplay masschallenge spc elemental speedrun pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet"
+    "askedBy": "yc techstars 500global antler ef plugandplay masschallenge spc elemental speedrun pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet argon tworavens"
   },
   {
     "id": "email",
     "ask": "Email",
     "field": "line",
-    "askedBy": "yc techstars 500global antler ef plugandplay masschallenge spc elemental speedrun pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet"
+    "askedBy": "yc techstars 500global antler ef plugandplay masschallenge spc elemental speedrun pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet argon tworavens"
   },
   {
     "id": "phone",
@@ -273,25 +293,25 @@
     "id": "company",
     "ask": "Company name",
     "field": "line",
-    "askedBy": "yc techstars 500global plugandplay masschallenge elemental speedrun pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet"
+    "askedBy": "yc techstars 500global plugandplay masschallenge elemental speedrun pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet argon tworavens"
   },
   {
     "id": "url",
     "ask": "Company or product URL",
     "field": "line",
-    "askedBy": "yc techstars 500global antler plugandplay masschallenge elemental speedrun pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet"
+    "askedBy": "yc techstars 500global antler plugandplay masschallenge elemental speedrun pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet argon tworavens"
   },
   {
     "id": "oneLiner",
     "ask": "Describe what you do in one sentence (50 characters is best).",
     "field": "line",
-    "askedBy": "yc 500global antler plugandplay masschallenge 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet"
+    "askedBy": "yc 500global antler plugandplay masschallenge 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet argon tworavens"
   },
   {
     "id": "stage",
     "ask": "Stage: idea, prototype, launched, revenue, preseed, seed, seriesA...",
     "field": "line",
-    "askedBy": "500global antler plugandplay masschallenge spc elemental 16vc homebrew marketplace darkmode sarahsmith grahamwalker greatoaks ridehome drf sterling notyet"
+    "askedBy": "500global antler plugandplay masschallenge spc elemental 16vc homebrew marketplace darkmode sarahsmith grahamwalker greatoaks ridehome drf sterling notyet argon tworavens"
   },
   {
     "id": "problem",
@@ -303,13 +323,13 @@
     "id": "make",
     "ask": "What are you going to make? What does it do?",
     "field": "text",
-    "askedBy": "yc techstars 500global masschallenge elemental speedrun pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet"
+    "askedBy": "yc techstars 500global masschallenge elemental speedrun pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet argon tworavens"
   },
   {
     "id": "founders",
     "ask": "Who are the founders? How did you meet, who builds the product, and is everyone full-time?",
     "field": "text",
-    "askedBy": "yc techstars 500global antler ef masschallenge elemental speedrun pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet"
+    "askedBy": "yc techstars 500global antler ef masschallenge elemental speedrun pear residency 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet argon tworavens"
   },
   {
     "id": "edge",
@@ -321,7 +341,7 @@
     "id": "progress",
     "ask": "How far along are you? Users, revenue, growth, and how long you have been at it.",
     "field": "text",
-    "askedBy": "yc techstars 500global plugandplay masschallenge elemental speedrun pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet"
+    "askedBy": "yc techstars 500global plugandplay masschallenge elemental speedrun pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet argon tworavens"
   },
   {
     "id": "whyYou",
@@ -345,7 +365,7 @@
     "id": "funding",
     "ask": "Legal entity, equity split, money raised so far, burn and runway.",
     "field": "text",
-    "askedBy": "yc techstars 500global plugandplay masschallenge elemental pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet"
+    "askedBy": "yc techstars 500global plugandplay masschallenge elemental pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet argon tworavens"
   },
   {
     "id": "ask",
@@ -363,7 +383,7 @@
     "id": "deck",
     "ask": "Pitch deck link",
     "field": "line",
-    "askedBy": "techstars 500global antler plugandplay masschallenge elemental speedrun pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet"
+    "askedBy": "techstars 500global antler plugandplay masschallenge elemental speedrun pear 16vc homebrew marketplace darkmode sarahsmith blue grahamwalker greatoaks ridehome drf sterling notyet argon tworavens"
   },
   {
     "id": "video",
