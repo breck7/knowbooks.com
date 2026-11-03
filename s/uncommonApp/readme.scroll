@@ -36,6 +36,7 @@ main
  section
   addClass hero
   h1 One application. Every accelerator.
+  <p class="hype">Free&nbsp;as&nbsp;in&nbsp;freedom<i>✦</i><a href="https://github.com/breck7/knowbooks.com/tree/main/s/uncommonApp" target="_blank" rel="noopener">Open&nbsp;source</a><i>✦</i>Public&nbsp;domain<i>✦</i>Zero&nbsp;tracking<i>✦</i>Runs&nbsp;offline</p>
   a ▶ Watch the explainer video
    href https://x.com/breckyunits/status/2116584615033135447
    target _blank
@@ -86,6 +87,7 @@ css
  dialog{max-width:720px;width:92vw;border:0;border-radius:16px;padding:24px;background:var(--paper)}dialog::backdrop{background:#0006}
  dialog label button,#closeMail{font-size:12px;border:1px solid var(--sage);background:none;border-radius:99px;padding:2px 10px;cursor:pointer}#closeMail{float:right;font-size:18px}
  #body{min-height:40vh;font:14px/1.5 ui-monospace,Menlo,monospace}
+ .hype{font:italic 600 15px/1.8 Georgia,serif;color:var(--sage);margin:0 0 14px}.hype i{color:var(--gold);font-style:normal;margin:0 10px}.hype a{color:inherit;text-decoration:none;border-bottom:1px solid var(--gold)}
  .video{display:inline-block;margin:0 0 12px;color:var(--sage);font-weight:600;text-decoration:none;border-bottom:2px solid var(--gold)}
  footer{text-align:center;padding:40px;color:var(--sage)}footer a{color:var(--sage)}
 
