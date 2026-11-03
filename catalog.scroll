@@ -16,7 +16,7 @@ signatureParser
 
 shelfAtom
  extends atomAtom
- enum believer frontier special
+ enum believer special archive
 
 shelfParser
  extends abstractStringMeasureParser
@@ -96,7 +96,7 @@ title Launch
 signature Breck & Steph
 skills live love laugh learn launch
 tools hotel food people knowbooks memories
-shelf believer special
+shelf archive
 priceUsd 2830
 coverDescription four sine-like launch waves from left to right: a nearly flat ripple, a small rise and fall, another nearly flat ripple, then a steep rise and fall
 cover
@@ -179,7 +179,7 @@ id anger
 tags psychologyTag emotionalSkillsTag
 color orange
 title Anger
-shelf frontier
+shelf believer
 priceUsd 199
 coverDescription two scowling eyebrows and eyes
 cover
@@ -206,7 +206,7 @@ id plumbing
 tags physicsTag mechanicsTag fluidsTag buildingTag measurementTag instantTag hazardTag liquidTag pressureTag
 title Plumbing
 color ocean
-shelf frontier
+shelf believer
 priceUsd 349
 coverDescription two elbow pipes one coming from left a drip of water flowing out and into the other elbow pipe leaving to right. all solids
 cover
@@ -220,7 +220,7 @@ id capital
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 color forest
 title Capital
-shelf frontier
+shelf believer
 priceUsd 699
 coverDescription four pairs of two solid circles. each pair has 1 small circle, 2 are bigger, 1 is bigger than that, 1 bigger than that. arranged in a scattered way.
 cover
@@ -239,7 +239,7 @@ id buildings
 tags economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag
 color burgundy
 title Buildings
-shelf frontier
+shelf believer
 priceUsd 299
 coverDescription a teepee, a pitched tent, and a home increasing in height from left to right, showing greater investment
 cover
@@ -280,7 +280,7 @@ id gold
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Gold
 color yellow
-shelf frontier
+shelf believer
 priceUsd 999
 cover
  portrait
@@ -338,7 +338,7 @@ id silver
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Silver
 color teal
-shelf frontier
+shelf believer
 priceUsd 899
 cover
  portrait
@@ -391,7 +391,7 @@ id bronze
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Bronze
 color navy
-shelf frontier
+shelf believer
 priceUsd 799
 coverDescription Stippled portrait supplied from the designer
 cover
@@ -462,7 +462,7 @@ cover
 id mirrors
 tags physicsTag electromagnetismTag wavesTag instantTag opticsTag measurementTag geometryTag materialsTag solidTag
 title Mirrors
-shelf frontier
+shelf believer
 priceUsd 249
 color ocean
 skills reflect aim align bounce measure
@@ -476,37 +476,37 @@ cover
 id tools
 tags mechanicsTag buildingTag instantTag hazardTag solidTag machinesTag
 title Tools
-shelf frontier
+shelf believer
 priceUsd 249
 
 id gravity
 tags physicsTag mechanicsTag measurementTag instantTag energyTag spaceTag motionTag
 title Gravity
-shelf frontier
+shelf believer
 priceUsd 249
 
 id sound
 tags physicsTag wavesTag measurementTag creativeTag instantTag energyTag musicTag cyclesTag
 title Sound
-shelf frontier
+shelf believer
 priceUsd 249
 
 id air
 tags physicsTag materialsTag fluidsTag natureTag instantTag gasTag pressureTag
 title Air
-shelf frontier
+shelf believer
 priceUsd 249
 
 id heat
 tags physicsTag chemistryTag fluidsTag measurementTag instantTag hazardTag combustionTag energyTag temperatureTag
 title Heat
-shelf frontier
+shelf believer
 priceUsd 249
 
 id glass
 tags physicsTag chemistryTag materialsTag electromagnetismTag wavesTag instantTag hazardTag solidTag opticsTag
 title Glass
-shelf frontier
+shelf believer
 priceUsd 249
 coverDescription a magnifying glass with a circular glass lens and a short handle
 cover
@@ -516,7 +516,7 @@ cover
 id lasers
 tags physicsTag electromagnetismTag wavesTag energyTag instantTag opticsTag measurementTag machinesTag hazardTag
 title Lasers
-shelf frontier
+shelf believer
 priceUsd 349
 color coral
 skills focus aim measure amplify cut
@@ -534,31 +534,31 @@ cover
 id plastics
 tags materialsTag solidTag
 title Plastics
-shelf frontier
+shelf believer
 priceUsd 249
 
 id cells
 tags chemistryTag biologyTag growthTag
 title Cells
-shelf frontier
+shelf believer
 priceUsd 299
 
 id iron
 tags physicsTag chemistryTag materialsTag instantTag solidTag metalTag
 title Iron
-shelf frontier
+shelf believer
 priceUsd 249
 
 id elements
 tags physicsTag chemistryTag materialsTag instantTag
 title Elements
-shelf frontier
+shelf believer
 priceUsd 249
 
 id copper
 tags physicsTag chemistryTag materialsTag electricityTag electromagnetismTag instantTag solidTag metalTag
 title Copper
-shelf frontier
+shelf believer
 priceUsd 249
 
 // venture capital
@@ -566,7 +566,7 @@ priceUsd 249
 id venture
 tags economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag startupsTag communicationTag
 title Venture
-shelf frontier
+shelf believer
 priceUsd 10000
 
 // fed
@@ -574,13 +574,13 @@ priceUsd 10000
 id banking
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 title Banking
-shelf frontier
+shelf believer
 priceUsd 1999
 
 id sleep
 tags biologyTag psychologyTag measurementTag longTermTag healthTag timeTag cyclesTag
 title Sleep
-shelf frontier
+shelf believer
 priceUsd 499
 
 // electromagnetic and other fields
@@ -588,31 +588,31 @@ priceUsd 499
 id fields
 tags physicsTag electricityTag electromagnetismTag wavesTag instantTag
 title Fields
-shelf frontier
+shelf believer
 priceUsd 249
 
 id energy
 tags physicsTag electricityTag measurementTag instantTag combustionTag energyTag temperatureTag
 title Energy
-shelf frontier
+shelf believer
 priceUsd 249
 
 id frequency
 tags physicsTag wavesTag measurementTag instantTag cyclesTag
 title Frequency
-shelf frontier
+shelf believer
 priceUsd 299
 
 id waves
 tags physicsTag electromagnetismTag wavesTag measurementTag instantTag energyTag cyclesTag
 title Waves
-shelf frontier
+shelf believer
 priceUsd 299
 
 id helices
 tags physicsTag buildingTag cyclesTag geometryTag
 title Helices
-shelf frontier
+shelf believer
 priceUsd 299
 
 // the coiled machine
@@ -620,37 +620,37 @@ priceUsd 299
 id springs
 tags physicsTag materialsTag mechanicsTag buildingTag measurementTag instantTag solidTag energyTag machinesTag cyclesTag motionTag
 title Springs
-shelf frontier
+shelf believer
 priceUsd 249
 
 id voltage
 tags physicsTag electricityTag electromagnetismTag measurementTag instantTag hazardTag energyTag
 title Voltage
-shelf frontier
+shelf believer
 priceUsd 249
 
 id wires
 tags physicsTag electricityTag electromagnetismTag measurementTag instantTag hazardTag energyTag
 title Wires
-shelf frontier
+shelf believer
 priceUsd 249
 
 id motors
 tags physicsTag mechanicsTag electricityTag electromagnetismTag buildingTag instantTag hazardTag energyTag machinesTag cyclesTag motionTag
 title Motors
-shelf frontier
+shelf believer
 priceUsd 249
 
 id gears
 tags physicsTag mechanicsTag buildingTag instantTag machinesTag cyclesTag motionTag geometryTag
 title Gears
-shelf frontier
+shelf believer
 priceUsd 249
 
 id colors
 tags physicsTag electromagnetismTag wavesTag creativeTag instantTag opticsTag
 title Colors
-shelf frontier
+shelf believer
 priceUsd 249
 coverDescription a prism splitting a beam of light into a fan of rays
 cover
@@ -664,55 +664,55 @@ cover
 id matter
 tags physicsTag chemistryTag materialsTag instantTag solidTag
 title Matter
-shelf frontier
+shelf believer
 priceUsd 249
 
 id atoms
 tags physicsTag chemistryTag nuclearTag
 title Atoms
-shelf frontier
+shelf believer
 priceUsd 249
 
 id motion
 tags physicsTag mechanicsTag measurementTag instantTag energyTag motionTag
 title Motion
-shelf frontier
+shelf believer
 priceUsd 249
 
 id momentum
 tags physicsTag mechanicsTag measurementTag instantTag energyTag spaceTag motionTag
 title Momentum
-shelf frontier
+shelf believer
 priceUsd 249
 
 id friction
 tags physicsTag mechanicsTag measurementTag instantTag solidTag energyTag motionTag
 title Friction
-shelf frontier
+shelf believer
 priceUsd 249
 
 id ropes
 tags physicsTag mechanicsTag buildingTag instantTag machinesTag cyclesTag
 title Ropes
-shelf frontier
+shelf believer
 priceUsd 249
 
 id wind
 tags physicsTag mechanicsTag fluidsTag natureTag measurementTag instantTag gasTag energyTag pressureTag
 title Wind
-shelf frontier
+shelf believer
 priceUsd 249
 
 id aerodynamics
 tags physicsTag mechanicsTag fluidsTag measurementTag instantTag gasTag pressureTag flightTag motionTag
 title Aerodynamics
-shelf frontier
+shelf believer
 priceUsd 249
 
 id water
 tags physicsTag chemistryTag materialsTag fluidsTag natureTag measurementTag instantTag liquidTag pressureTag
 title Water
-shelf frontier
+shelf believer
 priceUsd 249
 
 id buoyancy
@@ -734,55 +734,55 @@ cover
 id rust
 tags physicsTag chemistryTag materialsTag longTermTag metalTag timeTag
 title Rust
-shelf frontier
+shelf believer
 priceUsd 249
 
 id time
 tags measurementTag timeTag cyclesTag
 title Time
-shelf frontier
+shelf believer
 priceUsd 249
 
 id patience
 tags psychologyTag longTermTag timeTag emotionalSkillsTag
 title Patience
-shelf frontier
+shelf believer
 priceUsd 249
 
 id centuries
 tags natureTag measurementTag longTermTag timeTag
 title Centuries
-shelf frontier
+shelf believer
 priceUsd 249
 
 id liberty
 tags economicsTag psychologyTag multiplePeopleTag socialTag
 title Liberty
-shelf frontier
+shelf believer
 priceUsd 249
 
 id courage
 tags psychologyTag emotionalSkillsTag
 title Courage
-shelf frontier
+shelf believer
 priceUsd 249
 
 id property
 tags economicsTag multiplePeopleTag financeTag businessTag
 title Property
-shelf frontier
+shelf believer
 priceUsd 399
 
 id membranes
 tags physicsTag chemistryTag biologyTag materialsTag fluidsTag instantTag liquidTag
 title Membranes
-shelf frontier
+shelf believer
 priceUsd 249
 
 id decay
 tags chemistryTag biologyTag natureTag longTermTag timeTag
 title Decay
-shelf frontier
+shelf believer
 priceUsd 299
 
 // chemical and other bonds
@@ -790,25 +790,25 @@ priceUsd 299
 id bonds
 tags physicsTag chemistryTag materialsTag
 title Bonds
-shelf frontier
+shelf believer
 priceUsd 249
 
 id teamwork
 tags psychologyTag multiplePeopleTag startupsTag communicationTag cooperationTag socialTag
 title Teamwork
-shelf frontier
+shelf believer
 priceUsd 249
 
 id motivation
 tags psychologyTag longTermTag startupsTag emotionalSkillsTag
 title Motivation
-shelf frontier
+shelf believer
 priceUsd 249
 
 id competition
 tags economicsTag psychologyTag multiplePeopleTag businessTag startupsTag socialTag
 title Competition
-shelf frontier
+shelf believer
 priceUsd 249
 
 // benefits of rowing in sync.
@@ -816,61 +816,61 @@ priceUsd 249
 id alignment
 tags psychologyTag multiplePeopleTag cooperationTag socialTag
 title Alignment
-shelf frontier
+shelf believer
 priceUsd 249
 
 id collusion
 tags economicsTag psychologyTag multiplePeopleTag businessTag cooperationTag socialTag
 title Collusion
-shelf frontier
+shelf believer
 priceUsd 249
 
 id paper
 tags plantTag materialsTag buildingTag creativeTag instantTag solidTag
 title Paper
-shelf frontier
+shelf believer
 priceUsd 249
 
 id ink
 tags chemistryTag materialsTag buildingTag creativeTag instantTag liquidTag communicationTag
 title Ink
-shelf frontier
+shelf believer
 priceUsd 249
 
 id folding
 tags materialsTag buildingTag creativeTag instantTag solidTag geometryTag
 title Folding
-shelf frontier
+shelf believer
 priceUsd 249
 
 id metals
 tags physicsTag chemistryTag materialsTag instantTag solidTag metalTag
 title Metals
-shelf frontier
+shelf believer
 priceUsd 249
 
 id steel
 tags physicsTag chemistryTag materialsTag instantTag solidTag metalTag
 title Steel
-shelf frontier
+shelf believer
 priceUsd 249
 
 id aluminum
 tags physicsTag chemistryTag materialsTag instantTag solidTag metalTag
 title Aluminum
-shelf frontier
+shelf believer
 priceUsd 249
 
 id brass
 tags physicsTag chemistryTag materialsTag instantTag solidTag metalTag
 title Brass
-shelf frontier
+shelf believer
 priceUsd 249
 
 id metalworking
 tags physicsTag materialsTag mechanicsTag buildingTag hazardTag solidTag metalTag machinesTag
 title Metalworking
-shelf frontier
+shelf believer
 priceUsd 699
 color ocean
 skills forge weld grind polish sharpen
@@ -882,31 +882,31 @@ cover
 id wood
 tags plantTag materialsTag buildingTag instantTag solidTag
 title Wood
-shelf frontier
+shelf believer
 priceUsd 249
 
 id seeds
 tags biologyTag plantTag natureTag longTermTag growthTag timeTag
 title Seeds
-shelf frontier
+shelf believer
 priceUsd 249
 
 id wheels
 tags physicsTag mechanicsTag buildingTag instantTag machinesTag cyclesTag motionTag
 title Wheels
-shelf frontier
+shelf believer
 priceUsd 249
 
 id wedges
 tags physicsTag mechanicsTag buildingTag instantTag hazardTag solidTag machinesTag
 title Wedges
-shelf frontier
+shelf believer
 priceUsd 249
 
 id stars
 tags physicsTag wavesTag natureTag measurementTag temperatureTag opticsTag nuclearTag spaceTag
 title Stars
-shelf frontier
+shelf believer
 priceUsd 249
 coverDescription a bright four-pointed star with a round center
 cover
@@ -917,61 +917,61 @@ cover
 id exploration
 tags natureTag explorationTag
 title Exploration
-shelf frontier
+shelf believer
 priceUsd 249
 
 id fabric
 tags plantTag materialsTag buildingTag creativeTag instantTag
 title Fabric
-shelf frontier
+shelf believer
 priceUsd 249
 
 id food
 tags chemistryTag biologyTag plantTag materialsTag hazardTag energyTag nutritionTag healthTag
 title Food
-shelf frontier
+shelf believer
 priceUsd 249
 
 id trees
 tags biologyTag plantTag natureTag longTermTag growthTag
 title Trees
-shelf frontier
+shelf believer
 priceUsd 249
 
 id breath
 tags biologyTag fluidsTag measurementTag instantTag gasTag pressureTag healthTag cyclesTag
 title Breath
-shelf frontier
+shelf believer
 priceUsd 249
 
 id smell
 tags chemistryTag biologyTag instantTag gasTag
 title Smell
-shelf frontier
+shelf believer
 priceUsd 349
 
 id rain
 tags physicsTag fluidsTag natureTag measurementTag gasTag liquidTag temperatureTag cyclesTag
 title Rain
-shelf frontier
+shelf believer
 priceUsd 249
 
 id budgeting
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 title Budgeting
-shelf frontier
+shelf believer
 priceUsd 249
 
 id bookkeeping
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 title Bookkeeping
-shelf frontier
+shelf believer
 priceUsd 299
 
 id screws
 tags physicsTag mechanicsTag buildingTag instantTag hazardTag solidTag machinesTag cyclesTag geometryTag
 title Screws
-shelf frontier
+shelf believer
 priceUsd 249
 
 // aka wrinkles/steaming
@@ -979,25 +979,25 @@ priceUsd 249
 id ironing
 tags physicsTag plantTag materialsTag instantTag hazardTag gasTag energyTag temperatureTag
 title Ironing
-shelf frontier
+shelf believer
 priceUsd 199
 
 id payroll
 tags economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag startupsTag cooperationTag
 title Payroll
-shelf frontier
+shelf believer
 priceUsd 299
 
 id batteries
 tags physicsTag chemistryTag electricityTag electromagnetismTag buildingTag measurementTag instantTag hazardTag energyTag
 title Batteries
-shelf frontier
+shelf believer
 priceUsd 299
 
 id software
 tags computingTag buildingTag creativeTag instantTag startupsTag communicationTag
 title Software
-shelf frontier
+shelf believer
 priceUsd 599
 
 // the language/software
@@ -1005,115 +1005,115 @@ priceUsd 599
 id scroll
 tags computingTag buildingTag creativeTag instantTag communicationTag
 title Scroll
-shelf frontier
+shelf believer
 priceUsd 499
 
 id marketing
 tags economicsTag psychologyTag creativeTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag socialTag
 title Marketing
-shelf frontier
+shelf believer
 priceUsd 1499
 
 id hydration
 tags biologyTag fluidsTag measurementTag liquidTag nutritionTag healthTag
 title Hydration
-shelf frontier
+shelf believer
 priceUsd 249
 
 id hurricanes
 tags physicsTag mechanicsTag fluidsTag natureTag measurementTag hazardTag gasTag pressureTag cyclesTag
 title Hurricanes
-shelf frontier
+shelf believer
 priceUsd 399
 
 id currency
 tags economicsTag measurementTag financeTag
 title Currency
-shelf frontier
+shelf believer
 priceUsd 799
 
 id bitcoin
 tags economicsTag computingTag measurementTag financeTag
 title Bitcoin
-shelf frontier
+shelf believer
 priceUsd 899
 
 id guitar
 tags physicsTag wavesTag buildingTag creativeTag instantTag musicTag cyclesTag
 title Guitar
-shelf frontier
+shelf believer
 priceUsd 599
 
 id piano
 tags physicsTag wavesTag buildingTag creativeTag instantTag musicTag cyclesTag
 title Piano
-shelf frontier
+shelf believer
 priceUsd 599
 
 id drums
 tags physicsTag wavesTag buildingTag creativeTag instantTag musicTag cyclesTag
 title Drums
-shelf frontier
+shelf believer
 priceUsd 599
 
 id singing
 tags physicsTag wavesTag creativeTag instantTag musicTag cyclesTag
 title Singing
-shelf frontier
+shelf believer
 priceUsd 599
 
 id matrices
 tags mathTag physicsTag computingTag
 title Matrices
-shelf frontier
+shelf believer
 priceUsd 800
 
 id actuators
 tags physicsTag mechanicsTag electricityTag electromagnetismTag buildingTag instantTag hazardTag machinesTag motionTag
 title Actuators
-shelf frontier
+shelf believer
 priceUsd 1499
 
 id rockets
 tags physicsTag mechanicsTag fluidsTag buildingTag measurementTag gasTag energyTag pressureTag flightTag spaceTag motionTag
 title Rockets
-shelf frontier
+shelf believer
 priceUsd 1969
 
 id transistors
 tags physicsTag computingTag electricityTag electromagnetismTag buildingTag instantTag
 title Transistors
-shelf frontier
+shelf believer
 priceUsd 1499
 
 id ibuprofen
 tags medicineTag chemistryTag biologyTag healthTag
 title Ibuprofen
-shelf frontier
+shelf believer
 priceUsd 449
 
 id ivermectin
 tags medicineTag chemistryTag biologyTag healthTag
 title Ivermectin
-shelf frontier
+shelf believer
 priceUsd 849
 
 id mitochondria
 tags chemistryTag biologyTag energyTag nutritionTag healthTag
 title Mitochondria
-shelf frontier
+shelf believer
 priceUsd 1499
 
 id cancer
 tags chemistryTag biologyTag longTermTag hazardTag growthTag healthTag
 title Cancer
-shelf frontier
+shelf believer
 priceUsd 1499
 
 id fusion
 tags physicsTag hazardTag energyTag temperatureTag nuclearTag
 title Fusion
-shelf frontier
+shelf believer
 priceUsd 1499
 
 // aka parenting
@@ -1121,7 +1121,7 @@ priceUsd 1499
 id raising
 tags biologyTag psychologyTag longTermTag multiplePeopleTag growthTag healthTag communicationTag cooperationTag timeTag emotionalSkillsTag parentingTag familyTag socialTag
 title Raising
-shelf frontier
+shelf believer
 priceUsd 1921
 
 // aka dating
@@ -1129,55 +1129,55 @@ priceUsd 1921
 id attraction
 tags psychologyTag longTermTag multiplePeopleTag communicationTag emotionalSkillsTag datingTag familyTag matingTag socialTag
 title Attraction
-shelf frontier
+shelf believer
 priceUsd 699
 
 id basketball
 tags mechanicsTag instantTag longTermTag multiplePeopleTag communicationTag cooperationTag motionTag sportsTag teamSportsTag ballSportsTag
 title Basketball
-shelf frontier
+shelf believer
 priceUsd 3323
 
 id football
 tags mechanicsTag instantTag longTermTag multiplePeopleTag communicationTag cooperationTag motionTag sportsTag teamSportsTag ballSportsTag
 title Football
-shelf frontier
+shelf believer
 priceUsd 2837
 
 id soccer
 tags mechanicsTag instantTag longTermTag multiplePeopleTag communicationTag cooperationTag motionTag sportsTag teamSportsTag ballSportsTag
 title Soccer
-shelf frontier
+shelf believer
 priceUsd 1023
 
 id boxing
 tags mechanicsTag instantTag longTermTag multiplePeopleTag motionTag sportsTag combatSportsTag individualSportsTag
 title Boxing
-shelf frontier
+shelf believer
 priceUsd 4956
 
 id chimps
 tags animalsTag biologyTag
 title Chimps
-shelf frontier
+shelf believer
 priceUsd 699
 
 id dolphins
 tags animalsTag biologyTag
 title Dolphins
-shelf frontier
+shelf believer
 priceUsd 750
 
 id golf
 tags mechanicsTag instantTag longTermTag motionTag sportsTag ballSportsTag individualSportsTag
 title Golf
-shelf frontier
+shelf believer
 priceUsd 1518
 
 id baseball
 tags mechanicsTag instantTag longTermTag multiplePeopleTag communicationTag cooperationTag motionTag sportsTag teamSportsTag ballSportsTag
 title Baseball
-shelf frontier
+shelf believer
 priceUsd 406
 
 // Fluids / Navier–Stokes
@@ -1185,25 +1185,25 @@ priceUsd 406
 id flow
 tags physicsTag mechanicsTag fluidsTag measurementTag instantTag gasTag liquidTag pressureTag
 title Flow
-shelf frontier
+shelf believer
 priceUsd 1499
 
 id gluons
 tags physicsTag nuclearTag
 title Gluons
-shelf frontier
+shelf believer
 priceUsd 1499
 
 id bosons
 tags physicsTag nuclearTag
 title Bosons
-shelf frontier
+shelf believer
 priceUsd 1499
 
 id solar
 tags physicsTag electricityTag electromagnetismTag wavesTag natureTag buildingTag measurementTag instantTag hazardTag energyTag temperatureTag opticsTag
 title Solar
-shelf frontier
+shelf believer
 priceUsd 10000
 coverDescription a sun shining onto a tilted solar panel
 cover
@@ -1224,7 +1224,7 @@ cover
 id neurons
 tags neuroscienceTag biologyTag healthTag
 title Neurons
-shelf frontier
+shelf believer
 priceUsd 799
 
 // Partner onboarding: purchase includes the initial conversation.
@@ -1248,7 +1248,7 @@ description 1 root level folder on WWS for 10 years. Unlimited subdomains.
 
 id bitokens
 title Bitokens
-shelf special
+shelf archive
 priceUsd 1000
 color navy
 description 100 bitokens. Can be used to pay for both input and output tokens. Send prompts to bi@knowbooks.com.
@@ -1310,7 +1310,7 @@ cover
 id titanium
 tags physicsTag chemistryTag materialsTag buildingTag instantTag solidTag metalTag flightTag spaceTag machinesTag
 title Titanium
-shelf frontier
+shelf believer
 priceUsd 699
 color ocean
 skills mine smelt alloy forge weld machine
@@ -1323,7 +1323,7 @@ cover
 id watches
 tags measurementTag mechanicsTag timeTag metalTag machinesTag geometryTag
 title Watches
-shelf frontier
+shelf believer
 priceUsd 1509
 color navy
 skills measure time regulate calibrate service
@@ -1340,7 +1340,7 @@ cover
 id stone
 tags physicsTag chemistryTag materialsTag buildingTag measurementTag longTermTag natureTag solidTag geometryTag
 title Stone
-shelf frontier
+shelf believer
 priceUsd 349
 skills quarry cut carve chip stack build
 tools chisel mallet wedge level trowel hammer
