@@ -16,7 +16,7 @@ signatureParser
 
 shelfAtom
  extends atomAtom
- enum believer special archive
+ enum launchation believer special archive
 
 shelfParser
  extends abstractStringMeasureParser
@@ -84,6 +84,13 @@ tagsParser
 // data
 
 // new product launches
+
+id kog
+title KOG
+shelf launchation
+priceUsd 99
+color forest
+description KOG — Knowbooks OG. For those who can't make it to Launchation at Turtle Bay in person. A t-shirt from Cotton Bureau. A 10 year membership to World Wide Scroll. A chance to tell one of our founders, over the phone, your best ideas or worst insults.
 
 id launch
 description VIP Launchation Package. Oahu, Hawaii. November 4-6 2026. Airfare not included. Some regular rooms remain, visit Launchation.com to book.

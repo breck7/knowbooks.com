@@ -894,9 +894,9 @@ script
   const editionNameByShelf = {
    believer: "Believer"
   };
-  const shelfOrder = ["believer", "special", "archive"];
-  const plainShelves = { special: "Special items", archive: "Archive" };
-  const collapsedEditions = new Set(["special", "archive"]);
+  const shelfOrder = ["launchation", "believer", "special", "archive"];
+  const plainShelves = { launchation: "Launchation", special: "Special items", archive: "Archive" };
+  const collapsedEditions = new Set(["believer", "special", "archive"]);
   const cart = new Map();
   const grid = document.querySelector("#product-grid");
   const preview = document.querySelector(".book-preview");
@@ -1057,7 +1057,7 @@ script
    [...cart].forEach(([id, quantity], index) => {
     const product = products.get(id);
     const number = index + 1;
-    url.searchParams.set(`item_name_${number}`, `${product.title}${product.shelf === "special" && product.id !== "knowbook" ? "" : " Knowbook"}${product.id === "knowbook" ? " + initial partner conversation" : ""}${pickupNote(product) ? " — in-person pickup only; no shipping" : ""}${product.note ? ` — Instructions: ${product.note}` : ""}${referralCode ? ` (Referral: ${referralCode})` : ""}`);
+    url.searchParams.set(`item_name_${number}`, `${product.title}${plainShelves[product.shelf] && product.id !== "knowbook" ? "" : " Knowbook"}${product.id === "knowbook" ? " + initial partner conversation" : ""}${pickupNote(product) ? " — in-person pickup only; no shipping" : ""}${product.note ? ` — Instructions: ${product.note}` : ""}${referralCode ? ` (Referral: ${referralCode})` : ""}`);
     url.searchParams.set(`item_number_${number}`, product.id);
     url.searchParams.set(`amount_${number}`, Number(product.priceUsd).toFixed(2));
     url.searchParams.set(`quantity_${number}`, String(quantity));
