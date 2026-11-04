@@ -861,7 +861,7 @@ script
   const productCatalog = (Array.isArray(catalog) ? catalog : []).map(product => {
    const color = product.color?.trim().toLowerCase();
    if (color && !Object.hasOwn(coverPalette, color)) throw new Error(`Unknown cover color "${product.color}" for ${product.id}`);
-   return { ...product, listPriceUsd: product.priceUsd, priceUsd: salePrice(product.priceUsd), coverColor: color ? coverPalette[color] : coverColors[nextCoverColor++ % coverColors.length] };
+   return { ...product, listPriceUsd: 2 ** product.priceExponent, priceUsd: salePrice(2 ** product.priceExponent), coverColor: color ? coverPalette[color] : coverColors[nextCoverColor++ % coverColors.length] };
   });
   const products = new Map(productCatalog.map(product => [product.id, product]));
   const productTags = new Map(productCatalog.map(product => [product.id, new Set((product.tags || "").split(/\s+/).filter(Boolean))]));
