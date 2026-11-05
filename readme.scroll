@@ -87,10 +87,10 @@ css
  .designer-head h2 { margin: 0; font-size: 26px; font-weight: normal; }
  #design-close { border: 0; background: none; font-size: 28px; }
  .design-spread { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
- .design-cover { background: linear-gradient(90deg, #0000 20%, #0006 20%, #0000 23.5%), linear-gradient(90deg, var(--ls), var(--lc) 2%, var(--lc) 19.4%, var(--ls) 20%, #0000 20%), var(--wood) 0 0 / 100% 100%; color: #dcb985; text-shadow: 0 1px 1px #0009; border-radius: 4px 3px 3px 4px; box-shadow: 5px 5px 12px #0003; padding: 16px 12px 12px 24%; text-align: center; aspect-ratio: .5; max-width: 250px; margin: auto; }
- #design-title { font: 21px/1.2 Georgia, serif; min-height: 29px; overflow-wrap: anywhere; margin: 0 0 10px; }
- .design-signature-wrap { position: relative; display: block; margin: -2px 0 6px; }
- #design-signature { display: block; width: 100%; padding: 3px; border: 0; background: transparent; color: inherit; text-align: center; font: 400 17px/1.15 Georgia, serif; }
+ .design-cover { background: linear-gradient(90deg, #0000 20%, #0006 20%, #0000 23.5%), linear-gradient(90deg, var(--ls), var(--lc) 2%, var(--lc) 19.4%, var(--ls) 20%, #0000 20%), var(--wood) 0 0 / 100% 100%; color: #dcb985; text-shadow: 0 1px 1px #0009; border-radius: 4px 3px 3px 4px; box-shadow: 5px 5px 12px #0003; position: relative; container-type: inline-size; text-align: center; aspect-ratio: .5; max-width: 250px; margin: auto; }
+ #design-title { position: absolute; left: 27%; right: 7%; top: 6.8%; font: 9cqw/1.2 Georgia, serif; overflow-wrap: anywhere; margin: 0; }
+ .design-signature-wrap { position: absolute; left: 27%; right: 7%; top: 13%; height: 11.3cqw; display: block; }
+ #design-signature { display: block; width: 100%; padding: 3px; border: 0; background: transparent; color: inherit; text-align: center; font: 400 6cqw/1.15 Georgia, serif; }
  #design-signature::placeholder { color: inherit; opacity: .7; }
  #design-signature-art { position: absolute; inset: 0; display: block; padding: 3px; pointer-events: none; }
  #design-signature-art svg { display: block; width: 100%; height: 100%; }
@@ -100,14 +100,14 @@ css
  [data-edit-design] { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; text-align: left; }
  [data-edit-design]:hover { text-decoration: underline; }
  .design-actions { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 6px 0; }
- .book-signature { display: block; margin-top: 5px; }
- .book-signature svg { display: block; width: 100%; height: 26px; }
+ .book-signature { position: absolute; left: 27%; right: 7%; top: 13%; }
+ .book-signature svg { display: block; width: 100%; height: 11.3cqw; }
  #design-title:focus { outline: 1px dashed var(--gold); }
  .design-cover svg { display: block; width: 100%; touch-action: none; cursor: crosshair; }
- #design-art { height: clamp(110px, 27dvh, 210px); }
+ #design-art { position: absolute; left: 41%; top: 40.5%; width: 38%; }
  #design-code-status { color: #b42318; white-space: pre-line; }
  .design-cover .strokes { fill: none; stroke: currentColor; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; pointer-events: stroke; }
- .design-cover > span { display: block; margin-top: 10px; font: 10px Arial, sans-serif; letter-spacing: .25em; }
+ .design-cover > span { position: absolute; left: 27%; right: 7%; bottom: 5%; font: 3cqw/1 Arial, sans-serif; letter-spacing: .25em; }
  #design-colors, #design-woods { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 6px; justify-content: center; }
  #design-colors button, #design-woods button { width: 20px; height: 40px; padding: 0; border: 0; border-radius: 2px; cursor: pointer; }
  #design-colors button { background: linear-gradient(90deg, var(--ls), var(--lc) 20%, var(--lc) 80%, var(--ls)); }
@@ -143,8 +143,6 @@ css
   .design-inside h3 { grid-column: 2; grid-row: 1; align-self: start; font-size: 20px; }
   #design-experiments { grid-column: 2; grid-row: 1; }
   .design-inside > p, #design-add { grid-column: 1 / -1; margin: 0; }
-  .design-cover { padding: 12px 8px 8px; } #design-title { font-size: 18px; margin-bottom: 4px; }
-  #design-signature { font-size: 19px; } #design-art { height: 100px; }
   #design-colors, #design-woods { gap: 5px; margin: 8px 0 4px; } #design-colors button, #design-woods button { width: 14px; height: 28px; }
   .design-tools { gap: 2px 8px; font-size: 11px; } #design-marker { gap: 3px; } #design-marker svg { width: 24px; }
  }
@@ -290,7 +288,7 @@ css
  .edition-toggle[aria-expanded="true"] h2::before { content: "▾"; }
  .edition-divider p { margin: 0; color: var(--muted); white-space: nowrap; text-transform: uppercase; font: 700 14px/1.2 Arial, sans-serif; letter-spacing: .06em; }
  .product { min-width: 0; padding: clamp(20px, 2vw, 28px); background: var(--paper); }
- .book-cover { position: relative; isolation: isolate; aspect-ratio: .5; display: flex; flex-direction: column; align-items: center; padding: 11% 7% 9% 27%; overflow: hidden; color: #dcb985; text-shadow: 0 1px 1px #0009; background:
+ .book-cover { position: relative; isolation: isolate; aspect-ratio: .5; display: flex; flex-direction: column; align-items: center; container-type: inline-size; overflow: hidden; color: #dcb985; text-shadow: 0 1px 1px #0009; background:
   linear-gradient(90deg, #0000 20%, #0006 20%, #0000 23.5%),
   linear-gradient(90deg, var(--ls), var(--lc) 2%, var(--lc) 19.4%, var(--ls) 20%, #0000 20%),
   var(--wood) 0 0 / 100% 100%;
@@ -298,11 +296,11 @@ css
  .book-cover::after { content: ""; position: absolute; z-index: -1; inset: 0 auto 0 0; width: 20%; background: linear-gradient(#ffffff14, #0000 20%, #0000 80%, #0003), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.4 .42'/%3E%3C/filter%3E%3Crect width='60' height='60' filter='url(%23p)'/%3E%3C/svg%3E") 0 0 / 24px 24px; pointer-events: none; }
  .product:hover .book-cover { transform: translateY(-5px) rotate(-.5deg); }
  .book-cover::before { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(112deg, #fff0 20%, #ffffff24 40%, #fff0 56%, #fff0 70%, #ffffff12 82%, #fff0 92%), linear-gradient(#fff1, #0000 30%, #0002); box-shadow: inset -2px -2px 0 #0003, inset 1px 1px 0 #fff2; }
- .book-cover h3 { width: 100%; margin: 4% 0 0; white-space: nowrap; text-align: center; text-transform: uppercase; font-family: "Avenir Next", Futura, "Gill Sans", sans-serif; font-size: clamp(17px, 1.8vw, 26px); font-weight: 400; letter-spacing: .14em; }
+ .book-cover h3 { position: absolute; left: 27%; right: 7%; top: 6.8%; margin: 0; white-space: nowrap; text-align: center; text-transform: uppercase; font-family: "Avenir Next", Futura, "Gill Sans", sans-serif; font-size: 7.4cqw; font-weight: 400; letter-spacing: .14em; }
  .book-symbol { position: absolute; left: 60%; top: 50%; width: 38%; aspect-ratio: 1; transform: translate(-50%, -50%); pointer-events: none; }
  .book-symbol svg { display: block; width: 100%; height: 100%; }
  .book-cover a { text-decoration: none; }
- .book-brand { margin-top: auto; text-transform: uppercase; font: 600 7px/1 Arial, sans-serif; letter-spacing: .22em; }
+ .book-brand { position: absolute; left: 27%; right: 7%; bottom: 5%; text-align: center; text-transform: uppercase; font: 600 3cqw/1 Arial, sans-serif; letter-spacing: .22em; }
  .book-preview { position: fixed; z-index: 30; inset: 0; background: rgba(23,23,20,.55); opacity: 0; visibility: hidden; transition: opacity 250ms, visibility 250ms; }
  .book-preview.is-open { opacity: 1; visibility: visible; }
  .preview-book { position: absolute; left: 50%; top: 50%; width: min(320px, 42vw, 62svh); aspect-ratio: .5; translate: 0 -50%; transform: translate(var(--x), var(--y)) scale(var(--scale)); transition: transform 450ms cubic-bezier(.2,.8,.2,1); perspective: 1400px; }
@@ -358,7 +356,7 @@ css
  .cart-lines { overflow-y: auto; min-height: 90px; flex: 1 0 auto; }
  .cart-line { display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 15px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
  .line-swatch, .basket-book { position: relative; width: var(--mini-width, 54px); aspect-ratio: .5; }
- .line-swatch .book-cover, .basket-book .book-cover { position: absolute; width: 270px; padding: 29.7px 24.3px; transform: scale(var(--book-scale, .2)); transform-origin: top left; pointer-events: none; }
+ .line-swatch .book-cover, .basket-book .book-cover { position: absolute; width: 270px; transform: scale(var(--book-scale, .2)); transform-origin: top left; pointer-events: none; }
  .line-copy h3 { margin: 0 0 6px; font-size: 18px; font-weight: 400; }
  .line-copy p { margin: 0; color: var(--muted); font: 12px/1 Arial, sans-serif; }
  .quantity { display: flex; align-items: center; gap: 8px; }
@@ -1059,7 +1057,7 @@ script
      title.style.removeProperty("font-size");
      if (title.scrollWidth > title.clientWidth) {
       const baseSize = Number.parseFloat(getComputedStyle(title).fontSize);
-      title.style.fontSize = `${baseSize * title.clientWidth / title.scrollWidth}px`;
+      title.style.fontSize = `${100 * baseSize * title.clientWidth / title.scrollWidth / title.closest('.book-cover').clientWidth}cqw`;
      }
     });
    });
