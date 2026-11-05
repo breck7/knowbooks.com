@@ -909,7 +909,7 @@ script
   try { loadReferral = (new URLSearchParams(location.search).get("r") || localStorage.getItem("knowbooks-referral") || "").trim().toLowerCase(); } catch {}
   const referralFactor = 1 - referralPercent(loadReferral) / 100;
   const shippingByShelf = {
-   believer: "Ship within 6 months"
+   believer: "Ships before Christmas"
   };
   const editionNameByShelf = {
    believer: "Believer"
