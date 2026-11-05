@@ -128,7 +128,7 @@ css
  #design-experiments input { display: block; margin: 4px 0; width: 100%; min-width: 0; padding: 6px; border: 1px solid var(--line); border-radius: 4px; background: #fff8; font: inherit; }
  .design-price { font: 30px Georgia, serif; margin: 14px 0 8px; }
  .design-price label { display: inline-flex; align-items: baseline; gap: 4px; }
- .design-price input { width: 4.6em; padding: 2px 6px; border: 1px solid var(--line); border-radius: 4px; background: #fff8; font: inherit; color: var(--ink); }
+ .design-price button { width: 1.3em; height: 1.3em; padding: 0; border: 1px solid var(--line); border-radius: 4px; background: #fff8; font: inherit; line-height: 1; color: var(--ink); cursor: pointer; }
  .design-price small { display: inline !important; font: 13px Arial, sans-serif; }
  #design-add { width: 100%; padding: 12px; border: 0; border-radius: 5px; color: white; background: #243d32; font-weight: bold; cursor: pointer; }
  #design-status { font-size: 12px; }
@@ -808,7 +808,7 @@ aside
  <div id="design-woods" role="group" aria-label="Wood"></div>
  <div class="design-tools"><button type="button" id="design-marker" aria-pressed="false" aria-label="Flip marker to eraser"><svg viewBox="0 0 100 24" width="100" height="24" aria-hidden="true"><path d="M5 12 19 5v14z" fill="currentColor"/><rect x="19" y="4" width="60" height="16" rx="3" fill="currentColor"/><rect x="80" y="4" width="15" height="16" rx="3" fill="#d9bc78"/></svg><span>Flip to erase</span></button><button type="button" id="design-undo">Undo</button><label class="design-upload">Upload<input id="portrait-file" type="file" aria-label="Upload cover image" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,.svg"></label><button type="button" id="remove-image" hidden>Remove image</button></div>
  </div>
- <div class="design-inside"><div id="design-experiments"><h3><label for="design-superpowers">What skills will customers learn?</label></h3><input id="design-superpowers" placeholder="write 5 verbs...." maxlength="124" aria-describedby="design-superpowers-help"><small id="design-superpowers-help">We’ll work with you to design 5 hands-on experiments.</small><h3><label for="design-tools">What tools will they acquire?</label></h3><input id="design-tools" placeholder="write 5 tools...." maxlength="124" aria-describedby="design-tools-help"><small id="design-tools-help">We'll work with you to pick 5 durable tools for customer homes.</small></div><p class="design-price"><label for="design-price">$<input id="design-price" type="number" inputmode="numeric" step="1" required></label> <small>price per copy</small></p><p>You buy the first one, then your audience buys the rest.</p><p>You keep 80% of net sales. We handle manufacturing, distribution, and delivery.</p><button id="design-add" type="submit"></button><p id="design-status" role="status"></p></div>
+ <div class="design-inside"><div id="design-experiments"><h3><label for="design-superpowers">What skills will customers learn?</label></h3><input id="design-superpowers" placeholder="write 5 verbs...." maxlength="124" aria-describedby="design-superpowers-help"><small id="design-superpowers-help">We’ll work with you to design 5 hands-on experiments.</small><h3><label for="design-tools">What tools will they acquire?</label></h3><input id="design-tools" placeholder="write 5 tools...." maxlength="124" aria-describedby="design-tools-help"><small id="design-tools-help">We'll work with you to pick 5 durable tools for customer homes.</small></div><p class="design-price"><button type="button" id="design-price-down" aria-label="Halve price">−</button> <output id="design-price" aria-live="polite"></output> <button type="button" id="design-price-up" aria-label="Double price">+</button> <small>price per copy</small></p><p>You buy the first one, then your audience buys the rest.</p><p>You keep 80% of net sales. We handle manufacturing, distribution, and delivery.</p><button id="design-add" type="submit"></button><p id="design-status" role="status"></p></div>
  </div><details id="design-source"><summary>See/Edit code</summary><textarea id="design-code" aria-label="Knowbook Scroll code" aria-describedby="design-code-status" spellcheck="false"></textarea><small id="design-code-status" role="status"></small><label for="design-link">Design link</label><input id="design-link" type="text" readonly spellcheck="false"></details></form>
 </dialog>
 partners.scroll
@@ -897,9 +897,9 @@ script
   const currency = "USD";
   // Whole dollars stay whole ($199); anything with cents shows two decimals ($287.02).
   const money = { format: usd => new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: Number.isInteger(Math.round(usd * 100) / 100) ? 0 : 2 }).format(usd) };
-  // Creator-set price for custom Knowbooks: whole dollars within these limits.
-  const customKnowbookPrice = { defaultUsd: 349, minUsd: 199, maxUsd: 10000000000 };
-  const validCustomPrice = value => Number.isInteger(value) && value >= customKnowbookPrice.minUsd && value <= customKnowbookPrice.maxUsd;
+  // Creator-set price for custom Knowbooks: 2 ** priceExponent, from $256 to $2,147,483,648.
+  const customKnowbookPrice = { defaultExponent: 8, minExponent: 8, maxExponent: 31 };
+  const validCustomPrice = value => Number.isInteger(value) && value >= customKnowbookPrice.minExponent && value <= customKnowbookPrice.maxExponent;
   const checkoutMoney = new Intl.NumberFormat("en-US", { style: "currency", currency });
   const referralCodes = new Set("john kendric pldb sean tyler brad producthunt fireplace liz daylight kemi mikayla joe blake daniel francisco butler hassam ash goodman frank ari leah mystery nico cora yc".split(" "));
   // Referral percent off (yc is intentionally negative).
@@ -1398,9 +1398,9 @@ script
    const $ = selector => document.querySelector(selector), dialog = $('#designer'), title = $('#design-title'), signature = $('#design-signature'), signatureArt = $('#design-signature-art');
    const art = $('#design-art'), marker = $('#design-marker'), status = $('#design-status');
    const key = 'knowbooks-signature-design', undo = [], hedcuts = new WeakMap();
-   const price = Object.assign($('#design-price'), { min: customKnowbookPrice.minUsd, max: customKnowbookPrice.maxUsd });
+   const price = $('#design-price');
    let design, draft, editing = false, erase = false, drawing, opener, photoVersion = 0;
-   const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', signature: '', color: 'navy', wood: 'koa', superpowers: '', tools: '', priceUsd: customKnowbookPrice.defaultUsd, art: [], portrait: [], svgImage: '', coverDescription: '' });
+   const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', signature: '', color: 'navy', wood: 'koa', superpowers: '', tools: '', priceExponent: customKnowbookPrice.defaultExponent, art: [], portrait: [], svgImage: '', coverDescription: '' });
    function cryptoId() { return globalThis.crypto.randomUUID().slice(0, 8); }
    // Superpowers and tools share the same rule: up to 5 space-separated words, 124 characters.
    const maxWords = 5, maxWordChars = 124;
@@ -1417,7 +1417,7 @@ script
    const dots = values => body(covers.packDots(values).join('\n'));
    const vectorImage = value => value ? body('svgImage '+value) : '';
    const cover = d => covers.compile(covers.designerSource(d));
-   const product = d => ({ id: d.id, title: `${d.title} — Signature Knowbook (${d.id})`, listPriceUsd: d.priceUsd, priceUsd: salePrice(d.priceUsd), color: d.color, wood: d.wood, cover: cover(d), design: d });
+   const product = d => ({ id: d.id, title: `${d.title} — Signature Knowbook (${d.id})`, priceExponent: d.priceExponent, listPriceUsd: 2 ** d.priceExponent, priceUsd: salePrice(2 ** d.priceExponent), color: d.color, wood: d.wood, cover: cover(d), design: d });
    const remember = () => {
     design.title = title.textContent.replace(/\s+/g,' ').trim().slice(0, 60);
     design.signature = signature.value.trim();
@@ -1433,7 +1433,7 @@ script
     d.superpowers = fiveWords(d.superpowers ?? (Array.isArray(d.verbs) ? d.verbs.filter(Boolean).join(' ') : ''));
     delete d.verbs;
     d.tools = fiveWords(d.tools);
-    d.priceUsd = validCustomPrice(d.priceUsd) ? d.priceUsd : customKnowbookPrice.defaultUsd;
+    d.priceExponent = validCustomPrice(d.priceExponent) ? d.priceExponent : customKnowbookPrice.defaultExponent;
     d.coverDescription = String(d.coverDescription || d.symbol || '').replace(/\s+/g,' ').trim();
     delete d.symbol;
     d.art = (Array.isArray(d.art) ? d.art : []).filter(p => typeof p === 'string' && p.length < 20000 && /^[MLQ0-9., -]+$/.test(p) && !/\.\d{2}/.test(p)).slice(0,200);
@@ -1457,7 +1457,7 @@ script
     const leaf = value => String(value || '').replace(/\s+/g,' ').trim();
     return [
      `title ${leaf(d.title)}`, ...(d.signature ? [`signature ${leaf(d.signature)}`] : []), `color ${d.color}`, `wood ${d.wood}`,
-     `priceUsd ${d.priceUsd}`,
+     `priceExponent ${d.priceExponent}`,
      `superpowers ${leaf(d.superpowers)}`,
      ...(d.tools ? [`tools ${leaf(d.tools)}`] : []),
      ...(d.coverDescription ? [`coverDescription ${leaf(d.coverDescription)}`] : []),
@@ -1477,7 +1477,7 @@ script
     const url=new URL(location.href);url.search='';url.hash='knowbook='+encodeURIComponent(text);designLink.value=url.href;
    }
    // Forgiving parser: applies every recognized line, never throws, and returns warnings like "line 3: ...".
-   const fieldAliases = { title: 'title', name: 'title', signature: 'signature', author: 'signature', color: 'color', colour: 'color', wood: 'wood', price: 'priceUsd', priceusd: 'priceUsd', superpowers: 'superpowers', verbs: 'superpowers', skills: 'superpowers', experiments: 'superpowers', tools: 'tools', coverdescription: 'coverDescription', symbol: 'coverDescription', cover: 'cover' };
+   const fieldAliases = { title: 'title', name: 'title', signature: 'signature', author: 'signature', color: 'color', colour: 'color', wood: 'wood', price: 'priceExponent', priceexponent: 'priceExponent', superpowers: 'superpowers', verbs: 'superpowers', skills: 'superpowers', experiments: 'superpowers', tools: 'tools', coverdescription: 'coverDescription', symbol: 'coverDescription', cover: 'cover' };
    const legacyFields = ['designfeeusd', 'depositusd', 'prototype', 'balance', 'copies'];
    function readProposal(text) {
     const d = { ...fresh(), id: design.id, shapes: [] }, warnings = [], chunks = [];
@@ -1492,11 +1492,9 @@ script
      if (inCover || legacyFields.includes(rawKey.toLowerCase())) return;
      if (!key) return warn(n, `unknown field "${rawKey.slice(0, 30)}", skipped`);
      if (key === 'color' || key === 'wood') return Object.hasOwn(key === 'color' ? leathers : woods, value.toLowerCase()) ? d[key] = value.toLowerCase() : warn(n, `unknown ${key} "${value}", using ${d[key]}`);
-     if (key === 'priceUsd') {
-      const price = Math.round(Number(value.replace(/[$,\s]/g, '')));
-      if (!Number.isFinite(price)) return warn(n, `invalid price "${value}", using ${d.priceUsd}`);
-      d.priceUsd = Math.min(customKnowbookPrice.maxUsd, Math.max(customKnowbookPrice.minUsd, price));
-      return d.priceUsd !== price && warn(n, `price must be ${customKnowbookPrice.minUsd}–${customKnowbookPrice.maxUsd}, using ${d.priceUsd}`);
+     if (key === 'priceExponent') {
+      const exponent = Number(value);
+      return validCustomPrice(exponent) ? d.priceExponent = exponent : warn(n, `priceExponent must be ${customKnowbookPrice.minExponent}–${customKnowbookPrice.maxExponent}, using ${d.priceExponent}`);
      }
      if (key === 'superpowers' || key === 'tools') { if (tooManyWords(value)) warn(n, `${rawKey}: kept the first 5 words`); return d[key] = fiveWords(value); }
      if (key === 'title' && !value.trim()) return warn(n, 'empty title, using default');
@@ -1522,12 +1520,10 @@ script
     open(event, saved);
    });
    const superpowers = $('#design-superpowers'), tools = $('#design-tools');
-   const updateAddButton = () => { $('#design-add').innerHTML = editing ? 'Update cart' : `Add first copy to cart — ${priceHtml(design.priceUsd)}`; };
-   price.addEventListener('input', () => {
-    const value=price.valueAsNumber;
-    price.setCustomValidity(validCustomPrice(value) ? '' : `Enter whole dollars from $${customKnowbookPrice.minUsd} to $${customKnowbookPrice.maxUsd.toLocaleString('en-US')}.`);
-    if(validCustomPrice(value)) { design.priceUsd=value; updateAddButton(); remember(); }
-   });
+   const updateAddButton = () => { price.innerHTML = priceHtml(2 ** design.priceExponent); $('#design-add').innerHTML = editing ? 'Update cart' : `Add first copy to cart — ${priceHtml(2 ** design.priceExponent)}`; };
+   const stepPrice = step => { if (validCustomPrice(design.priceExponent + step)) { design.priceExponent += step; updateAddButton(); remember(); } };
+   $('#design-price-down').onclick = () => stepPrice(-1);
+   $('#design-price-up').onclick = () => stepPrice(1);
    limitWordsInput(superpowers, 'superpowers');
    limitWordsInput(tools, 'tools');
    const swatches = (field, names) => names.map(name => `<button type="button" class="book-cover" style="${escapeHtml(coverStyle({ id: name, color: field === 'color' ? name : 'navy', wood: field === 'wood' ? name : 'koa' }))}" data-${field}="${name}" aria-label="${name}" title="${name}" aria-pressed="false"></button>`).join('');
@@ -1701,7 +1697,6 @@ script
     title.textContent=design.title; signature.value=design.signature || '';
     superpowers.value=design.superpowers;
     tools.value=design.tools;
-    price.value=design.priceUsd;
     updateAddButton();
     render();
    }
