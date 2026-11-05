@@ -914,9 +914,9 @@ script
   const editionNameByShelf = {
    believer: "Believer"
   };
-  const shelfOrder = ["launchation", "believer", "special", "archive"];
-  const plainShelves = { launchation: "Launchation", special: "Special items", archive: "Archive" };
-  const collapsedEditions = new Set(["believer", "special", "archive"]);
+  const shelfOrder = ["believer", "special", "archive"];
+  const plainShelves = { special: "Special items", archive: "Archive" };
+  const collapsedEditions = new Set(["special", "archive"]);
   const cart = new Map();
   const grid = document.querySelector("#product-grid");
   const preview = document.querySelector(".book-preview");

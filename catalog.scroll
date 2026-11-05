@@ -16,7 +16,7 @@ signatureParser
 
 shelfAtom
  extends atomAtom
- enum launchation believer special archive
+ enum believer special archive
 
 shelfParser
  extends abstractStringMeasureParser
@@ -93,13 +93,6 @@ tagsParser
 // data
 
 // new product launches
-
-id kog
-color olive
-title KOG
-shelf launchation
-priceExponent 7
-description KOG — Knowbooks OG. For those who can't make it to Launchation at Turtle Bay in person. A t-shirt from Cotton Bureau. A 10 year membership to World Wide Scroll. A chance to tell one of our founders, over the phone, your best ideas or worst insults.
 
 id launch
 color olive
