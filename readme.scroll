@@ -899,7 +899,7 @@ script
   const customKnowbookPrice = { defaultExponent: 8, minExponent: 8, maxExponent: 31 };
   const validCustomPrice = value => Number.isInteger(value) && value >= customKnowbookPrice.minExponent && value <= customKnowbookPrice.maxExponent;
   const checkoutMoney = new Intl.NumberFormat("en-US", { style: "currency", currency });
-  const referralCodes = new Set("john kendric pldb sean tyler brad producthunt fireplace liz daylight kemi mikayla joe blake daniel francisco butler hassam ash goodman frank ari leah mystery nico cora yc".split(" "));
+  const referralCodes = new Set("john mia kendric pldb sean tyler brad producthunt fireplace liz daylight kemi mikayla joe blake daniel francisco butler hassam ash goodman frank ari leah mystery nico cora yc".split(" "));
   // Referral percent off (yc is intentionally negative).
   const referralPercent = code => referralCodes.has(code) ? (code === "yc" ? -200 : 10) : 0;
   // Like the sale, the display referral is decided at page load (?r= or saved code); the cart charges it once as discount_amount on the sale-priced subtotal.
