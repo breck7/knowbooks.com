@@ -28,14 +28,14 @@ priceExponentParser
  extends abstractIntegerMeasureParser
  description Website checkout price in whole US dollars is 2 to this power (8 means $256).
 
-coverColorAtom
- extends colorAtom
- enum navy ocean teal forest purple yellow orange coral brick burgundy brown
+spineColorAtom
+ extends atomAtom
+ enum russet black brown oxblood navy olive tan
 
 colorParser
  extends abstractEnumMeasureParser
- atoms measureNameAtom coverColorAtom
- description Optional default cover color: navy, ocean, teal, forest, purple, yellow, orange, coral, brick, burgundy, or brown. Unassigned books cycle yellow, navy, coral, forest, orange, purple, brick, teal, burgundy, ocean, brown in catalog order; assigned colors do not advance the cycle.
+ atoms measureNameAtom spineColorAtom
+ description Leather spine color.
 
 woodAtom
  extends atomAtom
@@ -44,16 +44,7 @@ woodAtom
 woodParser
  extends abstractEnumMeasureParser
  atoms measureNameAtom woodAtom
- description Optional cover wood. Defaults to one picked from the id.
-
-leatherAtom
- extends atomAtom
- enum russet black brown oxblood navy olive tan
-
-leatherParser
- extends abstractEnumMeasureParser
- atoms measureNameAtom leatherAtom
- description Optional spine leather. Defaults from color, else picked from the id.
+ description Optional cover wood. Defaults to the wood paired with the spine color.
 
 coverDescriptionParser
  extends abstractStringMeasureParser
@@ -104,19 +95,19 @@ tagsParser
 // new product launches
 
 id kog
+color olive
 title KOG
 shelf launchation
 priceExponent 7
-color forest
 description KOG — Knowbooks OG. For those who can't make it to Launchation at Turtle Bay in person. A t-shirt from Cotton Bureau. A 10 year membership to World Wide Scroll. A chance to tell one of our founders, over the phone, your best ideas or worst insults.
 
 id launch
+color olive
 description VIP Launchation Package. Oahu, Hawaii. November 4-6 2026. Airfare not included. Some regular rooms remain, visit Launchation.com to book.
 video videos/launch.mp4
 fulfillment pickup
 soldOut true
 tags economicsTag measurementTag creativeTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag
-color forest
 title Launch
 signature Breck & Steph
 skills live love laugh learn launch
@@ -131,10 +122,9 @@ cover
  path M 192 194.6 C 199.7 194.6 199.7 61.4 208.6 61.4 C 217.6 61.4 217.6 194.6 225.3 194.6
 
 id magnets
-leather tan
+color tan
 tags physicsTag mechanicsTag electricityTag electromagnetismTag instantTag metalTag
 video videos/magnets.mp4
-color navy
 title Magnets
 signature Breck
 skills push pull point test see lift find
@@ -150,9 +140,8 @@ cover
 // physical experiments that teach both non-linear physical jumps and metaphorically the personal/social power of focus
 
 id focus
-leather oxblood
+color oxblood
 tags physicsTag psychologyTag instantTag startupsTag emotionalSkillsTag
-color coral
 title Focus
 skills pierce spark direct cut spread
 tools needle magnifier funnel scissors paper
@@ -164,9 +153,8 @@ cover
  filledPolygon 204.8 71.7 128 128 204.8 184.3
 
 id levers
-leather navy
-tags physicsTag mechanicsTag buildingTag instantTag energyTag machinesTag motionTag
 color navy
+tags physicsTag mechanicsTag buildingTag instantTag energyTag machinesTag motionTag
 title Levers
 skills lift pry balance push move
 tools beams prybar fulcrums weights ruler
@@ -179,9 +167,8 @@ cover
  filledPolygon 44.6 95.1 83 88.5 89.6 126.9 51.2 133.5
 
 id beams
-leather brown
-tags physicsTag materialsTag mechanicsTag buildingTag measurementTag instantTag solidTag machinesTag geometryTag
 color brown
+tags physicsTag materialsTag mechanicsTag buildingTag measurementTag instantTag solidTag machinesTag geometryTag
 title Beams
 skills hold cross push bend snap
 tools beams studfinder scale clamp toothpicks
@@ -192,9 +179,8 @@ cover
  filledRect 102.4 43.5 51.2 169
 
 id sales
-leather olive
+color olive
 tags economicsTag psychologyTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag socialTag
-color forest
 title Sales
 skills listen clarify electrify expand compound
 tools stethoscope recorder circuit pens seeds
@@ -206,8 +192,8 @@ cover
  filledPolygon 209.9 46.1 189.4 117.8 138.2 66.6
 
 id anger
+color tan
 tags psychologyTag emotionalSkillsTag
-color orange
 title Anger
 shelf believer
 priceExponent 8
@@ -219,14 +205,13 @@ cover
  filledCircle 166.4 161.3 7.7
 
 id carpentry
-leather black
+color black
 tags plantTag materialsTag mechanicsTag buildingTag creativeTag hazardTag solidTag machinesTag geometryTag
 title Carpentry
 signature Rob & Sean & Breck
 skills measure mark cut shape level
 tools tape pencil saw chisel level
 shelf believer
-color brown
 priceExponent 8
 coverDescription long horizontal hand saw blade tapering from left to right. solid fill. three teeth. small handle on the left
 cover
@@ -234,9 +219,9 @@ cover
  filledPath M25.6 89.6 Q25.6 79.4 35.8 79.4 H71.7 V161.3 H35.8 Q25.6 161.3 25.6 151 Z M41 99.8 V140.8 H56.3 V99.8 Z
 
 id plumbing
+color navy
 tags physicsTag mechanicsTag fluidsTag buildingTag measurementTag instantTag hazardTag liquidTag pressureTag
 title Plumbing
-color ocean
 shelf believer
 priceExponent 8
 coverDescription two elbow pipes one coming from left a drip of water flowing out and into the other elbow pipe leaving to right. all solids
@@ -248,9 +233,8 @@ cover
 // economic system
 
 id capital
-leather russet
+color russet
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
-color forest
 title Capital
 shelf believer
 priceExponent 9
@@ -268,8 +252,8 @@ cover
 // real estate investing
 
 id buildings
+color oxblood
 tags economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag
-color burgundy
 title Buildings
 shelf believer
 priceExponent 8
@@ -286,32 +270,32 @@ cover
  rect 192 112.6 15.4 15.4 5.1
 
 id electricity
+color navy
 tags physicsTag electricityTag electromagnetismTag buildingTag measurementTag instantTag hazardTag energyTag
 title Electricity
 skills make connect switch measure move
 tools magnet wires bulb meter motor
 shelf believer
 priceExponent 8
-color navy
 coverDescription a simple lightning bolt
 cover
  filledPolygon 148.5 30.7 69.1 140.8 120.3 140.8 99.8 225.3 186.9 110.1 135.7 110.1
 
 id fire
+color russet
 tags physicsTag chemistryTag instantTag hazardTag gasTag combustionTag energyTag temperatureTag
 title Fire
 skills cook light warm melt join
 tools stove candle warmers lighter iron
 shelf believer
-color coral
 priceExponent 8
 cover
  svgImage data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBTVkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xzIC0tPg0KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTQuNDUyNyA4LjQ4Njc5TDEyLjE4NDIgMy45Mzg5NkwxMS40NDcxIDQuNzQzMDlDNy4zMDk0NSA5LjI1NjkzIDYgMTEuOTYwOSA2IDE0LjI0OTlDNiAxNy40MjIgOC43MzQ1MiAxOS45MDkgMTIgMTkuOTA5QzE1LjI2NTUgMTkuOTA5IDE4IDE3LjQyMiAxOCAxNC4yNDk5QzE4IDEzLjMxNzkgMTcuNjc0NiAxMi4zMTI0IDE3LjIzODEgMTEuMzY1OEMxNi43OTYgMTAuNDA2OSAxNi4yMDkxIDkuNDQzMzUgMTUuNjIgOC41Nzc4OEwxNS4xMDY1IDcuODIzNDJMMTQuNDUyNyA4LjQ4Njc5Wk0xNC4wNDczIDExLjAzNDhMMTQuODgxOCAxMC4xODgzQzE1LjI1NiAxMC43ODQ2IDE1LjYwMDggMTEuMzk3IDE1Ljg3NiAxMS45OTM4QzE2LjI3NjUgMTIuODYyNSAxNi41IDEzLjYzNTcgMTYuNSAxNC4yNDk5QzE2LjUgMTUuMDk0MSAxNi4yMjMzIDE1Ljg5MDEgMTUuNzQzOCAxNi41NTU0QzE1Ljc0NzkgMTYuNDkzNSAxNS43NSAxNi40MzA5IDE1Ljc1IDE2LjM2NzVDMTUuNzUgMTUuODA1NiAxNS41MjMxIDE1LjI0MTMgMTUuMjYzMiAxNC43NjI0QzE0Ljk5NDYgMTQuMjY3OSAxNC42NDM0IDEzLjc3OTggMTQuMjk5NSAxMy4zNTA3TDEzLjgxMzUgMTIuNzQ0M0wxMy40NzcyIDEzLjAzNEwxMi4xNzQ0IDEwLjgxNTlMMTEuNDkwMyAxMS40NDk3QzkuMTM3MjEgMTMuNjI5OCA4LjI1IDE1LjA1MDggOC4yNSAxNi4zNjc1QzguMjUgMTYuNDMwOSA4LjI1MjA5IDE2LjQ5MzUgOC4yNTYyMiAxNi41NTU0QzcuNzc2NjkgMTUuODkwMSA3LjUgMTUuMDk0MSA3LjUgMTQuMjQ5OUM3LjUgMTIuNjc4NiA4LjMyNyAxMC41MzA4IDExLjgyMDYgNi41NzA1TDE0LjA0NzMgMTEuMDM0OFpNMTMuMDk0MyAxNS4zNDRMMTMuNTk0OCAxNC45MTI3QzEzLjcyNTkgMTUuMTAzNiAxMy44NDQ3IDE1LjI5MzYgMTMuOTQ0OSAxNS40NzgxQzE0LjE2MzIgMTUuODgwMiAxNC4yNSAxNi4xNzkxIDE0LjI1IDE2LjM2NzVDMTQuMjUgMTcuMTE3MSAxMy40MTMxIDE3Ljk5OTkgMTIgMTcuOTk5OUMxMC41ODY5IDE3Ljk5OTkgOS43NSAxNy4xMTcxIDkuNzUgMTYuMzY3NUM5Ljc1IDE1LjgyMzUgMTAuMDY5NyAxNC45NDY0IDExLjgzMzQgMTMuMTk3MkwxMy4wOTQzIDE1LjM0NFoiIGZpbGw9IiMwODAzNDEiLz4NCjwvc3ZnPg==
 
 id gold
+color tan
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Gold
-color yellow
 shelf believer
 priceExponent 10
 cover
@@ -367,9 +351,9 @@ cover
   dotRow 220 120 0.9 124 1.2 128 0.4
 
 id silver
+color navy
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Silver
-color teal
 shelf believer
 priceExponent 10
 cover
@@ -420,9 +404,9 @@ cover
   dotRow 204 124 0.1 152 0.3 168 0.2 180 0.8 184 0.2
 
 id bronze
+color navy
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Bronze
-color navy
 shelf believer
 priceExponent 10
 coverDescription Stippled portrait supplied from the designer
@@ -472,11 +456,11 @@ cover
   dotRow 218.9 107.5 0.6 111.4 0.6
 
 id light
+color tan
 tags physicsTag electromagnetismTag wavesTag instantTag opticsTag cyclesTag
 title Light
 shelf believer
 priceExponent 8
-color yellow
 skills see measure colorize illuminate enhance
 tools headlamp flashlight prism glowstick leds
 coverDescription a glowing circle with short rays radiating outward and a single beam streaming out below
@@ -492,11 +476,11 @@ cover
  line 149 117 169 137
 
 id mirrors
+color navy
 tags physicsTag electromagnetismTag wavesTag instantTag opticsTag measurementTag geometryTag materialsTag solidTag
 title Mirrors
 shelf believer
 priceExponent 8
-color ocean
 skills reflect aim align bounce measure
 tools mirrors flashlight protractor cards targets
 coverDescription a vertical mirror with an incoming ray reflecting off at an equal angle
@@ -506,36 +490,42 @@ cover
  line 168 140 48 216
 
 id tools
+color tan
 tags mechanicsTag buildingTag instantTag hazardTag solidTag machinesTag
 title Tools
 shelf believer
 priceExponent 8
 
 id gravity
+color oxblood
 tags physicsTag mechanicsTag measurementTag instantTag energyTag spaceTag motionTag
 title Gravity
 shelf believer
 priceExponent 8
 
 id sound
+color oxblood
 tags physicsTag wavesTag measurementTag creativeTag instantTag energyTag musicTag cyclesTag
 title Sound
 shelf believer
 priceExponent 8
 
 id air
+color black
 tags physicsTag materialsTag fluidsTag natureTag instantTag gasTag pressureTag
 title Air
 shelf believer
 priceExponent 8
 
 id heat
+color russet
 tags physicsTag chemistryTag fluidsTag measurementTag instantTag hazardTag combustionTag energyTag temperatureTag
 title Heat
 shelf believer
 priceExponent 8
 
 id glass
+color olive
 tags physicsTag chemistryTag materialsTag electromagnetismTag wavesTag instantTag hazardTag solidTag opticsTag
 title Glass
 shelf believer
@@ -546,11 +536,11 @@ cover
  line 148 138 200 190 14
 
 id lasers
+color russet
 tags physicsTag electromagnetismTag wavesTag energyTag instantTag opticsTag measurementTag machinesTag hazardTag
 title Lasers
 shelf believer
 priceExponent 8
-color coral
 skills focus aim measure amplify cut
 tools lasers lenses targets goggles sensors
 coverDescription a laser emitter firing a straight beam across the cover into a glowing spot
@@ -564,30 +554,35 @@ cover
  line 224 128 240 128
 
 id plastics
+color brown
 tags materialsTag solidTag
 title Plastics
 shelf believer
 priceExponent 8
 
 id cells
+color brown
 tags chemistryTag biologyTag growthTag
 title Cells
 shelf believer
 priceExponent 8
 
 id iron
+color olive
 tags physicsTag chemistryTag materialsTag instantTag solidTag metalTag
 title Iron
 shelf believer
 priceExponent 8
 
 id elements
+color brown
 tags physicsTag chemistryTag materialsTag instantTag
 title Elements
 shelf believer
 priceExponent 8
 
 id copper
+color russet
 tags physicsTag chemistryTag materialsTag electricityTag electromagnetismTag instantTag solidTag metalTag
 title Copper
 shelf believer
@@ -596,6 +591,7 @@ priceExponent 8
 // venture capital
 
 id venture
+color brown
 tags economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag startupsTag communicationTag
 title Venture
 shelf believer
@@ -604,12 +600,14 @@ priceExponent 13
 // fed
 
 id banking
+color olive
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 title Banking
 shelf believer
 priceExponent 11
 
 id sleep
+color oxblood
 tags biologyTag psychologyTag measurementTag longTermTag healthTag timeTag cyclesTag
 title Sleep
 shelf believer
@@ -618,30 +616,35 @@ priceExponent 9
 // electromagnetic and other fields
 
 id fields
+color russet
 tags physicsTag electricityTag electromagnetismTag wavesTag instantTag
 title Fields
 shelf believer
 priceExponent 8
 
 id energy
+color oxblood
 tags physicsTag electricityTag measurementTag instantTag combustionTag energyTag temperatureTag
 title Energy
 shelf believer
 priceExponent 8
 
 id frequency
+color tan
 tags physicsTag wavesTag measurementTag instantTag cyclesTag
 title Frequency
 shelf believer
 priceExponent 8
 
 id waves
+color tan
 tags physicsTag electromagnetismTag wavesTag measurementTag instantTag energyTag cyclesTag
 title Waves
 shelf believer
 priceExponent 8
 
 id helices
+color oxblood
 tags physicsTag buildingTag cyclesTag geometryTag
 title Helices
 shelf believer
@@ -650,36 +653,42 @@ priceExponent 8
 // the coiled machine
 
 id springs
+color brown
 tags physicsTag materialsTag mechanicsTag buildingTag measurementTag instantTag solidTag energyTag machinesTag cyclesTag motionTag
 title Springs
 shelf believer
 priceExponent 8
 
 id voltage
+color black
 tags physicsTag electricityTag electromagnetismTag measurementTag instantTag hazardTag energyTag
 title Voltage
 shelf believer
 priceExponent 8
 
 id wires
+color black
 tags physicsTag electricityTag electromagnetismTag measurementTag instantTag hazardTag energyTag
 title Wires
 shelf believer
 priceExponent 8
 
 id motors
+color oxblood
 tags physicsTag mechanicsTag electricityTag electromagnetismTag buildingTag instantTag hazardTag energyTag machinesTag cyclesTag motionTag
 title Motors
 shelf believer
 priceExponent 8
 
 id gears
+color navy
 tags physicsTag mechanicsTag buildingTag instantTag machinesTag cyclesTag motionTag geometryTag
 title Gears
 shelf believer
 priceExponent 8
 
 id colors
+color navy
 tags physicsTag electromagnetismTag wavesTag creativeTag instantTag opticsTag
 title Colors
 shelf believer
@@ -694,65 +703,74 @@ cover
  line 177 136 244 172
 
 id matter
+color olive
 tags physicsTag chemistryTag materialsTag instantTag solidTag
 title Matter
 shelf believer
 priceExponent 8
 
 id atoms
+color oxblood
 tags physicsTag chemistryTag nuclearTag
 title Atoms
 shelf believer
 priceExponent 8
 
 id motion
+color brown
 tags physicsTag mechanicsTag measurementTag instantTag energyTag motionTag
 title Motion
 shelf believer
 priceExponent 8
 
 id momentum
+color olive
 tags physicsTag mechanicsTag measurementTag instantTag energyTag spaceTag motionTag
 title Momentum
 shelf believer
 priceExponent 8
 
 id friction
+color olive
 tags physicsTag mechanicsTag measurementTag instantTag solidTag energyTag motionTag
 title Friction
 shelf believer
 priceExponent 8
 
 id ropes
+color olive
 tags physicsTag mechanicsTag buildingTag instantTag machinesTag cyclesTag
 title Ropes
 shelf believer
 priceExponent 8
 
 id wind
+color brown
 tags physicsTag mechanicsTag fluidsTag natureTag measurementTag instantTag gasTag energyTag pressureTag
 title Wind
 shelf believer
 priceExponent 8
 
 id aerodynamics
+color black
 tags physicsTag mechanicsTag fluidsTag measurementTag instantTag gasTag pressureTag flightTag motionTag
 title Aerodynamics
 shelf believer
 priceExponent 8
 
 id water
+color brown
 tags physicsTag chemistryTag materialsTag fluidsTag natureTag measurementTag instantTag liquidTag pressureTag
 title Water
 shelf believer
 priceExponent 8
 
 id buoyancy
+color navy
 tags physicsTag mechanicsTag fluidsTag measurementTag instantTag liquidTag pressureTag
 title Buoyancy
 shelf believer
 priceExponent 9
-color ocean
 skills float sink weigh displace balance
 tools beaker boat scale hydrometer clay
 coverDescription a block floating at a waterline, its lower part submerged and solid
@@ -764,54 +782,63 @@ cover
  circle 196 204 5
 
 id rust
+color black
 tags physicsTag chemistryTag materialsTag longTermTag metalTag timeTag
 title Rust
 shelf believer
 priceExponent 8
 
 id time
+color russet
 tags measurementTag timeTag cyclesTag
 title Time
 shelf believer
 priceExponent 8
 
 id patience
+color brown
 tags psychologyTag longTermTag timeTag emotionalSkillsTag
 title Patience
 shelf believer
 priceExponent 8
 
 id centuries
+color russet
 tags natureTag measurementTag longTermTag timeTag
 title Centuries
 shelf believer
 priceExponent 8
 
 id liberty
+color russet
 tags economicsTag psychologyTag multiplePeopleTag socialTag
 title Liberty
 shelf believer
 priceExponent 8
 
 id courage
+color brown
 tags psychologyTag emotionalSkillsTag
 title Courage
 shelf believer
 priceExponent 8
 
 id property
+color oxblood
 tags economicsTag multiplePeopleTag financeTag businessTag
 title Property
 shelf believer
 priceExponent 9
 
 id membranes
+color navy
 tags physicsTag chemistryTag biologyTag materialsTag fluidsTag instantTag liquidTag
 title Membranes
 shelf believer
 priceExponent 8
 
 id decay
+color navy
 tags chemistryTag biologyTag natureTag longTermTag timeTag
 title Decay
 shelf believer
@@ -820,24 +847,28 @@ priceExponent 8
 // chemical and other bonds
 
 id bonds
+color olive
 tags physicsTag chemistryTag materialsTag
 title Bonds
 shelf believer
 priceExponent 8
 
 id teamwork
+color oxblood
 tags psychologyTag multiplePeopleTag startupsTag communicationTag cooperationTag socialTag
 title Teamwork
 shelf believer
 priceExponent 8
 
 id motivation
+color oxblood
 tags psychologyTag longTermTag startupsTag emotionalSkillsTag
 title Motivation
 shelf believer
 priceExponent 8
 
 id competition
+color brown
 tags economicsTag psychologyTag multiplePeopleTag businessTag startupsTag socialTag
 title Competition
 shelf believer
@@ -846,65 +877,74 @@ priceExponent 8
 // benefits of rowing in sync.
 
 id alignment
+color olive
 tags psychologyTag multiplePeopleTag cooperationTag socialTag
 title Alignment
 shelf believer
 priceExponent 8
 
 id collusion
+color tan
 tags economicsTag psychologyTag multiplePeopleTag businessTag cooperationTag socialTag
 title Collusion
 shelf believer
 priceExponent 8
 
 id paper
+color navy
 tags plantTag materialsTag buildingTag creativeTag instantTag solidTag
 title Paper
 shelf believer
 priceExponent 8
 
 id ink
+color black
 tags chemistryTag materialsTag buildingTag creativeTag instantTag liquidTag communicationTag
 title Ink
 shelf believer
 priceExponent 8
 
 id folding
+color black
 tags materialsTag buildingTag creativeTag instantTag solidTag geometryTag
 title Folding
 shelf believer
 priceExponent 8
 
 id metals
+color oxblood
 tags physicsTag chemistryTag materialsTag instantTag solidTag metalTag
 title Metals
 shelf believer
 priceExponent 8
 
 id steel
+color oxblood
 tags physicsTag chemistryTag materialsTag instantTag solidTag metalTag
 title Steel
 shelf believer
 priceExponent 8
 
 id aluminum
+color navy
 tags physicsTag chemistryTag materialsTag instantTag solidTag metalTag
 title Aluminum
 shelf believer
 priceExponent 8
 
 id brass
+color russet
 tags physicsTag chemistryTag materialsTag instantTag solidTag metalTag
 title Brass
 shelf believer
 priceExponent 8
 
 id metalworking
+color navy
 tags physicsTag materialsTag mechanicsTag buildingTag hazardTag solidTag metalTag machinesTag
 title Metalworking
 shelf believer
 priceExponent 9
-color ocean
 skills forge weld grind polish sharpen
 tools anvil hammer tongs files hacksaw
 coverDescription a blacksmith hammer swinging down toward a classic anvil
@@ -912,30 +952,35 @@ cover
  svgImage data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBTVkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xzIC0tPgo8c3ZnIHdpZHRoPSI4MDBweCIgaGVpZ2h0PSI4MDBweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0iIzAwMDAwMCIgZD0iTTQxMy4zNzUgNjkuOTA2TDMzNi45MzcgMTkxLjQ3bC04LjI1LTMyLjY5LTMwLjIxOCA4OC45NyA2Mi42NTUtMjkuMzc1LjIyIDI5LjQzOCAxMjcuMDMtNTAuOTM4LTcwLjgxMy0xLjk3IDQ3Ljc4Mi02OC42ODYtNzMuNDcgMzkuMjUgMjEuNS05NS41NjR6TTIxMC4yMiAxMDIuMDk0bC0zMiAxNC40MDYgMTYuODc0IDU1LjY1Ni0xNzcuODEzIDgwLjAzIDEyLjU2NCAyNy44NzZMMjA3LjY1NiAyMDBsMzAuNDA2IDQ5LjQ3IDQ5LjMxMy0yMi4xOS0yMS4zNDQtNzAuMzQzLTU1LjgxLTU0Ljg0M3pNMTk3LjU5MyAyNjYuNzh2MjAuMzQ1aC04OC45MDZjMTUuOTk0IDM4LjgwNyA1MS4yMjUgNjUuNDMgODguOTA2IDc0LjI4djMyLjk3aDU4LjU2MmMtMTIuMTE4IDMwLjUyOC0zMy41MDUgNTUuNjg0LTU4LjQ3IDc3LjU5NEgxNzIuMjJ2MTguNjg2SDQ1Ni41NlY0NzEuOTdoLTI3LjQwNmMtMjguNzM0LTIxLjg5NS01MC4wNTUtNDcuMDE4LTYxLjYyNS03Ny41OTVoNjMuNjU4di0yOS4xODhjMTkuNzQ4LTYuOTk1IDM5LjUtMTkuNTEgNTkuMjUtMzYuNjg3LTE5LjgxMi0xNy41MjMtMzkuMjMtMjcuMjUtNTkuMjUtMzEuOTM4di0yOS43OEgxOTcuNTk0eiIvPjwvc3ZnPg==
 
 id wood
+color brown
 tags plantTag materialsTag buildingTag instantTag solidTag
 title Wood
 shelf believer
 priceExponent 8
 
 id seeds
+color brown
 tags biologyTag plantTag natureTag longTermTag growthTag timeTag
 title Seeds
 shelf believer
 priceExponent 8
 
 id wheels
+color black
 tags physicsTag mechanicsTag buildingTag instantTag machinesTag cyclesTag motionTag
 title Wheels
 shelf believer
 priceExponent 8
 
 id wedges
+color brown
 tags physicsTag mechanicsTag buildingTag instantTag hazardTag solidTag machinesTag
 title Wedges
 shelf believer
 priceExponent 8
 
 id stars
+color tan
 tags physicsTag wavesTag natureTag measurementTag temperatureTag opticsTag nuclearTag spaceTag
 title Stars
 shelf believer
@@ -947,60 +992,70 @@ cover
  filledPolygon 14 128 128 114 242 128 128 142
 
 id exploration
+color black
 tags natureTag explorationTag
 title Exploration
 shelf believer
 priceExponent 8
 
 id fabric
+color tan
 tags plantTag materialsTag buildingTag creativeTag instantTag
 title Fabric
 shelf believer
 priceExponent 8
 
 id food
+color tan
 tags chemistryTag biologyTag plantTag materialsTag hazardTag energyTag nutritionTag healthTag
 title Food
 shelf believer
 priceExponent 8
 
 id trees
+color oxblood
 tags biologyTag plantTag natureTag longTermTag growthTag
 title Trees
 shelf believer
 priceExponent 8
 
 id breath
+color tan
 tags biologyTag fluidsTag measurementTag instantTag gasTag pressureTag healthTag cyclesTag
 title Breath
 shelf believer
 priceExponent 8
 
 id smell
+color olive
 tags chemistryTag biologyTag instantTag gasTag
 title Smell
 shelf believer
 priceExponent 8
 
 id rain
+color brown
 tags physicsTag fluidsTag natureTag measurementTag gasTag liquidTag temperatureTag cyclesTag
 title Rain
 shelf believer
 priceExponent 8
 
 id budgeting
+color olive
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 title Budgeting
 shelf believer
 priceExponent 8
 
 id bookkeeping
+color oxblood
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 title Bookkeeping
 shelf believer
 priceExponent 8
 
 id screws
+color navy
 tags physicsTag mechanicsTag buildingTag instantTag hazardTag solidTag machinesTag cyclesTag geometryTag
 title Screws
 shelf believer
@@ -1009,24 +1064,28 @@ priceExponent 8
 // aka wrinkles/steaming
 
 id ironing
+color navy
 tags physicsTag plantTag materialsTag instantTag hazardTag gasTag energyTag temperatureTag
 title Ironing
 shelf believer
 priceExponent 8
 
 id payroll
+color russet
 tags economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag startupsTag cooperationTag
 title Payroll
 shelf believer
 priceExponent 8
 
 id batteries
+color brown
 tags physicsTag chemistryTag electricityTag electromagnetismTag buildingTag measurementTag instantTag hazardTag energyTag
 title Batteries
 shelf believer
 priceExponent 8
 
 id software
+color brown
 tags computingTag buildingTag creativeTag instantTag startupsTag communicationTag
 title Software
 shelf believer
@@ -1035,114 +1094,133 @@ priceExponent 9
 // the language/software
 
 id scroll
+color oxblood
 tags computingTag buildingTag creativeTag instantTag communicationTag
 title Scroll
 shelf believer
 priceExponent 9
 
 id marketing
+color brown
 tags economicsTag psychologyTag creativeTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag socialTag
 title Marketing
 shelf believer
 priceExponent 10
 
 id hydration
+color black
 tags biologyTag fluidsTag measurementTag liquidTag nutritionTag healthTag
 title Hydration
 shelf believer
 priceExponent 8
 
 id hurricanes
+color navy
 tags physicsTag mechanicsTag fluidsTag natureTag measurementTag hazardTag gasTag pressureTag cyclesTag
 title Hurricanes
 shelf believer
 priceExponent 9
 
 id currency
+color black
 tags economicsTag measurementTag financeTag
 title Currency
 shelf believer
 priceExponent 10
 
 id bitcoin
+color navy
 tags economicsTag computingTag measurementTag financeTag
 title Bitcoin
 shelf believer
 priceExponent 10
 
 id guitar
+color oxblood
 tags physicsTag wavesTag buildingTag creativeTag instantTag musicTag cyclesTag
 title Guitar
 shelf believer
 priceExponent 9
 
 id piano
+color olive
 tags physicsTag wavesTag buildingTag creativeTag instantTag musicTag cyclesTag
 title Piano
 shelf believer
 priceExponent 9
 
 id drums
+color oxblood
 tags physicsTag wavesTag buildingTag creativeTag instantTag musicTag cyclesTag
 title Drums
 shelf believer
 priceExponent 9
 
 id singing
+color navy
 tags physicsTag wavesTag creativeTag instantTag musicTag cyclesTag
 title Singing
 shelf believer
 priceExponent 9
 
 id matrices
+color brown
 tags mathTag physicsTag computingTag
 title Matrices
 shelf believer
 priceExponent 10
 
 id actuators
+color oxblood
 tags physicsTag mechanicsTag electricityTag electromagnetismTag buildingTag instantTag hazardTag machinesTag motionTag
 title Actuators
 shelf believer
 priceExponent 10
 
 id rockets
+color black
 tags physicsTag mechanicsTag fluidsTag buildingTag measurementTag gasTag energyTag pressureTag flightTag spaceTag motionTag
 title Rockets
 shelf believer
 priceExponent 11
 
 id transistors
+color tan
 tags physicsTag computingTag electricityTag electromagnetismTag buildingTag instantTag
 title Transistors
 shelf believer
 priceExponent 10
 
 id ibuprofen
+color brown
 tags medicineTag chemistryTag biologyTag healthTag
 title Ibuprofen
 shelf believer
 priceExponent 9
 
 id ivermectin
+color russet
 tags medicineTag chemistryTag biologyTag healthTag
 title Ivermectin
 shelf believer
 priceExponent 10
 
 id mitochondria
+color russet
 tags chemistryTag biologyTag energyTag nutritionTag healthTag
 title Mitochondria
 shelf believer
 priceExponent 10
 
 id cancer
+color brown
 tags chemistryTag biologyTag longTermTag hazardTag growthTag healthTag
 title Cancer
 shelf believer
 priceExponent 10
 
 id fusion
+color oxblood
 tags physicsTag hazardTag energyTag temperatureTag nuclearTag
 title Fusion
 shelf believer
@@ -1151,6 +1229,7 @@ priceExponent 10
 // aka parenting
 
 id raising
+color olive
 tags biologyTag psychologyTag longTermTag multiplePeopleTag growthTag healthTag communicationTag cooperationTag timeTag emotionalSkillsTag parentingTag familyTag socialTag
 title Raising
 shelf believer
@@ -1159,54 +1238,63 @@ priceExponent 11
 // aka dating
 
 id attraction
+color oxblood
 tags psychologyTag longTermTag multiplePeopleTag communicationTag emotionalSkillsTag datingTag familyTag matingTag socialTag
 title Attraction
 shelf believer
 priceExponent 9
 
 id basketball
+color black
 tags mechanicsTag instantTag longTermTag multiplePeopleTag communicationTag cooperationTag motionTag sportsTag teamSportsTag ballSportsTag
 title Basketball
 shelf believer
 priceExponent 12
 
 id football
+color olive
 tags mechanicsTag instantTag longTermTag multiplePeopleTag communicationTag cooperationTag motionTag sportsTag teamSportsTag ballSportsTag
 title Football
 shelf believer
 priceExponent 11
 
 id soccer
+color black
 tags mechanicsTag instantTag longTermTag multiplePeopleTag communicationTag cooperationTag motionTag sportsTag teamSportsTag ballSportsTag
 title Soccer
 shelf believer
 priceExponent 10
 
 id boxing
+color tan
 tags mechanicsTag instantTag longTermTag multiplePeopleTag motionTag sportsTag combatSportsTag individualSportsTag
 title Boxing
 shelf believer
 priceExponent 12
 
 id chimps
+color brown
 tags animalsTag biologyTag
 title Chimps
 shelf believer
 priceExponent 9
 
 id dolphins
+color navy
 tags animalsTag biologyTag
 title Dolphins
 shelf believer
 priceExponent 9
 
 id golf
+color russet
 tags mechanicsTag instantTag longTermTag motionTag sportsTag ballSportsTag individualSportsTag
 title Golf
 shelf believer
 priceExponent 10
 
 id baseball
+color black
 tags mechanicsTag instantTag longTermTag multiplePeopleTag communicationTag cooperationTag motionTag sportsTag teamSportsTag ballSportsTag
 title Baseball
 shelf believer
@@ -1215,24 +1303,28 @@ priceExponent 9
 // Fluids / Navier–Stokes
 
 id flow
+color brown
 tags physicsTag mechanicsTag fluidsTag measurementTag instantTag gasTag liquidTag pressureTag
 title Flow
 shelf believer
 priceExponent 10
 
 id gluons
+color tan
 tags physicsTag nuclearTag
 title Gluons
 shelf believer
 priceExponent 10
 
 id bosons
+color black
 tags physicsTag nuclearTag
 title Bosons
 shelf believer
 priceExponent 10
 
 id solar
+color black
 tags physicsTag electricityTag electromagnetismTag wavesTag natureTag buildingTag measurementTag instantTag hazardTag energyTag temperatureTag opticsTag
 title Solar
 shelf believer
@@ -1254,6 +1346,7 @@ cover
 // the brain and nervous system
 
 id neurons
+color russet
 tags neuroscienceTag biologyTag healthTag
 title Neurons
 shelf believer
@@ -1262,27 +1355,27 @@ priceExponent 10
 // Partner onboarding: purchase includes the initial conversation.
 
 id knowbook
+color brown
 tags economicsTag buildingTag creativeTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag
 title Knowbooks
 shelf special
 priceExponent 13
-color brown
 description Includes an initial partner conversation about building Knowbooks in your community.
 cover
  svgImage data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiA8dGl0bGUgaWQ9InRpdGxlIj5Lbm93Ym9va3M8L3RpdGxlPgogPGRlc2MgaWQ9ImRlc2MiPkEgY2lyY3VsYXIgcmluZyBzdXBwb3J0ZWQgYnkgdHdvIGhhbmRzLjwvZGVzYz4KIDxnIGZpbGw9IiNkOWJjNzgiPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEyOCAxNEM2OC40NSAxNCAyMCA2Mi40NSAyMCAxMjJjMCAxOC4xMiA0LjUgMzUuMiAxMi40MiA1MC4ybDEyLjM3LTcuMTVBOTMuMjggOTMuMjggMCAwIDEgMzQuMyAxMjJjMC01MS42NyA0Mi4wMy05My43IDkzLjctOTMuN3M5My43IDQyLjAzIDkzLjcgOTMuN2E5My4yOCA5My4yOCAwIDAgMS0xMC40OSA0My4wNWwxMi4zNyA3LjE1QTEwNy40MiAxMDcuNDIgMCAwIDAgMjM2IDEyMmMwLTU5LjU1LTQ4LjQ1LTEwOC0xMDgtMTA4WiIvPgogIDxwYXRoIGQ9Ik0yOS4zMSAxNTYuNDJjLTQuMzQtNy4yMy0zLjY2LTEzLjc3LjA3LTE1Ljg0IDMuMzgtMS44NyA3LjMzLjMxIDEwLjUzIDQuNGwyMi44MiAyNS4xNmMxLjEyIDEuMjQgMi44NS0uMzEgMS44OC0xLjY2bC0xOS4xLTI2LjY3Yy0zLjY3LTUuMTMtMy4zMy0xMC4xOS4yLTEyLjQxIDMuNzctMi4zOCA4LjU0LjY1IDEyLjUyIDUuMjZsMTguMSAyMC45N2MzLjcgNC4yOSA4LjM2IDcuNjUgMTIuMDUgMTIuNiA1Ljk2IDcuOTkgNi4wOCAxOS40OCA2LjA4IDMxLjM2djI1Ljk5Yy0yNC4xLTIuODYtNDMuMDItMTIuNTEtNTMuODUtMjYuNDgtNy4zOC05LjUyLTguNzYtMjMuNTMtMTEuMy00Mi42OFoiLz4KICA8cGF0aCBkPSJNMjI2LjY5IDE1Ni40MmM0LjM0LTcuMjMgMy42Ni0xMy43Ny0uMDctMTUuODQtMy4zOC0xLjg3LTcuMzMuMzEtMTAuNTMgNC40bC0yMi44MiAyNS4xNmMtMS4xMiAxLjI0LTIuODUtLjMxLTEuODgtMS42NmwxOS4xLTI2LjY3YzMuNjctNS4xMyAzLjMzLTEwLjE5LS4yLTEyLjQxLTMuNzctMi4zOC04LjU0LjY1LTEyLjUyIDUuMjZsLTE4LjEgMjAuOTdjLTMuNyA0LjI5LTguMzYgNy42NS0xMi4wNSAxMi42LTUuOTYgNy45OS02LjA4IDE5LjQ4LTYuMDggMzEuMzZ2MjUuOTljMjQuMS0yLjg2IDQzLjAyLTEyLjUxIDUzLjg1LTI2LjQ4IDcuMzgtOS41MiA4Ljc2LTIzLjUzIDExLjMtNDIuNjhaIi8+CiA8L2c+Cjwvc3ZnPg==
 
 id wws
+color navy
 title WWS
 shelf special
 priceExponent 7
-color navy
 description 1 root level folder on WWS for 10 years. Unlimited subdomains.
 
 id bitokens
+color navy
 title Bitokens
 shelf archive
 priceExponent 10
-color navy
 description 100 bitokens. Can be used to pay for both input and output tokens. Send prompts to bi@knowbooks.com.
 cover
  portrait
@@ -1340,11 +1433,11 @@ cover
   dotRow 228 92 0.1 96 0.9 100 1.3 104 1.4 108 1.3 112 0.4 136 0.2 140 1.2 144 1.4 148 1.4 152 1.1 156 0.1
 
 id titanium
+color navy
 tags physicsTag chemistryTag materialsTag buildingTag instantTag solidTag metalTag flightTag spaceTag machinesTag
 title Titanium
 shelf believer
 priceExponent 9
-color ocean
 skills mine smelt alloy forge weld machine
 tools ore sponge crucible torch files calipers
 coverDescription a single elegant twisted jet-engine turbine blade
@@ -1353,11 +1446,11 @@ cover
  filledPolygon 116.6 203.4 114.7 195.7 113.3 188.1 112.3 180.5 111.8 172.9 111.7 165.4 112 157.8 112.7 150.3 113.8 142.9 115.3 135.4 117.1 128 119.2 120.7 121.6 113.4 124.3 106.2 127.2 99 130.4 92 133.9 84.9 137.5 78 141.4 71.1 145.4 64.3 149.5 57.6 153.8 51 158.1 44.2 159.2 46.2 155.5 53.6 152 61.1 148.7 68.6 145.6 76.2 142.8 83.8 140.2 91.4 138 99 136 106.5 134.4 114.1 133 121.6 132 129 131.3 136.5 131 143.8 131.1 151.1 131.5 158.4 132.3 165.5 133.5 172.6 135.1 179.5 137.1 186.4 139.6 193.2 142.5 199.9 145.8 206.4
 
 id watches
+color navy
 tags measurementTag mechanicsTag timeTag metalTag machinesTag geometryTag
 title Watches
 shelf believer
 priceExponent 10
-color navy
 skills measure time regulate calibrate service
 tools movement dial hands crown loupe
 coverDescription a round watch face with hour, minute, and second hands
@@ -1370,6 +1463,7 @@ cover
  filledCircle 128 128 6
 
 id stone
+color oxblood
 tags physicsTag chemistryTag materialsTag buildingTag measurementTag longTermTag natureTag solidTag geometryTag
 title Stone
 shelf believer

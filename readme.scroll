@@ -87,10 +87,10 @@ css
  .designer-head h2 { margin: 0; font-size: 26px; font-weight: normal; }
  #design-close { border: 0; background: none; font-size: 28px; }
  .design-spread { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
- .design-cover { background: var(--cover, #294575); color: var(--gold); border-radius: 5px 12px 12px 5px; box-shadow: inset 8px 0 8px #0003, 5px 5px 0 #dcd1b9; padding: 16px 18px 12px; text-align: center; max-width: 320px; margin: auto; }
- #design-title { font: 24px/1.2 Georgia, serif; min-height: 29px; overflow-wrap: anywhere; margin: 0 0 10px; }
+ .design-cover { background: linear-gradient(90deg, #0000 20%, #0006 20%, #0000 23.5%), linear-gradient(90deg, var(--ls), var(--lc) 2%, var(--lc) 19.4%, var(--ls) 20%, #0000 20%), var(--wood) 0 0 / 100% 100%; color: #dcb985; text-shadow: 0 1px 1px #0009; border-radius: 4px 3px 3px 4px; box-shadow: 5px 5px 12px #0003; padding: 16px 12px 12px 24%; text-align: center; aspect-ratio: .5; max-width: 250px; margin: auto; }
+ #design-title { font: 21px/1.2 Georgia, serif; min-height: 29px; overflow-wrap: anywhere; margin: 0 0 10px; }
  .design-signature-wrap { position: relative; display: block; margin: -2px 0 6px; }
- #design-signature { display: block; width: 100%; padding: 3px; border: 0; background: transparent; color: inherit; text-align: center; font: 400 22px/1.15 Georgia, serif; }
+ #design-signature { display: block; width: 100%; padding: 3px; border: 0; background: transparent; color: inherit; text-align: center; font: 400 17px/1.15 Georgia, serif; }
  #design-signature::placeholder { color: inherit; opacity: .7; }
  #design-signature-art { position: absolute; inset: 0; display: block; padding: 3px; pointer-events: none; }
  #design-signature-art svg { display: block; width: 100%; height: 100%; }
@@ -108,9 +108,10 @@ css
  #design-code-status { color: #b42318; white-space: pre-line; }
  .design-cover .strokes { fill: none; stroke: currentColor; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; pointer-events: stroke; }
  .design-cover > span { display: block; margin-top: 10px; font: 10px Arial, sans-serif; letter-spacing: .25em; }
- #design-colors { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 6px; justify-content: center; }
- #design-colors button { width: 24px; height: 24px; border: 2px solid transparent; border-radius: 50%; background: var(--swatch); cursor: pointer; }
- #design-colors button[aria-pressed=true] { outline: 2px solid var(--ink); outline-offset: 2px; }
+ #design-colors, #design-woods { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 6px; justify-content: center; }
+ #design-colors button, #design-woods button { width: 20px; height: 40px; padding: 0; border: 0; border-radius: 2px; cursor: pointer; }
+ #design-colors button { background: linear-gradient(90deg, var(--ls), var(--lc) 20%, var(--lc) 80%, var(--ls)); }
+ #design-colors button[aria-pressed=true], #design-woods button[aria-pressed=true] { outline: 2px solid var(--ink); outline-offset: 2px; }
  .design-tools { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px 14px; font: 13px Arial, sans-serif; }
  .design-tools button { cursor: pointer; border: 0; background: none; padding: 8px 0; }
  #design-marker { display: flex; align-items: center; gap: 8px; }
@@ -137,14 +138,14 @@ css
   .design-spread { gap: 6px 10px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .design-inside, .design-spread > div:first-child { display: contents; }
   .design-cover { grid-column: 1; grid-row: 1; width: 100%; }
-  #design-colors { grid-column: 1 / -1; grid-row: 2; }
+  #design-colors { grid-column: 1; grid-row: 2; } #design-woods { grid-column: 2; grid-row: 2; }
   .design-tools { grid-column: 1 / -1; grid-row: 3; }
   .design-inside h3 { grid-column: 2; grid-row: 1; align-self: start; font-size: 20px; }
   #design-experiments { grid-column: 2; grid-row: 1; }
   .design-inside > p, #design-add { grid-column: 1 / -1; margin: 0; }
   .design-cover { padding: 12px 8px 8px; } #design-title { font-size: 18px; margin-bottom: 4px; }
   #design-signature { font-size: 19px; } #design-art { height: 100px; }
-  #design-colors { gap: 5px; margin: 8px 0 4px; } #design-colors button { width: 17px; height: 17px; }
+  #design-colors, #design-woods { gap: 5px; margin: 8px 0 4px; } #design-colors button, #design-woods button { width: 14px; height: 28px; }
   .design-tools { gap: 2px 8px; font-size: 11px; } #design-marker { gap: 3px; } #design-marker svg { width: 24px; }
  }
  :root {
@@ -803,7 +804,8 @@ aside
  <span class="design-signature-wrap"><input id="design-signature" aria-label="Expert name" placeholder="Your name (optional)" maxlength="60"><span id="design-signature-art" aria-hidden="true"></span></span>
  <svg id="design-art" viewBox="0 0 256 256" tabindex="0" aria-label="Draw your cover with the marker"><g id="design-portrait"></g><g class="strokes"></g></svg>
  <span>KNOWBOOKS</span></div>
- <div id="design-colors" role="group" aria-label="Cover color"></div>
+ <div id="design-colors" role="group" aria-label="Spine color"></div>
+ <div id="design-woods" role="group" aria-label="Wood"></div>
  <div class="design-tools"><button type="button" id="design-marker" aria-pressed="false" aria-label="Flip marker to eraser"><svg viewBox="0 0 100 24" width="100" height="24" aria-hidden="true"><path d="M5 12 19 5v14z" fill="currentColor"/><rect x="19" y="4" width="60" height="16" rx="3" fill="currentColor"/><rect x="80" y="4" width="15" height="16" rx="3" fill="#d9bc78"/></svg><span>Flip to erase</span></button><button type="button" id="design-undo">Undo</button><label class="design-upload">Upload<input id="portrait-file" type="file" aria-label="Upload cover image" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,.svg"></label><button type="button" id="remove-image" hidden>Remove image</button></div>
  </div>
  <div class="design-inside"><div id="design-experiments"><h3><label for="design-superpowers">What skills will customers learn?</label></h3><input id="design-superpowers" placeholder="write 5 verbs...." maxlength="124" aria-describedby="design-superpowers-help"><small id="design-superpowers-help">We’ll work with you to design 5 hands-on experiments.</small><h3><label for="design-tools">What tools will they acquire?</label></h3><input id="design-tools" placeholder="write 5 tools...." maxlength="124" aria-describedby="design-tools-help"><small id="design-tools-help">We'll work with you to pick 5 durable tools for customer homes.</small></div><p class="design-price"><label for="design-price">$<input id="design-price" type="number" inputmode="numeric" step="1" required></label> <small>price per copy</small></p><p>You buy the first one, then your audience buys the rest.</p><p>You keep 80% of net sales. We handle manufacturing, distribution, and delivery.</p><button id="design-add" type="submit"></button><p id="design-status" role="status"></p></div>
@@ -848,21 +850,6 @@ script
   perMonthSwitch.setAttribute("aria-checked", String(perMonth));
   // The URL is the source of truth (?perMonth=1). Toggling rewrites it and reloads; cart and designer drafts persist in localStorage.
   perMonthSwitch.addEventListener("click", () => { const url = new URL(location.href); perMonth ? url.searchParams.delete("perMonth") : url.searchParams.set("perMonth", "1"); history.replaceState(null, "", url); location.reload(); });
-  const coverPalette = {
-   navy: "#294575",
-   ocean: "#05638E",
-   teal: "#0E91A5",
-   forest: "#3D6640",
-   purple: "#7D589E",
-   yellow: "#F2C75D",
-   orange: "#E88F47",
-   coral: "#EC704B",
-   brick: "#B84A40",
-   burgundy: "#8D3340",
-   brown: "#65453B"
-  };
-  const coverColors = ["yellow", "navy", "coral", "forest", "orange", "purple", "brick", "teal", "burgundy", "ocean", "brown"].map(color => coverPalette[color]);
-  let nextCoverColor = 0;
   // Real Knowbooks: 10 tall x 5 wide x 2 deep, two 1-inch-deep wood trays (1/4 inch walls) hinged by leather that covers the 2 inch spine and wraps 1 inch onto front and back.
   // Drawn front-on: a 5 x 10 cover (aspect 1:2) whose left 1 inch (20%) is the leather wrap. Colors sampled from og.png; all dark, so titles are always gold.
   const woods = { // dark lines to highlights, grain frequency [across, along], angle
@@ -881,9 +868,7 @@ script
    tan: ["#8a3c1b", "#ad5831"]
   };
   const woodByLeather = { brown: "walnut", tan: "walnut", oxblood: "mahogany", navy: "koa", olive: "walnut", russet: "cherry", black: "walnut" }; // OG pairings
-  const leatherByColor = { navy: "navy", ocean: "navy", teal: "navy", forest: "olive", purple: "oxblood", burgundy: "oxblood", brick: "russet", coral: "russet", yellow: "tan", orange: "tan", brown: "brown" };
   const hashOf = text => [...String(text)].reduce((h, c) => Math.imul(h ^ c.charCodeAt(0), 16777619) >>> 0, 2166136261);
-  const pick = (object, h) => Object.keys(object)[h % Object.keys(object).length];
   const woodSvg = (wood, seed) => {
    const [ramp, frequency, angle] = woods[wood];
    const bands = [0, 1, 2, 3, 4, 3, 2, 3, 4, 2, 1, 2, 3, 4, 3, 1, 0, 2, 3, 4, 3, 2].map(i => ramp[i]);
@@ -892,13 +877,11 @@ script
    return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
   };
   const coverStyle = product => {
-   const h = hashOf(product.id), leatherName = product.leather || leatherByColor[product.color] || pick(leathers, h >>> 3), leather = leathers[leatherName], wood = product.wood || woodByLeather[leatherName];
+   const h = hashOf(product.id), leather = leathers[product.color], wood = product.wood || woodByLeather[product.color];
    return `--wood:${woodSvg(wood, h % 997)};--ls:${leather[0]};--lc:${leather[1]}`;
   };
   const productCatalog = (Array.isArray(catalog) ? catalog : []).map(product => {
-   const color = product.color?.trim().toLowerCase();
-   if (color && !Object.hasOwn(coverPalette, color)) throw new Error(`Unknown cover color "${product.color}" for ${product.id}`);
-   return { ...product, listPriceUsd: 2 ** product.priceExponent, priceUsd: salePrice(2 ** product.priceExponent), coverColor: color ? coverPalette[color] : coverColors[nextCoverColor++ % coverColors.length] };
+   return { ...product, listPriceUsd: 2 ** product.priceExponent, priceUsd: salePrice(2 ** product.priceExponent) };
   });
   const products = new Map(productCatalog.map(product => [product.id, product]));
   const productTags = new Map(productCatalog.map(product => [product.id, new Set((product.tags || "").split(/\s+/).filter(Boolean))]));
@@ -1094,7 +1077,7 @@ script
    [...cart].forEach(([id, quantity], index) => {
     const product = products.get(id);
     const number = index + 1;
-    url.searchParams.set(`item_name_${number}`, `${product.title}${plainShelves[product.shelf] && product.id !== "knowbook" ? "" : " Knowbook"}${product.id === "knowbook" ? " + initial partner conversation" : ""}${pickupNote(product) ? " — in-person pickup only; no shipping" : ""}${product.note ? ` — Instructions: ${product.note}` : ""}${referralCode ? ` (Referral: ${referralCode})` : ""}`);
+    url.searchParams.set(`item_name_${number}`, `${product.title}${plainShelves[product.shelf] && product.id !== "knowbook" ? "" : " Knowbook"}${product.id === "knowbook" ? " + initial partner conversation" : ""}${product.design ? ` — ${product.color} spine, ${product.wood} wood` : ""}${pickupNote(product) ? " — in-person pickup only; no shipping" : ""}${product.note ? ` — Instructions: ${product.note}` : ""}${referralCode ? ` (Referral: ${referralCode})` : ""}`);
     url.searchParams.set(`item_number_${number}`, product.id);
     url.searchParams.set(`amount_${number}`, Number(product.priceUsd).toFixed(2));
     url.searchParams.set(`quantity_${number}`, String(quantity));
@@ -1417,7 +1400,7 @@ script
    const key = 'knowbooks-signature-design', undo = [], hedcuts = new WeakMap();
    const price = Object.assign($('#design-price'), { min: customKnowbookPrice.minUsd, max: customKnowbookPrice.maxUsd });
    let design, draft, editing = false, erase = false, drawing, opener, photoVersion = 0;
-   const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', signature: '', color: 'navy', superpowers: '', tools: '', priceUsd: customKnowbookPrice.defaultUsd, art: [], portrait: [], svgImage: '', coverDescription: '' });
+   const fresh = () => ({ id: `custom-${cryptoId()}`, title: 'Your Knowbook', signature: '', color: 'navy', wood: 'koa', superpowers: '', tools: '', priceUsd: customKnowbookPrice.defaultUsd, art: [], portrait: [], svgImage: '', coverDescription: '' });
    function cryptoId() { return globalThis.crypto.randomUUID().slice(0, 8); }
    // Superpowers and tools share the same rule: up to 5 space-separated words, 124 characters.
    const maxWords = 5, maxWordChars = 124;
@@ -1434,7 +1417,7 @@ script
    const dots = values => body(covers.packDots(values).join('\n'));
    const vectorImage = value => value ? body('svgImage '+value) : '';
    const cover = d => covers.compile(covers.designerSource(d));
-   const product = d => ({ id: d.id, title: `${d.title} — Signature Knowbook (${d.id})`, listPriceUsd: d.priceUsd, priceUsd: salePrice(d.priceUsd), coverColor: coverPalette[d.color], cover: cover(d), design: d });
+   const product = d => ({ id: d.id, title: `${d.title} — Signature Knowbook (${d.id})`, listPriceUsd: d.priceUsd, priceUsd: salePrice(d.priceUsd), color: d.color, wood: d.wood, cover: cover(d), design: d });
    const remember = () => {
     design.title = title.textContent.replace(/\s+/g,' ').trim().slice(0, 60);
     design.signature = signature.value.trim();
@@ -1445,7 +1428,7 @@ script
    };
    // Rebuild saved custom products from validated design data, never stored HTML.
    const restoreDesign = d => {
-    if (!d || !/^custom-[a-f0-9-]{8}$/.test(d.id) || !Object.hasOwn(coverPalette,d.color)) return null;
+    if (!d || !/^custom-[a-f0-9-]{8}$/.test(d.id) || !Object.hasOwn(leathers,d.color) || !Object.hasOwn(woods,d.wood)) return null;
     d.title = String(d.title).slice(0,60); d.signature = String(typeof d.signature === 'string' ? d.signature : '').replace(/\s+/g,' ').slice(0,60);
     d.superpowers = fiveWords(d.superpowers ?? (Array.isArray(d.verbs) ? d.verbs.filter(Boolean).join(' ') : ''));
     delete d.verbs;
@@ -1473,7 +1456,7 @@ script
    const proposal = d => {
     const leaf = value => String(value || '').replace(/\s+/g,' ').trim();
     return [
-     `title ${leaf(d.title)}`, ...(d.signature ? [`signature ${leaf(d.signature)}`] : []), `color ${d.color}`,
+     `title ${leaf(d.title)}`, ...(d.signature ? [`signature ${leaf(d.signature)}`] : []), `color ${d.color}`, `wood ${d.wood}`,
      `priceUsd ${d.priceUsd}`,
      `superpowers ${leaf(d.superpowers)}`,
      ...(d.tools ? [`tools ${leaf(d.tools)}`] : []),
@@ -1494,7 +1477,7 @@ script
     const url=new URL(location.href);url.search='';url.hash='knowbook='+encodeURIComponent(text);designLink.value=url.href;
    }
    // Forgiving parser: applies every recognized line, never throws, and returns warnings like "line 3: ...".
-   const fieldAliases = { title: 'title', name: 'title', signature: 'signature', author: 'signature', color: 'color', colour: 'color', price: 'priceUsd', priceusd: 'priceUsd', superpowers: 'superpowers', verbs: 'superpowers', skills: 'superpowers', experiments: 'superpowers', tools: 'tools', coverdescription: 'coverDescription', symbol: 'coverDescription', cover: 'cover' };
+   const fieldAliases = { title: 'title', name: 'title', signature: 'signature', author: 'signature', color: 'color', colour: 'color', wood: 'wood', price: 'priceUsd', priceusd: 'priceUsd', superpowers: 'superpowers', verbs: 'superpowers', skills: 'superpowers', experiments: 'superpowers', tools: 'tools', coverdescription: 'coverDescription', symbol: 'coverDescription', cover: 'cover' };
    const legacyFields = ['designfeeusd', 'depositusd', 'prototype', 'balance', 'copies'];
    function readProposal(text) {
     const d = { ...fresh(), id: design.id, shapes: [] }, warnings = [], chunks = [];
@@ -1508,7 +1491,7 @@ script
      inCover = key === 'cover';
      if (inCover || legacyFields.includes(rawKey.toLowerCase())) return;
      if (!key) return warn(n, `unknown field "${rawKey.slice(0, 30)}", skipped`);
-     if (key === 'color') return Object.hasOwn(coverPalette, value.toLowerCase()) ? d.color = value.toLowerCase() : warn(n, `unknown color "${value}", using ${d.color}`);
+     if (key === 'color' || key === 'wood') return Object.hasOwn(key === 'color' ? leathers : woods, value.toLowerCase()) ? d[key] = value.toLowerCase() : warn(n, `unknown ${key} "${value}", using ${d[key]}`);
      if (key === 'priceUsd') {
       const price = Math.round(Number(value.replace(/[$,\s]/g, '')));
       if (!Number.isFinite(price)) return warn(n, `invalid price "${value}", using ${d.priceUsd}`);
@@ -1547,15 +1530,19 @@ script
    });
    limitWordsInput(superpowers, 'superpowers');
    limitWordsInput(tools, 'tools');
-   $('#design-colors').innerHTML = Object.entries(coverPalette).map(([name,color]) => `<button type="button" style="--swatch:${color}" data-color="${name}" aria-label="${name}" title="${name}" aria-pressed="false"></button>`).join('');
+   const swatches = (field, names) => names.map(name => `<button type="button" class="book-cover" style="${escapeHtml(coverStyle({ id: name, color: field === 'color' ? name : 'navy', wood: field === 'wood' ? name : 'koa' }))}" data-${field}="${name}" aria-label="${name}" title="${name}" aria-pressed="false"></button>`).join('');
+   $('#design-colors').innerHTML = swatches('color', Object.keys(leathers));
+   $('#design-woods').innerHTML = swatches('wood', Object.keys(woods));
    function render() {
-    $('.design-cover').style.setProperty('--cover', coverPalette[design.color]);
+    $('.design-cover').style.cssText = coverStyle(design);
     $('#design-colors').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed',b.dataset.color === design.color));
+    $('#design-woods').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed',b.dataset.wood === design.wood));
     $('#design-portrait').innerHTML = vectorImage(design.svgImage) + dots(design.portrait) + body((design.shapes || []).join('\n')); $('#remove-image').hidden = !design.svgImage && !design.portrait.length && !design.shapes?.length && !hedcuts.has(design);
     art.querySelector('.strokes').innerHTML = paths(design.art);
     signatureArt.innerHTML = signatureFor(design.title, design.signature);
    }
    $('#design-colors').onclick = event => { const b = event.target.closest('[data-color]'); if(b) { design.color = b.dataset.color; render(); remember(); } };
+   $('#design-woods').onclick = event => { const b = event.target.closest('[data-wood]'); if(b) { design.wood = b.dataset.wood; render(); remember(); } };
    title.addEventListener('keydown', event => { if(event.key === 'Enter') event.preventDefault(); });
    title.addEventListener('input', () => { if(title.textContent.length > 60) title.textContent = title.textContent.slice(0,60); remember(); signatureArt.innerHTML = signatureFor(design.title, design.signature); });
    signature.addEventListener('input', () => { remember(); signatureArt.innerHTML = signatureFor(design.title, design.signature); });
