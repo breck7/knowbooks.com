@@ -289,17 +289,22 @@ css
  .edition-toggle[aria-expanded="true"] h2::before { content: "▾"; }
  .edition-divider p { margin: 0; color: var(--muted); white-space: nowrap; text-transform: uppercase; font: 700 14px/1.2 Arial, sans-serif; letter-spacing: .06em; }
  .product { min-width: 0; padding: clamp(20px, 2vw, 28px); background: var(--paper); }
- .book-cover { position: relative; isolation: isolate; aspect-ratio: .72; display: flex; flex-direction: column; align-items: center; padding: 11% 9%; overflow: hidden; color: #f4dfb3; background: linear-gradient(135deg, var(--cover), color-mix(in srgb, var(--cover) 58%, #000)); border-radius: 2px 12px 12px 2px; box-shadow: 11px 16px 25px rgba(34,28,20,.2), inset 5px 0 8px rgba(0,0,0,.17), inset 0 0 0 1px rgba(255,255,255,.08); cursor: pointer; transition: transform 180ms ease; }
+ .book-cover { position: relative; isolation: isolate; aspect-ratio: .5; display: flex; flex-direction: column; align-items: center; padding: 11% 7% 9% 27%; overflow: hidden; color: #dcb985; text-shadow: 0 1px 1px #0009; background:
+  linear-gradient(90deg, #0000 20%, #0006 20%, #0000 23.5%),
+  linear-gradient(90deg, var(--ls), var(--lc) 2%, var(--lc) 19.4%, var(--ls) 20%, #0000 20%),
+  var(--wood) 0 0 / 100% 100%;
+  border-radius: 4px 3px 3px 4px; box-shadow: 11px 16px 25px rgba(34,28,20,.22), inset 0 2px 0 #ffffff1c, inset 0 -3px 4px #0003; cursor: pointer; transition: transform 180ms ease; }
+ .book-cover::after { content: ""; position: absolute; z-index: -1; inset: 0 auto 0 0; width: 20%; background: linear-gradient(#ffffff14, #0000 20%, #0000 80%, #0003), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.4 .42'/%3E%3C/filter%3E%3Crect width='60' height='60' filter='url(%23p)'/%3E%3C/svg%3E") 0 0 / 24px 24px; pointer-events: none; }
  .product:hover .book-cover { transform: translateY(-5px) rotate(-.5deg); }
- .book-cover::before { content: ""; position: absolute; z-index: -1; inset: 0; opacity: .22; background: repeating-linear-gradient(89deg, rgba(255,255,255,.18) 0 1px, transparent 1px 4px); }
- .book-cover h3 { width: 100%; margin: 5% 0 0; white-space: nowrap; text-align: center; text-transform: uppercase; font-size: clamp(19px, 2vw, 29px); font-weight: 400; letter-spacing: .11em; }
- .book-symbol { position: absolute; left: 50%; top: 50%; width: 44%; aspect-ratio: 1; transform: translate(-50%, -50%); pointer-events: none; }
+ .book-cover::before { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(112deg, #fff0 20%, #ffffff24 40%, #fff0 56%, #fff0 70%, #ffffff12 82%, #fff0 92%), linear-gradient(#fff1, #0000 30%, #0002); box-shadow: inset -2px -2px 0 #0003, inset 1px 1px 0 #fff2; }
+ .book-cover h3 { width: 100%; margin: 4% 0 0; white-space: nowrap; text-align: center; text-transform: uppercase; font-family: "Avenir Next", Futura, "Gill Sans", sans-serif; font-size: clamp(17px, 1.8vw, 26px); font-weight: 400; letter-spacing: .14em; }
+ .book-symbol { position: absolute; left: 60%; top: 50%; width: 38%; aspect-ratio: 1; transform: translate(-50%, -50%); pointer-events: none; }
  .book-symbol svg { display: block; width: 100%; height: 100%; }
  .book-cover a { text-decoration: none; }
- .book-brand { margin-top: auto; text-transform: uppercase; font: 700 7px/1 Arial, sans-serif; letter-spacing: .18em; }
+ .book-brand { margin-top: auto; text-transform: uppercase; font: 600 7px/1 Arial, sans-serif; letter-spacing: .22em; }
  .book-preview { position: fixed; z-index: 30; inset: 0; background: rgba(23,23,20,.55); opacity: 0; visibility: hidden; transition: opacity 250ms, visibility 250ms; }
  .book-preview.is-open { opacity: 1; visibility: visible; }
- .preview-book { position: absolute; left: 50%; top: 50%; width: min(320px, 42vw, 62svh); aspect-ratio: .72; translate: 0 -50%; transform: translate(var(--x), var(--y)) scale(var(--scale)); transition: transform 450ms cubic-bezier(.2,.8,.2,1); perspective: 1400px; }
+ .preview-book { position: absolute; left: 50%; top: 50%; width: min(320px, 42vw, 62svh); aspect-ratio: .5; translate: 0 -50%; transform: translate(var(--x), var(--y)) scale(var(--scale)); transition: transform 450ms cubic-bezier(.2,.8,.2,1); perspective: 1400px; }
  .preview-book-video { width: min(42vw, 56svh, 560px); perspective: 1600px; }
  .book-preview.is-open .preview-book { transform: none; }
  .preview-pages { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 36px 10% 22px; overflow: clip; border-radius: 2px 12px 12px 2px; background: #fffaf0; box-shadow: 11px 16px 35px rgba(0,0,0,.28), inset 7px 0 12px rgba(90,70,35,.12); }
@@ -351,7 +356,7 @@ css
  .cart-close { width: 42px; height: 42px; border: 0; background: transparent; cursor: pointer; font-size: 32px; font-weight: 300; }
  .cart-lines { overflow-y: auto; min-height: 90px; flex: 1 0 auto; }
  .cart-line { display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 15px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
- .line-swatch, .basket-book { position: relative; width: var(--mini-width, 54px); aspect-ratio: .72; }
+ .line-swatch, .basket-book { position: relative; width: var(--mini-width, 54px); aspect-ratio: .5; }
  .line-swatch .book-cover, .basket-book .book-cover { position: absolute; width: 270px; padding: 29.7px 24.3px; transform: scale(var(--book-scale, .2)); transform-origin: top left; pointer-events: none; }
  .line-copy h3 { margin: 0 0 6px; font-size: 18px; font-weight: 400; }
  .line-copy p { margin: 0; color: var(--muted); font: 12px/1 Arial, sans-serif; }
@@ -858,6 +863,38 @@ script
   };
   const coverColors = ["yellow", "navy", "coral", "forest", "orange", "purple", "brick", "teal", "burgundy", "ocean", "brown"].map(color => coverPalette[color]);
   let nextCoverColor = 0;
+  // Real Knowbooks: 10 tall x 5 wide x 2 deep, two 1-inch-deep wood trays (1/4 inch walls) hinged by leather that covers the 2 inch spine and wraps 1 inch onto front and back.
+  // Drawn front-on: a 5 x 10 cover (aspect 1:2) whose left 1 inch (20%) is the leather wrap. Colors sampled from og.png; all dark, so titles are always gold.
+  const woods = { // dark lines to highlights, grain frequency [across, along], angle
+   koa: [["#3a1806", "#5a2a10", "#6e3818", "#86481f", "#a0602c"], "0.06 0.003", -6],
+   walnut: [["#3a1a0a", "#4c240f", "#5c2d14", "#6c3a1d", "#80492a"], "0.07 0.003", -4],
+   mahogany: [["#2a0806", "#3a0f0a", "#4a160f", "#5a1f16", "#6c2b20"], "0.08 0.003", -3],
+   cherry: [["#3e1408", "#5c2414", "#74321c", "#8a4326", "#a05632"], "0.07 0.003", -5]
+  };
+  const leathers = { // shadow, base; sampled from og.png
+   russet: ["#994f2d", "#b26541"],
+   black: ["#0e1414", "#1f2a29"],
+   brown: ["#3a231a", "#5e3e33"],
+   oxblood: ["#5a1818", "#80322f"],
+   navy: ["#1c2639", "#3c475d"],
+   olive: ["#3a321d", "#5d563a"],
+   tan: ["#8a3c1b", "#ad5831"]
+  };
+  const woodByLeather = { brown: "walnut", tan: "walnut", oxblood: "mahogany", navy: "koa", olive: "walnut", russet: "cherry", black: "walnut" }; // OG pairings
+  const leatherByColor = { navy: "navy", ocean: "navy", teal: "navy", forest: "olive", purple: "oxblood", burgundy: "oxblood", brick: "russet", coral: "russet", yellow: "tan", orange: "tan", brown: "brown" };
+  const hashOf = text => [...String(text)].reduce((h, c) => Math.imul(h ^ c.charCodeAt(0), 16777619) >>> 0, 2166136261);
+  const pick = (object, h) => Object.keys(object)[h % Object.keys(object).length];
+  const woodSvg = (wood, seed) => {
+   const [ramp, frequency, angle] = woods[wood];
+   const bands = [0, 1, 2, 3, 4, 3, 2, 3, 4, 2, 1, 2, 3, 4, 3, 1, 0, 2, 3, 4, 3, 2].map(i => ramp[i]);
+   const table = n => bands.map(hex => (parseInt(hex.slice(n, n + 2), 16) / 255).toFixed(3)).join(" ");
+   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" preserveAspectRatio="none"><filter id="w" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="${frequency}" numOctaves="2" seed="${seed}"/><feColorMatrix values="1.4 0 0 0 -.2 1.4 0 0 0 -.2 1.4 0 0 0 -.2 0 0 0 0 1"/><feComponentTransfer><feFuncR type="table" tableValues="${table(1)}"/><feFuncG type="table" tableValues="${table(3)}"/><feFuncB type="table" tableValues="${table(5)}"/><feFuncA type="linear" slope="0" intercept="1"/></feComponentTransfer></filter><rect x="-60" y="-60" width="220" height="260" filter="url(#w)" transform="rotate(${angle} 50 70)"/></svg>`;
+   return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+  };
+  const coverStyle = product => {
+   const h = hashOf(product.id), leatherName = product.leather || leatherByColor[product.color] || pick(leathers, h >>> 3), leather = leathers[leatherName], wood = product.wood || woodByLeather[leatherName];
+   return `--wood:${woodSvg(wood, h % 997)};--ls:${leather[0]};--lc:${leather[1]}`;
+  };
   const productCatalog = (Array.isArray(catalog) ? catalog : []).map(product => {
    const color = product.color?.trim().toLowerCase();
    if (color && !Object.hasOwn(coverPalette, color)) throw new Error(`Unknown cover color "${product.color}" for ${product.id}`);
@@ -977,7 +1014,7 @@ script
   const toolsOf = product => (product.tools || "").trim().split(/\s+/).filter(Boolean);
   const chipSection = (label, items) => items.length ? `<div class="preview-know"><h4>${escapeHtml(label)}</h4><ul class="preview-skills">${items.slice(0, 5).map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul><p class="preview-more">and more!</p></div>` : "";
   const cartDeliveryNote = () => [...cart.keys()].some(id => pickupNote(products.get(id))) ? "Includes tax and shipping for shippable items. Pickup-only items must be collected in person." : "Includes shipping and tax.";
-  const bookCover = product => `<div class="book-cover" style="--cover:${escapeHtml(product.coverColor)}">
+  const bookCover = product => `<div class="book-cover" style="${escapeHtml(coverStyle(product))}">
      <h3><a href="?knowbookId=${escapeHtml(product.id)}" onclick="return false">${escapeHtml(product.design?.title || product.title)}</a></h3>${(product.design?.signature || product.signature) ? `<span class="book-signature">${signatureFor(product.design?.title || product.title, product.design?.signature || product.signature)}</span>` : ""}<span class="book-symbol" aria-hidden="true">${product.cover || ""}</span><span class="book-brand">Knowbooks</span>
     </div>`;
   const productCard = (product, shelf) => {

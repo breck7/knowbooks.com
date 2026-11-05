@@ -37,6 +37,24 @@ colorParser
  atoms measureNameAtom coverColorAtom
  description Optional default cover color: navy, ocean, teal, forest, purple, yellow, orange, coral, brick, burgundy, or brown. Unassigned books cycle yellow, navy, coral, forest, orange, purple, brick, teal, burgundy, ocean, brown in catalog order; assigned colors do not advance the cycle.
 
+woodAtom
+ extends atomAtom
+ enum koa walnut mahogany cherry
+
+woodParser
+ extends abstractEnumMeasureParser
+ atoms measureNameAtom woodAtom
+ description Optional cover wood. Defaults to one picked from the id.
+
+leatherAtom
+ extends atomAtom
+ enum russet black brown oxblood navy olive tan
+
+leatherParser
+ extends abstractEnumMeasureParser
+ atoms measureNameAtom leatherAtom
+ description Optional spine leather. Defaults from color, else picked from the id.
+
 coverDescriptionParser
  extends abstractStringMeasureParser
  description Prose description of the cover artwork.
@@ -113,6 +131,7 @@ cover
  path M 192 194.6 C 199.7 194.6 199.7 61.4 208.6 61.4 C 217.6 61.4 217.6 194.6 225.3 194.6
 
 id magnets
+leather tan
 tags physicsTag mechanicsTag electricityTag electromagnetismTag instantTag metalTag
 video videos/magnets.mp4
 color navy
@@ -131,6 +150,7 @@ cover
 // physical experiments that teach both non-linear physical jumps and metaphorically the personal/social power of focus
 
 id focus
+leather oxblood
 tags physicsTag psychologyTag instantTag startupsTag emotionalSkillsTag
 color coral
 title Focus
@@ -144,6 +164,7 @@ cover
  filledPolygon 204.8 71.7 128 128 204.8 184.3
 
 id levers
+leather navy
 tags physicsTag mechanicsTag buildingTag instantTag energyTag machinesTag motionTag
 color navy
 title Levers
@@ -158,6 +179,7 @@ cover
  filledPolygon 44.6 95.1 83 88.5 89.6 126.9 51.2 133.5
 
 id beams
+leather brown
 tags physicsTag materialsTag mechanicsTag buildingTag measurementTag instantTag solidTag machinesTag geometryTag
 color brown
 title Beams
@@ -170,6 +192,7 @@ cover
  filledRect 102.4 43.5 51.2 169
 
 id sales
+leather olive
 tags economicsTag psychologyTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag socialTag
 color forest
 title Sales
@@ -196,6 +219,7 @@ cover
  filledCircle 166.4 161.3 7.7
 
 id carpentry
+leather black
 tags plantTag materialsTag mechanicsTag buildingTag creativeTag hazardTag solidTag machinesTag geometryTag
 title Carpentry
 signature Rob & Sean & Breck
@@ -224,6 +248,7 @@ cover
 // economic system
 
 id capital
+leather russet
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 color forest
 title Capital
