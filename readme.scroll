@@ -809,7 +809,7 @@ aside
  <div class="design-tools"><button type="button" id="design-marker" aria-pressed="false" aria-label="Flip marker to eraser"><svg viewBox="0 0 100 24" width="100" height="24" aria-hidden="true"><path d="M5 12 19 5v14z" fill="currentColor"/><rect x="19" y="4" width="60" height="16" rx="3" fill="currentColor"/><rect x="80" y="4" width="15" height="16" rx="3" fill="#d9bc78"/></svg><span>Flip to erase</span></button><button type="button" id="design-undo">Undo</button><label class="design-upload">Upload<input id="portrait-file" type="file" aria-label="Upload cover image" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,.svg"></label><button type="button" id="remove-image" hidden>Remove image</button></div>
  </div>
  <div class="design-inside"><div id="design-experiments"><h3><label for="design-superpowers">What skills will customers learn?</label></h3><input id="design-superpowers" placeholder="write 5 verbs...." maxlength="124" aria-describedby="design-superpowers-help"><small id="design-superpowers-help">We’ll work with you to design 5 hands-on experiments.</small><h3><label for="design-tools">What tools will they acquire?</label></h3><input id="design-tools" placeholder="write 5 tools...." maxlength="124" aria-describedby="design-tools-help"><small id="design-tools-help">We'll work with you to pick 5 durable tools for customer homes.</small></div><p class="design-price"><button type="button" id="design-price-down" aria-label="Halve price">−</button> <output id="design-price" aria-live="polite"></output> <button type="button" id="design-price-up" aria-label="Double price">+</button> <small>price per copy</small></p><p>You buy the first one, then your audience buys the rest.</p><p>You keep 80% of net sales. We handle manufacturing, distribution, and delivery.</p><button id="design-add" type="submit"></button><p id="design-status" role="status"></p></div>
- </div><details id="design-source"><summary>See/Edit code</summary><textarea id="design-code" aria-label="Knowbook Scroll code" aria-describedby="design-code-status" spellcheck="false"></textarea><small id="design-code-status" role="status"></small><label for="design-link">Design link</label><input id="design-link" type="text" readonly spellcheck="false"></details></form>
+ </div><details id="design-source"><summary>See/Edit code</summary><textarea id="design-code" aria-label="Knowbook Scroll code" aria-describedby="design-code-status" spellcheck="false"></textarea><small id="design-code-status" role="status"></small><label for="design-link">Share link</label><input id="design-link" type="text" readonly spellcheck="false"></details></form>
 </dialog>
 partners.scroll
 
@@ -1733,7 +1733,7 @@ script
     const payload = fromUrl('knowbook'); if(!payload) return;
     open();$('#design-source').open=true;
     try {code.value=decodeURIComponent(payload);code.dispatchEvent(new Event('input'));}
-    catch {code.value='';codeInvalid=true;designLink.value='';codeStatus.textContent='This design link has invalid URL encoding.';code.setCustomValidity(codeStatus.textContent);}
+    catch {code.value='';codeInvalid=true;designLink.value='';codeStatus.textContent='This share link has invalid URL encoding.';code.setCustomValidity(codeStatus.textContent);}
    };
    window.addEventListener('hashchange',loadDesignLink);loadDesignLink();
   }
