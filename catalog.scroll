@@ -102,7 +102,6 @@ fulfillment pickup
 soldOut true
 tags economicsTag measurementTag creativeTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag
 title Launch
-signature Breck & Steph
 skills live love laugh learn launch
 tools hotel food people knowbooks memories
 shelf archive
@@ -119,7 +118,6 @@ color tan
 tags physicsTag mechanicsTag electricityTag electromagnetismTag instantTag metalTag
 video videos/magnets.mp4
 title Magnets
-signature Breck
 skills push pull point test see lift find
 tools magnets filings compasses lodestones lifter
 shelf believer
@@ -201,7 +199,6 @@ id carpentry
 color black
 tags plantTag materialsTag mechanicsTag buildingTag creativeTag hazardTag solidTag machinesTag geometryTag
 title Carpentry
-signature Rob & Sean & Breck
 skills measure mark cut shape level
 tools tape pencil saw chisel level
 shelf believer

@@ -418,7 +418,7 @@ css
 <main id="top">
   <section class="hero">
    <h1>Knowbooks are books you <em>do</em>.</h1>
-   <p class="intro">No pages. No screens. A Knowbook is an experiment kit in a book. Open one, do the experiments, and grow superpowers.</p>
+   <p class="intro">No pages. No screens. A Knowbook is an experiment kit in a book. Open one, do the experiments, and grow superpowers. See what <a href="https://friends.knowbooks.com">customers are doing.</a></p>
    <a class="down" href="#catalog">Build your shelf <span aria-hidden="true">↓</span></a>
   </section>
   <aside class="bos-banner" role="status" aria-live="polite" hidden><span class="bos-spark" aria-hidden="true">✦</span><span class="bos-label">1776 Launchation Celebration Sale</span><span class="bos-rule" aria-hidden="true"></span><strong class="bos-percent">17.76% off</strong><span class="bos-ends">everything · ends in <span class="bos-clock">33:04:00</span></span><span class="bos-spark" aria-hidden="true">✦</span></aside>
