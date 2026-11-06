@@ -68,7 +68,12 @@ main
    li
     span October 27, 2026
      addClass when
-    span First Knowbooks Inc. bank account opened.
+    span First Knowbooks Inc. <a href="https://www.cpb.bank">bank account</a> opened.
+     addClass what
+   li
+    span November 5, 2026
+     addClass when
+    span Knowbooks <a href="https://launchation.com">Launchation</a> at Ritz-Carlton O‘ahu, Turtle Bay.
      addClass what
  section
   addClass about-section
