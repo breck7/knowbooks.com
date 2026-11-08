@@ -181,6 +181,8 @@ css
  .per-month[aria-checked="false"] .track span:first-child, .per-month[aria-checked="true"] .track span:last-child { color: #262b22; }
  .per-month:focus-visible { outline: 2px solid #d9bc78; outline-offset: 2px; border-radius: 999px; }
  .faq-link { margin-left: auto; margin-right: 100px; text-decoration: none; text-transform: uppercase; font: 700 10px/1 Arial, sans-serif; letter-spacing: .13em; }
+ .about-link { margin-right: 24px; }
+ .about-link + .faq-link { margin-left: 0; }
  .faq-link:hover, .faq-link:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
  .cart-toggle { position: fixed; z-index: 25; top: 16px; right: clamp(16px, 4vw, 60px); width: 86px; height: 78px; padding: 0; border: 0; background: transparent; cursor: pointer; filter: drop-shadow(0 5px 5px #0002); transition: opacity 200ms, transform 200ms; }
  .corner-books { position: absolute; inset: 0 auto auto 0; width: 200px; height: 148px; transform: scale(.43, .527027); transform-origin: top left; pointer-events: none; }
@@ -413,6 +415,7 @@ css
 
 <header class="site-header">
   <a class="brand" href="#top" aria-label="Knowbooks home"><img src="knowbooksLogo.svg" alt=""><span>KNOWBOOKS</span></a>
+  <a class="faq-link about-link" href="about.html">About</a>
   <a class="faq-link" href="#faq">FAQ</a>
   <button class="cart-toggle" type="button" aria-label="Open shopping cart" aria-expanded="false" aria-controls="cart"><span class="corner-books" aria-hidden="true"><span class="basket-books"></span></span><svg viewBox="0 0 160 120" fill="none" aria-hidden="true"><path d="M13 15h19l16 69h88" stroke="#343e35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 34h108l-13 40H47z" fill="#c7ad7029" stroke="#343e35" stroke-width="3" stroke-linejoin="round"/><path d="M62 35l5 38m20-38v38m23-38-5 38M43 54h96" stroke="#8b805f" stroke-width="2"/><circle cx="59" cy="100" r="9" fill="#343e35"/><circle cx="126" cy="100" r="9" fill="#343e35"/><circle cx="59" cy="100" r="3" fill="#efe9da"/><circle cx="126" cy="100" r="3" fill="#efe9da"/></svg><span class="cart-count">0</span></button>
  </header>
