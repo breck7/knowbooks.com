@@ -16,7 +16,7 @@ signatureParser
 
 shelfAtom
  extends atomAtom
- enum believer special archive
+ enum build believer special archive
 
 shelfParser
  extends abstractStringMeasureParser
@@ -27,6 +27,10 @@ shelfParser
 priceExponentParser
  extends abstractIntegerMeasureParser
  description Website checkout price in whole US dollars is 2 to this power (8 means $256).
+
+quantityLeftParser
+ extends abstractIntegerMeasureParser
+ description Optional copies left. When set, the card shows a "N left" badge.
 
 spineColorAtom
  extends atomAtom
@@ -91,6 +95,44 @@ tagsParser
  description Tags with an editorial Yes answer; tag definitions live in tags.scroll. At least one tag per Knowbook.
 
 // data
+
+// build a book
+
+id small
+color tan
+title Small
+shelf build
+priceExponent 7
+quantityLeft 3
+description Small custom Knowbook. We meet with you in person and/or on a video call, you choose the items that go in your book, then we laser-cut and build it for you, with other adjustable customizations.
+coverDescription a solid plus sign, sized to the book
+cover
+ filledRect 120.0 104.0 16.0 48.0
+ filledRect 104.0 120.0 48.0 16.0
+
+id medium
+color oxblood
+title Medium
+shelf build
+priceExponent 7
+quantityLeft 3
+description Medium custom Knowbook. We meet with you in person and/or on a video call, you choose the items that go in your book, then we laser-cut and build it for you, with other adjustable customizations.
+coverDescription a solid plus sign, sized to the book
+cover
+ filledRect 115.0 89.0 26.0 78.0
+ filledRect 89.0 115.0 78.0 26.0
+
+id large
+color navy
+title Large
+shelf build
+priceExponent 7
+quantityLeft 3
+description Large custom Knowbook. We meet with you in person and/or on a video call, you choose the items that go in your book, then we laser-cut and build it for you, with other adjustable customizations.
+coverDescription a solid plus sign, sized to the book
+cover
+ filledRect 110.0 74.0 36.0 108.0
+ filledRect 74.0 110.0 108.0 36.0
 
 // new product launches
 

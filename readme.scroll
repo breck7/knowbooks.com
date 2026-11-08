@@ -370,6 +370,7 @@ css
  .is-sale { white-space: nowrap; }
  .is-sale del { margin-right: .3em; font-size: .72em; font-weight: 400; opacity: .6; text-decoration-thickness: 1px; text-decoration-color: currentColor; }
  .is-sale ins { text-decoration: none; box-shadow: inset 0 -.18em 0 #d9bc7866; }
+ .qty-left { display: inline-block; margin-left: .5em; padding: 2px 7px 1px; border-radius: 999px; background: #6b2a24; color: #e8cf94; box-shadow: inset 0 0 0 1px #d9bc7855; font: 700 9px/1.3 Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; vertical-align: 2px; }
  .sale-tag { display: inline-block; margin-left: .45em; padding: 2px 5px 1px; border-radius: 3px; background: #2f3d30; color: #d9bc78; font: 700 9px/1.2 Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; vertical-align: .2em; }
  .cart-savings { margin: -14px 0 18px; text-align: right; color: #9a7a2e; font: 600 12px Arial, sans-serif; }
  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -912,9 +913,9 @@ script
   const editionNameByShelf = {
    believer: "Believer"
   };
-  const shelfOrder = ["believer", "special", "archive"];
-  const plainShelves = { special: "Special items", archive: "Archive" };
-  const collapsedEditions = new Set(["special", "archive"]);
+  const shelfOrder = ["build", "believer", "special", "archive"];
+  const plainShelves = { build: "Build a Book", special: "Special items", archive: "Archive" };
+  const collapsedEditions = new Set(["believer", "special", "archive"]);
   const cart = new Map();
   const grid = document.querySelector("#product-grid");
   const preview = document.querySelector(".book-preview");
@@ -1002,7 +1003,7 @@ script
    const { name, shipping } = editionDetails(shelf);
    return `<article class="product" id="${escapeHtml(cardId(product, shelf))}" data-product-id="${escapeHtml(product.id)}" data-shelf="${escapeHtml(shelf)}">
     ${bookCover(product)}
-    <div class="product-info${product.soldOut ? " is-sold-out" : ""}"><div class="product-meta"><span class="price">${priceHtml(product.listPriceUsd, undefined, { tag: true })}</span><p>${escapeHtml(product.description || (plainShelves[shelf] ? "" : "Experiment kit in a book."))}${plainShelves[shelf] ? (pickupNote(product) ? `<br><i>${escapeHtml(pickupNote(product))}</i>` : "") : `<br><i>${escapeHtml(name)} edition<br>${escapeHtml(pickupNote(product) || shipping)}</i>`}</p></div>${product.soldOut ? '<button class="sold-out" type="button">Sold out</button>' : `<button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button>`}</div>
+    <div class="product-info${product.soldOut ? " is-sold-out" : ""}"><div class="product-meta"><span class="price">${priceHtml(product.listPriceUsd, undefined, { tag: true })}</span>${product.quantityLeft ? `<span class="qty-left">${product.quantityLeft} left</span>` : ""}<p>${escapeHtml(product.description || (plainShelves[shelf] ? "" : "Experiment kit in a book."))}${plainShelves[shelf] ? (pickupNote(product) ? `<br><i>${escapeHtml(pickupNote(product))}</i>` : "") : `<br><i>${escapeHtml(name)} edition<br>${escapeHtml(pickupNote(product) || shipping)}</i>`}</p></div>${product.soldOut ? '<button class="sold-out" type="button">Sold out</button>' : `<button class="add-button" type="button" data-add="${escapeHtml(product.id)}" aria-label="Add ${escapeHtml(product.title)} to cart">+</button>`}</div>
    </article>`;
   };
   const editionDivider = shelf => {
