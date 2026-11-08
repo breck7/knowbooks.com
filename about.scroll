@@ -3,6 +3,7 @@ description The mission of Knowbooks cannot be put in words.
 baseUrl https://knowbooks.com/
 openGraphImage og.png
 favicon knowbooksLogo.svg
+about.parsers
 buildHtml
 metaTags
 
@@ -15,71 +16,44 @@ header
   href index.html
   addClass header-link
 
-main
- addClass about-main
- section
-  addClass about-hero
-  p Our mission
-   addClass eyebrow
-  h1 The mission of Knowbooks cannot be put in words…
-  p Knowbooks arose from research into making science, language, and knowledge better serve humans.
-   addClass intro
-   link https://breck.lol/fordCat.html research
- section
-  addClass about-section
-  h2 Timeline
-  ol
-   addClass timeline
-   li
-    span July 8, 2026
-     addClass when
-    span Breck and Steph purchase Knowbooks.com.
-     addClass what
-   li
-    span August 20, 2026
-     addClass when
-    span <a href="letterToInvestors2026.png">Letter to investors.</a>
-     addClass what
-   li
-    span August 22, 2026
-     addClass when
-    span Knowbooks.com goes live.
-     addClass what
-   li
-    span August 25, 2026
-     addClass when
-    span First online sale. Mahalo Evan!
-     addClass what
-   li
-    span October 2, 2026
-     addClass when
-    span Knowbooks Inc. name reserved in Hawaii.
-     addClass what
-   li
-    span October 7, 2026
-     addClass when
-    span Knowbooks Inc. incorporates in Hawaii.
-     addClass what
-   li
-    span October 27, 2026
-     addClass when
-    span Knowbooks Inc. Articles of Incorporation approved by <a href="https://cca.hawaii.gov/breg/">Hawaii</a>. Mahalo Dawn, Elroy, and Russell!
-     addClass what
-   li
-    span October 27, 2026
-     addClass when
-    span First Knowbooks Inc. <a href="https://www.cpb.bank">bank account</a> opened. Mahalo Elroy!
-     addClass what
-   li
-    span November 5, 2026
-     addClass when
-    span Knowbooks <a href="https://launchation.com">Launchation</a> at <a href="https://www.ritzcarlton.com/en/hotels/hnlkz-the-ritz-carlton-oahu-turtle-bay/overview/">Ritz-Carlton O‘ahu, Turtle Bay</a>. Mahalo Kiana, Trystan, and entire Turtle Bay team!
-     addClass what
- section
-  addClass about-section
-  h2 Values
-  p Keep calm and copy on.
-   addClass value
+<main class="about-main">
+section
+ addClass about-hero
+ p Our mission
+  addClass eyebrow
+ h1 The mission of Knowbooks cannot be put in words…
+ p Knowbooks arose from research into making science, language, and knowledge better serve humans.
+  addClass intro
+  link https://breck.lol/fordCat.html research
+<section class="about-section">
+h2 Timeline
+<ol class="timeline">
+event November 5, 2026
+what Knowbooks <a href="https://launchation.com">Launchation</a> at <a href="https://www.ritzcarlton.com/en/hotels/hnlkz-the-ritz-carlton-oahu-turtle-bay/overview/">Ritz-Carlton O‘ahu, Turtle Bay</a>. Mahalo Kiana, Trystan, and entire Turtle Bay team!
+event October 27, 2026
+what First Knowbooks Inc. <a href="https://www.cpb.bank">bank account</a> opened. Mahalo Elroy!
+event October 27, 2026
+what Knowbooks Inc. Articles of Incorporation approved by <a href="https://cca.hawaii.gov/breg/">Hawaii</a>. Mahalo Dawn, Elroy, and Russell!
+event October 7, 2026
+what Knowbooks Inc. incorporates in Hawaii.
+event October 2, 2026
+what Knowbooks Inc. name reserved in Hawaii.
+event August 25, 2026
+what First online sale. Mahalo Evan!
+event August 22, 2026
+what Knowbooks.com goes live.
+event August 20, 2026
+what <a href="letterToInvestors2026.png">Letter to investors.</a>
+event July 8, 2026
+what Breck and Steph purchase Knowbooks.com.
+</ol>
+</section>
+section
+ addClass about-section
+ h2 Values
+ p Keep calm and copy on.
+  addClass value
+</main>
 
 footer
  addClass about-footer

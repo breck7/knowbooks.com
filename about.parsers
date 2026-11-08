@@ -1,0 +1,17 @@
+// Timeline lines for about.scroll, newest first. Flat, one pair per entry:
+//  event November 5, 2026
+//  what What happened, with inline <a href="...">links</a>.
+
+eventParser
+ cue event
+ extends abstractScrollParser
+ catchAllAtomType stringAtom
+ javascript
+  buildHtml() { return `<li ><span class="when">${this.content}</span>` }
+
+whatParser
+ cue what
+ extends abstractScrollParser
+ catchAllAtomType stringAtom
+ javascript
+  buildHtml() { return `<span class="what">${this.content}</span></li>` }
