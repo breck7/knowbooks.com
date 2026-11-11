@@ -443,7 +443,7 @@ Knowbooks are for curious people of all ages. Younger children can explore them 
 Each Knowbook contains a curated collection of durable tools plus experiment cards that show you what to do to learn a superpower.
 
 ? How is the current build quality?
-Our first Knowbooks are Believer editions. Each one is hand-crafted in Hawaii. They are complete and usable, but their tools, experiments, packaging, and instructions are improving as we learn from our first customers.
+Each one is hand-crafted in Hawaii. They are complete and usable, but their tools, experiments, packaging, and instructions are improving as we learn from our first customers.
 
 ? Can I use a Knowbook more than once?
 Yes. Knowbooks are designed to last a lifetime and can be explored repeatedly, shared, and returned to the shelf. Most objects inside are reusable tools; some contain consumable/replaceable materials.
@@ -910,15 +910,9 @@ script
   let loadReferral = "";
   try { loadReferral = (new URLSearchParams(location.search).get("r") || localStorage.getItem("knowbooks-referral") || "").trim().toLowerCase(); } catch {}
   const referralFactor = 1 - referralPercent(loadReferral) / 100;
-  const shippingByShelf = {
-   believer: "Ships before Christmas"
-  };
-  const editionNameByShelf = {
-   believer: "Believer"
-  };
-  const shelfOrder = ["build", "believer", "special", "archive"];
+  const shelfOrder = ["build", "special", "archive"];
   const plainShelves = { build: "Build a Book", special: "Special items", archive: "Archive" };
-  const collapsedEditions = new Set(["believer", "special", "archive"]);
+  const collapsedEditions = new Set(["special", "archive"]);
   const cart = new Map();
   const grid = document.querySelector("#product-grid");
   const preview = document.querySelector(".book-preview");
@@ -988,11 +982,9 @@ script
   const primaryShelf = product => shelvesOf(product)[0];
   const cardId = (product, shelf) => shelf === primaryShelf(product) ? product.id : `${product.id}--${shelf}`;
   const editionDetails = shelf => {
-   if (plainShelves[shelf]) return { name: plainShelves[shelf], shipping: "" };
-   const name = editionNameByShelf[shelf];
-   const shipping = shippingByShelf[shelf];
-   if (!name || !shipping) throw new Error(`Unknown product shelf: ${shelf}`);
-   return { name, shipping };
+   const name = plainShelves[shelf];
+   if (!name) throw new Error(`Unknown product shelf: ${shelf}`);
+   return { name, shipping: "" };
   };
   const pickupNote = product => product.fulfillment === "pickup" ? "In-person pickup only — will not be shipped." : "";
   const skillsOf = product => (product.skills || product.design?.superpowers || "").trim().split(/\s+/).filter(Boolean);

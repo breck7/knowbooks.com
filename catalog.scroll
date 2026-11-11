@@ -16,7 +16,7 @@ signatureParser
 
 shelfAtom
  extends atomAtom
- enum build believer special archive
+ enum build special archive
 
 shelfParser
  extends abstractStringMeasureParser
@@ -162,7 +162,7 @@ video videos/magnets.mp4
 title Magnets
 skills push pull point test see lift find
 tools magnets filings compasses lodestones lifter
-shelf believer
+shelf archive
 priceExponent 8
 coverDescription vertical bar magnet. south half is solid color
 cover
@@ -178,7 +178,7 @@ tags physicsTag psychologyTag instantTag startupsTag emotionalSkillsTag
 title Focus
 skills pierce spark direct cut spread
 tools needle magnifier funnel scissors paper
-shelf believer
+shelf archive
 priceExponent 8
 coverDescription two triangles touching horizontally, like a bowtie. solid fill
 cover
@@ -191,7 +191,7 @@ tags physicsTag mechanicsTag buildingTag instantTag energyTag machinesTag motion
 title Levers
 skills lift pry balance push move
 tools beams prybar fulcrums weights ruler
-shelf believer
+shelf archive
 priceExponent 8
 coverDescription tilted lever with an aligned square load and a small touching fulcrum near the load. solid shapes
 cover
@@ -205,7 +205,7 @@ tags physicsTag materialsTag mechanicsTag buildingTag measurementTag instantTag 
 title Beams
 skills hold cross push bend snap
 tools beams studfinder scale clamp toothpicks
-shelf believer
+shelf archive
 priceExponent 8
 coverDescription vertical bar. solid fill.
 cover
@@ -217,7 +217,7 @@ tags economicsTag psychologyTag longTermTag multiplePeopleTag businessTag startu
 title Sales
 skills listen clarify electrify expand compound
 tools stethoscope recorder circuit pens seeds
-shelf believer
+shelf archive
 priceExponent 9
 coverDescription two triangles in alignment, pointed north east
 cover
@@ -228,7 +228,7 @@ id anger
 color tan
 tags psychologyTag emotionalSkillsTag
 title Anger
-shelf believer
+shelf archive
 priceExponent 8
 coverDescription two scowling eyebrows and eyes
 cover
@@ -243,7 +243,7 @@ tags plantTag materialsTag mechanicsTag buildingTag creativeTag hazardTag solidT
 title Carpentry
 skills measure mark cut shape level
 tools tape pencil saw chisel level
-shelf believer
+shelf archive
 priceExponent 8
 coverDescription long horizontal hand saw blade tapering from left to right. solid fill. three teeth. small handle on the left
 cover
@@ -254,7 +254,7 @@ id plumbing
 color navy
 tags physicsTag mechanicsTag fluidsTag buildingTag measurementTag instantTag hazardTag liquidTag pressureTag
 title Plumbing
-shelf believer
+shelf archive
 priceExponent 8
 coverDescription two elbow pipes one coming from left a drip of water flowing out and into the other elbow pipe leaving to right. all solids
 cover
@@ -268,7 +268,7 @@ id capital
 color russet
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 title Capital
-shelf believer
+shelf archive
 priceExponent 9
 coverDescription four pairs of two solid circles. each pair has 1 small circle, 2 are bigger, 1 is bigger than that, 1 bigger than that. arranged in a scattered way.
 cover
@@ -287,7 +287,7 @@ id buildings
 color oxblood
 tags economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag
 title Buildings
-shelf believer
+shelf archive
 priceExponent 8
 coverDescription a teepee, a pitched tent, and a home increasing in height from left to right, showing greater investment
 cover
@@ -307,7 +307,7 @@ tags physicsTag electricityTag electromagnetismTag buildingTag measurementTag in
 title Electricity
 skills make connect switch measure move
 tools magnet wires bulb meter motor
-shelf believer
+shelf archive
 priceExponent 8
 coverDescription a simple lightning bolt
 cover
@@ -319,7 +319,7 @@ tags physicsTag chemistryTag instantTag hazardTag gasTag combustionTag energyTag
 title Fire
 skills cook light warm melt join
 tools stove candle warmers lighter iron
-shelf believer
+shelf archive
 priceExponent 8
 cover
  svgImage data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBTVkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xzIC0tPg0KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTQuNDUyNyA4LjQ4Njc5TDEyLjE4NDIgMy45Mzg5NkwxMS40NDcxIDQuNzQzMDlDNy4zMDk0NSA5LjI1NjkzIDYgMTEuOTYwOSA2IDE0LjI0OTlDNiAxNy40MjIgOC43MzQ1MiAxOS45MDkgMTIgMTkuOTA5QzE1LjI2NTUgMTkuOTA5IDE4IDE3LjQyMiAxOCAxNC4yNDk5QzE4IDEzLjMxNzkgMTcuNjc0NiAxMi4zMTI0IDE3LjIzODEgMTEuMzY1OEMxNi43OTYgMTAuNDA2OSAxNi4yMDkxIDkuNDQzMzUgMTUuNjIgOC41Nzc4OEwxNS4xMDY1IDcuODIzNDJMMTQuNDUyNyA4LjQ4Njc5Wk0xNC4wNDczIDExLjAzNDhMMTQuODgxOCAxMC4xODgzQzE1LjI1NiAxMC43ODQ2IDE1LjYwMDggMTEuMzk3IDE1Ljg3NiAxMS45OTM4QzE2LjI3NjUgMTIuODYyNSAxNi41IDEzLjYzNTcgMTYuNSAxNC4yNDk5QzE2LjUgMTUuMDk0MSAxNi4yMjMzIDE1Ljg5MDEgMTUuNzQzOCAxNi41NTU0QzE1Ljc0NzkgMTYuNDkzNSAxNS43NSAxNi40MzA5IDE1Ljc1IDE2LjM2NzVDMTUuNzUgMTUuODA1NiAxNS41MjMxIDE1LjI0MTMgMTUuMjYzMiAxNC43NjI0QzE0Ljk5NDYgMTQuMjY3OSAxNC42NDM0IDEzLjc3OTggMTQuMjk5NSAxMy4zNTA3TDEzLjgxMzUgMTIuNzQ0M0wxMy40NzcyIDEzLjAzNEwxMi4xNzQ0IDEwLjgxNTlMMTEuNDkwMyAxMS40NDk3QzkuMTM3MjEgMTMuNjI5OCA4LjI1IDE1LjA1MDggOC4yNSAxNi4zNjc1QzguMjUgMTYuNDMwOSA4LjI1MjA5IDE2LjQ5MzUgOC4yNTYyMiAxNi41NTU0QzcuNzc2NjkgMTUuODkwMSA3LjUgMTUuMDk0MSA3LjUgMTQuMjQ5OUM3LjUgMTIuNjc4NiA4LjMyNyAxMC41MzA4IDExLjgyMDYgNi41NzA1TDE0LjA0NzMgMTEuMDM0OFpNMTMuMDk0MyAxNS4zNDRMMTMuNTk0OCAxNC45MTI3QzEzLjcyNTkgMTUuMTAzNiAxMy44NDQ3IDE1LjI5MzYgMTMuOTQ0OSAxNS40NzgxQzE0LjE2MzIgMTUuODgwMiAxNC4yNSAxNi4xNzkxIDE0LjI1IDE2LjM2NzVDMTQuMjUgMTcuMTE3MSAxMy40MTMxIDE3Ljk5OTkgMTIgMTcuOTk5OUMxMC41ODY5IDE3Ljk5OTkgOS43NSAxNy4xMTcxIDkuNzUgMTYuMzY3NUM5Ljc1IDE1LjgyMzUgMTAuMDY5NyAxNC45NDY0IDExLjgzMzQgMTMuMTk3MkwxMy4wOTQzIDE1LjM0NFoiIGZpbGw9IiMwODAzNDEiLz4NCjwvc3ZnPg==
@@ -328,7 +328,7 @@ id gold
 color tan
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Gold
-shelf believer
+shelf archive
 priceExponent 10
 cover
  portrait
@@ -386,7 +386,7 @@ id silver
 color navy
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Silver
-shelf believer
+shelf archive
 priceExponent 10
 cover
  portrait
@@ -439,7 +439,7 @@ id bronze
 color navy
 tags physicsTag chemistryTag economicsTag materialsTag instantTag solidTag financeTag metalTag
 title Bronze
-shelf believer
+shelf archive
 priceExponent 10
 coverDescription Stippled portrait supplied from the designer
 cover
@@ -491,7 +491,7 @@ id light
 color tan
 tags physicsTag electromagnetismTag wavesTag instantTag opticsTag cyclesTag
 title Light
-shelf believer
+shelf archive
 priceExponent 8
 skills see measure colorize illuminate enhance
 tools headlamp flashlight prism glowstick leds
@@ -511,7 +511,7 @@ id mirrors
 color navy
 tags physicsTag electromagnetismTag wavesTag instantTag opticsTag measurementTag geometryTag materialsTag solidTag
 title Mirrors
-shelf believer
+shelf archive
 priceExponent 8
 skills reflect aim align bounce measure
 tools mirrors flashlight protractor cards targets
@@ -525,42 +525,42 @@ id tools
 color tan
 tags mechanicsTag buildingTag instantTag hazardTag solidTag machinesTag
 title Tools
-shelf believer
+shelf archive
 priceExponent 8
 
 id gravity
 color oxblood
 tags physicsTag mechanicsTag measurementTag instantTag energyTag spaceTag motionTag
 title Gravity
-shelf believer
+shelf archive
 priceExponent 8
 
 id sound
 color oxblood
 tags physicsTag wavesTag measurementTag creativeTag instantTag energyTag musicTag cyclesTag
 title Sound
-shelf believer
+shelf archive
 priceExponent 8
 
 id air
 color black
 tags physicsTag materialsTag fluidsTag natureTag instantTag gasTag pressureTag
 title Air
-shelf believer
+shelf archive
 priceExponent 8
 
 id heat
 color russet
 tags physicsTag chemistryTag fluidsTag measurementTag instantTag hazardTag combustionTag energyTag temperatureTag
 title Heat
-shelf believer
+shelf archive
 priceExponent 8
 
 id glass
 color olive
 tags physicsTag chemistryTag materialsTag electromagnetismTag wavesTag instantTag hazardTag solidTag opticsTag
 title Glass
-shelf believer
+shelf archive
 priceExponent 8
 coverDescription a magnifying glass with a circular glass lens and a short handle
 cover
@@ -571,7 +571,7 @@ id lasers
 color russet
 tags physicsTag electromagnetismTag wavesTag energyTag instantTag opticsTag measurementTag machinesTag hazardTag
 title Lasers
-shelf believer
+shelf archive
 priceExponent 8
 skills focus aim measure amplify cut
 tools lasers lenses targets goggles sensors
@@ -589,35 +589,35 @@ id plastics
 color brown
 tags materialsTag solidTag
 title Plastics
-shelf believer
+shelf archive
 priceExponent 8
 
 id cells
 color brown
 tags chemistryTag biologyTag growthTag
 title Cells
-shelf believer
+shelf archive
 priceExponent 8
 
 id iron
 color olive
 tags physicsTag chemistryTag materialsTag instantTag solidTag metalTag
 title Iron
-shelf believer
+shelf archive
 priceExponent 8
 
 id elements
 color brown
 tags physicsTag chemistryTag materialsTag instantTag
 title Elements
-shelf believer
+shelf archive
 priceExponent 8
 
 id copper
 color russet
 tags physicsTag chemistryTag materialsTag electricityTag electromagnetismTag instantTag solidTag metalTag
 title Copper
-shelf believer
+shelf archive
 priceExponent 8
 
 // venture capital
@@ -626,7 +626,7 @@ id venture
 color brown
 tags economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag startupsTag communicationTag
 title Venture
-shelf believer
+shelf archive
 priceExponent 13
 
 // fed
@@ -635,14 +635,14 @@ id banking
 color olive
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 title Banking
-shelf believer
+shelf archive
 priceExponent 11
 
 id sleep
 color oxblood
 tags biologyTag psychologyTag measurementTag longTermTag healthTag timeTag cyclesTag
 title Sleep
-shelf believer
+shelf archive
 priceExponent 9
 
 // electromagnetic and other fields
@@ -651,35 +651,35 @@ id fields
 color russet
 tags physicsTag electricityTag electromagnetismTag wavesTag instantTag
 title Fields
-shelf believer
+shelf archive
 priceExponent 8
 
 id energy
 color oxblood
 tags physicsTag electricityTag measurementTag instantTag combustionTag energyTag temperatureTag
 title Energy
-shelf believer
+shelf archive
 priceExponent 8
 
 id frequency
 color tan
 tags physicsTag wavesTag measurementTag instantTag cyclesTag
 title Frequency
-shelf believer
+shelf archive
 priceExponent 8
 
 id waves
 color tan
 tags physicsTag electromagnetismTag wavesTag measurementTag instantTag energyTag cyclesTag
 title Waves
-shelf believer
+shelf archive
 priceExponent 8
 
 id helices
 color oxblood
 tags physicsTag buildingTag cyclesTag geometryTag
 title Helices
-shelf believer
+shelf archive
 priceExponent 8
 
 // the coiled machine
@@ -688,42 +688,42 @@ id springs
 color brown
 tags physicsTag materialsTag mechanicsTag buildingTag measurementTag instantTag solidTag energyTag machinesTag cyclesTag motionTag
 title Springs
-shelf believer
+shelf archive
 priceExponent 8
 
 id voltage
 color black
 tags physicsTag electricityTag electromagnetismTag measurementTag instantTag hazardTag energyTag
 title Voltage
-shelf believer
+shelf archive
 priceExponent 8
 
 id wires
 color black
 tags physicsTag electricityTag electromagnetismTag measurementTag instantTag hazardTag energyTag
 title Wires
-shelf believer
+shelf archive
 priceExponent 8
 
 id motors
 color oxblood
 tags physicsTag mechanicsTag electricityTag electromagnetismTag buildingTag instantTag hazardTag energyTag machinesTag cyclesTag motionTag
 title Motors
-shelf believer
+shelf archive
 priceExponent 8
 
 id gears
 color navy
 tags physicsTag mechanicsTag buildingTag instantTag machinesTag cyclesTag motionTag geometryTag
 title Gears
-shelf believer
+shelf archive
 priceExponent 8
 
 id colors
 color navy
 tags physicsTag electromagnetismTag wavesTag creativeTag instantTag opticsTag
 title Colors
-shelf believer
+shelf archive
 priceExponent 8
 coverDescription a prism splitting a beam of light into a fan of rays
 cover
@@ -738,70 +738,70 @@ id matter
 color olive
 tags physicsTag chemistryTag materialsTag instantTag solidTag
 title Matter
-shelf believer
+shelf archive
 priceExponent 8
 
 id atoms
 color oxblood
 tags physicsTag chemistryTag nuclearTag
 title Atoms
-shelf believer
+shelf archive
 priceExponent 8
 
 id motion
 color brown
 tags physicsTag mechanicsTag measurementTag instantTag energyTag motionTag
 title Motion
-shelf believer
+shelf archive
 priceExponent 8
 
 id momentum
 color olive
 tags physicsTag mechanicsTag measurementTag instantTag energyTag spaceTag motionTag
 title Momentum
-shelf believer
+shelf archive
 priceExponent 8
 
 id friction
 color olive
 tags physicsTag mechanicsTag measurementTag instantTag solidTag energyTag motionTag
 title Friction
-shelf believer
+shelf archive
 priceExponent 8
 
 id ropes
 color olive
 tags physicsTag mechanicsTag buildingTag instantTag machinesTag cyclesTag
 title Ropes
-shelf believer
+shelf archive
 priceExponent 8
 
 id wind
 color brown
 tags physicsTag mechanicsTag fluidsTag natureTag measurementTag instantTag gasTag energyTag pressureTag
 title Wind
-shelf believer
+shelf archive
 priceExponent 8
 
 id aerodynamics
 color black
 tags physicsTag mechanicsTag fluidsTag measurementTag instantTag gasTag pressureTag flightTag motionTag
 title Aerodynamics
-shelf believer
+shelf archive
 priceExponent 8
 
 id water
 color brown
 tags physicsTag chemistryTag materialsTag fluidsTag natureTag measurementTag instantTag liquidTag pressureTag
 title Water
-shelf believer
+shelf archive
 priceExponent 8
 
 id buoyancy
 color navy
 tags physicsTag mechanicsTag fluidsTag measurementTag instantTag liquidTag pressureTag
 title Buoyancy
-shelf believer
+shelf archive
 priceExponent 9
 skills float sink weigh displace balance
 tools beaker boat scale hydrometer clay
@@ -817,63 +817,63 @@ id rust
 color black
 tags physicsTag chemistryTag materialsTag longTermTag metalTag timeTag
 title Rust
-shelf believer
+shelf archive
 priceExponent 8
 
 id time
 color russet
 tags measurementTag timeTag cyclesTag
 title Time
-shelf believer
+shelf archive
 priceExponent 8
 
 id patience
 color brown
 tags psychologyTag longTermTag timeTag emotionalSkillsTag
 title Patience
-shelf believer
+shelf archive
 priceExponent 8
 
 id centuries
 color russet
 tags natureTag measurementTag longTermTag timeTag
 title Centuries
-shelf believer
+shelf archive
 priceExponent 8
 
 id liberty
 color russet
 tags economicsTag psychologyTag multiplePeopleTag socialTag
 title Liberty
-shelf believer
+shelf archive
 priceExponent 8
 
 id courage
 color brown
 tags psychologyTag emotionalSkillsTag
 title Courage
-shelf believer
+shelf archive
 priceExponent 8
 
 id property
 color oxblood
 tags economicsTag multiplePeopleTag financeTag businessTag
 title Property
-shelf believer
+shelf archive
 priceExponent 9
 
 id membranes
 color navy
 tags physicsTag chemistryTag biologyTag materialsTag fluidsTag instantTag liquidTag
 title Membranes
-shelf believer
+shelf archive
 priceExponent 8
 
 id decay
 color navy
 tags chemistryTag biologyTag natureTag longTermTag timeTag
 title Decay
-shelf believer
+shelf archive
 priceExponent 8
 
 // chemical and other bonds
@@ -882,28 +882,28 @@ id bonds
 color olive
 tags physicsTag chemistryTag materialsTag
 title Bonds
-shelf believer
+shelf archive
 priceExponent 8
 
 id teamwork
 color oxblood
 tags psychologyTag multiplePeopleTag startupsTag communicationTag cooperationTag socialTag
 title Teamwork
-shelf believer
+shelf archive
 priceExponent 8
 
 id motivation
 color oxblood
 tags psychologyTag longTermTag startupsTag emotionalSkillsTag
 title Motivation
-shelf believer
+shelf archive
 priceExponent 8
 
 id competition
 color brown
 tags economicsTag psychologyTag multiplePeopleTag businessTag startupsTag socialTag
 title Competition
-shelf believer
+shelf archive
 priceExponent 8
 
 // benefits of rowing in sync.
@@ -912,70 +912,70 @@ id alignment
 color olive
 tags psychologyTag multiplePeopleTag cooperationTag socialTag
 title Alignment
-shelf believer
+shelf archive
 priceExponent 8
 
 id collusion
 color tan
 tags economicsTag psychologyTag multiplePeopleTag businessTag cooperationTag socialTag
 title Collusion
-shelf believer
+shelf archive
 priceExponent 8
 
 id paper
 color navy
 tags plantTag materialsTag buildingTag creativeTag instantTag solidTag
 title Paper
-shelf believer
+shelf archive
 priceExponent 8
 
 id ink
 color black
 tags chemistryTag materialsTag buildingTag creativeTag instantTag liquidTag communicationTag
 title Ink
-shelf believer
+shelf archive
 priceExponent 8
 
 id folding
 color black
 tags materialsTag buildingTag creativeTag instantTag solidTag geometryTag
 title Folding
-shelf believer
+shelf archive
 priceExponent 8
 
 id metals
 color oxblood
 tags physicsTag chemistryTag materialsTag instantTag solidTag metalTag
 title Metals
-shelf believer
+shelf archive
 priceExponent 8
 
 id steel
 color oxblood
 tags physicsTag chemistryTag materialsTag instantTag solidTag metalTag
 title Steel
-shelf believer
+shelf archive
 priceExponent 8
 
 id aluminum
 color navy
 tags physicsTag chemistryTag materialsTag instantTag solidTag metalTag
 title Aluminum
-shelf believer
+shelf archive
 priceExponent 8
 
 id brass
 color russet
 tags physicsTag chemistryTag materialsTag instantTag solidTag metalTag
 title Brass
-shelf believer
+shelf archive
 priceExponent 8
 
 id metalworking
 color navy
 tags physicsTag materialsTag mechanicsTag buildingTag hazardTag solidTag metalTag machinesTag
 title Metalworking
-shelf believer
+shelf archive
 priceExponent 9
 skills forge weld grind polish sharpen
 tools anvil hammer tongs files hacksaw
@@ -987,35 +987,35 @@ id wood
 color brown
 tags plantTag materialsTag buildingTag instantTag solidTag
 title Wood
-shelf believer
+shelf archive
 priceExponent 8
 
 id seeds
 color brown
 tags biologyTag plantTag natureTag longTermTag growthTag timeTag
 title Seeds
-shelf believer
+shelf archive
 priceExponent 8
 
 id wheels
 color black
 tags physicsTag mechanicsTag buildingTag instantTag machinesTag cyclesTag motionTag
 title Wheels
-shelf believer
+shelf archive
 priceExponent 8
 
 id wedges
 color brown
 tags physicsTag mechanicsTag buildingTag instantTag hazardTag solidTag machinesTag
 title Wedges
-shelf believer
+shelf archive
 priceExponent 8
 
 id stars
 color tan
 tags physicsTag wavesTag natureTag measurementTag temperatureTag opticsTag nuclearTag spaceTag
 title Stars
-shelf believer
+shelf archive
 priceExponent 8
 coverDescription a bright four-pointed star with a round center
 cover
@@ -1027,70 +1027,70 @@ id exploration
 color black
 tags natureTag explorationTag
 title Exploration
-shelf believer
+shelf archive
 priceExponent 8
 
 id fabric
 color tan
 tags plantTag materialsTag buildingTag creativeTag instantTag
 title Fabric
-shelf believer
+shelf archive
 priceExponent 8
 
 id food
 color tan
 tags chemistryTag biologyTag plantTag materialsTag hazardTag energyTag nutritionTag healthTag
 title Food
-shelf believer
+shelf archive
 priceExponent 8
 
 id trees
 color oxblood
 tags biologyTag plantTag natureTag longTermTag growthTag
 title Trees
-shelf believer
+shelf archive
 priceExponent 8
 
 id breath
 color tan
 tags biologyTag fluidsTag measurementTag instantTag gasTag pressureTag healthTag cyclesTag
 title Breath
-shelf believer
+shelf archive
 priceExponent 8
 
 id smell
 color olive
 tags chemistryTag biologyTag instantTag gasTag
 title Smell
-shelf believer
+shelf archive
 priceExponent 8
 
 id rain
 color brown
 tags physicsTag fluidsTag natureTag measurementTag gasTag liquidTag temperatureTag cyclesTag
 title Rain
-shelf believer
+shelf archive
 priceExponent 8
 
 id budgeting
 color olive
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 title Budgeting
-shelf believer
+shelf archive
 priceExponent 8
 
 id bookkeeping
 color oxblood
 tags economicsTag measurementTag longTermTag financeTag businessTag startupsTag
 title Bookkeeping
-shelf believer
+shelf archive
 priceExponent 8
 
 id screws
 color navy
 tags physicsTag mechanicsTag buildingTag instantTag hazardTag solidTag machinesTag cyclesTag geometryTag
 title Screws
-shelf believer
+shelf archive
 priceExponent 8
 
 // aka wrinkles/steaming
@@ -1099,28 +1099,28 @@ id ironing
 color navy
 tags physicsTag plantTag materialsTag instantTag hazardTag gasTag energyTag temperatureTag
 title Ironing
-shelf believer
+shelf archive
 priceExponent 8
 
 id payroll
 color russet
 tags economicsTag measurementTag longTermTag multiplePeopleTag financeTag businessTag startupsTag cooperationTag
 title Payroll
-shelf believer
+shelf archive
 priceExponent 8
 
 id batteries
 color brown
 tags physicsTag chemistryTag electricityTag electromagnetismTag buildingTag measurementTag instantTag hazardTag energyTag
 title Batteries
-shelf believer
+shelf archive
 priceExponent 8
 
 id software
 color brown
 tags computingTag buildingTag creativeTag instantTag startupsTag communicationTag
 title Software
-shelf believer
+shelf archive
 priceExponent 9
 
 // the language/software
@@ -1129,133 +1129,133 @@ id scroll
 color oxblood
 tags computingTag buildingTag creativeTag instantTag communicationTag
 title Scroll
-shelf believer
+shelf archive
 priceExponent 9
 
 id marketing
 color brown
 tags economicsTag psychologyTag creativeTag longTermTag multiplePeopleTag businessTag startupsTag communicationTag socialTag
 title Marketing
-shelf believer
+shelf archive
 priceExponent 10
 
 id hydration
 color black
 tags biologyTag fluidsTag measurementTag liquidTag nutritionTag healthTag
 title Hydration
-shelf believer
+shelf archive
 priceExponent 8
 
 id hurricanes
 color navy
 tags physicsTag mechanicsTag fluidsTag natureTag measurementTag hazardTag gasTag pressureTag cyclesTag
 title Hurricanes
-shelf believer
+shelf archive
 priceExponent 9
 
 id currency
 color black
 tags economicsTag measurementTag financeTag
 title Currency
-shelf believer
+shelf archive
 priceExponent 10
 
 id bitcoin
 color navy
 tags economicsTag computingTag measurementTag financeTag
 title Bitcoin
-shelf believer
+shelf archive
 priceExponent 10
 
 id guitar
 color oxblood
 tags physicsTag wavesTag buildingTag creativeTag instantTag musicTag cyclesTag
 title Guitar
-shelf believer
+shelf archive
 priceExponent 9
 
 id piano
 color olive
 tags physicsTag wavesTag buildingTag creativeTag instantTag musicTag cyclesTag
 title Piano
-shelf believer
+shelf archive
 priceExponent 9
 
 id drums
 color oxblood
 tags physicsTag wavesTag buildingTag creativeTag instantTag musicTag cyclesTag
 title Drums
-shelf believer
+shelf archive
 priceExponent 9
 
 id singing
 color navy
 tags physicsTag wavesTag creativeTag instantTag musicTag cyclesTag
 title Singing
-shelf believer
+shelf archive
 priceExponent 9
 
 id matrices
 color brown
 tags mathTag physicsTag computingTag
 title Matrices
-shelf believer
+shelf archive
 priceExponent 10
 
 id actuators
 color oxblood
 tags physicsTag mechanicsTag electricityTag electromagnetismTag buildingTag instantTag hazardTag machinesTag motionTag
 title Actuators
-shelf believer
+shelf archive
 priceExponent 10
 
 id rockets
 color black
 tags physicsTag mechanicsTag fluidsTag buildingTag measurementTag gasTag energyTag pressureTag flightTag spaceTag motionTag
 title Rockets
-shelf believer
+shelf archive
 priceExponent 11
 
 id transistors
 color tan
 tags physicsTag computingTag electricityTag electromagnetismTag buildingTag instantTag
 title Transistors
-shelf believer
+shelf archive
 priceExponent 10
 
 id ibuprofen
 color brown
 tags medicineTag chemistryTag biologyTag healthTag
 title Ibuprofen
-shelf believer
+shelf archive
 priceExponent 9
 
 id ivermectin
 color russet
 tags medicineTag chemistryTag biologyTag healthTag
 title Ivermectin
-shelf believer
+shelf archive
 priceExponent 10
 
 id mitochondria
 color russet
 tags chemistryTag biologyTag energyTag nutritionTag healthTag
 title Mitochondria
-shelf believer
+shelf archive
 priceExponent 10
 
 id cancer
 color brown
 tags chemistryTag biologyTag longTermTag hazardTag growthTag healthTag
 title Cancer
-shelf believer
+shelf archive
 priceExponent 10
 
 id fusion
 color oxblood
 tags physicsTag hazardTag energyTag temperatureTag nuclearTag
 title Fusion
-shelf believer
+shelf archive
 priceExponent 10
 
 // aka parenting
@@ -1264,7 +1264,7 @@ id raising
 color olive
 tags biologyTag psychologyTag longTermTag multiplePeopleTag growthTag healthTag communicationTag cooperationTag timeTag emotionalSkillsTag parentingTag familyTag socialTag
 title Raising
-shelf believer
+shelf archive
 priceExponent 11
 
 // aka dating
@@ -1273,63 +1273,63 @@ id attraction
 color oxblood
 tags psychologyTag longTermTag multiplePeopleTag communicationTag emotionalSkillsTag datingTag familyTag matingTag socialTag
 title Attraction
-shelf believer
+shelf archive
 priceExponent 9
 
 id basketball
 color black
 tags mechanicsTag instantTag longTermTag multiplePeopleTag communicationTag cooperationTag motionTag sportsTag teamSportsTag ballSportsTag
 title Basketball
-shelf believer
+shelf archive
 priceExponent 12
 
 id football
 color olive
 tags mechanicsTag instantTag longTermTag multiplePeopleTag communicationTag cooperationTag motionTag sportsTag teamSportsTag ballSportsTag
 title Football
-shelf believer
+shelf archive
 priceExponent 11
 
 id soccer
 color black
 tags mechanicsTag instantTag longTermTag multiplePeopleTag communicationTag cooperationTag motionTag sportsTag teamSportsTag ballSportsTag
 title Soccer
-shelf believer
+shelf archive
 priceExponent 10
 
 id boxing
 color tan
 tags mechanicsTag instantTag longTermTag multiplePeopleTag motionTag sportsTag combatSportsTag individualSportsTag
 title Boxing
-shelf believer
+shelf archive
 priceExponent 12
 
 id chimps
 color brown
 tags animalsTag biologyTag
 title Chimps
-shelf believer
+shelf archive
 priceExponent 9
 
 id dolphins
 color navy
 tags animalsTag biologyTag
 title Dolphins
-shelf believer
+shelf archive
 priceExponent 9
 
 id golf
 color russet
 tags mechanicsTag instantTag longTermTag motionTag sportsTag ballSportsTag individualSportsTag
 title Golf
-shelf believer
+shelf archive
 priceExponent 10
 
 id baseball
 color black
 tags mechanicsTag instantTag longTermTag multiplePeopleTag communicationTag cooperationTag motionTag sportsTag teamSportsTag ballSportsTag
 title Baseball
-shelf believer
+shelf archive
 priceExponent 9
 
 // Fluids / Navier–Stokes
@@ -1338,28 +1338,28 @@ id flow
 color brown
 tags physicsTag mechanicsTag fluidsTag measurementTag instantTag gasTag liquidTag pressureTag
 title Flow
-shelf believer
+shelf archive
 priceExponent 10
 
 id gluons
 color tan
 tags physicsTag nuclearTag
 title Gluons
-shelf believer
+shelf archive
 priceExponent 10
 
 id bosons
 color black
 tags physicsTag nuclearTag
 title Bosons
-shelf believer
+shelf archive
 priceExponent 10
 
 id solar
 color black
 tags physicsTag electricityTag electromagnetismTag wavesTag natureTag buildingTag measurementTag instantTag hazardTag energyTag temperatureTag opticsTag
 title Solar
-shelf believer
+shelf archive
 priceExponent 13
 coverDescription a sun shining onto a tilted solar panel
 cover
@@ -1381,7 +1381,7 @@ id neurons
 color russet
 tags neuroscienceTag biologyTag healthTag
 title Neurons
-shelf believer
+shelf archive
 priceExponent 10
 
 // Partner onboarding: purchase includes the initial conversation.
@@ -1468,7 +1468,7 @@ id titanium
 color navy
 tags physicsTag chemistryTag materialsTag buildingTag instantTag solidTag metalTag flightTag spaceTag machinesTag
 title Titanium
-shelf believer
+shelf archive
 priceExponent 9
 skills mine smelt alloy forge weld machine
 tools ore sponge crucible torch files calipers
@@ -1481,7 +1481,7 @@ id watches
 color navy
 tags measurementTag mechanicsTag timeTag metalTag machinesTag geometryTag
 title Watches
-shelf believer
+shelf archive
 priceExponent 10
 skills measure time regulate calibrate service
 tools movement dial hands crown loupe
@@ -1498,7 +1498,7 @@ id stone
 color oxblood
 tags physicsTag chemistryTag materialsTag buildingTag measurementTag longTermTag natureTag solidTag geometryTag
 title Stone
-shelf believer
+shelf archive
 priceExponent 8
 skills quarry cut carve chip stack build
 tools chisel mallet wedge level trowel hammer
