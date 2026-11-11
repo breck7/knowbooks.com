@@ -1386,10 +1386,10 @@ priceExponent 10
 
 // Partner onboarding: purchase includes the initial conversation.
 
-id knowbook
+id franchise
 color brown
 tags economicsTag buildingTag creativeTag multiplePeopleTag businessTag startupsTag communicationTag cooperationTag
-title Knowbooks
+title Franchise
 shelf special
 priceExponent 13
 description Includes an initial partner conversation about building Knowbooks in your community.

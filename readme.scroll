@@ -587,7 +587,7 @@ section
  div
   id partners-element-1
   addClass section-heading
-  a Knowbooks partners
+  a Knowbooks franchise
    href #partners
    id partners-element-2
    addClass eyebrow
@@ -599,10 +599,10 @@ section
   p Our focus is Hawaii. Our partners build around the world.
    id partners-element-4
    addClass offering-lead
-  p We partner with exceptional teams all over the world to bring more Knowbooks to more people faster. Interested in building Knowbooks for your community? Talk to us about becoming a Knowbooks partner.
+  p We partner with exceptional teams all over the world to bring more Knowbooks to more people faster. Interested in building Knowbooks for your community? Talk to us about becoming a Knowbooks franchise.
    id partners-element-5
    addClass offering-copy
-  a Become a Knowbooks partner <span aria-hidden="true">↗</span>
+  a Become a Knowbooks franchise <span aria-hidden="true">↗</span>
    id partners-element-6
    addClass down
    href #partner-dialog
@@ -1071,7 +1071,7 @@ script
    [...cart].forEach(([id, quantity], index) => {
     const product = products.get(id);
     const number = index + 1;
-    url.searchParams.set(`item_name_${number}`, `${product.title}${plainShelves[product.shelf] && product.id !== "knowbook" ? "" : " Knowbook"}${product.id === "knowbook" ? " + initial partner conversation" : ""}${product.design ? ` — ${product.color} spine, ${product.wood} wood` : ""}${pickupNote(product) ? " — in-person pickup only; no shipping" : ""}${product.note ? ` — Instructions: ${product.note}` : ""}${referralCode ? ` (Referral: ${referralCode})` : ""}`);
+    url.searchParams.set(`item_name_${number}`, `${product.title}${plainShelves[product.shelf] ? "" : " Knowbook"}${product.id === "franchise" ? " + initial partner conversation" : ""}${product.design ? ` — ${product.color} spine, ${product.wood} wood` : ""}${pickupNote(product) ? " — in-person pickup only; no shipping" : ""}${product.note ? ` — Instructions: ${product.note}` : ""}${referralCode ? ` (Referral: ${referralCode})` : ""}`);
     url.searchParams.set(`item_number_${number}`, product.id);
     url.searchParams.set(`amount_${number}`, Number(product.priceUsd).toFixed(2));
     url.searchParams.set(`quantity_${number}`, String(quantity));
@@ -1760,7 +1760,7 @@ script
   initDesigner();
   document.querySelector("#partner-buy").addEventListener("click", () => {
    document.querySelector("#partner-dialog").close();
-   change("knowbook", 1);
+   change("franchise", 1);
    openCart();
   });
   try {
