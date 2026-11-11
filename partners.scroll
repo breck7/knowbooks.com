@@ -339,7 +339,7 @@ dialog
  div
   addClass partner-invite
   id partner-invite
-  button Buy the Franchise Knowbook
+  button Buy a Franchise Knowbook
    id partner-buy
    type button
 
