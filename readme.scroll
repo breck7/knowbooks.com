@@ -637,7 +637,7 @@ section
   <a href="https://wws.scroll.surf">World Wide Scroll</a>
   </nav>
   </div>
-  <p class="footer-download"><a href="knowbooks.zip" download>Download this website</a> <button class="per-month" type="button" role="switch" aria-checked="false" title="Per month over 100 years (price ÷ 1,200)"><span class="track"><span>Total</span><span>/mo</span></span></button></p>
+  <p class="footer-download"><a href="knowbooks.zip" download>Download this website</a> · <a href="https://28.breck.lol/">28</a> <button class="per-month" type="button" role="switch" aria-checked="false" title="Per month over 100 years (price ÷ 1,200)"><span class="track"><span>Total</span><span>/mo</span></span></button></p>
  </footer>
 
 <div class="scrim" hidden></div>
