@@ -1,0 +1,6 @@
+authors Breck
+ https://x.com/breckyunits Breck Yunits
+baseUrl https://knowbooks.com
+rssFeedUrl feed.xml
+editBaseUrl https://github.com/breck7/knowbooks.com/blob/main/
+// editBaseUrl edit.html?fileName=
