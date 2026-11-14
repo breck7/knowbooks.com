@@ -103,7 +103,7 @@ color tan
 title Small
 shelf build
 priceExponent 7
-quantityLeft 3
+quantityLeft 4
 description Small custom Knowbook. We meet with you in person and/or on a video call, you choose the items that go in your book, then we laser-cut and build it for you, with other adjustable customizations.
 coverDescription a solid plus sign, sized to the book
 cover
@@ -114,7 +114,7 @@ id medium
 color oxblood
 title Medium
 shelf build
-priceExponent 7
+priceExponent 8
 quantityLeft 3
 description Medium custom Knowbook. We meet with you in person and/or on a video call, you choose the items that go in your book, then we laser-cut and build it for you, with other adjustable customizations.
 coverDescription a solid plus sign, sized to the book
@@ -126,8 +126,8 @@ id large
 color navy
 title Large
 shelf build
-priceExponent 7
-quantityLeft 3
+priceExponent 9
+quantityLeft 5
 description Large custom Knowbook. We meet with you in person and/or on a video call, you choose the items that go in your book, then we laser-cut and build it for you, with other adjustable customizations.
 coverDescription a solid plus sign, sized to the book
 cover
