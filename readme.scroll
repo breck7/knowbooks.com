@@ -61,6 +61,46 @@ buildGitHashParser
 
 buildGitHash gitHash.js
 
+buildPaymentMethodsParser
+ description Compile paymentMethod lines in this file to paymentMethods.js. Line order is checkout button order.
+ extends abstractBuildOneCommandParser
+ cueFromId
+ baseParser blobParser
+ javascript
+  async buildOne() {
+   const { root } = this
+   const { fileSystem, folderPath, path } = root
+   const name = this.getAtomsFrom(1)[0] || "paymentMethods.js"
+   const methods = root.topDownArray.filter(particle => particle.cue === "paymentMethod").map(particle => particle.method)
+   await fileSystem.writeProduct(path.join(folderPath, name), "const paymentMethods = " + JSON.stringify(methods, null, 1) + ";\n")
+   root.log(`💾 Built ${name} (${methods.length} methods)`)
+  }
+
+paymentMethodParser
+ cue paymentMethod
+ extends abstractScrollParser
+ catchAllAtomType stringAtom
+ description One checkout method. Line order is button order. discount is a percent; 0 or missing means none.
+ javascript
+  get method() {
+   const atoms = this.getAtomsFrom(1)
+   const method = { id: String(atoms[0] || ""), discount: 0 }
+   for (let i = 1; i < atoms.length; i += 2) {
+    const key = atoms[i], value = atoms[i + 1]
+    if (!key || value === undefined) break
+    method[key] = key === "discount" ? Number(value) || 0 : value
+   }
+   return method
+  }
+  buildHtml() { return "" }
+
+buildPaymentMethods paymentMethods.js
+
+// Checkout methods. Line order is the button order. discount is a percent; 0 or missing means none.
+// href is the link to open. PayPal's cart URL (with the amount and any discount) is filled in by the page.
+paymentMethod x label $X href https://x.com/breckyunits handle @breckyunits discount 10
+paymentMethod paypal label PayPal discount 0
+
 buildToFile knowbooksLogo.svg
  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
   <title id="title">Knowbooks</title>
@@ -386,8 +426,19 @@ css
  .referral input[aria-invalid="true"] { border-color: #a33e29; }
  .referral-status { margin: 8px 0 0; color: var(--muted); }
  .referral-status:empty { display: none; }
- .paypal-button { display: block; padding: 20px; border-radius: 999px; color: white; background: #243d32; box-shadow: 0 6px 16px #243d3226; text-align: center; text-decoration: none; font: 700 14px/1 Arial, sans-serif; }
- .paypal-button:hover { background: #172e24; transform: translateY(-1px); }
+ .checkout-methods { display: flex; flex-direction: column; gap: 10px; }
+ .checkout-button { display: block; padding: 20px 16px; border-radius: 999px; color: #fff; background: #243d32; box-shadow: 0 6px 16px #243d3226; text-align: center; text-decoration: none; font: 700 14px/1.3 Arial, sans-serif; }
+ .checkout-button:hover { background: #172e24; transform: translateY(-1px); }
+ .checkout-button:not(.is-primary) { padding: 14px 16px; background: #3a4e43; box-shadow: none; font-size: 13px; }
+ .checkout-button:not(.is-primary):hover { background: #2c3d34; }
+ .checkout-button.has-discount {
+  background-image: linear-gradient(105deg, transparent 35%, #d9bc7888 50%, transparent 65%);
+  background-size: 250% 100%;
+  animation: checkout-shimmer 2.2s ease-in-out infinite;
+ }
+ .checkout-button .save { display: block; margin-top: 6px; font: 600 11px/1 Arial, sans-serif; letter-spacing: .06em; color: #d9bc78; }
+ @keyframes checkout-shimmer { to { background-position: -250% 0; } }
+ @media (prefers-reduced-motion: reduce) { .checkout-button.has-discount { animation: none; } }
  .wallet-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
  .wallet-buttons a, .wallet-buttons button { padding: 14px 8px; border: 1px solid var(--line); border-radius: 16px; color: var(--ink); text-align: center; text-decoration: none; font: 700 14px/1.4 Arial, sans-serif; }
  .wallet-buttons a:hover, .wallet-buttons button:hover { background: #243d320a; }
@@ -615,13 +666,9 @@ aside
   small Includes shipping and tax.
    id cart-element-16
    addClass shipping-note
-  a Checkout with PayPal &nbsp; ↗
-   id cart-element-17
-   addClass paypal-button
-   data-payment PayPal
-   target _blank
-   href https://www.paypal.com/cgi-bin/webscr
-   rel noopener
+  div
+   id checkout-methods
+   addClass checkout-methods
   div
    addClass wallet-buttons
    id payment-options
@@ -641,14 +688,6 @@ aside
     rel noopener
     span @knowbooks
      id venmo-account
-   a X Money ↗
-    id pay-x-money
-    data-payment X Money
-    href https://x.com/breckyunits
-    target _blank
-    rel noopener
-    span @breckyunits
-     id x-money-account
    button NEAR
     id pay-near
     type button
@@ -720,6 +759,7 @@ signature.js
 covers.js
 catalog.js
 tags.js
+paymentMethods.js
 s/qrcode/qrcode.js
 s/checko/checko.js
 
@@ -853,7 +893,15 @@ script
   const cartSavings = Object.assign(document.createElement("p"), { className: "cart-savings", hidden: true });
   cartSavings.setAttribute("aria-live", "polite");
   total.closest(".cart-total").after(cartSavings);
-  const checkout = document.querySelector(".paypal-button");
+  const checkoutMethods = document.querySelector("#checkout-methods");
+  const checkoutButtons = (paymentMethods || []).map((method, index) => {
+   const button = Object.assign(document.createElement("a"), { className: "checkout-button" + (index ? "" : " is-primary"), target: "_blank", rel: "noopener", href: method.href || "#" });
+   button.dataset.payment = method.label;
+   button.dataset.methodId = method.id;
+   if (method.handle) button.dataset.handle = method.handle;
+   checkoutMethods.append(button);
+   return button;
+  });
   const bonusOpportunitySaleNote = document.querySelector(".bonus-opportunity-sale-note");
   const bosBanner = document.querySelector(".bos-banner");
   // Sale tags open a dialog holding a live copy of the banner.
@@ -984,16 +1032,18 @@ script
     });
    });
   };
-  const paypalUrl = ({ referralCode, discountCents }) => {
+  const paymentDiscount = id => Number((paymentMethods.find(method => method.id === id) || {}).discount) || 0;
+  const methodAmount = (amount, id) => Math.round(amount * 100 * (1 - paymentDiscount(id) / 100)) / 100;
+  const paypalUrl = ({ referralCode, discountCents, amount }) => {
    const url = new URL("https://www.paypal.com/cgi-bin/webscr");
    url.searchParams.set("cmd", "_cart");
    url.searchParams.set("upload", "1");
    url.searchParams.set("business", paypalEmail);
    url.searchParams.set("currency_code", currency);
-   if (referralCode) {
-    url.searchParams.set("custom", `referral_code=${referralCode}`);
-    if (discountCents > 0) url.searchParams.set("discount_amount_cart", (discountCents / 100).toFixed(2));
-   }
+   if (referralCode) url.searchParams.set("custom", `referral_code=${referralCode}`);
+   const platformCents = Math.round(amount * 100 * paymentDiscount("paypal") / 100);
+   const totalDiscountCents = discountCents + platformCents;
+   if (totalDiscountCents > 0) url.searchParams.set("discount_amount_cart", (totalDiscountCents / 100).toFixed(2));
    [...cart].forEach(([id, quantity], index) => {
     const product = products.get(id);
     const number = index + 1;
@@ -1090,12 +1140,15 @@ script
   drawer.addEventListener('click', event => {
    const button = event.target.closest('[data-payment]'); if (!button) return;
    if (!cart.size) { event.preventDefault(); return; }
+   const status = document.querySelector('#payment-status');
    const address = button.dataset.address;
    if (address) {
-    const status = document.querySelector('#payment-status');
     const fallback = () => { status.textContent = `Copy ${button.dataset.payment} address: ${address}`; };
     if (navigator.clipboard?.writeText) navigator.clipboard.writeText(address).then(() => { status.textContent = `${button.dataset.payment} address copied.`; }, fallback);
     else fallback();
+   } else if (button.dataset.handle) {
+    const { amount } = cartPricing();
+    status.textContent = `Send ${checkoutMoney.format(methodAmount(amount, button.dataset.methodId))} to ${button.dataset.handle} in X Money.`;
    }
   });
   const save = () => {
@@ -1130,7 +1183,16 @@ script
    document.querySelector("#cart-element-16").textContent = cartDeliveryNote();
    referralInput.setAttribute("aria-invalid", String(Boolean(enteredCode && !referralCode)));
    referralStatus.textContent = referralCode ? `${discountAmount}% code applied — you save ${shown(discountCents / 100, usd => checkoutMoney.format(usd))}.` : enteredCode ? "That referral code isn’t valid." : "";
-   checkout.href = quantity ? paypalUrl(pricing) : "https://www.paypal.com/cgi-bin/webscr";
+   checkoutButtons.forEach(button => {
+    const method = paymentMethods.find(item => item.id === button.dataset.methodId) || {};
+    const discount = paymentDiscount(method.id);
+    const pay = methodAmount(amount, method.id);
+    button.classList.toggle("has-discount", Boolean(quantity && discount));
+    button.innerHTML = `Checkout with ${escapeHtml(method.label || method.id)} ↗` + (quantity ? ` <span>${escapeHtml(checkoutMoney.format(pay))}${discount ? ` · Save ${discount}%` : ""}</span>` : "");
+    if (method.id === "paypal") button.href = quantity ? paypalUrl(pricing) : "https://www.paypal.com/cgi-bin/webscr";
+    else if (method.href) button.href = method.href;
+    if (discount) button.querySelector("span")?.classList.add("save");
+   });
    return save();
   };
   const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1756,4 +1818,4 @@ script
 catalog.scroll
 buildCoverRuntime
 buildConcepts catalog.js
-buildZip knowbooks.zip index.html about.html signature.js catalog.js covers.js catalog.csv tags.js gitHash.js knowbooksLogo.svg og.png hero-background.png hero.mp4 hero.jpg kbc.jpg readme.scroll about.scroll catalog.scroll catalogCsv.scroll covers.scroll tags.scroll partners.scroll upstreamToScroll.scroll s/checko s/qrcode
+buildZip knowbooks.zip index.html about.html signature.js catalog.js covers.js catalog.csv tags.js gitHash.js paymentMethods.js knowbooksLogo.svg og.png hero-background.png hero.mp4 hero.jpg kbc.jpg readme.scroll about.scroll catalog.scroll catalogCsv.scroll covers.scroll tags.scroll partners.scroll upstreamToScroll.scroll s/checko s/qrcode
