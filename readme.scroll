@@ -169,7 +169,9 @@ css
   align-items: center;
   justify-content: space-between;
   padding: 24px clamp(20px, 5vw, 72px);
+  color: #fff;
  }
+ .site-header .brand, .site-header .faq-link { text-shadow: 0 1px 3px #000, 0 0 14px #000c, 0 0 2px #0009; }
  .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font: 700 11px/1 Arial, sans-serif; letter-spacing: .2em; }
  .brand img { width: 30px; height: 30px; padding: 5px; border-radius: 50%; background: var(--ink); }
  .per-month { float: right; margin-top: 7px; padding: 0; border: 0; background: none; cursor: pointer; vertical-align: middle; font: 700 8px/1 Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; opacity: .55; transition: opacity 200ms; }
@@ -210,19 +212,25 @@ css
  .preview-add span { opacity: .65; font-weight: 400; }
  button:focus-visible, a:focus-visible { outline: 3px solid #b58132; outline-offset: 5px; }
  .hero {
-  aspect-ratio: 1730 / 909;
+  height: 100vh;
+  height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: max(88px, 6vw) 5.6vw 0;
   position: relative;
-  background: #eee4d8 url("hero-background.png") center / 100% 100% no-repeat;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
  }
+ /* hero-background.png is kept in the repo for later use. */
+ .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; z-index: 0; pointer-events: none; }
+ .hero h1, .hero .intro, .hero .down { color: #fff; text-shadow: 0 1px 3px #000, 0 0 14px #000c, 0 0 2px #0009; }
  .hero h1 { max-width: 46vw; font-size: 3.8vw; line-height: .95; }
- .hero .intro { max-width: 43vw; margin: 1vw 0; font-size: 1.15vw; line-height: 1.4; color: #353129; }
+ .hero .intro { max-width: 43vw; margin: 1vw 0; font-size: 1.15vw; line-height: 1.4; }
  .hero .down { font-size: .7vw; padding-bottom: .35vw; }
  @media (max-width: 1000px) {
-  .hero { aspect-ratio: auto; padding: 110px 6vw calc(52.55vw + 28px); background-size: 100% auto; background-position: center bottom; }
+  .hero { padding: 110px 6vw 0; }
   .hero h1 { max-width: 720px; font-size: clamp(48px, 8vw, 76px); }
   .hero .intro { max-width: 610px; margin: 24px 0; font-size: 18px; }
   .hero .down { font-size: 10px; padding-bottom: 7px; }
@@ -324,12 +332,13 @@ css
  .preview-face { position: absolute; inset: 0; overflow: hidden; border-radius: 2px 12px 12px 2px; backface-visibility: hidden; }
  .preview-back { transform: rotateY(180deg); background: #140f0a; box-shadow: inset 0 0 26px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.06); }
  .preview-back video { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.36); }
- .preview-sound { position: absolute; z-index: 2; right: 10px; bottom: 10px; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(20,15,10,.55); color: #fff; cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: background 150ms; }
- .preview-sound:hover, .preview-sound:focus-visible { background: rgba(20,15,10,.82); }
- .preview-sound svg { width: 22px; height: 22px; }
- .preview-sound .preview-loud { display: none; }
- .preview-sound.is-on .preview-loud { display: block; }
- .preview-sound.is-on .preview-muted { display: none; }
+ .preview-sound, .hero-sound { position: absolute; z-index: 2; right: 10px; bottom: 10px; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(20,15,10,.55); color: #fff; cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: background 150ms; }
+ .preview-sound:hover, .preview-sound:focus-visible, .hero-sound:hover, .hero-sound:focus-visible { background: rgba(20,15,10,.82); }
+ .preview-sound svg, .hero-sound svg { width: 22px; height: 22px; }
+ .preview-sound .preview-loud, .hero-sound .hero-loud { display: none; }
+ .preview-sound.is-on .preview-loud, .hero-sound.is-on .hero-loud { display: block; }
+ .preview-sound.is-on .preview-muted, .hero-sound.is-on .hero-muted { display: none; }
+ .hero-sound { right: 16px; bottom: 16px; }
  .product-info { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-top: 23px; }
  .product-meta p { margin: 4px 0 0; color: var(--muted); font: 12px/1.4 Arial, sans-serif; }
  .price { font-size: 19px; }
@@ -415,6 +424,9 @@ css
  </header>
 <main id="top">
   <section class="hero">
+   <video id="hero-video" class="hero-video" autoplay muted loop playsinline poster="hero.jpg" src="hero.mp4" aria-hidden="true"></video>
+   <!-- hero-background.png is kept in the repo for later use. -->
+   <button type="button" class="hero-sound" aria-label="Turn sound on" aria-pressed="false"><svg class="hero-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><line x1="17" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="17" y2="15"/></svg><svg class="hero-loud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg></button>
    <h1>Knowbooks are books you <em>do</em>.</h1>
    <p class="intro">No pages. No screens. A Knowbook is an experiment kit in a book. Open one, do the experiments, and grow superpowers. See what <a href="https://friends.knowbooks.com">customers are doing.</a></p>
    <a class="down" href="#catalog">Build your shelf <span aria-hidden="true">↓</span></a>
@@ -714,6 +726,34 @@ s/checko/checko.js
 script
  (() => {
   "use strict";
+  const heroVideo = document.querySelector("#hero-video");
+  const heroSound = document.querySelector(".hero-sound");
+  if (heroVideo && heroSound) {
+   let soundOn = false;
+   try { soundOn = localStorage.getItem("knowbooks-sound") === "on"; } catch {}
+   const setHeroSound = on => {
+    soundOn = on;
+    heroVideo.muted = !on;
+    heroSound.classList.toggle("is-on", on);
+    heroSound.setAttribute("aria-pressed", String(on));
+    heroSound.setAttribute("aria-label", on ? "Turn sound off" : "Turn sound on");
+    if (!on) return;
+    const playing = heroVideo.play();
+    if (playing?.catch) playing.catch(() => {
+     heroVideo.muted = true;
+     soundOn = false;
+     heroSound.classList.remove("is-on");
+     heroSound.setAttribute("aria-pressed", "false");
+     heroSound.setAttribute("aria-label", "Turn sound on");
+    });
+   };
+   setHeroSound(soundOn);
+   heroSound.addEventListener("click", () => {
+    const next = !soundOn;
+    try { localStorage.setItem("knowbooks-sound", next ? "on" : "off"); } catch {}
+    setHeroSound(next);
+   });
+  }
   // Global Bonus Opportunity Sale price factor for a timed sale. Hardcoded start; prices return to normal at bonusOpportunitySaleEndsAt.
   const bonusOpportunitySaleDiscount = 0.1776;
   const bonusOpportunitySale = 1 - bonusOpportunitySaleDiscount;
@@ -1716,4 +1756,4 @@ script
 catalog.scroll
 buildCoverRuntime
 buildConcepts catalog.js
-buildZip knowbooks.zip index.html about.html signature.js catalog.js covers.js catalog.csv tags.js gitHash.js knowbooksLogo.svg og.png hero-background.png kbc.jpg readme.scroll about.scroll catalog.scroll catalogCsv.scroll covers.scroll tags.scroll partners.scroll upstreamToScroll.scroll s/checko s/qrcode
+buildZip knowbooks.zip index.html about.html signature.js catalog.js covers.js catalog.csv tags.js gitHash.js knowbooksLogo.svg og.png hero-background.png hero.mp4 hero.jpg kbc.jpg readme.scroll about.scroll catalog.scroll catalogCsv.scroll covers.scroll tags.scroll partners.scroll upstreamToScroll.scroll s/checko s/qrcode
