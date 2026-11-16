@@ -100,39 +100,15 @@ tagsParser
 
 id small
 color tan
-title Small
+title Knowbook1
 shelf build
 priceExponent 7
-quantityLeft 4
-description Small custom Knowbook. We meet with you in person and/or on a video call, you choose the items that go in your book, then we laser-cut and build it for you, with other adjustable customizations.
+quantityLeft 70
+description Knowbook 1. You visit Knowbook HQ (or we do a video call) to choose your book and items. We laser cut your tray, pack your items, and deliver your Knowbook to you.
 coverDescription a solid plus sign, sized to the book
 cover
  filledRect 120.0 104.0 16.0 48.0
  filledRect 104.0 120.0 48.0 16.0
-
-id medium
-color oxblood
-title Medium
-shelf build
-priceExponent 8
-quantityLeft 3
-description Medium custom Knowbook. We meet with you in person and/or on a video call, you choose the items that go in your book, then we laser-cut and build it for you, with other adjustable customizations.
-coverDescription a solid plus sign, sized to the book
-cover
- filledRect 115.0 89.0 26.0 78.0
- filledRect 89.0 115.0 78.0 26.0
-
-id large
-color navy
-title Large
-shelf build
-priceExponent 9
-quantityLeft 5
-description Large custom Knowbook. We meet with you in person and/or on a video call, you choose the items that go in your book, then we laser-cut and build it for you, with other adjustable customizations.
-coverDescription a solid plus sign, sized to the book
-cover
- filledRect 110.0 74.0 36.0 108.0
- filledRect 74.0 110.0 108.0 36.0
 
 // new product launches
 
