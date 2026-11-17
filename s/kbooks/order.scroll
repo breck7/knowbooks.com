@@ -3,7 +3,6 @@
 title Knowbooks order
 permalink order.html
 buildHtml
-buildPdf
 
 replace RECEIPT
  article

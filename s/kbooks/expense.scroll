@@ -3,7 +3,6 @@
 title Knowbooks expense
 permalink expense.html
 buildHtml
-buildPdf
 
 replace RECEIPT
  article
