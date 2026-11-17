@@ -120,6 +120,20 @@ main
     See your entire X timeline as helix.
     span Spin your helix ↗
      addClass tool-action
+  a
+   href kbooks/index.html
+   addClass tool
+   img
+    src kbooks/og.png
+    alt Kbooks: a bookkeeping system that never goes offline.
+    width 1200
+    height 630
+   div
+    addClass tool-copy
+    h2 Kbooks
+    A bookkeeping system that never goes offline.
+    span Open Kbooks ↗
+     addClass tool-action
 footer
  id software-footer
  Built with Scroll.
