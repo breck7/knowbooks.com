@@ -549,6 +549,9 @@ All Knowbooks go through many prototype editions. Some of these prototypes we re
 ? How can I design a custom knowbook?
 Yes, using <a href="#" onclick="event.preventDefault(); toggleDesigner(event);">Knowbook designer</a>.
 
+? Can I buy a gift card?
+Yes. Gift cards are on the Special items shelf. Add one to your cart and check out as usual.
+
 section
  addClass offering
  id partners
