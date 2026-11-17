@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Kbooks">
+ <title>Kbooks</title>
+ <defs>
+  <clipPath id="inner">
+   <rect x="3" y="3" width="58" height="58" rx="11"/>
+  </clipPath>
+ </defs>
+ <rect width="64" height="64" rx="14" fill="#20211e"/>
+ <g clip-path="url(#inner)">
+  <rect width="64" height="64" fill="#fffdf8"/>
+  <path d="M64 0v64H0Z" fill="#c23a2c"/>
+ </g>
+</svg>
