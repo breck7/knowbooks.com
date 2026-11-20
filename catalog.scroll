@@ -103,7 +103,8 @@ color tan
 title Knowbook1
 shelf build
 priceExponent 7
-quantityLeft 30
+quantityLeft 0
+soldOut true
 description Knowbook 1. You visit Knowbook HQ (or we do a video call) to choose your book and items. We laser cut your tray, pack your items, and deliver your Knowbook to you.
 coverDescription a solid plus sign, sized to the book
 cover
