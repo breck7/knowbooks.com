@@ -5,6 +5,7 @@
 *.js
 !s/checko/checko.js
 !s/qrcode/qrcode.js
+!s/bychn/bychn.js
 *.zip
 *.csv
 output/
