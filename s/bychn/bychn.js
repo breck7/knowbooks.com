@@ -83,7 +83,7 @@ const bychn = {
     if (kind === "story" && item.type && item.type !== "story") out += this.field("type", item.type)
     if (item.parent) out += this.field("parent", item.parent)
     if (item.thread && String(item.thread) !== String(item.id) && String(item.thread) !== String(item.parent)) out += this.field("thread", item.thread)
-    out += this.field("title", item.title)
+    out += this.field("headline", item.title)
     out += this.field("url", item.url)
     if (item.score != null && item.score !== "") out += this.field("score", item.score)
     if (item.descendants != null && item.descendants !== "") out += this.field("descendants", item.descendants)
@@ -93,8 +93,19 @@ const bychn = {
     return out + "\n"
   },
 
+  emitHeader(profile) {
+    const id = profile.id
+    return "https://breck.lol/bychn.parsers\n" +
+      "title " + id + "'s Hacker News\n" +
+      "description Full Hacker News export of " + id + "\n" +
+      "htmlLang en\n" +
+      "buildHtml\n" +
+      "metaTags\n\n"
+  },
+
   emitUser(profile) {
-    let out = "user " + profile.id + "\n"
+    let out = this.emitHeader(profile)
+    out += "user " + profile.id + "\n"
     out += this.field("created", this.iso(profile.created))
     out += this.field("karma", profile.karma)
     const about = this.htmlToText(profile.about || "")
@@ -264,7 +275,7 @@ function bychnApp() {
   }
 
   const download = () => {
-    const name = (input.value.trim() || "hackernews") + ".scroll"
+    const name = (input.value.trim() || "hackernews") + ".bychn.scroll"
     const blob = new Blob([out.value], { type: "text/plain;charset=utf-8" })
     const a = document.createElement("a")
     a.href = URL.createObjectURL(blob)

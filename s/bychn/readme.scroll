@@ -58,7 +58,7 @@ html
     <output id="bychn-status" aria-live="polite"></output>
    </div>
   </details>
-  <p class="note">The file uses the <a href="bychn.parsers">bychn microlanguage</a>. A small sample of user breck is in <a href="breck.html">breck.scroll</a>. Everything stays in your browser. No server, no tracking.</p>
+  <p class="note">The file uses the <a href="bychn.parsers">bychn microlanguage</a>. Breck’s full export is at <a href="https://breck.lol/breck.bychn.html">breck.lol/breck.bychn.html</a> (<a href="https://breck.lol/breck.bychn.scroll">source</a>). Everything stays in your browser. No server, no tracking.</p>
  </main>
 
 footer
