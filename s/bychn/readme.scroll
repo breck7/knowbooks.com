@@ -1,0 +1,116 @@
+title Bye YCombinator HackerNews
+description Export all your HackerNews data as a single beautiful scroll file
+baseUrl https://knowbooks.com/s/bychn/
+openGraphImage og.png
+favicon favicon.svg
+permalink index.html
+htmlLang en
+buildHtml
+metaTags
+
+header
+ a Knowbooks
+  href ../index.html
+ a Source ↗
+  href https://github.com/breck7/knowbooks.com/tree/main/s/bychn
+
+html
+ <main>
+  <p class="eyebrow">bychn</p>
+  <h1>BYCHN: ByeYCHackerNews</h1>
+  <p class="lead">Export all your HackerNews data as a single beautiful scroll file.</p>
+  <form id="bychn-form">
+   <label for="bychn-user">Username</label>
+   <div class="row">
+    <input id="bychn-user" type="text" name="user" value="breck" autocomplete="username" spellcheck="false" aria-label="Hacker News username">
+    <button type="submit">Export</button>
+   </div>
+  </form>
+  <div id="bychn-stage" class="stage" hidden>
+   <div class="stats">
+    <ul class="counters">
+     <li><b id="n-stories">0</b> stories</li>
+     <li><b id="n-comments">0</b> comments</li>
+     <li><b id="n-karma">0</b> karma</li>
+    </ul>
+    <div class="progress" role="progressbar" aria-labelledby="bychn-progress-label">
+     <div id="bychn-bar" class="bar"></div>
+    </div>
+    <p id="bychn-progress-label" class="progress-label"><span id="n-loaded">0</span> of <span id="n-total">—</span> submitted</p>
+   </div>
+   <div class="boards">
+    <section class="feed-panel" aria-label="Incoming posts">
+     <h2>Incoming</h2>
+     <ol id="bychn-feed"></ol>
+    </section>
+    <aside class="top-panel" aria-label="Top voted stories">
+     <h2>Top voted</h2>
+     <ol id="bychn-top"></ol>
+    </aside>
+   </div>
+  </div>
+  <details class="export-wrap">
+   <summary>Scroll file</summary>
+   <textarea id="bychn-out" class="export" readonly spellcheck="false" aria-label="Scroll export"></textarea>
+   <div class="actions">
+    <button id="bychn-copy" type="button">Copy</button>
+    <button id="bychn-download" type="button">Download</button>
+    <output id="bychn-status" aria-live="polite"></output>
+   </div>
+  </details>
+  <p class="note">The file uses the <a href="bychn.parsers">bychn microlanguage</a>. A small sample of user breck is in <a href="breck.html">breck.scroll</a>. Everything stays in your browser. No server, no tracking.</p>
+ </main>
+
+footer
+ span Free software ·
+ a Page source
+  href https://github.com/breck7/knowbooks.com/tree/main/s/bychn
+
+html
+ <script src="bychn.js"></script>
+
+css
+ :root { color-scheme: light; font-family: Georgia, "Times New Roman", serif; color: #222; background: #f6f0e4; }
+ * { box-sizing: border-box; }
+ body { max-width: 980px; margin: auto; padding: 28px 30px 48px; }
+ header { display: flex; justify-content: space-between; font: 12px Arial, sans-serif; }
+ a { color: inherit; text-underline-offset: 3px; }
+ main { margin: 48px 0 36px; }
+ .eyebrow { margin: 0 0 10px; font: 700 11px/1 Arial, sans-serif; letter-spacing: .18em; text-transform: uppercase; color: #ff6600; }
+ h1 { font-weight: 400; font-size: clamp(36px, 6.4vw, 68px); letter-spacing: -.05em; line-height: .95; margin: 0 0 16px; text-wrap: balance; }
+ .lead { max-width: 28em; margin: 0 0 28px; font-size: 20px; line-height: 1.45; color: #4a453c; }
+ form { margin-bottom: 28px; }
+ .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+ label { display: block; margin-bottom: 6px; font: 700 11px/1 Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #6b6458; }
+ #bychn-user { flex: 1; min-width: 180px; font: 18px/1.3 Georgia, serif; padding: 10px 12px; border: 1px solid #d7cbb6; border-radius: 6px; background: #fffdf8; color: inherit; }
+ button { font: 700 13px/1 Arial, sans-serif; letter-spacing: .04em; padding: 11px 16px; border: 0; border-radius: 6px; background: #ff6600; color: #fff; cursor: pointer; }
+ button:hover { background: #e65c00; }
+ .actions button { background: #3d3a34; }
+ .actions button:hover { background: #222; }
+ #bychn-user:focus, button:focus-visible, summary:focus-visible { outline: 3px solid #ff6600; outline-offset: 3px; }
+ .stats { margin-bottom: 22px; }
+ .counters { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0 0 12px; padding: 0; list-style: none; font: 14px/1.3 Arial, sans-serif; color: #6b6458; }
+ .counters b { font: 400 28px/1 Georgia, serif; color: #222; margin-right: 6px; }
+ .progress { height: 6px; background: #e8ddcc; border-radius: 99px; overflow: hidden; }
+ .bar { height: 100%; width: 0; background: #ff6600; border-radius: 99px; transition: width .35s ease; }
+ .progress-label { margin: 8px 0 0; font: 12px/1.4 Arial, sans-serif; color: #6b6458; }
+ .boards { display: grid; grid-template-columns: 1.4fr .8fr; gap: 28px; align-items: start; }
+ h2 { margin: 0 0 12px; font: 700 11px/1 Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #6b6458; }
+ #bychn-feed, #bychn-top { list-style: none; margin: 0; padding: 0; }
+ .card, #bychn-top li { display: grid; grid-template-columns: 44px 1fr; gap: 10px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid #eadfcf; font-size: 16px; line-height: 1.35; }
+ .card { animation: arrive .45s ease both; }
+ .card.reply { font-size: 14px; color: #5c574e; }
+ .score { font: 700 13px/1 Arial, sans-serif; color: #ff6600; tabular-nums: true; font-variant-numeric: tabular-nums; }
+ .score.muted { color: #c4b8a6; font-weight: 500; }
+ .card a, #bychn-top a { color: inherit; text-decoration: none; }
+ .card a:hover, #bychn-top a:hover { text-decoration: underline; text-underline-offset: 3px; }
+ .export-wrap { margin: 36px 0 18px; border-top: 1px solid #eadfcf; padding-top: 16px; }
+ summary { cursor: pointer; font: 700 11px/1 Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #6b6458; }
+ .export { display: block; width: 100%; min-height: 220px; max-height: 50vh; margin: 12px 0 0; overflow: auto; padding: 16px 18px; border: 1px solid #d7cbb6; border-radius: 6px; background: #fffdf8; font: 13px/1.55 ui-monospace, Menlo, monospace; resize: vertical; color: inherit; }
+ .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 12px 0 0; }
+ #bychn-status { font: 13px/1.4 Arial, sans-serif; color: #6b6458; min-height: 1.2em; }
+ .note { max-width: 38em; font-size: 15px; line-height: 1.5; color: #6b6458; }
+ footer { border-top: 1px solid #e4d9c6; padding-top: 18px; font: 12px/1.5 Arial, sans-serif; color: #6b6458; }
+ @keyframes arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+ @media (max-width: 760px) { body { padding: 22px 18px 36px; } h1 { font-size: 38px; } .boards { grid-template-columns: 1fr; gap: 22px; } .counters b { font-size: 24px; } }
+ @media (prefers-reduced-motion: reduce) { .card { animation: none; } .bar { transition: none; } }

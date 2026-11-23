@@ -1,5 +1,5 @@
 title Free software by Knowbooks.com
-description Small tools for a brighter day. Track a storm, make a checksum you can say, turn a PDF into one long image, or coil your GitHub years or X posts into a 3D helix. Free to use and make your own.
+description Small tools for a brighter day. Export a Hacker News profile to Scroll, track a storm, make a checksum you can say, turn a PDF into one long image, or coil your GitHub years or X posts into a 3D helix. Free to use and make your own.
 baseUrl https://knowbooks.com/s/
 permalink index.html
 openGraphImage og.png
@@ -24,6 +24,20 @@ main
  section
   addClass tool-grid
   aria-label Free utilities
+  a
+   href bychn/index.html
+   addClass tool
+   img
+    src bychn/og.png
+    alt Bye YCombinator HackerNews: export all your HackerNews data as a single beautiful scroll file.
+    width 1200
+    height 630
+   div
+    addClass tool-copy
+    h2 Bye YCombinator HackerNews
+    Export all your HackerNews data as a single beautiful scroll file.
+    span Open bychn ↗
+     addClass tool-action
   a
    href brave/index.html
    addClass tool

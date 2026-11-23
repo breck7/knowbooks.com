@@ -1,0 +1,118 @@
+// bychn: a microlanguage for a Hacker News profile export.
+// version 0.1.0
+
+userParser
+ cue user
+ extends abstractScrollParser
+ catchAllAtomType stringAtom
+ description A Hacker News user. The remaining atom is the username.
+ example
+  user breck
+  created 2007-08-24T03:38:45Z
+  karma 16633
+ javascript
+  buildHtml() {
+    const id = (this.content || "").trim()
+    const esc = s => String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    return `<section class="hn-user"><h1>${esc(id)}</h1>${this.map(p => p.asHtml).join("")}</section>`
+  }
+
+storyParser
+ cue story
+ extends abstractScrollParser
+ catchAllAtomType stringAtom
+ description A Hacker News story, job, or poll. The remaining atom is the item id.
+ javascript
+  buildHtml() {
+    const id = (this.content || "").trim()
+    const esc = s => String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    return `<article class="hn-story" id="item-${esc(id)}">${this.map(p => p.asHtml).join("")}</article>`
+  }
+
+replyParser
+ cue reply
+ extends abstractScrollParser
+ catchAllAtomType stringAtom
+ description A Hacker News comment or poll option. The remaining atom is the item id.
+ javascript
+  buildHtml() {
+    const id = (this.content || "").trim()
+    const esc = s => String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    return `<article class="hn-reply" id="item-${esc(id)}">${this.map(p => p.asHtml).join("")}</article>`
+  }
+
+hnFieldParser
+ extends abstractStringMeasureParser
+ javascript
+  buildHtml() {
+    const esc = s => String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    const cue = this.cue || ""
+    return `<div class="hn-field"><b>${esc(cue)}</b> ${esc(this.content)}</div>`
+  }
+
+createdParser
+ extends hnFieldParser
+ description Account creation time (ISO 8601).
+
+karmaParser
+ extends hnFieldParser
+ description User karma.
+
+aboutParser
+ cue about
+ extends abstractScrollParser
+ catchAllAtomType stringAtom
+ description The user's about text, one indented line per line of text.
+ javascript
+  buildHtml() {
+    const esc = s => String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    const lines = [this.content].concat(this.map(p => p.asString)).filter(Boolean).join("\n")
+    return `<div class="hn-about">${esc(lines)}</div>`
+  }
+
+titleParser
+ extends hnFieldParser
+
+urlParser
+ extends hnFieldParser
+
+scoreParser
+ extends hnFieldParser
+
+descendantsParser
+ extends hnFieldParser
+ description Comment count on a story.
+
+timeParser
+ extends hnFieldParser
+ description Item time (ISO 8601).
+
+parentParser
+ extends hnFieldParser
+ description Parent item id.
+
+threadParser
+ extends hnFieldParser
+ description Story id a comment was posted on.
+
+typeParser
+ extends hnFieldParser
+ description Item type when not the default story or comment (job, poll, pollopt).
+
+deletedParser
+ extends hnFieldParser
+
+deadParser
+ extends hnFieldParser
+
+textParser
+ cue text
+ extends abstractScrollParser
+ catchAllAtomType stringAtom
+ description Item text, one indented line per line of text.
+ javascript
+  buildHtml() {
+    const esc = s => String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    const lines = [this.content].concat(this.map(p => p.asString)).filter(Boolean).join("\n")
+    return `<div class="hn-text">${esc(lines)}</div>`
+  }

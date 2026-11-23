@@ -260,6 +260,16 @@
     "invests": "$250k–$500k pre-seed"
   },
   {
+    "id": "vercelx",
+    "x": "vercel",
+    "firm": "Vercel X",
+    "applyUrl": "https://vercel.com/x/apply",
+    "applyEmail": "guillermo@vercel.com",
+    "basedIn": "San Francisco, CA, USA",
+    "funded": "0",
+    "invests": "Zero equity. $9M+ credits from partners. 6 weeks in SF, Jan 19–Mar 2 2027. Deadline Nov 29."
+  },
+  {
     "id": "name",
     "ask": "Your full name",
     "field": "line",
