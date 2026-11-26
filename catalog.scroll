@@ -75,6 +75,10 @@ videoParser
  extends abstractStringMeasureParser
  description Optional video path shown on the inside front cover when the Knowbook is opened.
 
+stripeUrlParser
+ extends abstractStringMeasureParser
+ description Optional Stripe Payment Link opened by the Card checkout button.
+
 skillsParser
  extends abstractStringMeasureParser
  description Space-separated verbs naming what the Knowbook teaches. At least five.
@@ -103,8 +107,8 @@ color tan
 title Knowbook1
 shelf build
 priceExponent 7
-quantityLeft 0
-soldOut true
+quantityLeft 5
+stripeUrl https://buy.stripe.com/5kQ5kCeNxaNUbJ51K7dAk01
 description Knowbook 1. You visit Knowbook HQ (or we do a video call) to choose your book and items. We laser cut your tray, pack your items, and deliver your Knowbook to you.
 coverDescription a solid plus sign, sized to the book
 cover
