@@ -57,6 +57,8 @@ css
  #stage canvas { display: block; width: 100%; height: 100%; }
  #stage .tag { position: absolute; left: 12px; bottom: 14px; z-index: 1; font-size: 13px; font-weight: 700; color: #eafff1; pointer-events: none; text-shadow: 0 1px 10px #050a07; }
  #stage .tag small { display: block; margin-top: 2px; font-size: 11px; font-weight: 500; color: #88b79c; }
+ #meta a, #stage .tag a { color: inherit; text-decoration: none; pointer-events: auto; }
+ #meta a:hover, #stage .tag a:hover { text-decoration: underline; text-underline-offset: 3px; }
  header, footer, .panel { position: fixed; z-index: 2; }
  header { top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: baseline; padding: 18px 22px; pointer-events: none; }
  .wordmark { font-size: 18px; font-weight: 800; letter-spacing: -.03em; color: #eafff1; text-decoration: none; pointer-events: auto; }
@@ -373,14 +375,20 @@ script
    return fillRange(counts);
   };
   const summary = (title, days) => title + ' · ' + totalOf(days).toLocaleString() + ' contributions · ' + spanOf(days) + ' years';
+  const ghLink = name => /^[A-Za-z0-9-]+$/.test(name) ? '<a href="https://github.com/' + encodeURIComponent(name) + '" target="_blank" rel="noopener">' + name + '</a>' : name;
+  const linkedTitle = names => names.map(ghLink).join(' + ');
   const showAll = entries => {
    if (!ready) { pending = entries; return; }
    layout(entries.length);
    entries.forEach((entry, i) => {
     draw(views[i], entry.days);
-    if (entries.length > 1) views[i].tag.innerHTML = entry.tag + '<small>' + totalOf(entry.days).toLocaleString() + ' · ' + spanOf(entry.days) + ' years</small>';
+    const title = linkedTitle(entry.names || [entry.tag]);
+    if (entries.length > 1) views[i].tag.innerHTML = title + '<small>' + totalOf(entry.days).toLocaleString() + ' · ' + spanOf(entry.days) + ' years</small>';
    });
-   meta.textContent = entries.length === 1 ? entries[0].label : '';
+   if (entries.length === 1) {
+    const entry = entries[0];
+    meta.innerHTML = linkedTitle(entry.names || [entry.tag]) + ' · ' + totalOf(entry.days).toLocaleString() + ' contributions · ' + spanOf(entry.days) + ' years';
+   } else meta.textContent = '';
   };
   const fetchUser = async name => {
    const res = await fetch(API + encodeURIComponent(name) + '?y=all', { headers: { Accept: 'application/json' } });
@@ -407,8 +415,7 @@ script
      const ok = group.filter(name => fetched[name]);
      if (!ok.length) continue;
      const days = mergeDays(ok.map(name => fetched[name]));
-     const tag = ok.join(' + ');
-     entries.push({ days, tag, label: summary(tag, days) });
+     entries.push({ days, names: ok, tag: ok.join(' + ') });
     }
     if (!entries.length) { say(errors.join(' ') || 'Could not load that profile.', true); return; }
     setLink(text);
@@ -427,7 +434,7 @@ script
     const days = toDays(parseArchive(text, file.name));
     if (!days.length) throw new Error('No contributions in that file');
     setLink('');
-    showAll([{ days, tag: file.name, label: summary(file.name, days) }]);
+    showAll([{ days, names: [file.name], tag: file.name }]);
     say('');
    }).catch(error => say(error.message || 'Could not read that file.', true));
   };
