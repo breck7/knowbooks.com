@@ -107,18 +107,18 @@ main
     span Make a Longpic ↗
      addClass tool-action
   a
-   href gitHelix/index.html
+   href gitCoil/index.html
    addClass tool
    img
-    src gitHelix/og.png
-    alt GitHelix: a green spring of GitHub contribution dots, one loop for each year.
+    src gitCoil/og.png
+    alt gitCoil: a green spring of GitHub contribution dots, one loop for each year.
     width 1200
     height 630
    div
     addClass tool-copy
-    h2 GitHelix
-    See your entire GitHub timeline as helix.
-    span Spin your helix ↗
+    h2 gitCoil
+    See your entire GitHub timeline as a coil.
+    span Spin your coil ↗
      addClass tool-action
   a
    href heliX/index.html
@@ -132,7 +132,7 @@ main
     addClass tool-copy
     h2 heliX
     See your entire X timeline as helix.
-    span Spin your helix ↗
+    span Spin your coil ↗
      addClass tool-action
   a
    href kbooks/index.html
