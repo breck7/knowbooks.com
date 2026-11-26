@@ -121,17 +121,17 @@ main
     span Spin your coil ↗
      addClass tool-action
   a
-   href heliX/index.html
+   href xCoil/index.html
    addClass tool
    img
-    src heliX/og.png
-    alt heliX: a blue spring of X post dots, one loop for each year.
+    src xCoil/og.png
+    alt xCoil: a blue spring of X post dots, one loop for each year.
     width 1200
     height 630
    div
     addClass tool-copy
-    h2 heliX
-    See your entire X timeline as helix.
+    h2 xCoil
+    See your entire X timeline as a coil.
     span Spin your coil ↗
      addClass tool-action
   a
